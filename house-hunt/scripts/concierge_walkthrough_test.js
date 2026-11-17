@@ -1,6 +1,6 @@
 /* Walk through the short page (version 4) the way Lamia would, on a phone:  node scripts/concierge_walkthrough_test.js
    Build first: python3 scripts/build_concierge.py. Opens site/dist/concierge.html from disk, no network (the font
-   stylesheet request is answered with an empty file). Writes site/screens/concierge4-*.png at 2x.
+   stylesheet request is answered with an empty file). Writes site/screens/concierge41-*.png at 2x.
    At 390 x 844 and 360 x 780: every persona in meta.recommender_examples is played through the screen (eight choices
    between made-up apartments, tapping what the persona chose) and the page must show exactly the example's tasks, in
    the example's words, then its priorities and sentence on "Here's what you told me", then its three neighborhoods with
@@ -42,13 +42,13 @@ async function open(browser, extra, init) {
   return { ctx, page, errs, net };
 }
 let prefix = "";
-async function screen(page, name, full) { await page.waitForTimeout(200); await page.screenshot({ path: path.join(SHOTS, "concierge4-" + prefix + name + ".png"), fullPage: !!full }); }
+async function screen(page, name, full) { await page.waitForTimeout(200); await page.screenshot({ path: path.join(SHOTS, "concierge41-" + prefix + name + ".png"), fullPage: !!full }); }
 async function sheetShot(page, name) {
   const h = await page.evaluate(() => { const s = document.getElementById("sheet"); return s ? s.scrollHeight : 0; });
   const vp = page.viewportSize();
   if (h > vp.height) {
     await page.setViewportSize({ width: vp.width, height: Math.min(h, 7000) }); await page.waitForTimeout(200);
-    await page.screenshot({ path: path.join(SHOTS, "concierge4-" + prefix + name + ".png") });
+    await page.screenshot({ path: path.join(SHOTS, "concierge41-" + prefix + name + ".png") });
     await page.setViewportSize(vp);
   } else await screen(page, name);
 }
@@ -98,7 +98,7 @@ async function barSays(page, n, label) {
 const taskOnScreen = (page) => page.locator("#app [data-cand]").getAttribute("data-cand").then(Number);
 async function tap(page, choice) {
   if (choice === "either") await page.click('#app button[data-act="cj"][data-v="either"]');
-  else await page.click('#app .apt[data-v="' + choice + '"]');
+  else await page.click('#app .ct-pick[data-v="' + choice + '"], #app .apt[data-v="' + choice + '"]');
 }
 const shownTopFromState = (page) => page.evaluate(() => { const r = window.__conciergeRec(); return r && r.top[0] ? r.top[0][0] : null; });
 /* what the results show: [[area, [building ids]]] */
@@ -137,10 +137,19 @@ async function saveFromResults(page, n) {
       ok(t === ex.expected_tasks[i], L + ex.persona + ": task " + (i + 1) + " is " + t + ", the example says " + ex.expected_tasks[i]);
       ok((await page.locator("#cj-step").innerText()).trim() === (i + 1) + " of " + n, "progress " + (i + 1) + " of " + n);
       if (ex.expected_tasks_shown) {   /* only the attributes that differ, in the task's order, with the example's words */
-        const rows = await page.evaluate(() => { const A = [...document.querySelectorAll('#app .apt[data-v="a"] .ap-row')], B = [...document.querySelectorAll('#app .apt[data-v="b"] .ap-row')];
-          return A.map((r, j) => ({ attribute: r.querySelector(".ap-l").textContent, a: r.querySelector("b").textContent, b: B[j].querySelector("b").textContent })); });
-        ok(JSON.stringify(rows) === JSON.stringify(ex.expected_tasks_shown[i]), L + "task " + (i + 1) + " shows " + JSON.stringify(rows));
+        const rows = await page.evaluate(() => [...document.querySelectorAll("#app .ct-row")].map((r) => { const c = r.querySelectorAll(".ct-c");
+          return { attribute: r.getAttribute("data-label"), a: c[0].getAttribute("data-level"), b: c[1].getAttribute("data-level") }; }));
+        const want = ex.expected_tasks_shown[i], wantRows = Array.isArray(want) ? want : want.rows;
+        ok(JSON.stringify(rows) === JSON.stringify(wantRows), L + "task " + (i + 1) + " shows " + JSON.stringify(rows));
+        if (!Array.isArray(want)) {
+          const hl = await page.locator("#app .ct-pick .ap-hl").allTextContents();
+          ok(JSON.stringify(hl) === JSON.stringify([want.headline_a, want.headline_b]), L + "task " + (i + 1) + " headlines " + hl.join(" / "));
+        }
         ok((await page.locator("#app .same").count()) === 1, "a quiet Same for both line");
+        const marks = await page.evaluate(() => [...document.querySelectorAll("#app .ct-row")].map((r) => [...r.querySelectorAll(".ct-c")].map((c) => c.classList.contains("up") ? "up" : "dn")));
+        ok(marks.every((m) => m.length === 2 && m[0] !== m[1]), "each row: one side marked better, the other worse");
+        ok(marks.some((m) => m[0] === "up") && marks.some((m) => m[0] === "dn"), "a trade-off: A better on one, worse on another");
+        ok((await page.locator("#app .ct-pick .ap-hl").count()) === 2, "a headline on each side");
       }
       if (shots && i === 0) { await everyScreen(page, L + "choice", LIMIT); await screen(page, "02-choice"); }
       if (shots && i === 3) await screen(page, "02b-choice-4");
@@ -158,7 +167,8 @@ async function saveFromResults(page, n) {
     ok(JSON.stringify(top) === JSON.stringify(ex.expected_top), L + ex.persona + ": the three shown " + JSON.stringify(top));
     ok((await page.locator("#res-h").innerText()).trim() === ex.expected_priorities_sentence, "the results open with what she cares about");
     const exp = await page.locator("#app .hhead").evaluateAll((els) => els.map((e) => e.getAttribute("aria-expanded")));
-    ok(JSON.stringify(exp) === JSON.stringify(["true", "false", "false"].slice(0, exp.length)), "number 1 open, 2 and 3 closed");
+    ok(JSON.stringify(exp) === JSON.stringify(["true", "false", "false"]), "exactly three neighborhoods: number 1 open, 2 and 3 closed");
+    ok(top.length === 3 && top.every((t) => t[1].length === 3), L + ex.persona + ": exactly three buildings in each of the three");
     for (const [area] of ex.expected_top) {
       const card = page.locator('#app .hcard[data-area="' + area + '"]');
       if (ex.expected_why && ex.expected_why[area]) ok((await card.locator(".because .t").textContent()) === ex.expected_why[area], L + "why for " + area);
@@ -182,6 +192,10 @@ async function saveFromResults(page, n) {
     const { ctx, page, errs, net } = await open(browser, { viewport: { width: vp.width, height: vp.height } });
     await everyScreen(page, L + "welcome", LIMIT);
     ok(await page.locator('#app [data-act="all"]').isVisible(), "See everything on the first screen");
+    const intro = await page.locator(".hello").innerText();
+    ok(/eight quick choices/i.test(intro) && /imaginary apartments/i.test(intro) && /trade-off/i.test(intro) && /teach the page/i.test(intro) &&
+       /three neighborhoods/i.test(intro) && /three best buildings/i.test(intro) && /browse, search and filter/i.test(intro), "the first screen says what will happen and what is promised");
+    ok((await page.locator("#app .btn").count()) === 1 && (await page.locator('#app .btn[data-act="start"]').count()) === 1, "one Start button");
     await screen(page, "01-welcome");
     const ex = EX[0];
     /* Back undoes an answer */
@@ -274,6 +288,22 @@ async function saveFromResults(page, n) {
     await act(page, "all"); await barSays(page, 3, "See everything");
     await everyScreen(page, L + "everything", LIMIT);
     ok((await page.locator("#all-list .row").count()) === NB, "every building is listed");
+    /* search: by name, street and town, instant */
+    ok(await page.locator("#f-q").isVisible(), "a visible search box");
+    const probe = D.buildings.find((b) => b.city) || D.buildings[0];
+    const norm = (t) => String(t || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
+    for (const q of [probe.city, probe.address, probe.name]) {
+      await page.fill("#f-q", q); await page.waitForTimeout(80);
+      const ids = await page.locator("#all-list .row").evaluateAll((els) => els.map((e) => e.getAttribute("data-id")));
+      const want = D.buildings.filter((b) => { const h = " " + norm([b.name, b.address, b.city, b.state, b.zip, b.postal_code, b.neighborhood_name, (HB[b.neighborhood_id] || {}).name, (HB[b.group_id] || {}).name].join(" ")) + " "; return norm(q).split(" ").every((w) => h.includes(" " + w)); }).length;
+      ok(ids.includes(probe.id) && ids.length === want, "search '" + q + "' finds it (" + ids.length + " of " + want + ")");
+      ok((await page.locator("#f-count").innerText()) === "Showing " + ids.length + " of " + NB + " buildings", "the count follows the search");
+    }
+    if (!vp.p || true) { await page.fill("#f-q", probe.city); await page.waitForTimeout(80); await everyScreen(page, L + "search", LIMIT); await screen(page, "12c-browse-search"); }
+    await page.fill("#f-q", "zzzz qqqq"); await page.waitForTimeout(80);
+    ok(/Nothing matches/.test(await page.locator("#all-list").innerText()), "no match says so");
+    await page.fill("#f-q", ""); await page.waitForTimeout(80);
+    ok((await page.locator("#all-list .row").count()) === NB, "clearing the search brings every building back");
     const box = await page.locator(".filter").boundingBox(); ok(box && box.y < 600, "the filter is near the top of See everything");
     const slider = page.locator("#f-rent"), min = Number(await slider.getAttribute("min")), max = Number(await slider.getAttribute("max"));
     await slider.evaluate((el, v) => { el.value = v; el.dispatchEvent(new Event("input", { bubbles: true })); }, String(Math.round((min + (max - min) * 0.45) / 50) * 50));
@@ -401,5 +431,5 @@ async function saveFromResults(page, n) {
     await none.page.waitForTimeout(300); ok((await none.page.locator("#ask-btn").count()) === 0, "use() resolving null leaves no trace"); await none.ctx.close(); }
 
   await browser.close();
-  console.log(checks + " checks passed; screenshots in site/screens/concierge4-*.png");
+  console.log(checks + " checks passed; screenshots in site/screens/concierge41-*.png");
 })().catch((e) => { console.error("FAILED: " + (e && e.message || e)); process.exit(1); });

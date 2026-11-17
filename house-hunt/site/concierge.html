@@ -79,6 +79,10 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;line-height:1.
 .hello{text-align:center;display:grid;gap:16px;padding-top:10px}
 .hello .name{font-family:var(--script);font-size:clamp(58px,17vw,84px);line-height:.95;color:var(--berry);transform:rotate(-4deg);display:block}
 .hello .tagbox{justify-self:center;font-family:var(--display);font-weight:800;font-stretch:80%;font-size:26px;line-height:1;background:var(--ink);color:var(--paper);padding:6px 16px 9px;border-radius:12px;transform:rotate(1.5deg)}
+.how{list-style:none;padding:0;display:grid;gap:10px;text-align:left;counter-reset:how}
+.how li{counter-increment:how;display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:12px 14px;font-size:17px;line-height:1.4}
+.how li::before{content:counter(how);width:30px;height:30px;border-radius:50%;background:var(--butter);color:var(--on-butter);display:grid;place-items:center;font-family:var(--display);font-weight:800}
+.how b{font-weight:800}
 .steps{list-style:none;padding:0;display:grid;gap:10px;text-align:left}
 .steps li{display:flex;gap:14px;align-items:center;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:12px 16px;font-weight:600}
 .steps b{flex:0 0 auto;width:36px;height:36px;border-radius:50%;background:var(--butter);color:var(--on-butter);display:grid;place-items:center;font-family:var(--display);font-weight:800}
@@ -92,13 +96,34 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;line-height:1.
 .qnav{display:flex;justify-content:space-between;gap:12px}
 .h-pick{font-weight:800;font-stretch:82%;font-size:clamp(25px,7vw,30px)}
 .duel{display:grid;gap:0;align-items:stretch}
-.apt{display:grid;gap:10px;width:100%;min-height:150px;align-content:start;text-align:left;background:var(--card);border:2px solid var(--ink);border-radius:22px;padding:14px 16px 16px;color:var(--ink);font:inherit;box-shadow:0 3px 0 var(--berry-deep)}
+.apt{display:grid;gap:8px;width:100%;min-height:150px;align-content:start;text-align:left;background:var(--card);border:2px solid var(--ink);border-radius:22px;padding:14px 16px 16px;color:var(--ink);font:inherit;box-shadow:0 3px 0 var(--berry-deep)}
 .apt:active{transform:translateY(2px);box-shadow:0 1px 0 var(--berry-deep)}
 .ap-h{display:flex;justify-content:space-between;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-stretch:84%;font-size:24px;line-height:1.1}
 .ap-go{flex:0 0 auto;background:var(--berry-deep);color:var(--on-berry);font-size:15px;border-radius:999px;padding:5px 12px;font-stretch:100%}
-.ap-row{display:grid;gap:1px}
-.ap-l{font-size:14px;font-weight:800;color:var(--muted);letter-spacing:.02em}
-.ap-row b{font-family:var(--display);font-weight:800;font-size:22px;line-height:1.15}
+.ap-n{font-size:15px;font-family:var(--body);font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-stretch:100%}
+.ap-hl{display:block;font-family:var(--display);font-weight:800;font-stretch:84%;font-size:clamp(23px,6.6vw,27px);line-height:1.1;text-wrap:balance}
+.ap-rows{display:grid;gap:8px;border-top:2px dotted var(--line);padding-top:10px}
+.ap-row{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start}
+.ap-t{display:grid;gap:0}
+.ap-l{font-size:13px;font-weight:800;color:var(--muted);letter-spacing:.02em}
+.ap-row b{font-weight:700;font-size:17px;line-height:1.25}
+.ap-row.dn b{color:var(--muted)}
+.mk{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:15px;font-weight:900;line-height:1}
+.mk.up{background:var(--ok-bg);color:var(--ok-ink)}
+.mk.dn{background:var(--track);color:var(--muted)}
+.ctab{display:grid;gap:0;border:2px solid var(--ink);border-radius:20px;overflow:hidden;background:var(--card)}
+.ct-heads{display:grid;grid-template-columns:1fr 1fr}
+.ct-pick{display:grid;gap:6px;align-content:start;text-align:left;min-height:120px;padding:12px;background:var(--card);border:0;border-bottom:2px solid var(--ink);font:inherit;color:var(--ink)}
+.ct-pick+.ct-pick{border-left:2px solid var(--ink)}
+.ct-pick .ap-hl{font-size:19px}
+.ct-pick .ap-go{justify-self:start;background:var(--berry-deep);color:var(--on-berry);font-weight:800;font-size:14px;border-radius:999px;padding:4px 10px}
+.ct-row{padding:8px 12px 4px;border-top:2px solid var(--line)}
+.ct-row:first-of-type{border-top:0}
+.ct-l{font-size:13px;font-weight:800;color:var(--muted)}
+.ct-cells{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ct-c{display:grid;grid-template-columns:24px 1fr;gap:6px;align-items:start;text-align:left;font:inherit;font-size:15px;font-weight:700;line-height:1.25;background:none;border:0;padding:2px 0;color:var(--ink);min-height:44px}
+.ct-c.dn{color:var(--muted)}
+.ct-cells .mk{width:22px;height:22px;font-size:13px}
 .or{justify-self:center;font-family:var(--script);font-size:28px;line-height:1;color:var(--berry);padding:2px 0 6px;margin:0}
 .same{font-size:15px;font-weight:600;color:var(--muted);line-height:1.35}
 @media (min-width:640px){.duel{grid-template-columns:1fr auto 1fr;gap:12px}.or{align-self:center}}
@@ -272,6 +297,9 @@ details.more .in{padding:2px 0 16px;display:grid;gap:12px;font-size:17px}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 
 /* everything */
+.search{display:grid;gap:6px}
+.search label{font-weight:800;font-size:16px}
+.search input{min-height:52px;border:2px solid var(--ink);border-radius:16px;background:var(--card);color:var(--ink);font:inherit;font-size:18px;padding:8px 14px;width:100%}
 .filter{background:var(--butter);color:var(--on-butter);border:2px solid var(--ink);border-radius:22px;padding:16px;display:grid;gap:14px}
 .filter h2{font-weight:800;font-size:22px}
 .filter label,.filter .lab{font-weight:800;font-size:16px;display:block;color:var(--on-butter);letter-spacing:0;text-transform:none}
@@ -479,8 +507,8 @@ var ConciergeRec = (function () {
   function groupScores(M, w, G) {
     var sc = {}, all = [], out = {};
     G.forEach(function (g) { g.building_ids.forEach(function (id) { sc[id] = q(M, score(M, id, w)); all.push(sc[id]); }); });
-    var med = median(all);
-    G.forEach(function (g) { out[g.id] = top2of3(g.building_ids.map(function (id) { return sc[id]; }).sort(function (a, b) { return b - a; }), med); });
+    var med = median(all), need = M.cfg.min_buildings || 0;   /* only neighborhoods with min_buildings can be recommended */
+    G.forEach(function (g) { if (g.building_ids.length >= need) out[g.id] = top2of3(g.building_ids.map(function (id) { return sc[id]; }).sort(function (a, b) { return b - a; }), med); });
     return out;
   }
   /* the groups good enough to recommend: the best, and those ranked in the top relevance_top_share (ceil) with
@@ -493,6 +521,8 @@ var ConciergeRec = (function () {
     return { ok: order.filter(function (g, i) { return i === 0 || (i < cut && q(M, gs[g]) >= floor); }), order: order };
   }
   function mmr(M, gs, G) {
+    G = G.filter(function (g) { return gs[g.id] !== undefined; });
+    if (!G.length) return [];
     var lam = M.cfg.mmr_lambda, lo = Infinity, hi = -Infinity, picked = [];
     G.forEach(function (g) { lo = Math.min(lo, gs[g.id]); hi = Math.max(hi, gs[g.id]); });
     var norm = {}; G.forEach(function (g) { norm[g.id] = hi - lo > 1e-12 ? (gs[g.id] - lo) / (hi - lo) : 0; });
@@ -758,6 +788,19 @@ var ConciergeRec = (function () {
     });
     return best ? best[1] : null;
   }
+  /* per side, the gain and the cost in a few plain words ("More room, but quieter"): the first attribute where this
+     apartment is better, then the first where it is worse (meta.recommender.conjoint.headline_rule) */
+  function taskHeadlines(M, task) {
+    var C = cj(M), G = C.c.gain_words, K = C.c.cost_words, out = {};
+    if (!G || !K) return null;
+    ["a", "b"].forEach(function (side) {
+      var me = side === "a" ? 1 : 2, other = side === "a" ? 2 : 1, gain = null, cost = null;
+      task.forEach(function (x) { var v = C.lv[x[0]]; if (gain === null && v[x[me]] > v[x[other]]) gain = x[0]; });
+      task.forEach(function (x) { var v = C.lv[x[0]]; if (cost === null && v[x[me]] < v[x[other]]) cost = x[0]; });
+      out[side] = gain && cost ? G[gain] + ", but " + K[cost] : "";
+    });
+    return out;
+  }
   /* her weights in plain-word order (highest first; ties in feature order) and the one-sentence summary; when the
      spread of her weights (max - min) is below conjoint.flat_below, nothing stood out (flat), with "if anything, X a
      little more" when the top weight leads the next by conjoint.lean_step */
@@ -787,7 +830,7 @@ var ConciergeRec = (function () {
     return w;
   }
   function similarTo(M, id, w, n) { return M.byId[id] ? moreLike(M, id, w, {}, {}, n || 3) : []; }
-  return { similarTo: similarTo, cj: cj, taskGap: taskGap, cjPosterior: cjPosterior, cjNext: cjNext, priorities: priorities, nudge: nudge, cjWeights: cjWeights,
+  return { taskHeadlines: taskHeadlines, similarTo: similarTo, cj: cj, taskGap: taskGap, cjPosterior: cjPosterior, cjNext: cjNext, priorities: priorities, nudge: nudge, cjWeights: cjWeights,
     usable: usable, model: model, posterior: posterior, meanW: meanW, nextPair: nextPair, holds: holds, recommend: recommend,
     play: play, choiceOf: choiceOf, nsum: nsum, pyRound: pyRound, label: LABEL };
 })();
@@ -907,7 +950,7 @@ var CJ = CAN ? R.cj(MODEL) : null;
 })();
 function save() { try { window.localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* ignore */ } }
 /* the overlays: a place, My list, Compare. The top one is on screen; Back pops it. */
-var VIEW = { all: false, tab: "list", stack: [], confirmReset: false, open: {}, grp: {}, f: { rent: null, beds: "any", garage: false, state: "any" } };
+var VIEW = { all: false, tab: "list", stack: [], confirmReset: false, open: {}, grp: {}, f: { rent: null, beds: "any", garage: false, state: "any", q: "" } };
 var mapApi = null, askApi = null;
 function isSaved(id) { return S.saved.indexOf(id) >= 0; }
 function onTour(id) { return S.tour.indexOf(id) >= 0; }
@@ -1023,7 +1066,11 @@ function welcome() {
   var c = META.counts || {}, done = CAN && S.cj.length >= CJ.n;
   return top("", true) +
     '<section class="hello"><h1 tabindex="-1"><span class="name">Lamia&#39;s<br>House Hunt</span><span class="sr">: </span></h1><span class="tagbox">the short version</span>' +
-    (CAN ? '<p class="lead">Pick between two made-up apartments, ' + (WORDS[CJ.n] || CJ.n) + ' times. Then I&#39;ll suggest three places to look.</p>' +
+    (CAN ? '<ol class="how">' +
+        '<li><b>' + cap(WORDS[CJ.n] || String(CJ.n)) + ' quick choices.</b> Each time, pick between two imaginary apartments. Each choice is a trade-off: more of one thing, less of another.</li>' +
+        '<li><b>Your answers teach the page</b> what matters to you.</li>' +
+        '<li><b>Then three neighborhoods</b> that fit you best, with the three best buildings in each.</li>' +
+        '<li><b>Everything stays open.</b> You can still browse, search and filter every place gathered here.</li></ol>' +
       (done ? '<button type="button" class="btn main" data-act="results">See my three places</button><button type="button" class="btn" data-act="restart">Change my answers</button>'
             : '<button type="button" class="btn main" data-act="start">' + (S.cj.length ? 'Carry on' : 'Start') + '</button>')
       : '<p class="lead">Every place, nearest to ' + esc(ANCHOR) + ' first. Save the ones you like.</p><button type="button" class="btn main" data-act="all">See every place</button>') +
@@ -1032,13 +1079,42 @@ function welcome() {
 }
 
 /* ---------- this or that, between made-up apartments ---------- */
-function aptCard(task, side) {
-  var rows = task.map(function (x) {
-    var a = CJ.attr[x[0]], lv = a.levels[side === "a" ? x[1] : x[2]];
-    return '<span class="ap-row" data-attr="' + esc(a.id) + '"><span class="ap-l">' + esc(a.label) + '</span><b>' + esc(lv.text) + '</b></span>';
-  }).join("");
-  return '<button type="button" class="apt" data-act="cj" data-v="' + side + '"><span class="ap-h"><span>Apartment ' + side.toUpperCase() + '</span><span class="ap-go" aria-hidden="true">This one</span></span>' + rows + '</button>';
+/* the headline for one side of a two-attribute trade-off: the data's when it has one, else made here */
+var BETTER = { money: "Costs less", family: "Closer to " + ANCHOR, room: "More room", going_out: "Livelier", parking: "Easier parking", green: "A park closer by" };
+var WORSE = { money: "costs more", family: "farther from " + ANCHOR, room: "less room", going_out: "quieter", parking: "harder parking", green: "the park is farther" };
+function sideOf(task, side) {   /* [{attr, level, better}] for one apartment, in the task's order */
+  return task.map(function (x) { var a = CJ.attr[x[0]], mine = side === "a" ? x[1] : x[2], other = side === "a" ? x[2] : x[1];
+    return { a: a, level: a.levels[mine], better: a.levels[mine].value > a.levels[other].value }; });
 }
+function headline(id, task, side) {
+  var H = R.taskHeadlines(MODEL, task); if (H && H[side]) return H[side];
+  var rows = sideOf(task, side), up = rows.filter(function (r) { return r.better; }), dn = rows.filter(function (r) { return !r.better; });
+  if (!up.length || !dn.length) return "";
+  return BETTER[up[0].a.id] + ", but " + WORSE[dn[0].a.id];
+}
+function mark(better) { return '<span class="mk ' + (better ? "up" : "dn") + '" aria-hidden="true">' + (better ? "&#10003;" : "&#10005;") + '</span><span class="sr">' + (better ? "Better: " : "Worse: ") + '</span>'; }
+function aptCard(id, task, side) {
+  var rows = sideOf(task, side).map(function (r) {
+    return '<span class="ap-row' + (r.better ? ' up' : ' dn') + '" data-attr="' + esc(r.a.id) + '">' + mark(r.better) + '<span class="ap-t"><span class="ap-l">' + esc(r.a.label) + '</span><b>' + esc(r.level.text) + '</b></span></span>';
+  }).join("");
+  var h = headline(id, task, side);
+  return '<button type="button" class="apt" data-act="cj" data-v="' + side + '"><span class="ap-h"><span class="ap-n">Apartment ' + side.toUpperCase() + '</span><span class="ap-go" aria-hidden="true">This one</span></span>' +
+    (h ? '<span class="ap-hl">' + esc(h) + '</span>' : '') + '<span class="ap-rows">' + rows + '</span></button>';
+}
+/* the other layout: one two-column comparison, a row per attribute */
+function duelTable(id, task) {
+  var A = sideOf(task, "a"), Bs = sideOf(task, "b");
+  function head(side) { var h = headline(id, task, side); return '<button type="button" class="ct-pick" data-act="cj" data-v="' + side + '"><span class="ap-n">Apartment ' + side.toUpperCase() + '</span>' + (h ? '<span class="ap-hl">' + esc(h) + '</span>' : '') + '<span class="ap-go">This one</span></button>'; }
+  return '<div class="ctab"><div class="ct-heads">' + head("a") + head("b") + '</div>' + A.map(function (r, i) {
+    var o = Bs[i];
+    function cell(x, side) { return '<button type="button" tabindex="-1" class="ct-c ' + (x.better ? "up" : "dn") + '" data-act="cj" data-v="' + side + '" data-level="' + esc(x.level.text) + '">' + mark(x.better) + '<span>' + esc(x.level.text) + '</span></button>'; }
+    return '<div class="ct-row" data-attr="' + esc(r.a.id) + '" data-label="' + esc(r.a.label) + '"><p class="ct-l">' + esc(r.a.label) + '</p><div class="ct-cells">' + cell(r, "a") + cell(o, "b") + '</div></div>';
+  }).join("") + '</div>';
+}
+/* "table" (one two-column comparison) or "cards" (two stacked cards). Tried both at 390 and 360: the table puts the
+   two levels of each attribute side by side, so the eye compares straight across, and the whole choice with "No real
+   difference" and Back fits one phone screen; the cards need a scroll and an up-and-down comparison. */
+var CHOICE_LAYOUT = "table";
 function chooseScreen() {
   var id = nextNow(); if (id === null) { S.step = "confirm"; return confirmScreen(); }
   var task = CJ.pool[id], n = S.cj.length, inTask = task.map(function (x) { return x[0]; });
@@ -1047,7 +1123,7 @@ function chooseScreen() {
     '<div class="qhead"><p class="qtop"><span id="cj-step">' + (n + 1) + ' of ' + CJ.n + '</span><span class="muted">Tap the one you would rather live in</span></p>' +
     '<div class="prog" role="progressbar" aria-label="Choices" aria-valuemin="0" aria-valuemax="' + CJ.n + '" aria-valuenow="' + n + '"><i style="width:' + Math.round((n + 1) / CJ.n * 100) + '%"></i></div></div>' +
     '<section class="stack enter" style="gap:10px" data-cand="' + esc(id) + '"><h1 class="h-pick" tabindex="-1" id="q-h">Which would you rather have?</h1>' +
-    '<div class="duel">' + aptCard(task, "a") + '<p class="or" aria-hidden="true">or</p>' + aptCard(task, "b") + '</div>' +
+    (CHOICE_LAYOUT === "table" ? duelTable(id, task) : '<div class="duel">' + aptCard(id, task, "a") + '<p class="or" aria-hidden="true">or</p>' + aptCard(id, task, "b") + '</div>') +
     (same.length ? '<p class="same">Same for both: ' + esc(same.join(", ")) + '.</p>' : '') +
     '<button type="button" class="btn" data-act="cj" data-v="either">No real difference to me</button>' +
     '<div class="qnav"><button type="button" class="quiet" data-act="undo"><span aria-hidden="true">&#8249;</span> Back</button></div></section>';
@@ -1336,6 +1412,13 @@ function rentBounds() {
   if (lo >= hi) lo = Math.max(0, hi - 50);
   return [lo, hi];
 }
+/* search: every word must appear in the name, street, town, state, ZIP or neighborhood */
+function norm(t) { return String(t || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, " ").trim(); }
+var HAY = {};
+function matchesQuery(b, q) {
+  var h = HAY[b.id] || (HAY[b.id] = " " + norm([b.name, b.address, b.city, b.state, b.zip, b.postal_code, hoodNameOf(b), (HBY[b.area_id] || {}).name].join(" ")) + " ");
+  return norm(q).split(" ").filter(Boolean).every(function (w) { return h.indexOf(" " + w) >= 0; });
+}
 function stateOf(b) { var h = HBY[b.neighborhood_id]; return b.state || (h && h.state) || ""; }
 var STATES = B.map(stateOf).filter(function (x, i, a) { return x && a.indexOf(x) === i; }).sort();
 /* every area (the recommender's group, else the neighborhood) with its buildings */
@@ -1345,6 +1428,7 @@ function matchApts(b) {
   var f = VIEW.f, ap = b.apartments || [];
   if (f.garage && ((b.facts || {}).parking || {}).kind !== "garage") return null;
   if (f.state !== "any" && stateOf(b) !== f.state) return null;
+  if (f.q && !matchesQuery(b, f.q)) return null;
   if (!ap.length) { var r = (b.facts || {}).rent_from; return (f.beds === "any" && (f.rent == null || !isNum(r) || r <= f.rent)) ? [] : null; }
   var m = ap.filter(function (a) { return (f.rent == null || !isNum(a.rent) || a.rent <= f.rent) && (f.beds === "any" || String(a.beds) === f.beds); });
   return m.length ? m : null;
@@ -1382,7 +1466,7 @@ function listHtml() {
       (rest.length ? '<div class="grp-rest stack" id="' + gid + '"' + (open ? '' : ' hidden') + ' style="gap:8px">' + rest.join("") + '</div>' +
         '<button type="button" class="quiet" data-act="grp-more" data-id="' + esc(A) + '" aria-expanded="' + open + '" aria-controls="' + gid + '">' + (open ? 'Show fewer' : 'Show ' + rest.length + ' more in ' + esc(h.name)) + '</button>' : '') + '</div>';
   });
-  if (!shown) html = '<p class="empty">Nothing fits that filter. Raise the rent or clear a choice.</p>';
+  if (!shown) html = '<p class="empty">' + (VIEW.f.q ? 'Nothing matches &ldquo;' + esc(VIEW.f.q) + '&rdquo; with these filters. Check the spelling, or clear the search.' : 'Nothing fits that filter. Raise the rent or clear a choice.') + '</p>';
   return { html: html, shown: shown };
 }
 function everything() {
@@ -1391,6 +1475,7 @@ function everything() {
   function seg(v, label) { return '<button type="button" data-act="f-beds" data-v="' + v + '" aria-pressed="' + (f.beds === v) + '">' + label + '</button>'; }
   return '<header class="top"><button type="button" class="quiet" data-act="all-close"><span aria-hidden="true">&#8249;</span> Back</button><span class="topbtns" id="topbtns"></span></header>' +
     '<section class="stack" style="gap:6px"><h1 class="h-big" tabindex="-1">Everything</h1><p>Every building, nothing left out. Tap one to see it.</p></section>' +
+    '<div class="search"><label for="f-q">Search by name, street, town or ZIP</label><input type="search" id="f-q" autocomplete="off" placeholder="For example: Stamford, or Monroe" value="' + esc(f.q || "") + '"></div>' +
     '<section class="filter" aria-label="Filter"><h2>Filter</h2>' +
     '<div><label for="f-rent">Rent up to <output id="f-rent-out" for="f-rent">' + money(f.rent) + '</output></label><input type="range" id="f-rent" min="' + rb[0] + '" max="' + rb[1] + '" step="50" value="' + f.rent + '"></div>' +
     '<div><span class="lab" id="f-beds-l">Bedrooms</span><div class="seg" role="group" aria-labelledby="f-beds-l">' + seg("any", "Any") + seg("0", "Studio") + seg("1", "1 bedroom") + '</div></div>' +
@@ -1552,6 +1637,7 @@ document.addEventListener("change", function (ev) {
 document.addEventListener("input", function (ev) {
   if (ev.target.id === "f-rent") { VIEW.f.rent = Number(ev.target.value); var o = document.getElementById("f-rent-out"); if (o) o.textContent = money(VIEW.f.rent); soonRefresh(); }
   else if (ev.target.id === "f-garage") { VIEW.f.garage = !!ev.target.checked; refreshList(); }
+  else if (ev.target.id === "f-q") { VIEW.f.q = ev.target.value; soonRefresh(); }
 });
 document.addEventListener("keydown", function (ev) {
   if (ev.key === "Escape") { if (document.getElementById("ask-sheet")) { if (askApi) askApi.close(); } else if (VIEW.stack.length) back(); else if (VIEW.all) act("all-close", document.body); return; }

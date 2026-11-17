@@ -74,7 +74,11 @@ EX.forEach((ex) => {
     const p = replay(ex);
     assert.deepStrictEqual(p.tasks, ex.expected_tasks);
     ex.answers.forEach((a, i) => assert.strictEqual(a.task_index, ex.expected_tasks[i]));
-    if (ex.expected_tasks_shown) ex.expected_tasks_shown.forEach((rows, i) => assert.deepStrictEqual(C.pool[ex.expected_tasks[i]].map((x) => ({ attribute: C.attr[x[0]].label, a: C.attr[x[0]].levels[x[1]].text, b: C.attr[x[0]].levels[x[2]].text })), rows));
+    if (ex.expected_tasks_shown) ex.expected_tasks_shown.forEach((shown, i) => {
+      const task = C.pool[ex.expected_tasks[i]], rows = Array.isArray(shown) ? shown : shown.rows;
+      assert.deepStrictEqual(task.map((x) => ({ attribute: C.attr[x[0]].label, a: C.attr[x[0]].levels[x[1]].text, b: C.attr[x[0]].levels[x[2]].text })), rows);
+      if (!Array.isArray(shown)) { const h = R.taskHeadlines(M, task); assert.deepStrictEqual([h.a, h.b], [shown.headline_a, shown.headline_b]); }
+    });
   });
   test("example '" + name + "': weights, priorities and the sentence", () => {
     const p = replay(ex), w6 = round6(p.w);
@@ -112,7 +116,7 @@ const RULES = {
   near: (t) => { const g = gapUnder({ family: 1 })(t); return g > 0 ? "a" : g < 0 ? "b" : "either"; },
   space: (t) => { const g = gapUnder({ room: 1 })(t); return g > 0 ? "a" : g < 0 ? "b" : "either"; },
 };
-test("the pool: two or three attributes differ, never one apartment better on all of them", () => {
+test("the pool: every task a trade-off (two or three attributes), never one apartment better on all of them", () => {
   C.pool.forEach((t, i) => {
     assert(t.length >= 2 && t.length <= 3, "task " + i);
     assert.strictEqual(new Set(t.map((x) => x[0])).size, t.length, "task " + i + " repeats an attribute");
@@ -154,14 +158,15 @@ test("a move swaps one priority with its neighbour, and only that", () => {
   }
   assert.deepStrictEqual(R.cjWeights(M, walk(RULES.mixed), [[o[1], "up"]]), R.nudge(M, w, o[1], "up"));
 });
-test("three different neighborhoods, each with one to three of its own buildings, best first", () => {
+test("three different neighborhoods, each with exactly three of its own buildings (min_buildings), best first", () => {
   for (const k in RULES) {
     const r = R.recommend(M, [], { w: R.cjWeights(M, walk(RULES[k])) });
     assert.strictEqual(r.top.length, Math.min(3, M.groups.length), k);
     assert.strictEqual(new Set(r.top.map((t) => t[0])).size, r.top.length, k);
     r.top.forEach((t) => {
       const g = M.groups.find((x) => x.id === t[0]);
-      assert(t[1].length >= 1 && t[1].length <= 3 && t[1].every((id) => g.building_ids.includes(id)), k + ": " + t[0]);
+      assert(t[1].length === Math.min(3, Math.max(1, M.cfg.min_buildings || 1)) || (!M.cfg.min_buildings && t[1].length >= 1 && t[1].length <= 3), k + ": " + t[0] + " has " + t[1].length);
+      assert(t[1].every((id) => g.building_ids.includes(id)), k + ": " + t[0]);
       const s = t[1].map((id) => r.scores[id]); for (let i = 1; i < s.length; i++) assert(s[i - 1] >= s[i] - 1e-9, k);
     });
   }

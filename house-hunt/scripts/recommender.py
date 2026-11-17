@@ -410,14 +410,19 @@ def mean_weights(samples, pi):
     return [sum(p * w[j] for p, w in zip(pi, samples)) for j in range(len(FEATURES))]
 
 
-def group_scores(w, buildings, params):
-    by = {b["id"]: b for b in buildings}
+MIN_BUILDINGS = 3            # the page promises three neighborhoods with three buildings each: only groups with 3+
+
+
+def group_scores(w, buildings, params, all_groups=False):
+    """Scores of the recommendable groups (at least params['min_buildings'] buildings); all_groups=True scores every
+    group (for reporting how often a small neighborhood would have been best)."""
     sc = {b["id"]: q(score(b, w)) for b in buildings}
     med = statistics.median(sc.values())               # a one-building neighborhood is not a deep one
+    need = 0 if all_groups else params.get("min_buildings", 0)
     out = {}
     for g in params["groups"]:
-        out[g["id"]] = top2_of_3(sorted((sc[i] for i in g["building_ids"]), reverse=True), med)
-    _ = by
+        if len(g["building_ids"]) >= need:
+            out[g["id"]] = top2_of_3(sorted((sc[i] for i in g["building_ids"]), reverse=True), med)
     return out
 
 
@@ -452,9 +457,9 @@ def mmr(gs, params, k=3):
     sim = params["group_similarity"]
     lam = params["mmr_lambda"]
     lo, hi = min(gs.values()), max(gs.values())
-    norm = {g: ((gs[g] - lo) / (hi - lo) if hi - lo > 1e-12 else 0.0) for g in gids}
+    norm = {g: ((gs[g] - lo) / (hi - lo) if hi - lo > 1e-12 else 0.0) for g in gs}
     ok, order = eligible(gs, params)
-    k = min(k, len(gids))
+    k = min(k, len(gs))
     if len(ok) < k:
         return ok + [g for g in order if g not in ok][:k - len(ok)]
     pool = sorted(ok)
@@ -785,8 +790,8 @@ def run_persona(samples, buildings, params, hidden, sets=None, pair_fn=None, bes
     return answers
 
 
-def true_top(hidden, buildings, params):
-    gs = group_scores(hidden, buildings, params)
+def true_top(hidden, buildings, params, all_groups=False):
+    gs = group_scores(hidden, buildings, params, all_groups)
     return sorted(gs, key=lambda g: (-q(gs[g]), g))[0]
 
 
@@ -832,12 +837,14 @@ def validation(exs, buildings, params):
         h = [e["hidden_weights"][k] for k in FEATURES] if e["hidden_weights"] else [1 / len(FEATURES)] * len(FEATURES)
         gs = group_scores(h, buildings, params)
         truth = sorted(gs, key=lambda g: (-q(gs[g]), g))[0]
+        truth_all = true_top(h, buildings, params, all_groups=True)
         top = [n for n, _ in e["expected_top"]]
         got = max(top, key=lambda g: (q(gs[g]), g))
         gap = (gs[truth] - gs[got]) / gs[truth] if gs[truth] else 0.0
         rows.append({"persona": e["persona"], "weights": "hidden" if e["hidden_weights"] else "equal (no hidden weights)",
                      "true_best": truth, "true_best_score": round(gs[truth], 6), "best_recommended": got,
                      "best_recommended_score": round(gs[got], 6), "gap_share": round(gap, 4),
+                     "true_best_any_size": truth_all, "true_best_is_small": truth_all != truth,
                      "hit_strict": truth in top, "hit_within_tolerance": gap <= HIT_TOLERANCE + 1e-12})
     return {"tolerance": HIT_TOLERANCE, "required_hits": 4, "personas": rows,
             "hits": sum(r["hit_within_tolerance"] for r in rows), "missed": [r["persona"] for r in rows if not r["hit_within_tolerance"]]}
@@ -851,7 +858,7 @@ def params_block(buildings, groups, sim, mean, sd, alpha, meds):
         "prior": {"distribution": "Dirichlet", "relative_mass": PRIOR_RELATIVE, "concentration": CONCENTRATION, "alpha": alpha,
                   "draw": "Python random.Random(seed).gammavariate(alpha_k, 1) per feature, normalised, rounded to 6 decimals"},
         "min_pairs": MIN_PAIRS, "max_pairs": MAX_PAIRS, "stop_prob": STOP_PROB, "mmr_lambda": MMR_LAMBDA, "relevance_floor": RELEVANCE_FLOOR, "relevance_top_share": RELEVANCE_TOP_SHARE,
-        "pair_pool": PAIR_POOL, "group_km": GROUP_KM, "tag_floors": TAG_FLOORS, "gives_up_margin": MARGIN, "n_similar": N_SIMILAR, "n_more_like_this": N_MORE, "round_decimals": ROUND, "nudges": list(NUDGES),
+        "pair_pool": PAIR_POOL, "group_km": GROUP_KM, "min_buildings": MIN_BUILDINGS, "tag_floors": TAG_FLOORS, "gives_up_margin": MARGIN, "n_similar": N_SIMILAR, "n_more_like_this": N_MORE, "round_decimals": ROUND, "nudges": list(NUDGES),
         "feature_mean": mean, "feature_sd": sd,
         "groups": [{k: g[k] for k in ("id", "name", "building_ids", "neighborhood_ids")} for g in groups],
         "group_similarity": sim,
@@ -863,6 +870,7 @@ def params_block(buildings, groups, sim, mean, sd, alpha, meds):
             "likelihood": "gap = U_w(a) - U_w(b); P(a) = sig((gap - either_band)/temperature); P(b) = sig((-gap - either_band)/temperature); P(either) = max(0, 1 - P(a) - P(b))",
             "posterior": "pi_s = prod over answers (in order) of the likelihood, divided by the sum over samples; uniform if the sum is 0",
             "mean_weights": "wbar_k = sum_s pi_s x w_s,k; expected utility = U_wbar",
+            "recommendable": "only groups with at least min_buildings (3) buildings are scored for recommendation (group_scores), so every recommendation is three neighborhoods with three buildings each; smaller neighborhoods stay in Browse everything. Everything below (floor, MMR, true best in the simulations) is within those",
             "eligible": "order groups by round(score) desc, id; eligible = the first, plus any with rank < ceil(n x relevance_top_share) and round(score) >= round(relevance_floor x the first's score); if fewer than 3 are eligible, the recommendation is the eligible ones then the next by score (no diversity)",
             "mmr": "among the eligible groups only (iterated in id order): s' = (score - min)/(max - min) over all groups (all 0 if max - min <= 1e-12); pick 3 greedily by round(lambda x s' - (1 - lambda) x max similarity to the picked, round_decimals), ties to the smaller id; similarity is group_similarity (1 - centroid distance / largest centroid distance, standardised features)",
             "sample_sets": "for each sample, the MMR top three with that sample's weights, as sorted ids joined by '|'; computed once",
@@ -1027,31 +1035,49 @@ def conjoint_attributes(buildings):
     return [{"id": k, "label": ATTR_LABEL[k], "feature": k, "levels": lv[k]} for k in ATTR_ORDER]
 
 
+MAX_LEVEL_GAP = 2            # level pairs at most two steps apart: the trade is felt but not absurd
+
+
 def build_pool(attrs):
-    """Every task, in this order (the index is the tie-break):
-    two attributes: each pair of attributes (in ATTR_ORDER), every pair of different levels on each; A has the better
-      level on the first attribute and the worse on the second (so neither apartment is better on everything);
-    three attributes: each triple, adjacent levels only (one step apart) on each; A better on the first; on the second
-      and third, (A better, B better), (B, A) or (B, B) -- never A better on all three.
-    A task is [[attr, level of A, level of B], ...] with level indexes worst = 0."""
+    """Every task is a pure two-attribute trade-off, in this order (the index is the tie-break): each pair of
+    attributes (in ATTR_ORDER); every pair of levels one or two steps apart (MAX_LEVEL_GAP) on the first, and the same
+    on the second; one apartment has the better level on the first attribute and the worse on the second, the other the
+    reverse; everything else is the same. Sides alternate by index: at an even index A has the better level on the
+    first attribute, at an odd index B does. Never dominated. A task is [[attr, level of A, level of B], ...] with level
+    indexes worst = 0."""
     import itertools
     n = {a["id"]: len(a["levels"]) for a in attrs}
     ids = [a["id"] for a in attrs]
     pool = []
     for i, j in itertools.combinations(ids, 2):
         for lo1, hi1 in itertools.combinations(range(n[i]), 2):
+            if hi1 - lo1 > MAX_LEVEL_GAP:
+                continue
             for lo2, hi2 in itertools.combinations(range(n[j]), 2):
-                pool.append([[i, hi1, lo1], [j, lo2, hi2]])
-    for i, j, k in itertools.combinations(ids, 3):
-        for l1 in range(n[i] - 1):
-            for l2 in range(n[j] - 1):
-                for l3 in range(n[k] - 1):
-                    for d2, d3 in (("a", "b"), ("b", "a"), ("b", "b")):
-                        t = [[i, l1 + 1, l1]]
-                        t.append([j, l2 + 1, l2] if d2 == "a" else [j, l2, l2 + 1])
-                        t.append([k, l3 + 1, l3] if d3 == "a" else [k, l3, l3 + 1])
-                        pool.append(t)
+                if hi2 - lo2 > MAX_LEVEL_GAP:
+                    continue
+                t = [[i, hi1, lo1], [j, lo2, hi2]]
+                if len(pool) % 2:
+                    t = [[k, b, a] for k, a, b in t]
+                pool.append(t)
     return pool
+
+
+GAIN = {"money": "Cheaper", "family": "Nearer family", "room": "More room", "going_out": "Livelier",
+        "parking": "Better parking", "green": "Park closer"}
+COST = {"money": "pricier", "family": "longer drive", "room": "smaller", "going_out": "quieter",
+        "parking": "worse parking", "green": "park farther"}
+
+
+def task_headlines(task, params):
+    """{a, b}: per side, the gain and the cost in at most five plain words ("More room, but quieter")."""
+    lv = _level_values(params)
+    out = {}
+    for side, me, other in (("a", 1, 2), ("b", 2, 1)):
+        gain = next(k for k, *ab in task if lv[k][ab[me - 1]] > lv[k][ab[other - 1]])
+        cost = next(k for k, *ab in task if lv[k][ab[me - 1]] < lv[k][ab[other - 1]])
+        out[side] = f"{GAIN[gain]}, but {COST[cost]}"
+    return out
 
 
 def _level_values(params):
@@ -1193,7 +1219,9 @@ def nudge(w, feature, direction):
 
 def task_display(task, params):
     attrs = {a["id"]: a for a in params["conjoint"]["attributes"]}
-    return [{"attribute": attrs[k]["label"], "a": attrs[k]["levels"][a]["text"], "b": attrs[k]["levels"][b]["text"]} for k, a, b in task]
+    h = task_headlines(task, params)
+    return {"headline_a": h["a"], "headline_b": h["b"],
+            "rows": [{"attribute": attrs[k]["label"], "a": attrs[k]["levels"][a]["text"], "b": attrs[k]["levels"][b]["text"]} for k, a, b in task]}
 
 
 def conjoint_examples(samples, buildings, params):
@@ -1231,7 +1259,7 @@ def conjoint_block(buildings):
     attrs = conjoint_attributes(buildings)
     return {"attributes": attrs, "n_tasks": N_TASKS, "prefilter": POOL_PREFILTER, "pool": build_pool(attrs),
             "answers": {"a": "Apartment A", "b": "Apartment B", "either": "No real difference to me"},
-            "pool_rules": build_pool.__doc__.strip(), "selection": next_task.__doc__.strip(),
+            "pool_rules": build_pool.__doc__.strip(), "headline_rule": task_headlines.__doc__.strip(), "gain_words": GAIN, "cost_words": COST, "selection": next_task.__doc__.strip(),
             "levels_rule": conjoint_attributes.__doc__.strip(), "priorities_rule": priorities.__doc__.strip(),
             "nudge_rule": nudge.__doc__.strip(), "priority_words": PRIORITY_WORDS,
             "flat_rule": flat_threshold.__doc__.strip(), "lean_step": LEAN_STEP}
