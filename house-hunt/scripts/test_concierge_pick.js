@@ -124,15 +124,14 @@ test("the pool: every task a trade-off (two or three attributes), never one apar
     assert(better.includes(1) && better.includes(-1), "task " + i + " is dominated");
   });
 });
-test("exactly n_tasks choices, never the same task twice, never the same attributes twice in a row", () => {
+test("exactly n_tasks choices; no attribute pair twice; every attribute at least twice in eight", () => {
   for (const k in RULES) {
     const A = walk(RULES[k]);
     assert.strictEqual(A.length, C.n, k);
-    assert.strictEqual(new Set(A.map((x) => x.task_index)).size, A.length, k);
-    for (let i = 1; i < A.length; i++) {
-      const s = (j) => C.pool[A[j].task_index].map((x) => x[0]).sort().join("|");
-      assert.notStrictEqual(s(i), s(i - 1), k + ": same attributes twice in a row");
-    }
+    const pairs = A.map((x) => C.pool[x.task_index].map((y) => y[0]).sort().join("|"));
+    assert.strictEqual(new Set(pairs).size, pairs.length, k + ": an attribute pair repeats");
+    const cnt = {}; A.forEach((x) => C.pool[x.task_index].forEach((y) => { cnt[y[0]] = (cnt[y[0]] || 0) + 1; }));
+    if (C.n >= 6) C.c.attributes.forEach((a) => assert((cnt[a.id] || 0) >= 2, k + ": " + a.id + " appears " + (cnt[a.id] || 0) + " times"));
   }
 });
 test("deterministic: the same answers give the same tasks, weights and places", () => {

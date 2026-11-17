@@ -1,6 +1,6 @@
 /* Walk through the short page (version 4) the way Lamia would, on a phone:  node scripts/concierge_walkthrough_test.js
    Build first: python3 scripts/build_concierge.py. Opens site/dist/concierge.html from disk, no network (the font
-   stylesheet request is answered with an empty file). Writes site/screens/concierge41-*.png at 2x.
+   stylesheet request is answered with an empty file). Writes site/screens/concierge42-*.png at 2x.
    At 390 x 844 and 360 x 780: every persona in meta.recommender_examples is played through the screen (eight choices
    between made-up apartments, tapping what the persona chose) and the page must show exactly the example's tasks, in
    the example's words, then its priorities and sentence on "Here's what you told me", then its three neighborhoods with
@@ -14,18 +14,18 @@
    none of the banned words, no trace of "Ask the concierge" outside a Claude viewer, every target at least 44px, the
    bar never covering the end of the page, and the toast never under the bar. */
 "use strict";
-const { chromium } = require("playwright");
+const { chromium, devices } = require("playwright");
 const path = require("path"), fs = require("fs"), assert = require("assert");
 const ROOT = path.resolve(__dirname, "..");
 const PAGE = "file://" + path.join(ROOT, "site", "dist", "concierge.html");
 const SHOTS = path.join(ROOT, "site", "screens");
 const BANNED = /\ball-in\b|\bcap\b|\bunits?\b|\bgate\b|\bwe\b|net-effective|everything included|\bcrimes?\b|\bexperiences?\b/i;
-const KEY = "lamia-concierge-v4";
+const KEY = "lamia-concierge";
 let checks = 0;
 const ok = (cond, msg) => { assert(cond, msg); checks++; };
 const said = (t) => String(t || "");   /* the page shows the model's sentences as they are */
 
-async function open(browser, extra, init) {
+async function open(browser, extra, init, initArg) {
   const ctx = await browser.newContext(Object.assign({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, hasTouch: true, isMobile: true }, extra || {}));
   const page = await ctx.newPage(), errs = [], net = [];
   page.setDefaultTimeout(10000);
@@ -36,19 +36,19 @@ async function open(browser, extra, init) {
     if (/fonts\.googleapis\.com/.test(u)) return route.fulfill({ status: 200, contentType: "text/css", body: "" });
     net.push(u); return route.abort();
   });
-  if (init) await page.addInitScript(init);
+  if (init) await page.addInitScript(init, initArg);
   await page.goto(PAGE);
   await page.waitForSelector("#app h1");
   return { ctx, page, errs, net };
 }
 let prefix = "";
-async function screen(page, name, full) { await page.waitForTimeout(200); await page.screenshot({ path: path.join(SHOTS, "concierge41-" + prefix + name + ".png"), fullPage: !!full }); }
+async function screen(page, name, full) { await page.waitForTimeout(200); await page.screenshot({ path: path.join(SHOTS, "concierge42-" + prefix + name + ".png"), fullPage: !!full }); }
 async function sheetShot(page, name) {
   const h = await page.evaluate(() => { const s = document.getElementById("sheet"); return s ? s.scrollHeight : 0; });
   const vp = page.viewportSize();
   if (h > vp.height) {
     await page.setViewportSize({ width: vp.width, height: Math.min(h, 7000) }); await page.waitForTimeout(200);
-    await page.screenshot({ path: path.join(SHOTS, "concierge41-" + prefix + name + ".png") });
+    await page.screenshot({ path: path.join(SHOTS, "concierge42-" + prefix + name + ".png") });
     await page.setViewportSize(vp);
   } else await screen(page, name);
 }
@@ -97,6 +97,7 @@ async function barSays(page, n, label) {
 }
 const taskOnScreen = (page) => page.locator("#app [data-cand]").getAttribute("data-cand").then(Number);
 async function tap(page, choice) {
+  await page.waitForTimeout(380);   /* the page ignores taps in the first 300 ms of a new choice (a double tap) */
   if (choice === "either") await page.click('#app button[data-act="cj"][data-v="either"]');
   else await page.click('#app .ct-pick[data-v="' + choice + '"], #app .apt[data-v="' + choice + '"]');
 }
@@ -165,14 +166,17 @@ async function saveFromResults(page, n) {
     await page.waitForSelector("#app .hlist");
     const top = await shownTop(page);
     ok(JSON.stringify(top) === JSON.stringify(ex.expected_top), L + ex.persona + ": the three shown " + JSON.stringify(top));
-    ok((await page.locator("#res-h").innerText()).trim() === ex.expected_priorities_sentence, "the results open with what she cares about");
+    ok((await page.locator("#res-h").textContent()).includes(ex.expected_priorities_sentence), "the results heading carries what she cares about, for screen readers");
+    if (!ex.expected_flat) ok(JSON.stringify(await page.locator("#app .pchips .pc").evaluateAll((els) => els.map((e) => e.getAttribute("data-k")))) === JSON.stringify(ex.expected_priorities.slice(0, 3)), "her top three priorities as numbered chips");
+    ok((await page.locator("#app .glance tbody tr.gl-vals").count()) === 3 && (await page.locator("#app .glance thead th").count()) === 5, "at a glance: three rows, four columns");
+    ok((await page.locator("#app .glance td.best").count()) >= 1, "the best in a column is marked");
     const exp = await page.locator("#app .hhead").evaluateAll((els) => els.map((e) => e.getAttribute("aria-expanded")));
     ok(JSON.stringify(exp) === JSON.stringify(["true", "false", "false"]), "exactly three neighborhoods: number 1 open, 2 and 3 closed");
     ok(top.length === 3 && top.every((t) => t[1].length === 3), L + ex.persona + ": exactly three buildings in each of the three");
     for (const [area] of ex.expected_top) {
       const card = page.locator('#app .hcard[data-area="' + area + '"]');
-      if (ex.expected_why && ex.expected_why[area]) ok((await card.locator(".because .t").textContent()) === ex.expected_why[area], L + "why for " + area);
-      if (ex.expected_gives_up) ok(ex.expected_gives_up[area] ? (await card.locator(".gives .t").textContent()) === ex.expected_gives_up[area] : (await card.locator(".gives").count()) === 0, L + "gives up for " + area);
+      if (ex.expected_why && ex.expected_why[area]) ok((await card.locator(".because").getAttribute("data-full")) === ex.expected_why[area], L + "why for " + area);
+      if (ex.expected_gives_up) ok(ex.expected_gives_up[area] ? (await card.locator(".gives").getAttribute("data-full")) === ex.expected_gives_up[area] : (await card.locator(".gives").count()) === 0, L + "gives up for " + area);
     }
     ok(!(await page.locator('#app #whatif, #app [data-act="more"], #app [data-act="remove"], #app .thumb').count()), "no what-would-change, more like this or Not for me on the results");
     return top;
@@ -210,6 +214,11 @@ async function saveFromResults(page, n) {
     const top = await playExample(page, ex, L, true);
     await everyScreen(page, L + "results", LIMIT);
     await screen(page, "04-results"); await screen(page, "04b-results-full", true);
+    const tall = await page.evaluate(() => document.scrollingElement.scrollHeight / window.innerHeight);
+    ok(tall <= 1.75, L + "the results with number 1 open fit in about 1.5 phone screens (" + tall.toFixed(2) + ")");
+    await page.click('#app tr.gl-vals[data-v="2"]');
+    ok((await page.locator('#app .hhead[data-v="2"]').getAttribute("aria-expanded")) === "true", "tapping an at-a-glance row opens that neighborhood");
+    await page.click('#app .gl-name[data-v="0"]');
     /* number 2 opens on tap */
     await page.click('#app .hhead[data-v="1"]');
     ok((await page.locator('#app .hhead[data-v="1"]').getAttribute("aria-expanded")) === "true" && await page.locator("#hb-1").isVisible(), "a tap opens number 2");
@@ -218,7 +227,7 @@ async function saveFromResults(page, n) {
     /* a place row, and the place sheet with More like this at the bottom */
     const firstId = top[0][1][0], fb = byId[firstId];
     const rowText = await page.locator('#app .prow[data-id="' + firstId + '"]').innerText();
-    ok(/Rent/.test(rowText) && /Total with utilities and fees/.test(rowText), "a place row pairs rent and total");
+    ok(/Rent \$[\d,]+ · Total \$[\d,]+/.test(rowText.replace(/\s+/g, " ")), "a place row: Rent $x · Total $y on one line (" + rowText.replace(/\s+/g, " ") + ")");
     await page.click('#app .prow[data-id="' + firstId + '"]'); await page.waitForSelector("#sheet .place");
     ok((await page.locator("#sheet .life .moment").count()) === (fb.life_here || []).filter((m) => m.text).length, "Life here");
     const labels = await page.locator("#sheet .facts .l").allInnerTexts();
@@ -396,6 +405,76 @@ async function saveFromResults(page, n) {
     await everyScreen(p, "fallback", LIMIT); await screen(p, "15-fallback");
     ok(errs.length === 0, "errors (fallback): " + errs.join(" || ")); await ctx.close(); }
 
+  /* ================= recovery: stale saved answers, duplicates, a thrown error ================= */
+  { /* answers saved by an older version, under its key, point at other tasks: they are dropped, the list is kept */
+    const keep = D.buildings[0].id;
+    const { ctx, page: p, errs } = await open(browser, {}, (k) => { if (!sessionStorage.getItem("seeded")) { sessionStorage.setItem("seeded", "1");
+      localStorage.setItem("lamia-concierge-v4", JSON.stringify({ v: 4, step: "results", cj: [0, 1, 2, 3, 4, 5, 6, 7].map((i) => ({ task_index: i, choice: "a" })), moves: [], saved: [k], ticked: [], tour: [] })); } }, keep);
+    ok((await p.locator(".hello").count()) === 1 && (await p.locator('#app [data-act="start"]').innerText()).trim() === "Start", "stale answers from an older version are dropped: back to the start");
+    ok((await state(p)).saved.includes(keep), "her list survives");
+    ok(await p.evaluate(() => localStorage.getItem("lamia-concierge-v4") === null), "the old key is removed");
+    await playExample(p, EX[0], "after stale ", false);
+    ok(errs.length === 0, "errors (stale): " + errs.join(" || ")); await ctx.close(); }
+  { /* the same task saved twice (and a different data version) */
+    const t0 = EX[0].expected_tasks[0];
+    const dup = await open(browser, {}, ([t, a]) => { if (!sessionStorage.getItem("seeded")) { sessionStorage.setItem("seeded", "1");
+      localStorage.setItem("lamia-concierge", JSON.stringify({ v: 42, data_version: "__fill__", step: "choose", cj: [{ task_index: t, choice: a }, { task_index: t, choice: a }, { task_index: t, choice: a }], moves: [], saved: [], ticked: [], tour: [] })); } }, [t0, EX[0].answers[0].choice]);
+    const dv = await dup.page.evaluate(() => window.__conciergeDataVersion);
+    await dup.page.evaluate(([dv, t, a]) => { localStorage.setItem("lamia-concierge", JSON.stringify({ v: 42, data_version: dv, step: "choose", cj: [{ task_index: t, choice: a }, { task_index: t, choice: a }, { task_index: t, choice: a }], moves: [], saved: [], ticked: [], tour: [] })); }, [dv, t0, EX[0].answers[0].choice]);
+    await dup.page.reload(); await dup.page.waitForSelector("#app [data-cand]");
+    ok(((await state(dup.page)).cj || []).length === 1, "a task saved three times counts once");
+    ok((await taskOnScreen(dup.page)) === EX[0].expected_tasks[1], "and the next task is the example's second, not a repeat");
+    ok(dup.errs.length === 0, "errors (duplicates): " + dup.errs.join(" || ")); await dup.ctx.close(); }
+  { /* an action that throws: a bar with ways on, not nothing */
+    const { ctx, page: p } = await open(browser);
+    await act(p, "start"); await p.waitForSelector("#app [data-cand]");
+    await p.evaluate(() => { window.__conciergeThrowOn = "cj"; });
+    await tap(p, "a");
+    ok(await p.locator("#oops").isVisible(), "a thrown error shows the Something went wrong bar");
+    ok((await p.locator('#oops [data-oops="results"]').count()) === 0 && (await p.locator('#oops [data-oops="restart"]').count()) === 1 && (await p.locator('#oops [data-oops="all"]').count()) === 1, "before eight answers: Start over and See everything");
+    await screen(p, "16-oops");
+    await p.evaluate(() => { window.__conciergeThrowOn = null; });
+    await p.click('#oops [data-oops="restart"]');
+    ok((await p.locator("#oops").count()) === 0 && (await p.locator(".hello").count()) === 1, "Start over recovers");
+    for (const a of EX[0].answers.slice(0, 0)) await tap(p, a.choice);
+    await playExample(p, EX[0], "after an error ", false);
+    await p.evaluate(() => { window.__conciergeThrowOn = "area"; });
+    await p.click('#app .hhead[data-v="1"]');
+    ok(await p.locator('#oops [data-oops="results"]').isVisible(), "with eight answers the bar offers See my results");
+    await p.evaluate(() => { window.__conciergeThrowOn = null; });
+    await p.click('#oops [data-oops="results"]');
+    ok(JSON.stringify(await shownTop(p)) === JSON.stringify(EX[0].expected_top), "See my results recovers to the same three");
+    await ctx.close(); }
+
+  /* ================= real phones: iPhone 13 and Pixel 7, every step by tap() ================= */
+  for (const name of ["iPhone 13", "Pixel 7"]) {
+    const ctx = await browser.newContext(Object.assign({}, devices[name]));
+    const page = await ctx.newPage(), errs = [], net = [];
+    page.on("pageerror", (e) => errs.push(e.message)); page.on("console", (m) => { if (m.type() === "error") errs.push(m.text()); });
+    await page.route(/^https?:/, (route) => { const u = route.request().url(); if (/fonts\.googleapis\.com/.test(u)) return route.fulfill({ status: 200, contentType: "text/css", body: "" }); net.push(u); return route.abort(); });
+    await page.goto(PAGE); await page.waitForSelector("#app h1");
+    const ex = EX[0];
+    await page.tap('#app [data-act="start"]');
+    for (let i = 0; i < ex.answers.length; i++) {
+      await page.waitForSelector("#app [data-cand]");
+      ok((await taskOnScreen(page)) === ex.expected_tasks[i], name + ": task " + (i + 1));
+      await page.waitForTimeout(380);
+      const c = ex.answers[i].choice;
+      await page.tap(c === "either" ? '#app button[data-act="cj"][data-v="either"]' : '#app .ct-pick[data-v="' + c + '"]');
+    }
+    await page.waitForSelector("#prio");
+    const vis = await page.evaluate(() => { const r = document.getElementById("cf-h").getBoundingClientRect(); return r.top >= -1 && r.top < window.innerHeight; });
+    ok(vis, name + ": after the eighth choice the confirmation is in view");
+    await page.tap('#app [data-act="confirm-yes"]'); await page.waitForSelector("#app .hlist");
+    ok(JSON.stringify(await shownTop(page)) === JSON.stringify(ex.expected_top), name + ": the example's three places");
+    await page.tap('#app .prow >> nth=0'); await page.waitForSelector("#sheet .place");
+    await page.tap('#sheet [data-act="back"]');
+    await page.tap('#app .btn[data-act="all"]'); await page.waitForSelector("#f-q");
+    ok(errs.length === 0 && net.length === 0, name + ": errors or network " + errs.concat(net).join(" | "));
+    await page.screenshot({ path: path.join(SHOTS, "concierge42-device-" + name.replace(/\W+/g, "-") + ".png") });
+    await ctx.close();
+  }
+
   /* ================= Ask, against a stand-in for the viewer's Claude ================= */
   { const stub = () => {
       window.__calls = [];
@@ -432,5 +511,5 @@ async function saveFromResults(page, n) {
     await none.page.waitForTimeout(300); ok((await none.page.locator("#ask-btn").count()) === 0, "use() resolving null leaves no trace"); await none.ctx.close(); }
 
   await browser.close();
-  console.log(checks + " checks passed; screenshots in site/screens/concierge41-*.png");
-})().catch((e) => { console.error("FAILED: " + (e && e.message || e)); process.exit(1); });
+  console.log(checks + " checks passed; screenshots in site/screens/concierge42-*.png");
+})().catch((e) => { console.error("FAILED: " + (e && e.message || e) + "\n" + ((e && e.stack) || "").split("\n").filter((l) => /walkthrough/.test(l)).slice(0, 3).join("\n")); process.exit(1); });

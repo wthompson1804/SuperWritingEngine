@@ -140,31 +140,53 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;line-height:1.
 .mv:disabled{opacity:.3;cursor:default}
 
 /* the three places */
-.hlist{list-style:none;padding:0;display:grid;gap:12px}
+.pchips{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:5px}
+.mine{display:grid;gap:4px}
+.pc{display:inline-flex;align-items:center;gap:5px;background:var(--card);border:2px solid var(--line);border-radius:999px;padding:2px 10px 2px 3px;font-weight:700;font-size:14px}
+.pc b{display:inline-grid;place-items:center;width:21px;height:21px;border-radius:50%;background:var(--ink);color:var(--paper);font-size:13px}
+.glance{display:grid;gap:2px}
+.gl-h{font-family:var(--body);font-size:13px;letter-spacing:.06em;text-transform:uppercase;font-weight:800;color:var(--muted)}
+.glance table{width:100%;border-collapse:collapse;table-layout:fixed;font-variant-numeric:tabular-nums}
+.glance thead th{font-size:12px;font-weight:800;color:var(--muted);text-align:left;padding:0 4px 4px;vertical-align:bottom;line-height:1.15}
+.glance thead th:first-child{width:0;padding:0}
+.glance tbody th{text-align:left;padding:4px 0 0;border-top:2px solid var(--line)}
+.glance tbody tr:first-child th{border-top:2px solid var(--ink)}
+.gl-name{display:flex;align-items:center;gap:8px;width:100%;min-height:44px;background:none;border:0;padding:0;font:inherit;font-family:var(--display);font-weight:800;font-size:18px;line-height:1.15;color:var(--ink);text-align:left}
+.gl-name .num{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-size:14px}
+.gl-vals{cursor:pointer}
+.gl-vals td{padding:0 4px 8px;font-weight:800;font-size:16px;line-height:1.2;vertical-align:top;white-space:nowrap}
+.gl-vals td:first-child{width:0;padding:0}
+.gl-vals td small{display:block;font-size:12px;font-weight:600;color:var(--muted)}
+.gl-vals td.best{color:var(--ok-ink)}
+.gl-vals td .bm{margin-right:2px}
+.hlist{list-style:none;padding:0;display:grid;gap:8px}
 .hcard{background:var(--card);border:2px solid var(--line);border-radius:22px;overflow:hidden}
 .hcard.open{border-color:var(--ink)}
 .hcard h2{margin:0;font-size:inherit}
-.hhead{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;width:100%;min-height:64px;text-align:left;background:none;border:0;padding:12px 14px;font:inherit;color:inherit}
-.hhead .num{width:38px;height:38px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:20px}
+.hhead{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;width:100%;min-height:56px;text-align:left;background:none;border:0;padding:8px 12px;font:inherit;color:inherit}
+.hhead .num{width:32px;height:32px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:20px}
 .hn{display:grid;gap:5px;min-width:0}
-.hname{font-family:var(--display);font-weight:800;font-stretch:84%;font-size:clamp(21px,6vw,25px);line-height:1.1}
+.hname{font-family:var(--display);font-weight:800;font-stretch:84%;font-size:clamp(19px,5.4vw,22px);line-height:1.1}
 .htags{display:flex;flex-wrap:wrap;gap:6px}
 .htags span{background:var(--butter);color:var(--on-butter);font-weight:800;font-size:13px;border-radius:999px;padding:2px 10px}
 .hhead .tw{font-size:28px;line-height:1;color:var(--berry-deep);transition:transform .15s}
 .hhead[aria-expanded="true"] .tw{transform:rotate(90deg)}
-.hbody{display:grid;gap:10px;padding:0 14px 14px}
-.because{font-size:17px;line-height:1.4}
+.hbody{display:grid;gap:8px;padding:0 12px 12px}
+.because,.gives{display:grid;grid-template-columns:24px 1fr;gap:8px;align-items:start;font-size:16px;line-height:1.35;font-weight:600}
+.because .mk,.gives .mk{width:22px;height:22px;font-size:13px}
 .because b,.gives b{font-weight:800}
-.gives{font-size:15px;line-height:1.4;color:var(--muted);font-weight:600}
-.gives b{color:var(--ink)}
+.gives{color:var(--muted)}
 .plist{list-style:none;padding:0;display:grid;gap:8px}
-.prow{display:grid;gap:3px;width:100%;text-align:left;background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:10px 12px;font:inherit;color:var(--ink);min-height:44px}
-.prow .pr1{display:flex;justify-content:space-between;align-items:center;gap:8px}
-.prow .pr1 b{font-family:var(--display);font-weight:800;font-size:19px;line-height:1.15}
+.prow{display:grid;gap:2px;width:100%;text-align:left;background:var(--paper);border:2px solid var(--line);border-radius:14px;padding:8px 12px;font:inherit;color:var(--ink);min-height:44px}
+.prow .pr1{display:flex;align-items:center;gap:8px}
+.prow .pr1 b{font-family:var(--display);font-weight:800;font-size:18px;line-height:1.15;min-width:0}
 .prow .go{font-size:24px;line-height:1;color:var(--berry-deep)}
 .prow .pin{font-size:13px;font-weight:700;color:var(--muted)}
-.prow .pmn{display:flex;flex-wrap:wrap;gap:0 14px;font-size:14px;font-weight:600;color:var(--muted);line-height:1.4}
-.prow .pmn>span{white-space:nowrap}
+.prow .pr2{font-size:14.5px;font-weight:600;color:var(--muted);line-height:1.35}
+.prow .pr2 b{color:var(--ink);font-variant-numeric:tabular-nums}
+.prow .ck{flex:0 0 auto;font-size:14px;font-weight:900;margin-left:auto}
+.prow .ck.ok{color:var(--ok-ink)}
+.prow .ck.old{color:var(--muted)}
 .prow .pmn b{color:var(--ink);font-variant-numeric:tabular-nums}
 .prow .pf1{font-size:15px;font-weight:700}
 .prow .chk{font-size:13px}
@@ -772,17 +794,24 @@ var ConciergeRec = (function () {
   }
   function keyOf(task) { return JSON.stringify(task); }
   function attrSet(task) { return task.map(function (x) { return x[0]; }).sort().join("|"); }
-  /* the next task (an index into the pool), or null after n_tasks: not asked, not on the same attributes as the one
-     before, the `prefilter` most utility-balanced at her mean weights, then the largest expected reduction in the trace
-     of the posterior covariance of the weights; ties to the lower index */
+  /* the next task (an index into the pool), or null after n_tasks (meta.recommender.conjoint.selection): never an
+     attribute pair already asked, balanced coverage, the most utility-balanced, then the largest expected reduction in
+     the trace of the posterior covariance of the weights; ties to the lower index */
   function cjNext(M, answers) {
     var C = cj(M); answers = answers || [];
     if (!C || answers.length >= C.n) return null;
-    var pi = cjPosterior(M, answers), w = meanW(M, pi), asked = {}, prev = null;
-    answers.forEach(function (x) { asked[keyOf(taskOf(M, x))] = 1; });
-    if (answers.length) prev = attrSet(taskOf(M, answers[answers.length - 1]));
+    /* not on an attribute pair already asked; then only the tasks whose two attributes have appeared least (coverage:
+       lowest sum of their counts, then lowest larger count); then the `prefilter` most utility-balanced */
+    var pi = cjPosterior(M, answers), w = meanW(M, pi), askedPairs = {}, counts = {};
+    answers.forEach(function (x) { var t = taskOf(M, x); askedPairs[attrSet(t)] = 1; t.forEach(function (y) { counts[y[0]] = (counts[y[0]] || 0) + 1; }); });
+    function cover(t) { var c = t.map(function (y) { return counts[y[0]] || 0; }); return [c.reduce(function (a, b) { return a + b; }, 0), Math.max.apply(null, c)]; }
     var cand = [];
-    C.pool.forEach(function (t, i) { if (!asked[keyOf(t)] && attrSet(t) !== prev) cand.push([q(M, Math.abs(taskGap(M, w, t))), i]); });
+    C.pool.forEach(function (t, i) { if (!askedPairs[attrSet(t)]) cand.push(i); });
+    if (!cand.length) return null;
+    var least = null;
+    cand.forEach(function (i) { var c = cover(C.pool[i]); if (least === null || c[0] < least[0] || (c[0] === least[0] && c[1] < least[1])) least = c; });
+    cand = cand.filter(function (i) { var c = cover(C.pool[i]); return c[0] === least[0] && c[1] === least[1]; })
+      .map(function (i) { return [q(M, Math.abs(taskGap(M, w, C.pool[i]))), i]; });
     cand.sort(function (x, y) { return x[0] !== y[0] ? x[0] - y[0] : x[1] - y[1]; });
     cand = cand.slice(0, C.c.prefilter || 60).map(function (x) { return x[1]; }).sort(function (x, y) { return x - y; });
     var T = M.cfg.temperature, band = M.cfg.either_band, nf = M.K, best = null;
@@ -1180,35 +1209,104 @@ function confirmScreen() {
     '<div class="qnav"><button type="button" class="quiet" data-act="undo"><span aria-hidden="true">&#8249;</span> Back</button>' + (S.moves.length ? '<button type="button" class="quiet" data-act="unmove">Undo my changes</button>' : '') + '</div></section>';
 }
 
-/* ---------- your three places, in one reading order ---------- */
-function oneFact(b, order) {
-  var k = order.filter(function (x) { return x !== "money"; })[0] || "family";
-  return factText(b, k);
+/* ---------- your three places, at a glance ---------- */
+var SHORT = { family: "Near " + ANCHOR, money: "Lower cost", room: "Space", going_out: "Going out", green: "A park for the dog", parking: "Parking" };
+function medianOf(xs) { xs = xs.filter(isNum).sort(function (a, b) { return a - b; }); if (!xs.length) return null; var h = Math.floor(xs.length / 2); return xs.length % 2 ? xs[h] : (xs[h - 1] + xs[h]) / 2; }
+/* the figures of a neighborhood, over the buildings shown (as the recommender's own figures) */
+function areaFigs(ids) {
+  var rs = ids.map(function (id) { return BY[id].features_raw || {}; }), L = ids.map(function (id) { return raw(BY[id]); });
+  var places = rs.filter(function (r) { return isNum(r.restaurants_10min) || isNum(r.bars_10min); }).map(function (r) { return (r.restaurants_10min || 0) + (r.bars_10min || 0); });
+  var sq = L.map(function (x) { return x.sqft; }).filter(isNum), tot = L.map(function (x) { return x.total; }).filter(isNum), walk = L.map(function (x) { return x.park; }).filter(isNum);
+  var pk = ids.map(function (id) { return (BY[id].features || {}).parking; }).filter(isNum).sort(function (a, b) { return a - b; });
+  var d = medianOf(L.map(function (x) { return x.drive; })), p = medianOf(places);
+  return { drive: isNum(d) ? Math.round(d) : null, total: tot.length ? Math.min.apply(null, tot) : null, sqft: sq.length ? Math.max.apply(null, sq) : null,
+    bedroom: L.some(function (x) { return x.bedroom; }), places: isNum(p) ? Math.round(p) : null, walk: walk.length ? Math.max(1, Math.round(Math.min.apply(null, walk))) : null,
+    parking: pk.length ? pk[Math.floor((pk.length - 1) / 2)] : null };
 }
+var PARK_SHORT = { "1": "garage", "0.7": "off-street", "0.4": "not stated", "0.2": "street only" };
+function goodBit(k, f) {
+  if (k === "family") return isNum(f.drive) ? f.drive + " min to " + ANCHOR : "close to " + ANCHOR;
+  if (k === "money") return isNum(f.total) ? "totals from " + money(f.total) : "lower totals";
+  if (k === "room") return (f.bedroom ? "1 bedroom" : "studios") + (isNum(f.sqft) ? ", up to " + Math.round(f.sqft).toLocaleString("en-US") + " sq ft" : "");
+  if (k === "going_out") return isNum(f.places) ? f.places + (f.places === 1 ? " place" : " places") + " to eat nearby" : "places to eat nearby";
+  if (k === "green") return isNum(f.walk) ? "a park " + f.walk + " min away" : "a park nearby";
+  return (PARK_SHORT[String(f.parking)] || "parking") + " parking";
+}
+function badBit(k, f, unknown) {
+  if (unknown) return { family: "drive not known yet", money: "total not known yet", room: "size not published yet", going_out: "places nearby not mapped yet", green: "park not mapped yet", parking: "parking not stated yet" }[k] || "not known yet";
+  if (k === "family") return "farther: " + f.drive + " min to " + ANCHOR;
+  if (k === "money") return "costs more: from " + money(f.total);
+  if (k === "room") return "smaller: up to " + Math.round(f.sqft).toLocaleString("en-US") + " sq ft";
+  if (k === "going_out") return "quieter: " + f.places + " places to eat nearby";
+  if (k === "green") return "park farther: " + f.walk + " min";
+  return "parking less certain";
+}
+/* the one fact on a place row: her top priority after cost (the row already shows the total) */
+function rowFact(b, order) {
+  var k = order.filter(function (x) { return x !== "money"; })[0] || "family", x = raw(b);
+  if (k === "family") return isNum(x.drive) ? Math.round(x.drive) + " min" : null;
+  if (k === "room") return isNum(x.sqft) ? Math.round(x.sqft).toLocaleString("en-US") + " sq ft" : (x.bedroom ? "1 bedroom" : null);
+  if (k === "going_out") return isNum(x.rest) ? x.rest + " places" : null;
+  if (k === "green") return isNum(x.park) ? "park " + Math.max(1, Math.round(x.park)) + " min" : null;
+  if (k === "parking") return PK[x.pk] ? PK[x.pk].replace(" parking", "").toLowerCase() : null;
+  return null;
+}
+var FACT_SR = { family: "drive to " + ANCHOR, room: "space", going_out: "places to eat nearby", green: "walk to a park", parking: "parking" };
 function placeRow(id, order) {
-  var b = BY[id], f = b.facts || {};
-  return '<li><button type="button" class="prow" data-act="open" data-id="' + esc(id) + '"><span class="pr1"><b>' + esc(nm(b)) + '</b><span class="go" aria-hidden="true">&#8250;</span></span>' +
-    (b.neighborhood_id !== b.area_id ? '<span class="pin">In ' + esc(hoodNameOf(b)) + '</span>' : '') +
-    '<span class="pmn"><span>Rent <b' + (isNum(f.rent_from) ? ' data-rent="' + f.rent_from + '"' : '') + '>' + (fromMoney(f.rent_from, f.rent_to) || "not known") + '</b></span><span>Total with utilities and fees <b>' + (fromMoney(f.total_from, f.total_to) || "not known") + '</b></span></span>' +
-    '<span class="pf1">' + esc(oneFact(b, order)) + '</span>' + chkSpan(bldChecked(b)) + '</button></li>';
+  var b = BY[id], f = b.facts || {}, c = bldChecked(b), fx = rowFact(b, order), k = order.filter(function (x) { return x !== "money"; })[0] || "family";
+  return '<li><button type="button" class="prow" data-act="open" data-id="' + esc(id) + '">' +
+    '<span class="pr1"><b>' + esc(nm(b)) + '</b>' + (c ? '<span class="ck ' + c.kind + '" title="' + esc(c.text) + '"><span aria-hidden="true">' + (c.kind === "ok" ? "&#10003;" : "&#9719;") + '</span><span class="sr">' + esc(c.text) + '</span></span>' : '') + '<span class="go" aria-hidden="true">&#8250;</span></span>' +
+    '<span class="pr2">Rent <b' + (isNum(f.rent_from) ? ' data-rent="' + f.rent_from + '"' : '') + '>' + (fromMoney(f.rent_from, f.rent_to) || "?") + '</b> &middot; Total <b>' + (fromMoney(f.total_from, f.total_to) || "?") + '</b>' +
+      (fx ? ' &middot; <b>' + esc(fx) + '</b><span class="sr"> ' + esc(FACT_SR[k] || "") + '</span>' : '') + '</span>' +
+    (b.neighborhood_id !== b.area_id ? '<span class="pin">' + esc(hoodNameOf(b)) + '</span>' : '') + '</button></li>';
+}
+/* the at-a-glance table: one row per neighborhood, four short columns, the best in each marked */
+var GLANCE = [
+  { k: "money", label: "Total from", v: function (f) { return f.total; }, t: function (f) { return isNum(f.total) ? money(f.total) : "?"; }, best: "low" },
+  { k: "family", label: "Drive to " + ANCHOR, v: function (f) { return f.drive; }, t: function (f) { return isNum(f.drive) ? f.drive + " min" : "?"; }, best: "low" },
+  { k: "room", label: "Space, sq ft", v: function (f) { return isNum(f.sqft) ? f.sqft + (f.bedroom ? 10000 : 0) : null; }, t: function (f) { return (isNum(f.sqft) ? Math.round(f.sqft).toLocaleString("en-US") : "?") + '<small>' + (f.bedroom ? "1 bed" : "studio") + '</small>'; }, best: "high" },
+  { k: "going_out", label: "Places to eat", v: function (f) { return f.places; }, t: function (f) { return isNum(f.places) ? String(f.places) : "?"; }, best: "high" }
+];
+function glance(r, figs) {
+  var best = GLANCE.map(function (col) {
+    var vs = figs.map(col.v).filter(isNum); if (vs.length < 2) return null;
+    var t = col.best === "low" ? Math.min.apply(null, vs) : Math.max.apply(null, vs);
+    return vs.filter(function (x) { return x === t; }).length === vs.length ? null : t;
+  });
+  return '<section class="glance" aria-labelledby="gl-h"><h2 id="gl-h" class="gl-h">At a glance</h2><table><thead><tr><th scope="col"><span class="sr">Neighborhood</span></th>' +
+    GLANCE.map(function (c) { return '<th scope="col">' + esc(c.label) + '</th>'; }).join("") + '</tr></thead><tbody>' +
+    r.neighborhoods.map(function (nb, i) {
+      var f = figs[i], ids = nb.buildings.map(function (x) { return x.id; });
+      return '<tr data-area="' + esc(nb.neighborhood_id) + '"><th scope="row" colspan="5"><button type="button" class="gl-name" data-act="goto" data-v="' + i + '"><span class="num" aria-hidden="true">' + (i + 1) + '</span>' + esc(areaName(nb.neighborhood_id, ids)) + '</button></th></tr>' +
+        '<tr class="gl-vals" data-act="goto" data-v="' + i + '"><td><span class="sr">' + esc(areaName(nb.neighborhood_id, ids)) + '</span></td>' + GLANCE.map(function (c, j) {
+          var isBest = best[j] !== null && c.v(f) === best[j];
+          return '<td class="' + (isBest ? "best" : "") + '">' + (isBest ? '<span class="bm" aria-hidden="true">&#10003;</span><span class="sr">Best: </span>' : '') + c.t(f) + '</td>';
+        }).join("") + '</tr>';
+    }).join("") + '</tbody></table></section>';
 }
 function results() {
   var c = rec(), r = c.r, order = c.order;
   if (VIEW.areaOpen === undefined) VIEW.areaOpen = { 0: true };
-  var html = top() + '<section class="stack" style="gap:6px"><p class="kicker">Your three places to look</p><h1 class="h-say" tabindex="-1" id="res-h">' + esc(c.sentence) + '</h1>' +
-    '<p class="small">Start with number 1. Tap a place to see it.</p></section><ol class="hlist">';
+  var figs = r.neighborhoods.map(function (nb) { return areaFigs(nb.buildings.map(function (x) { return x.id; })); });
+  var chips = c.flat ? '<p class="pchips"><span class="pc">Open on everything</span></p>'
+    : '<ol class="pchips" aria-hidden="true">' + order.slice(0, 3).map(function (k, i) { return '<li class="pc" data-k="' + k + '"><b>' + (i + 1) + '</b> ' + esc(SHORT[k] || k) + '</li>'; }).join("") + '</ol>';
+  var html = top() + '<section class="stack" style="gap:6px"><h1 class="h-say" tabindex="-1" id="res-h">Your three places to look<span class="sr">. ' + esc(c.sentence) + '</span></h1>' +
+    '<div class="mine"><span class="lab">You care about</span>' + chips + '</div></section>' + glance(r, figs) + '<ol class="hlist">';
   r.neighborhoods.forEach(function (nb, i) {
-    var A = nb.neighborhood_id, open = !!VIEW.areaOpen[i], ids = nb.buildings.map(function (x) { return x.id; });
-    html += '<li class="hcard' + (open ? ' open' : '') + '" data-area="' + esc(A) + '">' +
+    var A = nb.neighborhood_id, open = !!VIEW.areaOpen[i], ids = nb.buildings.map(function (x) { return x.id; }), f = figs[i];
+    var why = (nb.why_features || []).map(function (k) { return goodBit(k, f); }).join(" · ");
+    var give = nb.gives_up_feature ? badBit(nb.gives_up_feature, f, nb.gives_up_unknown) : null;
+    html += '<li class="hcard' + (open ? ' open' : '') + '" data-area="' + esc(A) + '" id="area-' + i + '">' +
       '<h2><button type="button" class="hhead" data-act="area" data-v="' + i + '" aria-expanded="' + open + '" aria-controls="hb-' + i + '"><span class="num" aria-hidden="true">' + (i + 1) + '</span>' +
       '<span class="hn"><span class="hname">' + esc(areaName(A, ids)) + '</span>' + tagSpan(HBY[A]) + '</span><span class="tw" aria-hidden="true">&#8250;</span></button></h2>' +
       '<div class="hbody" id="hb-' + i + '"' + (open ? '' : ' hidden') + '>' +
-      (nb.why ? '<p class="because"><b>Why:</b> <span class="t">' + esc(nb.why) + '</span></p>' : '') +
-      (nb.gives_up ? '<p class="gives"><b>Gives up:</b> <span class="t">' + esc(nb.gives_up) + '</span></p>' : '') +
+      (why ? '<p class="because" data-full="' + esc(nb.why || "") + '"><span class="mk up" aria-hidden="true">&#10003;</span><span><span class="sr">Why: </span>' + esc(cap(why)) + '</span></p>' : '') +
+      (give ? '<p class="gives" data-full="' + esc(nb.gives_up || "") + '"><span class="mk dn" aria-hidden="true">&#8211;</span><span><span class="sr">Gives up: </span>' + esc(cap(give)) + '</span></p>' : '') +
       '<ol class="plist">' + ids.map(function (id) { return placeRow(id, order); }).join("") + '</ol></div></li>';
   });
   html += '</ol><div class="endblock"><button type="button" class="btn main" data-act="all">Browse everything</button>' +
-    '<div class="links"><button type="button" class="quiet" data-act="restart">Change my answers</button>' + (S.tour.length ? '<button type="button" class="quiet" data-act="plan">My tour plan &middot; ' + S.tour.length + '</button>' : '') + '</div>' + resetBlock() + '</div>';
+    '<div class="links"><button type="button" class="quiet" data-act="restart">Change my answers</button>' + (S.tour.length ? '<button type="button" class="quiet" data-act="plan">My tour plan &middot; ' + S.tour.length + '</button>' : '') +
+    (VIEW.confirmReset ? '' : '<button type="button" class="quiet" data-act="reset-ask">Start over</button>') + '</div>' + (VIEW.confirmReset ? resetBlock() : '') + '</div>';
   return html;
 }
 function tagSpan(h) { var t = (h && Array.isArray(h.tags) ? h.tags : []).filter(function (x) { return typeof x === "string" && x.trim(); }).slice(0, 2); return t.length ? '<span class="htags">' + t.map(function (x) { return '<span>' + esc(cap(x.trim())) + '</span>'; }).join("") + '</span>' : ''; }
@@ -1655,7 +1753,7 @@ function act(a, el) {
     case "cj": {
       var cid = nextNow(); if (cid === null) { afterChoice(); break; }
       /* a quick second tap lands on the next choice before she has seen it: ignore taps in the first moment */
-      if (VIEW.cjShownAt && Date.now() - VIEW.cjShownAt < 350) break;
+      if (VIEW.cjShownAt && Date.now() - VIEW.cjShownAt < 300) break;
       if (S.cj.some(function (x) { return x.task_index === cid; })) { afterChoice(); break; }
       S.cj.push({ task_index: cid, choice: v === "a" || v === "b" ? v : "either" });
       live.textContent = v === "either" ? "No real difference." : "Apartment " + v.toUpperCase() + ".";
@@ -1670,6 +1768,8 @@ function act(a, el) {
       { var mb = app.querySelector('.mv[data-id="' + id + '"][data-v="' + v + '"]:not([disabled])') || app.querySelector('.mv[data-id="' + id + '"]:not([disabled])'); if (mb) mb.focus(); }
       live.textContent = cap(plain(id)) + " moved " + v + "."; break;
     case "unmove": S.moves = []; CACHE = {}; render({ stay: true }); break;
+    case "goto": { var gi = Number(v); VIEW.areaOpen = {}; VIEW.areaOpen[gi] = true; render({ stay: true }); var tgt = document.getElementById("area-" + gi);
+      if (tgt) { try { tgt.scrollIntoView({ block: "start", behavior: "smooth" }); } catch (e) { tgt.scrollIntoView(); } var hh = tgt.querySelector(".hhead"); if (hh) hh.focus({ preventScroll: true }); } break; }
     case "area": { var i = Number(v); VIEW.areaOpen[i] = !VIEW.areaOpen[i]; var hb = document.getElementById("hb-" + i); if (hb) hb.hidden = !VIEW.areaOpen[i];
       el.setAttribute("aria-expanded", String(!!VIEW.areaOpen[i])); el.closest(".hcard").classList.toggle("open", !!VIEW.areaOpen[i]); break; }
     case "open": push({ t: "place", id: id }); break;
@@ -1887,6 +1987,7 @@ function initAsk(sample, canTools) {
   }, function () { /* no Claude here: the feature stays absent */ });
 })();
 window.__conciergeLookups = LOOKUPS;
+window.__conciergeDataVersion = DATA_VERSION;
 window.__conciergeRec = function () { return CAN ? { top: rec().r.top, order: rec().order, next: S.step === "choose" ? nextNow() : null, answers: S.cj.slice() } : null; };
 })();
 </script>
