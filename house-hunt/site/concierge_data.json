@@ -1,6 +1,6 @@
 {
  "meta": {
-  "built_at": "2026-11-17T21:39:55+00:00",
+  "built_at": "2026-11-17T21:43:32+00:00",
   "rent_limit": 2000,
   "counts": {
    "apartments": 235,
@@ -23,7 +23,7 @@
    "lon": -73.80853
   },
   "source": "site/data.json",
-  "source_built_at": "2026-11-17T21:39:30+00:00",
+  "source_built_at": "2026-11-17T21:41:58+00:00",
   "score_keys": [
    "parents",
    "going_out",

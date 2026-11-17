@@ -86,9 +86,13 @@ separate utilities fee.
   `build_scene_text.py`, `check_scene_text.py` (116 rows, 0 failing), `realtor_lines.py`, `test_realtor_lines.py`
   (77 tests OK), `page_data_extras.py`, `check_published_text.py` (text 0, pipeline strings 0).
 - `test_rules.py`: 1,128 pure checks (new `pure_ic6`: the check's own cases for all ten sweeps); `--data` with the
-  fresh page data: 12,029 checks, 3 failures that were already failing before this work on the 20:42 page data
-  (concierge on 15 apartments, under the 50 the IC4 test expects; Milford garage count 0 against 2; the night moment
-  80% "mixed"): they follow from the $2,200 list, not from this repair. New `data_ic6` (the six wrong items, every
-  shown template listing carries the asterisk, every income requirement disclosed, the cached-page reader) passes.
+  fresh page data: 12,459 checks, 0 failed. New `data_ic6` (the six wrong items, every shown template listing carries
+  the asterisk, every income requirement disclosed, the cached-page reader). Three page checks that had been failing
+  since the $2,200 limit (before this repair) froze numbers of the $3,000 list; each now tests its rule instead:
+  concierge (was "more than 50"; now: set on exactly the apartments whose sources say concierge, 15 of 15), Milford's
+  garage count (was "2": its two garage buildings are no longer shown; now: no neighborhood counts a free lot with a
+  paid garage as a garage building, beside the existing recount check), and the night moment (was "no level above
+  60%": night is an absolute rule, so its spread follows the inventory, 80% mixed; now: every apartment's night rating
+  is recomputed from the rule; the 60% balance check stays on the other five moments).
 - `verify_all.py --quick`: 18 passed, 1 failed (`test_concierge_data.py`, rebuilt next by the coordinator), 1 warning
   (`site/dist` older than `site/data.json`: `build_site.py` is the page agent's step), 4 skipped.

@@ -113,7 +113,7 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;line-height:1.
 .area3{display:grid;gap:10px;padding-top:6px}
 .a-head{display:flex;align-items:center;gap:12px}
 .a-head .num{flex:0 0 auto;width:40px;height:40px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:21px}
-.a-head h2{font-weight:800;font-stretch:82%;font-size:30px}
+.a-head h2{font-weight:800;font-stretch:82%;font-size:clamp(24px,7vw,30px)}
 .tags{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:6px}
 .tags li{background:var(--butter);color:var(--on-butter);font-weight:800;font-size:14px;border-radius:999px;padding:3px 11px}
 .because{font-size:17px;line-height:1.4}
@@ -281,7 +281,10 @@ details.more .in{padding:2px 0 16px;display:grid;gap:12px;font-size:17px}
 .tabs button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
 .grp{display:grid;gap:8px}
 .grp-h{font-weight:800;font-size:19px;display:flex;justify-content:space-between;gap:10px;align-items:baseline;scroll-margin-top:12px}
-.grp-h .rk{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--ink);color:var(--paper);font-size:15px;margin-right:4px}
+.grp-h{flex-direction:column;align-items:flex-start!important;gap:2px!important}
+.grp-h>span{display:flex;align-items:center;gap:8px;min-width:0}
+.grp-h small{white-space:normal!important}
+.grp-h .rk{flex:0 0 auto;display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--ink);color:var(--paper);font-size:15px;margin-right:4px}
 .grp-h small{font-family:var(--body);font-size:14px;font-weight:700;color:var(--muted);white-space:nowrap}
 .nearby{font-size:13px;letter-spacing:.06em;text-transform:uppercase;font-weight:800;color:var(--muted);margin-top:4px}
 .row{display:grid;gap:4px;width:100%;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:12px 14px;min-height:64px}
@@ -446,16 +449,22 @@ var ConciergeRec = (function () {
     return M.groups.map(function (g) { return { id: g.id, name: g.name, i: M.gidx[g.id], building_ids: g.building_ids.filter(function (id) { return !removed[id] && M.byId[id]; }) }; })
       .filter(function (g) { return g.building_ids.length; });
   }
-  /* two or more buildings: the mean of the two best; one building: the mean of it and the median building score of
-     the whole set (so one strong building is not treated as a deep neighborhood) */
+  /* a neighborhood scores the exact expected mean of the two best of a random 3-building subset of its buildings
+     (so depth alone does not win); fewer than three are filled with the median building score of the whole set */
+  function comb(n, k) { if (k < 0 || k > n) return 0; var c = 1; for (var i = 1; i <= k; i++) c = c * (n - k + i) / i; return Math.round(c); }
+  function top2of3(s, med) {
+    s = s.slice();
+    if (s.length < 3) { while (s.length < 3) s.push(med); s.sort(function (a, b) { return b - a; }); return (s[0] + s[1]) / 2; }
+    var n = s.length, total = comb(n, 3), t = [];
+    for (var i = 0; i < n; i++) t.push(s[i] * comb(i, 2));
+    var eMin = nsum(t) / total;
+    return (3 * nsum(s) / n - eMin) / 2;
+  }
   function groupScores(M, w, G) {
     var sc = {}, all = [], out = {};
     G.forEach(function (g) { g.building_ids.forEach(function (id) { sc[id] = q(M, score(M, id, w)); all.push(sc[id]); }); });
     var med = median(all);
-    G.forEach(function (g) {
-      var s = g.building_ids.map(function (id) { return sc[id]; }).sort(function (a, b) { return b - a; }).slice(0, 2);
-      out[g.id] = s.length === 2 ? (s[0] + s[1]) / 2 : (s[0] + med) / 2;
-    });
+    G.forEach(function (g) { out[g.id] = top2of3(g.building_ids.map(function (id) { return sc[id]; }).sort(function (a, b) { return b - a; }), med); });
     return out;
   }
   /* the groups good enough to recommend: the best, and those ranked in the top relevance_top_share (ceil) with
@@ -744,8 +753,9 @@ function bldChecked(b) {
   return { kind: "old", text: lastSeenText(dates[dates.length - 1]), ask: true, date: dates[dates.length - 1] };
 }
 function chkLine(c) { return c ? '<p class="chk ' + c.kind + '"><span aria-hidden="true">' + (c.kind === "ok" ? "&#10003;" : "&#9719;") + '</span> ' + esc(c.text) + '</p>' : ""; }
+function aptLabel(a) { var l = String((a && a.label) || "").trim(); return !l || /^apartment\s*(null|none|undefined)?$/i.test(l) ? "Apartment" : l; }
 function bedsText(n) { return n === 0 ? "Studio" : n === 1 ? "1 bedroom" : isNum(n) ? n + " bedrooms" : null; }
-function hoodName(b) { var h = HBY[b.neighborhood_id]; return h ? h.name + (h.state ? ", " + h.state : "") : [b.city, b.state].filter(Boolean).join(", "); }
+function hoodName(b) { var h = HBY[b.neighborhood_id], n = (typeof b.neighborhood_name === "string" && b.neighborhood_name) || (h && h.name); return n ? n + ((h && h.state) || b.state ? ", " + ((h && h.state) || b.state) : "") : [b.city, b.state].filter(Boolean).join(", "); }
 function fromMoney(a, z) { return isNum(a) ? (isNum(z) && z !== a ? "from " : "") + money(a) : null; }
 function pairHtml(b, tag) {
   var f = b.facts || {}, t = tag || "div";
@@ -842,7 +852,7 @@ var PK = { garage: "Garage parking", covered: "Covered parking", lot: "A parking
 function factText(b, k) {
   var x = raw(b);
   if (k === "family") return isNum(x.drive) ? Math.round(x.drive) + " min to " + ANCHOR : "Drive to " + ANCHOR + " not known";
-  if (k === "room") return (x.bedroom ? "1 bedroom" : x.studio ? "Studio" : "Size") + (isNum(x.sqft) ? ", " + Math.round(x.sqft) + " sq ft" : x.bedroom || x.studio ? "" : " not known");
+  if (k === "room") return (x.bedroom ? "1 bedroom" : x.studio ? "Studio" : "Size") + (isNum(x.sqft) ? ", " + Math.round(x.sqft).toLocaleString("en-US") + " sq ft" : x.bedroom || x.studio ? "" : " not known");
   if (k === "going_out") return isNum(x.rest) ? x.rest + (x.rest === 1 ? " restaurant" : " restaurants") + " in a 10-min walk" : "Restaurants nearby not known";
   if (k === "green") return isNum(x.park) ? "A park " + Math.max(1, Math.round(x.park)) + " min on foot" : "Nearest park not known";
   if (k === "parking") return PK[x.pk] || "Parking not known";
@@ -853,7 +863,7 @@ function factText(b, k) {
 function shortFact(b, k) {
   var x = raw(b);
   if (k === "family") return isNum(x.drive) ? Math.round(x.drive) + " min drive" : "";
-  if (k === "room") return (x.bedroom ? "1 bedroom" : x.studio ? "Studio" : "") + (isNum(x.sqft) ? (x.bedroom || x.studio ? ", " : "") + Math.round(x.sqft) + " sq ft" : "");
+  if (k === "room") return (x.bedroom ? "1 bedroom" : x.studio ? "Studio" : "") + (isNum(x.sqft) ? (x.bedroom || x.studio ? ", " : "") + Math.round(x.sqft).toLocaleString("en-US") + " sq ft" : "");
   if (k === "going_out") return isNum(x.rest) ? x.rest + (x.rest === 1 ? " restaurant" : " restaurants") + " near" : "";
   if (k === "green") return isNum(x.park) ? "Park " + Math.max(1, Math.round(x.park)) + " min walk" : "";
   if (k === "parking") return PK[x.pk] ? PK[x.pk].replace(" parking", "").replace("A parking lot", "Parking lot") : "";
@@ -894,8 +904,15 @@ function heart(b, big) {
     '<span class="h" aria-hidden="true">' + (on ? "&#9829;" : "&#9825;") + '</span>' + (on ? "Saved" : "Save") + (big ? " to My list" : "") + '</button>';
 }
 function tagList(h) { var t = (h && Array.isArray(h.tags) ? h.tags : []).filter(function (x) { return typeof x === "string" && x.trim(); }).slice(0, 2); return t.length ? '<ul class="tags" aria-label="In a word">' + t.map(function (x) { return '<li>' + esc(cap(x.trim())) + '</li>'; }).join("") + '</ul>' : ''; }
-function areaName(id) { var h = HBY[id]; return h ? h.name + (h.state ? ", " + h.state : "") : id; }
-function inHood(b) { return b.area_id !== b.neighborhood_id && HBY[b.neighborhood_id] ? '<p class="inhood">In ' + esc(HBY[b.neighborhood_id].name) + (HBY[b.neighborhood_id].state ? ", " + esc(HBY[b.neighborhood_id].state) : "") + '</p>' : ''; }
+function hoodNameOf(b) { var h = HBY[b.neighborhood_id]; return (typeof b.neighborhood_name === "string" && b.neighborhood_name) || (h && h.name) || ""; }
+/* a group's heading: its name, or "X and nearby" when the buildings listed under it come from joined neighborhoods */
+function areaName(id, ids) {
+  var h = HBY[id], g = MODEL && MODEL.groups.filter(function (x) { return x.id === id; })[0];
+  var name = (g && g.name) || (h && h.name) || id, st = h && h.state ? ", " + h.state : "";
+  var joined = (ids || []).some(function (bid) { return BY[bid] && BY[bid].neighborhood_id !== id; });
+  return joined ? name + " and nearby" + st : name + st;
+}
+function inHood(b) { if (b.neighborhood_id === b.area_id) return ''; var h = HBY[b.neighborhood_id], n = hoodNameOf(b); return n ? '<p class="inhood">In ' + esc(n) + (h && h.state ? ", " + esc(h.state) : "") + '</p>' : ''; }
 
 /* ---------- welcome ---------- */
 function welcome() {
@@ -912,7 +929,7 @@ function welcome() {
 
 /* ---------- this or that ---------- */
 function pickCard(b, o, side) {
-  var h = HBY[b.neighborhood_id], place = h ? h.name + (h.state ? ", " + h.state : "") : [b.city, b.state].filter(Boolean).join(", ");
+  var place = hoodName(b);
   var life = lifeLine(b);
   return '<button type="button" class="pick" data-act="choose" data-v="' + side + '" data-id="' + esc(b.id) + '" aria-label="' + esc((b.name || "This place") + ", " + place) + '. Choose this one." aria-describedby="pf-' + side + '">' +
     '<span class="p-top"><span><span class="p-name">' + esc(nm(b)) + '</span><span class="p-place">' + esc(place) + '</span></span><span class="p-go" aria-hidden="true">This one</span></span>' +
@@ -960,7 +977,7 @@ function results() {
   if (S.nudge) html += '<div class="nudged" id="nudged"><p>Showing what happens if ' + esc(R.label[S.nudge.feature] || S.nudge.feature) + ' mattered ' + esc(S.nudge.direction) + '.</p><button type="button" class="quiet" data-act="unnudge">Undo</button></div>';
   r.neighborhoods.forEach(function (nb, i) {
     var A = nb.neighborhood_id, h = HBY[A];
-    html += '<section class="area3" data-area="' + esc(A) + '" aria-labelledby="ar-' + i + '"><div class="a-head"><span class="num" aria-hidden="true">' + (i + 1) + '</span><h2 id="ar-' + i + '"><span class="sr">Place ' + (i + 1) + ': </span>' + esc(areaName(A)) + '</h2></div>' +
+    html += '<section class="area3" data-area="' + esc(A) + '" aria-labelledby="ar-' + i + '"><div class="a-head"><span class="num" aria-hidden="true">' + (i + 1) + '</span><h2 id="ar-' + i + '"><span class="sr">Place ' + (i + 1) + ': </span>' + esc(areaName(A, nb.buildings.map(function (x) { return x.id; }))) + '</h2></div>' +
       tagList(h) + (nb.why ? '<p class="because"><b>Why:</b> <span class="t">' + esc(nb.why) + '</span></p>' : '') + (nb.gives_up ? '<p class="gives"><b>Gives up:</b> <span class="t">' + esc(nb.gives_up) + '</span></p>' : '') +
       '<ol class="blist">' + nb.buildings.map(function (x, j) { return bcard(x.id, j, x.more_like_this); }).join("") + '</ol></section>';
   });
@@ -1024,7 +1041,7 @@ function detailsBlocks(b) {
   var ap = b.apartments || [];
   if (ap.length) out += '<details class="more"><summary>' + (ap.length === 1 ? "The apartment" : "The " + ap.length + " apartments") + '</summary><div class="in"><ul class="apts">' + ap.map(function (a) {
     var bits = [bedsText(a.beds), isNum(a.sqft) ? Math.round(a.sqft) + " sq ft" : null, a.floor_text, a.available_text].filter(Boolean).join(" · ");
-    return '<li><p class="a-h">' + esc(a.label || "Apartment") + '</p>' + (bits ? '<p class="a-s">' + esc(bits) + '</p>' : '') +
+    return '<li><p class="a-h">' + esc(aptLabel(a)) + '</p>' + (bits ? '<p class="a-s">' + esc(bits) + '</p>' : '') +
       '<div class="pair"><div><span>Rent</span><b' + (isNum(a.rent) ? ' data-rent="' + a.rent + '"' : '') + '>' + (money(a.rent) || "Not known") + '</b></div><div><span>Total with utilities and fees</span><b>' + (money(a.total) || "Not known") + '</b></div></div>' +
       (offerText(a) ? '<p class="a-s">' + esc(offerText(a)) + '</p>' : '') + chkLine(aptChecked(a)) +
       (a.star ? '<p class="star"><span aria-hidden="true">&#9733;</span> ' + esc(a.confirm_label || "One thing to confirm") + '</p>' : '') +
@@ -1234,11 +1251,11 @@ function listHtml() {
   areas.forEach(function (A) {
     var h = HBY[A] || { id: A, name: A };
     var rows = AREAS.by[A].slice().sort(function (x, y) { return (score[y.id] - score[x.id]) || (x.id < y.id ? -1 : 1); })
-      .map(function (b) { return rowFor(b, b.neighborhood_id !== A && HBY[b.neighborhood_id] ? HBY[b.neighborhood_id].name : null); }).filter(Boolean);
+      .map(function (b) { return rowFor(b, b.neighborhood_id !== A ? hoodNameOf(b) : null); }).filter(Boolean);
     if (!rows.length) return;
     if (!rank[A] && firstRest && Object.keys(rank).length) { html += '<p class="nearby" style="margin-top:10px">Every other place</p>'; firstRest = false; }
     var open = !!VIEW.grp[A], rest = rows.slice(SHOW), gid = "grp-more-" + A.replace(/[^\w-]/g, "_");
-    html += '<div class="grp"><h3 class="grp-h" tabindex="-1" id="grp-' + esc(A) + '" data-hood="' + esc(A) + '"><span>' + (rank[A] ? '<span class="rk">' + rank[A] + '</span> ' : '') + esc(h.name) + (h.state ? ', ' + esc(h.state) : '') + '</span>' + (isNum(h.drive_min) ? '<small>' + Math.round(h.drive_min) + ' min to ' + esc(ANCHOR) + '</small>' : '') + '</h3>' + tagList(h) +
+    html += '<div class="grp"><h3 class="grp-h" tabindex="-1" id="grp-' + esc(A) + '" data-hood="' + esc(A) + '"><span>' + (rank[A] ? '<span class="rk">' + rank[A] + '</span> ' : '') + esc(areaName(A, AREAS.by[A].map(function (b) { return b.id; }))) + '</span>' + (isNum(h.drive_min) ? '<small>' + Math.round(h.drive_min) + ' min to ' + esc(ANCHOR) + '</small>' : '') + '</h3>' + tagList(h) +
       rows.slice(0, SHOW).join("") +
       (rest.length ? '<div class="grp-rest stack" id="' + gid + '"' + (open ? '' : ' hidden') + ' style="gap:8px">' + rest.join("") + '</div>' +
         '<button type="button" class="quiet" data-act="grp-more" data-id="' + esc(A) + '" aria-expanded="' + open + '" aria-controls="' + gid + '">' + (open ? 'Show fewer' : 'Show ' + rest.length + ' more in ' + esc(h.name)) + '</button>' : '') + '</div>';
@@ -1470,7 +1487,7 @@ var LOOKUPS = {
     o.life_here = (b.life_here || []).map(function (m) { return { moment: m.title || m.moment, text: m.text, places: (m.places || []).map(function (p) { return p.name; }), sources: (m.sources || []).map(function (s) { return s.name; }) }; });
     o.points = (b.points || []).map(function (p) { return p.text; }); o.a_day_here = (b.day || []).map(function (m) { return { moment: m.title, text: m.text, level: m.level }; });
     o.to_confirm = (b.confirm || []).map(function (c) { return c.question || c.label; }); o.tour_questions = b.tour_questions || [];
-    o.apartments = (b.apartments || []).map(function (a) { return { label: a.label, bedrooms: a.beds, sqft: a.sqft, floor: a.floor_text, rent: a.rent, total_with_utilities_and_fees: a.total, available: a.available_text, offer: offerText(a), one_thing_to_confirm: a.star ? (a.confirm_label || true) : null, checked: (aptChecked(a) || {}).text || null }; });
+    o.apartments = (b.apartments || []).map(function (a) { return { label: aptLabel(a), bedrooms: a.beds, sqft: a.sqft, floor: a.floor_text, rent: a.rent, total_with_utilities_and_fees: a.total, available: a.available_text, offer: offerText(a), one_thing_to_confirm: a.star ? (a.confirm_label || true) : null, checked: (aptChecked(a) || {}).text || null }; });
     return o;
   },
   compare: function (q) {
