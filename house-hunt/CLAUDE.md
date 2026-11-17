@@ -242,3 +242,11 @@ Decisions by Will that changed or replaced an earlier one. Dates are UTC days of
 
 - **Publishing (Will, 2026-11-16):** "You can go ahead and overwrite what's already been published." Republishing the
   shared page to the same link is approved; check the build loads cleanly first.
+
+- **The concierge draft (Will, 2026-11-17):** a second, separate page ("the short version") is built on the same data
+  and published as its own artifact; the first page, its link, its template and its data are not changed by that
+  work. On the new page only: nothing above **$2,000 listed base rent** is shown (the pipeline and the first page keep
+  $3,000); a neighborhood with exactly one apartment is shown but is never its own stop, it is parked under the
+  nearest larger neighborhood in the same experience. The experiences stay the front door ("what kind of life do I
+  want next year?"); the page recommends five buildings to tour and she keeps or swaps. Design and data contract:
+  `docs/CONCIERGE_DESIGN.md`.
