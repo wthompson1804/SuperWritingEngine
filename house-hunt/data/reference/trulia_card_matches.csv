@@ -16,7 +16,7 @@ trulia:2075873997,New Jersey,134 43rd St,07087,2,1,1675,,,unmatched_offline,no r
 trulia:466418316,New Jersey,147 36th St,07087,6E,0,1695,,,unmatched_offline,no readable row in the building
 trulia:466265699,New Jersey,1712 Bergenline Ave,07087,1R,1,1325,,,unmatched_offline,no readable row in the building
 trulia:2072821400,New Jersey,2301 Central Ave,07087,4D,1,1695,,,unmatched_offline,no readable row in the building
-trulia:2112014850,New Jersey,305 49th St,07087,14,1,1700,,,unmatched_offline,no readable row in the building
+trulia:2112014850,New Jersey,305 49th St,07087,14,1,1700,,,no_site_found,web search 2026-11-17: only stale Apartment List/Zumper address pages
 trulia:466520170,New Jersey,311 6th St,07087,AA1,1,1800,zumper-59062246,,building_id,"1 readable rows in the building (zumper); 1 at or under $2,200"
 trulia:466561514,New Jersey,4008 Kennedy Blvd,07087,3C,1,1725,,,unmatched_offline,no readable row in the building
 trulia:2113671491,New Jersey,4008 Kennedy Blvd,07087,C3,1,1725,,,unmatched_offline,no readable row in the building
@@ -258,7 +258,7 @@ trulia:466559343,New Jersey,381 Union Ave,07111,303,1,1550,,,unmatched_offline,n
 trulia:2068680390,New Jersey,386 Stuyvesant Ave,07111,1,1,1450,,,unmatched_offline,no readable row in the building
 trulia:466330243,New Jersey,387 Stuyvesant Ave,07111,7,0,1200,,,unmatched_offline,no readable row in the building
 trulia:466061425,New Jersey,388 Stuyvesant Ave,07111,2A,1,1450,,,unmatched_offline,no readable row in the building
-trulia:466592716,New Jersey,39 Fabyan Pl,07108,6D,0,1100,,,unmatched_offline,no readable row in the building
+trulia:466592716,New Jersey,39 Fabyan Pl,07108,6D,0,1100,,,site_no_units,web search 2026-11-17: Apartment List 39-41 Fabyan Place shown off the market (not fetched)
 trulia:466386229,New Jersey,398 Stuyvesnt Ave,07111,23,1,1450,,,unmatched_offline,no readable row in the building
 trulia:465940800,New Jersey,404 Stuyvesant Ave,07111,11,1,1450,,,unmatched_offline,no readable row in the building
 trulia:439874810,New Jersey,595-594 Elizabeth Ave,07112,3J,1,1450,,,unmatched_offline,no readable row in the building
@@ -279,8 +279,8 @@ trulia:466146794,New Jersey,186 William St,07017,404,1,1545,,,unmatched_offline,
 trulia:465894728,New Jersey,40-50 4th Ave,07017,CS,0,2000,zumper-65514802,,building_id,"1 readable rows in the building (zumper); 1 at or under $2,200"
 trulia:442182275,New Jersey,10 Columbia Ave,07106,2,1,1595,apartmentlist:p127017832-1BR,,street_key,"1 readable rows in the building (apartmentlist.com); 1 at or under $2,200"
 trulia:466228300,New Jersey,10 Columbia Ave,07106,4,1,1595,apartmentlist:p127017832-1BR,,street_key,"1 readable rows in the building (apartmentlist.com); 1 at or under $2,200"
-trulia:2054270981,New Jersey,148 Palm St,07106,6,1,1695,,,unmatched_offline,no readable row in the building
-trulia:465421118,New Jersey,148 Palm St,07106,7,1,1695,,,unmatched_offline,no readable row in the building
+trulia:2054270981,New Jersey,148 Palm St,07106,6,1,1695,,,no_site_found,web search 2026-11-17 (Apartment List/Zumper only): only a 3BR on a Zumper index page
+trulia:465421118,New Jersey,148 Palm St,07106,7,1,1695,,,no_site_found,web search 2026-11-17 (Apartment List/Zumper only): only a 3BR on a Zumper index page
 trulia:464871886,New Jersey,177 Boston Ave,07205,4A,1,1595,,,unmatched_offline,no readable row in the building
 trulia:454842031,New Jersey,12 Canfield St,07050,14,1,1700,zumper-65769236,,street_key_same_unit,"1 readable rows in the building (zumper); 1 at or under $2,200; same unit label on zumper-65769236"
 trulia:463696573,New Jersey,395 Berwick St,07050,3,1,1600,zumper-52231448,,street_key,"1 readable rows in the building (zumper); 1 at or under $2,200"
@@ -609,9 +609,9 @@ trulia:465947108,New Jersey,208 Undercliff Ave,07020,B12,1,1895,zumper-65774135,
 trulia:2114642511,New Jersey,2102 Kennedy Blvd,07087,22,1,1695,,,unmatched_offline,no readable row in the building
 trulia:38944544,New Jersey,224 48th St,07087,,0,1750,,,unmatched_offline,no readable row in the building
 trulia:466562580,New Jersey,2301-2303 Central Ave,07087,4D,1,1625,,,unmatched_offline,no readable row in the building
-trulia:465020588,New Jersey,305 49th St,07087,14A,1,1650,,,unmatched_offline,no readable row in the building
-trulia:2100062270,New Jersey,305 49th St,07087,3,1,1595,,,unmatched_offline,no readable row in the building
-trulia:2113000451,New Jersey,305 49th St,07087,7,1,1525,,,unmatched_offline,no readable row in the building
+trulia:465020588,New Jersey,305 49th St,07087,14A,1,1650,,,no_site_found,web search 2026-11-17: only stale Apartment List/Zumper address pages
+trulia:2100062270,New Jersey,305 49th St,07087,3,1,1595,,,no_site_found,web search 2026-11-17: only stale Apartment List/Zumper address pages
+trulia:2113000451,New Jersey,305 49th St,07087,7,1,1525,,,no_site_found,web search 2026-11-17: only stale Apartment List/Zumper address pages
 trulia:343984702,New Jersey,3100 Bergenline Ave,07087,205,0,1950,,,unmatched_offline,no readable row in the building
 trulia:462719205,New Jersey,4008 John F Kennedy Blvd,07087,2,1,1725,,,unmatched_offline,no readable row in the building
 trulia:2076999846,New Jersey,515 22nd St,07087,1,1,1500,,,unmatched_offline,no readable row in the building
@@ -1031,11 +1031,11 @@ trulia:465173380,New Jersey,240 Rosa Parks Blvd,07501,302,1,1636,apartmentlist:p
 trulia:2065207788,New Jersey,273 Governor St,07501,,1,1718,,,unmatched_offline,no readable row in the building
 trulia:463514910,New Jersey,302 Van Houten St,07501,304-4,0,1145,,,unmatched_offline,no readable row in the building
 trulia:2061880188,New Jersey,362 Hamilton Ave,07501,401,1,1800,apartmentlist:p64705369-3;zumper-65745328,,street_key,"2 readable rows in the building (apartmentlist.com, zumper); 2 at or under $2,200"
-trulia:465005132,New Jersey,39 16th Ave,07501,0,0,1431,,,unmatched_offline,no readable row in the building
-trulia:460749539,New Jersey,39 16th Ave,07501,15,0,1454,,,unmatched_offline,no readable row in the building
-trulia:466245480,New Jersey,39 16th Ave,07501,204,0,1390,,,unmatched_offline,no readable row in the building
-trulia:461915930,New Jersey,39 16th Ave,07501,30,0,1454,,,unmatched_offline,no readable row in the building
-trulia:458010703,New Jersey,39 16th Ave,07501,,1,1718,,,unmatched_offline,no readable row in the building
+trulia:465005132,New Jersey,39 16th Ave,07501,0,0,1431,,,no_site_found,web search 2026-11-17 (Apartment List/Zumper only): no page for 39 16th Ave
+trulia:460749539,New Jersey,39 16th Ave,07501,15,0,1454,,,no_site_found,web search 2026-11-17 (Apartment List/Zumper only): no page for 39 16th Ave
+trulia:466245480,New Jersey,39 16th Ave,07501,204,0,1390,,,no_site_found,web search 2026-11-17 (Apartment List/Zumper only): no page for 39 16th Ave
+trulia:461915930,New Jersey,39 16th Ave,07501,30,0,1454,,,no_site_found,web search 2026-11-17 (Apartment List/Zumper only): no page for 39 16th Ave
+trulia:458010703,New Jersey,39 16th Ave,07501,,1,1718,,,no_site_found,web search 2026-11-17 (Apartment List/Zumper only): no page for 39 16th Ave
 trulia:39760090,New Jersey,41 Auburn St,07501,,1,1718,,,unmatched_offline,no readable row in the building
 trulia:2115430172,New Jersey,41 Godwin Ave,07501,1,1,1636,apartmentlist:p65925773-3;zumper-65730242,,street_key,"2 readable rows in the building (apartmentlist.com, zumper); 2 at or under $2,200"
 trulia:465671616,New Jersey,455 Summer St,07501,100,1,1963,,,unmatched_offline,no readable row in the building
@@ -1255,8 +1255,8 @@ trulia:462996370,New Jersey,338 Myrtle Ave,07111,1B,1,1800,,,unmatched_offline,n
 trulia:448485986,New Jersey,345 Osborne Ter,07112,5,0,1249,,,unmatched_offline,no readable row in the building
 trulia:447614170,New Jersey,35 Clinton Ter,07111,3,1,1450,,,unmatched_offline,no readable row in the building
 trulia:466521098,New Jersey,384 Stuyvesant Ave,07111,77,0,1250,,,unmatched_offline,no readable row in the building
-trulia:466432602,New Jersey,39 Fabyan Pl,07108,133,0,1100,,,unmatched_offline,no readable row in the building
-trulia:466520444,New Jersey,39 Fabyan Pl,07108,14,0,1100,,,unmatched_offline,no readable row in the building
+trulia:466432602,New Jersey,39 Fabyan Pl,07108,133,0,1100,,,site_no_units,web search 2026-11-17: Apartment List 39-41 Fabyan Place shown off the market (not fetched)
+trulia:466520444,New Jersey,39 Fabyan Pl,07108,14,0,1100,,,site_no_units,web search 2026-11-17: Apartment List 39-41 Fabyan Place shown off the market (not fetched)
 trulia:466256374,New Jersey,404 Stuyvesant Ave,07111,111,1,1500,,,unmatched_offline,no readable row in the building
 trulia:353974609,New Jersey,404 Union Ave,07111,204,1,1450,,,unmatched_offline,no readable row in the building
 trulia:463708464,New Jersey,469-470 Elizabeth Ave,07112,6099,1,2000,,,unmatched_offline,no readable row in the building
@@ -1334,9 +1334,9 @@ trulia:461707955,New Jersey,826 Jersey Ave,07202,10,0,1600,,,unmatched_offline,n
 trulia:462180530,New Jersey,834 Jersey Ave,07202,7,1,1850,,,unmatched_offline,no readable row in the building
 trulia:462920421,New Jersey,834 Jersey Ave,07202,8,1,1850,,,unmatched_offline,no readable row in the building
 trulia:465997955,New Jersey,10 Columbia Ave,07106,33,1,1650,apartmentlist:p127017832-1BR,,street_key,"1 readable rows in the building (apartmentlist.com); 1 at or under $2,200"
-trulia:465237874,New Jersey,148 Palm St,07106,8,1,1695,,,unmatched_offline,no readable row in the building
-trulia:464462158,New Jersey,148 Palm St,07106,88,1,1750,,,unmatched_offline,no readable row in the building
-trulia:464493537,New Jersey,148 Palm St,07106,8A,1,1750,,,unmatched_offline,no readable row in the building
+trulia:465237874,New Jersey,148 Palm St,07106,8,1,1695,,,no_site_found,web search 2026-11-17 (Apartment List/Zumper only): only a 3BR on a Zumper index page
+trulia:464462158,New Jersey,148 Palm St,07106,88,1,1750,,,no_site_found,web search 2026-11-17 (Apartment List/Zumper only): only a 3BR on a Zumper index page
+trulia:464493537,New Jersey,148 Palm St,07106,8A,1,1750,,,no_site_found,web search 2026-11-17 (Apartment List/Zumper only): only a 3BR on a Zumper index page
 trulia:38711761,New Jersey,158 Alexander St,07106,,1,1400,,,unmatched_offline,no readable row in the building
 trulia:452054923,New Jersey,54 Speedway Ave,07106,3,0,1450,,,unmatched_offline,no readable row in the building
 trulia:448323158,New Jersey,6 Longfellow Ave,07106,3E,1,1500,,,unmatched_offline,no readable row in the building
@@ -1570,9 +1570,9 @@ trulia:466312277,New Jersey,216 E  7th St,07060,22,1,1775,,,unmatched_offline,no
 trulia:466426638,New Jersey,347 Franklin Pl,07060,9,0,1545,,,unmatched_offline,no readable row in the building
 trulia:463939002,New Jersey,470 W  End Ave,07060,,1,1950,,,unmatched_offline,no readable row in the building
 trulia:461364021,New Jersey,831 Central Ave,07060,1,1,1600,,,unmatched_offline,no readable row in the building
-trulia:b2796125332,New Jersey,1996 Route 27,08817,f8d9e1149,1,1695,,,unmatched_offline,no readable row in the building
+trulia:b2796125332,New Jersey,1996 Route 27,08817,f8d9e1149,1,1695,,,no_site_found,web search 2026-11-17 (Edison Square Apartments): no listing under that name; aggregators only
 trulia:b2430637685,New Jersey,1985 Route 27,08817,,1,1695,zumper-60646929,,building_id,"1 readable rows in the building (zumper); 1 at or under $2,200"
-trulia:b2761549697,New Jersey,1940 State Route 27,08817,00a50df9e,1,1695,,,unmatched_offline,no readable row in the building
+trulia:b2761549697,New Jersey,1940 State Route 27,08817,00a50df9e,1,1695,,,no_site_found,"web search 2026-11-17 (Lincoln Gardens, 52 units, 2 storeys): aggregators only"
 trulia:b2750956633,New Jersey,12 Lee St,08817,2B,1,1885,,,unmatched_offline,no readable row in the building
 trulia:b2008277193,New Jersey,35 Mill Rd,08817,3,1,1735,,,unmatched_offline,no readable row in the building
 trulia:460043188,New Jersey,61 Hillcrest Blvd,07059,C,1,1900,,,unmatched_offline,no readable row in the building
@@ -1599,7 +1599,7 @@ trulia:b1002093116,New Jersey,99 Green Grove Ave,07735,,1,1725,,,unmatched_offli
 trulia:b1002418023,New Jersey,140 Montgomery St,08904,,1,1849,,,unmatched_offline,no readable row in the building
 trulia:b1002377108,New Jersey,251 Atlantic St,07735,,1,1950,zumper-55433305,,street_key,"1 readable rows in the building (zumper); 1 at or under $2,200"
 trulia:b1002055069,New Jersey,260 S  11th Ave,08904,,1,1999,,,unmatched_offline,no readable row in the building
-trulia:b2750824374,New Jersey,481 S  2nd Ave,08904,61e81b7c9,1,1795,,,unmatched_offline,no readable row in the building
+trulia:b2750824374,New Jersey,481 S  2nd Ave,08904,61e81b7c9,1,1795,,,no_site_found,"web search 2026-11-17 (Raritan Landing, Real Estate Growth Advisors): aggregators only"
 trulia:b1002375177,New Jersey,250 Treetops Dr,08904,b571bae9a,1,1940,,,site_offlimits,"web search 2026-11-17 (Treetops, Oxford Realty): only RentCafe (off limits) and aggregators; no own site found"
 trulia:59487656,Long Island,10 Halliday Rd,11727,,1,1600,,,unmatched_offline,no readable row in the building
 trulia:466216071,New Jersey,121 N  4th Ave,08904,2R,1,1500,,,unmatched_offline,no readable row in the building
@@ -1699,7 +1699,7 @@ trulia:59455898,Long Island,,11778,,1,1850,,,unmatched_offline,no address on car
 trulia:b2005413129,Connecticut,1208 Broad St,06604,101,0,1650,zumper-65329623,,street_key,"1 readable rows in the building (zumper); 1 at or under $2,200"
 trulia:b1002416819,Connecticut,955 Main St,06604,,0,1400,zumper-59138696,,street_key,"1 readable rows in the building (zumper); 1 at or under $2,200"
 trulia:b2734499849,Connecticut,855 Main St,06604,,1,1950,apartmentlist:p117584758-2280;apartmentlist:p117584758-2261;apartmentlist:p117584758-2278;apartmentlist:p117584758-2225;apartmentlist:p117584758-2271;apartmentlist:p117584758-2270;apartmentlist:p117584758-2257;apartmentlist:p117584758-2269;apartmentlist:p117584758-2285,,street_key,"9 readable rows in the building (apartmentlist.com); 1 at or under $2,200"
-trulia:b1005185522,Connecticut,2340 North Ave,06604,b56d0c0c1,1,1899,,,unmatched_offline,no readable row in the building
+trulia:b1005185522,Connecticut,2340 North Ave,06604,b56d0c0c1,1,1899,,,no_site_found,"web search 2026-11-17 (The Siena Building, 67 units, elevator per Apartments.com): aggregators only"
 trulia:2058728658,Connecticut,1071 Iranistan Ave,06604,16,0,1260,,,unmatched_offline,no readable row in the building
 trulia:442643916,Connecticut,1075 North Ave,06604,3,1,1575,,,unmatched_offline,no readable row in the building
 trulia:449017432,Connecticut,211 Birdseye St,06604,A4,1,1349,,,unmatched_offline,no readable row in the building
@@ -1711,8 +1711,8 @@ trulia:459848162,Connecticut,425 Park Ave,06604,2,0,1075,,,unmatched_offline,no 
 trulia:57237945,Connecticut,467 Lexington Ave,06604,,1,1700,,,unmatched_offline,no readable row in the building
 trulia:465085957,Connecticut,60 Coleman St,06604,3BN,1,1700,,,unmatched_offline,no readable row in the building
 trulia:465065405,Connecticut,60 Coleman St,06604,O1K,0,1200,,,unmatched_offline,no readable row in the building
-trulia:347827104,Connecticut,677 Fairfield Ave,06604,101,1,1600,,,unmatched_offline,no readable row in the building
-trulia:2057508900,Connecticut,677 Fairfield Ave,06604,,0,1450,,,unmatched_offline,no readable row in the building
+trulia:347827104,Connecticut,677 Fairfield Ave,06604,101,1,1600,,,site_no_units,"web search 2026-11-17: Apartment List page for 677 Fairfield Avenue about 1,287 days old (stale; not fetched)"
+trulia:2057508900,Connecticut,677 Fairfield Ave,06604,,0,1450,,,site_no_units,"web search 2026-11-17: Apartment List page for 677 Fairfield Avenue about 1,287 days old (stale; not fetched)"
 trulia:442184207,Connecticut,681 Myrtle Ave,06604,,0,1125,,,unmatched_offline,no readable row in the building
 trulia:465238162,Connecticut,683 Fairfield Ave,06604,102,1,1800,,,unmatched_offline,no readable row in the building
 trulia:446692894,Connecticut,683 Fairfield Ave,06604,306,1,1650,,,unmatched_offline,no readable row in the building
@@ -1790,7 +1790,7 @@ trulia:b2000068288,New Jersey,3331 Route 94,07419,,1,1500,,,unmatched_offline,no
 trulia:459109738,New Jersey,175 New Jersey,07419,23,1,1349,,,unmatched_offline,no readable row in the building
 trulia:463762216,New Jersey,3331 State Route 94,07419,1,1,1750,,,unmatched_offline,no readable row in the building
 trulia:463762735,New Jersey,3331 State Route 94,07419,2,1,1950,,,unmatched_offline,no readable row in the building
-trulia:b2769601294,New Jersey,1 Justin Dr,08512,2e16febee,1,1364,,,unmatched_offline,no readable row in the building
+trulia:b2769601294,New Jersey,1 Justin Dr,08512,2e16febee,1,1364,,,site_offlimits,"web search 2026-11-17 (Birchwood at Cranbury, 55+ LIHTC, Ingerman): RentCafe (off limits) and aggregators only"
 trulia:b2750805514,New Jersey,164 One Mile Rd,08512,,1,2000,,,unmatched_offline,no readable row in the building
 trulia:b1002097909,New Jersey,129 Mercer St,08876,,1,1733,apartmentlist:p14562-8-584;apartmentlist:p14562-8-616;apartmentlist:p14562-4-498;apartmentlist:p14562-4-484;apartmentlist:p14562-4-404;apartmentlist:p14562-1-165;apartmentlist:p14562-1-133;apartmentlist:p14562-2-430;apartmentlist:p14562-20-380;apartmentlist:p14562-6-322;apartmentlist:p14562-6-373;apartmentlist:p14562-6-364,,street_key,"12 readable rows in the building (apartmentlist.com); 8 at or under $2,200"
 trulia:b2750792725,New Jersey,21 Oak Ter,08876,1J,1,1995,zumper-61446441,,street_key,"1 readable rows in the building (zumper); 1 at or under $2,200"
@@ -1848,7 +1848,7 @@ trulia:b2765854033,Connecticut,1001 Bridgeport Ave,06484,,0,1858,apartmentlist:p
 trulia:57349363,Connecticut,292 Coram Ave,06484,,1,1900,apartmentlist:p109846431-1_bed_1.0_bath_800_sqft;zumper-65654282,,street_key,"2 readable rows in the building (apartmentlist.com, zumper); 2 at or under $2,200"
 trulia:460169112,Connecticut,87 Shelton Ave,06484,0,1,1700,,,unmatched_offline,no readable row in the building
 trulia:2055433941,Connecticut,90 Hill St,06484,3,1,1750,,,unmatched_offline,no readable row in the building
-trulia:b2781702095,New Jersey,1726 Route 31,08809,14c410538,1,1654,,,unmatched_offline,no readable row in the building
+trulia:b2781702095,New Jersey,1726 Route 31,08809,14c410538,1,1654,,,site_offlimits,"web search 2026-11-17 (Willows at Spruce Run, affordable, MRK Partners): RentCafe (off limits) and aggregators only"
 trulia:465724460,Connecticut,132 Greenwood Ave,06801,2B,1,1800,,,unmatched_offline,no readable row in the building
 trulia:466372537,New Jersey,22 Spring St,07728,3,1,1450,,,unmatched_offline,no readable row in the building
 trulia:83038603,New Jersey,36D Manchester Ct,07728,,1,1900,,,unmatched_offline,no readable row in the building
@@ -2048,9 +2048,9 @@ trulia:57963599,Connecticut,28 Trumbull St,06511,,1,1850,,,unmatched_offline,no 
 trulia:464421930,Connecticut,287 Saint John St,06511,2,1,1950,,,unmatched_offline,no readable row in the building
 trulia:456722898,Connecticut,289 Norton St,06511,A3,1,1250,,,unmatched_offline,no readable row in the building
 trulia:465689688,Connecticut,289 Norton St,06511,C3,1,1250,,,unmatched_offline,no readable row in the building
-trulia:2103357986,Connecticut,293 Norton St,06511,C6,1,1250,,,unmatched_offline,no readable row in the building
-trulia:464920824,Connecticut,293 Norton St,06511,C7-0,1,1375,,,unmatched_offline,no readable row in the building
-trulia:2082502104,Connecticut,293 Norton St,06511,C7,1,1400,,,unmatched_offline,no readable row in the building
+trulia:2103357986,Connecticut,293 Norton St,06511,C6,1,1250,,,no_site_found,web search 2026-11-17 (Apartment List/Zumper only): no page for 293
+trulia:464920824,Connecticut,293 Norton St,06511,C7-0,1,1375,,,no_site_found,web search 2026-11-17 (Apartment List/Zumper only): no page for 293
+trulia:2082502104,Connecticut,293 Norton St,06511,C7,1,1400,,,no_site_found,web search 2026-11-17 (Apartment List/Zumper only): no page for 293
 trulia:465500692,Connecticut,30 Bassett St,06511,3,1,1000,zumper-65395683,,street_key_same_unit,"2 readable rows in the building (apartmentlist.com, zumper); 2 at or under $2,200; same unit label on zumper-65395683"
 trulia:57970225,Connecticut,31 Carmel St,06511,,1,1500,zumper-65347647,,street_key,"1 readable rows in the building (zumper); 1 at or under $2,200"
 trulia:466509469,Connecticut,31 Mead St,06511,2L,1,1375,,,unmatched_offline,no readable row in the building
@@ -2867,8 +2867,8 @@ trulia:456889091,New Jersey,262 Osborne Ter,07112,,1,1300,,,unmatched_offline,no
 trulia:466515909,New Jersey,292-293 Wainwright St,07112,A2,1,1550,,,unmatched_offline,no readable row in the building
 trulia:463697481,New Jersey,292-293 Wainwright St,07112,B3,1,1550,,,unmatched_offline,no readable row in the building
 trulia:462996087,New Jersey,342 Myrtle Ave,07111,2L,1,1495,,,unmatched_offline,no readable row in the building
-trulia:466293935,New Jersey,39 Fabyan Pl,07108,13B,0,1100,,,unmatched_offline,no readable row in the building
-trulia:466500197,New Jersey,39 Fabyan Pl,07108,13BB,0,1100,,,unmatched_offline,no readable row in the building
+trulia:466293935,New Jersey,39 Fabyan Pl,07108,13B,0,1100,,,site_no_units,web search 2026-11-17: Apartment List 39-41 Fabyan Place shown off the market (not fetched)
+trulia:466500197,New Jersey,39 Fabyan Pl,07108,13BB,0,1100,,,site_no_units,web search 2026-11-17: Apartment List 39-41 Fabyan Place shown off the market (not fetched)
 trulia:38661147,New Jersey,46 Norwood Ave,07111,,1,1800,apartmentlist:p125434957-1_bed_1.0_bath_0_sqft;zumper-65451104,,street_key,"2 readable rows in the building (apartmentlist.com, zumper); 2 at or under $2,200"
 trulia:466527959,New Jersey,48 Millington Ave,07108,34B,1,1550,,,unmatched_offline,no readable row in the building
 trulia:459907320,New Jersey,51 Chester Ave,07111,3,1,1795,,,unmatched_offline,no readable row in the building
@@ -3099,7 +3099,7 @@ trulia:460894610,New Jersey,50 North St,07940,2R,1,2000,,,unmatched_offline,no r
 trulia:2083762862,New Jersey,57 Park Ave,07940,B,0,1799,,,unmatched_offline,no readable row in the building
 trulia:378881630,Long Island,,11742,,1,1825,,,unmatched_offline,no address on card
 trulia:b1002384767,New Jersey,50 N  Evergreen Rd,08837,1,1,1970,gardencommunities:nj-middlesex-greenfield-gardens-one-bedroom,,street_key,"1 readable rows in the building (gardencommunities.com); 1 at or under $2,200"
-trulia:b1003145025,New Jersey,12 Koster Blvd,08837,5c70dfb0d,1,1690,,,unmatched_offline,no readable row in the building
+trulia:b1003145025,New Jersey,12 Koster Blvd,08837,5c70dfb0d,1,1690,,,no_site_found,web search 2026-11-17 (Parkwood Gardens; Zillow says no dogs): aggregators only
 trulia:466382891,New Jersey,17 Redfield Vlg,08837,D2,1,1600,,,unmatched_offline,no readable row in the building
 trulia:465152564,New Jersey,26 Hanover Road Florham Park,07932,,1,1800,apartmentlist:p124531552-1_bed_1.0_bath_0_sqft,,building_id,"1 readable rows in the building (apartmentlist.com); 1 at or under $2,200"
 trulia:b1012712617,Connecticut,12 Rowan St,06855,1R,1,1850,zumper-61200636,,street_key,"1 readable rows in the building (zumper); 1 at or under $2,200"
@@ -3156,7 +3156,7 @@ trulia:2070060083,New Jersey,26 Main St,07735,,1,1780,apartmentlist:p71474879-1_
 trulia:39086897,New Jersey,64 Lawrence Ave,08904,,1,1550,apartmentlist:p85114725-1_bed_1.0_bath_0_sqft;zumper-65436910,,street_key,"2 readable rows in the building (apartmentlist.com, zumper); 2 at or under $2,200"
 trulia:465602319,New Jersey,,07735,,1,1650,,,unmatched_offline,no address on card
 trulia:b2750781020,New Jersey,30 Elm St,07960,,0,2000,,,unmatched_offline,no readable row in the building
-trulia:b2750783047,New Jersey,400 Lindsley Dr,07960,632e47483,1,1950,,,unmatched_offline,no readable row in the building
+trulia:b2750783047,New Jersey,400 Lindsley Dr,07960,632e47483,1,1950,,,no_site_found,"web search 2026-11-17 (Lindsley Arms, 180 units; Zillow says no dogs): aggregators only"
 trulia:b1003145583,New Jersey,137 Washington St,07960,,0,1905,,,unmatched_offline,no readable row in the building
 trulia:2088188098,New Jersey,340 South St,07960,12,1,1850,,,unmatched_offline,no readable row in the building
 trulia:466089988,New Jersey,4111 Delsea Dr,07960,,1,775,,,unmatched_offline,no readable row in the building
@@ -3227,8 +3227,8 @@ trulia:440870239,Connecticut,65 James St,06604,2,1,1700,apartmentlist:p125428574
 trulia:440870263,Connecticut,65 James St,06604,3,1,1700,apartmentlist:p125428574-74f785a8-b281-11ef-8ab6-12de4bf481cd;zumper-65456021,,street_key,"2 readable rows in the building (apartmentlist.com, zumper); 2 at or under $2,200"
 trulia:450133021,Connecticut,65 James St,06604,36,1,1600,apartmentlist:p125428574-74f785a8-b281-11ef-8ab6-12de4bf481cd;zumper-65456021,,street_key,"2 readable rows in the building (apartmentlist.com, zumper); 2 at or under $2,200"
 trulia:2064325952,Connecticut,65 James St,06604,,1,1600,apartmentlist:p125428574-74f785a8-b281-11ef-8ab6-12de4bf481cd;zumper-65456021,,street_key,"2 readable rows in the building (apartmentlist.com, zumper); 2 at or under $2,200"
-trulia:440873150,Connecticut,677 Fairfield Ave,06604,1,1,1700,,,unmatched_offline,no readable row in the building
-trulia:347827013,Connecticut,677 Fairfield Ave,06604,201,1,1600,,,unmatched_offline,no readable row in the building
+trulia:440873150,Connecticut,677 Fairfield Ave,06604,1,1,1700,,,site_no_units,"web search 2026-11-17: Apartment List page for 677 Fairfield Avenue about 1,287 days old (stale; not fetched)"
+trulia:347827013,Connecticut,677 Fairfield Ave,06604,201,1,1600,,,site_no_units,"web search 2026-11-17: Apartment List page for 677 Fairfield Avenue about 1,287 days old (stale; not fetched)"
 trulia:460538186,Connecticut,87 Pequonnock St,06604,2,1,1800,,,unmatched_offline,no readable row in the building
 trulia:462923516,Connecticut,87 Pequonnock St,06604,40,0,1500,,,unmatched_offline,no readable row in the building
 trulia:466180162,Connecticut,87 Pequonnock St,06604,49,1,1800,,,unmatched_offline,no readable row in the building
@@ -3422,7 +3422,7 @@ trulia:466412835,Connecticut,191 Wooster St,06511,C,1,1450,,,unmatched_offline,n
 trulia:443487008,Connecticut,191 Wooster St,06511,C02,1,1475,,,unmatched_offline,no readable row in the building
 trulia:462855523,Connecticut,191 Wooster St,06511,D,1,1425,,,unmatched_offline,no readable row in the building
 trulia:441774349,Connecticut,279 Winthrop Ave,06511,4B,1,1400,,,unmatched_offline,no readable row in the building
-trulia:462013380,Connecticut,293 Norton St,06511,7C,1,1375,,,unmatched_offline,no readable row in the building
+trulia:462013380,Connecticut,293 Norton St,06511,7C,1,1375,,,no_site_found,web search 2026-11-17 (Apartment List/Zumper only): no page for 293
 trulia:2056996779,Connecticut,42 Warren St,06511,52,1,1800,,,unmatched_offline,no readable row in the building
 trulia:465667864,Connecticut,507 Norton Pkwy,06511,22C-0,1,1525,,,unmatched_offline,no readable row in the building
 trulia:2060224118,Connecticut,507 Norton Pkwy,06511,22C,1,1525,,,unmatched_offline,no readable row in the building
@@ -3464,7 +3464,7 @@ trulia:2069024321,New Jersey,512 Main Ave,08742,5,1,1950,zumper-65119638,,street
 trulia:b1002373792,New Jersey,66 Park Ave,07882,C12,1,1484,,,unmatched_offline,no readable row in the building
 trulia:b2753284318,New Jersey,13A Nunn Ave,07882,,0,1485,,,unmatched_offline,no readable row in the building
 trulia:b1045867905,New Jersey,133 Liberty St,08611,1,1,1200,zumper-63897808,,street_key,"1 readable rows in the building (zumper); 1 at or under $2,200"
-trulia:b2783885658,New Jersey,507 Grand Ave,08611,6a3ff879c,1,1695,,,unmatched_offline,no readable row in the building
+trulia:b2783885658,New Jersey,507 Grand Ave,08611,6a3ff879c,1,1695,,,no_site_found,web search 2026-11-17 (Seville Lofts; Zillow says no pets): aggregators only
 trulia:466579163,New Jersey,147 Mercer St,08611,2C,0,1100,,,unmatched_offline,no readable row in the building
 trulia:353684600,New Jersey,728 Anderson St,08611,7,1,1275,,,unmatched_offline,no readable row in the building
 trulia:466361958,New Jersey,84 Washington St,08611,1F,1,1600,,,unmatched_offline,no readable row in the building
