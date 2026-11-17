@@ -854,7 +854,8 @@ def main(argv=None):
     absent = []
     # With --out-suffix, data/reference/scene_text_source<suffix>.csv (columns kind, id, field, draft) replaces single
     # fields of a draft where the sentence written for the whole page is not true of the subset. The replacement is a
-    # draft like any other: tokens, hidden tests, every guard.
+    # draft like any other: tokens, hidden tests, every guard. A field "sub_<section>" replaces the section subhead the
+    # "=== sub:" rules would pick (they are shared by every row, so no draft of the source file can replace them).
     over = SOURCE.with_name(SOURCE.stem + C.OUT_SUFFIX + ".csv") if C.OUT_SUFFIX else None
     if over is not None and over.exists():
         with open(over, newline="", encoding="utf-8") as fh:
@@ -935,6 +936,9 @@ def main(argv=None):
                     raise ValueError(f"{b['id']}: paraphrases residents without a voices: line")
                 closes[b["id"]] = "drive" if C.ends_on_drive(texts["host_intro"]) else "other"
             for section in C.SUB_SECTIONS[b["kind"]]:
+                if ("sub_" + section) in f:              # a subhead given in the --out-suffix override table replaces
+                    texts["sub_" + section] = render(f["sub_" + section], ctx, evidence)   # the one the rules pick
+                    continue
                 texts["sub_" + section], evs = pick_sub(subs.get((b["kind"], section), []), ctx, section,
                                                          sub_cap[b["kind"]])
                 evidence += evs

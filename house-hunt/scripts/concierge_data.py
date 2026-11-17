@@ -889,6 +889,22 @@ def apartment(u):
             "listing_url": (u.get("links") or {}).get("listing"), "source_site": u.get("source_site"), "last_read": last_read(u)}
 
 
+PLACE_ONLY = re.compile(r"^[^,\d]+,\s*[A-Z]{2}\s*\d{5}(?:-\d{4})?(?:,\s*USA)?$")    # "East Haven, CT 06512, USA"
+
+
+def display_name(bd):
+    """The building's name; a name that is only a town, state and ZIP shows as the street address when one exists,
+    else "A building in <town>"."""
+    name = str(bd.get("name") or "").strip() or str(bd.get("address") or "").strip()
+    if PLACE_ONLY.match(name):
+        addr = str(bd.get("address") or "").strip()
+        if addr and re.match(r"\d", addr) and not PLACE_ONLY.match(addr):
+            return addr.split(",")[0].strip()
+        town = str(bd.get("city") or "").strip() or name.split(",")[0].strip()
+        return f"A building in {town}"
+    return name or None
+
+
 def contact(b):
     """{office_phone, site, ...} or null. A broker's or an individual owner's number may be one person's own line:
     it is never given (scripts/page_data_extras.py: is_private_line), whatever the page data holds."""
@@ -1028,7 +1044,7 @@ def concierge(b, source):
         rents = [rent_now(u) for u in us]
         totals = [u["all_in"] for u in us]
         blds.append({
-            "id": bd["id"], "name": bd.get("name") or bd.get("address"), "address": bd.get("address"), "city": bd.get("city"),
+            "id": bd["id"], "name": display_name(bd), "address": bd.get("address"), "city": bd.get("city"),
             "state": bd.get("state"), "lat": round(sum(u["lat"] for u in us) / len(us), 5), "lon": round(sum(u["lon"] for u in us) / len(us), 5),
             "neighborhood_id": bd["hood_id"], "experience_id": bd.get("experience") or best.get("year"),
             "rank_score": num((best.get("scores") or {}).get("rank")),

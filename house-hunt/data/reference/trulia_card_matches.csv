@@ -556,9 +556,9 @@ trulia:31181363,Long Island,,11003,,1,1750,,,unmatched_offline,no address on car
 trulia:466554523,Brooklyn,,11236,,1,2000,,,unmatched_offline,no address on card
 trulia:31257638,Long Island,,11581,,1,1750,,,unmatched_offline,no address on card
 trulia:31238262,Long Island,,11580,,1,1700,,,unmatched_offline,no address on card
-trulia:458420429,Long Island,2000 Hillside Ave,11040,,1,1450,,,unmatched_offline,no readable row in the building
+trulia:458420429,Long Island,2000 Hillside Ave,11040,,1,1450,,,no_site_found,web search 2026-11-17: Zillow building page only (off limits)
 trulia:464365782,Long Island,26 Lafayette Pl,11598,2B,0,1700,,,unmatched_offline,no readable row in the building
-trulia:2096471486,Long Island,918 Hempstead Tpke,11010,1,1,1750,,,unmatched_offline,no readable row in the building
+trulia:2096471486,Long Island,918 Hempstead Tpke,11010,1,1,1750,,https://www.apartmentlist.com/ny/franklin-square/918-hempstead,site_no_units,Apartment List page is a soft 404 (read 2026-11-17T20:54:52+00:00)
 trulia:31204382,Long Island,,11010,,1,1950,,,unmatched_offline,no address on card
 trulia:447225427,Long Island,15 Ives Rd,11557,1,0,2000,,,unmatched_offline,no readable row in the building
 trulia:465607145,Long Island,24 Linhurst Pl,11570,BASEMENT,0,1750,,,unmatched_offline,no readable row in the building
@@ -2293,14 +2293,14 @@ trulia:466179578,Long Island,,11572,,1,1800,,,unmatched_offline,no address on ca
 trulia:466093417,Long Island,,11510,,1,1900,,,unmatched_offline,no address on card
 trulia:466409579,Brooklyn,3105 Avenue D,11226,B2,1,1849,,,unmatched_offline,no readable row in the building
 trulia:466536060,Brooklyn,182 Beaumont St,11235,1G,1,1999,,,unmatched_offline,no readable row in the building
-trulia:466483032,Brooklyn,3154 Coney Island Ave,11235,B5,1,1799,,,unmatched_offline,no readable row in the building
+trulia:466483032,Brooklyn,3154 Coney Island Ave,11235,B5,1,1799,,,no_site_found,web search 2026-11-17: Apartments.com page only (off limits)
 trulia:2108390337,Brooklyn,1791 New York Ave,11210,3C,1,1975,,,unmatched_offline,no readable row in the building
 trulia:466629135,Brooklyn,1781 E  16th St,11229,4G,1,1750,,,unmatched_offline,no readable row in the building
 trulia:2063336215,Brooklyn,2066 E  15th St,11229,2D,1,1975,apartmentlist:p67484636-1_bed_1.0_bath_650.0_sqft,,street_key,"1 readable rows in the building (apartmentlist.com); 1 at or under $2,200"
 trulia:466551883,Brooklyn,2082 E  28th St,11229,2F,1,2000,,,unmatched_offline,no readable row in the building
 trulia:456448393,Brooklyn,,11229,,0,1700,,,unmatched_offline,no address on card
 trulia:459457028,Long Island,,11566,,1,1700,,,unmatched_offline,no address on card
-trulia:466483923,Brooklyn,1626 Foster Ave,11230,4B,0,1499,,,unmatched_offline,no readable row in the building
+trulia:466483923,Brooklyn,1626 Foster Ave,11230,4B,0,1499,,,no_site_found,web search 2026-11-17: no result for the address
 trulia:466486056,Brooklyn,1629 W  10th St,11223,4G,1,1699,,,unmatched_offline,no readable row in the building
 trulia:466625706,Brooklyn,2035 West St,11223,3,1,2000,,,unmatched_offline,no readable row in the building
 trulia:466627326,Brooklyn,2277 West St,11223,2F,1,2000,,,unmatched_offline,no readable row in the building
@@ -3091,7 +3091,7 @@ trulia:64698033,New Jersey,707 Cricket Ln,07095,,1,1950,,,unmatched_offline,no r
 trulia:b2737382027,New Jersey,245 Hamburg Tpke,07403,XX1,1,1950,,,unmatched_offline,no readable row in the building
 trulia:461526721,New Jersey,127 Main St,07403,2A,1,1875,,,unmatched_offline,no readable row in the building
 trulia:466618934,New Jersey,152 Hamburg Tpke,07403,4,1,1500,apartmentlist:p125760136-4;zumper-65786023,,street_key_same_unit,"2 readable rows in the building (apartmentlist.com, zumper); 2 at or under $2,200; same unit label on apartmentlist:p125760136-4;zumper-65786023"
-trulia:457328918,Long Island,4909 Express Dr N,11779,BASEMENT,1,1750,,,unmatched_offline,no readable row in the building
+trulia:457328918,Long Island,4909 Express Dr N,11779,BASEMENT,1,1750,,,no_site_found,web search 2026-11-17: address only in a Redfin street index
 trulia:464326077,Long Island,,11779,,0,1750,,,unmatched_offline,no address on card
 trulia:464990570,New Jersey,36 Paul St,08863,2,1,1850,,,unmatched_offline,no readable row in the building
 trulia:b2757028192,Connecticut,10 Wall St,06850,,0,2000,zumper-60602579;zumper-63210358,,street_key,"2 readable rows in the building (zumper); 2 at or under $2,200"
@@ -3109,8 +3109,8 @@ trulia:b1003145006,New Jersey,1617 Solook Dr,08859,5ead8cedb,1,1575,,,unmatched_
 trulia:466096932,Long Island,8 League Ct,11720,2,1,1900,,,unmatched_offline,no readable row in the building
 trulia:465872739,Long Island,,11720,,1,2000,,,unmatched_offline,no address on card
 trulia:b2776709033,New Jersey,440 Talmadge Rd,08817,1,1,1770,,,unmatched_offline,no readable row in the building
-trulia:464953385,Long Island,447 S  Ocean Ave,11772,1,1,1700,,,unmatched_offline,no readable row in the building
-trulia:2082816469,Long Island,447 S  Ocean Ave,11772,2,1,1825,,,unmatched_offline,no readable row in the building
+trulia:464953385,Long Island,447 S  Ocean Ave,11772,1,1,1700,,,no_site_found,web search 2026-11-17: property record only (PropertyShark); no rental page or manager found
+trulia:2082816469,Long Island,447 S  Ocean Ave,11772,2,1,1825,,,no_site_found,web search 2026-11-17: property record only (PropertyShark); no rental page or manager found
 trulia:62615033,Long Island,,11772,,1,1875,,,unmatched_offline,no address on card
 trulia:466552518,New Jersey,112 Myrtle Ave,07005,3,1,1575,,,unmatched_offline,no readable row in the building
 trulia:465688563,New Jersey,26 Lorraine Ter,07005,BASEMENT,0,1400,,,unmatched_offline,no readable row in the building

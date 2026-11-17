@@ -21,7 +21,7 @@ DATA IT ADDS (nothing renamed)
 THE MODEL
   utility U_w(b)   = sum_k w_k * features[k]  over the six weighted features (sure excluded)
   score_w(b)       = U_w(b) * features.sure
-  group score      = mean of the group's two best building scores; one building: mean of it and the set's median score
+  group score      = expected mean of the two best of a random 3-building subset (fewer than 3: filled with the set's median)
   likelihood       gap g = U_w(a) - U_w(b);  P(a) = sig((g - band)/T), P(b) = sig((-g - band)/T), P(either) = 1 - P(a) - P(b)
   posterior        pi_s proportional to prod_j L_s(answer_j), from uniform; normalised once at the end
   mean weights     wbar = sum_s pi_s w_s; since U is linear in w, expected utility = U_wbar
@@ -53,7 +53,7 @@ PRIOR_RELATIVE = {"family": 1.25, "money": 1.0, "room": 1.25, "going_out": 1.25,
 CONCENTRATION = 6.0
 TEMPERATURE = 0.04          # logistic temperature on the utility gap (utilities run 0..1, gaps between places 0.0-0.4)
 EITHER_BAND = 0.03          # a gap within this is "either is fine" (for a simulated persona, and the model's threshold)
-MIN_PAIRS, MAX_PAIRS, STOP_PROB = 3, 6, 0.8
+MIN_PAIRS, MAX_PAIRS, STOP_PROB = 3, 6, 0.9
 MMR_LAMBDA = 0.7
 RELEVANCE_FLOOR = 0.85       # places 2 and 3 need a score >= this x the best neighborhood's ...
 RELEVANCE_TOP_SHARE = 0.5   # ... and a rank in the top half by score; fewer than three clear it: fill by score
@@ -363,10 +363,24 @@ def group_scores(w, buildings, params):
     med = statistics.median(sc.values())               # a one-building neighborhood is not a deep one
     out = {}
     for g in params["groups"]:
-        s = sorted((sc[i] for i in g["building_ids"]), reverse=True)[:2]
-        out[g["id"]] = (s[0] + s[1]) / 2 if len(s) == 2 else (s[0] + med) / 2
+        out[g["id"]] = top2_of_3(sorted((sc[i] for i in g["building_ids"]), reverse=True), med)
     _ = by
     return out
+
+
+def top2_of_3(s, med):
+    """The expected mean of the two best of a random 3-building subset of the scores s (sorted, best first): the
+    neighborhood scored as if it had three buildings, so depth alone does not win. With fewer than three, the missing
+    ones are the set's median score. E[top two of 3] = (E[sum of 3] - E[min of 3]) / 2, E[sum] = 3 x mean(s),
+    P(the i-th best, 1-based, is the min of the subset) = C(i-1, 2) / C(n, 3)."""
+    s = list(s)
+    if len(s) < 3:
+        s = sorted(s + [med] * (3 - len(s)), reverse=True)
+        return (s[0] + s[1]) / 2
+    n = len(s)
+    total = math.comb(n, 3)
+    e_min = sum(x * math.comb(i, 2) for i, x in enumerate(s)) / total     # i = number of better buildings
+    return (3 * sum(s) / n - e_min) / 2
 
 
 def eligible(gs, params):
@@ -765,7 +779,7 @@ def params_block(buildings, groups, sim, mean, sd, alpha, meds):
         "algorithm": {
             "utility": "U_w(b) = sum_k w_k x features[k] over `features` (sure excluded)",
             "score": "score_w(b) = U_w(b) x features.sure",
-            "group_score": "each building's score is rounded to round_decimals; a group with two or more buildings scores the mean of its two best; a group with one building scores the mean of that building and the median building score of the whole set under the same weights (the mean of the two middle values when the count is even), so one strong building is not treated as a deep neighborhood",
+            "group_score": "each building's score is rounded to round_decimals; a group scores the expected mean of the two best of a random 3-building subset of its buildings (exact: (3 x mean - E[min of 3]) / 2, with P(the i-th best is the min) = C(i-1, 2) / C(n, 3), i counted from 1 in score order, best first); a group with fewer than three buildings is filled to three with the median building score of the whole set under the same weights (the mean of the two middle values when the count is even), then the mean of its two best. Why (coordinator, 2026-11-17): with the mean of its two best, a deep neighborhood wins by having many buildings to pick from (Newark, 20 buildings, was in the three for 197 of 200 simulated users); a one-building neighborhood is not treated as a deep one either",
             "likelihood": "gap = U_w(a) - U_w(b); P(a) = sig((gap - either_band)/temperature); P(b) = sig((-gap - either_band)/temperature); P(either) = max(0, 1 - P(a) - P(b))",
             "posterior": "pi_s = prod over answers (in order) of the likelihood, divided by the sum over samples; uniform if the sum is 0",
             "mean_weights": "wbar_k = sum_s pi_s x w_s,k; expected utility = U_wbar",
@@ -774,7 +788,7 @@ def params_block(buildings, groups, sim, mean, sd, alpha, meds):
             "sample_sets": "for each sample, the MMR top three with that sample's weights, as sorted ids joined by '|'; computed once",
             "next_pair": "pool = top pair_pool buildings by round(score_wbar) desc, id; pairs (a, b) with a < b by id, skipping pairs asked; gain = round(H(set distribution under pi) - sum over answers of P(answer) x H(set distribution under the posterior after that answer)); highest gain, ties to the earlier pair in (a, b) id order; entropy in nats",
             "sample_bests": "for each sample, its best group (highest group score with that sample's weights, ties by id); computed once",
-            "stop": "stop when answers >= max_pairs, or answers >= min_pairs and round(stop probability) >= stop_prob, where stop probability = sum of pi_s over the samples whose best group is among the current three (MMR on wbar, as recommend). (Changed 2026-11-17 from 'the most probable top-three set has probability >= stop_prob', which almost never holds with ~57 neighborhoods.) The next pair is still chosen by the expected entropy reduction of the top-three set",
+            "stop": "stop when answers >= max_pairs, or answers >= min_pairs and round(stop probability) >= stop_prob (0.9 from 2026-11-17), where stop probability = sum of pi_s over the samples whose best group is among the current three (MMR on wbar, as recommend). (Changed 2026-11-17 from 'the most probable top-three set has probability >= stop_prob', which almost never holds with ~57 neighborhoods.) The next pair is still chosen by the expected entropy reduction of the top-three set",
             "groups": "a one-apartment neighborhood counts under its parked host only when the host is within group_km and in the same state; otherwise it is its own group (groups lists the result)",
             "recommend": "groups by MMR on wbar; in each, the three best buildings by round(score) desc, id; why = the two features with the largest wbar_k x (group centroid_k - mean over all buildings_k); gives_up: features in order of wbar_k x (centroid_k - mean of the other two picked centroids_k), negative ones only and never one of the two `why` features (centroids over the buildings shown); the first whose figure is unknown here (sq ft not published, parking not stated) is said plainly (gives_up_unknown true), or the first where this neighborhood's figure is worse than BOTH others' known figures by the margin in gives_up_margin (both figures as in the text: drive median minutes, lowest total, largest sq ft, median places, shortest park walk rounded) is compared; none: null. Figures are over the buildings shown",
             "what_would_change": "multiply one weight by a nudge factor (more) or divide by it (less), renormalise, and see which group has the highest score; levels in `nudges` order, then features in order, then more before less; the first found where the first group changes (for the first neighborhood) or becomes this one (for the second and third)",
@@ -791,6 +805,9 @@ def add_version_three(out):
     mean, sd = standardisation(blds)
     add_similar(blds, mean, sd)
     groups, sim = build_groups(hoods, blds, mean, sd)
+    hname = {h["id"]: h["name"] for h in hoods}
+    for b in blds:                                # the card shows the building's own neighborhood, not only its group's
+        b["neighborhood_name"] = hname.get(b["neighborhood_id"])
     add_tags(hoods, blds, groups, mean, sd)
     samples, alpha = draw_samples()
     params = params_block(blds, groups, sim, mean, sd, alpha, meds)
