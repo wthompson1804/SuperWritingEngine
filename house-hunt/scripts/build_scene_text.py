@@ -131,6 +131,7 @@ YEAR_UNITS = {
     "u_pool": ("pool", "mean", "pct"), "u_doorman": ("doorman", "mean", "pct"), "u_gym": ("gym", "mean", "pct"),
     "u_laundry": ("in_unit_laundry", "mean", "pct"), "u_n": ("listing_id", "count", "int"),
     "u_parkown": ("own_parking", "mean", "pct"), "u_owndog": ("own_dog_area", "mean", "pct"),
+    "u_fewrest": ("few_rest_walk", "mean", "pct"),        # share where at most 3 restaurants are within a walk
 }
 # In a neighborhood with places on the page, these aliases are computed from the SHOWN units (the median unit, or the
 # commonest name), so the prose matches what the reader sees listed under it. alias: (column of #units, agg, rounding)

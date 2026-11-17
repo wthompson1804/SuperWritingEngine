@@ -1411,7 +1411,8 @@ p_drive>60 :: Sunday dinner takes the whole afternoon. | Each visit to your pare
 p_places<8 :: What is within a walk differs by neighborhood. | Each neighborhood below says what you can walk to. | Check each neighborhood for what is on foot.
 p_rest>=20, u_bars>=4 :: Restaurants and bars are both within walking distance. | Dinner and a drink are both a walk. | You can spend the evening out without the car.
 p_rest>=15 :: Plenty of restaurants within a walk, and fewer bars. | You can walk to dinner most nights. | Good for eating out, with fewer bars.
-p_rest<=3 :: Going out means driving. | Almost no restaurants are within walking distance. | Dinner out starts with a drive.
+p_rest<=3, u_fewrest>=0.75 :: Going out means driving. | Almost no restaurants are within walking distance. | Dinner out starts with a drive.
+p_rest<=3 :: Dinner is a walk in some of these towns and a drive in others. | Whether dinner is a walk or a drive depends on the town. | Each neighborhood below says whether dinner is a walk or a drive.
 p_rest<=14 :: A few restaurants within a walk, and more by car. | From the typical apartment a few restaurants are within a walk. | Some places to eat are close, and the others are a drive.
 
 === sub: year.green

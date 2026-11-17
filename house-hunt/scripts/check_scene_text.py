@@ -340,6 +340,10 @@ def _page_table(part):
                 "cafes_800m": (mo.get("after") or {}).get("cafes_800m"),
                 "bars_800m": (mo.get("after") or {}).get("bars_800m"),
                 "restaurants_800m": (mo.get("after") or {}).get("restaurants_800m"),
+                # 1 where dinner out is a drive (at most 3 restaurants within a 10-minute walk), the test of the
+                # "you drive to everything" claim of EXP_CLAIMS, so a going-out line can be chosen on its share
+                "few_rest_walk": (None if (mo.get("after") or {}).get("restaurants_800m") is None else
+                                  float((mo.get("after") or {}).get("restaurants_800m") <= 3)),
                 "restaurants_1600m": (mo.get("sat") or {}).get("restaurants_1600m"),
                 "bars_1600m": (mo.get("sat") or {}).get("bars_1600m"),
                 "garage_or_covered": float(kind in ("garage", "covered")),
@@ -1380,7 +1384,9 @@ EXP_CLAIMS = [
     ("you drive to everything",
      r"drive to (?:almost |nearly )?everything|(?:almost )?nothing (?:is |else is )?within walking distance|every outing "
      r"starts in the car|going out means driving|(?:almost )?no restaurants are within|walking anywhere|"
-     r"drive to dinner|dinner[^.]{0,40}all a drive|nearly everything is a drive|drive to nearly everything",
+     r"drive to dinner|dinner[^.]{0,40}all a drive|nearly everything is a drive|drive to nearly everything|"
+     r"starts? with a drive|begins? in the car|(?:dinner|going|eating) out (?:means|is) (?:a )?driv(?:e|ing)|"
+     r"drive (?:out )?(?:to|for) (?:dinner|every meal)",
      "restaurants_800m", ("<=", 3)),
     ("you walk to dinner",
      r"walk to dinner|downtown to walk to|walk to a small downtown|dinner[^.]{0,30}(?:on foot|a short walk)|"

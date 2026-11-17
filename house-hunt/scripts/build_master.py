@@ -1011,6 +1011,133 @@ def apply_call_answers_units(MU, answers):
     return MU
 
 
+# ---- independent check 6: what the cached listing page itself says about ONE apartment
+PAGE_FACTS_FILE = DATA / "reference" / "listing_page_facts.csv"
+PAGE_FACT_COLS = ["raw_path", "bytes", "listing_id", "site", "read_on", "modified", "modified_field", "description", "title", "unit_label",
+                  "unit_rows_on_page", "extra_text"]
+
+
+def _page_meta_read_on(p: Path) -> str:
+    """The day a cached page was retrieved (its .meta.json, else the source's _index.jsonl), YYYY-MM-DD."""
+    mp = p.with_name(p.name.rsplit(".", 1)[0] + ".meta.json")
+    try:
+        return str(json.loads(mp.read_text()).get("retrieved_at", ""))[:10]
+    except (OSError, ValueError):
+        pass
+    try:
+        rel = str(p.relative_to(DATA.parent))
+        for line in (p.parent / "_index.jsonl").read_text(errors="ignore").splitlines():
+            if rel in line:
+                return str(json.loads(line).get("retrieved_at", ""))[:10]
+    except (OSError, ValueError):
+        pass
+    return ""
+
+
+def read_listing_page(raw_path, listing_id) -> dict:
+    """The facts a cached listing page gives about one listing (no request is made):
+      modified        the page's own last-modified date (Trulia "lastDateModified"; the Apartment List unit record's
+                      "updated_at"; Zumper's "modified_on" of the listing itself), YYYY-MM-DD
+      description     the listing's own description (not other listings' cards)
+      title           the listing's own title or display name
+      unit_label      the label the site gives the unit; unit_rows_on_page: how many unit rows the page lists
+      extra_text      the site's structured requirement / fee / laundry / parking sentences for the listing"""
+    out = {c: "" for c in PAGE_FACT_COLS}
+    out.update(raw_path=str(raw_path), listing_id=str(listing_id))
+    p = DATA.parent / str(raw_path)
+    if not str(raw_path).strip() or not p.is_file():
+        return out
+    out["bytes"] = str(p.stat().st_size)
+    out["read_on"] = _page_meta_read_on(p)
+    txt = p.read_text(errors="replace")
+    lid = str(listing_id)
+    clean = lambda s: re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", __import__("html").unescape(str(s or "")))).strip()
+    try:
+        if lid.startswith("apartmentlist:"):
+            import h_apartmentlist as HA
+            out["site"] = "apartmentlist"
+            X = HA.parse_listing(txt) or {}
+            rid = lid.split(":", 1)[1]
+            rows = [(fp, u) for fp in X.get("available_units") or [] for u in fp.get("units") or []]
+            mine = [(fp, u) for fp, u in rows if str(u.get("unit_rental_id")) == rid]
+            out["unit_rows_on_page"] = str(len(rows))
+            out["description"] = clean(X.get("description"))[:6000]
+            out["title"] = clean(X.get("display_name"))
+            if mine:
+                fp, u = mine[0]
+                out["unit_label"] = clean(u.get("display_name") or u.get("name"))
+                if re.match(r"20\d\d-\d\d-\d\d", str(u.get("updated_at") or "")):
+                    out["modified"], out["modified_field"] = str(u["updated_at"])[:10], "Apartment List unit record updated_at"
+            extra = [f"{k}: {clean(X.get(k))}" for k in ("income_requirement_text", "credit_check_required_text", "utilities_included_text", "additional_fees_text",
+                                                         "parking_details_text", "move_in_fees_text") if clean(X.get(k))]
+            out["extra_text"] = " | ".join(extra)[:1500]
+        elif "trulia" in str(raw_path) or "trulia" in lid:
+            out["site"] = "trulia"
+            ds = sorted(set(re.findall(r'"lastDateModified":"(20\d\d-\d\d-\d\d)', txt)))
+            if ds:
+                out["modified"], out["modified_field"] = ds[-1], "Trulia lastDateModified"
+            m = re.search(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', txt, re.S)
+            if m:
+                hd = ((json.loads(m.group(1)).get("props") or {}).get("homeDetails")) or {}
+                out["description"] = clean((hd.get("description") or {}).get("value"))[:6000]
+                out["title"] = clean(((hd.get("community") or {}) if isinstance(hd.get("community"), dict) else {}).get("name") or (hd.get("location") or {}).get("streetAddress"))
+                fees = []
+                for grp in (((hd.get("rentalCostsAndFees") or {}).get("costAndFeeCalculator") or {}).get("fees") or {}).values():
+                    for x in grp if isinstance(grp, list) else []:
+                        f = x.get("fee") or {}
+                        a = f.get("amount") or {}
+                        fees.append(f"{f.get('displayValue') or ''}: {a.get('displayText') or a.get('formattedValue') or ''}".strip(": "))
+                out["extra_text"] = " | ".join(x for x in fees if x)[:1500]
+        elif "zumper" in str(raw_path) or lid.startswith("zumper"):
+            out["site"] = "zumper"
+            i = txt.find("window.__PRELOADED_STATE__ = ")
+            st = json.JSONDecoder().raw_decode(txt[i + len("window.__PRELOADED_STATE__ = "):])[0] if i >= 0 else {}
+            want = lid.split("-", 1)[1] if "-" in lid else ""
+            found = []
+
+            def walk(o, depth=0):
+                if depth > 12 or found:
+                    return
+                if isinstance(o, dict):
+                    if str(o.get("listing_id", "")) == want and ("description" in o or "modified_on" in o):
+                        found.append(o)
+                        return
+                    for v in o.values():
+                        walk(v, depth + 1)
+                elif isinstance(o, list):
+                    for v in o:
+                        walk(v, depth + 1)
+            walk(st)
+            if found:
+                L_ = found[0]
+                out["description"] = clean(L_.get("description"))[:6000]
+                out["title"] = clean(L_.get("title") or L_.get("building_name"))
+                mo = L_.get("modified_on")
+                if isinstance(mo, (int, float)) and mo > 0:
+                    from datetime import datetime, timezone
+                    out["modified"], out["modified_field"] = datetime.fromtimestamp(mo, timezone.utc).date().isoformat(), "Zumper modified_on"
+    except (ValueError, KeyError, TypeError, AttributeError):
+        pass
+    return out
+
+
+def listing_page_facts(MU) -> dict:
+    """read_listing_page for every row of the unit table, kept in data/reference/listing_page_facts.csv keyed on the raw
+    path, the file's size and the listing (a rerun reads only pages that changed). {listing_id: row}."""
+    sys.path.insert(0, str(Path(__file__).parent))
+    old = pd.read_csv(PAGE_FACTS_FILE, dtype=str, keep_default_na=False) if PAGE_FACTS_FILE.exists() else pd.DataFrame(columns=PAGE_FACT_COLS)
+    have = {(r["raw_path"], r["listing_id"]): r for r in old.to_dict("records")}
+    rows = []
+    for lid, rp in zip(MU.listing_id, MU.raw_path):
+        p = DATA.parent / str(rp)
+        size = str(p.stat().st_size) if str(rp).strip() and p.is_file() else ""
+        r = have.get((str(rp), str(lid)))
+        rows.append(r if r is not None and str(r.get("bytes", "")) == size else read_listing_page(rp, lid))
+    df = pd.DataFrame(rows, columns=PAGE_FACT_COLS).drop_duplicates(["raw_path", "listing_id"]).sort_values(["raw_path", "listing_id"])
+    df.to_csv(PAGE_FACTS_FILE, index=False)
+    return {r["listing_id"]: r for r in df.to_dict("records")}
+
+
 def main():
     U = pd.read_csv(DATA / "units.csv", dtype=str, keep_default_na=False, low_memory=False)
     U["zip5"] = U.zip5.map(lambda z: z.zfill(5) if re.fullmatch(r"\d{3,5}", z) else z)        # NJ / CT ZIPs keep their leading zero
