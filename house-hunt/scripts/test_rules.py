@@ -1276,7 +1276,17 @@ def page_3(J, M, R, S):
     for u in J["units"][:400]:
         ok("all_in_likely" in u and u["all_in_likely"] >= u["all_in"] and isinstance(u["unknown_cost_lines"], list) and "more_in_building" in u, f"step 6: {u['id']} carries all_in_likely, unknown_cost_lines, more_in_building")
         ok(all(u["moments"][k].get("rating") in ("strong", "mixed", "weak", None) for k in ("wake", "work", "after", "night", "sat", "sun")), f"step 6: {u['id']} moment ratings")
-    for k in ("wake", "work", "after", "night", "sat", "sun"):
+    # the night moment is an absolute rule (build_page_data.moment_ratings): strong only for a garage or gated space at the
+    # building with a doorman, concierge, front desk or controlled access; weak for street parking only or an overnight
+    # parking rule; mixed otherwise (unknown parking is mixed by the owner's rule). Its spread follows the inventory (trawl 2
+    # added garden complexes with open lots), so it is tested as the rule, not as a share
+    for u in J["units"]:
+        am, pk = u["amenities"], u["parking"]
+        sec = bool(am["doorman"] or am["concierge"] or am["front_desk"]) or str(am["controlled_access"] or "").strip().lower().startswith(("yes", "true"))
+        restricted = any(d["what"] == "overnight street parking" for d in u["disclosures"])
+        want = "weak" if (pk["kind"] == "street" or restricted) else ("strong" if pk["kind"] in ("garage", "gated_lot") and not pk["offsite"] and sec else "mixed")
+        ok(u["moments"]["night"].get("rating") == want, f"step 6: {u['id']} night is {u['moments']['night'].get('rating')!r}, the rule gives {want!r}")
+    for k in ("wake", "work", "after", "sat", "sun"):
         vc = pd.Series([u["moments"][k].get("rating") for u in J["units"]]).value_counts(normalize=True)
         ok(len(vc) == 0 or float(vc.max()) <= 0.62, f"step 6: no level of the '{k}' moment holds more than about 60% of the shown places (largest: {vc.index[0] if len(vc) else ''} {float(vc.max()) if len(vc) else 0:.0%})")
     ok(all((u["moments"]["sun"]["rating"] == "strong") == (u["moments"]["sun"]["drive_min"] <= 30) for u in J["units"] if u["moments"]["sun"]["drive_min"] is not None), "step 6: Sunday is strong at 30 minutes or less, an absolute threshold")
@@ -1533,7 +1543,12 @@ def page_ic4(J, M, R, S):
     # D9
     con = [u for u in J["units"] if u["amenities"]["doorman"] and not re.search(r"door ?m[ae]n|door ?person", str(M.at[u["id"], "doorman_all_sources"] if "doorman_all_sources" in M.columns else ""), re.I)]
     ok(not con, f"IC4 D9: {len(con)} shown apartments carry the amenity 'doorman' with no source that says doorman")
-    ok(sum(1 for u in J["units"] if u["amenities"]["concierge"]) > 50, "IC4 D9: concierge is an amenity of its own")
+    # (was "> 50" at the $3,000 list; at the $2,200 limit of 2026-11-17 and after trawl 2 fewer towers are shown: the
+    # rule is tested instead: concierge is set exactly where a source says concierge, apart from doorman)
+    said_con = lambda u: bool(re.search(r"concierge", str(M.at[u["id"], "doorman_all_sources"] if "doorman_all_sources" in M.columns and u["id"] in M.index else ""), re.I))
+    bad_con = [u["id"] for u in J["units"] if bool(u["amenities"]["concierge"]) != said_con(u)]
+    ok(not bad_con, f"IC4 D9: concierge is an amenity of its own, set exactly where a source says concierge ({len(bad_con)} apartments disagree, e.g. {bad_con[:3]})")
+    ok(any(u["amenities"]["concierge"] for u in J["units"]), "IC4 D9: at least one shown apartment has a concierge")
     # D10
     for h in J["neighborhoods"]:
         sf = h["safety"]
@@ -2036,9 +2051,12 @@ def page_ic5(J, M, R, S):
         ok(sf["buildings_with_garage"] <= sf["buildings_with_garage_or_covered"] <= sf["buildings"], f"N8: {h['id']} garage counts out of order")
     # (the check's own counts, 17 in Stamford and 1 in New Brunswick, took out only the buildings it had read; with every
     # building re-read Stamford has 14 and New Brunswick none: the count follows the corrected kinds, tested just above)
-    for name, n in [("Milford", 2)]:
-        for h in [h for h in J["neighborhoods"] if h["name"] == name]:
-            ok(h["shown_figures"]["buildings_with_garage"] == n, f"N8: {name} has a garage at {h['shown_figures']['buildings_with_garage']} buildings, the check counted {n}")
+    # N8 (Milford, check 5: 2 of 4): the two garage buildings of check 5 are no longer shown at the $2,200 limit, so the
+    # frozen count is replaced by its rule: a building whose space is a free lot with a garage as a paid extra (Merion
+    # Milford) is never counted as a garage building
+    for h in J["neighborhoods"]:
+        lots_extra = [i for i in h["building_ids"] if B[i]["parking"]["kind"] in ("open_lot", "off_street", "assigned_lot") and B[i]["parking"].get("garage_is_optional_extra")]
+        ok(h["shown_figures"]["buildings_with_garage"] <= len(h["building_ids"]) - len(lots_extra), f"N8: {h['id']} counts a free lot with a paid garage as a garage building")
     # the night moment follows the space that is there
     for u in J["units"]:
         if u["moments"]["night"]["rating"] == "strong":

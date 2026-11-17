@@ -1408,9 +1408,11 @@ def _parking_chip(f):
     if k == "street":
         return base
     if f["parking_included"]:
-        return f"{base}, included in the rent"
+        t = f"{base}, included in the rent"
+        return t if words(t) <= CHIP_MAX_WORDS else "Parking included in the rent"
     if f["parking_fee"]:
-        return f"{base}, ${half_up(f['parking_fee'])} a month"
+        t = f"{base}, ${half_up(f['parking_fee'])} a month"
+        return t if words(t) <= CHIP_MAX_WORDS else f"Parking, ${half_up(f['parking_fee'])} a month"
     return base
 
 

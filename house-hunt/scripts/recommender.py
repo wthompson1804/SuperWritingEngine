@@ -71,7 +71,8 @@ ROOM_LOG_SHARE, ROOM_BEDROOM_STEP = 0.7, 0.3
 GOING_PTS = [(0, 0.0), (20, 0.6), (60, 1.0)]                                    # restaurants + bars within 800 m
 GREEN_PTS = [(0, 1.0), (5, 1.0), (12, 0.5), (20, 0.15), (30, 0.05)]             # walk minutes to nearest park
 GREEN_DOG_AREA = 0.1                                                            # added, capped at 1
-PARKING_VALUE = {"garage": 1.0, "covered": 1.0, "carport": 1.0, "lot": 0.7, "off_street": 0.7, "driveway": 0.7,
+PARKING_VALUE = {"garage": 1.0, "covered": 1.0, "carport": 1.0, "lot": 0.7, "off_street": 0.7, "driveway": 0.7, "assigned": 0.7,
+                 "unspecified": 0.5,                       # parking offered, kind not stated
                  "surface": 0.7, "street": 0.2}
 PARKING_UNKNOWN = 0.4
 SURE_TODAY, SURE_EARLIER, SURE_STAR = 1.0, 0.6, 0.8
@@ -81,7 +82,7 @@ LABEL = {"family": "being near Mom and Dad", "money": "money left over", "room":
 TAG_HIGH = {"family": "near family", "money": "good value", "room": "more room", "going_out": "lively",
             "green": "green", "parking": "easy parking"}
 TAG_LOW = {"going_out": "quiet"}
-PARKING_WORDS = {1.0: "garage or covered parking", 0.7: "off-street parking", 0.4: "parking not stated",
+PARKING_WORDS = {1.0: "garage or covered parking", 0.7: "off-street parking", 0.5: "parking offered, kind not stated", 0.4: "parking not stated",
                  0.2: "street parking"}
 
 
