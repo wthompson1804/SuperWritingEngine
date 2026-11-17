@@ -435,3 +435,7 @@ kept, so possibly a false match, but treated as a refusal). visithudson.org `?p=
 Refused and closed for the session (by life_here_ctny): www.newhavenct.gov, ctvisit.com, www.playwrightirishpub.com,
 www.scratchbaking.com, www.grownyc.org, islipny.gov. A mirror of NYC Parks (php1-84.nycgovparks.org) was deliberately
 not used (NYC Parks refused us earlier).
+
+### Contacts trawl 2 (2026-11-17)
+Refused (403) and closed for the session: www.townwalkhamden.com, www.crestprinceton.com, www.addisonprinceton.com,
+www.quailridgenj.com.

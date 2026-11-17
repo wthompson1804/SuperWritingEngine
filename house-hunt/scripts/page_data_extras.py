@@ -724,6 +724,9 @@ def contacts(c):
     no contact; while building_contacts.csv is unreadable, contacts already on the page are left alone."""
     C, why_c = c.csv(c.P.contacts, need=("building_id",))
     O, why_o = c.csv(c.P.contacts_own, need=("building_id",))
+    # trawl 2 (2026-11-17): contacts for buildings new to the page; no id overlaps building_contacts.csv
+    T = c.csv(c.P.contacts.with_name("building_contacts_trawl2.csv"), need=("building_id",))[0]
+    C = T if C is None else C + (T or [])
     if C is None and O is None:
         return why_c
     by_c = {r["building_id"]: r for r in C or [] if r["building_id"]}
