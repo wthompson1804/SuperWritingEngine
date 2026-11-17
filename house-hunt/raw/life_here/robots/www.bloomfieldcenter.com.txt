@@ -1,0 +1,6 @@
+User-Agent: *
+Disallow: /pub/event/tag/
+Disallow: /pub/news/tag/
+Disallow: /images/
+
+Sitemap: https://www.bloomfieldcenter.com/sitemap.xml

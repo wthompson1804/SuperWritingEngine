@@ -53,7 +53,7 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;line-height:1.
 /* top line */
 .top{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px}
 .brand{font-family:var(--script);font-size:25px;line-height:1;color:var(--berry);white-space:nowrap}
-.quiet{background:none;border:0;padding:10px 0;min-height:44px;font-weight:800;font-size:15px;text-decoration:underline;text-decoration-color:var(--berry);text-decoration-thickness:2px;text-underline-offset:4px;display:inline-flex;align-items:center;gap:6px}
+.quiet{background:none;border:0;padding:10px 0;min-height:44px;min-width:44px;justify-content:center;font-weight:800;font-size:15px;text-decoration:underline;text-decoration-color:var(--berry);text-decoration-thickness:2px;text-underline-offset:4px;display:inline-flex;align-items:center;gap:6px}
 .quiet.center{justify-content:center;width:100%}
 .topbtns{display:flex;gap:16px;align-items:center}
 
@@ -67,6 +67,7 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;line-height:1.
 .stack>*{min-width:0}
 .kicker{font-family:var(--script);font-size:30px;line-height:1;color:var(--berry)}
 .h-big{font-weight:800;font-stretch:82%;font-size:clamp(30px,8.6vw,40px)}
+.h-mid{font-weight:800;font-stretch:82%;font-size:clamp(28px,7.6vw,34px)}
 .lead{font-size:20px;line-height:1.4}
 .muted{color:var(--muted)}
 .small{font-size:15px}
@@ -105,29 +106,33 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;line-height:1.
 
 /* matches */
 .mlist{list-style:none;padding:0;display:grid;gap:16px}
-.mcard{background:var(--card);border:2px solid var(--line);border-radius:24px;padding:16px;display:grid;gap:10px;min-width:0}
+.mcard{background:var(--card);border:2px solid var(--line);border-radius:22px;padding:14px 16px;display:grid;gap:8px;min-width:0}
 .mcard.best{border-color:var(--ink)}
 .mtop{display:flex;justify-content:space-between;align-items:center;gap:8px}
-.badge{display:flex;align-items:center;gap:7px;font-weight:800;font-size:14px;line-height:1.2;min-width:0}
+.badge{display:flex;align-items:center;gap:7px;font-weight:800;font-size:13px;line-height:1.2;min-width:0}
+.badge .mark{width:22px;height:22px}.badge .mark svg{width:15px;height:15px}
 .bestflag{flex:0 0 auto;background:var(--butter);color:var(--on-butter);font-weight:800;font-size:13px;border-radius:999px;padding:3px 10px;white-space:nowrap}
-.xline{font-size:14px;line-height:1.3;color:var(--muted);font-weight:600;margin-top:-6px}
-.mcard h2{font-weight:800;font-stretch:84%;font-size:26px}
+.xline{font-size:13px;line-height:1.3;color:var(--muted);font-weight:600;margin-top:-4px}
+.mcard h2{font-weight:800;font-stretch:84%;font-size:25px}
 .mname{background:none;border:0;padding:0;text-align:left;font:inherit;color:inherit;min-height:44px;display:flex;align-items:center}
-.hood{font-size:15px;font-weight:700;color:var(--muted);margin-top:-8px}
+.hood{font-size:15px;font-weight:700;color:var(--muted);margin-top:-10px}
 .lab{font-size:13px;letter-spacing:.06em;text-transform:uppercase;font-weight:800;color:var(--muted)}
 .chips{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:6px}
-.chips li{background:var(--ok-bg);color:var(--ok-ink);font-weight:700;font-size:15px;line-height:1.25;border-radius:12px;padding:5px 10px}
-.missc{justify-self:start;background:var(--mid-bg);color:var(--mid-ink);font-weight:700;font-size:15px;line-height:1.25;border-radius:12px;padding:5px 10px}
+.chips li{background:var(--ok-bg);color:var(--ok-ink);font-weight:700;font-size:14px;line-height:1.25;border-radius:10px;padding:4px 9px}
+.missc{justify-self:start;background:var(--mid-bg);color:var(--mid-ink);font-weight:700;font-size:14px;line-height:1.25;border-radius:10px;padding:4px 9px}
 .mact{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
 .heart{min-height:48px;min-width:48px;border:2px solid var(--berry-deep);border-radius:999px;background:var(--card);color:var(--berry-deep);font-weight:800;font-size:16px;padding:6px 16px;display:inline-flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap}
 .heart .h{font-size:20px;line-height:1}
 .heart[aria-pressed="true"]{background:var(--berry-deep);color:var(--on-berry)}
 .misfit{border-bottom:2px solid var(--line)}
+.pline{font-size:14px;font-weight:600;color:var(--muted);line-height:1.35}
+.pline b{color:var(--ink);font-variant-numeric:tabular-nums}
 .frow-x{display:grid;gap:4px;background:var(--card);border:2px solid var(--line);border-radius:16px;padding:12px 14px}
 .frow-x .why{font-size:15px;font-weight:700;color:var(--low-ink);display:grid}
 .frow-x .why span{font-weight:600;color:var(--muted);font-size:14px}
 .frow-x .r1{display:flex;justify-content:space-between;gap:10px;align-items:center}
-.frow-x b{font-family:var(--display);font-size:18px;line-height:1.15}
+.frow-x .r1 .quiet{flex:0 0 auto;white-space:nowrap;padding-inline:4px}
+.frow-x .r1 b{font-family:var(--display);font-size:18px;line-height:1.15}
 .none-box{background:var(--low-bg);color:var(--low-ink);border-radius:18px;padding:14px 16px;font-weight:700}
 
 /* a place */
@@ -150,8 +155,8 @@ details.src summary::-webkit-details-marker{display:none}
 details.src summary::after{content:"+";font-size:18px;line-height:1}
 details.src[open] summary::after{content:"\2212"}
 details.src ul{list-style:none;padding:0;display:grid;gap:0;margin-top:-4px}
-details.src .link{font-size:15px}
-.chk{font-size:15px;font-weight:700;line-height:1.3}
+details.src .link{font-size:15px;display:block;padding:10px 0;min-height:44px;line-height:1.35}
+.chk{font-size:14px;font-weight:700;line-height:1.3}
 .chk.ok{color:var(--ok-ink)}
 .chk.old{color:var(--muted)}
 .facts{list-style:none;padding:0;border-top:2px solid var(--line)}
@@ -192,7 +197,7 @@ details.more .in{padding:2px 0 16px;display:grid;gap:12px;font-size:17px}
 .apts li{border:2px solid var(--line);border-radius:16px;padding:12px 14px;display:grid;gap:6px}
 .apts .a-h{font-weight:800}
 .apts .a-s{font-size:15px;color:var(--muted);font-weight:600}
-.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pair{display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);gap:10px}
 .pair div{display:grid;gap:1px;align-content:start}
 .pair span{font-size:13px;font-weight:800;color:var(--muted);line-height:1.2}
 .pair b{font-family:var(--display);font-size:20px;font-variant-numeric:tabular-nums}
@@ -225,7 +230,6 @@ details.more .in{padding:2px 0 16px;display:grid;gap:12px;font-size:17px}
 .cells>div{font-size:14px;font-weight:700;line-height:1.3;min-width:0}
 .cells .big{font-family:var(--display);font-size:18px;font-weight:800;font-variant-numeric:tabular-nums;display:block;line-height:1.15}
 .cells .best{color:var(--ok-ink)}
-.cells .best::before{content:"\2713\00a0";font-weight:800}
 .cells .mk{display:inline-flex;vertical-align:middle;margin-right:4px}
 .cells .mk .mark{width:20px;height:20px}
 .cells .mk .mark svg{width:14px;height:14px}
@@ -616,6 +620,10 @@ function pairHtml(b) {
     '<div><span>Total with utilities and fees</span><b>' + (fromMoney(f.total_from, f.total_to) || "Not known") + '</b></div></div>';
 }
 
+function pairLine(b) {
+  var f = b.facts || {};
+  return '<p class="pline">Rent <b' + (isNum(f.rent_from) ? ' data-rent="' + f.rent_from + '"' : '') + '>' + (fromMoney(f.rent_from, f.rent_to) || "not known") + '</b> &middot; Total with utilities and fees <b>' + (fromMoney(f.total_from, f.total_to) || "not known") + '</b></p>';
+}
 /* where a figure sits among every building on this page */
 var RANGE = {};
 ["rent_from", "total_from", "drive_min"].forEach(function (k) { RANGE[k] = B.map(function (b) { return b.facts && b.facts[k]; }).filter(isNum).sort(function (a, b) { return a - b; }); });
@@ -701,7 +709,7 @@ function question() {
   var q = QS[S.qi], n = QS.length, picked = S.qa[q.id], two = q.kind === "pick_two";
   var count = M.countFits(B, QS, S.qa, CFG);
   var head = '<div class="qhead"><p class="qtop"><span>Question ' + (S.qi + 1) + ' of ' + n + '</span>' + (q.must_have ? '<span class="must">Must-have</span>' : '<span class="muted">' + (two ? 'Pick up to two' : 'Tap one') + '</span>') + '</p>' +
-    '<div class="prog" role="progressbar" aria-label="Questions" aria-valuemin="0" aria-valuemax="' + n + '" aria-valuenow="' + S.qi + '"><i style="width:' + Math.round(S.qi / n * 100) + '%"></i></div></div>';
+    '<div class="prog" role="progressbar" aria-label="Questions" aria-valuemin="0" aria-valuemax="' + n + '" aria-valuenow="' + S.qi + '"><i style="width:' + Math.round((S.qi + 1) / n * 100) + '%"></i></div></div>';
   var body;
   if (two) {
     var sel = Array.isArray(picked) ? picked : [];
@@ -751,16 +759,16 @@ function matches() {
   var links = '<div class="links">' + (QS.length ? '<button type="button" class="quiet" data-act="redo">Change my answers</button>' : '') +
     (nt ? '<button type="button" class="quiet" data-act="plan">My tour plan &middot; ' + nt + '</button>' : '') + '</div>';
   var head = nf
-    ? '<section class="stack" style="gap:6px"><p class="kicker">Your matches</p><h1 class="h-big" tabindex="-1">' + (nf === 1 ? 'One place fits' : cap(WORDS[nf] && nf <= 10 ? WORDS[nf] : String(nf)) + ' places fit') + ' what you said</h1>' +
-      '<p>Best fits first. Tap <span aria-hidden="true">&#9825;</span> Save on the ones you like.</p>' + links + '</section>'
+    ? '<section class="stack" style="gap:6px"><p class="kicker">Your matches</p><h1 class="h-mid" tabindex="-1">' + (nf === 1 ? 'One place fits' : cap(WORDS[nf] && nf <= 10 ? WORDS[nf] : String(nf)) + ' places fit') + ' what you said</h1>' +
+      '<p class="small">Best fits first. Tap <span aria-hidden="true">&#9825;</span> Save on the ones you like.</p>' + links + '</section>'
     : '<section class="stack" style="gap:8px"><p class="kicker">Your matches</p><h1 class="h-big" tabindex="-1">Nothing fits all of that</h1>' +
-      '<p class="none-box">Your must-haves rule out every place. Change an answer, or look at the closest ones below.</p>' + links + '</section>';
+      '<p class="none-box">Your must-haves rule out every place. Change an answer, or look at every place below, best first.</p>' + links + '</section>';
   var list = nf ? '<ol class="mlist" id="mlist">' + R.fits.map(mcard).join("") + '</ol>' : '';
   var fails = R.fails.length ? '<details class="more misfit" id="misfit"' + (nf ? '' : ' open') + '><summary>Doesn&#39;t fit what you said (' + R.fails.length + ')</summary><div class="in">' +
     R.fails.map(function (r) {
       var b = r.b;
       return '<div class="frow-x" data-building="' + esc(b.id) + '"><div class="r1"><b>' + esc(b.name || b.address) + '</b><button type="button" class="quiet" data-act="open" data-id="' + esc(b.id) + '">See it</button></div>' +
-        '<p class="small muted">' + esc(hoodName(b)) + '</p>' + M.reasons(b, r.failed).map(function (t) { return '<p class="why">' + esc(t.text) + (t.said ? '<span>You said: ' + esc(t.said) + '</span>' : '') + '</p>'; }).join("") + pairHtml(b) + '</div>';
+        '<p class="small muted" style="margin-top:-8px">' + esc(hoodName(b)) + '</p>' + M.reasons(b, r.failed).map(function (t) { return '<p class="why">' + esc(t.text) + (t.said ? '<span>You said: ' + esc(t.said) + '</span>' : '') + '</p>'; }).join("") + pairLine(b) + '</div>';
     }).join("") + '</div></details>' : '';
   return top() + head + list + fails +
     '<div class="stack" style="gap:0">' + resetBlock() + '</div>';
@@ -865,7 +873,7 @@ function myList() {
         '<button type="button" class="quiet" data-act="unsave" data-id="' + esc(b.id) + '">Remove</button></div>' +
         '<button type="button" class="quiet" data-act="open" data-id="' + esc(b.id) + '">See this place</button></li>';
     }).join("") + '</ul><p class="tickmsg" id="tickmsg" role="status"></p>' +
-    (S.tour.length ? '<button type="button" class="btn" data-act="plan">See my tour plan (' + S.tour.length + ')</button>' : '') + void nt;
+    (S.tour.length ? '<button type="button" class="btn" data-act="plan">See my tour plan (' + S.tour.length + ')</button>' : '');
 }
 
 /* ---------- compare ---------- */
@@ -875,7 +883,7 @@ function biggest(b, beds) { var xs = (b.apartments || []).filter(function (a) { 
 function roomOf(b) {
   var ap = b.apartments || [], one = ap.some(function (a) { return a.beds === 1; }), st = ap.some(function (a) { return a.beds === 0; });
   var sq = biggest(b, one ? 1 : st ? 0 : null);
-  return { text: (one ? "1 bedroom" : st ? "Studio" : "Not known") + (isNum(sq) ? ", " + Math.round(sq) + " sq ft" : ""), v: (one ? 10000 : 0) + (sq || 0) };
+  return { text: (one ? "1 bedroom" : st ? "Studio" : "Not known") + (isNum(sq) ? ", " + Math.round(sq) + " sq ft" : ""), v: isNum(sq) ? (one ? 10000 : 0) + sq : one ? 10000 : null };
 }
 function parkShort(b) {
   var p = (b.facts || {}).parking || {};
@@ -915,7 +923,7 @@ function compareRows(L) {
   add("Checked", val(function (b) { var c = bldChecked(b); return c ? { html: c.today ? "Confirmed today" : "Last seen " + (shortDate(c.date) || "earlier"), text: c.text, v: c.today ? 1 : 0 } : { html: "Not known", text: "?", v: null }; }), "high");
   add("Experience", val(function (b) { var e = EBY[b.experience_id]; return { html: '<span class="mk">' + markSvg(b.experience_id) + '</span>' + esc(expShort(e)), text: b.experience_id, v: null }; }), null);
   add("Life here", val(function (b) {
-    var L2 = b.life_here || [], m = L2.filter(function (x) { return x.moment === "saturday"; })[0] || L2[0];
+    var L2 = b.life_here || [], m = L2.filter(function (x) { return x.moment === "weekday"; })[0] || L2[0];
     var t = m ? firstSentence(m.text) : (expLine(b) || "");
     return { html: m ? boldPlaces(t, m.places) : esc(t), text: t, v: null };
   }), null);
@@ -940,7 +948,9 @@ function compare(ids) {
   var rows = compareRows(L), diff = rows.filter(function (r) { return !r.same; }), same = rows.filter(function (r) { return r.same; });
   function rowHtml(r) {
     return '<div class="crow"><p class="cl">' + esc(r.label) + '</p><div class="cells">' + r.cells.map(function (c, i) {
-      return '<div class="' + (r.best.indexOf(i) >= 0 ? "best" : "") + '"><span class="sr">' + esc(L[i].name || "") + ': </span>' + c.html + (r.best.indexOf(i) >= 0 ? '<span class="sr"> (better)</span>' : '') + '</div>';
+      var good = r.best.indexOf(i) >= 0, h = c.html, tick = '<span aria-hidden="true">&#10003;&nbsp;</span>';
+      if (good) h = /^<span class="big"[^>]*>/.test(h) ? h.replace(/^(<span class="big"[^>]*>)/, "$1" + tick) : tick + h;
+      return '<div class="' + (good ? "best" : "") + '"><span class="sr">' + esc(L[i].name || "") + ': </span>' + h + (good ? '<span class="sr"> (better)</span>' : '') + '</div>';
     }).join("") + '</div></div>';
   }
   return sheetTop() + '<section class="stack" style="gap:6px"><h1 class="h-big" tabindex="-1" id="sheet-h">Side by side</h1><p class="small muted"><span aria-hidden="true">&#10003;</span> marks the better one in each row.</p></section>' +
@@ -1129,6 +1139,7 @@ function render(opts) {
   var key = v ? v.t + ":" + (v.id || (v.ids || []).join(",") || (v.ei + ":" + v.ci)) : VIEW.all ? "all" : S.step + ":" + S.qi;
   if (!opts.stay && key !== lastFocusKey) {
     lastFocusKey = key;
+    var ot = document.getElementById("toast"); if (ot && !opts.keepToast) ot.remove();
     var h = (inner ? layer : app).querySelector("h1[tabindex],h2[tabindex]");
     if (sh) sh.scrollTop = 0; else window.scrollTo(0, 0);
     if (h && opts.focus !== false) h.focus({ preventScroll: true });

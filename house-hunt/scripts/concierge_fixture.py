@@ -255,7 +255,7 @@ QUESTIONS = [
                  a("sat_home", "Staying in, friends over", "A comfortable place to host", None, {"home": 10})]},
     {"id": "dog", "kind": "single", "must_have": False, "text": "The dog's daily walk?",
      "help": None,
-     "answers": [a("dog_park", "A park we can walk to", "Green space a few minutes away", None, {"green": 20}),
+     "answers": [a("dog_park", "A park to walk to", "Green space a few minutes away", None, {"green": 20}),
                  a("dog_building", "A dog area in the building", "A run or dog park on site", None, {"green": 5}),
                  a("dog_either", "Either is fine", None, None, {})]},
     {"id": "car", "kind": "single", "must_have": False, "text": "Where does the car sleep?",
