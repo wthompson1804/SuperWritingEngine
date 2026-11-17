@@ -250,3 +250,9 @@ Decisions by Will that changed or replaced an earlier one. Dates are UTC days of
   nearest larger neighborhood in the same experience. The experiences stay the front door ("what kind of life do I
   want next year?"); the page recommends five buildings to tour and she keeps or swaps. Design and data contract:
   `docs/CONCIERGE_DESIGN.md`.
+
+- **The short version, version 2 (Will, 2026-11-17):** questions first, asked about her life (visits, longest drive,
+  room to work, Saturday night, the dog's walk, the car, a comfortable monthly total, the two that matter most), then
+  straight to the places that fit; each place names its experience and says what life there is like, with sourced
+  local detail; saved places and Compare sit in a bar on every screen. The stories stay reachable but no longer stand
+  in front of the matches. Spec: "Version 2" in `docs/CONCIERGE_DESIGN.md`.
