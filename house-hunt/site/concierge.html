@@ -89,8 +89,8 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;line-height:1.
 .dots i.now{background:none;border:2px solid var(--berry)}
 .qnav{display:flex;justify-content:space-between;gap:12px}
 .duel{display:grid;gap:0;align-items:stretch}
-.pick{display:grid;gap:6px;width:100%;text-align:left;background:var(--card);border:2px solid var(--ink);border-radius:22px;padding:12px 14px 12px;color:var(--ink);font:inherit;line-height:1.3;box-shadow:0 3px 0 var(--ink)}
-.pick:active{transform:translateY(2px);box-shadow:0 1px 0 var(--ink)}
+.pick{display:grid;gap:6px;width:100%;text-align:left;background:var(--card);border:2px solid var(--ink);border-radius:22px;padding:12px 14px 12px;color:var(--ink);font:inherit;line-height:1.3;box-shadow:0 3px 0 var(--berry-deep)}
+.pick:active{transform:translateY(2px);box-shadow:0 1px 0 var(--berry-deep)}
 .pick .p-top{display:flex;justify-content:space-between;align-items:start;gap:10px}
 .pick .p-name{display:block;font-family:var(--display);font-weight:800;font-stretch:84%;font-size:21px;line-height:1.08;text-wrap:balance}
 .pick .p-place{display:block;font-size:14px;font-weight:700;color:var(--muted);margin-top:2px}
@@ -98,7 +98,8 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;line-height:1.
 .pick .pair{gap:8px}
 .pick .pair>span{display:grid;gap:0;align-content:start}
 .pick .pair span>span{display:block;font-size:12px;line-height:1.2}
-.pick .pair b{font-size:19px;line-height:1.15}
+.pick .pair{grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)}
+.pick .pair b{font-size:19px;line-height:1.15;color:var(--ink)}
 .pf{display:grid;gap:3px}
 .pf>span{display:grid;grid-template-columns:20px 1fr;gap:8px;align-items:center;font-size:15px;font-weight:600;line-height:1.2}
 .pf svg{width:20px;height:20px;color:var(--berry-deep)}
@@ -132,15 +133,18 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;line-height:1.
 .heart .h{font-size:20px;line-height:1}
 .heart[aria-pressed="true"]{background:var(--berry-deep);color:var(--on-berry)}
 .brow{display:flex;justify-content:space-between;align-items:center;gap:10px;border-top:2px solid var(--line);margin-top:2px;padding-top:2px}
-.brow .quiet{font-size:15px}
-.brow .quiet .tw{display:inline-block;transition:transform .15s}
+.brow .quiet{font-size:15px;text-decoration:none}
+.brow .quiet .lb{text-decoration:underline;text-decoration-color:var(--berry);text-decoration-thickness:2px;text-underline-offset:4px}
+.brow .quiet.dim .lb{text-decoration-color:var(--line)}
+.brow .quiet .tw{display:inline-block;transition:transform .15s;color:var(--berry-deep)}
 .brow .quiet[aria-expanded="true"] .tw{transform:rotate(90deg)}
 .brow .quiet.dim{color:var(--muted);text-decoration-color:var(--line)}
-.thumbs{list-style:none;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-.thumb{display:grid;gap:2px;align-content:start;width:100%;height:100%;text-align:left;background:var(--paper);border:2px solid var(--line);border-radius:14px;padding:8px 9px;min-height:44px;font:inherit;color:var(--ink)}
-.thumb b{font-family:var(--display);font-size:15px;line-height:1.12;font-weight:800;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.thumb span{font-size:12.5px;font-weight:700;line-height:1.25;color:var(--muted)}
-.thumb span.m{color:var(--ink);font-variant-numeric:tabular-nums}
+.thumbs{list-style:none;padding:0;display:grid;gap:6px}
+.thumb{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1px 10px;align-items:baseline;width:100%;text-align:left;background:var(--paper);border:2px solid var(--line);border-radius:14px;padding:7px 12px;min-height:44px;font:inherit;color:var(--ink)}
+.thumb b{font-family:var(--display);font-size:16px;line-height:1.15;font-weight:800;min-width:0}
+.thumb .f{font-size:13px;font-weight:700;color:var(--muted);text-align:right;white-space:nowrap}
+.thumb .m{grid-column:1/-1;font-size:13.5px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
+.thumb .m b{font-family:var(--body);font-size:13.5px;color:var(--ink)}
 .whatif{background:var(--card);border:2px dashed var(--berry);border-radius:18px;padding:12px 14px;display:grid;gap:2px}
 .whatif p{font-weight:700;font-size:16px;line-height:1.35}
 .whatif .quiet{justify-self:start}
@@ -336,6 +340,8 @@ details.more .in{padding:2px 0 16px;display:grid;gap:12px;font-size:17px}
    CPython 3.12+, plain += where Python uses +=, and every compared value is rounded to round_decimals (q) first;
    ties go to the smaller id. Python's round() to a whole number rounds halves to even (pyRound).
 
+   The selection rule follows meta.recommender.algorithm: group score (one building: mean with the set's median),
+   eligibility (relevance_floor, relevance_top_share), then MMR among the eligible only (fill by score otherwise).
    model(data)                          the model's numbers; null when the data has no recommender fields
    posterior(M, answers)                pi over samples after her answers [{a, b, choice: "a"|"b"|"either"}]
    nextPair(M, answers, opts)           [a id, b id] (a < b by id), or null when the stop rule says stop.
@@ -429,21 +435,37 @@ var ConciergeRec = (function () {
     return M.groups.map(function (g) { return { id: g.id, name: g.name, i: M.gidx[g.id], building_ids: g.building_ids.filter(function (id) { return !removed[id] && M.byId[id]; }) }; })
       .filter(function (g) { return g.building_ids.length; });
   }
+  /* two or more buildings: the mean of the two best; one building: the mean of it and the median building score of
+     the whole set (so one strong building is not treated as a deep neighborhood) */
   function groupScores(M, w, G) {
-    var out = {};
+    var sc = {}, all = [], out = {};
+    G.forEach(function (g) { g.building_ids.forEach(function (id) { sc[id] = q(M, score(M, id, w)); all.push(sc[id]); }); });
+    var med = median(all);
     G.forEach(function (g) {
-      var s = g.building_ids.map(function (id) { return q(M, score(M, id, w)); }).sort(function (a, b) { return b - a; }).slice(0, 2);
-      out[g.id] = nsum(s) / s.length;
+      var s = g.building_ids.map(function (id) { return sc[id]; }).sort(function (a, b) { return b - a; }).slice(0, 2);
+      out[g.id] = s.length === 2 ? (s[0] + s[1]) / 2 : (s[0] + med) / 2;
     });
     return out;
+  }
+  /* the groups good enough to recommend: the best, and those ranked in the top relevance_top_share (ceil) with
+     score >= relevance_floor x the best's; in score order */
+  function eligible(M, gs, G) {
+    var order = G.map(function (g) { return g.id; }).sort(function (a, b) { var x = q(M, gs[a]), y = q(M, gs[b]); return x !== y ? y - x : cmpId(a, b); });
+    var share = M.cfg.relevance_top_share, fl = M.cfg.relevance_floor;
+    if (share === undefined || fl === undefined) return { ok: order.slice(), order: order };
+    var cut = Math.ceil(order.length * share), floor = q(M, fl * gs[order[0]]);
+    return { ok: order.filter(function (g, i) { return i === 0 || (i < cut && q(M, gs[g]) >= floor); }), order: order };
   }
   function mmr(M, gs, G) {
     var lam = M.cfg.mmr_lambda, lo = Infinity, hi = -Infinity, picked = [];
     G.forEach(function (g) { lo = Math.min(lo, gs[g.id]); hi = Math.max(hi, gs[g.id]); });
     var norm = {}; G.forEach(function (g) { norm[g.id] = hi - lo > 1e-12 ? (gs[g.id] - lo) / (hi - lo) : 0; });
-    while (picked.length < Math.min(3, G.length)) {
+    var E = eligible(M, gs, G), k = Math.min(3, G.length);
+    if (E.ok.length < k) return E.ok.concat(E.order.filter(function (g) { return E.ok.indexOf(g) < 0; }).slice(0, k - E.ok.length));
+    var okSet = setOf(E.ok), pool = G.filter(function (g) { return okSet[g.id]; }).sort(function (a, b) { return cmpId(a.id, b.id); });
+    while (picked.length < k) {
       var best = null;
-      G.forEach(function (g) {
+      pool.forEach(function (g) {
         if (picked.some(function (p) { return p.id === g.id; })) return;
         var red = 0, any = false;
         picked.forEach(function (p) { var v = M.sim[g.i][p.i]; if (!any || v > red) { red = v; any = true; } });
@@ -789,6 +811,16 @@ function factText(b, k) {
   if (k === "money") return isNum(x.total) ? "Total " + money(x.total) + " a month" : "Total not known";
   return "";
 }
+/* the same, short enough for a thumbnail */
+function shortFact(b, k) {
+  var x = raw(b);
+  if (k === "family") return isNum(x.drive) ? Math.round(x.drive) + " min drive" : "";
+  if (k === "room") return (x.bedroom ? "1 bedroom" : x.studio ? "Studio" : "") + (isNum(x.sqft) ? (x.bedroom || x.studio ? ", " : "") + Math.round(x.sqft) + " sq ft" : "");
+  if (k === "going_out") return isNum(x.rest) ? x.rest + (x.rest === 1 ? " restaurant" : " restaurants") + " near" : "";
+  if (k === "green") return isNum(x.park) ? "Park " + Math.max(1, Math.round(x.park)) + " min walk" : "";
+  if (k === "parking") return PK[x.pk] ? PK[x.pk].replace(" parking", "").replace("A parking lot", "Parking lot") : "";
+  return "";
+}
 /* which of two is better on a fact (for the tick on "this or that"): 1 = a, -1 = b, 0 = same or unknown */
 function better(a, b, k) {
   var x = raw(a), y = raw(b);
@@ -873,12 +905,12 @@ function bcard(id, i, more) {
     (ks.length ? '<ul class="chips">' + ks.map(function (k) { return '<li>' + esc(factText(b, k)) + '</li>'; }).join("") + '</ul>' : '') +
     chkLine(bldChecked(b)) +
     '<div class="mact"><button type="button" class="btn sm" data-act="open" data-id="' + esc(id) + '">See this place</button>' + heart(b) + '</div>' +
-    '<div class="brow">' + (ml.length ? '<button type="button" class="quiet" data-act="more" data-id="' + esc(id) + '" aria-expanded="' + open + '" aria-controls="ml-' + esc(id) + '"><span class="tw" aria-hidden="true">&#8250;</span> More like this</button>' : '<span></span>') +
-    '<button type="button" class="quiet dim" data-act="remove" data-id="' + esc(id) + '" aria-label="Not for me: ' + esc(b.name || "this place") + '">Not for me</button></div>' +
+    '<div class="brow">' + (ml.length ? '<button type="button" class="quiet" data-act="more" data-id="' + esc(id) + '" aria-expanded="' + open + '" aria-controls="ml-' + esc(id) + '"><span class="tw" aria-hidden="true">&#8250;</span> <span class="lb">More like this</span></button>' : '<span></span>') +
+    '<button type="button" class="quiet dim" data-act="remove" data-id="' + esc(id) + '" aria-label="Not for me: ' + esc(nm(b)) + '"><span class="lb">Not for me</span></button></div>' +
     (ml.length ? '<ul class="thumbs" id="ml-' + esc(id) + '"' + (open ? '' : ' hidden') + ' aria-label="More like ' + esc(b.name || "this") + '">' + ml.map(function (sid) {
       var s = BY[sid], f = s.facts || {};
-      return '<li><button type="button" class="thumb" data-act="open" data-id="' + esc(sid) + '" data-thumb-of="' + esc(id) + '"><b>' + esc(nm(s)) + '</b>' +
-        '<span class="m">Rent <span' + (isNum(f.rent_from) ? ' data-rent="' + f.rent_from + '"' : '') + '>' + (money(f.rent_from) || "not known") + '</span></span><span class="m">Total ' + (money(f.total_from) || "not known") + '</span><span>' + esc(factText(s, ks[0] || "family")) + '</span></button></li>';
+      return '<li><button type="button" class="thumb" data-act="open" data-id="' + esc(sid) + '" data-thumb-of="' + esc(id) + '"><b>' + esc(nm(s)) + '</b><span class="f">' + esc(shortFact(s, ks[0] || "family")) + '</span>' +
+        '<span class="m">Rent <b' + (isNum(f.rent_from) ? ' data-rent="' + f.rent_from + '"' : '') + '>' + (money(f.rent_from) || "not known") + '</b> &middot; Total with utilities and fees <b>' + (money(f.total_from) || "not known") + '</b></span></button></li>';
     }).join("") + '</ul>' : '') + '</li>';
 }
 /* the model's sentences, with one plural mended for display ("1 places" from the reference) */
@@ -887,8 +919,8 @@ function results() {
   var c = rec(), r = c.r;
   if (!r.top.length) return top() + '<section class="stack"><p class="kicker">Hmm</p><h1 class="h-big" tabindex="-1">Every place is set aside</h1><p class="none-box">You marked every place "Not for me". Bring them back to see a suggestion.</p><button type="button" class="btn main" data-act="unremove">Bring them back</button></section>';
   var n = S.answers.length;
-  var html = top() + '<section class="stack" style="gap:6px"><p class="kicker">Here is where I would look</p><h1 class="h-big" tabindex="-1">Your three places to look</h1>' +
-    '<p class="small">From your ' + (WORDS[n] || n) + ' ' + (n === 1 ? 'choice' : 'choices') + ', with the best three buildings in each.</p></section>';
+  var html = top() + '<section class="stack" style="gap:4px"><p class="kicker">From your ' + (WORDS[n] || n) + ' ' + (n === 1 ? 'choice' : 'choices') + '</p><h1 class="h-big" tabindex="-1">Your three places to look</h1>' +
+    '<p class="small">Each with its best buildings.</p></section>';
   if (S.nudge) html += '<div class="nudged" id="nudged"><p>Showing what happens if ' + esc(R.label[S.nudge.feature] || S.nudge.feature) + ' mattered ' + esc(S.nudge.direction) + '.</p><button type="button" class="quiet" data-act="unnudge">Undo</button></div>';
   r.neighborhoods.forEach(function (nb, i) {
     var A = nb.neighborhood_id, h = HBY[A];

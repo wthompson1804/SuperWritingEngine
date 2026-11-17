@@ -51,3 +51,27 @@ trawl2 details (priority): 307 pages to read
 2026-11-17T18:48:30+00:00 trawl2 details 150/307 requests 331
 2026-11-17T18:51:00+00:00 trawl2 details 200/307 requests 381
 2026-11-17T18:53:30+00:00 trawl2 details 250/307 requests 431
+2026-11-17T18:56:00+00:00 trawl2 details 300/307 requests 481
+trawl2: network requests this run 488
+card filter: {'lines': 28244, 'zip_not_in_grid': 444, 'beds_gt1': 0, 'over_cap': 49}
+build: {'cards': 3735, 'detail_rows': 1724, 'card_rows': 2241, 'dropped_detail_over_cap': 290, 'dropped_detail_beds': 701, 'dropped_inactive': 1266, 'extra_units_from_building': 317, 'opened_added': 370, 'opened_replaced_card': 1526, 'opened_replaced_older_detail': 3, 'opened_older_than_here': 15, 'card_dropped_same_unit_new_id': 1, 'card_dropped_gone_on_opened_page': 103, 'propagated_dogs': 2, 'propagated_elevator': 25, 'propagated_floors': 4, 'dropped_zip_not_in_grid_after_detail': 0, 'rows_written': 4132}
+  available_date: 892/4132 (21%)
+  dogs {'yes': 1522, 'unknown': 2030, 'no': 580}
+  elevator {'yes': 655, 'unknown': 3418, 'no': 59}
+  floor: 673/4132 (16%)
+  building_floors: 33/4132 (0%)
+  sqft: 2991/4132 (72%)
+  unit: 1657/4132 (40%)
+  pet_rent: 320/4132 (7%)
+  parking_type: 1286/4132 (31%)
+  parking_fee: 152/4132 (3%)
+  laundry: 1833/4132 (44%)
+  utilities_included: 300/4132 (7%)
+  dog_weight_limit_lb: 140/4132 (3%)
+  manager: 4130/4132 (99%)
+  photo_url: 4088/4132 (98%)
+  other_monthly_fees_json: 3336/4132 (80%)
+  detail_level {'detail': 3529, 'card': 603}
+  state {'NY': 1282, 'NJ': 2334, 'CT': 502, 'PA': 14}
+2026-11-17T18:57:07+00:00 trawl2 cities done 380 requests 7 last new-rochelle-ny
+2026-11-17T18:58:28+00:00 trawl2 cities done 400 requests 34 last nyack-ny

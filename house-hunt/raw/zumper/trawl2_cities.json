@@ -4776,6 +4776,389 @@
 "cards": 25,
 "status": "done",
 "searched_at": "2026-11-17T18:40:59+00:00"
+},
+"westampton-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"willingboro-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"kent-ct": {
+"status": "skipped_no_inventory",
+"area": "CT",
+"basis": "fresh counts 0"
+},
+"queens-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 79,
+"status": "done",
+"searched_at": "2026-11-17T18:56:55+00:00"
+},
+"mount-vernon-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 50,
+"status": "done",
+"searched_at": "2026-11-17T18:57:01+00:00"
+},
+"new-rochelle-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 50,
+"status": "done",
+"searched_at": "2026-11-17T18:57:07+00:00"
+},
+"larchmont-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:57:10+00:00"
+},
+"bronxville-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:57:13+00:00"
+},
+"mamaroneck-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 50,
+"status": "done",
+"searched_at": "2026-11-17T18:57:19+00:00"
+},
+"tuckahoe-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 50,
+"status": "done",
+"searched_at": "2026-11-17T18:57:25+00:00"
+},
+"yonkers-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 50,
+"status": "done",
+"searched_at": "2026-11-17T18:57:31+00:00"
+},
+"scarsdale-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:57:34+00:00"
+},
+"rye-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 50,
+"status": "done",
+"searched_at": "2026-11-17T18:57:40+00:00"
+},
+"harrison-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:57:43+00:00"
+},
+"hastings-on-hudson-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:57:46+00:00"
+},
+"dobbs-ferry-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:57:49+00:00"
+},
+"port-chester-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 50,
+"status": "done",
+"searched_at": "2026-11-17T18:57:55+00:00"
+},
+"rye-brook-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:57:58+00:00"
+},
+"white-plains-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 50,
+"status": "done",
+"searched_at": "2026-11-17T18:58:04+00:00"
+},
+"irvington-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:58:07+00:00"
+},
+"elmsford-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:58:10+00:00"
+},
+"hartsdale-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:58:13+00:00"
+},
+"piermont-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:58:16+00:00"
+},
+"tarrytown-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:58:19+00:00"
+},
+"pleasantville-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:58:22+00:00"
+},
+"nyack-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 50,
+"status": "done",
+"searched_at": "2026-11-17T18:58:28+00:00"
+},
+"nanuet-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 50,
+"status": "done",
+"searched_at": "2026-11-17T18:58:34+00:00"
+},
+"pearl-river-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 50,
+"status": "done",
+"searched_at": "2026-11-17T18:58:40+00:00"
+},
+"valley-cottage-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:58:43+00:00"
+},
+"congers-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 50,
+"status": "done",
+"searched_at": "2026-11-17T18:58:49+00:00"
+},
+"allentown-pa": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 70,
+"status": "done",
+"searched_at": "2026-11-17T18:58:58+00:00"
+},
+"ossining-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 50,
+"status": "done",
+"searched_at": "2026-11-17T18:59:04+00:00"
+},
+"mount-kisco-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 50,
+"status": "done",
+"searched_at": "2026-11-17T18:59:10+00:00"
+},
+"new-city-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:59:13+00:00"
+},
+"haverstraw-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:59:16+00:00"
+},
+"sloatsburg-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:59:19+00:00"
+},
+"pomona-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 44,
+"status": "done",
+"searched_at": "2026-11-17T18:59:25+00:00"
+},
+"suffern-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:59:28+00:00"
+},
+"west-haverstraw-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:59:31+00:00"
+},
+"goldens-bridge-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:59:34+00:00"
+},
+"katonah-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:59:37+00:00"
+},
+"yorktown-heights-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:59:40+00:00"
 }
 },
 "counts": {
@@ -8698,6 +9081,246 @@ null,
 0,
 0,
 2
+],
+"village-of-pelham-ny": [
+0,
+1,
+0
+],
+"pelham-manor-ny": [
+null,
+null,
+0
+],
+"bronxville-ny": [
+0,
+0,
+2
+],
+"new-rochelle-ny": [
+4,
+14,
+63
+],
+"tuckahoe-ny": [
+1,
+9,
+16
+],
+"eastchester-ny": [
+0,
+0,
+2
+],
+"mount-vernon-ny": [
+5,
+12,
+48
+],
+"tarrytown-ny": [
+0,
+4,
+12
+],
+"sleepy-hollow-ny": [
+0,
+0,
+3
+],
+"nyack-ny": [
+1,
+10,
+30
+],
+"pleasantville-ny": [
+0,
+1,
+2
+],
+"briarcliff-manor-ny": [
+0,
+0,
+1
+],
+"valley-cottage-ny": [
+0,
+3,
+8
+],
+"ossining-ny": [
+1,
+5,
+19
+],
+"chappaqua-ny": [
+0,
+0,
+2
+],
+"croton-on-hudson-ny": [
+1,
+2,
+7
+],
+"congers-ny": [
+1,
+3,
+5
+],
+"new-city-ny": [
+0,
+2,
+10
+],
+"haverstraw-ny": [
+0,
+2,
+5
+],
+"west-haverstraw-ny": [
+0,
+1,
+5
+],
+"stony-point-ny": [
+0,
+0,
+4
+],
+"pomona-ny": [
+1,
+1,
+6
+],
+"montrose-ny": [
+0,
+0,
+2
+],
+"cortlandt-ny": [
+0,
+0,
+0
+],
+"emmaus-pa": [
+1,
+5,
+11
+],
+"catasauqua-pa": [
+1,
+4,
+11
+],
+"fountain-hill-pa": [
+0,
+1,
+5
+],
+"northampton-pa": [
+0,
+0,
+8
+],
+"macungie-pa": [
+0,
+1,
+19
+],
+"trexlertown-pa": [
+0,
+0,
+1
+],
+"coopersburg-pa": [
+1,
+0,
+6
+],
+"fogelsville-pa": [
+0,
+1,
+12
+],
+"schnecksville-pa": [
+0,
+0,
+0
+],
+"allentown-bethlehem-pa": [
+0,
+1,
+0
+],
+"alburtis-pa": [
+0,
+0,
+3
+],
+"breinigsville-pa": [
+0,
+2,
+18
+],
+"bath-pa": [
+0,
+1,
+8
+],
+"walnutport-pa": [
+0,
+1,
+4
+],
+"slatington-pa": [
+0,
+1,
+10
+],
+"quakertown-pa": [
+0,
+3,
+16
+],
+"yorktown-heights-ny": [
+0,
+2,
+3
+],
+"amawalk-ny": [
+0,
+0,
+0
+],
+"mohegan-lake-ny": [
+1,
+1,
+5
+],
+"shrub-oak-ny": [
+0,
+0,
+0
+],
+"peekskill-ny": [
+1,
+3,
+13
+],
+"fort-montgomery-ny": [
+0,
+0,
+1
+],
+"harriman-ny": [
+0,
+0,
+7
+],
+"putnam-valley-ny": [
+0,
+0,
+0
 ]
 }
 }
