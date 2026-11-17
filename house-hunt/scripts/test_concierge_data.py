@@ -653,10 +653,32 @@ def experience_line_is_the_guarded_text():
 
 
 def life_facts():
-    if not K.LIFE_FACTS.exists():
-        return []
-    import pandas as pd
-    return pd.read_csv(K.LIFE_FACTS, dtype=str, keep_default_na=False, on_bad_lines="skip").to_dict("records")
+    return K.read_life_facts()[0]
+
+
+@test
+def life_facts_files_are_merged_and_days_respected():
+    rows, rep = K.read_life_facts()
+    keys = [tuple(re.sub(r"\s+", " ", r.get(k, "")).lower() for k in ("building_id", "moment", "place_name", "fact")) for r in rows]
+    assert len(keys) == len(set(keys)), "deduplicated"
+    assert {f.name for f in K.LIFE_FACTS_FILES} == set(rep)
+    r = {"moment": "saturday", "fact": "Trivia night on Fridays.", "schedule": ""}
+    assert K.day_moment(r) == "weekday"
+    assert K.day_moment(dict(r, fact="A market on Thursday afternoons.")) == "weekday"
+    assert K.day_moment(dict(r, moment="weekday", fact="The farmers market runs on Sundays.")) == "sunday"
+    assert K.day_moment(dict(r, moment="weekday", fact="Open Saturday mornings.")) == "saturday"
+    assert K.day_moment(dict(r, fact="Live music on Saturdays.")) == "saturday"
+    assert K.day_moment(dict(r, moment="sunday", fact="Brunch on Saturdays and Sundays.")) == "sunday"
+    assert K.day_moment(dict(r, moment="weekday", fact="Saturday and Sunday mornings only.")) is None
+    assert K.day_moment(dict(r, fact="A quiz every week.")) == "saturday"
+    b, h, report = K.load_life_facts()
+    for x in [r for v in list(b.values()) + list(h.values()) for r in v]:
+        assert x.get("confidence", "").lower() == "high" or x.get("_name_only") or x.get("place_name") in [v[2] for v in K.FACT_OVERRIDE.values()]
+        if not x.get("_name_only"):
+            assert K.day_moment(x) == x["moment"], x
+        assert not K.UNCONFIRMED.search(x.get("notes", "")) and K.name_key(x["place_name"]) not in K.BLOCKED
+    REPORT.append(f"life-here facts: {report.get('files')}; used high {report.get('used_high')}, medium as names "
+                  f"{report.get('used_medium_name_only')}; moved by day {report.get('moved_by_day')}")
 
 
 @test

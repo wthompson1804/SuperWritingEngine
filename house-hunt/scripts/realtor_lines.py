@@ -886,7 +886,25 @@ CATCHES = {
         "The listing gives no floor and does not say there is an elevator. Ask both: without an elevator, only the floor just "
         "above the ground floor works.",
         "Ask which floor this apartment is on and whether the building has an elevator. Without an elevator, only the floor "
-        "just above the ground floor works."],
+        "just above the ground floor works.",
+        # the same fact in other words, so that no wording is on more than SHARE of the page (2026-11-17, trawl 2: this
+        # catch applies to more than half of the apartments shown)
+        "The floor and the elevator are both left out of the listing. Ask about each: with no elevator, only the floor "
+        "just above the ground floor works.",
+        "Confirm the floor and whether there is an elevator. The listing gives neither, and without an elevator only the "
+        "floor just above the ground floor works.",
+        "This listing names no floor and no elevator. Ask about both, since without an elevator only the floor just above "
+        "the ground floor works.",
+        "Before you tour, ask which floor this is and whether an elevator serves it. Without an elevator, only the floor "
+        "just above the ground floor works.",
+        "The floor is not given, and no elevator is mentioned. Ask both questions: without an elevator, only the floor just "
+        "above the ground floor works.",
+        "Ask the office for the floor and whether there is an elevator. The listing says neither, and a walk-up works only "
+        "on the floor just above the ground floor.",
+        "No floor or elevator is listed for this apartment. Ask about both, because without an elevator only the floor just "
+        "above the ground floor works.",
+        "Find out the floor and whether the building has an elevator. The listing says neither, and without an elevator "
+        "only the floor just above the ground floor works."],
     "floor:inferred": [
         "The listing does not state the floor. The apartment number suggests floor {floor}, so confirm it.",
         "Floor {floor} is read from the apartment number, and the listing does not state it. Ask the office to confirm "
@@ -925,7 +943,12 @@ SUBS = {
             "Some fees are not published, so the real cost could be higher.",
             "Ask for the fees that the listing does not publish.",
             "This total leaves out fees that the listing does not publish.",
-            "The listing leaves out some fees, so ask for the full monthly cost."]),
+            "The listing leaves out some fees, so ask for the full monthly cost.",
+            "The listing does not publish every fee, so ask for them all.",
+            "Ask the office for any fee the listing leaves out.",
+            "Some charges are not listed, so the monthly cost could rise.",
+            "Get every fee in writing, because the listing does not publish them all.",
+            "Fees are missing from this listing, so ask what a month really costs."]),
         ("roomy", [
             "This is well under your limit.",
             "Well under your limit, so an added fee would still fit.",
@@ -1227,7 +1250,13 @@ BUILDING = {
         "The listing mentions parking without saying what kind."]),
     "plain": ("plain", "inside", [
         "The listing gives few details about the building itself.",
-        "Few details about the building itself are published."]),
+        "Few details about the building itself are published.",
+        "The listing says little about the building itself.",
+        "Little is published about the building itself.",
+        "The building's own details are mostly missing from the listing.",
+        "The listing describes the apartment more than the building.",
+        "Not much about the building is in the listing.",
+        "The building is described only briefly in the listing."]),
     "closest_run": ("dog", "around", [
         "{Dogpark} is {dogpark_mi} miles away, closer than from any other building listed in this neighborhood.",
         "Of the {n} buildings listed in this neighborhood, this is the closest to a dog park, {dogpark_mi} miles away."]),
@@ -1258,7 +1287,9 @@ BUILDING = {
         "The nearest supermarket, {market}, is {market_mi} miles away.",
         "It is {market_mi} miles to the nearest supermarket, {market}."]),
     "food_few": ("food", "around", [
-        "{Rest_few} within a {w10}."]),
+        "{Rest_few} within a {w10}.",
+        "{Rest_few} within a {w10} of the building.",
+        "{Rest_few} within a {w10} of the door."]),
     "market_far": ("errands", "around", [
         "The nearest supermarket, {market}, is {market_mi} miles away."]),
 }

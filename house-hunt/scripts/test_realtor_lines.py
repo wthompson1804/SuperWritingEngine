@@ -1202,5 +1202,41 @@ class Repetition(unittest.TestCase):
         self.assertLessEqual(catch[1] / len(rows), R.SHARE, catch)
 
 
+class SameFactVariants(unittest.TestCase):
+    """2026-11-17 (trawl 2): wordings added so no sentence passes its share of the page each say the same true thing;
+    the share guards themselves are unchanged."""
+
+    def test_floor_and_elevator_catch_wordings_all_ask_both_and_give_the_rule(self):
+        texts = R.CATCHES["confirm:floor and elevator"]
+        self.assertGreaterEqual(len(texts), 8)
+        for t in texts:
+            low = t.lower()
+            self.assertIn("floor", low, t)
+            self.assertIn("elevator", low, t)
+            self.assertIn("just above the ground floor", low, t)       # the owner's rule: floor 2 works without one
+            self.assertRegex(low, r"\b(ask|confirm|find out)\b", t)    # an open item is asked, never settled
+
+    def test_plain_building_wordings_say_the_listing_gives_little_about_the_building(self):
+        texts = R.BUILDING["plain"][2]
+        self.assertGreaterEqual(len(texts), 5)
+        for t in texts:
+            self.assertIn("building", t.lower(), t)
+            self.assertRegex(t.lower(), r"few|little|missing|not much|briefly|more than the building", t)
+            self.assertFalse(re.search(r"\d", t), t)
+
+    def test_unpublished_cost_subheads_all_say_fees_are_missing_and_carry_no_number(self):
+        texts = dict(R.SUBS["cost"])["unpublished"]
+        self.assertGreaterEqual(len(texts), 8)
+        for t in texts:
+            self.assertRegex(t.lower(), r"\bfees?\b|\bcharges\b", t)
+            self.assertRegex(t.lower(), r"not publish|leaves? out|not listed|missing|does not publish", t)
+            self.assertFalse(re.search(r"\d", t), t)
+            self.assertLessEqual(len(t.split()), 14, t)
+
+    def test_few_restaurants_wordings_keep_the_count_first(self):
+        for t in R.BUILDING["food_few"][2]:
+            self.assertTrue(t.startswith("{Rest_few} within a {w10}"), t)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=1)

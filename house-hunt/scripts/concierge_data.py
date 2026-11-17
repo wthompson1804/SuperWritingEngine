@@ -1112,6 +1112,7 @@ NEAR_MIN = 15                       # a café, bar, bakery or library is named o
 DOG_RUN_MAX_M, VET_MAX_M = 3219, 4828     # 2 miles, 3 miles straight line
 LIFE_MAX_WORDS, LIFE_MAX_SENTENCES, CHIP_MAX_WORDS = 45, 3, 7
 LIFE_FACTS = REF / "life_here_facts.csv"
+LIFE_FACTS_FILES = (LIFE_FACTS, REF / "life_here_facts_nj.csv", REF / "life_here_facts_ctny.csv")   # same columns; read in this order
 ENRICHED, COLOR = ROOT / "data" / "enriched", ROOT / "data" / "enriched_color"
 OSM = "OpenStreetMap"
 MOMENTS = (("weekday", "A weekday"), ("saturday", "Saturday night"), ("sunday", "Sunday with Mom and Dad"), ("dog", "The dog's walk"))
@@ -1569,24 +1570,73 @@ def name_key(n):
     return " ".join(re.findall(r"[a-z0-9']+", str(n or "").lower())[:2])
 
 
+def read_life_facts():
+    """The rows of every LIFE_FACTS_FILES file present, in file order, deduplicated on (building_id, moment, place_name,
+    fact) (case and spacing ignored; the first kept). Returns (rows, report)."""
+    rows, rep, seen = [], {}, set()
+    for f in LIFE_FACTS_FILES:
+        if not f.exists():
+            rep[f.name] = "absent"
+            continue
+        try:
+            t = pd.read_csv(f, dtype=str, keep_default_na=False, on_bad_lines="skip")
+        except (OSError, ValueError, pd.errors.ParserError) as e:
+            rep[f.name] = f"unreadable: {e}"[:200]
+            continue
+        n = dup = 0
+        for r in t.to_dict("records"):
+            r = {k: str(v_ or "").strip() for k, v_ in r.items()}
+            key = tuple(re.sub(r"\s+", " ", r.get(k, "")).lower() for k in ("building_id", "moment", "place_name", "fact"))
+            if key in seen:
+                dup += 1
+                continue
+            seen.add(key)
+            r["_file"] = f.name
+            rows.append(r)
+            n += 1
+        rep[f.name] = {"rows": int(len(t)), "kept": n, "duplicates": dup}
+    return rows, rep
+
+
+WEEKDAYS = {"mon", "tue", "wed", "thu", "fri"}
+
+
+def day_moment(r):
+    """The moment a row's event belongs under, from the days its fact and schedule name: an event on Thursday or Friday
+    filed under Saturday moves to the weekday, a Sunday-only event (a Sunday market) under the weekday moves to Sunday,
+    a Saturday-only one to Saturday; days that fit no moment drop the row (None). No day named: the row's own moment."""
+    mom = r["moment"]
+    days = {d for d in DAYS if re.search(rf"\b{d}", r.get("fact", "") + " " + r.get("schedule", ""), re.I)}
+    if not days or mom == "dog":
+        return mom
+    fits = {"saturday": "sat" in days, "sunday": "sun" in days, "weekday": bool(days & WEEKDAYS)}
+    if fits.get(mom):
+        return mom
+    if days <= WEEKDAYS:
+        return "weekday"
+    if days == {"sun"}:
+        return "sunday"
+    if days == {"sat"}:
+        return "saturday"
+    return None
+
+
 def load_life_facts():
-    """data/reference/life_here_facts.csv as {building id: [rows]} and {neighborhood id: [rows]}: absent or partial is
-    fine (written by a research agent; the script picks up more rows on its next run). Only confidence 'high' rows
-    are used; the counts of the rest are reported."""
-    out_b, out_h, skipped = defaultdict(list), defaultdict(list), Counter()
-    if not LIFE_FACTS.exists():
-        return out_b, out_h, {"file": "absent"}
-    try:
-        t = pd.read_csv(LIFE_FACTS, dtype=str, keep_default_na=False, on_bad_lines="skip")
-    except (OSError, ValueError, pd.errors.ParserError) as e:
-        return out_b, out_h, {"file": f"unreadable: {e}"[:200]}
+    """The research rows of LIFE_FACTS_FILES as {building id: [rows]} and {neighborhood id: [rows]}: absent or partial
+    is fine. Confidence 'high' rows are used as claims (their fact text); 'medium' rows only as a named nearby place
+    with no description (r['_name_only']: the name and the walk computed here from its coordinates, never its text);
+    other confidences, closed places, unconfirmed or pre-2024 rows are skipped and counted. An event's moment follows
+    its day (day_moment)."""
+    out_b, out_h, skipped, moved = defaultdict(list), defaultdict(list), Counter(), Counter()
+    t, rep = read_life_facts()
+    if not any(isinstance(v_, dict) for v_ in rep.values()):
+        return out_b, out_h, {"file": "absent", "files": rep}
     BLOCKED.clear()
-    for r in t.to_dict("records"):
-        r = {k: str(v_ or "").strip() for k, v_ in r.items()}
+    for r in t:
         if CLOSED.search(r.get("place_name", "")) or CLOSED_NOTE.search(r.get("notes", "")):
             BLOCKED.add(name_key(re.sub(r"\s*\(closed\)", "", r["place_name"], flags=re.I)))
-    for r in t.to_dict("records"):
-        r = {k: str(v_ or "").strip() for k, v_ in r.items()}
+    for r in t:
+        r = dict(r)
         conf = r.get("confidence", "").lower()
         if r.get("place_name") in FACT_OVERRIDE:
             r["fact"], r["schedule"], r["place_name"] = FACT_OVERRIDE[r["place_name"]]
@@ -1597,24 +1647,40 @@ def load_life_facts():
         if UNCONFIRMED.search(r.get("notes", "")):
             skipped["operation unconfirmed or source before 2024"] += 1
             continue
-        if conf != "high":
+        if conf not in ("high", "medium"):
             skipped[f"confidence {conf or 'blank'}"] += 1
             continue
         r["moment"] = MOMENT_ALIASES.get(r.get("moment", "").lower(), r.get("moment", "").lower())
         if r["moment"] not in dict(MOMENTS):
             skipped[f"moment {r['moment'] or 'blank'} (not one of the four)"] += 1
             continue
-        if not (r.get("fact") and r.get("place_name") and r.get("source_url", "").startswith("http")):
+        if not (r.get("place_name") and r.get("source_url", "").startswith("http") and (r.get("fact") or conf == "medium")):
             skipped["incomplete"] += 1
             continue
+        if conf == "medium":
+            if num(r.get("lat")) is None or num(r.get("lon")) is None or r.get("place_kind") in ("park", "trail", "greenway", "beach", "route", "downtown"):
+                skipped["medium without a point (or an area)"] += 1
+                continue
+            r["_name_only"] = True
+        else:
+            m2 = day_moment(r)
+            if m2 is None:
+                skipped["event on a day no moment fits"] += 1
+                continue
+            if m2 != r["moment"]:
+                moved[f"{r['moment']} -> {m2}"] += 1
+                r["moment"] = m2
         if r.get("building_id"):
             out_b[r["building_id"]].append(r)
         elif r.get("neighborhood_id"):
             out_h[r["neighborhood_id"]].append(r)
         else:
             skipped["no building or neighborhood"] += 1
-    return out_b, out_h, {"file": "present", "rows": int(len(t)), "used_high": sum(map(len, out_b.values())) + sum(map(len, out_h.values())),
-                          "skipped": dict(skipped)}
+    used = [r for v_ in list(out_b.values()) + list(out_h.values()) for r in v_]
+    return out_b, out_h, {"file": "present", "files": rep, "rows": len(t),
+                          "used_high": sum(1 for r in used if not r.get("_name_only")),
+                          "used_medium_name_only": sum(1 for r in used if r.get("_name_only")),
+                          "moved_by_day": dict(moved), "skipped": dict(skipped)}
 
 
 DAYS = ("mon", "tue", "wed", "thu", "fri", "sat", "sun")
@@ -1812,6 +1878,17 @@ def life_here(x, src_b, us, life_b, life_h):
         add("dog", 4, f"The nearest vet, {vet['name']}, is {far_words(vet)}.", [vet])
     # research rows: after the first sentence of the moment
     for r in rows:
+        if r.get("_name_only"):                       # a medium row: its name and our own walk, no description
+            name = clean_name(r["place_name"])
+            lat, lon = num(r.get("lat")), num(r.get("lon"))
+            m_ = haversine_km(pt, {"lat": lat, "lon": lon}) * 1000 if pt else None
+            wm = walk_min_of(m_) if m_ is not None else None
+            if wm is None or wm > NEAR_MIN or not name_ok(name) or BANNED.search(name) or HYPE.search(name):
+                continue
+            pl = {"name": name, "official_name": name, "kind": r.get("place_kind") or "place", "walk_min": wm,
+                  "distance_mi": miles_of(m_), "source_name": r.get("source_name") or "Source", "source_url": r["source_url"]}
+            add(r["moment"], 5, f"{name} is {a_walk(wm)}.", [pl])
+            continue
         fs = fact_sentence(r, pt)
         if not fs:
             continue
