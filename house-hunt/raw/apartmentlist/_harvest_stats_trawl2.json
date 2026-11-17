@@ -11,12 +11,12 @@
   "min_drive": 0,
   "minutes": 0
  },
- "srp_pages": 108,
- "props_considered": 192,
- "props_skipped_lowprice": 100,
- "props_read": 92,
+ "srp_pages": 121,
+ "props_considered": 320,
+ "props_skipped_lowprice": 189,
+ "props_read": 131,
  "reasons": {
-  "ok": 92
+  "ok": 131
  },
  "transient": [],
  "blocked": null,
@@ -168,6 +168,13 @@
    "drive_min": 37.5,
    "props": 2,
    "read": 2
+  },
+  {
+   "city": "nj/jersey-city",
+   "group": "New Jersey",
+   "drive_min": 37.7,
+   "props": 128,
+   "read": 39
   }
  ],
  "cities_unmatched_far": [

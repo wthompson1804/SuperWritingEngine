@@ -738,5 +738,200 @@
 "at": "2026-11-17T17:00:12+00:00",
 "status": 200,
 "reason": "ok"
+},
+"/nj/jersey-city/10-sherman-pl": {
+"at": "2026-11-17T17:00:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/112-franklin-st": {
+"at": "2026-11-17T17:00:50+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/117-magnolia-aveapartment-1rf--1": {
+"at": "2026-11-17T17:00:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/118-corbin-ave--1": {
+"at": "2026-11-17T17:00:54+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/12-laidlaw-avenue": {
+"at": "2026-11-17T17:00:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/120-danforth-ave": {
+"at": "2026-11-17T17:00:59+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/122-corbin-ave--1": {
+"at": "2026-11-17T17:01:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/149-bentley-ave-103": {
+"at": "2026-11-17T17:01:04+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/164-ogden-ave--3": {
+"at": "2026-11-17T17:01:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/165-vroom-st-apt-2g": {
+"at": "2026-11-17T17:01:09+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/191-danforth-ave": {
+"at": "2026-11-17T17:01:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/2-2nd-st-apt-1506": {
+"at": "2026-11-17T17:01:14+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/201-clinton-ave": {
+"at": "2026-11-17T17:01:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/215-mallory-ave--1": {
+"at": "2026-11-17T17:01:19+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/26-carlton-ave": {
+"at": "2026-11-17T17:01:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/272-hutton-st": {
+"at": "2026-11-17T17:01:24+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/277-harrison-ave--3": {
+"at": "2026-11-17T17:01:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/278-magnolia-ave--1": {
+"at": "2026-11-17T17:01:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/300-communipaw-ave--3": {
+"at": "2026-11-17T17:01:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/3027-john-f-kennedy-blvd": {
+"at": "2026-11-17T17:01:34+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/315-forrest-street": {
+"at": "2026-11-17T17:01:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/33-graham-st": {
+"at": "2026-11-17T17:01:40+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/356-palisade-ave--2": {
+"at": "2026-11-17T17:01:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/360-w-side-ave": {
+"at": "2026-11-17T17:01:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/429-fairmount-ave--3": {
+"at": "2026-11-17T17:01:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/44-sherman-ave--1": {
+"at": "2026-11-17T17:01:50+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/475-communipaw": {
+"at": "2026-11-17T17:01:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/545-bramhall-ave": {
+"at": "2026-11-17T17:01:55+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/656-658-grand": {
+"at": "2026-11-17T17:01:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/689-bergen-ave--1": {
+"at": "2026-11-17T17:02:00+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/826-grand-st": {
+"at": "2026-11-17T17:02:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/86-seaview-ave": {
+"at": "2026-11-17T17:02:04+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/995-summit-ave": {
+"at": "2026-11-17T17:02:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/birch-house": {
+"at": "2026-11-17T17:02:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/blvd-401": {
+"at": "2026-11-17T17:02:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/blvd-475": {
+"at": "2026-11-17T17:02:15+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/city-line-east--1": {
+"at": "2026-11-17T17:02:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/cityline-jersey-city-west--1": {
+"at": "2026-11-17T17:02:19+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/jersey-city/the-agnes-co-living--1": {
+"at": "2026-11-17T17:02:22+00:00",
+"status": 200,
+"reason": "ok"
 }
 }
