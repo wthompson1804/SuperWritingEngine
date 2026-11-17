@@ -265,3 +265,8 @@ Decisions by Will that changed or replaced an earlier one. Dates are UTC days of
   ("Confirm the floor, and whether there is an elevator"). Trulia stays closed: a person solving its CAPTCHA for our
   tools would be getting around a bot wall. Listings Will or Lamia find by hand go in `inbox/` (any site, saved by
   them). Plan: `/root/.claude/plans/linear-hatching-swan.md` (copied in `docs/TRAWL_2_PLAN.md`).
+
+- **The short version, version 3 (Will, 2026-11-17):** the experiences are no longer the way in. She makes a few
+  "this or that" choices between real places (three to six, chosen so each one changes the recommendation), then sees
+  the top three neighborhoods, each with its top three buildings, and under each building two or three "more like this"
+  thumbnails; all inventory stays one tap away. Spec: "Version 3" in `docs/CONCIERGE_DESIGN.md`.
