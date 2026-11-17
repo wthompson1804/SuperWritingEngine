@@ -5817,6 +5817,56 @@
 "cards": 25,
 "status": "done",
 "searched_at": "2026-11-17T19:03:04+00:00"
+},
+"pleasant-valley-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"wurtsboro-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"9-hudson-harbour-drive-poughkeepsie-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"highland-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"milton-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"washington-crossing-pa": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"high-falls-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"croydon-pa": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"new-hope-pa": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"penndel-pa": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
 }
 },
 "counts": {

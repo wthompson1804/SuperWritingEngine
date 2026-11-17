@@ -79,3 +79,25 @@ build: {'cards': 3735, 'detail_rows': 1724, 'card_rows': 2241, 'dropped_detail_o
 2026-11-17T19:01:22+00:00 trawl2 cities done 440 requests 92 last newburgh-ny
 2026-11-17T19:02:43+00:00 trawl2 cities done 460 requests 119 last yardley-pa
 trawl2 details (rest): 68 pages to read
+2026-11-17T19:05:34+00:00 trawl2 details 50/68 requests 176
+trawl2: network requests this run 194
+card filter: {'lines': 31242, 'zip_not_in_grid': 470, 'beds_gt1': 0, 'over_cap': 49}
+build: {'cards': 3751, 'detail_rows': 1790, 'card_rows': 2189, 'dropped_detail_over_cap': 294, 'dropped_detail_beds': 710, 'dropped_inactive': 1290, 'extra_units_from_building': 318, 'opened_added': 370, 'opened_replaced_card': 1526, 'opened_replaced_older_detail': 3, 'opened_older_than_here': 15, 'card_dropped_same_unit_new_id': 1, 'card_dropped_gone_on_opened_page': 87, 'propagated_dogs': 2, 'propagated_elevator': 25, 'propagated_floors': 4, 'dropped_zip_not_in_grid_after_detail': 0, 'rows_written': 4161}
+  available_date: 903/4161 (21%)
+  dogs {'yes': 1532, 'unknown': 2042, 'no': 587}
+  elevator {'yes': 656, 'unknown': 3443, 'no': 62}
+  floor: 684/4161 (16%)
+  building_floors: 33/4161 (0%)
+  sqft: 3010/4161 (72%)
+  unit: 1682/4161 (40%)
+  pet_rent: 322/4161 (7%)
+  parking_type: 1296/4161 (31%)
+  parking_fee: 152/4161 (3%)
+  laundry: 1865/4161 (44%)
+  utilities_included: 306/4161 (7%)
+  dog_weight_limit_lb: 144/4161 (3%)
+  manager: 4159/4161 (99%)
+  photo_url: 4117/4161 (98%)
+  other_monthly_fees_json: 3398/4161 (81%)
+  detail_level {'detail': 3594, 'card': 567}
+  state {'NY': 1310, 'NJ': 2334, 'CT': 502, 'PA': 15}

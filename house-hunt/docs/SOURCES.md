@@ -419,3 +419,8 @@ Second trawl step 3: storeys per candidate building and floor per apartment labe
 | Suffolk County GIS `TaxParcelPolygon` (`gis.suffolkcountyny.gov`) | Layer metadata read (200). No building fields. Not used. No official Nassau bulk parcel source found | — |
 | NYC PLUTO (held copy `raw/big/pluto/pluto_res4plus.csv`, 2026-11-15) | Used as is; **no request to data.cityofnewyork.us** (refused 2026-11-17). Lots with fewer than 4 residential units were never downloaded, so small NYC buildings have no record here | — |
 | OpenStreetMap `building:levels` (held Geofabrik extract, data 2026-11-14) | Used where no record exists; only about 98,000 of 5.4 million outlines in the extract carry the tag | — |
+
+### Zumper terms (read 2026-11-17, trawl 2)
+Zumper's terms have no robot or scraping clause but allow use "only in reasonable limited quantities for your personal,
+non-commercial use". This project is one person's personal, non-commercial apartment search; volume is kept modest
+(about 1,773 requests on 2026-11-17, 3 s floor). Keep later runs to re-reads of held listings.
