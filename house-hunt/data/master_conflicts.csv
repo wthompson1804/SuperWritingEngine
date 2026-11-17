@@ -18,7 +18,6 @@ b_8b12192229,dogs_allowed,no,confirmed,yes (stated)
 b_f74c7dfbaf,year_built,1973,confirmed,1974 (amenities_page)
 b_cb2d5d4fde,elevator,conflicting,confirmed,no (confirmed) | yes (amenities_page) | yes (stated)
 b_679a923f3a,elevator,conflicting,confirmed,no (confirmed) | yes (amenities_page) | yes (stated)
-b_84739a68fb,building_floors,14,amenities_page,17 (official_record)
 b_26d909bb7c,dogs_allowed,no,confirmed,yes (stated)
 b_27ace0b35e,elevator,conflicting,confirmed,no (confirmed) | yes (amenities_page) | yes (stated)
 b_61bba819ab,dogs_allowed,no,confirmed,yes (stated)
@@ -27,6 +26,7 @@ b_6a86a5dbf8,elevator,conflicting,confirmed,no (confirmed) | yes (official_recor
 b_4b56376dd7,elevator,yes,official_record,no (official_record)
 b_27056882d3,year_built,2006,confirmed,2007 (confirmed)
 b_8e1e111ea4,elevator,conflicting,confirmed,no (confirmed)
+b_84739a68fb,building_floors,,dropped,14 (amenities_page) is below a unit label that reads as floor 18
 b_5c4193202c,lat_lon,"40.672560,-74.098197",census_geocoder (address check),"the listing's point is outside the address's ZIP area and 6889 m from where the address geocodes (point 40.67096,-74.17977 is in ZIP area 07201, Elizabeth; the address says Bayonne 07002); Census geocoder matched '302 CONSTITUTION AVE, BAYONNE, NJ, 07002'."
 b_e2d2c14006,lat_lon,"40.911011,-74.397863","listing majority, unverified","listing rows disagree by 4634 m (avaloncommunities.com: 40.91101,-74.39786; apartmentlist.com: 40.92139,-74.45121); the Census geocoder found no match"
 b_cbc9a7d36b,lat_lon,"40.780762,-74.199995",census_geocoder (address check),"the listing's point is outside the address's ZIP area and 168 m from where the address geocodes (point 40.77926,-74.19988 is in ZIP area 07017, East Orange; the address says Bloomfield 07003); Census geocoder matched '5 LAWRENCE ST, BLOOMFIELD, NJ, 07003'."

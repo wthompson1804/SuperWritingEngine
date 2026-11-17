@@ -87,6 +87,7 @@ addr_key,building_id,street_key
 176 w side ave|07305,b_eeeae85d3f,176 w side ave|07305
 1009 broad st|07102,b_fec325fa9f,1009 broad st|07102
 260 ave e|07002,b_0c7b226ae6,260 ave e|07002
+740-748 washington ave|07109,b_66dc364565,740748 washington ave|07109
 5 lawrence st|07003,b_cbc9a7d36b,5 lawrence st|07003
 440 elizabeth ave|07112,b_003540ccc9,440 elizabeth ave|07112
 258 s harrison st|07018,b_cb023e642b,258 s harrison st|07018
@@ -149,7 +150,6 @@ addr_key,building_id,street_key
 510 millburn ave|07078,b_1aff39f3ba,510 millburn ave|07078
 17 ferris ave|06854,b_66685241d8,17 ferris ave|06854
 3 ronald dr|07067,b_764bb90d59,3 ronald dr|07067
-10 green st|07095,b_ed929002b2,10 green st|07095
 1 pikeview ln|07095,b_4d7c7e5bc4,1 pikeview ln|07095
 20 gill ln 1e|08830,b_08fbde9607,20 gill ln|08830
 289 main ave|06851,b_846f44689f,289 main ave|06851
@@ -234,7 +234,6 @@ one chester circle|08901,b_d7e3a4e75a,one chester circle|08901
 222 canal st|06511,b_e14f456bec,222 canal st|06511
 750 whitney ave|06511,b_2a734c539a,750 whitney ave|06511
 87 union st|06511,b_a9ff4714d6,87 union st|06511
-367 orange st|06511,b_a0f917d390,367 orange st|06511
 269 orange st|06510,b_d6c2bb093d,269 orange st|06510
 78 olive st|06511,b_5bd2e71f71,78 olive st|06511
 630 chapel st|06510,b_893bfa1b2e,630 chapel st|06510
@@ -589,6 +588,7 @@ florence nj 08518 usa|08518,b_67850cd563,florence|08518
 171 mount prospect ave 3 newark nj 07104 usa|07104,b_a564f7a7f5,171 mount prospect ave|07104
 226 roseville ave 202 newark nj 07107 usa|07107,b_68e3f26c07,226 roseville ave|07107
 42 llewellyn ave 1 bloomfield nj 07003 usa|07003,b_8778c9e418,42 llewellyn ave|07003
+526-532 mulberry st 3d newark nj 07114 us|07114,b_2af9c08d0c,526532 mulberry st|07114
 166-170 emmet st 201 newark nj 07114 us|07114,b_2de6eb06b7,166170 emmet st|07114
 814 s 12th st 2 newark nj 07108 usa|07108,b_8cf2509cd7,814 s 12 st|07108
 385 stuyvesant ave 385-1a irvington nj 07111 usa|07111,b_656a756d2f,385 stuyvesant ave|07111

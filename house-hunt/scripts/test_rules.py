@@ -786,14 +786,18 @@ def data_4(M, R, S):
     ok(S[has_].disclosures.str.contains("Could pass $3,000 once parking and fees are known", regex=False).all(), "step 4b: the disclosure names both figures in its sentence")
     ok(not S.disclosures.str.contains("cost near the cap", regex=False).any() and not S.disclosures.str.contains("counted as $0", regex=False).any(), "step 4b: the old 'cost near the cap' disclosure and 'counted as $0' are gone")
     ok(not R.confirm_why.str.contains("counted as $0", regex=False).any(), "pending fix: no confirm_why says 'counted as $0'")
-    # the estimate's reference set (master buildings) against the ranked buildings, per state: reported, and must be close
+    # the estimate (CLAUDE.md: "the median of the known pet rents in the same state") recomputed over the SAME set the
+    # estimator uses (all_in.known_medians): the master's buildings that publish a pet rent, one value per building
+    # (coordinator, 2026-11-17: the ranked buildings are a different, smaller set and were the wrong reference)
     E_ = pd.read_csv(DATA / "reference" / "cost_estimates.csv")
-    Rb = R.drop_duplicates("building_id")
-    for st_, g_ in Rb.groupby("state"):
-        known = pd.to_numeric(g_.pet_rent, errors="coerce").dropna()
-        used = E_[(E_.line == "pet rent") & (E_.state == st_)]["median"]
-        if len(known) >= 5 and len(used):
-            ok(abs(float(known.median()) - float(used.iloc[0])) <= 10, f"step 4a: {st_} pet-rent estimate ${float(used.iloc[0]):g} is within $10 of the median among ranked buildings (${float(known.median()):g})")
+    Mb = M.drop_duplicates("building_id")
+    for st_, g_ in Mb.groupby("state"):
+        known = pd.to_numeric(g_.pet_rent_monthly, errors="coerce")
+        known = known[(known >= 0) & (known <= 150)]
+        used = E_[(E_.line == "pet rent") & (E_.state == st_)]
+        if len(known) >= 5:
+            ok(len(used) == 1 and abs(float(known.median()) - float(used["median"].iloc[0])) <= 0.5 and int(used.buildings.iloc[0]) == len(known),
+               f"step 4a: {st_} pet-rent estimate (${float(used['median'].iloc[0]) if len(used) else float('nan'):g} over {int(used.buildings.iloc[0]) if len(used) else 0} buildings) is the median of the master's {len(known)} known pet rents (${float(known.median()):g})")
     # ---- step 5: buildings
     ok((S.groupby("building_id").size() <= 8).all(), "step 5: at most 8 shown per building")
     o = S.assign(rs=num(S, "rank_score"), n=num(S, "nth_shown_in_building")).sort_values(["building_id", "n"])

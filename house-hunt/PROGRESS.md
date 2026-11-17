@@ -4,64 +4,63 @@ Read this first every session. Newest entries at the top of the log.
 
 ## Current state (2026-11-16, after the pipeline repairs to independent check 5; details in `docs/REPAIRS_AFTER_INDEPENDENT_CHECK_5.md`)
 
-**2026-11-17 note: trawl 2, step 6, first rebuild (full `run_all.py`, not `--fast`; nothing published, no verdict written).** The harvest of
-trawl 2 is merged (Apartment List refresh, Zumper 1,830 detail rows, Openigloo, building storeys, unit floor reads). Full run: 19 min 22 s
-(most of it enrichment of about 450 new buildings: OSRM drive times, tolls, transit, places, crime, utilities; the Census geocoder at 1 request
-per second); after the fixes below, a second full run on the cache took 1 min 45 s (the counts here are from it; the first run ranked 580 and
-would have shown 139 before the `rank.py` fix). No request was sent to data.cityofnewyork.us (kill file; PLUTO and the
-NYC crime and precinct files came from the copies already held).
+**2026-11-17 note: trawl 2, step 6, rebuild (full `run_all.py`, not `--fast`; nothing published, no verdict written).** The harvest of
+trawl 2 is merged (Apartment List refresh, Zumper 1,830 detail rows, Openigloo, building storeys, unit floor reads). First full run: 19 min 22 s
+(most of it enrichment of about 450 new buildings: OSRM drive times, NJTA tolls, transit, places, crime, utilities; the Census geocoder at 1
+request per second); later full runs on the cache: about 2 min. No request was sent to data.cityofnewyork.us (kill file; PLUTO and the NYC crime
+and precinct files came from the copies already held).
 
-- **Counts**: 21,095 listings → 1,176 pass the listing gates (was 1,026) → 1,094 costed (the master now holds only listings at or under $2,200;
-  it held 2,451 from the $3,000 era) → 1,094 within the $3,000 total → **567 ranked** (was 119) → 136 that `rank.py` would show, in 70 buildings
-  and 35 neighborhoods; **83 have a current verdict** (was 89). The run ends "RUN FAILED" for two expected reasons: `check_registry.py` (53 shown
-  units without a current verdict: the review step below) and one data check, `test_rules.py --data` step 4a (the NY pet-rent estimate, $42.5
-  over 26 master buildings, against $55 over the 10 ranked NY buildings that publish one: the reference set is now much larger than the ranked
-  one; the estimate method was not changed).
-- **Why ranked jumped from 119 to 567**: the earlier counts came from a `--fast` run on the pre-trawl master; this run costed every listing that now
+- **Counts** (last run): 21,095 listings → 1,179 pass the listing gates (was 1,026) → 1,097 costed (the master now holds only listings at or under
+  $2,200; it held 2,451 from the $3,000 era) → 1,097 within the $3,000 total → **571 ranked** (was 119) → 141 that `rank.py` would show, in 72
+  buildings and 36 neighborhoods; **87 have a current verdict** (was 89). The run ends "RUN FAILED" for one expected reason: `check_registry.py`
+  and `test_rules.py --data` find 54 shown units without a current verdict (53 never reviewed, 1 whose evidence changed): the review step below.
+- **Why ranked jumped from 119 to 571**: the earlier counts came from a `--fast` run on the pre-trawl master; this run costed every listing that now
   passes, including the floor-2 walk-ups and the apartments whose one open fact is "floor and elevator" (owner, 2026-11-17).
-- **Pipeline changes** (`scripts/README.md`, "trawl 2, step 6"): `build_master.py` reads `data/reference/unit_floor_reads.csv` (311 master rows
-  take their floor from it; 135 ranked; 58 settle as floor-2 walk-ups; each carries the disclosure "floor read from the apartment number");
-  `rank.py` drops an apartment the floor-and-elevator rule leaves `unknown` (floor 3+, no elevator stated: 11 units that the new floor reads put on
-  floor 3+) instead of counting it as one open fact; the garden-style elevator rule reads the labels of all of a building's listings, so
-  Residences at The Summit keeps its elevator doubt with only two units left under $2,200; `test_rules.py` follows the new open fact
-  "floor and elevator" and the $2,200 limit (b20 buildings now above it); the crime and OSM bulk downloads check the kill file.
+- **Pipeline changes** (`scripts/README.md`, "trawl 2, step 6"):
+  - `build_master.py` reads `data/reference/unit_floor_reads.csv` (311 master rows take their floor from it; each carries the disclosure "floor
+    read from the apartment number").
+  - **Storey records not trusted** (coordinator, 2026-11-17; `build_master.BuildingStories.distrust`): a row of `building_stories.csv` whose
+    notes carry the `CHECK:` flag, or whose OpenStreetMap or listing count differs from the record, is kept but not used: storeys unknown,
+    `building_stories_basis = not_trusted`, the reason and the record in `building_stories_source`. It neither fails a unit nor settles "no
+    elevator needed" nor gives a floor count. 8 master buildings; one-storey fails at or under $2,200 went from 138 to 126. Ethos Kelsey
+    (Belleville, '1SB' beside apartments 301 to 526) is shown again on its existing verdicts.
+  - `rank.py` drops an apartment the floor-and-elevator rule leaves `unknown` (floor 3+, no elevator stated) instead of counting it as one open fact.
+  - The garden-style elevator rule reads the labels of all of a building's listings (Residences at The Summit keeps its elevator doubt).
+  - `test_rules.py` follows the open fact "floor and elevator" and the $2,200 limit; step 4a now recomputes the pet-rent estimate over the same
+    set the estimator uses (the master's buildings that publish one), not over the ranked buildings.
+  - The crime and OSM bulk downloads check the kill file.
 - **Waiting for review: 458 units in 268 buildings** (`out/trawl2_needs_review.csv`; reviewer files by state `out/trawl2_needs_review_nj.csv`
-  276 units / 161 buildings, `_ct.csv` 127 / 61, `_ny.csv` 55 / 46). Priority 1 (at most $2,000, priority area) 318; priority 2 (at most $2,000
-  elsewhere) 22; priority 3 ($2,001 to $2,200) 118. Open item: floor and elevator 378, none 71, elevator 4, dogs 3, listing 2. **387 of the
-  458 are in 232 buildings with no evidence rows**: they need an evidence pass before any verdict can show them (`rank.py` shows nothing
-  from a building without evidence).
-- **For the owner / coordinator**: Ethos Kelsey (740-748 Washington Ave, Belleville; 4 apartments shown before) now fails as a one-storey
-  building: the NJ tax record joined to it says '1SB', while its units are 301 to 526, the elevator is established and OSM says 6 storeys (the
-  storeys file itself marks the row CHECK). At or under $2,200, 11 listings fail on a one-storey record that is flagged CHECK or sits beside
-  an established elevator (Ethos Kelsey 4; Jersey City, Paterson, South Orange 1 each with an elevator; Cranford, Newark, Paterson flagged). The rule as tested says a one-storey official record fails whatever the elevator; the record needs correcting or the rule a
-  decision. Vermella Harrison: one unit (russo:641914:17099626) moved to another building id. Zumper's 1,830 new rows add 64 units to the
-  review list (most stay `pending`: no elevator or floor stated). Brooklyn, LIC and Long Island stay thin.
+  276 units / 161 buildings, `_ct.csv` 127 / 61, `_ny.csv` 55 / 46; one building, one file). Priority 1 (at most $2,000, priority area) 319;
+  priority 2 (at most $2,000 elsewhere) 22; priority 3 ($2,001 to $2,200) 117. Open item: floor and elevator 378, none 71, elevator 4, dogs 3,
+  listing 2. **387 of the 458 are in 232 buildings with no evidence rows**: they need an evidence pass before any verdict can show them.
+- **For the coordinator**: Vermella Harrison: one unit (russo:641914:17099626) moved to another building id. Zumper's 1,830 new rows add 65
+  units to the review list (most stay `pending`: no elevator or floor stated). Brooklyn, LIC and Long Island stay thin.
 
 **At or under $2,000 listed base rent** (before → after)
 
 | Area | Pass the listing gate | Ranked | Shown now (current verdict) | Waiting for review |
 |---|---|---|---|---|
-| NJ | 251 → 343 | 9 → 208 | 8 → 7 | 1 → 201 |
+| NJ | 251 → 345 | 9 → 210 | 8 → 8 | 1 → 202 |
 | CT | 318 → 344 | 24 → 135 | 24 → 24 | 0 → 111 |
 | Brooklyn | 9 → 10 | 5 → 5 | 1 → 1 | 0 → 1 |
 | LIC | 1 → 1 | 0 → 0 | 0 → 0 | 0 → 0 |
 | Long Island | 15 → 18 | 0 → 5 | 0 → 0 | 0 → 5 |
 | Queens other | 30 → 30 | 5 → 14 | 3 → 2 | 1 → 9 |
 | rest | 63 → 78 | 4 → 16 | 2 → 2 | 1 → 13 |
-| all | 687 → 824 | 47 → 383 | 38 → 36 | 3 → 340 |
+| all | 687 → 826 | 47 → 385 | 38 → 37 | 3 → 341 |
 
 **At or under $2,200 listed base rent** (before → after)
 
 | Area | Pass the listing gate | Ranked | Shown now (current verdict) | Waiting for review |
 |---|---|---|---|---|
-| NJ | 404 → 509 | 52 → 323 | 41 → 36 | 2 → 276 |
-| CT | 413 → 440 | 35 → 160 | 33 → 33 | 0 → 127 |
+| NJ | 404 → 513 | 52 → 327 | 41 → 40 | 2 → 276 |
+| CT | 413 → 439 | 35 → 160 | 33 → 33 | 0 → 127 |
 | Brooklyn | 13 → 14 | 5 → 5 | 1 → 1 | 0 → 1 |
 | LIC | 1 → 1 | 0 → 0 | 0 → 0 | 0 → 0 |
 | Long Island | 35 → 38 | 0 → 13 | 0 → 0 | 0 → 13 |
 | Queens other | 54 → 53 | 14 → 26 | 7 → 6 | 1 → 12 |
 | rest | 106 → 121 | 13 → 40 | 7 → 7 | 2 → 29 |
-| all | 1026 → 1176 | 119 → 567 | 89 → 83 | 5 → 458 |
+| all | 1026 → 1179 | 119 → 571 | 89 → 87 | 5 → 458 |
 
 **2026-11-17 note: live-check batch 21 applied (the 45 apartments at or under $2,000 listed rent, re-read that day; `docs/harvest_notes/live_check_batch_21.md`). The counts in this note replace the ones below.**
 

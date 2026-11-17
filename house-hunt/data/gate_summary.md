@@ -4,9 +4,9 @@ Raw rows: 24748. After dedupe: 21095.
 
 | status | listings | buildings |
 |---|---|---|
-| fail | 12416 | 6935 |
-| pass | 1176 | 680 |
-| pending | 7503 | 6123 |
+| fail | 12404 | 6929 |
+| pass | 1179 | 680 |
+| pending | 7512 | 6129 |
 
 ## Each gate (after dedupe)
 
@@ -16,7 +16,7 @@ Raw rows: 24748. After dedupe: 21095.
 | rent | 10743 | 10182 | 170 |
 | movein | 7987 | 961 | 12147 |
 | dog | 10655 | 1593 | 8847 |
-| floor_elevator | 17609 | 1721 | 1765 |
+| floor_elevator | 17579 | 1703 | 1813 |
 | place | 21065 | 0 | 30 |
 | proof | 12569 | 7 | 8519 |
 | elevator | 5441 | 876 | 14778 |
@@ -26,14 +26,14 @@ Raw rows: 24748. After dedupe: 21095.
 
 | result | listings |
 |---|---|
-| pass floor_or_elevator | 11253 |
-| pass - | 4626 |
-| unknown - | 1765 |
+| pass floor_or_elevator | 11214 |
+| pass - | 4634 |
+| unknown - | 1813 |
 | fail ground_floor | 1374 |
-| pass floor_2 | 1197 |
+| pass floor_2 | 1198 |
 | pass elevator | 533 |
 | fail no_elevator_above_floor_2 | 191 |
-| fail one_storey_building | 156 |
+| fail one_storey_building | 138 |
 
 ## By source
 
@@ -43,7 +43,7 @@ Raw rows: 24748. After dedupe: 21095.
 | 1eastmainstreet.com                       |      1 |      0 |         0 |
 | 360huguenot.com                           |      5 |      0 |         0 |
 | anninlofts.com                            |      1 |      0 |         0 |
-| apartmentlist.com                         |   3297 |    510 |       995 |
+| apartmentlist.com                         |   3295 |    509 |       998 |
 | arrivestamford.com                        |      1 |      0 |         0 |
 | avaloncommunities.com                     |    169 |      5 |         2 |
 | bltliveworkplay.com (SightMap embed)      |     69 |      3 |         5 |
@@ -79,7 +79,7 @@ Raw rows: 24748. After dedupe: 21095.
 | thesheldonatsuffern.com                   |      1 |      0 |         0 |
 | theshipyardriverhead.com                  |      1 |      0 |         0 |
 | trademarkfairfield.com                    |      1 |      0 |         0 |
-| trulia                                    |   5480 |    450 |      4959 |
+| trulia                                    |   5472 |    453 |      4964 |
 | trulia.com                                |     16 |      0 |         0 |
 | vermellacrossing.com                      |     13 |      0 |         0 |
 | vermellaharrison.com                      |      9 |      1 |         0 |
@@ -103,23 +103,23 @@ Raw rows: 24748. After dedupe: 21095.
 | www.vermellaeast.com                      |      1 |      0 |         0 |
 | www.zumper.com                            |      2 |      0 |         0 |
 | zillow.com                                |     35 |     21 |         8 |
-| zumper                                    |   2459 |    186 |      1428 |
+| zumper                                    |   2457 |    187 |      1429 |
 | zumper.com                                |     10 |      0 |         3 |
 
 ## Pending reasons (what would need confirming)
 
 | pending_reasons                 |   count |
 |:--------------------------------|--------:|
-| movein;dog;proof                |    2945 |
-| movein;proof                    |    1531 |
-| dog                             |    1130 |
+| movein;dog;proof                |    2941 |
+| movein;proof                    |    1515 |
+| dog                             |    1131 |
 | movein;dog                      |     760 |
 | movein                          |     443 |
-| movein;dog;floor_elevator;proof |     196 |
-| movein;floor_elevator;proof     |     144 |
-| floor_elevator                  |     139 |
-| movein;dog;floor_elevator       |      74 |
-| dog;floor_elevator              |      56 |
+| movein;dog;floor_elevator;proof |     201 |
+| movein;floor_elevator;proof     |     163 |
+| floor_elevator                  |     140 |
+| movein;dog;floor_elevator       |      76 |
+| dog;floor_elevator              |      57 |
 | movein;floor_elevator           |      42 |
 | proof                           |      19 |
 | dog;proof                       |      11 |
@@ -130,8 +130,8 @@ Raw rows: 24748. After dedupe: 21095.
 
 |                             |   0 |
 |:----------------------------|----:|
-| ('CT', 'New Haven')         | 193 |
-| ('NJ', 'Newark')            |  60 |
+| ('CT', 'New Haven')         | 192 |
+| ('NJ', 'Newark')            |  61 |
 | ('NJ', 'Jersey City')       |  41 |
 | ('CT', 'Bridgeport')        |  41 |
 | ('NJ', 'Paterson')          |  41 |
@@ -146,25 +146,25 @@ Raw rows: 24748. After dedupe: 21095.
 | ('NY', 'Bronx')             |  17 |
 | ('CT', 'West Haven')        |  17 |
 | ('NJ', 'Somerset')          |  16 |
-| ('NJ', 'Woodbridge')        |  16 |
 | ('NJ', 'Trenton')           |  15 |
+| ('NJ', 'Woodbridge')        |  15 |
 | ('NJ', 'Lawrenceville')     |  14 |
 | ('NY', 'Newburgh')          |  13 |
+| ('NJ', 'Belleville')        |  12 |
 | ('CT', 'Danbury')           |  12 |
 | ('CT', 'Stratford')         |  11 |
 | ('NY', 'Brooklyn')          |  11 |
-| ('CT', 'Milford')           |  10 |
 | ('NY', 'Yonkers')           |  10 |
 | ('NJ', 'Princeton Meadows') |  10 |
 | ('NY', 'Middletown')        |  10 |
-| ('NJ', 'Long Branch')       |   9 |
+| ('CT', 'Milford')           |  10 |
 | ('NJ', 'Piscataway')        |   9 |
 | ('NY', 'Jamaica')           |   9 |
+| ('NJ', 'Long Branch')       |   9 |
 | ('NJ', 'Burlington')        |   8 |
-| ('CT', 'Beacon Falls')      |   8 |
 | ('NY', 'Flushing')          |   8 |
 | ('NJ', 'Bloomfield')        |   8 |
-| ('NJ', 'Belleville')        |   8 |
+| ('CT', 'Beacon Falls')      |   8 |
 | ('NJ', 'West New York')     |   8 |
 | ('NJ', 'Irvington')         |   7 |
 | ('NJ', 'Orange')            |   7 |

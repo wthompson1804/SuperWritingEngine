@@ -469,6 +469,10 @@ Second trawl, 2026-11-17 (owner: floor and elevator; $2,200 collection limit; bu
   `simple`, `unit_floor_source = "unit number (data/reference/unit_floor_reads.csv: <convention>)"`, so it carries the existing
   disclosure "floor read from the apartment number". The garden-style elevator rule now reads the unit labels of all of a
   building's listings (`data/listings.csv`), not only those at or under $2,200 (Residences at The Summit).
+- `build_master.BuildingStories` (also read by `gates.py`): a `building_stories.csv` row whose notes carry `CHECK:` or whose OSM /
+  listing storey count differs from the record is kept but not trusted (`distrust`): storeys blank, basis `not_trusted`, the reason and
+  the record in `building_stories_source`; it fails nothing, settles nothing and gives no floor count. Tests in `pure_floor_elevator`.
+- `test_rules.py --data` step 4a: the pet-rent estimate is recomputed over the master's buildings that publish one (the estimator's set).
 - `rank.py`: an apartment the floor-and-elevator rule leaves `unknown` (floor 3+, no elevator stated) or `fail` is dropped as
   sketchy (`weak_why`); it used to count as one inferred fact and could rank.
 - `tools/crime.py`, `tools/places.py`: their streamed bulk downloads call `lib.check_host` first (refused and off-limits hosts).

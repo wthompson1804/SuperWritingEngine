@@ -1,4 +1,4 @@
-# Run report (2026-11-17T19:37:12+00:00)
+# Run report (2026-11-17T19:44:53+00:00)
 
 ## Steps
 
@@ -29,22 +29,22 @@
 | Stage | Now | Previous run | Change |
 |---|---|---|---|
 | listings harvested (after dedupe) | 21095 | 21095 | +0 |
-| pass every listing gate | 1176 | 1176 | +0 |
-|   pending: a gate fact is unstated | 7503 | 7503 | +0 |
-|   fail a gate | 12416 | 12416 | +0 |
-| costed in the master table | 1094 | 1094 | +0 |
-| within the $3,000 all-in cap | 1094 | 1094 | +0 |
-| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 567 | 567 | +0 |
-| shown (real apartments, at most one open item, up to 8 per building, after the thin-neighborhood rule) | 136 | 136 | +0 |
-|   neighborhoods shown | 35 | 35 | +0 |
-|   buildings shown | 70 | 70 | +0 |
+| pass every listing gate | 1179 | 1176 | +3 |
+|   pending: a gate fact is unstated | 7512 | 7503 | +9 |
+|   fail a gate | 12404 | 12416 | -12 |
+| costed in the master table | 1097 | 1094 | +3 |
+| within the $3,000 all-in cap | 1097 | 1094 | +3 |
+| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 571 | 567 | +4 |
+| shown (real apartments, at most one open item, up to 8 per building, after the thin-neighborhood rule) | 141 | 136 | +5 |
+|   neighborhoods shown | 36 | 35 | +1 |
+|   buildings shown | 72 | 70 | +2 |
 | not an apartment: floor plan, building price or co-living room (data/excluded_not_an_apartment.csv) | 84 | 84 | +0 |
-| thin neighborhoods cut (one apartment, not both well attested and promising) | 18 | 18 | +0 |
+| thin neighborhoods cut (one apartment, not both well attested and promising) | 17 | 18 | -1 |
 | avoid cards | 17 | 17 | +0 |
-|   shown with an asterisk (one thing to confirm) | 59 | 59 | +0 |
+|   shown with an asterisk (one thing to confirm) | 60 | 59 | +1 |
 | removed by a reviewed verdict (data/evidence/review_verdicts.csv) | 7 | 7 | +0 |
-| held back for one confirmation | 241 | 241 | +0 |
-| neighborhoods with 3+ shown places | 18 | 18 | +0 |
+| held back for one confirmation | 239 | 241 | -2 |
+| neighborhoods with 3+ shown places | 19 | 18 | +1 |
 | buildings in the master table | 617 | 617 | +0 |
 
 ## Why units left
@@ -77,31 +77,31 @@
 |:--------------------------|----------------:|---------:|--------:|--------------:|
 | The Fresh-Start Year      |               5 |       35 |      21 |             0 |
 | The Little-City Year      |              27 |      134 |      44 |             4 |
-| The Old-Neighborhood Year |              19 |       76 |      22 |            10 |
+| The Old-Neighborhood Year |              19 |       77 |      22 |            10 |
 | The Quiet-Street Year     |               9 |       12 |       5 |             0 |
-| The Room-to-Breathe Year  |              65 |      302 |      44 |             0 |
+| The Room-to-Breathe Year  |              65 |      305 |      49 |             0 |
 | The Walk-Everywhere Year  |               2 |        8 |       0 |             3 |
 
 ## Fill rate among shown units (percent with a value)
 
 | Field | % |
 |---|---|
-| sqft | 90 |
-| unit_floor | 68 |
-| elevator_basis | 65 |
-| dog_weight_limit_lb | 24 |
-| parking_type | 78 |
-| parking_fee | 33 |
-| pet_rent | 58 |
-| pool | 21 |
+| sqft | 91 |
+| unit_floor | 69 |
+| elevator_basis | 66 |
+| dog_weight_limit_lb | 23 |
+| parking_type | 79 |
+| parking_fee | 32 |
+| pet_rent | 59 |
+| pool | 23 |
 | doorman | 1 |
-| year_built | 34 |
+| year_built | 33 |
 | toll_rt_ezpass | 100 |
 | transit_sat_median | 95 |
 | near_violent_250m_24m | 7 |
-| live_status | 76 |
-| rent_first_full_payment_date | 71 |
-| ev_pause_notes | 19 |
+| live_status | 74 |
+| rent_first_full_payment_date | 69 |
+| ev_pause_notes | 18 |
 
 ## Last lines of each step
 
@@ -112,14 +112,14 @@ test_parsers: 259 assertions passed
 
 **rule tests (every repaired defect and rule, pure)**
 ```
-test_rules (rules): 1064 checks, 0 failed
+test_rules (rules): 1075 checks, 0 failed
 ```
 
 **gates (merge, dedupe, gate each listing)**
 ```
 | movein | 7987 | 961 | 12147 |
 | dog | 10655 | 1593 | 8847 |
-| floor_elevator | 17609 | 1721 | 1765 |
+| floor_elevator | 17579 | 1703 | 1813 |
 | place | 21065 | 0 | 30 |
 | proof | 12569 | 7 | 8519 |
 | elevator | 5441 | 876 | 14778 |
@@ -135,7 +135,7 @@ test_rules (rules): 1064 checks, 0 failed
 ```
 | movein | 7987 | 961 | 12147 |
 | dog | 10655 | 1593 | 8847 |
-| floor_elevator | 17609 | 1721 | 1765 |
+| floor_elevator | 17579 | 1703 | 1813 |
 | place | 21065 | 0 | 30 |
 | proof | 12569 | 7 | 8519 |
 | elevator | 5441 | 876 | 14778 |
@@ -147,7 +147,7 @@ test_rules (rules): 1064 checks, 0 failed
 625 680
 650 680
 675 680
-{'pass': 1176} buildings: 680
+{'pass': 1179} buildings: 680
 coordinates: {'listing rows agree': 611, 'census_geocoder (address check)': 4, 'census_geocoder': 1, 'listing majority, unverified': 1}; lookups redone at a corrected coordinate: 0 address keys
 ```
 
@@ -155,8 +155,8 @@ coordinates: {'listing rows agree': 611, 'census_geocoder (address check)': 4, '
 ```
 municipality from geography differs from the listed city for 82 address keys (data/reference/municipality_changes.csv)
 # Checkpoint A: neighborhoods and proposed years
-Passing units: 1176 in 680 buildings, across 211 neighborhoods; 84 neighborhoods have 3+ passing places.
-Cluster quality (silhouette; higher is cleaner): {5: 0.158, 6: 0.169}. Using k=6.
+Passing units: 1179 in 680 buildings, across 211 neighborhoods; 84 neighborhoods have 3+ passing places.
+Cluster quality (silhouette; higher is cleaner): {5: 0.138, 6: 0.152}. Using k=6.
 ```
 
 **lifestyle features**
@@ -184,40 +184,45 @@ max      17.21           5.22              5.02              7.26               
 enclave :: Mount Olive[6]; South Brunswick[6]; Millburn[3]; Fairfield[2]; East Fishkill[2]; Wilton[1]; Howell[1]; Independence[1]; Verona[1]; Brightwaters[1]
 middle :: Plainsboro[34]; Stamford[27]; Franklin[20]; Milford[16]; Bloomfield[13]; Danbury[12]; Jersey City – West Side[12]; Yonkers[11]; Long Branch[9]; Elizabeth[7]
 new_water :: Norwalk[22]; New Brunswick[16]; West New York[8]; Jersey City – Bergen-Lafayette[5]; North Bergen[4]; Harrison[2]; Long Island City-Hunters Point[1]
-pre_car :: New Haven[190]; Jersey City – McGinley Square[11]; Astoria (Central)[3]; Bay Ridge[1]; Brooklyn Heights[1]; Crown Heights (North)[1]; East Williamsburg[1]; Kew Gardens[1]; Sunnyside[1]; Woodside[1]
-settled :: Newark[56]; Flushing-Willets Point[10]; Jackson Heights[10]; Jamaica Hills-Briarwood[8]; Hempstead[5]; Forest Hills[3]; Norwood[3]; Union City[2]; Tremont[2]; Bensonhurst[2]
-space :: Bridgeport[41]; Paterson[41]; Hamden[40]; East Haven[25]; Woodbridge[22]; Bayonne[21]; West Haven[17]; West Windsor[14]; Lawrence[14]; Newburgh[13]
+pre_car :: New Haven[189]; Jersey City – McGinley Square[11]; Astoria (Central)[3]; Bay Ridge[1]; Brooklyn Heights[1]; Crown Heights (North)[1]; East Williamsburg[1]; Kew Gardens[1]; Sunnyside[1]; Woodside[1]
+settled :: Newark[57]; Flushing-Willets Point[10]; Jackson Heights[10]; Jamaica Hills-Briarwood[8]; Hempstead[5]; Forest Hills[3]; Norwood[3]; Union City[2]; Tremont[2]; Bensonhurst[2]
+space :: Bridgeport[41]; Paterson[41]; Hamden[40]; East Haven[25]; Bayonne[21]; Woodbridge[21]; West Haven[17]; West Windsor[14]; Lawrence[14]; Newburgh[13]
 ```
 
 **building amenities (cached pages)**
 ```
-passing buildings: 680; already in csv: 1204; to process: 0
+  year_built                     84   12.4%
+  year_renovated                 16    2.4%
+  total_floors                    8    1.2%
+  unit_count                    127   18.7%
+  management_company             68   10.0%
+  fetched: 0
 ```
 
 **master tables**
 ```
-  unit floor basis {'unknown': 704, 'inferred': 366, 'stated': 13, 'confirmed': 11} | label kind of inferred {'simple': 354, 'complex': 12}
+  unit floor basis {'unknown': 704, 'inferred': 369, 'stated': 13, 'confirmed': 11} | label kind of inferred {'simple': 357, 'complex': 12}
   confirmed floor values: 26 read, 15 matched no unit in the master (most are units that left the list), 0 not parseable (data/reference/floor_confirm_unmatched.csv)
-  live status {'not checked': 873, 'live': 166, 'blocked': 30, 'gone': 13, 'changed': 12} | coordinates {'listing rows agree': 611, 'census_geocoder (address check)': 4, 'listing majority, unverified': 1, 'census_geocoder': 1}
+  live status {'not checked': 876, 'live': 166, 'blocked': 30, 'gone': 13, 'changed': 12} | coordinates {'listing rows agree': 611, 'census_geocoder (address check)': 4, 'listing majority, unverified': 1, 'census_geocoder': 1}
   phone answers: 0 listing rows in 0 buildings (data/evidence/call_answers.csv is absent or empty)
-  page modification date known: 134 | stale: {'no': 1065, 'open': 19, 'remove': 10} | elevator on a listing site's page alone: 132 buildings | overnight parking rule: {'none': 513, 'permit': 76, 'ban': 16, 'seasonal': 12}
-  evidence facts not mapped to a field: {'building_size': 45, 'listing_broker': 18, 'building_site': 13, 'listing_type': 12, 'application_fee': 11, 'listing_date': 10, 'move_in_fees': 9, 'deposit': 8, 'available_units_listed': 7, 'building_site_url': 6, 'listing_agent': 5, 'dog': 5, 'openigloo_summary_counts': 5, 'open_violations_note': 5, 'deposit_and_fees': 4, 'building': 4, 'broker_fee': 3, 'landlord': 3, 'ownership': 3, 'own_site': 3, 'board_approval': 2, 'pet_deposit': 2, 'pet_count_limit': 2, 'building_name': 2, 'openigloo_summary': 2}
+  page modification date known: 138 | stale: {'no': 1068, 'open': 19, 'remove': 10} | elevator on a listing site's page alone: 133 buildings | overnight parking rule: {'none': 513, 'permit': 76, 'ban': 16, 'seasonal': 12}
+  evidence facts not mapped to a field: {'building_size': 45, 'listing_broker': 18, 'building_site': 13, 'listing_type': 12, 'application_fee': 11, 'listing_date': 10, 'move_in_fees': 9, 'deposit': 8, 'available_units_listed': 8, 'dog': 6, 'building_site_url': 6, 'listing_agent': 5, 'openigloo_summary_counts': 5, 'open_violations_note': 5, 'deposit_and_fees': 4, 'building': 4, 'broker_fee': 3, 'landlord': 3, 'ownership': 3, 'own_site': 3, 'board_approval': 2, 'pet_deposit': 2, 'pet_count_limit': 2, 'building_name': 2, 'openigloo_summary': 2}
 ```
 
 **rent terms**
 ```
-1176 rows -> data/rent_terms.csv
-offer_type: {'months_free': 299, 'other': 115, 'none': 645, 'reduced_deposit_or_fee': 44, 'look_and_lease': 22, 'weeks_free': 4, 'dollar_credit': 47}
-listed_price_is: {'net_effective': 12, 'unknown': 339, 'gross': 825}
-needs_call: {'yes': 398, 'no': 778}
+1179 rows -> data/rent_terms.csv
+offer_type: {'months_free': 302, 'other': 115, 'none': 645, 'reduced_deposit_or_fee': 44, 'look_and_lease': 22, 'weeks_free': 4, 'dollar_credit': 47}
+listed_price_is: {'net_effective': 12, 'unknown': 342, 'gross': 825}
+needs_call: {'yes': 401, 'no': 778}
 ```
 
 **all-in cost**
 ```
-  unknown building fees: 859
+  unknown building fees: 863
   unknown pet rent: 0
-  unknown parking fee: 903
-  unknown gas: 348
+  unknown parking fee: 906
+  unknown gas: 347
   pet rent estimated: 622 | within the cap but likely over once parking and fees are known: 0
   gross above cap while basis passes: 0
 ```
@@ -234,22 +239,21 @@ needs_call: {'yes': 398, 'no': 778}
 
 **ranking and selection**
 ```
-evidence: 19 units excluded, shown 136, avoid cards 17, of them with an asterisk 59 ({'floor and elevator': 29, 'listing': 13, 'elevator': 10, 'eligibility': 3, 'availability': 2, 'dogs allowed': 2}), held for a confirmation 241; shown and never re-read (information only, not an open item) 46
-stages: 1094 costed -> -0 over the all-in cap -> -236 Jamaica safety rule -> -93 failed a gate on confirmed facts -> -84 not an apartment (floor plan, building price, co-living room) -> -7 removed by a reviewed verdict -> -0 sibling floor rule -> -88 sketchy -> -19 evidence exclusions -> 567 ranked
-shown buildings 70; disclosures: {'floor not published': 99, 'special offer': 67, 'one-time costs': 28, 'lease term': 22, 'washer and dryer to confirm': 17, 'overnight street parking': 7, 'broker fee': 4, 'condo rented by its owner': 2, 'dog weight limit not published': 2, 'income requirement': 2, 'net-effective rent': 1, 'something else to know': 1}
-(kept 567 units; candidates 398; shown 427; pools: {'': 513, 'pool': 51, 'indoor': 3}
+evidence: 19 units excluded, shown 141, avoid cards 17, of them with an asterisk 60 ({'floor and elevator': 30, 'listing': 13, 'elevator': 10, 'eligibility': 3, 'availability': 2, 'dogs allowed': 2}), held for a confirmation 239; shown and never re-read (information only, not an open item) 50
+stages: 1097 costed -> -0 over the all-in cap -> -235 Jamaica safety rule -> -93 failed a gate on confirmed facts -> -84 not an apartment (floor plan, building price, co-living room) -> -7 removed by a reviewed verdict -> -0 sibling floor rule -> -88 sketchy -> -19 evidence exclusions -> 571 ranked
+shown buildings 72; disclosures: {'floor not published': 103, 'special offer': 72, 'one-time costs': 28, 'lease term': 23, 'washer and dryer to confirm': 17, 'overnight street parking': 7, 'broker fee': 4, 'dog weight limit not published': 3, 'condo rented by its owner': 2, 'income requirement': 2, 'net-effective rent': 1, 'something else to know': 1}
+(kept 571 units; candidates 399; shown 429; pools: {'': 513, 'pool': 55, 'indoor': 3}
 ```
 
 **rule tests on the output**
 ```
-test_rules (data): 391 checks, 2 failed
+test_rules (data): 393 checks, 1 failed
   FAIL verdicts: a shown unit has no ok / asterisk / disclose verdict
-  FAIL step 4a: NY pet-rent estimate $42.5 is within $10 of the median among ranked buildings ($55)
 ```
 
 **field registry, wiring check, shown-list assertions and the review rule**
 ```
-   trulia:b1001706661:Unit_3611:2078239581 (Quail Ridge 3611): no reviewed verdict: nobody has read this unit's evidence
+   apartmentlist:p32992-qr-a1-0719 (Quail Ridge 0719): no reviewed verdict: nobody has read this unit's evidence
    avalon:AVB-NJ006-006-6223 (eaves West Windsor 6223): no reviewed verdict: nobody has read this unit's evidence
    avalon:AVB-NJ006-009-9124 (eaves West Windsor 9124): no reviewed verdict: nobody has read this unit's evidence
    trulia:2084734385 ( 2D): the verdict was written against older evidence: the building's evidence rows have changed since the review
