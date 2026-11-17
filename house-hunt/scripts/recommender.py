@@ -93,6 +93,10 @@ def mins(n):
     return f"{n} minute{'' if n == 1 else 's'}"
 
 
+def places_n(n):
+    return f"{n} place{'' if n == 1 else 's'}"
+
+
 def pw(x, pts):
     if x <= pts[0][0]:
         return pts[0][1]
@@ -235,8 +239,20 @@ def add_similar(buildings, mean, sd):
         b["similar"] = [i for _, i in d[:N_SIMILAR]]
 
 
+GROUP_KM = 10.0             # a one-apartment neighborhood joins its host only within this distance and in the same state
+
+
+def host_of(h, by_id):
+    """The group a neighborhood counts under: its parked host if that is within GROUP_KM and in the same state, else itself."""
+    p = h.get("parked_under")
+    if p and p in by_id and by_id[p].get("state") == h.get("state") and (h.get("parked_distance_km") or 1e9) <= GROUP_KM:
+        return p
+    return h["id"]
+
+
 def build_groups(neighborhoods, buildings, mean, sd):
-    host = {h["id"]: (h.get("parked_under") or h["id"]) for h in neighborhoods}
+    hb = {h["id"]: h for h in neighborhoods}
+    host = {h["id"]: host_of(h, hb) for h in neighborhoods}
     name = {h["id"]: h["name"] for h in neighborhoods}
     members = {}
     for b in sorted(buildings, key=lambda b: b["id"]):
@@ -277,7 +293,7 @@ def add_tags(neighborhoods, buildings, groups, mean, sd):
     gm = {g["id"]: g["building_ids"] for g in groups}
     for h in neighborhoods:
         own = [b["id"] for b in buildings if b["neighborhood_id"] == h["id"]]
-        bids = gm.get(h["id"]) if not h.get("parked_under") and h["id"] in gm else own
+        bids = gm[h["id"]] if h["id"] in gm else own
         h["tags"] = _tags_for(bids, by, mean, sd) if bids else None
 
 
@@ -502,7 +518,7 @@ def _better(k, f):
         return f["places"]
     if k == "green":
         return None if f["walk"] is None else -f["walk"]
-    return f["parking"]
+    return None if f["parking"] == PARKING_UNKNOWN else f["parking"]
 
 
 def _good(k, f):
@@ -514,7 +530,7 @@ def _good(k, f):
         size = f"up to {f['sqft']:,} sq ft" if f["sqft"] else "more room"
         return f"A separate bedroom, {size}" if f["bedroom"] else size[0].upper() + size[1:]
     if k == "going_out":
-        return f"{f['places']} places to eat and drink within a 10-minute walk" if f["places"] is not None else "Places to eat and drink close by"
+        return f"{places_n(f['places'])} to eat and drink within a 10-minute walk" if f["places"] is not None else "Places to eat and drink close by"
     if k == "green":
         return f"A park about {mins(f['walk'])} on foot" if f["walk"] is not None else "A park close by"
     return PARKING_WORDS.get(f["parking"], "parking not stated")[0].upper() + PARKING_WORDS.get(f["parking"], "parking not stated")[1:]
@@ -528,7 +544,7 @@ def _fig_text(k, f):
     if k == "room":
         return f"{f['sqft']:,} sq ft" if f["sqft"] else "size not published"
     if k == "going_out":
-        return f"{f['places']}" if f["places"] is not None else "not known"
+        return places_n(f["places"]) if f["places"] is not None else "not known"
     if k == "green":
         return mins(f["walk"]) if f["walk"] is not None else "not known"
     return PARKING_WORDS.get(f["parking"], "parking not stated")
@@ -543,10 +559,15 @@ def _bad(k, f, others):
     if k == "room":
         return f"Smaller: up to {_fig_text(k, f)} (the other two: {o})"
     if k == "going_out":
-        return f"Quieter: {_fig_text(k, f)} places to eat and drink within a 10-minute walk (the other two: {o})"
+        return f"Quieter: {_fig_text(k, f)} to eat and drink within a 10-minute walk (the other two: {o})"
     if k == "green":
         return f"The nearest park is farther: about {_fig_text(k, f)} on foot (the other two: {o})"
-    return f"Parking is less certain: {_fig_text(k, f)} (the other two: {o})"
+    return f"{_fig_text(k, f)[0].upper() + _fig_text(k, f)[1:]} (the other two: {o})"
+
+
+UNKNOWN_TEXT = {"room": "The size isn't published yet; ask on the tour", "parking": "Parking isn't stated yet; ask on the tour",
+                "family": "The drive to Mom and Dad isn't known yet", "money": "The monthly total isn't known yet; ask on the tour",
+                "going_out": "Places to eat and drink nearby aren't mapped yet", "green": "The nearest park isn't mapped yet"}
 
 
 def _first_after_nudge(w, buildings, params, j, factor):
@@ -609,12 +630,15 @@ def recommend(samples, answers, buildings, params):
         oc = [[sum(by[i]["features"][k] for i in tops[o]) / len(tops[o]) for k in FEATURES] for o in others]
         diffs = [(q(w[j] * (cent[j] - sum(c[j] for c in oc) / len(oc))), q(cent[j] - sum(c[j] for c in oc) / len(oc)), k)
                  for j, k in enumerate(FEATURES)] if oc else []
-        give = None
+        give, give_unknown = None, False
         for _, _, k in sorted(diffs, key=lambda t: (t[0], t[2])):
-            if dict((t[2], t[1]) for t in diffs)[k] >= 0:
+            if dict((t[2], t[1]) for t in diffs)[k] >= 0 or k in why_k:     # never give up what `why` praises
                 continue
             mine, theirs = _better(k, figs[g]), [_better(k, figs[o]) for o in others]
-            if mine is not None and all(x is not None for x in theirs) and mine < sum(theirs) / len(theirs):
+            if mine is None:                       # the weak point is an unknown: say so plainly
+                give, give_unknown = k, True
+                break
+            if all(x is not None for x in theirs) and all(mine < x for x in theirs):
                 give = k
                 break
         bl = []
@@ -626,7 +650,8 @@ def recommend(samples, answers, buildings, params):
                     "buildings": bl, "why_features": why_k,
                     "why": ". ".join(_good(k, figs[g]) for k in why_k) + ".",
                     "gives_up_feature": give,
-                    "gives_up": (_bad(give, figs[g], [figs[o] for o in others]) + ".") if give else None,
+                    "gives_up": ((UNKNOWN_TEXT[give] if give_unknown else _bad(give, figs[g], [figs[o] for o in others])) + ".") if give else None,
+                    "gives_up_unknown": give_unknown,
                     "what_would_change": what_would_change(w, buildings, params, g, pos, first)})
     return {"weights": [round(x, 6) for x in w], "neighborhoods": out}
 
@@ -703,7 +728,7 @@ def params_block(buildings, groups, sim, mean, sd, alpha, meds):
         "prior": {"distribution": "Dirichlet", "relative_mass": PRIOR_RELATIVE, "concentration": CONCENTRATION, "alpha": alpha,
                   "draw": "Python random.Random(seed).gammavariate(alpha_k, 1) per feature, normalised, rounded to 6 decimals"},
         "min_pairs": MIN_PAIRS, "max_pairs": MAX_PAIRS, "stop_prob": STOP_PROB, "mmr_lambda": MMR_LAMBDA, "relevance_floor": RELEVANCE_FLOOR, "relevance_top_share": RELEVANCE_TOP_SHARE,
-        "pair_pool": PAIR_POOL, "n_similar": N_SIMILAR, "n_more_like_this": N_MORE, "round_decimals": ROUND, "nudges": list(NUDGES),
+        "pair_pool": PAIR_POOL, "group_km": GROUP_KM, "n_similar": N_SIMILAR, "n_more_like_this": N_MORE, "round_decimals": ROUND, "nudges": list(NUDGES),
         "feature_mean": mean, "feature_sd": sd,
         "groups": [{k: g[k] for k in ("id", "name", "building_ids", "neighborhood_ids")} for g in groups],
         "group_similarity": sim,
@@ -719,7 +744,8 @@ def params_block(buildings, groups, sim, mean, sd, alpha, meds):
             "sample_sets": "for each sample, the MMR top three with that sample's weights, as sorted ids joined by '|'; computed once",
             "next_pair": "pool = top pair_pool buildings by round(score_wbar) desc, id; pairs (a, b) with a < b by id, skipping pairs asked; gain = round(H(set distribution under pi) - sum over answers of P(answer) x H(set distribution under the posterior after that answer)); highest gain, ties to the earlier pair in (a, b) id order; entropy in nats",
             "stop": "stop when answers >= max_pairs, or answers >= min_pairs and round(max set probability) >= stop_prob",
-            "recommend": "groups by MMR on wbar; in each, the three best buildings by round(score) desc, id; why = the two features with the largest wbar_k x (group centroid_k - mean over all buildings_k); gives_up = the feature with the most negative wbar_k x (centroid_k - mean of the other two picked centroids_k) (if none is negative, the most negative unweighted difference; if none, null); figures in the text are over the three buildings shown",
+            "groups": "a one-apartment neighborhood counts under its parked host only when the host is within group_km and in the same state; otherwise it is its own group (groups lists the result)",
+            "recommend": "groups by MMR on wbar; in each, the three best buildings by round(score) desc, id; why = the two features with the largest wbar_k x (group centroid_k - mean over all buildings_k); gives_up: features in order of wbar_k x (centroid_k - mean of the other two picked centroids_k), negative ones only and never one of the two `why` features (centroids over the buildings shown); the first whose figure is unknown here (sq ft not published, parking not stated) is said plainly (gives_up_unknown true), or the first where this neighborhood's figure is worse than BOTH others' known figures is compared; none: null. Figures are over the buildings shown",
             "what_would_change": "multiply one weight by a nudge factor (more) or divide by it (less), renormalise, and see which group has the highest score; levels in `nudges` order, then features in order, then more before less; the first found where the first group changes (for the first neighborhood) or becomes this one (for the second and third)",
             "more_like_this": "for each of the nine buildings shown, in order: up to 3 nearest other buildings by sqrt(sum_k wbar_k x (z_k - z'_k)^2), z = (features - feature_mean)/feature_sd, excluding the nine and the thumbnails already given; ties by id",
             "comparisons": "values compared are rounded to round_decimals; ties go to the smaller id",

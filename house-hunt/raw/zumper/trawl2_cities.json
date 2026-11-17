@@ -5189,6 +5189,610 @@
 "cards": 44,
 "status": "done",
 "searched_at": "2026-11-17T18:59:58+00:00"
+},
+"mahopac-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T19:00:01+00:00"
+},
+"patterson-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 44,
+"status": "done",
+"searched_at": "2026-11-17T19:00:07+00:00"
+},
+"monroe-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T19:00:10+00:00"
+},
+"highland-falls-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 44,
+"status": "done",
+"searched_at": "2026-11-17T19:00:17+00:00"
+},
+"carmel-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T19:00:19+00:00"
+},
+"chester-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T19:00:22+00:00"
+},
+"washingtonville-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 41,
+"status": "done",
+"searched_at": "2026-11-17T19:00:28+00:00"
+},
+"stormville-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T19:00:32+00:00"
+},
+"holmes-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T19:00:34+00:00"
+},
+"goshen-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T19:00:37+00:00"
+},
+"hopewell-junction-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T19:00:40+00:00"
+},
+"warwick-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T19:00:43+00:00"
+},
+"pawling-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T19:00:46+00:00"
+},
+"new-windsor-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T19:00:49+00:00"
+},
+"greenwood-lake-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 34,
+"status": "done",
+"searched_at": "2026-11-17T19:00:55+00:00"
+},
+"fishkill-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 34,
+"status": "done",
+"searched_at": "2026-11-17T19:01:01+00:00"
+},
+"maybrook-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T19:01:04+00:00"
+},
+"wingdale-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 20,
+"status": "done",
+"searched_at": "2026-11-17T19:01:07+00:00"
+},
+"walden-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T19:01:10+00:00"
+},
+"beacon-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 46,
+"status": "done",
+"searched_at": "2026-11-17T19:01:18+00:00"
+},
+"newburgh-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 44,
+"status": "done",
+"searched_at": "2026-11-17T19:01:22+00:00"
+},
+"montgomery-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T19:01:25+00:00"
+},
+"middletown-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 33,
+"status": "done",
+"searched_at": "2026-11-17T19:01:31+00:00"
+},
+"wappingers-falls-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T19:01:34+00:00"
+},
+"morrisville-pa": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T19:01:37+00:00"
+},
+"easton-pa": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 46,
+"status": "done",
+"searched_at": "2026-11-17T19:01:43+00:00"
+},
+"pine-bush-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T19:01:46+00:00"
+},
+"poughkeepsie-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 44,
+"status": "done",
+"searched_at": "2026-11-17T19:01:52+00:00"
+},
+"port-jervis-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T19:01:55+00:00"
+},
+"upper-black-eddy-pa": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T19:01:58+00:00"
+},
+"westtown-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T19:02:01+00:00"
+},
+"milford-pa": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 18,
+"status": "done",
+"searched_at": "2026-11-17T19:02:04+00:00"
+},
+"east-stroudsburg-pa": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T19:02:07+00:00"
+},
+"stroudsburg-pa": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 31,
+"status": "done",
+"searched_at": "2026-11-17T19:02:13+00:00"
+},
+"new-paltz-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 44,
+"status": "done",
+"searched_at": "2026-11-17T19:02:19+00:00"
+},
+"tillson-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T19:02:22+00:00"
+},
+"bensalem-pa": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T19:02:25+00:00"
+},
+"bristol-pa": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 50,
+"status": "done",
+"searched_at": "2026-11-17T19:02:31+00:00"
+},
+"levittown-pa": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 50,
+"status": "done",
+"searched_at": "2026-11-17T19:02:37+00:00"
+},
+"newtown-pa": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T19:02:40+00:00"
+},
+"yardley-pa": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T19:02:43+00:00"
+},
+"fairless-hills-pa": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T19:02:46+00:00"
+},
+"langhorne-pa": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T19:02:49+00:00"
+},
+"wallkill-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T19:02:52+00:00"
+},
+"bellerose-terrace-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"pelham-manor-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"village-of-pelham-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"eastchester-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"palisades-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"sparkill-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"orangeburg-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"hawthorne-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"valhalla-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"sleepy-hollow-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"armonk-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"blauvelt-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"thornwood-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"bardonia-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"briarcliff-manor-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"spring-valley-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"chappaqua-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"bedford-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"bedford-hills-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 50,
+"status": "done",
+"searched_at": "2026-11-17T19:02:58+00:00"
+},
+"stony-point-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"heritage-hills-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"shrub-oak-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"amawalk-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"cortlandt-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"montrose-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"southfields-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"brewster-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"fort-montgomery-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"harriman-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"tuxedo-park-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"north-salem-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"putnam-valley-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"garrison-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"scotchtown-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"campbell-hall-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"poughquag-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"bloomingburg-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T19:03:01+00:00"
 }
 },
 "counts": {
@@ -9361,6 +9965,326 @@ null,
 0,
 0,
 1
+],
+"stormville-ny": [
+0,
+1,
+1
+],
+"hopewell-junction-ny": [
+0,
+2,
+5
+],
+"fishkill-ny": [
+1,
+3,
+23
+],
+"chester-ny": [
+0,
+5,
+18
+],
+"washingtonville-ny": [
+1,
+0,
+4
+],
+"goshen-ny": [
+0,
+10,
+22
+],
+"campbell-hall-ny": [
+0,
+0,
+3
+],
+"maybrook-ny": [
+0,
+2,
+4
+],
+"new-windsor-ny": [
+0,
+6,
+11
+],
+"scotchtown-ny": [
+0,
+0,
+1
+],
+"montgomery-ny": [
+0,
+2,
+6
+],
+"beacon-ny": [
+4,
+16,
+45
+],
+"newburgh-ny": [
+1,
+19,
+63
+],
+"monroe-ny": [
+0,
+5,
+28
+],
+"middletown-ny": [
+4,
+26,
+118
+],
+"walden-ny": [
+0,
+3,
+13
+],
+"bloomingburg-ny": [
+0,
+1,
+5
+],
+"wallkill-ny": [
+0,
+1,
+9
+],
+"pine-bush-ny": [
+0,
+1,
+5
+],
+"wappingers-falls-ny": [
+0,
+3,
+33
+],
+"verbank-ny": [
+0,
+0,
+1
+],
+"9-hudson-harbour-drive-poughkeepsie-ny": [
+null,
+null,
+0
+],
+"milton-ny": [
+0,
+0,
+2
+],
+"pleasant-valley-ny": [
+0,
+0,
+2
+],
+"poughkeepsie-ny": [
+8,
+44,
+165
+],
+"wurtsboro-ny": [
+0,
+0,
+4
+],
+"highland-ny": [
+0,
+0,
+7
+],
+"hyde-park-ny": [
+0,
+2,
+5
+],
+"millbrook-ny": [
+0,
+1,
+6
+],
+"wassaic-ny": [
+0,
+1,
+1
+],
+"amenia-ny": [
+0,
+0,
+1
+],
+"new-paltz-ny": [
+1,
+0,
+8
+],
+"kerhonkson-ny": [
+0,
+1,
+2
+],
+"rock-hill-ny": [
+0,
+0,
+1
+],
+"mountain-dale-ny": [
+0,
+0,
+3
+],
+"woodridge-ny": [
+0,
+1,
+6
+],
+"high-falls-ny": [
+0,
+0,
+0
+],
+"staatsburg-ny": [
+0,
+0,
+2
+],
+"ulster-park-ny": [
+1,
+1,
+4
+],
+"tillson-ny": [
+0,
+1,
+2
+],
+"clinton-corners-ny": [
+0,
+0,
+2
+],
+"glen-spey-ny": [
+0,
+0,
+0
+],
+"greeley-pa": [
+0,
+0,
+0
+],
+"tannersville-pa": [
+0,
+0,
+5
+],
+"henryville-pa": [
+0,
+0,
+6
+],
+"saylorsburg-pa": [
+1,
+0,
+3
+],
+"cresco-pa": [
+0,
+0,
+2
+],
+"mount-pocono-pa": [
+0,
+0,
+5
+],
+"pocono-summit-pa": [
+0,
+0,
+7
+],
+"effort-pa": [
+0,
+2,
+4
+],
+"long-pond-pa": [
+0,
+0,
+5
+],
+"pocono-pines-pa": [
+0,
+0,
+3
+],
+"port-ewen-ny": [
+0,
+1,
+4
+],
+"kingston-ny": [
+1,
+11,
+32
+],
+"olivebridge-ny": [
+0,
+1,
+2
+],
+"rhinebeck-ny": [
+0,
+1,
+2
+],
+"shokan-ny": [
+0,
+0,
+0
+],
+"woodstock-ny": [
+1,
+1,
+5
+],
+"bearsville-ny": [
+0,
+1,
+3
+],
+"bryn-athyn-pa": [
+0,
+2,
+7
+],
+"southampton-pa": [
+0,
+0,
+8
+],
+"warminster-pa": [
+1,
+2,
+14
+],
+"monticello-ny": [
+0,
+3,
+8
+],
+"south-fallsburg-ny": [
+0,
+1,
+3
 ]
 }
 }

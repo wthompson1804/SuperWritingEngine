@@ -1,6 +1,6 @@
 {
  "meta": {
-  "built_at": "2026-11-17T18:58:12+00:00",
+  "built_at": "2026-11-17T19:02:24+00:00",
   "rent_limit": 2000,
   "counts": {
    "apartments": 38,
@@ -749,6 +749,7 @@
    "relevance_floor": 0.85,
    "relevance_top_share": 0.5,
    "pair_pool": 30,
+   "group_km": 10.0,
    "n_similar": 5,
    "n_more_like_this": 3,
    "round_decimals": 9,
@@ -823,6 +824,16 @@
      ]
     },
     {
+     "id": "nj:bloomfield",
+     "name": "Bloomfield",
+     "building_ids": [
+      "b_e39cde86f4"
+     ],
+     "neighborhood_ids": [
+      "nj:bloomfield"
+     ]
+    },
+    {
      "id": "nj:east-orange",
      "name": "East Orange",
      "building_ids": [
@@ -840,11 +851,19 @@
      "id": "nj:newark",
      "name": "Newark",
      "building_ids": [
-      "b_674db3118a",
       "b_fec325fa9f"
      ],
      "neighborhood_ids": [
-      "nj:newark",
+      "nj:newark"
+     ]
+    },
+    {
+     "id": "ny:bath-beach",
+     "name": "Bath Beach",
+     "building_ids": [
+      "b_674db3118a"
+     ],
+     "neighborhood_ids": [
       "ny:bath-beach"
      ]
     },
@@ -854,12 +873,20 @@
      "building_ids": [
       "b_0f0fcfc79c",
       "b_1d1be12629",
-      "b_84bbe8d99e",
       "b_d007846fe9"
      ],
      "neighborhood_ids": [
       "ny:flushing-willets-point",
-      "ny:murray-hill-broadway-flushing",
+      "ny:murray-hill-broadway-flushing"
+     ]
+    },
+    {
+     "id": "ny:sheepshead-bay-manhattan-beach-gerritsen-beach",
+     "name": "Sheepshead Bay-Manhattan Beach-Gerritsen Beach",
+     "building_ids": [
+      "b_84bbe8d99e"
+     ],
+     "neighborhood_ids": [
       "ny:sheepshead-bay-manhattan-beach-gerritsen-beach"
      ]
     },
@@ -868,11 +895,9 @@
      "name": "Yonkers",
      "building_ids": [
       "b_c4831201c1",
-      "b_e39cde86f4",
       "b_ee2549a834"
      ],
      "neighborhood_ids": [
-      "nj:bloomfield",
       "ny:yonkers"
      ]
     }
@@ -880,82 +905,145 @@
    "group_similarity": [
     [
      1.0,
-     0.419547,
-     0.496185,
-     0.33742,
-     0.498848,
-     0.276958,
-     0.196808,
-     0.48409
+     0.43408,
+     0.5088,
+     0.35401,
+     0.501349,
+     0.511396,
+     0.275104,
+     0.2965,
+     0.167299,
+     0.308648,
+     0.425226
     ],
     [
-     0.419547,
+     0.43408,
      1.0,
-     0.405908,
-     0.235874,
-     0.513656,
-     0.243459,
-     0.111697,
-     0.366696
+     0.420783,
+     0.255007,
+     0.369905,
+     0.525833,
+     0.269055,
+     0.238205,
+     0.117024,
+     0.124448,
+     0.330267
     ],
     [
-     0.496185,
-     0.405908,
+     0.5088,
+     0.420783,
      1.0,
-     0.22928,
-     0.392286,
-     0.080409,
+     0.248577,
+     0.236852,
+     0.407502,
+     0.096334,
+     0.09581,
      0.0,
-     0.173581
+     0.047382,
+     0.129491
     ],
     [
-     0.33742,
-     0.235874,
-     0.22928,
+     0.35401,
+     0.255007,
+     0.248577,
      1.0,
-     0.409941,
-     0.410953,
-     0.556678,
-     0.486557
+     0.429341,
+     0.424715,
+     0.446529,
+     0.383708,
+     0.525414,
+     0.579471,
+     0.463114
     ],
     [
-     0.498848,
-     0.513656,
-     0.392286,
-     0.409941,
+     0.501349,
+     0.369905,
+     0.236852,
+     0.429341,
      1.0,
-     0.573878,
-     0.304314,
-     0.624597
+     0.456126,
+     0.395065,
+     0.403318,
+     0.562216,
+     0.558252,
+     0.525059
     ],
     [
-     0.276958,
-     0.243459,
-     0.080409,
-     0.410953,
-     0.573878,
+     0.511396,
+     0.525833,
+     0.407502,
+     0.424715,
+     0.456126,
      1.0,
-     0.410523,
-     0.631121
+     0.527798,
+     0.614336,
+     0.297942,
+     0.316766,
+     0.641911
     ],
     [
-     0.196808,
-     0.111697,
+     0.275104,
+     0.269055,
+     0.096334,
+     0.446529,
+     0.395065,
+     0.527798,
+     1.0,
+     0.769743,
+     0.433315,
+     0.304293,
+     0.624908
+    ],
+    [
+     0.2965,
+     0.238205,
+     0.09581,
+     0.383708,
+     0.403318,
+     0.614336,
+     0.769743,
+     1.0,
+     0.405255,
+     0.328866,
+     0.72343
+    ],
+    [
+     0.167299,
+     0.117024,
      0.0,
-     0.556678,
-     0.304314,
-     0.410523,
+     0.525414,
+     0.562216,
+     0.297942,
+     0.433315,
+     0.405255,
      1.0,
-     0.559774
+     0.625341,
+     0.442685
     ],
     [
-     0.48409,
-     0.366696,
-     0.173581,
-     0.486557,
-     0.624597,
-     0.631121,
-     0.559774,
+     0.308648,
+     0.124448,
+     0.047382,
+     0.579471,
+     0.558252,
+     0.316766,
+     0.304293,
+     0.328866,
+     0.625341,
+     1.0,
+     0.502895
+    ],
+    [
+     0.425226,
+     0.330267,
+     0.129491,
+     0.463114,
+     0.525059,
+     0.641911,
+     0.624908,
+     0.72343,
+     0.442685,
+     0.502895,
      1.0
     ]
    ],
@@ -971,7 +1059,8 @@
     "sample_sets": "for each sample, the MMR top three with that sample's weights, as sorted ids joined by '|'; computed once",
     "next_pair": "pool = top pair_pool buildings by round(score_wbar) desc, id; pairs (a, b) with a < b by id, skipping pairs asked; gain = round(H(set distribution under pi) - sum over answers of P(answer) x H(set distribution under the posterior after that answer)); highest gain, ties to the earlier pair in (a, b) id order; entropy in nats",
     "stop": "stop when answers >= max_pairs, or answers >= min_pairs and round(max set probability) >= stop_prob",
-    "recommend": "groups by MMR on wbar; in each, the three best buildings by round(score) desc, id; why = the two features with the largest wbar_k x (group centroid_k - mean over all buildings_k); gives_up = the feature with the most negative wbar_k x (centroid_k - mean of the other two picked centroids_k) (if none is negative, the most negative unweighted difference; if none, null); figures in the text are over the three buildings shown",
+    "groups": "a one-apartment neighborhood counts under its parked host only when the host is within group_km and in the same state; otherwise it is its own group (groups lists the result)",
+    "recommend": "groups by MMR on wbar; in each, the three best buildings by round(score) desc, id; why = the two features with the largest wbar_k x (group centroid_k - mean over all buildings_k); gives_up: features in order of wbar_k x (centroid_k - mean of the other two picked centroids_k), negative ones only and never one of the two `why` features (centroids over the buildings shown); the first whose figure is unknown here (sq ft not published, parking not stated) is said plainly (gives_up_unknown true), or the first where this neighborhood's figure is worse than BOTH others' known figures is compared; none: null. Figures are over the buildings shown",
     "what_would_change": "multiply one weight by a nudge factor (more) or divide by it (less), renormalise, and see which group has the highest score; levels in `nudges` order, then features in order, then more before less; the first found where the first group changes (for the first neighborhood) or becomes this one (for the second and third)",
     "more_like_this": "for each of the nine buildings shown, in order: up to 3 nearest other buildings by sqrt(sum_k wbar_k x (z_k - z'_k)^2), z = (features - feature_mean)/feature_sd, excluding the nine and the thumbnails already given; ties by id",
     "comparisons": "values compared are rounded to round_decimals; ties go to the smaller id"
@@ -996,14 +1085,14 @@
       "choice": "b"
      },
      {
-      "a": "b_377a717d0d",
+      "a": "b_0f0fcfc79c",
       "b": "b_917f6a1ed1",
       "choice": "a"
      },
      {
-      "a": "b_917f6a1ed1",
-      "b": "b_c4831201c1",
-      "choice": "b"
+      "a": "b_377a717d0d",
+      "b": "b_917f6a1ed1",
+      "choice": "a"
      }
     ],
     "expected_pairs": [
@@ -1012,30 +1101,30 @@
       "b_1d1be12629"
      ],
      [
-      "b_377a717d0d",
+      "b_0f0fcfc79c",
       "b_917f6a1ed1"
      ],
      [
-      "b_917f6a1ed1",
-      "b_c4831201c1"
+      "b_377a717d0d",
+      "b_917f6a1ed1"
      ]
     ],
     "expected_mean_weights": {
-     "family": 0.427463,
-     "money": 0.075782,
-     "room": 0.102539,
-     "going_out": 0.217322,
-     "green": 0.106954,
-     "parking": 0.069939
+     "family": 0.284179,
+     "money": 0.092272,
+     "room": 0.114456,
+     "going_out": 0.301869,
+     "green": 0.115813,
+     "parking": 0.091411
     },
-    "expected_top_set_probability": 0.809345,
+    "expected_top_set_probability": 0.87943,
     "expected_top": [
      [
       "ny:flushing-willets-point",
       [
        "b_1d1be12629",
        "b_d007846fe9",
-       "b_84bbe8d99e"
+       "b_0f0fcfc79c"
       ]
      ],
      [
@@ -1047,57 +1136,55 @@
       ]
      ],
      [
-      "ny:yonkers",
+      "nj:bloomfield",
       [
-       "b_e39cde86f4",
-       "b_c4831201c1",
-       "b_ee2549a834"
+       "b_e39cde86f4"
       ]
      ]
     ],
     "expected_more_like_this": {
      "b_1d1be12629": [
-      "b_0f0fcfc79c",
-      "b_674db3118a",
-      "b_fec325fa9f"
+      "b_84bbe8d99e",
+      "b_fec325fa9f",
+      "b_674db3118a"
      ],
      "b_d007846fe9": [
       "b_66dc364565",
+      "b_ee2549a834",
+      "b_c4831201c1"
+     ],
+     "b_0f0fcfc79c": [
       "b_296b3095f3",
+      "b_5f84c933a2",
       "b_022934bcb2"
      ],
-     "b_84bbe8d99e": [
+     "b_893edb6df8": [
       "b_0e634d994b",
-      "b_5f84c933a2",
+      "b_917f6a1ed1",
       "b_b29a9ae0e3"
      ],
-     "b_893edb6df8": [
-      "b_917f6a1ed1",
-      "b_5204934871",
-      "b_0ba5cc966d"
-     ],
      "b_377a717d0d": [
-      "b_e2378bf884"
+      "b_0ba5cc966d",
+      "b_e2378bf884",
+      "b_5204934871"
      ],
      "b_f95c86db48": [],
-     "b_e39cde86f4": [],
-     "b_c4831201c1": [],
-     "b_ee2549a834": []
+     "b_e39cde86f4": []
     },
     "expected_why": {
-     "ny:flushing-willets-point": "About 12 minutes by car to Mom and Dad. 48 places to eat and drink within a 10-minute walk.",
+     "ny:flushing-willets-point": "92 places to eat and drink within a 10-minute walk. About 12 minutes by car to Mom and Dad.",
      "ct:stamford": "33 places to eat and drink within a 10-minute walk. Monthly totals from $1,806 with utilities and fees.",
-     "ny:yonkers": "About 37 minutes by car to Mom and Dad. A park about 2 minutes on foot."
+     "nj:bloomfield": "19 places to eat and drink within a 10-minute walk. A separate bedroom, up to 564 sq ft."
     },
     "expected_gives_up": {
-     "ny:flushing-willets-point": "Parking is less certain: parking not stated (the other two: off-street parking and parking not stated).",
-     "ct:stamford": "Farther from Mom and Dad: about 53 minutes by car (the other two: 12 minutes and 37 minutes).",
-     "ny:yonkers": "Quieter: 4 places to eat and drink within a 10-minute walk (the other two: 48 and 33)."
+     "ny:flushing-willets-point": "Parking isn't stated yet; ask on the tour.",
+     "ct:stamford": "Farther from Mom and Dad: about 53 minutes by car (the other two: 12 minutes and 51 minutes).",
+     "nj:bloomfield": "Parking isn't stated yet; ask on the tour."
     },
     "expected_what_would_change": {
      "ny:flushing-willets-point": "If money left over mattered more, Stamford would come first.",
      "ct:stamford": "If money left over mattered more, Stamford would come first.",
-     "ny:yonkers": null
+     "nj:bloomfield": null
     }
    },
    {
@@ -1126,6 +1213,21 @@
       "a": "b_d007846fe9",
       "b": "b_e2378bf884",
       "choice": "b"
+     },
+     {
+      "a": "b_0f0fcfc79c",
+      "b": "b_e2378bf884",
+      "choice": "b"
+     },
+     {
+      "a": "b_022934bcb2",
+      "b": "b_893edb6df8",
+      "choice": "either"
+     },
+     {
+      "a": "b_1d1be12629",
+      "b": "b_e2378bf884",
+      "choice": "b"
      }
     ],
     "expected_pairs": [
@@ -1140,17 +1242,29 @@
      [
       "b_d007846fe9",
       "b_e2378bf884"
+     ],
+     [
+      "b_0f0fcfc79c",
+      "b_e2378bf884"
+     ],
+     [
+      "b_022934bcb2",
+      "b_893edb6df8"
+     ],
+     [
+      "b_1d1be12629",
+      "b_e2378bf884"
      ]
     ],
     "expected_mean_weights": {
-     "family": 0.049616,
-     "money": 0.072396,
-     "room": 0.614572,
-     "going_out": 0.061955,
-     "green": 0.135993,
-     "parking": 0.065468
+     "family": 0.031372,
+     "money": 0.075324,
+     "room": 0.628479,
+     "going_out": 0.041843,
+     "green": 0.154561,
+     "parking": 0.06842
     },
-    "expected_top_set_probability": 0.869519,
+    "expected_top_set_probability": 0.793553,
     "expected_top": [
      [
       "ct:bridgeport",
@@ -1197,8 +1311,8 @@
      ],
      "b_e2378bf884": [
       "b_022934bcb2",
-      "b_84bbe8d99e",
-      "b_d007846fe9"
+      "b_d007846fe9",
+      "b_84bbe8d99e"
      ],
      "b_5204934871": [
       "b_893edb6df8"
@@ -1207,12 +1321,12 @@
     "expected_why": {
      "ct:bridgeport": "A separate bedroom, up to 751 sq ft. Monthly totals from $1,703 with utilities and fees.",
      "ct:hamden": "A separate bedroom, up to 860 sq ft. Garage or covered parking.",
-     "ct:danbury": "A separate bedroom, up to 675 sq ft. Parking not stated."
+     "ct:danbury": "A separate bedroom, up to 675 sq ft. 4 places to eat and drink within a 10-minute walk."
     },
     "expected_gives_up": {
-     "ct:bridgeport": "Smaller: up to 751 sq ft (the other two: 860 sq ft and 675 sq ft).",
-     "ct:hamden": "The nearest park is farther: about 9 minutes on foot (the other two: 1 minute and 10 minutes).",
-     "ct:danbury": "Smaller: up to 675 sq ft (the other two: 751 sq ft and 860 sq ft)."
+     "ct:bridgeport": null,
+     "ct:hamden": "Farther from Mom and Dad: about 112 minutes by car (the other two: 81 minutes and 89 minutes).",
+     "ct:danbury": "Costs more: monthly totals from $2,204 (the other two: $1,703 and $1,932)."
     },
     "expected_what_would_change": {
      "ct:bridgeport": "If going out mattered more, Hamden would come first.",
@@ -1270,7 +1384,7 @@
      "green": 0.126405,
      "parking": 0.189053
     },
-    "expected_top_set_probability": 0.829642,
+    "expected_top_set_probability": 0.865883,
     "expected_top": [
      [
       "ct:stamford",
@@ -1281,17 +1395,17 @@
       ]
      ],
      [
-      "ct:hamden",
-      [
-       "b_0ba5cc966d"
-      ]
-     ],
-     [
       "ct:bridgeport",
       [
        "b_b29a9ae0e3",
        "b_0e634d994b",
        "b_917f6a1ed1"
+      ]
+     ],
+     [
+      "ct:hamden",
+      [
+       "b_0ba5cc966d"
       ]
      ]
     ],
@@ -1311,33 +1425,33 @@
       "b_e39cde86f4",
       "b_674db3118a"
      ],
-     "b_0ba5cc966d": [
-      "b_e2378bf884",
-      "b_296b3095f3",
-      "b_5f84c933a2"
-     ],
      "b_b29a9ae0e3": [
-      "b_0f0fcfc79c",
-      "b_5204934871",
-      "b_ee2549a834"
+      "b_5f84c933a2",
+      "b_296b3095f3",
+      "b_e2378bf884"
      ],
-     "b_0e634d994b": [],
-     "b_917f6a1ed1": []
+     "b_0e634d994b": [
+      "b_ee2549a834",
+      "b_5204934871",
+      "b_0f0fcfc79c"
+     ],
+     "b_917f6a1ed1": [],
+     "b_0ba5cc966d": []
     },
     "expected_why": {
      "ct:stamford": "Monthly totals from $1,806 with utilities and fees. 33 places to eat and drink within a 10-minute walk.",
-     "ct:hamden": "Monthly totals from $1,932 with utilities and fees. A separate bedroom, up to 860 sq ft.",
-     "ct:bridgeport": "Monthly totals from $1,703 with utilities and fees. A separate bedroom, up to 751 sq ft."
+     "ct:bridgeport": "Monthly totals from $1,703 with utilities and fees. A separate bedroom, up to 751 sq ft.",
+     "ct:hamden": "Monthly totals from $1,932 with utilities and fees. A separate bedroom, up to 860 sq ft."
     },
     "expected_gives_up": {
-     "ct:stamford": "Smaller: up to 489 sq ft (the other two: 860 sq ft and 751 sq ft).",
-     "ct:hamden": "The nearest park is farther: about 9 minutes on foot (the other two: 4 minutes and 1 minute).",
-     "ct:bridgeport": "Quieter: 4 places to eat and drink within a 10-minute walk (the other two: 33 and 11)."
+     "ct:stamford": "Smaller: up to 489 sq ft (the other two: 751 sq ft and 860 sq ft).",
+     "ct:bridgeport": "Quieter: 4 places to eat and drink within a 10-minute walk (the other two: 33 places and 11 places).",
+     "ct:hamden": "The nearest park is farther: about 9 minutes on foot (the other two: 4 minutes and 1 minute)."
     },
     "expected_what_would_change": {
      "ct:stamford": "If room at home mattered more, Bridgeport would come first.",
-     "ct:hamden": "If money left over mattered less, Hamden would come first.",
-     "ct:bridgeport": "If room at home mattered more, Bridgeport would come first."
+     "ct:bridgeport": "If room at home mattered more, Bridgeport would come first.",
+     "ct:hamden": "If money left over mattered less, Hamden would come first."
     }
    },
    {
@@ -1358,29 +1472,14 @@
       "choice": "b"
      },
      {
-      "a": "b_377a717d0d",
+      "a": "b_0f0fcfc79c",
       "b": "b_917f6a1ed1",
       "choice": "a"
      },
      {
-      "a": "b_917f6a1ed1",
-      "b": "b_c4831201c1",
-      "choice": "either"
-     },
-     {
-      "a": "b_917f6a1ed1",
-      "b": "b_e39cde86f4",
-      "choice": "b"
-     },
-     {
-      "a": "b_0e634d994b",
-      "b": "b_e2378bf884",
+      "a": "b_377a717d0d",
+      "b": "b_917f6a1ed1",
       "choice": "a"
-     },
-     {
-      "a": "b_022934bcb2",
-      "b": "b_0e634d994b",
-      "choice": "b"
      }
     ],
     "expected_pairs": [
@@ -1389,104 +1488,90 @@
       "b_1d1be12629"
      ],
      [
-      "b_377a717d0d",
+      "b_0f0fcfc79c",
       "b_917f6a1ed1"
      ],
      [
-      "b_917f6a1ed1",
-      "b_c4831201c1"
-     ],
-     [
-      "b_917f6a1ed1",
-      "b_e39cde86f4"
-     ],
-     [
-      "b_0e634d994b",
-      "b_e2378bf884"
-     ],
-     [
-      "b_022934bcb2",
-      "b_0e634d994b"
+      "b_377a717d0d",
+      "b_917f6a1ed1"
      ]
     ],
     "expected_mean_weights": {
-     "family": 0.171433,
-     "money": 0.07095,
-     "room": 0.079241,
-     "going_out": 0.393076,
-     "green": 0.201182,
-     "parking": 0.08412
+     "family": 0.284179,
+     "money": 0.092272,
+     "room": 0.114456,
+     "going_out": 0.301869,
+     "green": 0.115813,
+     "parking": 0.091411
     },
-    "expected_top_set_probability": 0.555498,
+    "expected_top_set_probability": 0.87943,
     "expected_top": [
      [
       "ny:flushing-willets-point",
       [
        "b_1d1be12629",
        "b_d007846fe9",
-       "b_84bbe8d99e"
+       "b_0f0fcfc79c"
       ]
      ],
      [
       "ct:stamford",
       [
        "b_893edb6df8",
-       "b_f95c86db48",
-       "b_377a717d0d"
+       "b_377a717d0d",
+       "b_f95c86db48"
       ]
      ],
      [
-      "ny:yonkers",
+      "nj:bloomfield",
       [
-       "b_e39cde86f4",
-       "b_c4831201c1",
-       "b_ee2549a834"
+       "b_e39cde86f4"
       ]
      ]
     ],
     "expected_more_like_this": {
      "b_1d1be12629": [
-      "b_0f0fcfc79c",
+      "b_84bbe8d99e",
       "b_fec325fa9f",
       "b_674db3118a"
      ],
      "b_d007846fe9": [
       "b_66dc364565",
-      "b_0e634d994b",
-      "b_0ba5cc966d"
+      "b_ee2549a834",
+      "b_c4831201c1"
      ],
-     "b_84bbe8d99e": [
+     "b_0f0fcfc79c": [
+      "b_296b3095f3",
       "b_5f84c933a2",
-      "b_b29a9ae0e3",
-      "b_296b3095f3"
-     ],
-     "b_893edb6df8": [
-      "b_917f6a1ed1",
-      "b_5204934871",
-      "b_e2378bf884"
-     ],
-     "b_f95c86db48": [
       "b_022934bcb2"
      ],
-     "b_377a717d0d": [],
-     "b_e39cde86f4": [],
-     "b_c4831201c1": [],
-     "b_ee2549a834": []
+     "b_893edb6df8": [
+      "b_0e634d994b",
+      "b_917f6a1ed1",
+      "b_b29a9ae0e3"
+     ],
+     "b_377a717d0d": [
+      "b_0ba5cc966d",
+      "b_e2378bf884",
+      "b_5204934871"
+     ],
+     "b_f95c86db48": [],
+     "b_e39cde86f4": []
     },
     "expected_why": {
-     "ny:flushing-willets-point": "48 places to eat and drink within a 10-minute walk. About 12 minutes by car to Mom and Dad.",
+     "ny:flushing-willets-point": "92 places to eat and drink within a 10-minute walk. About 12 minutes by car to Mom and Dad.",
      "ct:stamford": "33 places to eat and drink within a 10-minute walk. Monthly totals from $1,806 with utilities and fees.",
-     "ny:yonkers": "About 37 minutes by car to Mom and Dad. A park about 2 minutes on foot."
+     "nj:bloomfield": "19 places to eat and drink within a 10-minute walk. A separate bedroom, up to 564 sq ft."
     },
     "expected_gives_up": {
-     "ny:flushing-willets-point": "Parking is less certain: parking not stated (the other two: off-street parking and parking not stated).",
-     "ct:stamford": "Farther from Mom and Dad: about 53 minutes by car (the other two: 12 minutes and 37 minutes).",
-     "ny:yonkers": "Quieter: 4 places to eat and drink within a 10-minute walk (the other two: 48 and 33)."
+     "ny:flushing-willets-point": "Parking isn't stated yet; ask on the tour.",
+     "ct:stamford": "Farther from Mom and Dad: about 53 minutes by car (the other two: 12 minutes and 51 minutes).",
+     "nj:bloomfield": "Parking isn't stated yet; ask on the tour."
     },
     "expected_what_would_change": {
      "ny:flushing-willets-point": "If money left over mattered more, Stamford would come first.",
      "ct:stamford": "If money left over mattered more, Stamford would come first.",
-     "ny:yonkers": null
+     "nj:bloomfield": null
     }
    },
    {
@@ -1505,8 +1590,8 @@
       "choice": "either"
      },
      {
-      "a": "b_917f6a1ed1",
-      "b": "b_d007846fe9",
+      "a": "b_0f0fcfc79c",
+      "b": "b_b29a9ae0e3",
       "choice": "either"
      },
      {
@@ -1515,13 +1600,13 @@
       "choice": "either"
      },
      {
-      "a": "b_0e634d994b",
-      "b": "b_e2378bf884",
+      "a": "b_0ba5cc966d",
+      "b": "b_893edb6df8",
       "choice": "either"
      },
      {
       "a": "b_0ba5cc966d",
-      "b": "b_893edb6df8",
+      "b": "b_f95c86db48",
       "choice": "either"
      }
     ],
@@ -1535,31 +1620,31 @@
       "b_893edb6df8"
      ],
      [
-      "b_917f6a1ed1",
-      "b_d007846fe9"
+      "b_0f0fcfc79c",
+      "b_b29a9ae0e3"
      ],
      [
       "b_377a717d0d",
       "b_c4831201c1"
      ],
      [
-      "b_0e634d994b",
-      "b_e2378bf884"
+      "b_0ba5cc966d",
+      "b_893edb6df8"
      ],
      [
       "b_0ba5cc966d",
-      "b_893edb6df8"
+      "b_f95c86db48"
      ]
     ],
     "expected_mean_weights": {
-     "family": 0.168141,
-     "money": 0.14855,
-     "room": 0.2703,
-     "going_out": 0.116017,
-     "green": 0.204033,
-     "parking": 0.09296
+     "family": 0.140174,
+     "money": 0.139322,
+     "room": 0.216707,
+     "going_out": 0.094534,
+     "green": 0.285023,
+     "parking": 0.124241
     },
-    "expected_top_set_probability": 0.374202,
+    "expected_top_set_probability": 0.460209,
     "expected_top": [
      [
       "ct:bridgeport",
@@ -1574,13 +1659,15 @@
       [
        "b_1d1be12629",
        "b_d007846fe9",
-       "b_84bbe8d99e"
+       "b_0f0fcfc79c"
       ]
      ],
      [
-      "ct:hamden",
+      "ct:stamford",
       [
-       "b_0ba5cc966d"
+       "b_893edb6df8",
+       "b_f95c86db48",
+       "b_377a717d0d"
       ]
      ]
     ],
@@ -1593,40 +1680,40 @@
      "b_0e634d994b": [
       "b_66dc364565",
       "b_fec325fa9f",
-      "b_f95c86db48"
-     ],
-     "b_917f6a1ed1": [
-      "b_c4831201c1",
-      "b_e2378bf884",
-      "b_893edb6df8"
-     ],
-     "b_1d1be12629": [
-      "b_0f0fcfc79c",
-      "b_674db3118a",
       "b_ee2549a834"
      ],
-     "b_d007846fe9": [
-      "b_377a717d0d",
+     "b_917f6a1ed1": [
+      "b_0ba5cc966d",
+      "b_c4831201c1",
+      "b_84bbe8d99e"
+     ],
+     "b_1d1be12629": [
+      "b_674db3118a",
       "b_5204934871",
+      "b_e2378bf884"
+     ],
+     "b_d007846fe9": [
       "b_022934bcb2"
      ],
-     "b_84bbe8d99e": [],
-     "b_0ba5cc966d": []
+     "b_0f0fcfc79c": [],
+     "b_893edb6df8": [],
+     "b_f95c86db48": [],
+     "b_377a717d0d": []
     },
     "expected_why": {
      "ct:bridgeport": "A separate bedroom, up to 751 sq ft. Monthly totals from $1,703 with utilities and fees.",
-     "ny:flushing-willets-point": "About 12 minutes by car to Mom and Dad. 48 places to eat and drink within a 10-minute walk.",
-     "ct:hamden": "A separate bedroom, up to 860 sq ft. Monthly totals from $1,932 with utilities and fees."
+     "ny:flushing-willets-point": "About 12 minutes by car to Mom and Dad. 92 places to eat and drink within a 10-minute walk.",
+     "ct:stamford": "Monthly totals from $1,806 with utilities and fees. 33 places to eat and drink within a 10-minute walk."
     },
     "expected_gives_up": {
-     "ct:bridgeport": "Quieter: 4 places to eat and drink within a 10-minute walk (the other two: 48 and 11).",
-     "ny:flushing-willets-point": "Smaller: up to 525 sq ft (the other two: 751 sq ft and 860 sq ft).",
-     "ct:hamden": "Farther from Mom and Dad: about 112 minutes by car (the other two: 81 minutes and 12 minutes)."
+     "ct:bridgeport": "Farther from Mom and Dad: about 81 minutes by car (the other two: 12 minutes and 53 minutes).",
+     "ny:flushing-willets-point": "Costs more: monthly totals from $2,079 (the other two: $1,703 and $1,806).",
+     "ct:stamford": "Smaller: up to 489 sq ft (the other two: 751 sq ft and 600 sq ft)."
     },
     "expected_what_would_change": {
      "ct:bridgeport": "If being near Mom and Dad mattered more, Flushing-Willets Point would come first.",
      "ny:flushing-willets-point": "If being near Mom and Dad mattered more, Flushing-Willets Point would come first.",
-     "ct:hamden": "If a park nearby mattered less, Hamden would come first."
+     "ct:stamford": "If room at home mattered less, Stamford would come first."
     }
    }
   ]
@@ -2465,7 +2552,7 @@
    "parked_label": null,
    "tags": [
     "Easy parking",
-    "near family"
+    "green"
    ]
   },
   {
@@ -2772,7 +2859,7 @@
    "parked_label": null,
    "tags": [
     "Near family",
-    "green"
+    "quiet"
    ]
   }
  ],
@@ -3620,7 +3707,7 @@
     "b_0f0fcfc79c",
     "b_f95c86db48"
    ],
-   "group_id": "ny:flushing-willets-point"
+   "group_id": "ny:sheepshead-bay-manhattan-beach-gerritsen-beach"
   },
   {
    "id": "b_66dc364565",
@@ -6236,7 +6323,7 @@
     "b_c4831201c1",
     "b_84bbe8d99e"
    ],
-   "group_id": "ny:yonkers"
+   "group_id": "nj:bloomfield"
   },
   {
    "id": "b_674db3118a",
@@ -6650,7 +6737,7 @@
     "b_f95c86db48",
     "b_0e634d994b"
    ],
-   "group_id": "nj:newark"
+   "group_id": "ny:bath-beach"
   },
   {
    "id": "b_893edb6df8",

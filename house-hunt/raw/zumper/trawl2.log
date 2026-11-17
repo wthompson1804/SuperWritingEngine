@@ -75,3 +75,6 @@ build: {'cards': 3735, 'detail_rows': 1724, 'card_rows': 2241, 'dropped_detail_o
   state {'NY': 1282, 'NJ': 2334, 'CT': 502, 'PA': 14}
 2026-11-17T18:57:07+00:00 trawl2 cities done 380 requests 7 last new-rochelle-ny
 2026-11-17T18:58:28+00:00 trawl2 cities done 400 requests 34 last nyack-ny
+2026-11-17T19:00:01+00:00 trawl2 cities done 420 requests 65 last mahopac-ny
+2026-11-17T19:01:22+00:00 trawl2 cities done 440 requests 92 last newburgh-ny
+2026-11-17T19:02:43+00:00 trawl2 cities done 460 requests 119 last yardley-pa
