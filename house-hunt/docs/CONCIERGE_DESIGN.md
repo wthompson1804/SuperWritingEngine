@@ -75,3 +75,70 @@ this page. A missing value is `null`, never a guess.
 | `site/concierge.html`, `scripts/build_concierge.py`, `scripts/test_concierge_pick.js`, `scripts/concierge_walkthrough_test.js` | page |
 | `data/evidence/live_check_batch_21.csv` | re-read |
 | `scripts/verify_concierge.py`, this file, `CLAUDE.md`, `PROGRESS.md` | coordinator |
+
+---
+
+## Version 2 (Will, 2026-11-17): ask well, then go straight to what fits
+
+Will's review of version 1: the interface is much better; now (1) ask the right questions the right way to learn
+her preferences, (2) skip straight to the apartments that fit, (3) every place says which experience it belongs to
+and what life would be like there, made meaningful with real, sourced local detail (there are few enough places
+to research each one), (4) she picks and compares, (5) saved places and compare must be obvious and one tap away.
+
+### Principles (from the research behind version 1)
+
+- Ask about her life, not about attributes: "how often will you see Mom and Dad?" rather than "how important is
+  distance?". Concrete situations, one question per screen, one tap per answer, no sliders, under two minutes.
+- Separate must-haves (screens) from preferences (weights). A must-have answer moves places that fail it to a
+  collapsed "Doesn't fit what you said" group with the reason; nothing is deleted.
+- Show consequences while she answers: a live "N of 22 places fit" under every question, and an answer that would
+  leave none says so before she taps it.
+- End with an explicit priority pick ("Which two matter most?"): explicit values clarification beats inferred.
+- After the questions, the experience is a label and a story on each place, not a gate in front of them.
+
+### The flow
+
+1. **Welcome**: one sentence, Start. A quiet link "First, see the three kinds of life" opens the version-1 stories.
+2. **Questions** (from `questions` in the data; the page renders whatever is there, in order):
+   visits (how often she will see Mom and Dad) → longest drive she would make for a visit (must-have) → room to
+   work (separate bedroom needed / studio with room for a desk / either; the first is a must-have) → Saturday night
+   (walk out / drive somewhere / stay in) → the dog's daily walk (park to walk to / dog area in the building /
+   either) → where the car sleeps (garage even at a cost / any off-street spot / street is fine) → a comfortable
+   monthly total with utilities and fees (must-have) → which two matter most.
+3. **Your matches**: every place that fits, best first; the top three marked "Best fits". Each card: experience
+   badge, name and neighborhood, "Fits you because" (two or three chips tied to her answers, each with the real
+   figure), one amber chip for any preference it misses, rent and total as a labelled pair, the checked line,
+   Save. Below, collapsed: "Doesn't fit what you said (N)" with the reason on each.
+4. **A place**: experience badge and one line on what that experience means → **Life here** (A weekday, Saturday
+   night, Sunday with Mom and Dad, The dog's walk: specific to this building, named places, sourced) → the five
+   facts with position markers → the apartments → things to confirm → See photos. Save at top and bottom.
+5. **My list**: a bar fixed at the bottom of every screen once anything is saved: "My list · 3" and "Compare".
+   My list shows saved places with tick boxes; tick two or three, Compare.
+6. **Compare**: two or three columns, one row per fact (rent, total, drive and tolls, monthly visit time and tolls
+   at her visit frequency, room, parking, dog, going out, green, checked status, experience, life here in one
+   line); the better value in each row marked; rows where all are the same collapse under "Same for all".
+   "Choose this one" adds it to the tour plan.
+7. **Tour plan**: as in version 1.
+
+### Data contract additions (`site/concierge_data.json`), all added, none renamed
+
+```
+questions: [ { id, text, help, kind: "single"|"pick_two", must_have: bool,
+               answers: [ { id, label, sublabel,
+                            filter: {field, op, value} | null,      # must-have screens, on building fields below
+                            weights: {score_key: number} } ] } ]
+buildings[].fit:   { drive_min, toll_round_trip, has_one_bedroom, has_studio, studio_only,
+                     min_total, max_total, parking_kind, garage_or_covered, off_street,
+                     dog_area_in_building, park_walk_min, park_name,
+                     restaurants_10min, bars_10min, cafes_10min }      # the fields filters and chips read
+buildings[].fit_chips: { <answer id>: "11 minutes to Mom and Dad" , ... }  # the chip text per answer, real figures
+buildings[].experience_line: "One plain line on what this experience means"
+buildings[].life_here: [ { moment: "weekday"|"saturday"|"sunday"|"dog", title, text,
+                           places: [{name, kind, walk_min|null, distance_mi|null}],
+                           sources: [{name, url}] } ]
+experiences[].line: same line as experience_line, for the badge sheet
+```
+
+Every number in `fit_chips` and `life_here` comes from the data; every named place comes from the mapped places
+already in `data/enriched_color/` or from `data/reference/life_here_facts.csv` (sourced web research, each row with
+URL and retrieval time). A moment with nothing true and specific to say is left out, never padded.
