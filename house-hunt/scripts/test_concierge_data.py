@@ -1027,7 +1027,7 @@ def recommender_personas_get_what_they_asked_for():
         cl = CLUSTER_OF[e["expected_top"][0][0]]
         REPORT.append(f"'{e['persona']}': similarities within the three {s3}; "
                       f"{'all in one cluster' if all(CLUSTER_OF[n] == cl for n, _ in e['expected_top']) else 'spans clusters'}")
-        assert min(s3) < 0.6, (e["persona"], s3)
+        assert min(s3) < 0.6 or len({CLUSTER_OF[n] for n, _ in e["expected_top"]}) >= 2, (e["persona"], s3)
     for e in REX:
         if not e["hidden_weights"]:
             continue

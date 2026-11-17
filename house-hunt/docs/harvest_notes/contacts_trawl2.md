@@ -74,7 +74,7 @@ Other changes to the offline rows:
   number is withheld.
 - **Mandy Management (2 buildings):** these are now `management company` with no phone. The manager's site,
   mandy-management.com, does not resolve, and the number in the Trulia attribution is not used.
-- **Nextdoor Leasing (6 Bayonne and Jersey City buildings):** these are `management company` with no phone. No
+- **Nextdoor Leasing (7 Bayonne and Jersey City buildings):** these are `management company` with no phone. No
   site or office line was found for this small leasing outfit.
 
 ### Site only, not private (25)
