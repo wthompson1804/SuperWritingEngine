@@ -820,6 +820,7 @@ RP = OUT["meta"]["recommender"]
 RS = OUT["recommender_samples"]
 REX = OUT["meta"]["recommender_examples"]
 RSETS = R.sample_sets(RS, BLDS, RP)
+RBESTS = R.sample_bests(RS, BLDS, RP)
 GROUPS = {g["id"]: g for g in RP["groups"]}
 REPORT = []
 
@@ -941,7 +942,7 @@ def recommender_reference_reproduces_its_examples():
     by = {b["id"]: b for b in BLDS}
     for e in REX:
         hidden = [e["hidden_weights"][k] for k in R.FEATURES] if e["hidden_weights"] else None
-        ans = R.run_persona(RS, BLDS, RP, hidden, RSETS)
+        ans = R.run_persona(RS, BLDS, RP, hidden, RSETS, bests=RBESTS)
         assert ans == e["answers"] and [[x["a"], x["b"]] for x in ans] == e["expected_pairs"], e["persona"]
         assert 3 <= len(ans) <= 6 and len({(x["a"], x["b"]) for x in ans}) == len(ans)
         for x in ans:
@@ -972,11 +973,15 @@ def recommender_reference_reproduces_its_examples():
             elif n["gives_up"]:
                 assert "(" not in n["gives_up"] and "ask on the tour" in n["gives_up"] or "yet" in n["gives_up"], n["gives_up"]
         # the stop rule held: stopped at max, or the top set reached stop_prob and not before min_pairs
-        k, p = R.top_probability(RS, ans, BLDS, RP, RSETS)
-        assert abs(p - e["expected_top_set_probability"]) < 1e-6
+        p = R.stop_probability(RS, ans, BLDS, RP, bests=RBESTS)
+        assert abs(p - e["expected_stop_probability"]) < 1e-6
+        # by hand: the share of posterior mass whose own best neighborhood is among the three shown
+        pi = R.posterior(RS, ans, BLDS, RP)
+        three = {n for n, _ in e["expected_top"]}
+        assert abs(p - sum(x for x, w in zip(pi, RS) if R.best_group(w, BLDS, RP) in three)) < 1e-9
         assert len(ans) == RP["max_pairs"] or (p >= RP["stop_prob"] and len(ans) >= RP["min_pairs"])
         for m in range(RP["min_pairs"], len(ans)):
-            assert R.top_probability(RS, ans[:m], BLDS, RP, RSETS)[1] < RP["stop_prob"], (e["persona"], m)
+            assert round(R.stop_probability(RS, ans[:m], BLDS, RP, bests=RBESTS), 9) < RP["stop_prob"], (e["persona"], m)
     pi0 = R.posterior(RS, [], BLDS, RP)
     assert all(abs(p - 1 / 400) < 1e-12 for p in pi0)
 
@@ -1044,11 +1049,11 @@ def recommender_simulated_users():
         g = [rng.gammavariate(1.0, 1.0) for _ in R.FEATURES]
         users.append([x / sum(g) for x in g])
     for h in users[:15] + [None]:                     # the fast twin asks what the reference asks
-        assert R.run_persona(RS, BLDS, RP, h, RSETS) == R.run_persona(RS, BLDS, RP, h, RSETS, pair_fn=fast.next_pair)
+        assert R.run_persona(RS, BLDS, RP, h, RSETS, bests=RBESTS) == R.run_persona(RS, BLDS, RP, h, RSETS, pair_fn=fast.next_pair, bests=RBESTS)
     hit = hit1 = one = bot = 0
     stops, rs = Counter(), []
     for h in users:
-        ans = R.run_persona(RS, BLDS, RP, h, RSETS, pair_fn=fast.next_pair)
+        ans = R.run_persona(RS, BLDS, RP, h, RSETS, pair_fn=fast.next_pair, bests=RBESTS)
         assert 3 <= len(ans) <= 6
         stops[len(ans)] += 1
         w = [float(x) for x in fast.pi(ans) @ fast.W]

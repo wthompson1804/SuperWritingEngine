@@ -176,7 +176,9 @@ close to Mom and Dad and going out together (+0.55); money and parking mostly in
    (temperature in the data); "either" favours samples where the gap is small. Weights are re-weighted after each answer.
 5. **Next pair**: among pairs drawn from the current top 30 buildings, the pair whose answer is expected to change the
    recommended top three most (expected reduction in uncertainty about the top-three neighborhoods). At least three
-   pairs, at most six; stop early when the top three neighborhoods hold with probability 0.8 or more.
+   pairs, at most six; stop early once the probability that her best neighborhood (per weight sample) is among the
+   current three reaches 0.8 (changed 2026-11-17: on a set of ~57 neighborhoods an exact top-three set almost never
+   reaches 0.8, so the old rule always asked six).
 6. **Recommendation**: a building's score is expected utility under the re-weighted samples times `sure`. A
    neighborhood's score is the mean of its two best buildings. The three neighborhoods are picked greedily for score
    with a diversity term (maximal marginal relevance, lambda 0.7, distance between neighborhood feature centroids), so

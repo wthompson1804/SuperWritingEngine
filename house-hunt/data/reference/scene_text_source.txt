@@ -953,7 +953,7 @@ watch: [[The cost is at the top of your budget, about ${pg_mid} a month with uti
 voices: social_life
 
 === hood: nj:newark
-host_intro: Newark has {pg_n} apartments to choose from{!pg_n>=20}, and about {rest1600} restaurants are within {mile} of most buildings here{!rest1600>=30}. [[Residents call parking frustrating, so favor buildings with their own garage{!own_garage<1}.]][[Residents call parking frustrating, and {owngarage}.]]
+host_intro: Newark has {pg_n} apartments to choose from{!pg_n>=20}, and {rest1600} restaurants are within {mile} of most buildings here{!rest1600>=30}. [[Residents call parking frustrating, so favor buildings with their own garage{!own_garage<1}.]][[Residents call parking frustrating, and {owngarage}.]]
 scene: [[A park is about {parkwalk} minutes on foot and a dog run is {dogpark} miles away{!own_dog<1}.]] {thestation} is {station} miles {door} and the supermarket {super} miles.
 good: Many apartments to compare, close to dinner and {thetrain}.
 watch: [[Your parents are about {drive} minutes away, and each visit costs {tollcost}{!toll_spread<=5}.]][[Each visit costs {tollshort}, depending on the building{!toll_spread>5}.]]
@@ -978,7 +978,7 @@ good: A large apartment for well under your limit{!sqft>=800}{!pg_hi<=2400}.
 watch: Every meal out is a drive{!rest==0}, and your parents are about {drive} minutes away.
 
 === hood: nj:boonton
-host_intro: The building in Boonton has its own dog area and its own garage{!own_dog==1}{!own_garage==1}{!pg_bldgs==1}. The supermarket is {super} miles {door}{!super<=400}, and about {rest1600} restaurants are within {mile}. The nearest park is about {parkwalk} minutes on foot.
+host_intro: The building in Boonton has its own dog area and its own garage{!own_dog==1}{!own_garage==1}{!pg_bldgs==1}. The supermarket is {super} miles {door}{!super<=400}, and {rest1600} restaurants are within {mile}. The nearest park is about {parkwalk} minutes on foot.
 scene: Within a {w10} there are {rest} restaurants and no bars{!bars==0}. {thestation} is {station} miles away.
 good: A dog area and a garage at the building, and groceries close{!super<=400}.
 watch: The apartments are small, about {sqft} square feet{!sqft_hi<=600}.
@@ -1023,7 +1023,7 @@ watch: Your parents are about {drive} minutes away, so visits would be day trips
 
 === hood: nj:millburn
 host_intro: In Millburn {thestation} is {station} miles {door}{!station<=800}, and the supermarket {super} miles{!super<=800}. [[Trader Joe's is {tj} miles away{!tj<=1600}.]] The typical apartment is small, about {sqft} square feet{!sqft<=500}.
-scene: About {rest1600} restaurants are within {mile}, and a park is about {parkwalk} minutes on foot.
+scene: Within {mile} there are {rest1600} restaurants, and a park is about {parkwalk} minutes on foot.
 good: You can walk to {thetrain} and the supermarket{!station<=800}{!super<=800}.
 watch: Your parents are about {drive} minutes away, and each visit costs {tollcost}.
 
@@ -1034,7 +1034,7 @@ good: Dinner, drinks and {thetrain} are all a short walk{!rest>=40}{!station<=10
 watch: Your parents are about {drive} minutes away, and each visit costs {tollcost}.
 
 === hood: nj:paterson
-host_intro: Paterson has {pg_n} apartments to choose from{!pg_n>=12}. [[A dog run is {dogpark} miles {door}{!dogpark<=800}{!dog_any==0}, and a park about {parkwalk} minutes on foot.]] About {rest1600} restaurants are within {mile}.
+host_intro: Paterson has {pg_n} apartments to choose from{!pg_n>=12}. [[A dog run is {dogpark} miles {door}{!dogpark<=800}{!dog_any==0}, and a park about {parkwalk} minutes on foot.]] Within {mile} there are {rest1600} restaurants.
 scene: The supermarket is {super} miles {door}, and {thestation} {station} miles. {fewbars} are within a {w10}.
 good: [[Many apartments to compare, with a dog run close by{!pg_n>=12}{!dogpark<=800}{!dog_any==0}.]]
 watch: Ask {eachb} about parking, because most have no garage{!own_garage<0.5}.
@@ -1047,7 +1047,7 @@ watch: Every meal out and every errand is a drive{!rest==0}.
 
 === hood: nj:plainsboro
 host_intro: [[Plainsboro has {pg_n} apartments to choose from{!pg_n>=12}, and {owndog}.]][[Plainsboro has {pg_n} apartments to choose from{!pg_n>=12}{!own_dog==0}.]] Nothing to eat or drink is within a {w10}{!rest==0}{!bars==0}{!cafes==0}, and the supermarket is {super} miles away.
-scene: About {rest1600} restaurants are within {mile}. The nearest park is about {parkwalk} minutes on foot, and the nearest public dog park {dogpark} miles.
+scene: Within {mile} there are {rest1600} restaurants. The nearest park is about {parkwalk} minutes on foot, and the nearest public dog park {dogpark} miles.
 good: [[Many apartments, and a dog area at every building{!pg_n>=12}{!own_dog==1}.]]
 watch: You would drive for groceries and every meal out{!super>=1600}{!rest==0}.
 
@@ -1103,7 +1103,7 @@ watch: Your parents are about {drive} minutes away, so visits would be day trips
 
 === hood: ny:islip
 host_intro: From the building in Islip {thestation} is {station} miles away and the supermarket {super} miles{!pg_bldgs==1}. The drive to your parents has no tolls{!b_toll==0}. The apartments are very small, about {sqft} square feet{!sqft_hi<=450}.
-scene: About {rest1600} restaurants are within {mile}, but only {rest} restaurants are within a {w10}{!rest<=1}. The water is {water} miles {door}.
+scene: Within {mile} there are {rest1600} restaurants, but only {rest} restaurants are within a {w10}{!rest<=1}. The water is {water} miles {door}.
 good: Groceries, the water and {thetrain} are all close{!station<=1600}{!super<=800}{!water<=800}.
 watch: No park is within an easy walk{!parkwalk>=20}, and the apartments are very small{!sqft_hi<=450}.
 
@@ -1126,14 +1126,14 @@ good: A state park and the supermarket are a short walk{!parkwalk<=8}{!super<=80
 watch: Your parents are about {drive} minutes away, and each visit costs {tollcost}.
 
 === hood: ny:rego-park
-host_intro: Rego Park is about {drive} minutes from your parents, close enough to visit on a weeknight{!drive<=12}. The supermarket is {super} miles {door} and {thestation} {station} miles. Residents call it quiet, and they say parking is often a challenge.
+host_intro: Your parents are about {drive} minutes from Rego Park, close enough to visit on a weeknight{!drive<=12}. The supermarket is {super} miles {door} and {thestation} {station} miles. Residents call it quiet, and they say parking is often a challenge.
 scene: About {rest} restaurants and {cafes} cafés are within a {w10}. [[A dog run is {dogpark} miles away{!dog_any==0}.]]
 good: Your parents, groceries and {thetrain} are all close{!drive<=12}{!super<=400}{!station<=400}.
 watch: The apartment is very small, about {sqft} square feet{!sqft<=450}.
 voices: noise, parking
 
 === hood: ny:sunset-park-east-borough-park-west-
-host_intro: In this part of Sunset Park {thestation} is {station} miles {door} and the supermarket {super} miles. About {rest1600} restaurants are within {mile}{!rest1600>=80}. Your parents are about {drive} minutes away, with no tolls{!b_toll==0}.
+host_intro: In this part of Sunset Park {thestation} is {station} miles {door} and the supermarket {super} miles. Within {mile} there are {rest1600} restaurants{!rest1600>=80}. Your parents are about {drive} minutes away, with no tolls{!b_toll==0}.
 scene: A park is about {parkwalk} minutes on foot. About {rest} restaurants and {bars} bars are within a {w10}.
 good: Groceries and {thetrain} are both a short walk{!super<=400}{!station<=400}.
 watch: Most households here have no car{!nocar>=0.5}, so ask the building about parking.

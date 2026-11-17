@@ -889,16 +889,16 @@ CATCHES = {
         "just above the ground floor works.",
         # the same fact in other words, so that no wording is on more than SHARE of the page (2026-11-17, trawl 2: this
         # catch applies to more than half of the apartments shown)
-        "The floor and the elevator are both left out of the listing. Ask about each: with no elevator, only the floor "
-        "just above the ground floor works.",
+        "The floor and the elevator are both left out of the listing. Ask about each: without an elevator, only the "
+        "floor just above the ground floor works.",
         "Confirm the floor and whether there is an elevator. The listing gives neither, and without an elevator only the "
         "floor just above the ground floor works.",
-        "This listing names no floor and no elevator. Ask about both, since without an elevator only the floor just above "
-        "the ground floor works.",
+        "This listing does not give the floor or say whether there is an elevator. Ask about both, since without an "
+        "elevator only the floor just above the ground floor works.",
         "Before you tour, ask which floor this is and whether an elevator serves it. Without an elevator, only the floor "
         "just above the ground floor works.",
-        "The floor is not given, and no elevator is mentioned. Ask both questions: without an elevator, only the floor just "
-        "above the ground floor works.",
+        "The floor is not given, and an elevator is not mentioned. Ask both questions: without an elevator, only the floor "
+        "just above the ground floor works.",
         "Ask the office for the floor and whether there is an elevator. The listing says neither, and a walk-up works only "
         "on the floor just above the ground floor.",
         "No floor or elevator is listed for this apartment. Ask about both, because without an elevator only the floor just "

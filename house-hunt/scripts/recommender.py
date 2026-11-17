@@ -31,8 +31,8 @@ THE MODEL
   next pair        pool = top PAIR_POOL buildings by score_wbar; for each unasked pair (a.id < b.id) the expected
                    reduction in entropy of the distribution (over samples, weighted by pi) of the per-sample top-three
                    set (unordered, by the same MMR with that sample's weights); highest gain first
-  stop             at least MIN_PAIRS asked, at most MAX_PAIRS; stop once the most probable top-three set has
-                   probability >= STOP_PROB
+  stop             at least MIN_PAIRS asked, at most MAX_PAIRS; stop once the posterior probability that the
+                   sample's best neighborhood is among the current three reaches STOP_PROB
   determinism      every comparison uses values rounded to ROUND decimals; ties go to the smaller id (string order)
 """
 from __future__ import annotations
@@ -433,22 +433,38 @@ def ranked_buildings(w, buildings):
     return sorted(buildings, key=lambda b: (-q(score(b, w)), b["id"]))
 
 
-def should_stop(samples, answers, buildings, params, pi=None, sets=None):
+def best_group(w, buildings, params):
+    gs = group_scores(w, buildings, params)
+    return sorted(gs, key=lambda g: (-q(gs[g]), g))[0]
+
+
+def sample_bests(samples, buildings, params):
+    """For each sample, its best neighborhood (highest group score, ties by id); computed once."""
+    return [best_group(w, buildings, params) for w in samples]
+
+
+def stop_probability(samples, answers, buildings, params, pi=None, bests=None):
+    """The posterior probability that the sample's best neighborhood is among the current three (MMR on wbar)."""
+    pi = pi if pi is not None else posterior(samples, answers, buildings, params)
+    bests = bests if bests is not None else sample_bests(samples, buildings, params)
+    three = set(mmr(group_scores(mean_weights(samples, pi), buildings, params), params))
+    return sum(p for p, b in zip(pi, bests) if b in three)
+
+
+def should_stop(samples, answers, buildings, params, pi=None, bests=None):
     n = len(answers)
     if n >= params["max_pairs"]:
         return True
     if n < params["min_pairs"]:
         return False
-    pi = pi if pi is not None else posterior(samples, answers, buildings, params)
-    sets = sets if sets is not None else sample_sets(samples, buildings, params)
-    return q(max(set_distribution(samples, pi, sets).values())) >= params["stop_prob"]
+    return q(stop_probability(samples, answers, buildings, params, pi, bests)) >= params["stop_prob"]
 
 
-def next_pair(samples, answers, buildings, params, sets=None, explain=False):
+def next_pair(samples, answers, buildings, params, sets=None, explain=False, bests=None):
     """The next (a, b) to ask, a.id < b.id, or None when the stop rule says stop."""
     sets = sets if sets is not None else sample_sets(samples, buildings, params)
     pi = posterior(samples, answers, buildings, params)
-    if should_stop(samples, answers, buildings, params, pi, sets):
+    if should_stop(samples, answers, buildings, params, pi, bests):
         return None
     w = mean_weights(samples, pi)
     pool = ranked_buildings(w, buildings)[:params["pair_pool"]]
@@ -676,13 +692,6 @@ def recommend(samples, answers, buildings, params):
     return {"weights": [round(x, 6) for x in w], "neighborhoods": out}
 
 
-def top_probability(samples, answers, buildings, params, sets):
-    pi = posterior(samples, answers, buildings, params)
-    d = set_distribution(samples, pi, sets)
-    k = sorted(d, key=lambda s: (-q(d[s]), s))[0]
-    return k, d[k]
-
-
 def persona_answer(a, b, hidden, buildings_by, band):
     if hidden is None:
         return "either"
@@ -692,13 +701,14 @@ def persona_answer(a, b, hidden, buildings_by, band):
     return "a" if g > 0 else "b"
 
 
-def run_persona(samples, buildings, params, hidden, sets=None, pair_fn=None):
+def run_persona(samples, buildings, params, hidden, sets=None, pair_fn=None, bests=None):
     by = {b["id"]: b for b in buildings}
     sets = sets if sets is not None else sample_sets(samples, buildings, params)
+    bests = bests if bests is not None else sample_bests(samples, buildings, params)
     pair_fn = pair_fn or next_pair
     answers = []
     while True:
-        p = pair_fn(samples, answers, buildings, params, sets=sets)
+        p = pair_fn(samples, answers, buildings, params, sets=sets, bests=bests)
         if p is None:
             break
         answers.append({"a": p[0], "b": p[1], "choice": persona_answer(p[0], p[1], hidden, by, params["either_band"])})
@@ -719,19 +729,19 @@ PERSONAS = [
 ]
 
 
-def examples(samples, buildings, params, sets):
+def examples(samples, buildings, params, sets, bests):
     out = []
     for name, hw in PERSONAS:
         hidden = [hw[k] for k in FEATURES] if hw else None
-        ans = run_persona(samples, buildings, params, hidden, sets)
+        ans = run_persona(samples, buildings, params, hidden, sets, bests=bests)
         rec = recommend(samples, ans, buildings, params)
-        k, p = top_probability(samples, ans, buildings, params, sets)
+        p = stop_probability(samples, ans, buildings, params, bests=bests)
         out.append({"persona": name, "hidden_weights": dict(zip(FEATURES, hidden)) if hidden else None,
                     "answer_rule": "either to every pair" if hidden is None else
                     f"the building with the higher utility under hidden_weights; 'either' when the gap is within {params['either_band']}",
                     "answers": ans, "expected_pairs": [[x["a"], x["b"]] for x in ans],
                     "expected_mean_weights": dict(zip(FEATURES, rec["weights"])),
-                    "expected_top_set_probability": round(p, 6),
+                    "expected_stop_probability": round(p, 6),
                     "expected_top": [[n["neighborhood_id"], [b["id"] for b in n["buildings"]]] for n in rec["neighborhoods"]],
                     "expected_more_like_this": {b["id"]: b["more_like_this"] for n in rec["neighborhoods"] for b in n["buildings"]},
                     "expected_why": {n["neighborhood_id"]: n["why"] for n in rec["neighborhoods"]},
@@ -763,7 +773,8 @@ def params_block(buildings, groups, sim, mean, sd, alpha, meds):
             "mmr": "among the eligible groups only (iterated in id order): s' = (score - min)/(max - min) over all groups (all 0 if max - min <= 1e-12); pick 3 greedily by round(lambda x s' - (1 - lambda) x max similarity to the picked, round_decimals), ties to the smaller id; similarity is group_similarity (1 - centroid distance / largest centroid distance, standardised features)",
             "sample_sets": "for each sample, the MMR top three with that sample's weights, as sorted ids joined by '|'; computed once",
             "next_pair": "pool = top pair_pool buildings by round(score_wbar) desc, id; pairs (a, b) with a < b by id, skipping pairs asked; gain = round(H(set distribution under pi) - sum over answers of P(answer) x H(set distribution under the posterior after that answer)); highest gain, ties to the earlier pair in (a, b) id order; entropy in nats",
-            "stop": "stop when answers >= max_pairs, or answers >= min_pairs and round(max set probability) >= stop_prob",
+            "sample_bests": "for each sample, its best group (highest group score with that sample's weights, ties by id); computed once",
+            "stop": "stop when answers >= max_pairs, or answers >= min_pairs and round(stop probability) >= stop_prob, where stop probability = sum of pi_s over the samples whose best group is among the current three (MMR on wbar, as recommend). (Changed 2026-11-17 from 'the most probable top-three set has probability >= stop_prob', which almost never holds with ~57 neighborhoods.) The next pair is still chosen by the expected entropy reduction of the top-three set",
             "groups": "a one-apartment neighborhood counts under its parked host only when the host is within group_km and in the same state; otherwise it is its own group (groups lists the result)",
             "recommend": "groups by MMR on wbar; in each, the three best buildings by round(score) desc, id; why = the two features with the largest wbar_k x (group centroid_k - mean over all buildings_k); gives_up: features in order of wbar_k x (centroid_k - mean of the other two picked centroids_k), negative ones only and never one of the two `why` features (centroids over the buildings shown); the first whose figure is unknown here (sq ft not published, parking not stated) is said plainly (gives_up_unknown true), or the first where this neighborhood's figure is worse than BOTH others' known figures by the margin in gives_up_margin (both figures as in the text: drive median minutes, lowest total, largest sq ft, median places, shortest park walk rounded) is compared; none: null. Figures are over the buildings shown",
             "what_would_change": "multiply one weight by a nudge factor (more) or divide by it (less), renormalise, and see which group has the highest score; levels in `nudges` order, then features in order, then more before less; the first found where the first group changes (for the first neighborhood) or becomes this one (for the second and third)",
@@ -786,7 +797,7 @@ def add_version_three(out):
     out["recommender_samples"] = samples
     out["meta"]["recommender"] = params
     sets = sample_sets(samples, blds, params)
-    out["meta"]["recommender_examples"] = examples(samples, blds, params, sets)
+    out["meta"]["recommender_examples"] = examples(samples, blds, params, sets, sample_bests(samples, blds, params))
     return out
 
 
@@ -811,6 +822,7 @@ class Fast:
         self.S = np.zeros((len(samples), self.nk))
         self.S[np.arange(len(samples)), [keys.index(s) for s in sets]] = 1.0
         self.samples = samples
+        self.bests = sample_bests(samples, buildings, params)
 
     def pi(self, answers):
         np, p = self.np, self.params
@@ -830,13 +842,18 @@ class Fast:
             r = np.where(m > 0, m / P, 1.0)
             return -(np.where(m > 0, r * np.log(r), 0.0)).sum(axis=-1), P[..., 0]
 
-    def next_pair(self, samples, answers, buildings, params, sets=None):
+    def next_pair(self, samples, answers, buildings, params, sets=None, bests=None):
         np, p = self.np, self.params
         pi = self.pi(answers)
         dist = pi @ self.S
         n = len(answers)
-        if n >= p["max_pairs"] or (n >= p["min_pairs"] and round(float(dist.max()), ROUND) >= p["stop_prob"]):
+        if n >= p["max_pairs"]:
             return None
+        if n >= p["min_pairs"]:
+            w_ = [float(x) for x in pi @ self.W]
+            three = set(mmr(group_scores(w_, self.buildings, p), p))
+            if round(float(sum(pi[s] for s, b in enumerate(self.bests) if b in three)), ROUND) >= p["stop_prob"]:
+                return None
         w = pi @ self.W
         util = np.array([[b["features"][k] for k in FEATURES] for b in self.buildings]) @ w * self.sure
         order = sorted(range(len(self.ids)), key=lambda j: (-round(float(util[j]), ROUND), self.ids[j]))[:p["pair_pool"]]
