@@ -53,6 +53,7 @@ def main():
              ("shown (real apartments, at most one open item, up to 8 per building, after the thin-neighborhood rule)", int(R.shown.sum())),
              ("  neighborhoods shown", int(R[R.shown].hood_id.nunique())), ("  buildings shown", int(R[R.shown].building_id.nunique())),
              ("not an apartment: floor plan, building price or co-living room (data/excluded_not_an_apartment.csv)", len(pd.read_csv(DATA / "excluded_not_an_apartment.csv", usecols=["listing_id"])) if (DATA / "excluded_not_an_apartment.csv").exists() else 0),
+             ("no apartment number from any source (data/excluded_no_apartment_number.csv)", len(pd.read_csv(DATA / "excluded_no_apartment_number.csv", usecols=["listing_id"])) if (DATA / "excluded_no_apartment_number.csv").exists() else 0),
              ("thin neighborhoods cut (one apartment, not both well attested and promising)", int(R.thin_neighborhood.sum()) if "thin_neighborhood" in R else 0),
              ("avoid cards", int(R.avoid_card.sum())),
              ("  shown with an asterisk (one thing to confirm)", int((R.shown & (R.confirm_asterisk == "yes")).sum()) if "confirm_asterisk" in R else 0),

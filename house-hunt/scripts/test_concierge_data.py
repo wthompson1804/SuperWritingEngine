@@ -945,8 +945,16 @@ def recommender_samples_similar_groups_and_tags():
         assert all(B[i]["group_id"] == (p if joins else h["id"]) for i in h["building_ids"]), h["id"]
         assert (h["id"] in GROUPS) == (not joins), h["id"]
         t = h["tags"]
-        assert isinstance(t, list) and len(t) == 2 and t[0][0].isupper() and t[1] == t[1].lower(), (h["id"], t)
-        assert all(len(x.split()) <= 2 for x in t) and not ({t[0].lower(), t[1]} >= {"lively", "quiet"})
+        assert isinstance(t, list) and len(t) <= 2 and (not t or t[0][0].isupper()) and all(x == x.lower() for x in t[1:]), (h["id"], t)
+        assert all(len(x.split()) <= 2 for x in t) and not ({x.lower() for x in t} >= {"lively", "quiet"})
+        own = [B[i] for i in (GROUPS[h["id"]]["building_ids"] if h["id"] in GROUPS else h["building_ids"])]
+        for x in t:                                    # every tag true in plain terms of the buildings it describes
+            assert R.tag_holds(x.lower(), own), (h["id"], x)
+            r = [b["features_raw"] for b in own]
+            if x.lower() == "near family":
+                assert statistics.median(y["drive_min"] for y in r) <= 30, (h["id"], x)
+            if x.lower() == "good value":
+                assert statistics.median(y["total"] for y in r) <= 1950, (h["id"], x)
     sim = RP["group_similarity"]
     n = len(sim)
     assert all(abs(sim[i][i] - 1) < 1e-9 and sim[i][j] == sim[j][i] and 0 <= sim[i][j] <= 1 for i in range(n) for j in range(n))

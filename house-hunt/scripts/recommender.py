@@ -12,7 +12,8 @@ DATA IT ADDS (nothing renamed)
   buildings[].features_imputed  the features whose input was missing and set to the median of the set
   buildings[].similar           the 5 nearest other buildings, unweighted Euclidean distance on standardised features
   buildings[].group_id          the neighborhood the recommender counts it under (a parked neighborhood counts as its host's)
-  neighborhoods[].tags          two plain words from its strongest features against the set ("Lively", "near family")
+  neighborhoods[].tags          0 to 2 plain words from its strongest features against the set, each true in plain terms
+                                (TAG_FLOORS: "near family" only within 30 minutes, ...)
   recommender_samples           N_SAMPLES weight vectors (FEATURES order), Dirichlet, fixed SEED, rounded to 6 decimals
   meta.recommender              every parameter, the value functions with breakpoints, standardisation, groups and
                                 their similarity matrix, the algorithm in words
@@ -275,8 +276,47 @@ def build_groups(neighborhoods, buildings, mean, sd):
     return groups, sim
 
 
+TAG_FLOORS = {"near family": "median drive to Mom and Dad <= 30 minutes",
+              "lively": "median places to eat and drink within a 10-minute walk >= 20",
+              "quiet": "median places to eat and drink within a 10-minute walk <= 5",
+              "more room": "median size >= 650 sq ft, or most buildings with a one-bedroom",
+              "good value": "median monthly total <= $1,950",
+              "green": "median walk to the nearest park <= 5 minutes",
+              "easy parking": "garage, covered or off-street parking at most buildings"}
+
+
+def tag_holds(word, bs):
+    """The tag is true in plain terms of these buildings (TAG_FLOORS), not only relative to the set."""
+    r = [b["features_raw"] for b in bs]
+    med = lambda xs: statistics.median(xs) if xs else None  # noqa: E731
+    places = med([(x["restaurants_10min"] or 0) + (x["bars_10min"] or 0) for x in r
+                  if x["restaurants_10min"] is not None or x["bars_10min"] is not None])
+    if word == "near family":
+        d = med([x["drive_min"] for x in r if x["drive_min"] is not None])
+        return d is not None and d <= 30
+    if word == "lively":
+        return places is not None and places >= 20
+    if word == "quiet":
+        return places is not None and places <= 5
+    if word == "more room":
+        sq = med([x["sqft"] for x in r if x["sqft"] is not None])
+        return (sq is not None and sq >= 650) or sum(x["bedroom"] for x in r) > len(r) / 2
+    if word == "good value":
+        t = med([x["total"] for x in r if x["total"] is not None])
+        return t is not None and t <= 1950
+    if word == "green":
+        w = med([x["park_walk_min"] for x in r if x["park_walk_min"] is not None])
+        return w is not None and w <= 5
+    if word == "easy parking":
+        return sum(b["features"]["parking"] >= 0.7 for b in bs) > len(bs) / 2
+    return False
+
+
 def _tags_for(bids, by, mean, sd):
-    zs = [zvec(by[i], mean, sd) for i in bids]
+    """Up to two tags: the strongest features against the set (standardised centroid above the mean), each kept only
+    when it is true in plain terms (TAG_FLOORS). Fewer qualify: one, or none."""
+    bs = [by[i] for i in bids]
+    zs = [zvec(b, mean, sd) for b in bs]
     c = [sum(x) / len(zs) for x in zip(*zs)]
     cand = []
     for j, k in enumerate(FEATURES):
@@ -284,9 +324,14 @@ def _tags_for(bids, by, mean, sd):
         if k in TAG_LOW:
             cand.append((q(-c[j]), k, TAG_LOW[k]))
     cand.sort(key=lambda t: (-t[0], t[2]))
-    first = cand[0]
-    second = next(t for t in cand[1:] if t[1] != first[1])
-    return [first[2][0].upper() + first[2][1:], second[2]]
+    out, used = [], set()
+    for z, k, word in cand:
+        if z > 0 and k not in used and tag_holds(word, bs):
+            out.append(word)
+            used.add(k)
+        if len(out) == 2:
+            break
+    return [w if i else w[0].upper() + w[1:] for i, w in enumerate(out)]
 
 
 def add_tags(neighborhoods, buildings, groups, mean, sd):
@@ -295,7 +340,7 @@ def add_tags(neighborhoods, buildings, groups, mean, sd):
     for h in neighborhoods:
         own = [b["id"] for b in buildings if b["neighborhood_id"] == h["id"]]
         bids = gm[h["id"]] if h["id"] in gm else own
-        h["tags"] = _tags_for(bids, by, mean, sd) if bids else None
+        h["tags"] = _tags_for(bids, by, mean, sd) if bids else []
 
 
 def draw_samples():
@@ -796,7 +841,7 @@ def params_block(buildings, groups, sim, mean, sd, alpha, meds):
         "prior": {"distribution": "Dirichlet", "relative_mass": PRIOR_RELATIVE, "concentration": CONCENTRATION, "alpha": alpha,
                   "draw": "Python random.Random(seed).gammavariate(alpha_k, 1) per feature, normalised, rounded to 6 decimals"},
         "min_pairs": MIN_PAIRS, "max_pairs": MAX_PAIRS, "stop_prob": STOP_PROB, "mmr_lambda": MMR_LAMBDA, "relevance_floor": RELEVANCE_FLOOR, "relevance_top_share": RELEVANCE_TOP_SHARE,
-        "pair_pool": PAIR_POOL, "group_km": GROUP_KM, "gives_up_margin": MARGIN, "n_similar": N_SIMILAR, "n_more_like_this": N_MORE, "round_decimals": ROUND, "nudges": list(NUDGES),
+        "pair_pool": PAIR_POOL, "group_km": GROUP_KM, "tag_floors": TAG_FLOORS, "gives_up_margin": MARGIN, "n_similar": N_SIMILAR, "n_more_like_this": N_MORE, "round_decimals": ROUND, "nudges": list(NUDGES),
         "feature_mean": mean, "feature_sd": sd,
         "groups": [{k: g[k] for k in ("id", "name", "building_ids", "neighborhood_ids")} for g in groups],
         "group_similarity": sim,

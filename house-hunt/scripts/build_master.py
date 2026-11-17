@@ -1918,6 +1918,15 @@ def main():
     sn = [parsers.shown_unit_number(un_, PF.get(l_, {}).get("site", ""), PF.get(l_, {}).get("unit_rows_on_page", ""), PF.get(l_, {}).get("description", ""),
                                     PF.get(l_, {}).get("title", "")) for l_, un_ in zip(MU.listing_id, MU.unit)]
     MU["unit_shown"], MU["unit_number_basis"] = [x[0] for x in sn], [x[1] for x in sn]
+    # a number another site gives the same apartment (a duplicate merged into this row) counts as a source too
+    dup_lab = {}
+    for k_, un_ in zip(dups.listing_id.map(keep_of), dups.unit):
+        sh_, bs_ = parsers.shown_unit_number(un_, "apartmentlist" if str(k_).startswith("apartmentlist:") else "", "1", "", "")
+        if sh_ and parsers.unit_key(sh_):
+            dup_lab.setdefault(k_, sh_)
+    fill_ = (MU.unit_shown.map(parsers.unit_key) == "") & MU.listing_id.isin(dup_lab)
+    MU.loc[fill_, "unit_shown"] = MU.loc[fill_, "listing_id"].map(dup_lab)
+    MU.loc[fill_, "unit_number_basis"] = "another site's listing of the same apartment"
     # floor: confirmed per unit > stated on the listing > inferred from the unit label (W1, W17)
     bf_good = {b: v for b, v, bs in zip(B.index, B.get("building_floors", pd.Series(dtype=str)), B.get("building_floors_basis", pd.Series(dtype=str))) if bs in GOOD_FLOORCOUNT}
     bf_any = B.get("building_floors", pd.Series(dtype=str)).to_dict()

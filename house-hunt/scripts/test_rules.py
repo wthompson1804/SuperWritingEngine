@@ -1248,6 +1248,7 @@ def page_3(J, M, R, S):
     page_ic4(J, M, R, S)
     page_cleanup(J, M, R, S)
     page_ic5(J, M, R, S)
+    ok(all(u.get("unit") not in (None, "") and str(u["unit"]).strip() for u in J["units"]), "IC6 sweep 4: every apartment on the page has its own number (the page hides one without)")
     # D12: experience and neighborhood figures are computed over the shown units
     for y in J["years"]:
         us = [u for u in J["units"] if u["year"] == y["id"]]
@@ -2437,6 +2438,14 @@ def data_ic6(M, R, S):
             eq(S.at[l, "parking_fee"], "0.0", f"IC6 #27 / #29: {l}: the space included in the rent is $0, not 'not published'")
     if "zumper-65719911" in S.index:
         eq(S.at["zumper-65719911", "in_unit_laundry"], "on_site_only", "IC6 #28: 'washer and dryer nearby' is not in-unit laundry")
+    # owner's "real apartments only" with sweep 4: no apartment without a number from any source is shown or ranked
+    ok(not R.unit_shown.map(P.unit_key).eq("").any(), f"IC6 sweep 4: {int(R.unit_shown.map(P.unit_key).eq('').sum())} ranked apartments have no apartment number")
+    xf = DATA / "excluded_no_apartment_number.csv"
+    X_ = pd.read_csv(xf, dtype=str, keep_default_na=False) if xf.exists() else pd.DataFrame(columns=["listing_id", "drop_reason"])
+    for l in ("apartmentlist:p9805810-1", "apartmentlist:p80568625-2", "apartmentlist:p115164949-3", "apartmentlist:p127178168-3", "apartmentlist:p66598735-1"):
+        if l in M.index:
+            ok(l in set(X_.listing_id) and l not in shown, f"IC6 sweep 4: {l} (no number on any source) is excluded as no_apartment_number")
+    ok(X_.drop_reason.str.startswith("no_apartment_number").all(), "IC6 sweep 4: the exclusion carries the reason no_apartment_number")
     # sweep 9 on every shown apartment: a requirement the page states is disclosed
     inc = S[S.income_requirement.ne("") & ~S.income_requirement.map(P.income_restricted)]
     ok(all("income requirement" in d for d in inc.disclosures), "IC6 sweep 9: every shown apartment with an income requirement discloses it")

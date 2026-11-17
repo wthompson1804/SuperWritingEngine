@@ -308,6 +308,14 @@ def main():
     u[na].assign(status="not_an_apartment", drop_reason=kind[na].map(parsers.NOT_AN_APARTMENT_WHY)).to_csv(DATA / "excluded_not_an_apartment.csv", index=False)
     n_na = int(na.sum()); u = u[~na].copy()
     s = lambda c: u[c].fillna("").astype(str) if c in u else pd.Series("", index=u.index)
+    # owner, 2026-11-16 ("real apartments only"), with independent check 6, sweep 4: an apartment that no source gives a
+    # number (not its listing's label, words or title, nor another site's listing of it) is not shown or ranked: the page
+    # never shows an apartment without its own identifier. Reason no_apartment_number (data/excluded_no_apartment_number.csv).
+    shown_no = (s("unit_shown") if "unit_shown" in u else s("unit")).map(parsers.unit_key).eq("")
+    u[shown_no].assign(status="no_apartment_number", drop_reason="no_apartment_number: no source gives this apartment a number (" + s("unit_number_basis")[shown_no] + ")") \
+        .to_csv(DATA / "excluded_no_apartment_number.csv", index=False)
+    n_nonum = int(shown_no.sum()); u = u[~shown_no].copy()
+    s = lambda c: u[c].fillna("").astype(str) if c in u else pd.Series("", index=u.index)
 
     # ---- reviewed verdicts (independent check 2): data/evidence/review_verdicts.csv holds one row per unit whose
     # evidence a reviewer has read. remove -> excluded here, before ranking, with the reviewer's reason.
@@ -958,7 +966,7 @@ def main():
     print(f"evidence: {n_ex} units excluded, shown {int(u.shown.sum())}, avoid cards {int(u.avoid_card.sum())}, of them with an asterisk {int((u.shown & (u.confirm_asterisk == 'yes')).sum())} "
           f"({u[u.shown & (u.confirm_asterisk == 'yes')].confirm_what.value_counts().to_dict()}), held for a confirmation {int(u.held_for_confirmation.sum())}; "
           f"shown and never re-read (information only, not an open item) {int((u.shown & ~u.live_ok).sum())}")
-    print(f"stages: {n_in} costed -> -{n_cost} over the all-in cap -> -{n_cut} Jamaica safety rule -> -{n_hard} failed a gate on confirmed facts -> -{n_na} not an apartment (floor plan, building price, co-living room) -> -{n_rev} removed by a reviewed verdict -> -{n_sib} sibling floor rule -> -{n_sk} sketchy -> -{n_ex} evidence exclusions -> {len(u)} ranked")
+    print(f"stages: {n_in} costed -> -{n_cost} over the all-in cap -> -{n_cut} Jamaica safety rule -> -{n_hard} failed a gate on confirmed facts -> -{n_na} not an apartment (floor plan, building price, co-living room) -> -{n_nonum} no apartment number -> -{n_rev} removed by a reviewed verdict -> -{n_sib} sibling floor rule -> -{n_sk} sketchy -> -{n_ex} evidence exclusions -> {len(u)} ranked")
     print(f"shown buildings {u[u.shown].building_id.nunique()}; disclosures: " + str(pd.Series([d['what'] for x in u[u.shown].disclosures if x for d in json.loads(x)]).value_counts().to_dict()))
     print(f"(kept {len(u)} units; candidates {int(u.candidate.sum())}; shown {int(u.shown_pre_evidence.sum())}; pools: {u.pool.value_counts().to_dict()}")
 
