@@ -138,7 +138,8 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;line-height:1.
 .prow .pr1 b{font-family:var(--display);font-weight:800;font-size:19px;line-height:1.15}
 .prow .go{font-size:24px;line-height:1;color:var(--berry-deep)}
 .prow .pin{font-size:13px;font-weight:700;color:var(--muted)}
-.prow .pmn{font-size:14px;font-weight:600;color:var(--muted);line-height:1.35}
+.prow .pmn{display:flex;flex-wrap:wrap;gap:0 14px;font-size:14px;font-weight:600;color:var(--muted);line-height:1.4}
+.prow .pmn>span{white-space:nowrap}
 .prow .pmn b{color:var(--ink);font-variant-numeric:tabular-nums}
 .prow .pf1{font-size:15px;font-weight:700}
 .prow .chk{font-size:13px}
@@ -757,12 +758,19 @@ var ConciergeRec = (function () {
     });
     return best ? best[1] : null;
   }
-  /* her weights in plain-word order (highest first; ties in feature order) and the one-sentence summary */
+  /* her weights in plain-word order (highest first; ties in feature order) and the one-sentence summary; when the
+     spread of her weights (max - min) is below conjoint.flat_below, nothing stood out (flat), with "if anything, X a
+     little more" when the top weight leads the next by conjoint.lean_step */
   function priorities(M, w) {
     var C = cj(M), W = (C && C.words) || LABEL;
     var order = M.feats.map(function (k, j) { return [q(M, w[j]), j, k]; }).sort(function (x, y) { return x[0] !== y[0] ? y[0] - x[0] : x[1] - y[1]; }).map(function (x) { return x[2]; });
-    var words = order.map(function (k) { return W[k] || k; });
-    return { order: order, words: words, sentence: capFirst(words[0]) + " matters most to you, then " + words[1] + "; " + words[words.length - 1] + " matters least." };
+    var words = order.map(function (k) { return W[k] || k; }), ws = w.slice().sort(function (a, b) { return b - a; });
+    var fb = C && C.c.flat_below, lean = C && C.c.lean_step != null ? C.c.lean_step : 0.02;
+    var flat = fb !== undefined && fb !== null && q(M, ws[0] - ws[ws.length - 1]) < fb, sent;
+    if (flat) sent = q(M, ws[0] - ws[1]) >= lean ? "Nothing stood out strongly; you seem fairly open on all of these, if anything " + words[0] + " a little more."
+                                                : "Nothing stood out strongly; you seem fairly open on all of these.";
+    else sent = capFirst(words[0]) + " matters most to you, then " + words[1] + "; " + words[words.length - 1] + " matters least.";
+    return { order: order, words: words, flat: flat, sentence: sent };
   }
   /* move one priority up or down one place (meta.recommender.conjoint.nudge_rule) */
   function nudge(M, w, feature, direction) {
@@ -921,7 +929,7 @@ function rec() {
   var k = cacheKey(); if (CACHE.k === k) return CACHE.v;
   var w = R.cjWeights(MODEL, S.cj, S.moves), r = R.recommend(MODEL, [], { w: w });
   var pr = R.priorities(MODEL, w);
-  CACHE = { k: k, v: { r: r, w: w, order: pr.order, sentence: pr.sentence, next: null, nextDone: false } };
+  CACHE = { k: k, v: { r: r, w: w, order: pr.order, flat: pr.flat, sentence: pr.sentence, next: null, nextDone: false } };
   return CACHE.v;
 }
 function nextNow() { var c = rec(); if (!c.nextDone) { c.next = R.cjNext(MODEL, S.cj); c.nextDone = true; } return c.next; }
@@ -1034,7 +1042,7 @@ function aptCard(task, side) {
 function chooseScreen() {
   var id = nextNow(); if (id === null) { S.step = "confirm"; return confirmScreen(); }
   var task = CJ.pool[id], n = S.cj.length, inTask = task.map(function (x) { return x[0]; });
-  var same = CJ.c.attributes.filter(function (a) { return inTask.indexOf(a.id) < 0; }).map(function (a) { return a.label.toLowerCase(); });
+  var same = CJ.c.attributes.filter(function (a) { return inTask.indexOf(a.id) < 0; }).map(function (a) { return a.label.charAt(0).toLowerCase() + a.label.slice(1); });
   return top() +
     '<div class="qhead"><p class="qtop"><span id="cj-step">' + (n + 1) + ' of ' + CJ.n + '</span><span class="muted">Tap the one you would rather live in</span></p>' +
     '<div class="prog" role="progressbar" aria-label="Choices" aria-valuemin="0" aria-valuemax="' + CJ.n + '" aria-valuenow="' + n + '"><i style="width:' + Math.round((n + 1) / CJ.n * 100) + '%"></i></div></div>' +
@@ -1069,7 +1077,7 @@ function placeRow(id, order) {
   var b = BY[id], f = b.facts || {};
   return '<li><button type="button" class="prow" data-act="open" data-id="' + esc(id) + '"><span class="pr1"><b>' + esc(nm(b)) + '</b><span class="go" aria-hidden="true">&#8250;</span></span>' +
     (b.neighborhood_id !== b.area_id ? '<span class="pin">In ' + esc(hoodNameOf(b)) + '</span>' : '') +
-    '<span class="pmn">Rent <b' + (isNum(f.rent_from) ? ' data-rent="' + f.rent_from + '"' : '') + '>' + (fromMoney(f.rent_from, f.rent_to) || "not known") + '</b> &middot; Total with utilities and fees <b>' + (fromMoney(f.total_from, f.total_to) || "not known") + '</b></span>' +
+    '<span class="pmn"><span>Rent <b' + (isNum(f.rent_from) ? ' data-rent="' + f.rent_from + '"' : '') + '>' + (fromMoney(f.rent_from, f.rent_to) || "not known") + '</b></span><span>Total with utilities and fees <b>' + (fromMoney(f.total_from, f.total_to) || "not known") + '</b></span></span>' +
     '<span class="pf1">' + esc(oneFact(b, order)) + '</span>' + chkSpan(bldChecked(b)) + '</button></li>';
 }
 function results() {

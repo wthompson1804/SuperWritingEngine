@@ -82,6 +82,7 @@ EX.forEach((ex) => {
     const pr = R.priorities(M, w6);
     assert.deepStrictEqual(pr.order, ex.expected_priorities);
     if (ex.expected_priorities_sentence) assert.strictEqual(pr.sentence, ex.expected_priorities_sentence);
+    if (ex.expected_flat !== undefined) assert.strictEqual(pr.flat, ex.expected_flat);
   });
   test("example '" + name + "': the three places, more like this, why, gives up", () => {
     const r = replay(ex).rec, by = (f) => Object.fromEntries(r.neighborhoods.map((x) => [x.neighborhood_id, f(x)]));
@@ -142,7 +143,7 @@ test("the weights learn: someone who always picks the shorter drive gets Mom and
   assert.strictEqual(R.priorities(M, R.cjWeights(M, walk(RULES.space))).order[0], "room");
 });
 test("weights stay a distribution", () => {
-  for (const k in RULES) { const w = R.cjWeights(M, walk(RULES[k])); assert(Math.abs(R.nsum(w) - 1) < 1e-9 && w.every((x) => x >= 0), k); }
+  for (const k in RULES) { const w = R.cjWeights(M, walk(RULES[k])); assert(Math.abs(R.nsum(w) - 1) < 1e-4 && w.every((x) => x >= 0), k);   /* the samples are rounded to 6 decimals */ }
 });
 test("a move swaps one priority with its neighbour, and only that", () => {
   const w = R.cjWeights(M, walk(RULES.mixed)), o = R.priorities(M, w).order;
