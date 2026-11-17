@@ -430,3 +430,8 @@ Refused and closed for the session (raw/_host_kill_shared.json, by life_here_nj)
 middlesexcountynj.gov, mercercounty.org, www.hamiltonnj.com, lhtrail.org (403 on robots.txt); newyorkyimby.com,
 thesunpapers.com, www.somersetcountyparks.org (403 on a page); www.nj.gov (flagged as a bot-challenge page; body not
 kept, so possibly a false match, but treated as a refusal). visithudson.org `?p=` URLs are robots-disallowed.
+
+### Life-here research, Connecticut and New York (2026-11-17)
+Refused and closed for the session (by life_here_ctny): www.newhavenct.gov, ctvisit.com, www.playwrightirishpub.com,
+www.scratchbaking.com, www.grownyc.org, islipny.gov. A mirror of NYC Parks (php1-84.nycgovparks.org) was deliberately
+not used (NYC Parks refused us earlier).

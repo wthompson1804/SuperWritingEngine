@@ -341,7 +341,7 @@ voices: social_life
 === hood: nj:franklin
 host_intro: [[In Franklin the Delaware and Raritan Canal State Park{!b_park==Delaware and Raritan Canal State Park} is about {parkwalk} minutes {door}, which suits long dog walks{!parkwalk<=10}.]][[In Franklin a park is about {parkwalk} minutes {door}{!b_park!=Delaware and Raritan Canal State Park}.]] [[The apartments are large, about {sqft} square feet{!sqft>=800}{!sqft_lo>=700}{!pg_n>=2}.]][[The apartments are a good size, about {sqft} square feet{!sqft>=700}{!sqft<800}{!pg_n>=2}.]] You would drive for everything else, starting with dinner{!rest<=3}.
 scene: [[No restaurants are within a {w10}{!rest==0}.]] The supermarket is {super} miles away. [[The dog park is {dogpark} miles away{!own_dog<1}.]]
-good: [[A state park is a short walk away{!b_park==Delaware and Raritan Canal State Park}{!parkwalk<=10}.]][[A park is a short walk away{!b_park!=Delaware and Raritan Canal State Park}{!parkwalk<=10}.]]
+good: [[A state park is a short walk away{!b_park==Delaware and Raritan Canal State Park}{!parkwalk<=10}.]][[A park is a short walk away{!b_park!=Delaware and Raritan Canal State Park}{!parkwalk<=10}.]][[The supermarket is {super} miles away{!parkwalk>10}.]]
 watch: Your parents are about {drive} minutes away, and everything except the park is a drive.
 
 === hood: nj:somerville
@@ -477,8 +477,8 @@ rules: City of Orange|overnight_parking; City of Orange|municipal_garage_monthly
 === hood: nj:maplewood
 host_intro: Residents call Maplewood very pet friendly. [[The apartment is large, about {sqft} square feet{!sqft>=800}{!pg_n==1}.]][[The apartments are large, about {sqft} square feet{!sqft_lo>=700}{!pg_n>=2}.]] [[The dog park is {dogpark} miles away, so you would drive the dog there{!dogpark>=2400}{!dog_any==0}.]][[The nearest public dog park is {dogpark} miles away{!dog_any>0}.]]
 scene: About {rest} restaurants are within a {w10}, and the supermarket is {super} miles away. A park is about {parkwalk} minutes on foot.
-good: [[You get a large apartment in a pet-friendly town{!sqft_lo>=700}.]][[Residents call the town very pet friendly{!sqft_lo<700}.]]
-watch: [[The cost is near the top of your budget, about ${pg_mid} a month with utilities and fees{!pg_mid>=2850}.]]
+good: [[You get a large apartment in a pet-friendly town{!sqft_lo>=700}.]][[Residents call the town very pet friendly{!sqft_lo<700}.]][[Residents call the town very pet friendly{!nb==0}.]]
+watch: [[The cost is near the top of your budget, about ${pg_mid} a month with utilities and fees{!pg_mid>=2850}.]][[Each visit to your parents costs {tollcost}{!nb==0}.]]
 voices: dogs_green
 
 === hood: nj:rahway
@@ -604,9 +604,9 @@ watch: [[Your parents are about {drive} minutes away, and the dog park is a long
 voices: dogs_green
 
 === hood: ny:wallkill
-host_intro: [[The apartment in Wallkill is large, about {sqft} square feet{!sqft>=850}.]] [[A big park is about {parkwalk} minutes {door}{!parkha>=20}.]] Your parents are about {drive} minutes away, so visits would be day trips{!drive>=90}.
+host_intro: Your parents are about {drive} minutes away, so visits would be day trips{!drive>=90}. [[The apartment in Wallkill is large, about {sqft} square feet{!sqft>=850}.]][[The apartment in Wallkill is about {sqft} square feet{!sqft<850}.]] [[A big park is about {parkwalk} minutes {door}{!parkha>=20}.]]
 scene: Little is within a {w10}: {rest} restaurants and {bars} bars. About {rest1600} restaurants are within {mile}, and the supermarket is {super} miles away.
-good: [[You get a large apartment next to a big park{!sqft>=850}{!parkha>=20}.]]
+good: [[You get a large apartment next to a big park{!sqft>=850}{!parkha>=20}.]][[The supermarket is a short drive, {super} miles away{!parkha<20}.]]
 watch: [[The dog park is {dogpark} miles away, and each visit to your parents has a toll{!b_toll>0}{!dog_any==0}.]][[Each visit to your parents has a toll{!b_toll>0}{!dog_any>0}.]]
 
 === hood: ct:west-haven
@@ -673,8 +673,8 @@ watch: The cheapest apartment is about ${pg_lo} a month with utilities and fees,
 voices: dogs_green, noise
 
 === hood: nj:burlington
-host_intro: In Burlington the nearest park is a long walk {door}{!parkwalk>=25}, too far for daily dog walks. Your parents are about {drive} minutes away each way{!drive>=110}, so a visit takes the whole day.
-scene: {rest} restaurants are within a {w10}, and there are no bars{!bars==0}. [[The supermarket is {super} miles away and the dog park {dogpark} miles, so both need the car{!super>=1600}{!dogpark>=4800}{!dog_any==0}.]][[The supermarket is {super} miles away, so groceries need the car{!super>=1600}{!dog_any>0}.]] By train and bus the trip to your parents takes about {transit} minutes. [[For the dog, {owndog}.]]
+host_intro: In Burlington the nearest park is a long walk {door}{!parkwalk>=25}, too far for daily dog walks. Your parents are about {drive} minutes away each way{!drive>=110}, so a visit takes the whole day. {rest} restaurants are within a {w10}, and there are no bars{!bars==0}.
+scene: [[The supermarket is {super} miles away and the dog park {dogpark} miles, so both need the car{!super>=1600}{!dogpark>=4800}{!dog_any==0}.]][[The supermarket is {super} miles away, so groceries need the car{!super>=1600}{!dog_any>0}.]] By train and bus the trip to your parents takes about {transit} minutes. [[For the dog, {owndog}.]]
 good: The apartments are a good size, about {sqft} square feet{!sqft_lo>=650}.
 watch: Groceries and every meal out need the car{!super>=1600}{!rest<=3}.
 === hood: ny:jamaica
@@ -775,8 +775,8 @@ voices: dogs_green
 === hood: ny:hempstead
 host_intro: The Town of Hempstead runs enclosed dog parks with separate sections for small dogs. The Village is rewriting its overnight street-parking rules, so ask what applies in the month you move. [[The apartment is large, about {sqft} square feet{!sqft>=800}.]]
 scene: {rest} restaurants are within a {w10}, and the supermarket is {super} miles away. A park is about {parkwalk} minutes on foot.
-good: [[You get a large apartment a short drive from your parents{!drive<=25}{!sqft>=800}.]]
-watch: [[The cost is at the top of your budget, about ${pg_mid} a month with utilities and fees{!pg_mid>=2900}.]]
+good: [[You get a large apartment a short drive from your parents{!drive<=25}{!sqft>=800}.]][[Your parents are a short drive away{!drive<=25}{!nb==0}.]]
+watch: [[The cost is at the top of your budget, about ${pg_mid} a month with utilities and fees{!pg_mid>=2900}.]][[Many households here have no car{!nocar>=0.4}{!nb==0}, so ask about parking.]]
 rules: Hempstead (Town)|dog_park; Hempstead (Village)|overnight_parking
 
 === hood: ny:flatlands
@@ -960,10 +960,10 @@ watch: [[Your parents are about {drive} minutes away, and each visit costs {toll
 voices: parking
 
 === hood: nj:jersey-city-mcginley-square
-host_intro: McGinley Square is an older part of Jersey City{!pre1940>=0.3}. About {rest} restaurants are within a {w10}. On many streets a car without a resident permit may park for only 2 hours. So ask {eachb} about parking.
-scene: [[The supermarket is {super} miles away and a dog run {dogpark} miles{!own_dog<1}.]]
+host_intro: McGinley Square is an older part of Jersey City{!pre1940>=0.3}. About {rest} restaurants are within a {w10}. On many streets a car without a resident permit may park for only 2 hours.
+scene: [[The supermarket is {super} miles away and a dog run {dogpark} miles{!own_dog<1}.]] The nearest park is about {parkwalk} minutes on foot.
 good: Dinner is a short walk.
-watch: The nearest park is about {parkwalk} minutes on foot.
+watch: Ask {eachb} about parking, since many streets need a resident permit.
 rules: Jersey City|resident_permit
 === hood: ct:east-haven
 host_intro: East Haven has {pg_n} apartments to choose from{!pg_n>=12}, and all of them cost well under your limit{!pg_hi<=2400}. A park is about {parkwalk} minutes {door}, and the supermarket is {super} miles away.
@@ -1162,16 +1162,15 @@ watch: Most households here have no car{!nocar>=0.5}, so ask the building about 
 
 === year: The Walk-Everywhere Year @small
 display: The Walk-Everywhere Experience
-tagline: Dinner, coffee and a park on foot, in Kew Gardens or Bay Ridge.
-subhead: City blocks where you walk to dinner and coffee: {p_places} apartments, in Kew Gardens and Bay Ridge.
-host_intro: Only {p_places} apartments fit right now: {by_hood}{!hood_names==Bay Ridge; Kew Gardens}. Both are city neighborhoods with restaurants, cafés and a park within a short walk{!@ny:kew-gardens rest>=10}{!@ny:bay-ridge rest>=10}{!@ny:kew-gardens parkwalk<=8}{!@ny:bay-ridge parkwalk<=8}. What you give up is easy parking{!u_garage<=0.2}.
-points: clock | Kew Gardens is about {@ny:kew-gardens drive} minutes from your parents by car, with no tolls{!@ny:kew-gardens b_toll==0}. ;; car | Bay Ridge is about {@ny:bay-ridge drive} minutes from your parents, with no tolls{!@ny:bay-ridge b_toll==0}. ;; fork | Kew Gardens has about {@ny:kew-gardens rest} restaurants within a {w10}, and Bay Ridge {@ny:bay-ridge rest}. ;; warning | The listings say little about parking{!u_parkpub<0.6}, so ask every building where you would park.
-moment1: coffee | In Kew Gardens the morning dog walk reaches Forest Park{!@ny:kew-gardens b_park==Forest Park} in about {@ny:kew-gardens parkwalk} minutes. In Bay Ridge, Shore Road Park{!@ny:bay-ridge b_park==Shore Road Park} is about {@ny:bay-ridge parkwalk} minutes away. Cafés are close in both{!@ny:kew-gardens cafes>=3}{!@ny:bay-ridge cafes>=3}.
-moment2: cocktail | You walk to dinner and walk back. About {@ny:kew-gardens bars} bars are a short walk away in Kew Gardens, and about {@ny:bay-ridge bars} in Bay Ridge. If you drive instead, expect a search for parking afterward.
-moment3: heart | From Kew Gardens the drive to your parents is about {@ny:kew-gardens drive} minutes, and the train and bus take about {@ny:kew-gardens transit}. From Bay Ridge the drive is about {@ny:bay-ridge drive} minutes, the train and bus about {@ny:bay-ridge transit}.
-promise: You walk to dinner, coffee and a park from each apartment.
-catch: Choice is small: only {p_places} apartments, and Bay Ridge is a much longer trip to your parents than Kew Gardens{!@ny:bay-ridge drive>=25}{!@ny:kew-gardens drive<=10}.
-
+tagline: City blocks and dinner on foot, in Jersey City – McGinley Square{!@nj:jersey-city-mcginley-square rest>=10}.
+subhead: City blocks where you walk to dinner: {p_places} apartments, in Jersey City – McGinley Square{!hood_names==Jersey City – McGinley Square}.
+host_intro: Only {p_places} apartments fit right now: {by_hood}{!hood_names==Jersey City – McGinley Square}. About {@nj:jersey-city-mcginley-square rest} restaurants are within a {w10} of the buildings, and the PATH station is {@nj:jersey-city-mcginley-square station} miles away{!@nj:jersey-city-mcginley-square stationkind==PATH}. What you give up is easy parking{!u_parkown==0}.
+points: fork | About {@nj:jersey-city-mcginley-square rest1600} restaurants are within {mile} of the buildings. ;; park | A park is about {@nj:jersey-city-mcginley-square parkwalk} minutes on foot. ;; dog | The nearest dog run is about {@nj:jersey-city-mcginley-square dogpark} miles away{!@nj:jersey-city-mcginley-square dog_any==0}. ;; money | Each visit costs about ${@nj:jersey-city-mcginley-square b_toll} round trip with a New York E-ZPass{!@nj:jersey-city-mcginley-square toll_spread<=5}. ;; warning | The listings say nothing about parking{!u_parkpub==0}, so ask where you would park.
+moment1: coffee | The morning dog walk reaches a park in about {@nj:jersey-city-mcginley-square parkwalk} minutes. The supermarket is about {@nj:jersey-city-mcginley-square super} miles away.
+moment2: cocktail | You walk to dinner and walk back{!@nj:jersey-city-mcginley-square rest>=10}. About {@nj:jersey-city-mcginley-square bars} bars are within a {w10}, so a late night may mean another part of the city.
+moment3: heart | The drive to your parents is about {@nj:jersey-city-mcginley-square drive} minutes each way, and the train and bus take about {@nj:jersey-city-mcginley-square transit} minutes.
+promise: You walk to dinner from each apartment{!@nj:jersey-city-mcginley-square rest>=10}.
+catch: Choice is small: only {p_places} apartments, and street parking takes planning{!u_parkown==0}.
 === year: The Walk-Everywhere Year @full
 display: The Walk-Everywhere Experience
 tagline: Dinner, coffee and the dog run are on foot, and your parents are close.
@@ -1188,50 +1187,47 @@ catch: Easy parking is what you give up: most households in these neighborhoods 
 display: The Old-Neighborhood Experience
 tagline: An older city neighborhood: close to your parents, except in Newark{!far_names==Newark}.
 subhead: Long-established city neighborhoods{!m_yrbuilt<=1970} with daily errands on foot, close to your parents except in Newark{!far_names==Newark}.
-host_intro: This suits you if you want your own apartment in an older city neighborhood{!m_yrbuilt<=1970}, with errands on foot. Most of these apartments are in {close_areas}, within about {close_drive_hi:r5} minutes of your parents; the Newark ones{!far_names==Newark} are about {far_drive} minutes away, with a toll{!far_toll>0}. What you usually give up is nightlife and easy parking.
-points: clock | From {tollfree_areas} the drive to your parents has no tolls{!tollfree_share>=0.5}. ;; car | [[From Newark{!far_names==Newark} each visit costs about ${far_toll} round trip with a New York E-ZPass{!far_toll_spread<=5}.]][[Newark{!far_names==Newark} visits cost about ${far_toll_lo} to ${far_toll_hi} round trip with a New York E-ZPass{!far_toll_spread>5}.]] ;; money | [[From {toll_areas} each visit costs about ${close_toll} round trip with a New York E-ZPass{!close_toll>0}{!close_toll_spread<=5}.]][[{toll_areas} visits cost about ${close_toll_lo} to ${close_toll_hi} round trip with a New York E-ZPass{!close_toll_spread>5}.]] ;; park | From the typical apartment a park is about {p_parkwalk} minutes on foot. ;; fork | About {p_rest} restaurants are within a {w10} of the typical apartment. ;; warning | [[Only {u_garage} percent of the apartments list a garage or covered parking, so ask{!u_garage<0.6}.]][[Street parking is crowded, so ask each building for a space{!u_garage>=0.6}.]]
+host_intro: This suits you if you want your own apartment in an older city neighborhood{!m_yrbuilt<=1970}, with errands on foot. {close_n} of the {p_places} apartments are in {close_areas}, within about {close_drive_hi:r5} minutes of your parents; the rest are in Newark{!far_names==Newark}, about {far_drive} minutes away, with a toll{!far_toll>0}. What you usually give up is nightlife and easy parking.
+points: clock | From {tollfree_areas} the drive to your parents has no tolls{!tollfree_share>0}. ;; car | [[From Newark{!far_names==Newark} each visit costs about ${far_toll} round trip with a New York E-ZPass{!far_toll_spread<=5}.]][[Newark{!far_names==Newark} visits cost about ${far_toll_lo} to ${far_toll_hi} round trip with a New York E-ZPass{!far_toll_spread>5}.]] ;; money | [[From {toll_areas} each visit costs about ${close_toll} round trip with a New York E-ZPass{!close_toll>0}{!close_toll_spread<=5}.]][[{toll_areas} visits cost about ${close_toll_lo} to ${close_toll_hi} round trip with a New York E-ZPass{!close_toll_spread>5}.]] ;; park | From the typical apartment a park is about {p_parkwalk} minutes on foot. ;; fork | About {p_rest} restaurants are within a {w10} of the typical apartment. ;; warning | [[Only {u_garage} percent of the apartments list a garage or covered parking, so ask{!u_garage<0.6}.]][[Street parking is crowded, so ask each building for a space{!u_garage>=0.6}.]]
 moment1: coffee | A dog run is about {u_dogpark} miles from the typical apartment. About {u_cafes} cafés are close for a break from the desk, and the supermarket is about {u_super} miles away.
 moment2: fork | Dinner is easy, with about {u_rest1600} restaurants within {mile} of the typical apartment. [[Bars are usually few{!u_bars<=3}, so a late night often means going to another neighborhood.]]
-moment3: heart | From {close_areas} your parents are close enough for a weeknight visit{!close_share>=0.6}. From Newark{!far_names==Newark} the drive is about {far_drive} minutes each way. The typical trip by train and bus takes about {p_transit} minutes.
+moment3: heart | From {close_areas} your parents are close enough for a weeknight visit{!close_n>=1}. From Newark{!far_names==Newark} the drive is about {far_drive} minutes each way. The typical trip by train and bus takes about {p_transit} minutes.
 promise: Errands on foot in a long-established city neighborhood.
 catch: Nightlife and easy parking are usually what you give up. Bars are usually few{!u_bars<=3}, and many of these buildings do not list a garage{!u_garage<0.6}.
 
 === year: The Little-City Year
 display: The Little-City Experience
-tagline: Small cities, a garage at most buildings{!u_garage>=0.6}, a longer drive to your parents.
-subhead: Small cities and inner suburbs, most with a walkable downtown and a garage{!u_garage>=0.6}, and a longer drive to your parents.
-host_intro: This suits you if you want to park in a garage and do laundry in your own apartment, which most of these buildings offer{!u_garage>=0.6}{!u_laundry>=0.6}. Many of the towns also have a small downtown to walk to{!p_rest>=4}. What you give up is being near your parents: visits are usually planned trips{!p_drive>=40}.
-points: parking | {u_garage} percent of the apartments list a garage or covered parking. ;; laundry | {u_laundry} percent list laundry in the apartment. ;; pool | {u_pool} percent have a pool in the building, and nearly all have a gym{!u_gym>=0.85}. ;; dog | [[{u_owndog} percent are in a building with its own dog area{!u_owndog>=0.15}.]] ;; train | The nearest rail station is typically about {m_station} miles away. ;; warning | The typical drive to your parents is about {p_drive} minutes, so visits take planning.
+tagline: Small cities, parking at most buildings{!u_parkown>=0.75}, and a longer drive to your parents.
+subhead: Small cities and inner suburbs, with parking at most buildings{!u_parkown>=0.75} and a longer drive to your parents.
+host_intro: This suits you if you want a small city or a suburb, with parking at most buildings{!u_parkown>=0.75}. Many of the apartments have laundry inside{!u_laundry>=0.6}. What you give up is being near your parents: the typical drive is about {p_drive} minutes{!p_drive>=40}.
+points: parking | {u_garage} percent of the apartments list a garage or covered parking. ;; laundry | {u_laundry} percent list laundry in the apartment. ;; pool | {u_pool} percent are in a building with a pool. ;; dog | [[{u_owndog} percent are in a building with its own dog area{!u_owndog>=0.15}.]] ;; train | The nearest rail station is typically about {m_station} miles away. ;; warning | The typical drive to your parents is about {p_drive} minutes each way.
 moment1: dog | From the typical apartment a park is about {p_parkwalk} minutes on foot and the supermarket about {u_super} miles. A public dog park is about {u_dogpark} miles from the typical apartment.
-moment2: fork | You can usually walk to dinner{!p_rest>=4}: about {p_rest} restaurants are within a {w10} of the typical apartment. Bars are usually few{!u_bars<=2}, so a late night means a ride.
+moment2: fork | Saturday dinner is usually a short drive: about {u_rest1600} restaurants are within {mile} of the typical apartment. Bars are usually few{!u_bars<=2}, so a late night means a ride.
 moment3: car | Seeing your parents is a planned trip from most of these towns. [[Tolls run about ${u_toll} round trip with a New York E-ZPass{!u_toll>0}{!u_toll_spread<=5}, and the train]][[Tolls run up to about ${u_toll_hi} round trip with a New York E-ZPass{!u_toll_spread>5}{!u_toll_lo==0}, and the train]][[Tolls run from about ${u_toll_lo} to ${u_toll_hi} round trip with a New York E-ZPass{!u_toll_spread>5}{!u_toll_lo>0}, and the train]][[There are no tolls{!u_toll_hi==0}, and the train]][[Tolls are small on the typical trip{!u_toll==0}{!u_toll_hi>0}{!u_toll_spread<=5}, and the train]] and bus take about {p_transit} minutes.
-promise: A garage at most buildings, and often a small downtown nearby{!u_garage>=0.6}.
-catch: From here you usually cannot drop in on your parents. The typical apartment is also modest in size, about {p_sqft} square feet{!p_sqft<=620}.
-
+promise: Parking at most buildings, and often laundry in the apartment{!u_parkown>=0.75}{!u_laundry>=0.6}.
+catch: From here you usually cannot drop in on your parents. A garage is listed for only {u_garage} percent of the apartments{!u_garage<0.5}.
 === year: The Fresh-Start Year
 display: The Fresh-Start Experience
-tagline: A newer building{!m_yrbuilt>=2000} near the water{!m_water<=800}, with a gym{!u_gym>=0.8} and usually a garage{!u_garage>=0.6}.
-subhead: Newer buildings{!m_yrbuilt>=2000} near the water{!m_water<=800}, most with a gym and a garage{!u_garage>=0.6}, across a toll crossing{!u_toll>0} from your parents.
-host_intro: This suits you if you want a newer building{!m_yrbuilt>=2000} with a gym{!u_gym>=0.9}, usually a garage{!u_garage>=0.6} and often a pool{!u_pool>=0.5}. The water and a park are a short walk from most of them{!m_water<=800}{!p_parkwalk<=5}. What you usually give up is space and nightlife{!p_sqft<=600}{!u_bars<=1}.
-points: heart | [[Every building here has a gym{!u_gym==1}.]][[Nearly every building here has a gym{!u_gym>=0.8}{!u_gym<1}.]] ;; parking | {u_garage} percent of the apartments list a garage or covered parking. ;; pool | {u_pool} percent are in a building with a pool. ;; laundry | {u_laundry} percent list laundry in the apartment. ;; park | From the typical apartment a park is about {p_parkwalk} minutes on foot. ;; warning | [[The typical apartment is small, about {p_sqft} square feet{!p_sqft<600}.]][[Bars are usually few nearby, so nights out mean a drive{!p_sqft>=600}{!u_bars<=2}.]]
-moment1: water | From most of these buildings the morning dog walk can follow the water{!m_water<=800}, and a dog run is about {u_dogpark} miles from the typical apartment. The supermarket is about {u_super} miles away.
+tagline: Usually a small apartment, for less than a typical Queens apartment{!p_sqft<=600}{!q_cost>=4}.
+subhead: Mostly small apartments{!p_sqft<=600} that cost less than a typical Queens apartment{!q_cost>=4}, with a toll on every visit to your parents{!u_toll_lo>0}.
+host_intro: This suits you if a lower monthly cost matters more than space. The typical apartment is about {p_sqft} square feet and costs about ${p_allin} a month with utilities and fees{!q_cost>=4}. What you usually give up is space and nightlife{!p_sqft<=600}{!u_bars<=1}.
+points: laundry | {u_laundry} percent list laundry in the apartment. ;; parking | {u_garage} percent of the apartments list a garage or covered parking. ;; park | From the typical apartment a park is about {p_parkwalk} minutes on foot. ;; fork | About {u_rest1600} restaurants are within {mile} of the typical apartment. ;; warning | [[The typical apartment is small, about {p_sqft} square feet{!p_sqft<600}.]][[Bars are usually few nearby, so nights out mean a drive{!p_sqft>=600}{!u_bars<=2}.]]
+moment1: dog | The morning dog walk reaches a park in about {p_parkwalk} minutes from the typical apartment. A dog run is about {u_dogpark} miles away, and the supermarket about {u_super} miles.
 moment2: fork | About {p_rest} restaurants are within a {w10} of the typical apartment, and about {u_rest1600} within {mile}. [[There are usually no bars close by{!u_bars==0}, so a night out means a drive or a ride.]][[Bars are usually few{!u_bars>0}, so a bigger night out means a drive or a ride.]]
 moment3: car | The typical drive to your parents is about {p_drive} minutes each way[[, and tolls run about ${u_toll} round trip with a New York E-ZPass{!u_toll>0}{!u_toll_spread<=5}]][[, and tolls run up to about ${u_toll_hi} round trip with a New York E-ZPass{!u_toll_spread>5}{!u_toll_lo==0}]][[, and tolls run from about ${u_toll_lo} to ${u_toll_hi} round trip with a New York E-ZPass{!u_toll_spread>5}{!u_toll_lo>0}]]. The train and bus take about {p_transit} minutes.
-promise: The water close by, a gym in the building and usually a garage{!u_garage>=0.6}{!u_gym>=0.8}{!m_water<=800}.
+promise: Costs less than a typical Queens apartment, with a park nearby{!q_cost>=4}{!p_parkwalk<=8}.
 catch: You give up space and nightlife: most of the apartments are small{!p_sqft<=600} and bars are usually scarce{!u_bars<=1}. [[Each visit to your parents also has a toll{!u_toll>0}.]]
-
 === year: The Quiet-Street Year @small
 display: The Quiet-Street Experience
-tagline: Quiet towns of houses, in Westport, Fairfield or Teaneck.
-subhead: Apartments among houses in quiet towns: {p_places} of them, in Westport, Fairfield and Teaneck.
-host_intro: Only {p_places} apartments fit right now: {by_hood}{!hood_names==Fairfield; Teaneck; Westport}. All are in quiet towns of houses{!@ct:westport detached>=0.5}{!@ct:fairfield detached>=0.5}{!@nj:teaneck detached>=0.5}, and each building has parking of its own{!u_parkown==1}. In Westport and Teaneck you would drive to dinner{!@ct:westport rest<=3}{!@nj:teaneck rest<=3}; the Fairfield apartment is a short walk from restaurants and the train{!@ct:fairfield rest>=4}{!@ct:fairfield station<=800}{!@ct:fairfield stationkind==train}.
-points: clock | Teaneck is about {@nj:teaneck drive} minutes from your parents, Westport {@ct:westport drive} and Fairfield {@ct:fairfield drive}. ;; ruler | About {@ct:westport sqft} square feet in Westport, {@nj:teaneck sqft} in Teaneck and {@ct:fairfield sqft} in Fairfield. ;; fork | Fairfield has {@ct:fairfield rest} restaurants within a {w10}; Westport and Teaneck have almost none{!@ct:westport rest<=1}{!@nj:teaneck rest<=1}. ;; dog | The Teaneck building has its own dog area{!@nj:teaneck own_dog==1}. ;; warning | Choice is small: only {p_places} apartments, {@ct:westport pg_n} of them in a single Westport building{!@ct:westport pg_bldgs==1}.
-moment1: dog | The streets are quiet for dog walks. The nearest park is about {@nj:teaneck parkwalk} minutes on foot in Teaneck, {@ct:westport parkwalk} in Westport and {@ct:fairfield parkwalk} in Fairfield.
-moment2: car | You drive to dinner, except in Fairfield, where about {@ct:fairfield rest} restaurants and {@ct:fairfield bars} bars are within a {w10}. Coming back is simple, because parking is at the building{!u_parkown==1}.
-moment3: heart | From Teaneck the drive to your parents is about {@nj:teaneck drive} minutes and costs about ${@nj:teaneck b_toll} round trip with a New York E-ZPass. From Westport and Fairfield it is about {@ct:westport drive} and {@ct:fairfield drive} minutes.
-promise: Quiet streets among houses, with parking at the building.
-catch: Westport and Fairfield are more than an hour from your parents{!@ct:westport drive>60}{!@ct:fairfield drive>60}. Almost everything is a drive in Westport and Teaneck{!@ct:westport rest<=3}{!@nj:teaneck rest<=3}.
-
+tagline: A quiet town of houses{!@nj:millburn detached>=0.5}, in Millburn, with the train a walk away{!@nj:millburn station<=800}{!@nj:millburn stationkind==train}.
+subhead: Apartments in a town of houses{!@nj:millburn detached>=0.5}: {p_places} of them, in Millburn{!hood_names==Millburn}.
+host_intro: Only {p_places} apartments fit right now: {by_hood}{!hood_names==Millburn}. Millburn is a quiet town of houses{!@nj:millburn detached>=0.5}, and each building has parking of its own{!u_parkown==1}. The train station and the supermarket are a short walk{!@nj:millburn station<=800}{!@nj:millburn super<=800}{!@nj:millburn stationkind==train}.
+points: money | Each visit costs about ${@nj:millburn b_toll} round trip with a New York E-ZPass{!@nj:millburn toll_spread<=5}. ;; fork | About {@nj:millburn rest1600} restaurants are within {mile} of the Millburn buildings. ;; coffee | About {@nj:millburn cafes} cafés are within a {w10}. ;; park | A park is about {@nj:millburn parkwalk} minutes on foot. ;; warning | The apartments are about {@nj:millburn sqft_lo} to {@nj:millburn sqft_hi} square feet, so space is tight{!@nj:millburn sqft_hi<=650}.
+moment1: dog | The streets are quiet for dog walks. The supermarket is about {@nj:millburn super} miles from the Millburn buildings, and the dog park {@nj:millburn dogpark} miles.
+moment2: fork | Saturday dinner is a short trip into town. Coming back is simple, because parking is at the building{!u_parkown==1}.
+moment3: heart | From Millburn the drive to your parents is about {@nj:millburn drive} minutes and costs about ${@nj:millburn b_toll} round trip with a New York E-ZPass{!@nj:millburn toll_spread<=5}. The train and bus take about {@nj:millburn transit} minutes.
+promise: A quiet town of houses, with the train and groceries on foot{!@nj:millburn detached>=0.5}{!@nj:millburn station<=800}{!@nj:millburn super<=800}{!@nj:millburn stationkind==train}.
+catch: Choice is small: only {p_places} apartments, in {p_bldgs} buildings. Your parents are about {@nj:millburn drive} minutes away, with a toll each time{!@nj:millburn b_toll>0}.
 === year: The Quiet-Street Year @full
 display: The Quiet-Street Experience
 tagline: A quiet street of houses and lawns{!m_detached>=0.5}, where you drive to everything.
@@ -1246,14 +1242,14 @@ catch: Almost nothing is within walking distance{!p_rest<=3}, so every outing st
 
 === year: The Room-to-Breathe Year
 display: The Room-to-Breathe Experience
-tagline: Usually more space for you, the desk and the dog, in towns farther out.
-subhead: Mostly bigger apartments in towns farther out, with a longer drive to your parents.
+tagline: More space than a typical Queens apartment{!q_sqft>=4}, in towns farther from your parents.
+subhead: More room than a typical Queens apartment{!q_sqft>=4}, in towns with a longer drive to your parents.
 host_intro: This suits you if the apartment itself matters most, because you work from home. The typical apartment here is about {p_sqft} square feet, with room for a desk that is separate from the dinner table. In exchange you usually live farther from your parents{!p_drive>=45}, and what you can walk to depends on the town.
-points: laundry | {u_laundry} percent list laundry in the apartment. ;; parking | {u_garage} percent list a garage or covered parking. ;; heart | Nearly every building has a gym{!u_gym>=0.85}. ;; dog | [[{u_owndog} percent are in a building with its own dog area{!u_owndog>=0.15}.]] ;; fork | About {p_rest} restaurants are within a {w10} of the typical apartment. ;; warning | The typical drive to your parents is about {p_drive} minutes, each way.
-moment1: home | Most of these apartments have room for a proper desk. From the typical apartment a park is about {p_parkwalk} minutes on foot, and the supermarket is about {u_super} miles away.
+points: laundry | {u_laundry} percent list laundry in the apartment. ;; parking | {u_garage} percent list a garage or covered parking. ;; home | {u_parkown} percent are in a building with parking of its own. ;; dog | [[{u_owndog} percent are in a building with its own dog area{!u_owndog>=0.15}.]] ;; fork | About {p_rest} restaurants are within a {w10} of the typical apartment. ;; warning | The typical drive to your parents is about {p_drive} minutes, each way.
+moment1: home | The typical apartment has room for a proper desk. From the typical apartment a park is about {p_parkwalk} minutes on foot, and the supermarket is about {u_super} miles away.
 moment2: moon | From the typical apartment about {u_rest1600} restaurants are within {mile}[[, and bars are usually scarce{!u_bars1600<=2}]]. With this much space, having friends over is an easy evening.
 moment3: car | Seeing your parents is a long drive from most of these towns. [[Tolls run about ${u_toll} round trip with a New York E-ZPass{!u_toll>0}{!u_toll_spread<=5}, and the train]][[Tolls run up to about ${u_toll_hi} round trip with a New York E-ZPass{!u_toll_spread>5}{!u_toll_lo==0}, and the train]][[Tolls run from about ${u_toll_lo} to ${u_toll_hi} round trip with a New York E-ZPass{!u_toll_spread>5}{!u_toll_lo>0}, and the train]][[There are no tolls{!u_toll_hi==0}, and the train]][[Tolls are small on the typical trip{!u_toll==0}{!u_toll_hi>0}{!u_toll_spread<=5}, and the train]] and bus take about {p_transit} minutes.
-promise: Usually more room for you, your desk and the dog.
+promise: More room than a typical Queens apartment{!q_sqft>=4}, for less{!q_cost>=4}.
 catch: From most of these towns your parents are a long drive away{!p_drive>=45}. The typical apartment has only about {p_rest} restaurants within a {w10}.
 
 # ================================================================== ABOUT POINTS (neighborhoods)

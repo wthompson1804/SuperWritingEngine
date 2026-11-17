@@ -1,0 +1,45 @@
+building_id,sr,addr,city,st,hood,hid,lat,lon,name,park,dog
+b_37b5f7553b,1.0,164 Coe Ave,East Haven,CT,East Haven,ct:east-haven,41.251276967099,-72.873076219063,BAY SHORE APARTMENTS,Bradford Nature Preserve,Fort Hale Dog Park
+b_4fe6444f45,1.0,270 Spring Street,Naugatuck,CT,Naugatuck,ct:naugatuck,41.5057969,-73.0556543,Parkview Apartments,Whittemore Glen State Park,Naugatuck Dog Park
+b_73eecaf004,1.0,7617 47th Ave,New York,NY,Elmhurst,ny:elmhurst,40.739889,-73.887442,,Frank D O'Connor Playground,Sherry Dog Run
+b_83debd3403,1.0,2206 State St,Hamden,CT,Hamden,ct:hamden,41.341354,-72.89587,,Henry and Irene Garguilo Wildlife Refuge,Hamden Dog Park
+b_6a3a573216,1.0,1001 Bridgeport Avenue,Shelton,CT,Shelton,ct:shelton,41.25879825218,-73.14324687633,The Shelton Grove,Bushinsky Arboretum,Shelton Dog Park
+b_cffdb3842e,1.0,138-28 90th Ave,Jamaica,NY,Jamaica,ny:jamaica,40.70122528076172,-73.8129653930664,,Howard Von Dohlen Playground,Forest Park Barking Lot
+b_d03c93be22,1.0,945 41st St,New York,NY,Sunset Park (East)-Borough Park (West),ny:sunset-park-east-borough-park-west-,40.644317,-73.994932,,Sunset Park,Greenwood Playground Dog Run
+b_d47c36cd31,1.0,2121 Shore Pkwy,Brooklyn,NY,Gravesend (South),ny:gravesend-south-,40.58550262451172,-73.9880599975586,,,
+b_a82df6f46d,1.0,998-1008 Campbell Ave,West Haven,CT,West Haven,ct:west-haven,41.285649842406,-72.958887437461,Campbell Ave Apartments,Maurice P. Quigley Memorial Stadium,Veterans Memorial Dog Park
+b_b6f6e7d714,1.0,190 Main Street,Goshen,NY,Goshen,ny:goshen,41.403145,-74.320206,190 Main St,Triangle Park,
+b_91121ba2c7,1.0,63-44 Saunders Street,New York,NY,Rego Park,ny:rego-park,40.7293771,-73.8636697,,Lost Batallion Playground,
+b_e7ab1481ec,1.0,35 Penataquit Ave,Islip,NY,Islip,ny:islip,40.729239423253,-73.238295535282,Mid Island Apartments,Town Hall West Fields,
+b_f0a7059dca,1.0,301 Tower Ave,Maybrook,NY,Maybrook,ny:maybrook,41.483336,-74.217308,,Stewart State Forest,
+b_8909728008,2.0,24 Claremont Gdns,Ossining,NY,Ossining,ny:ossining,41.1697796,-73.8608263,Cortlandt Living,Old Croton Aqueduct State Park,Ossining Dog Park
+b_6b0a5d8f58,2.0,34-10 84th Street,New York,NY,Jackson Heights,ny:jackson-heights,40.75361251831055,-73.88325500488281,,Travers Park,
+b_fdd45ed063,2.0,270 N Spring St,Naugatuck,CT,Naugatuck,ct:naugatuck,41.506556305416,-73.055236765858,Parkview,Whittemore Glen State Park,Naugatuck Dog Park
+b_8f01469adc,2.0,157 Main Street,Goshen,NY,Goshen,ny:goshen,41.403194,-74.321086,157 Main St,Triangle Park,
+b_581c159c1f,2.0,204 Cherry St,Milford,CT,Milford,ct:milford-city-balance-,41.229942321777344,-73.04879760742188,,Upper Duck Pond,
+b_2f7efd4d62,2.0,405 Main St,West Haven,CT,West Haven,ct:west-haven,41.27172088623047,-72.95206451416016,,West Haven Green,Veterans Memorial Dog Park
+b_3d86019ee6,2.0,364 North St,Middletown,NY,Middletown,ny:middletown,41.457305908203125,-74.41214752197266,,Katherine Chappell memorial park,Maple Hill Dog Park
+b_4d77efaaab,2.0,29 Maple St,Seymour,CT,Seymour,ct:seymour,41.389959330233,-73.070779259824,Lopresti School Apartments at 29 Maple Street,French Memorial Park,Shelton Dog Park
+b_1d16d4f251,3.0,337 Main St,West Haven,CT,West Haven,ct:west-haven,41.27290725708008,-72.94937896728516,,West Haven Green,Veterans Memorial Dog Park
+b_afa4737951,3.0,26 Golden Hill St,Milford,CT,Milford,ct:milford-city-balance-,41.218379154247,-73.064887984368,Golden Hill Apartments,Milford Green,
+b_90a4ca82be,3.0,"East Haven, CT 06512, USA",East Haven,CT,East Haven,ct:east-haven,41.2786,-72.8765,,Burr Community Park,Fort Hale Dog Park
+b_9036d08473,3.0,151 Andrew Ave,Naugatuck,CT,Naugatuck,ct:naugatuck,41.486155609213,-73.066769386166,Horizon Homes,,Naugatuck Dog Park
+b_1f30aad7b0,4.0,99 Hemingway Ave,East Haven,CT,East Haven,ct:east-haven,41.27029,-72.871028,Encore 99,East Haven Marsh Wildlife Area,Fort Hale Dog Park
+b_c241fffec9,4.0,547-597 Millville Ave,Naugatuck,CT,Naugatuck,ct:naugatuck,41.495063940816,-73.073446336337,West Hill Apartments,Legion Field,Naugatuck Dog Park
+b_c7c4e6e0fd,4.0,100 Town Walk Drive,Hamden,CT,Hamden,ct:hamden,41.3913873,-72.9128351,Town Walk at Hamden Hills,Town Center Park,
+b_39bce8e231,4.0,3 Bedford Ave,Norwalk,CT,Norwalk,ct:norwalk,41.11384,-73.42032,3 Bedford LLC,Mathews Park,Oyster Shell Dog Park
+b_25caa353a4,4.0,141-15 84th Dr,Jamaica,NY,Jamaica Hills-Briarwood,ny:jamaica-hills-briarwood,40.710296630859375,-73.81622314453125,,Manton Playground,Forest Park Barking Lot
+b_731a059c3c,5.0,1126 Stratford Ave,Stratford,CT,Stratford,ct:stratford,41.187291841632,-73.131990098934,Renovated and Spacious 1BR apartment in Avon Apartments!,Shakespeare Park,
+b_2cd37adfe3,5.0,2 Short Beach Rd,East Haven,CT,East Haven,ct:east-haven,41.258948468552,-72.853127358612,Kelsey's Landing,Farm River State Park,Short Beach Dog Park
+b_bdba3ce8ce,5.0,34 Glenwood Avenue,Norwalk,CT,Norwalk,ct:norwalk,41.108571,-73.428465,34 Glenwood Ave,Mathews Park,Oyster Shell Dog Park
+b_72747f630d,6.0,31 Ferris Ave,Norwalk,CT,Norwalk,ct:norwalk,41.107929434077,-73.430711590427,31 Ferris LLC,Mathews Park,Oyster Shell Dog Park
+b_f55732231a,6.0,510 Main Street,East Haven,CT,East Haven,ct:east-haven,41.281817,-72.879531,510 Main Apartments,Burr Community Park,Fort Hale Dog Park
+b_997440dae7,6.0,1349 Dixwell Avenue,Hamden,CT,Hamden,ct:hamden,41.349555,-72.930431,1349 Dixwell Avenue - 24,John P. De Nicola Park,
+b_a70d51cf28,7.0,925 Mix Ave,Hamden,CT,Hamden,ct:hamden,41.37745573081,-72.919579668714,925 at North,Town Center Park,
+b_a786c9f75d,7.0,8 Union Ave,Norwalk,CT,Norwalk,ct:norwalk,41.124712606958,-73.415007179395,8 Union Ave LLC,North Avenue Park,Oyster Shell Dog Park
+b_5f667364a3,7.0,1078 East Main Street,Stamford,CT,Stamford,ct:stamford,41.057521,-73.516269,,Edward Hunt Recreation Area,Courtland Dog Park
+b_7757a6f93e,7.0,90 Gerrish Avenue,East Haven,CT,East Haven,ct:east-haven,41.2801616,-72.8791937,Autumn Ridge,Burr Community Park,Fort Hale Dog Park
+b_4278658026,8.0,150 Anton St,Bridgeport,CT,Bridgeport,ct:bridgeport,41.2183211,-73.2188318,Brookside Gardens,Elton G. Rogers Park,
+b_846f44689f,8.0,289 Main Avenue,Norwalk,CT,Norwalk,ct:norwalk,41.134826,-73.42485,The Flats at 289 Main,Broad River Park,
+b_fd00a92a6c,8.0,51 Whiting St,Hamden,CT,Hamden,ct:hamden,41.341325274224,-72.937037979462,Whiting,John L. Carusone Field,
+b_66685241d8,11.0,17 Ferris Avenue,Norwalk,CT,Norwalk,ct:norwalk,41.106884,-73.4305209,17 Ferris Ave,Flax Hill Park,Oyster Shell Dog Park
