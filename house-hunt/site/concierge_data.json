@@ -1,6 +1,6 @@
 {
  "meta": {
-  "built_at": "2026-11-17T18:49:42+00:00",
+  "built_at": "2026-11-17T18:53:31+00:00",
   "rent_limit": 2000,
   "counts": {
    "apartments": 38,
@@ -746,6 +746,8 @@
    "max_pairs": 6,
    "stop_prob": 0.8,
    "mmr_lambda": 0.7,
+   "relevance_floor": 0.85,
+   "relevance_top_share": 0.5,
    "pair_pool": 30,
    "n_similar": 5,
    "n_more_like_this": 3,
@@ -964,7 +966,8 @@
     "likelihood": "gap = U_w(a) - U_w(b); P(a) = sig((gap - either_band)/temperature); P(b) = sig((-gap - either_band)/temperature); P(either) = max(0, 1 - P(a) - P(b))",
     "posterior": "pi_s = prod over answers (in order) of the likelihood, divided by the sum over samples; uniform if the sum is 0",
     "mean_weights": "wbar_k = sum_s pi_s x w_s,k; expected utility = U_wbar",
-    "mmr": "s' = (score - min)/(max - min) over all groups (all 0 if max - min <= 1e-12); pick 3 greedily by round(lambda x s' - (1 - lambda) x max similarity to the picked, round_decimals), ties to the smaller id; similarity is group_similarity (1 - centroid distance / largest centroid distance, standardised features)",
+    "eligible": "order groups by round(score) desc, id; eligible = the first, plus any with rank < ceil(n x relevance_top_share) and round(score) >= round(relevance_floor x the first's score); if fewer than 3 are eligible, the recommendation is the eligible ones then the next by score (no diversity)",
+    "mmr": "among the eligible groups only (iterated in id order): s' = (score - min)/(max - min) over all groups (all 0 if max - min <= 1e-12); pick 3 greedily by round(lambda x s' - (1 - lambda) x max similarity to the picked, round_decimals), ties to the smaller id; similarity is group_similarity (1 - centroid distance / largest centroid distance, standardised features)",
     "sample_sets": "for each sample, the MMR top three with that sample's weights, as sorted ids joined by '|'; computed once",
     "next_pair": "pool = top pair_pool buildings by round(score_wbar) desc, id; pairs (a, b) with a < b by id, skipping pairs asked; gain = round(H(set distribution under pi) - sum over answers of P(answer) x H(set distribution under the posterior after that answer)); highest gain, ties to the earlier pair in (a, b) id order; entropy in nats",
     "stop": "stop when answers >= max_pairs, or answers >= min_pairs and round(max set probability) >= stop_prob",
@@ -988,18 +991,8 @@
     "answer_rule": "the building with the higher utility under hidden_weights; 'either' when the gap is within 0.03",
     "answers": [
      {
-      "a": "b_0f0fcfc79c",
-      "b": "b_b29a9ae0e3",
-      "choice": "a"
-     },
-     {
-      "a": "b_377a717d0d",
+      "a": "b_1d1be12629",
       "b": "b_917f6a1ed1",
-      "choice": "a"
-     },
-     {
-      "a": "b_022934bcb2",
-      "b": "b_0ba5cc966d",
       "choice": "a"
      },
      {
@@ -1008,51 +1001,43 @@
       "choice": "b"
      },
      {
-      "a": "b_e39cde86f4",
-      "b": "b_ee2549a834",
-      "choice": "either"
+      "a": "b_377a717d0d",
+      "b": "b_917f6a1ed1",
+      "choice": "a"
      },
      {
-      "a": "b_022934bcb2",
-      "b": "b_917f6a1ed1",
-      "choice": "either"
+      "a": "b_0ba5cc966d",
+      "b": "b_c4831201c1",
+      "choice": "b"
      }
     ],
     "expected_pairs": [
      [
-      "b_0f0fcfc79c",
-      "b_b29a9ae0e3"
-     ],
-     [
-      "b_377a717d0d",
+      "b_1d1be12629",
       "b_917f6a1ed1"
-     ],
-     [
-      "b_022934bcb2",
-      "b_0ba5cc966d"
      ],
      [
       "b_917f6a1ed1",
       "b_c4831201c1"
      ],
      [
-      "b_e39cde86f4",
-      "b_ee2549a834"
+      "b_377a717d0d",
+      "b_917f6a1ed1"
      ],
      [
-      "b_022934bcb2",
-      "b_917f6a1ed1"
+      "b_0ba5cc966d",
+      "b_c4831201c1"
      ]
     ],
     "expected_mean_weights": {
-     "family": 0.504752,
-     "money": 0.07794,
-     "room": 0.116353,
-     "going_out": 0.149754,
-     "green": 0.079882,
-     "parking": 0.071318
+     "family": 0.467338,
+     "money": 0.075951,
+     "room": 0.100261,
+     "going_out": 0.1869,
+     "green": 0.10526,
+     "parking": 0.06429
     },
-    "expected_top_set_probability": 0.617314,
+    "expected_top_set_probability": 0.803862,
     "expected_top": [
      [
       "ny:flushing-willets-point",
@@ -1137,53 +1122,44 @@
     "answer_rule": "the building with the higher utility under hidden_weights; 'either' when the gap is within 0.03",
     "answers": [
      {
-      "a": "b_0f0fcfc79c",
-      "b": "b_b29a9ae0e3",
+      "a": "b_1d1be12629",
+      "b": "b_917f6a1ed1",
       "choice": "b"
      },
      {
-      "a": "b_893edb6df8",
-      "b": "b_e39cde86f4",
-      "choice": "b"
+      "a": "b_5f84c933a2",
+      "b": "b_893edb6df8",
+      "choice": "a"
      },
      {
       "a": "b_d007846fe9",
-      "b": "b_e2378bf884",
-      "choice": "b"
-     },
-     {
-      "a": "b_0f0fcfc79c",
       "b": "b_e2378bf884",
       "choice": "b"
      }
     ],
     "expected_pairs": [
      [
-      "b_0f0fcfc79c",
-      "b_b29a9ae0e3"
+      "b_1d1be12629",
+      "b_917f6a1ed1"
      ],
      [
-      "b_893edb6df8",
-      "b_e39cde86f4"
+      "b_5f84c933a2",
+      "b_893edb6df8"
      ],
      [
       "b_d007846fe9",
       "b_e2378bf884"
-     ],
-     [
-      "b_0f0fcfc79c",
-      "b_e2378bf884"
      ]
     ],
     "expected_mean_weights": {
-     "family": 0.035596,
-     "money": 0.065863,
-     "room": 0.637338,
-     "going_out": 0.047275,
-     "green": 0.14278,
-     "parking": 0.071148
+     "family": 0.050585,
+     "money": 0.072998,
+     "room": 0.611351,
+     "going_out": 0.06085,
+     "green": 0.138995,
+     "parking": 0.065221
     },
-    "expected_top_set_probability": 0.876825,
+    "expected_top_set_probability": 0.859195,
     "expected_top": [
      [
       "ct:hamden",
@@ -1266,44 +1242,44 @@
     "answer_rule": "the building with the higher utility under hidden_weights; 'either' when the gap is within 0.03",
     "answers": [
      {
-      "a": "b_0f0fcfc79c",
-      "b": "b_b29a9ae0e3",
+      "a": "b_1d1be12629",
+      "b": "b_917f6a1ed1",
       "choice": "b"
      },
      {
-      "a": "b_893edb6df8",
-      "b": "b_e39cde86f4",
-      "choice": "a"
+      "a": "b_5f84c933a2",
+      "b": "b_893edb6df8",
+      "choice": "b"
      },
      {
-      "a": "b_0ba5cc966d",
-      "b": "b_1d1be12629",
-      "choice": "a"
+      "a": "b_0f0fcfc79c",
+      "b": "b_b29a9ae0e3",
+      "choice": "b"
      }
     ],
     "expected_pairs": [
      [
+      "b_1d1be12629",
+      "b_917f6a1ed1"
+     ],
+     [
+      "b_5f84c933a2",
+      "b_893edb6df8"
+     ],
+     [
       "b_0f0fcfc79c",
       "b_b29a9ae0e3"
-     ],
-     [
-      "b_893edb6df8",
-      "b_e39cde86f4"
-     ],
-     [
-      "b_0ba5cc966d",
-      "b_1d1be12629"
      ]
     ],
     "expected_mean_weights": {
-     "family": 0.068033,
-     "money": 0.310987,
-     "room": 0.157662,
-     "going_out": 0.080112,
-     "green": 0.133685,
-     "parking": 0.249522
+     "family": 0.083262,
+     "money": 0.293974,
+     "room": 0.14453,
+     "going_out": 0.081684,
+     "green": 0.178956,
+     "parking": 0.217595
     },
-    "expected_top_set_probability": 0.90889,
+    "expected_top_set_probability": 0.857608,
     "expected_top": [
      [
       "ct:hamden",
@@ -1358,7 +1334,7 @@
      "b_917f6a1ed1": []
     },
     "expected_why": {
-     "ct:hamden": "Monthly totals from $1,932 with utilities and fees. Garage or covered parking.",
+     "ct:hamden": "Monthly totals from $1,932 with utilities and fees. A separate bedroom, up to 860 sq ft.",
      "ct:stamford": "Monthly totals from $1,806 with utilities and fees. 33 places to eat and drink within a 10-minute walk.",
      "ct:bridgeport": "Monthly totals from $1,703 with utilities and fees. A separate bedroom, up to 751 sq ft."
     },
@@ -1386,44 +1362,53 @@
     "answer_rule": "the building with the higher utility under hidden_weights; 'either' when the gap is within 0.03",
     "answers": [
      {
-      "a": "b_0f0fcfc79c",
-      "b": "b_b29a9ae0e3",
-      "choice": "a"
-     },
-     {
-      "a": "b_377a717d0d",
+      "a": "b_1d1be12629",
       "b": "b_917f6a1ed1",
       "choice": "a"
      },
      {
-      "a": "b_022934bcb2",
-      "b": "b_0ba5cc966d",
-      "choice": "b"
+      "a": "b_917f6a1ed1",
+      "b": "b_c4831201c1",
+      "choice": "either"
+     },
+     {
+      "a": "b_377a717d0d",
+      "b": "b_ee2549a834",
+      "choice": "a"
+     },
+     {
+      "a": "b_0ba5cc966d",
+      "b": "b_c4831201c1",
+      "choice": "a"
      }
     ],
     "expected_pairs": [
      [
-      "b_0f0fcfc79c",
-      "b_b29a9ae0e3"
-     ],
-     [
-      "b_377a717d0d",
+      "b_1d1be12629",
       "b_917f6a1ed1"
      ],
      [
-      "b_022934bcb2",
-      "b_0ba5cc966d"
+      "b_917f6a1ed1",
+      "b_c4831201c1"
+     ],
+     [
+      "b_377a717d0d",
+      "b_ee2549a834"
+     ],
+     [
+      "b_0ba5cc966d",
+      "b_c4831201c1"
      ]
     ],
     "expected_mean_weights": {
-     "family": 0.160614,
-     "money": 0.112207,
-     "room": 0.117979,
-     "going_out": 0.342036,
-     "green": 0.124682,
-     "parking": 0.142481
+     "family": 0.156376,
+     "money": 0.066943,
+     "room": 0.142854,
+     "going_out": 0.42564,
+     "green": 0.114816,
+     "parking": 0.093371
     },
-    "expected_top_set_probability": 0.904129,
+    "expected_top_set_probability": 0.941592,
     "expected_top": [
      [
       "ny:flushing-willets-point",
@@ -1434,17 +1419,17 @@
       ]
      ],
      [
-      "ct:hamden",
-      [
-       "b_0ba5cc966d"
-      ]
-     ],
-     [
       "ct:stamford",
       [
        "b_893edb6df8",
-       "b_377a717d0d",
-       "b_f95c86db48"
+       "b_f95c86db48",
+       "b_377a717d0d"
+      ]
+     ],
+     [
+      "ct:hamden",
+      [
+       "b_0ba5cc966d"
       ]
      ]
     ],
@@ -1461,36 +1446,36 @@
      ],
      "b_84bbe8d99e": [
       "b_c4831201c1",
-      "b_5f84c933a2",
-      "b_b29a9ae0e3"
-     ],
-     "b_0ba5cc966d": [
-      "b_e2378bf884",
-      "b_917f6a1ed1",
-      "b_0e634d994b"
+      "b_0e634d994b",
+      "b_5f84c933a2"
      ],
      "b_893edb6df8": [
       "b_5204934871",
+      "b_917f6a1ed1",
+      "b_b29a9ae0e3"
+     ],
+     "b_f95c86db48": [
+      "b_e2378bf884",
       "b_296b3095f3",
       "b_022934bcb2"
      ],
      "b_377a717d0d": [],
-     "b_f95c86db48": []
+     "b_0ba5cc966d": []
     },
     "expected_why": {
      "ny:flushing-willets-point": "48 places to eat and drink within a 10-minute walk. About 12 minutes by car to Mom and Dad.",
-     "ct:hamden": "A separate bedroom, up to 860 sq ft. Garage or covered parking.",
-     "ct:stamford": "33 places to eat and drink within a 10-minute walk. Monthly totals from $1,806 with utilities and fees."
+     "ct:stamford": "33 places to eat and drink within a 10-minute walk. Monthly totals from $1,806 with utilities and fees.",
+     "ct:hamden": "A separate bedroom, up to 860 sq ft. Garage or covered parking."
     },
     "expected_gives_up": {
-     "ny:flushing-willets-point": "Parking is less certain: parking not stated (the other two: garage or covered parking and off-street parking).",
-     "ct:hamden": "Quieter: 11 places to eat and drink within a 10-minute walk (the other two: 48 and 33).",
-     "ct:stamford": "Smaller: up to 489 sq ft (the other two: 525 sq ft and 860 sq ft)."
+     "ny:flushing-willets-point": "Smaller: up to 525 sq ft (the other two: 489 sq ft and 860 sq ft).",
+     "ct:stamford": "Smaller: up to 489 sq ft (the other two: 525 sq ft and 860 sq ft).",
+     "ct:hamden": "Quieter: 11 places to eat and drink within a 10-minute walk (the other two: 48 and 33)."
     },
     "expected_what_would_change": {
-     "ny:flushing-willets-point": "If being near Mom and Dad mattered less, Stamford would come first.",
-     "ct:hamden": "If room at home mattered more, Hamden would come first.",
-     "ct:stamford": "If being near Mom and Dad mattered less, Stamford would come first."
+     "ny:flushing-willets-point": "If money left over mattered more, Stamford would come first.",
+     "ct:stamford": "If money left over mattered more, Stamford would come first.",
+     "ct:hamden": "If room at home mattered more, Hamden would come first."
     }
    },
    {
@@ -1499,18 +1484,8 @@
     "answer_rule": "either to every pair",
     "answers": [
      {
-      "a": "b_0f0fcfc79c",
-      "b": "b_b29a9ae0e3",
-      "choice": "either"
-     },
-     {
-      "a": "b_5f84c933a2",
-      "b": "b_893edb6df8",
-      "choice": "either"
-     },
-     {
-      "a": "b_0ba5cc966d",
-      "b": "b_f95c86db48",
+      "a": "b_1d1be12629",
+      "b": "b_917f6a1ed1",
       "choice": "either"
      },
      {
@@ -1519,56 +1494,68 @@
       "choice": "either"
      },
      {
-      "a": "b_296b3095f3",
-      "b": "b_893edb6df8",
+      "a": "b_0ba5cc966d",
+      "b": "b_0e634d994b",
       "choice": "either"
      },
      {
       "a": "b_0e634d994b",
       "b": "b_377a717d0d",
       "choice": "either"
+     },
+     {
+      "a": "b_0ba5cc966d",
+      "b": "b_c4831201c1",
+      "choice": "either"
+     },
+     {
+      "a": "b_296b3095f3",
+      "b": "b_893edb6df8",
+      "choice": "either"
      }
     ],
     "expected_pairs": [
      [
-      "b_0f0fcfc79c",
-      "b_b29a9ae0e3"
-     ],
-     [
-      "b_5f84c933a2",
-      "b_893edb6df8"
-     ],
-     [
-      "b_0ba5cc966d",
-      "b_f95c86db48"
+      "b_1d1be12629",
+      "b_917f6a1ed1"
      ],
      [
       "b_377a717d0d",
       "b_5f84c933a2"
      ],
      [
-      "b_296b3095f3",
-      "b_893edb6df8"
+      "b_0ba5cc966d",
+      "b_0e634d994b"
      ],
      [
       "b_0e634d994b",
       "b_377a717d0d"
+     ],
+     [
+      "b_0ba5cc966d",
+      "b_c4831201c1"
+     ],
+     [
+      "b_296b3095f3",
+      "b_893edb6df8"
      ]
     ],
     "expected_mean_weights": {
-     "family": 0.128988,
-     "money": 0.121649,
-     "room": 0.17214,
-     "going_out": 0.116802,
-     "green": 0.325829,
-     "parking": 0.134593
+     "family": 0.123533,
+     "money": 0.09327,
+     "room": 0.14504,
+     "going_out": 0.142086,
+     "green": 0.367472,
+     "parking": 0.128599
     },
-    "expected_top_set_probability": 0.58732,
+    "expected_top_set_probability": 0.587905,
     "expected_top": [
      [
-      "ct:hamden",
+      "ct:bridgeport",
       [
-       "b_0ba5cc966d"
+       "b_b29a9ae0e3",
+       "b_0e634d994b",
+       "b_917f6a1ed1"
       ]
      ],
      [
@@ -1580,57 +1567,55 @@
       ]
      ],
      [
-      "ct:bridgeport",
+      "ct:hamden",
       [
-       "b_b29a9ae0e3",
-       "b_0e634d994b",
-       "b_917f6a1ed1"
+       "b_0ba5cc966d"
       ]
      ]
     ],
     "expected_more_like_this": {
-     "b_0ba5cc966d": [
-      "b_e2378bf884",
-      "b_377a717d0d",
-      "b_5204934871"
-     ],
-     "b_1d1be12629": [
-      "b_0f0fcfc79c",
-      "b_f95c86db48",
-      "b_e39cde86f4"
-     ],
-     "b_d007846fe9": [
-      "b_fec325fa9f",
-      "b_674db3118a",
-      "b_66dc364565"
-     ],
-     "b_84bbe8d99e": [
-      "b_c4831201c1",
-      "b_893edb6df8",
-      "b_ee2549a834"
-     ],
      "b_b29a9ae0e3": [
       "b_5f84c933a2",
       "b_296b3095f3",
+      "b_e39cde86f4"
+     ],
+     "b_0e634d994b": [
+      "b_66dc364565",
+      "b_fec325fa9f",
+      "b_ee2549a834"
+     ],
+     "b_917f6a1ed1": [
+      "b_c4831201c1",
+      "b_893edb6df8",
+      "b_674db3118a"
+     ],
+     "b_1d1be12629": [
+      "b_f95c86db48",
+      "b_0f0fcfc79c",
+      "b_5204934871"
+     ],
+     "b_d007846fe9": [
+      "b_377a717d0d",
+      "b_e2378bf884",
       "b_022934bcb2"
      ],
-     "b_0e634d994b": [],
-     "b_917f6a1ed1": []
+     "b_84bbe8d99e": [],
+     "b_0ba5cc966d": []
     },
     "expected_why": {
-     "ct:hamden": "A separate bedroom, up to 860 sq ft. Garage or covered parking.",
+     "ct:bridgeport": "A park about 1 minute on foot. A separate bedroom, up to 751 sq ft.",
      "ny:flushing-willets-point": "48 places to eat and drink within a 10-minute walk. About 12 minutes by car to Mom and Dad.",
-     "ct:bridgeport": "Monthly totals from $1,703 with utilities and fees. A separate bedroom, up to 751 sq ft."
+     "ct:hamden": "A separate bedroom, up to 860 sq ft. Garage or covered parking."
     },
     "expected_gives_up": {
-     "ct:hamden": "The nearest park is farther: about 9 minutes on foot (the other two: 2 minutes and 1 minute).",
-     "ny:flushing-willets-point": "Smaller: up to 525 sq ft (the other two: 860 sq ft and 751 sq ft).",
-     "ct:bridgeport": "Quieter: 4 places to eat and drink within a 10-minute walk (the other two: 11 and 48)."
+     "ct:bridgeport": "Quieter: 4 places to eat and drink within a 10-minute walk (the other two: 48 and 11).",
+     "ny:flushing-willets-point": "Smaller: up to 525 sq ft (the other two: 751 sq ft and 860 sq ft).",
+     "ct:hamden": "The nearest park is farther: about 9 minutes on foot (the other two: 1 minute and 2 minutes)."
     },
     "expected_what_would_change": {
-     "ct:hamden": "If room at home mattered less, Stamford would come first.",
+     "ct:bridgeport": "If being near Mom and Dad mattered more, Flushing-Willets Point would come first.",
      "ny:flushing-willets-point": "If being near Mom and Dad mattered more, Flushing-Willets Point would come first.",
-     "ct:bridgeport": "If a park nearby mattered more, Bridgeport would come first."
+     "ct:hamden": "If being near Mom and Dad mattered less, Hamden would come first."
     }
    }
   ]

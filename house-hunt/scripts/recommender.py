@@ -55,6 +55,8 @@ TEMPERATURE = 0.04          # logistic temperature on the utility gap (utilities
 EITHER_BAND = 0.03          # a gap within this is "either is fine" (for a simulated persona, and the model's threshold)
 MIN_PAIRS, MAX_PAIRS, STOP_PROB = 3, 6, 0.8
 MMR_LAMBDA = 0.7
+RELEVANCE_FLOOR = 0.85       # places 2 and 3 need a score >= this x the best neighborhood's ...
+RELEVANCE_TOP_SHARE = 0.5   # ... and a rank in the top half by score; fewer than three clear it: fill by score
 PAIR_POOL = 30
 N_SIMILAR = 5
 N_MORE = 3
@@ -348,17 +350,32 @@ def group_scores(w, buildings, params):
     return out
 
 
+def eligible(gs, params):
+    """The groups good enough to be recommended: the best, and those with score >= relevance_floor x the best's AND
+    ranked in the top relevance_top_share by score (ceil), in score order (ties by id)."""
+    order = sorted(gs, key=lambda g: (-q(gs[g]), g))
+    cut = math.ceil(len(order) * params["relevance_top_share"])
+    floor = q(params["relevance_floor"] * gs[order[0]])
+    return [g for i, g in enumerate(order) if i == 0 or (i < cut and q(gs[g]) >= floor)], order
+
+
 def mmr(gs, params, k=3):
+    """MMR among the eligible groups; if fewer than k are eligible, they are all taken and the rest filled by score."""
     gids = [g["id"] for g in params["groups"]]
     idx = {g: j for j, g in enumerate(gids)}
     sim = params["group_similarity"]
     lam = params["mmr_lambda"]
     lo, hi = min(gs.values()), max(gs.values())
     norm = {g: ((gs[g] - lo) / (hi - lo) if hi - lo > 1e-12 else 0.0) for g in gids}
+    ok, order = eligible(gs, params)
+    k = min(k, len(gids))
+    if len(ok) < k:
+        return ok + [g for g in order if g not in ok][:k - len(ok)]
+    pool = sorted(ok)
     picked = []
-    while len(picked) < min(k, len(gids)):
+    while len(picked) < k:
         best = None
-        for g in gids:
+        for g in pool:
             if g in picked:
                 continue
             red = max((sim[idx[g]][idx[p]] for p in picked), default=0.0)
@@ -682,7 +699,7 @@ def params_block(buildings, groups, sim, mean, sd, alpha, meds):
         "temperature": TEMPERATURE, "either_band": EITHER_BAND, "n_samples": N_SAMPLES, "seed": SEED,
         "prior": {"distribution": "Dirichlet", "relative_mass": PRIOR_RELATIVE, "concentration": CONCENTRATION, "alpha": alpha,
                   "draw": "Python random.Random(seed).gammavariate(alpha_k, 1) per feature, normalised, rounded to 6 decimals"},
-        "min_pairs": MIN_PAIRS, "max_pairs": MAX_PAIRS, "stop_prob": STOP_PROB, "mmr_lambda": MMR_LAMBDA,
+        "min_pairs": MIN_PAIRS, "max_pairs": MAX_PAIRS, "stop_prob": STOP_PROB, "mmr_lambda": MMR_LAMBDA, "relevance_floor": RELEVANCE_FLOOR, "relevance_top_share": RELEVANCE_TOP_SHARE,
         "pair_pool": PAIR_POOL, "n_similar": N_SIMILAR, "n_more_like_this": N_MORE, "round_decimals": ROUND, "nudges": list(NUDGES),
         "feature_mean": mean, "feature_sd": sd,
         "groups": [{k: g[k] for k in ("id", "name", "building_ids", "neighborhood_ids")} for g in groups],
@@ -694,7 +711,8 @@ def params_block(buildings, groups, sim, mean, sd, alpha, meds):
             "likelihood": "gap = U_w(a) - U_w(b); P(a) = sig((gap - either_band)/temperature); P(b) = sig((-gap - either_band)/temperature); P(either) = max(0, 1 - P(a) - P(b))",
             "posterior": "pi_s = prod over answers (in order) of the likelihood, divided by the sum over samples; uniform if the sum is 0",
             "mean_weights": "wbar_k = sum_s pi_s x w_s,k; expected utility = U_wbar",
-            "mmr": "s' = (score - min)/(max - min) over all groups (all 0 if max - min <= 1e-12); pick 3 greedily by round(lambda x s' - (1 - lambda) x max similarity to the picked, round_decimals), ties to the smaller id; similarity is group_similarity (1 - centroid distance / largest centroid distance, standardised features)",
+            "eligible": "order groups by round(score) desc, id; eligible = the first, plus any with rank < ceil(n x relevance_top_share) and round(score) >= round(relevance_floor x the first's score); if fewer than 3 are eligible, the recommendation is the eligible ones then the next by score (no diversity)",
+            "mmr": "among the eligible groups only (iterated in id order): s' = (score - min)/(max - min) over all groups (all 0 if max - min <= 1e-12); pick 3 greedily by round(lambda x s' - (1 - lambda) x max similarity to the picked, round_decimals), ties to the smaller id; similarity is group_similarity (1 - centroid distance / largest centroid distance, standardised features)",
             "sample_sets": "for each sample, the MMR top three with that sample's weights, as sorted ids joined by '|'; computed once",
             "next_pair": "pool = top pair_pool buildings by round(score_wbar) desc, id; pairs (a, b) with a < b by id, skipping pairs asked; gain = round(H(set distribution under pi) - sum over answers of P(answer) x H(set distribution under the posterior after that answer)); highest gain, ties to the earlier pair in (a, b) id order; entropy in nats",
             "stop": "stop when answers >= max_pairs, or answers >= min_pairs and round(max set probability) >= stop_prob",

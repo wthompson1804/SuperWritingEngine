@@ -69,6 +69,7 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;line-height:1.
 .h-big{font-weight:800;font-stretch:82%;font-size:clamp(30px,8.6vw,40px)}
 .h-mid{font-weight:800;font-stretch:82%;font-size:clamp(28px,7.6vw,34px)}
 .lead{font-size:20px;line-height:1.4}
+.h-pick{font-weight:800;font-stretch:82%;font-size:clamp(25px,7vw,30px)}
 .muted{color:var(--muted)}
 .small{font-size:15px}
 .links{display:flex;flex-wrap:wrap;gap:4px 20px}
@@ -88,20 +89,23 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;line-height:1.
 .dots i.now{background:none;border:2px solid var(--berry)}
 .qnav{display:flex;justify-content:space-between;gap:12px}
 .duel{display:grid;gap:0;align-items:stretch}
-.pick{display:grid;gap:7px;width:100%;text-align:left;background:var(--card);border:2px solid var(--ink);border-radius:22px;padding:12px 14px 12px;color:var(--ink);font:inherit;line-height:1.3;box-shadow:0 3px 0 var(--ink)}
+.pick{display:grid;gap:6px;width:100%;text-align:left;background:var(--card);border:2px solid var(--ink);border-radius:22px;padding:12px 14px 12px;color:var(--ink);font:inherit;line-height:1.3;box-shadow:0 3px 0 var(--ink)}
 .pick:active{transform:translateY(2px);box-shadow:0 1px 0 var(--ink)}
 .pick .p-top{display:flex;justify-content:space-between;align-items:start;gap:10px}
-.pick .p-name{display:block;font-family:var(--display);font-weight:800;font-stretch:84%;font-size:22px;line-height:1.08;text-wrap:balance}
+.pick .p-name{display:block;font-family:var(--display);font-weight:800;font-stretch:84%;font-size:21px;line-height:1.08;text-wrap:balance}
 .pick .p-place{display:block;font-size:14px;font-weight:700;color:var(--muted);margin-top:2px}
 .pick .p-go{flex:0 0 auto;background:var(--berry-deep);color:var(--on-berry);font-family:var(--display);font-weight:800;font-size:15px;border-radius:999px;padding:5px 12px;white-space:nowrap}
-.pick .pair b{font-size:18px}
+.pick .pair{gap:8px}
+.pick .pair>span{display:grid;gap:0;align-content:start}
+.pick .pair span>span{display:block;font-size:12px;line-height:1.2}
+.pick .pair b{font-size:19px;line-height:1.15}
 .pf{display:grid;gap:3px}
-.pf>span{display:grid;grid-template-columns:22px 1fr;gap:8px;align-items:center;font-size:15px;font-weight:600;line-height:1.25}
+.pf>span{display:grid;grid-template-columns:20px 1fr;gap:8px;align-items:center;font-size:15px;font-weight:600;line-height:1.2}
 .pf svg{width:20px;height:20px;color:var(--berry-deep)}
 .pf .win{font-weight:800;color:var(--ok-ink)}
 .pf .win::after{content:" \2713"}
-.p-life{display:block;font-size:14px;line-height:1.35;color:var(--muted);font-weight:600;border-top:2px dotted var(--line);padding-top:7px}
-.or{justify-self:center;font-family:var(--script);font-size:30px;line-height:1;color:var(--berry);padding:4px 0 6px}
+.p-life{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:14px;line-height:1.35;color:var(--muted);font-weight:600;border-top:2px dotted var(--line);padding-top:7px}
+.or{justify-self:center;font-family:var(--script);font-size:28px;line-height:1;color:var(--berry);padding:0 0 4px;margin:0}
 @media (min-width:640px){.duel{grid-template-columns:1fr auto 1fr;gap:12px}.or{align-self:center}}
 
 /* the three places */
@@ -324,259 +328,295 @@ details.more .in{padding:2px 0 16px;display:grid;gap:12px;font-size:17px}
 
 <script id="recommender-logic">
 /* ===================================================================================================================
-   RECOMMENDER. Pure functions, no page access. Also loaded by Node (scripts/test_concierge_pick.js), which checks it
-   against meta.recommender_examples in the data (the pairs asked, in order, and the final top three).
-   The model of docs/CONCIERGE_DESIGN.md "Version 3"; parameters from meta.recommender (defaults below).
-   Sums run left to right in data order, exactly as the Python reference does, so both get the same numbers.
+   RECOMMENDER. Pure functions, no page access. The JS twin of scripts/recommender.py (the reference): the same
+   model on the same shipped numbers (buildings[].features, recommender_samples, meta.recommender). Loaded by Node in
+   scripts/test_concierge_pick.js, which checks it against every meta.recommender_examples entry: the pairs asked, in
+   order, the mean weights, the top three with their buildings, more like this, why, gives up and what would change.
+   To get the same doubles as Python: sums that Python does with sum() use the same compensated (Neumaier) sum as
+   CPython 3.12+, plain += where Python uses +=, and every compared value is rounded to round_decimals (q) first;
+   ties go to the smaller id. Python's round() to a whole number rounds halves to even (pyRound).
 
-   model(data)                          the buildings' features, the prior samples and every sample's utilities
-   posterior(M, answers)                sample weights after her answers [{a, b, choice: "a"|"b"|"either"|<id>}]
-   recommend(M, answers, opts)          {m, s, top: [[area id, [building ids]]], area_score}; opts {removed, nudge:{k, factor}}
-   status(M, answers, opts)             {done, n, hold}: whether to ask another pair; opts {removed, extraFrom}
-   nextPair(M, answers, opts)           [a id, b id], or null when the model is sure enough (3 to 6 pairs)
-   explain(M, R)                        per recommended area: {lift: [two feature keys], gives_up: key|null}
-   whatIf(M, answers, opts)             {k, dir: "less"|"more", factor, first: area id} or null
-   moreLike(M, id, m, exclude, n)       up to n other buildings closest in feature space under her weights
-   play(M, examples answers)            replays an example: {pairs, top}
+   model(data)                          the model's numbers; null when the data has no recommender fields
+   posterior(M, answers)                pi over samples after her answers [{a, b, choice: "a"|"b"|"either"}]
+   nextPair(M, answers, opts)           [a id, b id] (a < b by id), or null when the stop rule says stop.
+                                        opts {removed: [ids], extraFrom: n}: with extraFrom, the stop rule gives way to
+                                        "up to extra_pairs more after n answers" (the "make a few more choices" link)
+   holds(M, answers, opts)              {n, p, stop}: the probability of the most likely top-three set
+   recommend(M, answers, opts)          {weights, top: [[area, [ids]]], neighborhoods: [{neighborhood_id, name, score,
+                                        buildings: [{id, more_like_this}], why_features, why, gives_up_feature,
+                                        gives_up, what_would_change}]}; opts {removed, nudge: {feature, direction, factor}}
+   play(M, example)                     replays an example's answers: {pairs, rec}
+   Not in the reference (the page's own, used only when she sets buildings aside): opts.removed drops buildings from
+   every group, pool and list. With nothing removed the result is the reference's.
    =================================================================================================================== */
 var ConciergeRec = (function () {
   "use strict";
-  var DEF = { features: ["family", "money", "room", "going_out", "green", "parking"], temperature: 0.05, either_band: 0.04,
-    either_max: 0.5, min_pairs: 3, max_pairs: 6, extra_pairs: 3, stop_prob: 0.8, mmr_lambda: 0.7, pair_pool: 30,
-    nudge_less: 0.5, nudge_more: 2, eps: 1e-9 };
-  function config(data) {
-    var m = (data && data.meta && data.meta.recommender) || {}, c = {};
-    for (var k in DEF) c[k] = DEF[k];
-    for (var j in m) if (m[j] !== null && m[j] !== undefined) c[j] = m[j];
-    return c;
+  var LABEL = { family: "being near Mom and Dad", money: "money left over", room: "room at home", going_out: "going out", green: "a park nearby", parking: "parking" };
+  var PARKING_WORDS = { "1": "garage or covered parking", "0.7": "off-street parking", "0.4": "parking not stated", "0.2": "street parking" };
+  function nsum(xs) {   /* CPython 3.12+ sum() of floats: Neumaier */
+    var f = 0, c = 0;
+    for (var i = 0; i < xs.length; i++) { var x = xs[i], t = f + x; if (Math.abs(f) >= Math.abs(x)) c += (f - t) + x; else c += (x - t) + f; f = t; }
+    return c && isFinite(c) ? f + c : f;
   }
+  function pyRound(x) { var r = Math.round(x); if (Math.abs(x - Math.trunc(x)) === 0.5) r = 2 * Math.round(x / 2); return r === 0 ? 0 : r; }
   function cmpId(a, b) { return a < b ? -1 : a > b ? 1 : 0; }
-  function byScore(eps) { return function (x, y) { if (Math.abs(x[0] - y[0]) > eps) return x[0] > y[0] ? -1 : 1; return cmpId(x[1], y[1]); }; }
+  function sig(x) { if (x >= 0) return 1 / (1 + Math.exp(-x)); var e = Math.exp(x); return e / (1 + e); }
+  function setOf(list) { var o = {}; (list || []).forEach(function (x) { o[x] = 1; }); return o; }
+  function median(xs) { var s = xs.slice().sort(function (a, b) { return a - b; }), n = s.length, h = Math.floor(n / 2); return n % 2 ? s[h] : (s[h - 1] + s[h]) / 2; }
+  function medianLow(xs) { var s = xs.slice().sort(function (a, b) { return a - b; }); return s[Math.floor((s.length - 1) / 2)]; }
+  function fmt(n) { return Number(n).toLocaleString("en-US", { maximumFractionDigits: 20 }); }
+  function mins(n) { return n + " minute" + (n === 1 ? "" : "s"); }
+  function capFirst(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+
   function usable(data) {
-    return !!(data && Array.isArray(data.recommender_samples) && data.recommender_samples.length &&
+    var m = data && data.meta && data.meta.recommender;
+    return !!(m && Array.isArray(m.features) && Array.isArray(data.recommender_samples) && data.recommender_samples.length &&
       (data.buildings || []).length && (data.buildings || []).every(function (b) { return b && b.features; }));
   }
   function model(data) {
-    var cfg = config(data), feats = cfg.features, K = feats.length, parked = {};
-    (data.neighborhoods || []).forEach(function (h) { if (h && h.parked_under) parked[h.id] = h.parked_under; });
-    var B = data.buildings || [], F = [], sure = [], ids = [], idx = {}, area = [], seen = {}, areas = [];
-    B.forEach(function (b, j) {
-      ids.push(b.id); idx[b.id] = j;
-      F.push(feats.map(function (k) { var v = Number(b.features[k]); return isFinite(v) ? v : 0; }));
-      var s = Number(b.features.sure); sure.push(isFinite(s) ? s : 1);
-      var a = parked[b.neighborhood_id] || b.neighborhood_id; area.push(a);
-      if (!seen[a]) { seen[a] = 1; areas.push(a); }
-    });
-    areas.sort(cmpId);
-    var W = data.recommender_samples || [], U = [];
-    for (var i = 0; i < W.length; i++) {
-      var row = [];
-      for (var j = 0; j < F.length; j++) { var s2 = 0; for (var k = 0; k < K; k++) s2 += W[i][k] * F[j][k]; row.push(s2); }
-      U.push(row);
+    if (!usable(data)) return null;
+    var cfg = data.meta.recommender, feats = cfg.features, K = feats.length, R = cfg.round_decimals == null ? 9 : cfg.round_decimals;
+    var B = data.buildings, byId = {}, F = {}, sure = {};
+    B.forEach(function (b) { byId[b.id] = b; F[b.id] = feats.map(function (k) { return Number(b.features[k]); }); sure[b.id] = Number(b.features[cfg.sure_feature || "sure"]); });
+    var groups = cfg.groups, sim = cfg.group_similarity;
+    if (!Array.isArray(groups) || !groups.length) {   /* not shipped: a parked neighborhood counts as its host's */
+      var host = {}, name = {}, mem = {};
+      (data.neighborhoods || []).forEach(function (h) { host[h.id] = h.parked_under || h.id; name[h.id] = h.name; });
+      B.slice().sort(function (a, b) { return cmpId(a.id, b.id); }).forEach(function (b) { var g = b.group_id || host[b.neighborhood_id] || b.neighborhood_id; (mem[g] = mem[g] || []).push(b.id); });
+      groups = Object.keys(mem).sort(cmpId).map(function (g) { return { id: g, name: name[g] || g, building_ids: mem[g] }; });
+      sim = null;
     }
-    return { cfg: cfg, ids: ids, idx: idx, F: F, sure: sure, W: W, U: U, area: area, areas: areas, K: K };
+    var gidx = {}; groups.forEach(function (g, i) { gidx[g.id] = i; });
+    var W = data.recommender_samples, ids = B.map(function (b) { return b.id; });
+    var U = {}; ids.forEach(function (id) { U[id] = W.map(function (w) { var t = []; for (var k = 0; k < K; k++) t.push(w[k] * F[id][k]); return nsum(t); }); });
+    var M = { cfg: cfg, feats: feats, K: K, R: R, B: B, byId: byId, ids: ids, F: F, sure: sure, W: W, U: U, groups: groups, gidx: gidx, sim: sim,
+      mean: cfg.feature_mean || null, sd: cfg.feature_sd || null, sets: {} };
+    if (!M.mean || !M.sd) {
+      M.mean = {}; M.sd = {};
+      feats.forEach(function (k) { var xs = B.map(function (b) { return b.features[k]; }), m = nsum(xs) / xs.length, v = nsum(xs.map(function (x) { return (x - m) * (x - m); })) / xs.length, s = Math.sqrt(v);
+        M.mean[k] = Number(m.toFixed(6)); M.sd[k] = Number((s > 1e-9 ? s : 1).toFixed(6)); });
+    }
+    if (!sim) {
+      var cent = groups.map(function (g) { var zs = g.building_ids.map(function (id) { return zvec(M, id); }); return feats.map(function (k, j) { return nsum(zs.map(function (z) { return z[j]; })) / zs.length; }); });
+      var d = cent.map(function (a) { return cent.map(function (c) { return Math.sqrt(nsum(a.map(function (x, j) { return (x - c[j]) * (x - c[j]); }))); }); });
+      var dmax = 0; d.forEach(function (r) { r.forEach(function (x) { if (x > dmax) dmax = x; }); }); dmax = dmax || 1;
+      M.sim = d.map(function (r) { return r.map(function (x) { return Number((1 - x / dmax).toFixed(6)); }); });
+    }
+    return M;
   }
-  function sig(x) { return 1 / (1 + Math.exp(-x)); }
-  function lik(g, c, cfg) {
-    var z = g / cfg.either_band, pe = cfg.either_max * Math.exp(-(z * z));
-    if (c === "either") return pe;
-    return (1 - pe) * sig((c === "a" ? g : -g) / cfg.temperature);
+  function q(M, x) { return Number(x.toFixed(M.R)); }
+  function zvec(M, id) { var b = M.byId[id]; return M.feats.map(function (k) { return (b.features[k] - M.mean[k]) / M.sd[k]; }); }
+  function utility(M, id, w) { var f = M.F[id], t = []; for (var k = 0; k < M.K; k++) t.push(w[k] * f[k]); return nsum(t); }
+  function score(M, id, w) { return utility(M, id, w) * M.sure[id]; }
+  function lik(M, g, c) {
+    var T = M.cfg.temperature, band = M.cfg.either_band, pa = sig((g - band) / T), pb = sig((-g - band) / T);
+    return c === "a" ? pa : c === "b" ? pb : Math.max(0, 1 - pa - pb);
   }
-  function choiceOf(a) { var c = a.choice; if (c === "a" || c === "b" || c === "either") return c; return c === a.a ? "a" : c === a.b ? "b" : "either"; }
+  function choiceOf(x) { var c = x.choice; return c === "a" || c === "b" ? c : c === x.a ? "a" : c === x.b ? "b" : "either"; }
   function posterior(M, answers) {
-    var n = M.W.length, wt = []; for (var i = 0; i < n; i++) wt.push(1);
-    (answers || []).forEach(function (ans) {
-      var a = M.idx[ans.a], b = M.idx[ans.b]; if (a === undefined || b === undefined) return;
-      var c = choiceOf(ans), tot = 0, i;
-      for (i = 0; i < n; i++) { wt[i] = wt[i] * lik(M.U[i][a] - M.U[i][b], c, M.cfg); tot += wt[i]; }
-      for (i = 0; i < n; i++) wt[i] = wt[i] / tot;
-    });
-    return wt;
-  }
-  function meanW(M, wt) {
-    var m = [], tot = 0, k; for (k = 0; k < M.K; k++) m.push(0);
-    for (var i = 0; i < wt.length; i++) { tot += wt[i]; for (k = 0; k < M.K; k++) m[k] += wt[i] * M.W[i][k]; }
-    return m.map(function (x) { return x / tot; });
-  }
-  function bScores(M, m) {
-    return M.F.map(function (f, j) { var s = 0; for (var k = 0; k < M.K; k++) s += m[k] * f[k]; return s * M.sure[j]; });
-  }
-  function setOf(list) { var o = {}; (list || []).forEach(function (x) { o[x] = 1; }); return o; }
-  function areaTable(M, s, removed, eps) {
-    var by = {}, keys = [], cmp = byScore(eps);
-    for (var j = 0; j < s.length; j++) { if (removed[M.ids[j]]) continue; var A = M.area[j]; if (!by[A]) { by[A] = []; keys.push(A); } by[A].push(j); }
-    var sc = {};
-    keys.forEach(function (A) {
-      by[A].sort(function (x, y) { return cmp([s[x], M.ids[x]], [s[y], M.ids[y]]); });
-      var L = by[A]; sc[A] = L.length > 1 ? (s[L[0]] + s[L[1]]) / 2 : s[L[0]];
-    });
-    return { by: by, sc: sc };
-  }
-  function centroids(M, by, elig) {
-    var cent = {};
-    elig.forEach(function (A) {
-      var c = [], k; for (k = 0; k < M.K; k++) c.push(0);
-      by[A].forEach(function (j) { for (k = 0; k < M.K; k++) c[k] += M.F[j][k]; });
-      cent[A] = c.map(function (x) { return x / by[A].length; });
-    });
-    return cent;
-  }
-  function mmr(M, by, sc, cfg) {
-    var elig = M.areas.filter(function (A) { return by[A]; });
-    if (!elig.length) return [];
-    var lo = Infinity, hi = -Infinity;
-    elig.forEach(function (A) { if (sc[A] < lo) lo = sc[A]; if (sc[A] > hi) hi = sc[A]; });
-    var rel = {}; elig.forEach(function (A) { rel[A] = hi > lo ? (sc[A] - lo) / (hi - lo) : 1; });
-    var cent = centroids(M, by, elig);
-    function dist(A, B) { var d = 0; for (var k = 0; k < M.K; k++) d += (cent[A][k] - cent[B][k]) * (cent[A][k] - cent[B][k]); return Math.sqrt(d); }
-    var dmax = 0;
-    for (var x = 0; x < elig.length; x++) for (var y = x + 1; y < elig.length; y++) dmax = Math.max(dmax, dist(elig[x], elig[y]));
-    var lam = cfg.mmr_lambda, sel = [];
-    while (sel.length < 3 && sel.length < elig.length) {
-      var best = null, bv = null;
-      elig.forEach(function (A) {
-        if (sel.indexOf(A) >= 0) return;
-        var v;
-        if (!sel.length) v = rel[A];
-        else {
-          var ms = null;
-          sel.forEach(function (S) { var sim = dmax > 0 ? 1 - dist(A, S) / dmax : 0; ms = ms === null || sim > ms ? sim : ms; });
-          v = lam * rel[A] - (1 - lam) * ms;
-        }
-        if (best === null || v > bv + cfg.eps) { best = A; bv = v; }
-      });
-      sel.push(best);
+    var n = M.W.length, raw = [];
+    for (var s = 0; s < n; s++) {
+      var p = 1;
+      (answers || []).forEach(function (x) { if (M.U[x.a] && M.U[x.b]) p *= lik(M, M.U[x.a][s] - M.U[x.b][s], choiceOf(x)); });
+      raw.push(p);
     }
-    return sel;
+    var tot = nsum(raw);
+    if (tot <= 0) return raw.map(function () { return 1 / n; });
+    return raw.map(function (p) { return p / tot; });
   }
-  function recommend(M, answers, opts) {
-    opts = opts || {};
-    var cfg = M.cfg, removed = setOf(opts.removed), m = meanW(M, posterior(M, answers));
-    if (opts.nudge && cfg.features.indexOf(opts.nudge.k) >= 0) m[cfg.features.indexOf(opts.nudge.k)] *= opts.nudge.factor;
-    var s = bScores(M, m), t = areaTable(M, s, removed, cfg.eps), top = mmr(M, t.by, t.sc, cfg);
-    return { m: m, s: s, by: t.by, area_score: t.sc,
-      top: top.map(function (A) { return [A, t.by[A].slice(0, 3).map(function (j) { return M.ids[j]; })]; }) };
+  function meanW(M, pi) { var out = []; for (var k = 0; k < M.K; k++) { var t = []; for (var s = 0; s < pi.length; s++) t.push(pi[s] * M.W[s][k]); out.push(nsum(t)); } return out; }
+  function liveGroups(M, removed) {
+    return M.groups.map(function (g) { return { id: g.id, name: g.name, i: M.gidx[g.id], building_ids: g.building_ids.filter(function (id) { return !removed[id] && M.byId[id]; }) }; })
+      .filter(function (g) { return g.building_ids.length; });
   }
-  function sampleSets(M, removed) {
-    var out = [], cmp = byScore(0);
-    for (var i = 0; i < M.W.length; i++) {
-      var s = []; for (var j = 0; j < M.ids.length; j++) s.push(M.U[i][j] * M.sure[j]);
-      var t = areaTable(M, s, removed, 0);
-      var top = Object.keys(t.sc).sort(function (x, y) { return cmp([t.sc[x], x], [t.sc[y], y]); }).slice(0, 3);
-      out.push(top.sort(cmpId).join("|"));
-    }
+  function groupScores(M, w, G) {
+    var out = {};
+    G.forEach(function (g) {
+      var s = g.building_ids.map(function (id) { return q(M, score(M, id, w)); }).sort(function (a, b) { return b - a; }).slice(0, 2);
+      out[g.id] = nsum(s) / s.length;
+    });
     return out;
   }
-  function entropy(wt, sets) {
-    var mass = {}, order = [], tot = 0, i;
-    for (i = 0; i < wt.length; i++) { if (!(sets[i] in mass)) { mass[sets[i]] = 0; order.push(sets[i]); } mass[sets[i]] += wt[i]; tot += wt[i]; }
-    var h = 0;
-    order.forEach(function (k) { var p = mass[k] / tot; if (p > 0) h -= p * Math.log(p); });
-    return h;
+  function mmr(M, gs, G) {
+    var lam = M.cfg.mmr_lambda, lo = Infinity, hi = -Infinity, picked = [];
+    G.forEach(function (g) { lo = Math.min(lo, gs[g.id]); hi = Math.max(hi, gs[g.id]); });
+    var norm = {}; G.forEach(function (g) { norm[g.id] = hi - lo > 1e-12 ? (gs[g.id] - lo) / (hi - lo) : 0; });
+    while (picked.length < Math.min(3, G.length)) {
+      var best = null;
+      G.forEach(function (g) {
+        if (picked.some(function (p) { return p.id === g.id; })) return;
+        var red = 0, any = false;
+        picked.forEach(function (p) { var v = M.sim[g.i][p.i]; if (!any || v > red) { red = v; any = true; } });
+        var v = q(M, lam * norm[g.id] - (1 - lam) * red);
+        if (best === null || v > best[0] || (v === best[0] && g.id < best[1].id)) best = [v, g];
+      });
+      picked.push(best[1]);
+    }
+    return picked.map(function (g) { return g.id; });
   }
-  function modal(wt, sets) {
-    var mass = {}, tot = 0, best = 0;
-    for (var i = 0; i < wt.length; i++) { mass[sets[i]] = (mass[sets[i]] || 0) + wt[i]; tot += wt[i]; }
-    for (var k in mass) if (mass[k] > best) best = mass[k];
-    return best / tot;
+  function firstOf(M, gs) { return Object.keys(gs).sort(function (a, b) { var x = q(M, gs[a]), y = q(M, gs[b]); return x !== y ? y - x : cmpId(a, b); })[0]; }
+  function sampleSets(M, removed) {
+    var key = Object.keys(removed).sort().join("|");
+    if (M.sets[key]) return M.sets[key];
+    var G = liveGroups(M, removed);
+    return (M.sets[key] = M.W.map(function (w) { return mmr(M, groupScores(M, w, G), G).slice().sort(cmpId).join("|"); }));
   }
-  function status(M, answers, opts) {
+  function distribution(pi, sets) { var d = {}, order = []; for (var s = 0; s < pi.length; s++) { if (!(sets[s] in d)) { d[sets[s]] = 0; order.push(sets[s]); } d[sets[s]] += pi[s]; } return { d: d, order: order }; }
+  function entropy(ps) { var t = []; ps.forEach(function (p) { if (p > 0) t.push(p * Math.log(p)); }); return -nsum(t); }
+  function holds(M, answers, opts) {
     opts = opts || {};
-    var cfg = M.cfg, n = (answers || []).length, removed = setOf(opts.removed);
-    var wt = posterior(M, answers), sets = sampleSets(M, removed), hold = modal(wt, sets), done;
-    if (opts.extraFrom !== null && opts.extraFrom !== undefined) done = n >= opts.extraFrom + cfg.extra_pairs;
-    else done = n >= cfg.max_pairs || (n >= cfg.min_pairs && hold >= cfg.stop_prob);
-    return { done: done, n: n, hold: hold, wt: wt, sets: sets, removed: removed };
+    var removed = setOf(opts.removed), pi = posterior(M, answers), D = distribution(pi, sampleSets(M, removed)), mx = 0;
+    D.order.forEach(function (k) { if (D.d[k] > mx) mx = D.d[k]; });
+    var n = (answers || []).length, c = M.cfg, stop;
+    if (opts.extraFrom !== null && opts.extraFrom !== undefined) stop = n >= opts.extraFrom + (c.extra_pairs || 3);
+    else stop = n >= c.max_pairs || (n >= c.min_pairs && q(M, mx) >= c.stop_prob);
+    return { n: n, p: mx, stop: stop, pi: pi, D: D, removed: removed };
   }
   function nextPair(M, answers, opts) {
-    opts = opts || {};
-    var st = status(M, answers, opts); if (st.done) return null;
-    var cfg = M.cfg, wt = st.wt, sets = st.sets, removed = st.removed, R = recommend(M, answers, { removed: opts.removed }), cmp = byScore(cfg.eps);
-    var pool = []; for (var j = 0; j < M.ids.length; j++) if (!removed[M.ids[j]]) pool.push(j);
-    pool.sort(function (x, y) { return cmp([R.s[x], M.ids[x]], [R.s[y], M.ids[y]]); });
-    pool = pool.slice(0, cfg.pair_pool);
-    var asked = {}; (answers || []).forEach(function (x) { asked[[x.a, x.b].sort(cmpId).join("|")] = 1; });
-    var tot = 0, i; for (i = 0; i < wt.length; i++) tot += wt[i];
-    var best = null, bh = null, C = ["a", "b", "either"];
-    for (var x = 0; x < pool.length; x++) for (var y = x + 1; y < pool.length; y++) {
-      var a = pool[x], b = pool[y];
-      if (asked[[M.ids[a], M.ids[b]].sort(cmpId).join("|")]) continue;
+    var h = holds(M, answers, opts); if (h.stop) return null;
+    var removed = h.removed, pi = h.pi, w = meanW(M, pi), sets = sampleSets(M, removed);
+    var pool = M.ids.filter(function (id) { return !removed[id]; }).map(function (id) { return [q(M, score(M, id, w)), id]; })
+      .sort(function (x, y) { return x[0] !== y[0] ? y[0] - x[0] : cmpId(x[1], y[1]); }).slice(0, M.cfg.pair_pool).map(function (x) { return x[1]; });
+    var order = pool.slice().sort(cmpId), asked = {};
+    (answers || []).forEach(function (x) { asked[[x.a, x.b].sort(cmpId).join("|")] = 1; });
+    var keys = h.D.order, kidx = {}; keys.forEach(function (k, j) { kidx[k] = j; });
+    var sidx = sets.map(function (s) { return kidx[s]; }), h0 = entropy(keys.map(function (k) { return h.D.d[k]; }));
+    var T = M.cfg.temperature, band = M.cfg.either_band, best = null, nk = keys.length, S = pi.length;
+    for (var ii = 0; ii < order.length; ii++) for (var jj = ii + 1; jj < order.length; jj++) {
+      var a = order[ii], b = order[jj]; if (asked[a + "|" + b]) continue;
+      var Ua = M.U[a], Ub = M.U[b], m0 = new Array(nk).fill(0), m1 = new Array(nk).fill(0), m2 = new Array(nk).fill(0);
+      for (var s = 0; s < S; s++) {
+        if (pi[s] === 0) continue;
+        var g = Ua[s] - Ub[s], pa = sig((g - band) / T), pb = sig((-g - band) / T), pe = Math.max(0, 1 - pa - pb), k = sidx[s];
+        m0[k] += pi[s] * pa; m1[k] += pi[s] * pb; m2[k] += pi[s] * pe;
+      }
       var eh = 0;
-      for (var c = 0; c < 3; c++) {
-        var w2 = [], p = 0;
-        for (i = 0; i < wt.length; i++) { var v = wt[i] * lik(M.U[i][a] - M.U[i][b], C[c], cfg); w2.push(v); p += v; }
-        if (p > 0) eh += (p / tot) * entropy(w2, sets);
-      }
-      if (best === null || eh < bh - cfg.eps) { best = [M.ids[a], M.ids[b]]; bh = eh; }
+      [m0, m1, m2].forEach(function (m) { var P = nsum(m); if (P > 0) eh += P * entropy(m.map(function (x) { return x / P; })); });
+      var gain = q(M, h0 - eh);
+      if (best === null || gain > best[0]) best = [gain, a, b];
     }
-    return best;
+    return best ? [best[1], best[2]] : null;
   }
-  /* why each area: the two features that lift it most against all buildings, and what it gives up against the other two */
-  function explain(M, R) {
-    var cfg = M.cfg, all = [], k;
-    for (k = 0; k < M.K; k++) all.push(0);
-    var n = 0;
-    Object.keys(R.by).forEach(function (A) { R.by[A].forEach(function (j) { n++; for (var q = 0; q < M.K; q++) all[q] += M.F[j][q]; }); });
-    all = all.map(function (x) { return n ? x / n : 0; });
-    function phi(A) { var L = R.by[A].slice(0, 3), c = []; for (var q = 0; q < M.K; q++) { var s = 0; L.forEach(function (j) { s += M.F[j][q]; }); c.push(s / L.length); } return c; }
-    var P = {}; R.top.forEach(function (t) { P[t[0]] = phi(t[0]); });
-    return R.top.map(function (t) {
-      var A = t[0], f = P[A], lift = [], give = null, gv = 0;
-      for (k = 0; k < M.K; k++) lift.push([R.m[k] * (f[k] - all[k]), cfg.features[k]]);
-      lift = lift.filter(function (x) { return x[0] > cfg.eps; }).sort(function (x, y) { return y[0] - x[0] || cmpId(x[1], y[1]); }).slice(0, 2).map(function (x) { return x[1]; });
-      var others = R.top.filter(function (o) { return o[0] !== A; }).map(function (o) { return P[o[0]]; });
-      if (others.length) for (k = 0; k < M.K; k++) {
-        var o = 0; others.forEach(function (p) { o += p[k]; }); o /= others.length;
-        var g = R.m[k] * (f[k] - o);
-        if (g < gv - cfg.eps) { gv = g; give = cfg.features[k]; }
+  function figures(M, ids) {
+    var rs = ids.map(function (id) { return M.byId[id].features_raw || {}; }), nn = function (x) { return x !== null && x !== undefined; };
+    var drives = rs.map(function (r) { return r.drive_min; }).filter(nn), totals = rs.map(function (r) { return r.total; }).filter(nn), sq = rs.map(function (r) { return r.sqft; }).filter(nn);
+    var places = rs.filter(function (r) { return nn(r.restaurants_10min) || nn(r.bars_10min); }).map(function (r) { return (r.restaurants_10min || 0) + (r.bars_10min || 0); });
+    var walks = rs.map(function (r) { return r.park_walk_min; }).filter(nn);
+    return { drive: drives.length ? pyRound(median(drives)) : null, total: totals.length ? Math.min.apply(null, totals) : null,
+      sqft: sq.length ? Math.max.apply(null, sq) : null, bedroom: rs.some(function (r) { return !!r.bedroom; }),
+      places: places.length ? pyRound(median(places)) : null, walk: walks.length ? Math.max(1, pyRound(Math.min.apply(null, walks))) : null,
+      parking: medianLow(ids.map(function (id) { return M.byId[id].features.parking; })) };
+  }
+  function betterFig(k, f) {
+    if (k === "family") return f.drive === null ? null : -f.drive;
+    if (k === "money") return f.total === null ? null : -f.total;
+    if (k === "room") return !f.sqft ? null : f.sqft + (f.bedroom ? 10000 : 0);
+    if (k === "going_out") return f.places;
+    if (k === "green") return f.walk === null ? null : -f.walk;
+    return f.parking;
+  }
+  function pw(v) { return PARKING_WORDS[String(v)] || "parking not stated"; }
+  function good(k, f) {
+    if (k === "family") return f.drive !== null ? "About " + mins(f.drive) + " by car to Mom and Dad" : "Close to Mom and Dad";
+    if (k === "money") return f.total !== null ? "Monthly totals from $" + fmt(f.total) + " with utilities and fees" : "Lower monthly totals";
+    if (k === "room") { var size = f.sqft ? "up to " + fmt(f.sqft) + " sq ft" : "more room"; return f.bedroom ? "A separate bedroom, " + size : capFirst(size); }
+    if (k === "going_out") return f.places !== null ? f.places + " places to eat and drink within a 10-minute walk" : "Places to eat and drink close by";
+    if (k === "green") return f.walk !== null ? "A park about " + mins(f.walk) + " on foot" : "A park close by";
+    return capFirst(pw(f.parking));
+  }
+  function figText(k, f) {
+    if (k === "family") return f.drive !== null ? mins(f.drive) : "not known";
+    if (k === "money") return f.total !== null ? "$" + fmt(f.total) : "not known";
+    if (k === "room") return f.sqft ? fmt(f.sqft) + " sq ft" : "size not published";
+    if (k === "going_out") return f.places !== null ? String(f.places) : "not known";
+    if (k === "green") return f.walk !== null ? mins(f.walk) : "not known";
+    return pw(f.parking);
+  }
+  function bad(k, f, others) {
+    var o = others.map(function (x) { return figText(k, x); }).join(" and ");
+    if (k === "family") return "Farther from Mom and Dad: about " + figText(k, f) + " by car (the other two: " + o + ")";
+    if (k === "money") return "Costs more: monthly totals from " + figText(k, f) + " (the other two: " + o + ")";
+    if (k === "room") return "Smaller: up to " + figText(k, f) + " (the other two: " + o + ")";
+    if (k === "going_out") return "Quieter: " + figText(k, f) + " places to eat and drink within a 10-minute walk (the other two: " + o + ")";
+    if (k === "green") return "The nearest park is farther: about " + figText(k, f) + " on foot (the other two: " + o + ")";
+    return "Parking is less certain: " + figText(k, f) + " (the other two: " + o + ")";
+  }
+  function nudged(w, j, factor) { var w2 = w.slice(); w2[j] *= factor; var s = nsum(w2); return w2.map(function (x) { return x / s; }); }
+  function whatWouldChange(M, w, G, gid, pos, first) {
+    var names = {}; G.forEach(function (g) { names[g.id] = g.name; });
+    var levels = M.cfg.nudges || [1.5, 2, 3, 5, 10];
+    for (var l = 0; l < levels.length; l++) for (var j = 0; j < M.K; j++) {
+      var dirs = [["more", levels[l]], ["less", 1 / levels[l]]];
+      for (var d = 0; d < 2; d++) {
+        var f = firstOf(M, groupScores(M, nudged(w, j, dirs[d][1]), G));
+        if (pos === 0 ? f !== first : f === gid) {
+          var k = M.feats[j];
+          return { feature: k, direction: dirs[d][0], factor: levels[l], neighborhood_id: f, text: "If " + (LABEL[k] || k) + " mattered " + dirs[d][0] + ", " + names[f] + " would come first." };
+        }
       }
-      return { area: A, lift: lift, gives_up: give };
-    });
-  }
-  function whatIf(M, answers, opts) {
-    opts = opts || {};
-    var cfg = M.cfg, R = recommend(M, answers, { removed: opts.removed }); if (!R.top.length) return null;
-    var first = R.top[0][0], ex = explain(M, R)[0], order = ex.lift.concat(cfg.features.filter(function (k) { return ex.lift.indexOf(k) < 0; }));
-    for (var i = 0; i < order.length; i++) {
-      var R2 = recommend(M, answers, { removed: opts.removed, nudge: { k: order[i], factor: cfg.nudge_less } });
-      if (R2.top.length && R2.top[0][0] !== first) return { k: order[i], dir: "less", factor: cfg.nudge_less, first: R2.top[0][0] };
-    }
-    for (var j = 0; j < cfg.features.length; j++) {
-      var R3 = recommend(M, answers, { removed: opts.removed, nudge: { k: cfg.features[j], factor: cfg.nudge_more } });
-      if (R3.top.length && R3.top[0][0] !== first) return { k: cfg.features[j], dir: "more", factor: cfg.nudge_more, first: R3.top[0][0] };
     }
     return null;
   }
-  /* standardised feature distance, weighted by her mean weights; candidates from buildings[].similar first */
-  function moreLike(M, id, m, exclude, n, similar) {
-    var j0 = M.idx[id]; if (j0 === undefined) return [];
-    var ex = setOf(exclude), mu = [], sd = [], k, N = M.F.length;
-    for (k = 0; k < M.K; k++) {
-      var s = 0, q; for (q = 0; q < N; q++) s += M.F[q][k]; var mean = s / N, v = 0;
-      for (q = 0; q < N; q++) v += (M.F[q][k] - mean) * (M.F[q][k] - mean);
-      mu.push(mean); sd.push(Math.sqrt(v / N) || 1);
-    }
-    function d(j) { var t = 0; for (var k2 = 0; k2 < M.K; k2++) { var z = (M.F[j0][k2] - M.F[j][k2]) / sd[k2]; t += m[k2] * z * z; } return Math.sqrt(t); }
-    var cands = [], seen = {};
-    function add(j) { if (j === undefined || j === j0 || seen[j] || ex[M.ids[j]]) return; seen[j] = 1; cands.push(j); }
-    (similar || []).forEach(function (sid) { add(M.idx[sid]); });
-    var fromSimilar = cands.length;
-    if (fromSimilar < n) for (var j = 0; j < N; j++) add(j);
-    var cmp = byScore(M.cfg.eps);
-    function rank(L) { return L.map(function (j) { return [-d(j), M.ids[j], j]; }).sort(function (x, y) { return cmp(x, y); }).map(function (x) { return x[2]; }); }
-    var head = rank(cands.slice(0, fromSimilar)), tail = rank(cands.slice(fromSimilar));
-    return head.concat(tail).slice(0, n).map(function (j) { return M.ids[j]; });
+  function moreLike(M, id, w, shown, removed, n) {
+    var zb = zvec(M, id), cand = [];
+    M.ids.forEach(function (o) {
+      if (o === id || shown[o] || removed[o]) return;
+      var zo = zvec(M, o), t = []; for (var j = 0; j < M.K; j++) t.push(w[j] * (zb[j] - zo[j]) * (zb[j] - zo[j]));
+      cand.push([q(M, Math.sqrt(nsum(t))), o]);
+    });
+    cand.sort(function (x, y) { return x[0] !== y[0] ? x[0] - y[0] : cmpId(x[1], y[1]); });
+    return cand.slice(0, n).map(function (x) { return x[1]; });
   }
-  function play(M, answers) {
-    var asked = [], pairs = [];
-    for (var i = 0; i <= (answers || []).length; i++) {
+  function recommend(M, answers, opts) {
+    opts = opts || {};
+    var removed = setOf(opts.removed), G = liveGroups(M, removed), w = meanW(M, posterior(M, answers));
+    if (opts.nudge) { var j = M.feats.indexOf(opts.nudge.feature); if (j >= 0) w = nudged(w, j, opts.nudge.direction === "less" ? 1 / opts.nudge.factor : opts.nudge.factor); }
+    if (!G.length) return { weights: w, w: w, top: [], neighborhoods: [], scores: {} };
+    var gs = groupScores(M, w, G), picked = mmr(M, gs, G), first = firstOf(M, gs), gmap = {};
+    G.forEach(function (g) { gmap[g.id] = g; });
+    var tops = {}, figs = {};
+    picked.forEach(function (g) {
+      tops[g] = gmap[g].building_ids.map(function (id) { return [q(M, score(M, id, w)), id]; }).sort(function (x, y) { return x[0] !== y[0] ? y[0] - x[0] : cmpId(x[1], y[1]); }).slice(0, 3).map(function (x) { return x[1]; });
+      figs[g] = figures(M, tops[g]);
+    });
+    var live = M.ids.filter(function (id) { return !removed[id]; });
+    var allMean = M.feats.map(function (k) { return nsum(live.map(function (id) { return M.byId[id].features[k]; })) / live.length; });
+    var cent = {}; picked.forEach(function (g) { cent[g] = M.feats.map(function (k) { return nsum(tops[g].map(function (id) { return M.byId[id].features[k]; })) / tops[g].length; }); });
+    var taken = {}; picked.forEach(function (g) { tops[g].forEach(function (id) { taken[id] = 1; }); });
+    var out = picked.map(function (g, pos) {
+      var c = cent[g];
+      var lift = M.feats.map(function (k, j) { return [q(M, w[j] * (c[j] - allMean[j])), k]; }).sort(function (x, y) { return x[0] !== y[0] ? y[0] - x[0] : cmpId(x[1], y[1]); });
+      var whyK = lift.slice(0, 2).map(function (x) { return x[1]; });
+      var others = picked.filter(function (o) { return o !== g; }), oc = others.map(function (o) { return cent[o]; });
+      var diffs = oc.length ? M.feats.map(function (k, j) { var om = nsum(oc.map(function (x) { return x[j]; })) / oc.length; return [q(M, w[j] * (c[j] - om)), q(M, c[j] - om), k]; }) : [];
+      var raw = {}; diffs.forEach(function (t) { raw[t[2]] = t[1]; });
+      var give = null, sorted = diffs.slice().sort(function (x, y) { return x[0] !== y[0] ? x[0] - y[0] : cmpId(x[2], y[2]); });
+      for (var i = 0; i < sorted.length; i++) {
+        var k = sorted[i][2]; if (raw[k] >= 0) continue;
+        var mine = betterFig(k, figs[g]), theirs = others.map(function (o) { return betterFig(k, figs[o]); });
+        if (mine !== null && theirs.every(function (x) { return x !== null; }) && mine < nsum(theirs) / theirs.length) { give = k; break; }
+      }
+      var bl = tops[g].map(function (id) { var more = moreLike(M, id, w, taken, removed, M.cfg.n_more_like_this || 3); more.forEach(function (x) { taken[x] = 1; }); return { id: id, score: Number(score(M, id, w).toFixed(6)), more_like_this: more }; });
+      return { neighborhood_id: g, name: gmap[g].name, score: Number(gs[g].toFixed(6)), buildings: bl, why_features: whyK,
+        why: whyK.map(function (k) { return good(k, figs[g]); }).join(". ") + ".", gives_up_feature: give,
+        gives_up: give ? bad(give, figs[g], others.map(function (o) { return figs[o]; })) + "." : null,
+        what_would_change: whatWouldChange(M, w, G, g, pos, first) };
+    });
+    var scores = {}; live.forEach(function (id) { scores[id] = score(M, id, w); });
+    return { weights: w.map(function (x) { return Number(x.toFixed(6)); }), w: w, neighborhoods: out, scores: scores,
+      top: out.map(function (n) { return [n.neighborhood_id, n.buildings.map(function (b) { return b.id; })]; }) };
+  }
+  function play(M, ex) {
+    var asked = [], pairs = [], A = (ex && ex.answers) || [];
+    for (var i = 0; i <= A.length; i++) {
       var p = nextPair(M, asked); if (!p) break;
-      pairs.push(p); if (i < answers.length) asked.push(answers[i]); else break;
+      pairs.push(p); if (i >= A.length) break;
+      asked.push({ a: p[0], b: p[1], choice: choiceOf(A[i]) });
     }
-    return { pairs: pairs, top: recommend(M, asked).top, asked: asked.length };
+    return { pairs: pairs, rec: recommend(M, asked), asked: asked };
   }
-  return { config: config, usable: usable, model: model, posterior: posterior, recommend: recommend, status: status,
-    nextPair: nextPair, explain: explain, whatIf: whatIf, moreLike: moreLike, play: play, choiceOf: choiceOf, lik: lik };
+  return { usable: usable, model: model, posterior: posterior, meanW: meanW, nextPair: nextPair, holds: holds, recommend: recommend,
+    play: play, choiceOf: choiceOf, nsum: nsum, pyRound: pyRound, label: LABEL };
 })();
 if (typeof module !== "undefined") module.exports = ConciergeRec;
 </script>
@@ -592,10 +632,10 @@ if (!D || !D.buildings) { app.innerHTML = "<p>This page has not been built yet. 
 var R = ConciergeRec;
 var META = D.meta || {}, ANCHOR = META.anchor_label || "Mom and Dad";
 var HOODS = D.neighborhoods || [], B = D.buildings || [], BY = {}, HBY = {};
-var CAN = R.usable(D), MODEL = CAN ? R.model(D) : null;
+var MODEL = R.model(D), CAN = !!MODEL;
 B.forEach(function (b) { BY[b.id] = b; });
 HOODS.forEach(function (h) { HBY[h.id] = h; });
-B.forEach(function (b) { var h = HBY[b.neighborhood_id]; b.area_id = (h && h.parked_under && HBY[h.parked_under]) ? h.parked_under : b.neighborhood_id; });
+B.forEach(function (b) { var h = HBY[b.neighborhood_id]; b.area_id = (typeof b.group_id === "string" && b.group_id) || ((h && h.parked_under && HBY[h.parked_under]) ? h.parked_under : b.neighborhood_id); });
 var WORDS = ["no", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
 
 /* ---------- small helpers ---------- */
@@ -608,6 +648,7 @@ function ext(u, label, cls) { u = httpUrl(u); return u ? '<a class="' + (cls || 
 var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 function niceDate(iso) { var m = /^(\d{4})-(\d\d)-(\d\d)/.exec(iso || ""); return m ? MONTHS[+m[2] - 1] + " " + (+m[3]) : null; }
 function shortDate(iso) { var m = /^(\d{4})-(\d\d)-(\d\d)/.exec(iso || ""); return m ? MONTHS[+m[2] - 1].slice(0, 3) + " " + (+m[3]) : null; }
+function nm(b) { return String((b && (b.name || b.address)) || "This place").replace(/\.\s*$/, ""); }
 function cap(s) { s = String(s || ""); return s.charAt(0).toUpperCase() + s.slice(1); }
 function li(q) { return '<li>' + esc(q) + '</li>'; }
 var ICON = {
@@ -682,7 +723,7 @@ var S = fresh();
     if (typeof o.step === "string") S.step = o.step;
     if (Array.isArray(o.answers)) S.answers = o.answers.filter(function (x) { return x && BY[x.a] && BY[x.b] && typeof x.choice === "string"; });
     ["removed", "saved", "ticked", "tour"].forEach(function (k) { if (Array.isArray(o[k])) S[k] = o[k].filter(function (id, i, a) { return BY[id] && a.indexOf(id) === i; }); });
-    if (o.nudge && typeof o.nudge.k === "string" && isNum(o.nudge.factor)) S.nudge = { k: o.nudge.k, factor: o.nudge.factor };
+    if (o.nudge && typeof o.nudge.feature === "string" && isNum(o.nudge.factor)) S.nudge = { feature: o.nudge.feature, direction: o.nudge.direction === "less" ? "less" : "more", factor: o.nudge.factor };
     if (isNum(o.extraFrom)) S.extraFrom = o.extraFrom;
   } catch (e) { /* storage is a convenience; the page works without it */ }
   if (["welcome", "pick", "results", "plan"].indexOf(S.step) < 0) S.step = "welcome";
@@ -710,10 +751,10 @@ var CACHE = {};
 function cacheKey() { return JSON.stringify([S.answers, S.removed, S.nudge, S.extraFrom]); }
 function rec() {
   var k = cacheKey(); if (CACHE.k === k) return CACHE.v;
-  var r = R.recommend(MODEL, S.answers, { removed: S.removed, nudge: S.nudge });
-  var ex = R.explain(MODEL, r), onScreen = [];
+  var r = R.recommend(MODEL, S.answers, { removed: S.removed, nudge: S.nudge }), onScreen = [];
   r.top.forEach(function (t) { onScreen = onScreen.concat(t[1]); });
-  CACHE = { k: k, v: { r: r, ex: ex, onScreen: onScreen, what: S.nudge ? null : R.whatIf(MODEL, S.answers, { removed: S.removed }), pair: null, pairDone: false } };
+  var first = r.neighborhoods[0];
+  CACHE = { k: k, v: { r: r, onScreen: onScreen, what: S.nudge || !first ? null : first.what_would_change, pair: null, pairDone: false } };
   return CACHE.v;
 }
 function pairNow() {
@@ -724,7 +765,6 @@ function pairNow() {
 function areaRankOf(id) { var b = BY[id]; if (!b || !CAN) return null; var top = rec().r.top; for (var i = 0; i < top.length; i++) if (top[i][0] === b.area_id) return i + 1; return null; }
 
 /* ---------- the facts, in plain words ---------- */
-var FEAT_WORD = { family: "being close to " + ANCHOR, money: "a lower monthly total", room: "more room", going_out: "going out on foot", green: "a park close by", parking: "easy parking" };
 function raw(b) {
   var r = b.features_raw || {}, f = b.facts || {}, fit = b.fit || {}, ap = b.apartments || [];
   function pick(x, y) { return x !== undefined && x !== null ? x : y; }
@@ -757,7 +797,7 @@ function better(a, b, k) {
   if (k === "going_out") return lo(-x.rest, -y.rest);
   if (k === "green") return lo(x.park, y.park);
   if (k === "room") { if (x.bedroom !== y.bedroom) return x.bedroom ? 1 : -1; return lo(-x.sqft, -y.sqft); }
-  if (k === "parking") { var v = { garage: 4, covered: 4, off_street: 3, lot: 3, street: 1 }, p = v[x.pk] || 2, q = v[y.pk] || 2; return p === q ? 0 : p > q ? 1 : -1; }
+  if (k === "parking") { var v = { garage: 3, covered: 3, carport: 3, off_street: 2, lot: 2, driveway: 2, surface: 2, street: 1 }, p = v[x.pk], q = v[y.pk]; return !p || !q || p === q ? 0 : p > q ? 1 : -1; }
   return 0;
 }
 var FACT_ORDER = ["family", "room", "going_out", "green", "parking"], FACT_ICON = { family: "car", room: "ruler", going_out: "fork", green: "park", parking: "parking" };
@@ -767,7 +807,7 @@ function lifeLine(b) {
 }
 /* the three chips on a building card: the facts she weighs most, money aside (the pair shows it) */
 function chipKeys() {
-  var m = CAN ? rec().r.m : [], f = (MODEL && MODEL.cfg.features) || [];
+  var m = CAN ? rec().r.w : [], f = (MODEL && MODEL.feats) || [];
   return f.map(function (k, i) { return [m[i], k]; }).filter(function (x) { return x[1] !== "money" && FACT_ICON[x[1]]; })
     .sort(function (a, b) { return b[0] - a[0] || (a[1] < b[1] ? -1 : 1); }).slice(0, 3).map(function (x) { return x[1]; });
 }
@@ -805,7 +845,7 @@ function pickCard(b, o, side) {
   var h = HBY[b.neighborhood_id], place = h ? h.name + (h.state ? ", " + h.state : "") : [b.city, b.state].filter(Boolean).join(", ");
   var life = lifeLine(b);
   return '<button type="button" class="pick" data-act="choose" data-v="' + side + '" data-id="' + esc(b.id) + '" aria-label="' + esc((b.name || "This place") + ", " + place) + '. Choose this one." aria-describedby="pf-' + side + '">' +
-    '<span class="p-top"><span><span class="p-name">' + esc(b.name || b.address || "This place") + '</span><span class="p-place">' + esc(place) + '</span></span><span class="p-go" aria-hidden="true">This one</span></span>' +
+    '<span class="p-top"><span><span class="p-name">' + esc(nm(b)) + '</span><span class="p-place">' + esc(place) + '</span></span><span class="p-go" aria-hidden="true">This one</span></span>' +
     pairHtml(b, "span") +
     '<span class="pf" id="pf-' + side + '">' + FACT_ORDER.map(function (k) { var w = better(b, o, k) > 0; return '<span data-fact="' + k + '">' + icon(FACT_ICON[k]) + '<span' + (w ? ' class="win"' : '') + '>' + esc(factText(b, k)) + (w ? '<span class="sr"> (better)</span>' : '') + '</span></span>'; }).join("") + '</span>' +
     (life ? '<span class="p-life">' + esc(life) + '</span>' : '') + '</button>';
@@ -817,7 +857,7 @@ function pickScreen() {
   dots += '<i class="now"></i>';
   return top() +
     '<p class="qtop"><span>A few quick choices</span><span class="dots" aria-hidden="true">' + dots + '</span><span class="sr">' + (n ? n + ' made so far' : 'The first one') + '</span></p>' +
-    '<section class="stack enter" style="gap:10px" data-pair="' + esc(p[0] + "|" + p[1]) + '"><h1 class="h-mid" tabindex="-1" id="q-h">Which would you rather?</h1>' +
+    '<section class="stack enter" style="gap:10px" data-pair="' + esc(p[0] + "|" + p[1]) + '"><h1 class="h-pick" tabindex="-1" id="q-h">Which would you rather?</h1>' +
     '<div class="duel">' + pickCard(a, b, "a") + '<p class="or" aria-hidden="true">or</p>' + pickCard(b, a, "b") + '</div>' +
     '<button type="button" class="btn" data-act="choose" data-v="either">Either is fine</button>' +
     '<div class="qnav"><button type="button" class="quiet" data-act="undo"><span aria-hidden="true">&#8249;</span> Back</button>' +
@@ -825,29 +865,10 @@ function pickScreen() {
 }
 
 /* ---------- your three places ---------- */
-function median(xs) { xs = xs.filter(isNum).sort(function (a, b) { return a - b; }); if (!xs.length) return null; var h = Math.floor(xs.length / 2); return xs.length % 2 ? xs[h] : (xs[h - 1] + xs[h]) / 2; }
-function areaFigure(ids, k, low) {
-  var L = ids.map(function (id) { return raw(BY[id]); });
-  if (k === "family") { var d = median(L.map(function (x) { return x.drive; })); return isNum(d) ? (low ? "a longer drive, about " : "about ") + Math.round(d) + " minutes to " + ANCHOR : null; }
-  if (k === "money") { var t = L.map(function (x) { return x.total; }).filter(isNum); return t.length ? (low ? "a higher total, from " : "totals from ") + money(Math.min.apply(null, t)) + " a month" : null; }
-  if (k === "room") { var one = L.some(function (x) { return x.bedroom; }), sq = L.map(function (x) { return x.sqft; }).filter(isNum), mx = sq.length ? Math.max.apply(null, sq) : null;
-    if (low) return "less room" + (isNum(mx) ? ", " + (one ? "up to " : "studios up to ") + Math.round(mx) + " sq ft" : "");
-    return (one ? "a separate bedroom" : "studios") + (isNum(mx) ? " up to " + Math.round(mx) + " sq ft" : ""); }
-  if (k === "going_out") { var r = median(L.map(function (x) { return x.rest; })); return isNum(r) ? (low ? "fewer places to walk to, about " : "about ") + Math.round(r) + " restaurants within a 10-minute walk" : null; }
-  if (k === "green") { var pw = median(L.map(function (x) { return x.park; })); return isNum(pw) ? (low ? "a longer walk to a park, about " : "a park about ") + Math.max(1, Math.round(pw)) + " minutes on foot" : null; }
-  if (k === "parking") { var g = L.some(function (x) { return x.pk === "garage" || x.pk === "covered"; }), off = L.some(function (x) { return PK[x.pk] && x.pk !== "street"; });
-    return low ? "parking is less settled" + (g ? "" : off ? ", no garage listed" : ", ask where the car goes") : g ? "garage parking" : off ? "parking off the street" : null; }
-  return null;
-}
-function whyLine(e, ids) { var t = e.lift.map(function (k) { return areaFigure(ids, k, false); }).filter(Boolean); return t.length ? cap(t.join(", and ")) + "." : null; }
-function givesLine(e, ids, others) {
-  if (!e.gives_up) return "Little, compared with " + others + ".";
-  var t = areaFigure(ids, e.gives_up, true); return t ? cap(t) + ", compared with " + others + "." : null;
-}
 function bcard(id, i, more) {
-  var b = BY[id], ks = chipKeys(), open = !!VIEW.open[id], ml = more || [];
+  var b = BY[id], ks = chipKeys(), open = !!VIEW.open[id], ml = (more || []).filter(function (x) { return BY[x]; });
   return '<li class="bcard" data-building="' + esc(id) + '">' +
-    '<h3><button type="button" class="mname" data-act="open" data-id="' + esc(id) + '">' + esc(b.name || b.address || "This place") + '</button></h3>' + inHood(b) +
+    '<h3><button type="button" class="mname" data-act="open" data-id="' + esc(id) + '">' + esc(nm(b)) + '</button></h3>' + inHood(b) +
     pairHtml(b) +
     (ks.length ? '<ul class="chips">' + ks.map(function (k) { return '<li>' + esc(factText(b, k)) + '</li>'; }).join("") + '</ul>' : '') +
     chkLine(bldChecked(b)) +
@@ -856,28 +877,27 @@ function bcard(id, i, more) {
     '<button type="button" class="quiet dim" data-act="remove" data-id="' + esc(id) + '" aria-label="Not for me: ' + esc(b.name || "this place") + '">Not for me</button></div>' +
     (ml.length ? '<ul class="thumbs" id="ml-' + esc(id) + '"' + (open ? '' : ' hidden') + ' aria-label="More like ' + esc(b.name || "this") + '">' + ml.map(function (sid) {
       var s = BY[sid], f = s.facts || {};
-      return '<li><button type="button" class="thumb" data-act="open" data-id="' + esc(sid) + '" data-thumb-of="' + esc(id) + '"><b>' + esc(s.name || s.address) + '</b>' +
+      return '<li><button type="button" class="thumb" data-act="open" data-id="' + esc(sid) + '" data-thumb-of="' + esc(id) + '"><b>' + esc(nm(s)) + '</b>' +
         '<span class="m">Rent <span' + (isNum(f.rent_from) ? ' data-rent="' + f.rent_from + '"' : '') + '>' + (money(f.rent_from) || "not known") + '</span></span><span class="m">Total ' + (money(f.total_from) || "not known") + '</span><span>' + esc(factText(s, ks[0] || "family")) + '</span></button></li>';
     }).join("") + '</ul>' : '') + '</li>';
 }
+/* the model's sentences, with one plural mended for display ("1 places" from the reference) */
+function said(t) { return String(t || "").replace(/\b1 places\b/g, "1 place").replace(/\b1 minutes\b/g, "1 minute"); }
 function results() {
-  var c = rec(), r = c.r, ex = c.ex;
+  var c = rec(), r = c.r;
   if (!r.top.length) return top() + '<section class="stack"><p class="kicker">Hmm</p><h1 class="h-big" tabindex="-1">Every place is set aside</h1><p class="none-box">You marked every place "Not for me". Bring them back to see a suggestion.</p><button type="button" class="btn main" data-act="unremove">Bring them back</button></section>';
-  var m = r.m, used = {};
+  var n = S.answers.length;
   var html = top() + '<section class="stack" style="gap:6px"><p class="kicker">Here is where I would look</p><h1 class="h-big" tabindex="-1">Your three places to look</h1>' +
-    '<p class="small">From your ' + (WORDS[S.answers.length] || S.answers.length) + ' ' + (S.answers.length === 1 ? 'choice' : 'choices') + '. Each one comes with its best three buildings.</p></section>';
-  if (S.nudge) html += '<div class="nudged"><p>Showing what happens if ' + esc(FEAT_WORD[S.nudge.k] || S.nudge.k) + ' mattered ' + (S.nudge.factor < 1 ? 'less' : 'more') + '.</p><button type="button" class="quiet" data-act="unnudge">Undo</button></div>';
-  r.top.forEach(function (t, i) {
-    var A = t[0], ids = t[1], e = ex[i], h = HBY[A];
-    var others = r.top.filter(function (o) { return o[0] !== A; }).map(function (o) { return (HBY[o[0]] || {}).name || o[0]; });
-    var oth = others.length === 2 ? others[0] + " and " + others[1] : others[0] || "the others";
-    var why = whyLine(e, ids), give = others.length ? givesLine(e, ids, oth) : null;
+    '<p class="small">From your ' + (WORDS[n] || n) + ' ' + (n === 1 ? 'choice' : 'choices') + ', with the best three buildings in each.</p></section>';
+  if (S.nudge) html += '<div class="nudged" id="nudged"><p>Showing what happens if ' + esc(R.label[S.nudge.feature] || S.nudge.feature) + ' mattered ' + esc(S.nudge.direction) + '.</p><button type="button" class="quiet" data-act="unnudge">Undo</button></div>';
+  r.neighborhoods.forEach(function (nb, i) {
+    var A = nb.neighborhood_id, h = HBY[A];
     html += '<section class="area3" data-area="' + esc(A) + '" aria-labelledby="ar-' + i + '"><div class="a-head"><span class="num" aria-hidden="true">' + (i + 1) + '</span><h2 id="ar-' + i + '"><span class="sr">Place ' + (i + 1) + ': </span>' + esc(areaName(A)) + '</h2></div>' +
-      tagList(h) + (why ? '<p class="because"><b>Why:</b> ' + esc(why) + '</p>' : '') + (give ? '<p class="gives"><b>Gives up:</b> ' + esc(give) + '</p>' : '') +
-      '<ol class="blist">' + ids.map(function (id, j) { var ml = R.moreLike(MODEL, id, m, c.onScreen, 3, BY[id].similar); return bcard(id, j, ml); }).join("") + '</ol></section>';
+      tagList(h) + (nb.why ? '<p class="because"><b>Why:</b> <span class="t">' + esc(said(nb.why)) + '</span></p>' : '') + (nb.gives_up ? '<p class="gives"><b>Gives up:</b> <span class="t">' + esc(said(nb.gives_up)) + '</span></p>' : '') +
+      '<ol class="blist">' + nb.buildings.map(function (x, j) { return bcard(x.id, j, x.more_like_this); }).join("") + '</ol></section>';
   });
   var w = c.what;
-  if (w && !S.nudge) html += '<div class="whatif" id="whatif"><p>If ' + esc(FEAT_WORD[w.k] || w.k) + ' mattered ' + w.dir + ', ' + esc((HBY[w.first] || {}).name || w.first) + ' would come first.</p><button type="button" class="quiet" data-act="nudge">Show me that</button></div>';
+  if (w) html += '<div class="whatif" id="whatif" data-first="' + esc(w.neighborhood_id) + '"><p>' + esc(said(w.text)) + '</p><button type="button" class="quiet" data-act="nudge">Show me that</button></div>';
   var nr = S.removed.length;
   html += '<div class="endblock"><h2>Not quite right?</h2><button type="button" class="btn main" data-act="more-choices">Make a few more choices</button>' +
     '<button type="button" class="btn" data-act="all">See everything</button>' +
@@ -960,7 +980,7 @@ function place(b) {
   var h = HBY[b.neighborhood_id], area = HBY[b.area_id], rank = areaRankOf(b.id);
   return sheetTop(heart(b)) +
     '<article class="stack place" style="gap:16px" data-building="' + esc(b.id) + '">' +
-    '<div class="stack" style="gap:6px">' + (rank ? '<p class="kicker" style="font-size:24px">In your place ' + rank + ' of 3</p>' : '') + '<h1 tabindex="-1" id="sheet-h">' + esc(b.name || b.address || "This place") + '</h1><p class="hood" style="margin-top:0">' + esc(hoodName(b)) + '</p>' +
+    '<div class="stack" style="gap:6px">' + (rank ? '<p class="kicker" style="font-size:24px">In your place ' + rank + ' of 3</p>' : '') + '<h1 tabindex="-1" id="sheet-h">' + esc(nm(b)) + '</h1><p class="hood" style="margin-top:0">' + esc(hoodName(b)) + '</p>' +
     tagList(area || h) + chkLine(bldChecked(b)) + '</div>' +
     lifeHere(b) +
     '<section class="stack" style="gap:6px"><h2 class="sec-h">The numbers</h2>' + factsList(b) + '</section>' +
@@ -976,7 +996,7 @@ function myList() {
     '<ul class="saved">' + L.map(function (b) {
       var t = S.ticked.indexOf(b.id) >= 0;
       return '<li class="srow' + (t ? ' on' : '') + '" data-building="' + esc(b.id) + '">' +
-        '<label class="tickl" for="tick-' + esc(b.id) + '"><input type="checkbox" id="tick-' + esc(b.id) + '" data-tick="' + esc(b.id) + '"' + (t ? ' checked' : '') + '><span><b>' + esc(b.name || b.address) + '</b><small>' + esc(hoodName(b)) + '</small></span></label>' +
+        '<label class="tickl" for="tick-' + esc(b.id) + '"><input type="checkbox" id="tick-' + esc(b.id) + '" data-tick="' + esc(b.id) + '"' + (t ? ' checked' : '') + '><span><b>' + esc(nm(b)) + '</b><small>' + esc(hoodName(b)) + '</small></span></label>' +
         pairHtml(b) + chkLine(bldChecked(b)) +
         '<div class="sact">' + (onTour(b.id) ? '<button type="button" class="btn sm" data-act="untour" data-id="' + esc(b.id) + '" aria-pressed="true"><span aria-hidden="true">&#10003;</span> On your tour plan</button>' : '<button type="button" class="btn sm" data-act="tour" data-id="' + esc(b.id) + '">Add to tour plan</button>') +
         '<button type="button" class="quiet" data-act="unsave" data-id="' + esc(b.id) + '">Remove</button></div>' +
@@ -1052,7 +1072,7 @@ function compare(ids) {
   }
   return sheetTop() + '<section class="stack" style="gap:6px"><h1 class="h-big" tabindex="-1" id="sheet-h">Side by side</h1><p class="small muted"><span aria-hidden="true">&#10003;</span> marks the better one in each row.</p></section>' +
     '<div class="cmp cmp-n' + n + '" style="--n:' + n + '" id="cmp" data-cols="' + n + '">' +
-    '<div class="chead">' + L.map(function (b) { return '<div><b>' + esc(b.name || b.address) + '</b><small>' + esc(hoodName(b)) + '</small></div>'; }).join("") + '</div>' +
+    '<div class="chead">' + L.map(function (b) { return '<div><b>' + esc(nm(b)) + '</b><small>' + esc(hoodName(b)) + '</small></div>'; }).join("") + '</div>' +
     diff.map(rowHtml).join("") +
     (same.length ? '<details class="more" id="same"><summary>Same for all (' + same.length + ')</summary><div class="in" style="gap:0">' + same.map(rowHtml).join("") + '</div></details>' : '') +
     '<div class="cells choose">' + L.map(function (b) {
@@ -1087,7 +1107,7 @@ function plan() {
       if (chk && chk.ask) { seen[STILL_Q] = 1; qs.push(STILL_Q); }
       (b.confirm || []).forEach(function (c) { var q = c && (c.question || c.label); if (q && !seen[q]) { seen[q] = 1; qs.push(q); } });
       (b.tour_questions || []).forEach(function (q) { if (q && !seen[q]) { seen[q] = 1; qs.push(q); } });
-      html += '<div class="stop" data-stop="' + esc(b.id) + '"><h3>' + esc(b.name || b.address) + '</h3>' + (parked ? '<p class="small muted">In ' + esc(own.name) + '</p>' : '') + chkLine(chk) +
+      html += '<div class="stop" data-stop="' + esc(b.id) + '"><h3>' + esc(nm(b)) + '</h3>' + (parked ? '<p class="small muted">In ' + esc(own.name) + '</p>' : '') + chkLine(chk) +
         (addr ? '<p><a class="link" href="https://www.google.com/maps/search/?api=1&amp;query=' + encodeURIComponent(addr) + '" target="_blank" rel="noopener noreferrer">' + esc(addr) + ' <span aria-hidden="true">&#8599;</span><span class="sr"> (opens a map in a new tab)</span></a></p>' : '') +
         pairHtml(b) +
         (((ct.office_phone && !ct.private) || httpUrl(ct.site)) ? '<div><p class="lab">Leasing office</p>' + (ct.office_phone && !ct.private ? '<p class="phone">' + esc(ct.office_phone) + '</p>' : '') + ext(ct.site, "Building website") + '</div>' : '') +
@@ -1123,14 +1143,14 @@ function listHtml() {
     shown++;
     var f = b.facts || {}, rs = m.map(function (a) { return a.rent; }).filter(isNum), ts = m.map(function (a) { return a.total; }).filter(isNum);
     var r = rs.length ? Math.min.apply(null, rs) : f.rent_from, t = ts.length ? Math.min.apply(null, ts) : f.total_from, many = rs.length > 1 && Math.max.apply(null, rs) !== r;
-    return '<button type="button" class="row" data-act="open" data-id="' + esc(b.id) + '"><span class="r1"><b>' + esc(b.name || b.address) + '</b><span>' + (isNum(f.drive_min) ? Math.round(f.drive_min) + ' min' : '') + '</span></span>' +
+    return '<button type="button" class="row" data-act="open" data-id="' + esc(b.id) + '"><span class="r1"><b>' + esc(nm(b)) + '</b><span>' + (isNum(f.drive_min) ? Math.round(f.drive_min) + ' min' : '') + '</span></span>' +
       '<span class="r2"><span>Rent ' + (many ? 'from ' : '') + '</span><b' + (isNum(r) ? ' data-rent="' + r + '"' : '') + '>' + (money(r) || 'not known') + '</b><span>Total with utilities and fees ' + (many ? 'from ' : '') + '</span><b>' + (money(t) || 'not known') + '</b></span>' +
       (tagName ? '<span class="tag at">In ' + esc(tagName) + '</span>' : '') +
       (isSaved(b.id) ? '<span class="tag k">&#9829; On My list</span>' : '') + '</button>';
   }
   /* her three places first (when she has made choices), then the rest nearest to Mom and Dad first; within one, best first */
   var score = {}, rank = {};
-  if (CAN) { var c = rec(); B.forEach(function (b, j) { score[b.id] = c.r.s[j]; }); if (S.answers.length) c.r.top.forEach(function (t, i) { rank[t[0]] = i + 1; }); }
+  if (CAN) { var c = rec(); B.forEach(function (b) { score[b.id] = isNum(c.r.scores[b.id]) ? c.r.scores[b.id] : -1; }); if (S.answers.length) c.r.top.forEach(function (t, i) { rank[t[0]] = i + 1; }); }
   else B.forEach(function (b) { score[b.id] = b.rank_score || 0; });
   var hosts = HOODS.filter(function (h) { return !(h.parked_under && HBY[h.parked_under]); }).sort(function (x, y) {
     var a = rank[x.id] || 9, z = rank[y.id] || 9; if (a !== z) return a - z;
@@ -1270,7 +1290,7 @@ function act(a, el) {
       if (S.extraFrom !== null && S.answers.length < S.extraFrom) S.extraFrom = null;
       CACHE = {}; S.step = "pick"; render(); break;
     case "more-choices": S.extraFrom = S.answers.length; S.nudge = null; CACHE = {}; if (pairNow()) { S.step = "pick"; render(); } else { S.extraFrom = null; toast("No more useful choices to ask."); } break;
-    case "nudge": { var w = rec().what; if (w) { S.nudge = { k: w.k, factor: w.factor }; CACHE = {}; render(); toast(((HBY[w.first] || {}).name || "That place") + " comes first now."); } break; }
+    case "nudge": { var w = rec().what; if (w) { S.nudge = { feature: w.feature, direction: w.direction, factor: w.factor }; CACHE = {}; render(); toast(((HBY[w.neighborhood_id] || {}).name || "That place") + " comes first now."); } break; }
     case "unnudge": S.nudge = null; CACHE = {}; render(); toast("Back to your first suggestion."); break;
     case "more": VIEW.open[id] = !VIEW.open[id]; { var ul = document.getElementById("ml-" + id), btn = el; if (ul) ul.hidden = !VIEW.open[id]; btn.setAttribute("aria-expanded", String(!!VIEW.open[id])); } break;
     case "remove": if (S.removed.indexOf(id) < 0) S.removed.push(id); CACHE = {}; toast("Set aside. The next best takes its place."); render({ stay: true });
@@ -1334,10 +1354,9 @@ function placesNow() {
   return o;
 }
 function areaWords(i) {
-  var c = rec(), t = c.r.top[i]; if (!t) return null;
-  var others = c.r.top.filter(function (o) { return o[0] !== t[0]; }).map(function (o) { return (HBY[o[0]] || {}).name || o[0]; });
-  return { place: i + 1, neighborhood: areaName(t[0]), tags: ((HBY[t[0]] || {}).tags || []).slice(0, 2), why: whyLine(c.ex[i], t[1]),
-    gives_up: others.length ? givesLine(c.ex[i], t[1], others.join(" and ")) : null, buildings: t[1].map(function (id) { return BY[id].name; }) };
+  var nb = rec().r.neighborhoods[i]; if (!nb) return null;
+  return { place: i + 1, neighborhood: areaName(nb.neighborhood_id), tags: ((HBY[nb.neighborhood_id] || {}).tags || []).slice(0, 2), why: nb.why, gives_up: nb.gives_up,
+    buildings: nb.buildings.map(function (x) { return BY[x.id] ? BY[x.id].name : x.id; }), what_would_change: nb.what_would_change ? nb.what_would_change.text : null };
 }
 function brief(b, P) {
   var f = b.facts || {}, h = HBY[b.neighborhood_id], px = (P || placesNow())[b.id] || null;
@@ -1392,8 +1411,8 @@ var LOOKUPS = {
     if (CAN) {
       var top = rec().r.top, i = -1; top.forEach(function (t, k) { if (t[0] === b.area_id) i = k; });
       o.its_neighborhood = i >= 0 ? areaWords(i) : { neighborhood: areaName(b.area_id), in_her_three_places: false };
-      var j = MODEL.idx[b.id], rank = rec().r.s.map(function (x, k) { return [x, k]; }).sort(function (x, y) { return y[0] - x[0]; }).map(function (x) { return x[1]; }).indexOf(j);
-      o.rank_among_all_buildings = rank + 1; o.of = B.length;
+      var sc = rec().r.scores, order = Object.keys(sc).sort(function (x, y) { return sc[y] - sc[x] || (x < y ? -1 : 1); });
+      o.rank_among_all_buildings = order.indexOf(b.id) + 1 || null; o.of = order.length;
     }
     o.facts = FACT_ORDER.map(function (k) { return factText(b, k); });
     return o;

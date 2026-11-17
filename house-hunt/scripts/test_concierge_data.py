@@ -830,6 +830,14 @@ def pearson(x, y):
     return a / b if b else 0.0
 
 
+def bottom_half(h, top):
+    """The recommended groups that rank in the bottom half by score under hidden weights h."""
+    gs = R.group_scores(h, BLDS, RP)
+    order = sorted(gs, key=lambda g: (-round(gs[g], 9), g))
+    half = math.ceil(len(order) / 2)
+    return [g for g in top if order.index(g) >= half]
+
+
 def group_raw(gid, key):
     return [B[i]["features_raw"][key] for i in GROUPS[gid]["building_ids"] if B[i]["features_raw"][key] is not None]
 
@@ -978,6 +986,19 @@ def recommender_personas_get_what_they_asked_for():
                       f"{R.true_top(h, BLDS, RP)}, recommended {[n for n, _ in e['expected_top']]}")
         assert r > 0.6, (e["persona"], r)
         assert R.true_top(h, BLDS, RP) in [n for n, _ in e["expected_top"]], e["persona"]
+        bad = bottom_half(h, [n for n, _ in e["expected_top"]])
+        assert not bad, (e["persona"], "recommended but in the bottom half by its hidden weights", bad)
+    # diversity only chooses among good fits: places 2 and 3 are eligible, or every eligible one was taken first
+    for e in REX:
+        rec = R.recommend(RS, e["answers"], BLDS, RP)
+        gs = R.group_scores(rec["weights"], BLDS, RP)
+        ok, order = R.eligible(gs, RP)
+        top = [n for n, _ in e["expected_top"]]
+        if len(ok) >= 3:
+            assert set(top) <= set(ok), (e["persona"], top, ok)
+        else:
+            assert top == ok + [g for g in order if g not in ok][:3 - len(ok)], (e["persona"], top, ok)
+        assert top[0] == order[0]
 
 
 @test
@@ -991,7 +1012,7 @@ def recommender_simulated_users():
         users.append([x / sum(g) for x in g])
     for h in users[:15] + [None]:                     # the fast twin asks what the reference asks
         assert R.run_persona(RS, BLDS, RP, h, RSETS) == R.run_persona(RS, BLDS, RP, h, RSETS, pair_fn=fast.next_pair)
-    hit = hit1 = one = 0
+    hit = hit1 = one = bot = 0
     stops, rs = Counter(), []
     for h in users:
         ans = R.run_persona(RS, BLDS, RP, h, RSETS, pair_fn=fast.next_pair)
@@ -1003,13 +1024,15 @@ def recommender_simulated_users():
         hit += t in top
         hit1 += t == top[0]
         one += len({CLUSTER_OF[g] for g in top}) == 1
+        bot += bool(bottom_half(h, top))
         rs.append(pearson(w, h))
     REPORT.append(f"200 simulated users (hidden weights flat Dirichlet, seed 11): true best neighborhood in the three "
                   f"{hit / 2:.1f}%, first {hit1 / 2:.1f}%; pairs asked {dict(sorted(stops.items()))}; weight recovery r "
                   f"median {statistics.median(rs):.2f}, share > 0.6 {sum(r > 0.6 for r in rs) / 2:.1f}%; "
-                  f"{len(RP['groups'])} neighborhoods to choose from; all three in one cluster {one / 2:.1f}%")
+                  f"{len(RP['groups'])} neighborhoods to choose from; all three in one cluster {one / 2:.1f}%; a recommended neighborhood in the bottom half by hidden weights {bot / 2:.1f}% of users")
     assert hit / 200 >= 0.8, hit
     assert one / 200 <= 0.2, one
+    assert bot / 200 <= 0.05, bot
     # more like this: excludes what is shown and the building itself, nearest first under her weights
     w = R.mean_weights(RS, R.posterior(RS, [], BLDS, RP))
     b0 = BLDS[0]
