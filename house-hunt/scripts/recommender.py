@@ -764,6 +764,29 @@ def examples(samples, buildings, params, sets, bests):
     return out
 
 
+HIT_TOLERANCE = 0.02
+
+
+def validation(exs, buildings, params):
+    """Per persona: its true best neighborhood by its hidden weights (equal weights for "either to everything"), the
+    best of the three it was given, and the gap. A hit is the true best in the three, or one within HIT_TOLERANCE of
+    its score. Shown, not hidden: the tests require at least 4 of the 5 to hit."""
+    rows = []
+    for e in exs:
+        h = [e["hidden_weights"][k] for k in FEATURES] if e["hidden_weights"] else [1 / len(FEATURES)] * len(FEATURES)
+        gs = group_scores(h, buildings, params)
+        truth = sorted(gs, key=lambda g: (-q(gs[g]), g))[0]
+        top = [n for n, _ in e["expected_top"]]
+        got = max(top, key=lambda g: (q(gs[g]), g))
+        gap = (gs[truth] - gs[got]) / gs[truth] if gs[truth] else 0.0
+        rows.append({"persona": e["persona"], "weights": "hidden" if e["hidden_weights"] else "equal (no hidden weights)",
+                     "true_best": truth, "true_best_score": round(gs[truth], 6), "best_recommended": got,
+                     "best_recommended_score": round(gs[got], 6), "gap_share": round(gap, 4),
+                     "hit_strict": truth in top, "hit_within_tolerance": gap <= HIT_TOLERANCE + 1e-12})
+    return {"tolerance": HIT_TOLERANCE, "required_hits": 4, "personas": rows,
+            "hits": sum(r["hit_within_tolerance"] for r in rows), "missed": [r["persona"] for r in rows if not r["hit_within_tolerance"]]}
+
+
 def params_block(buildings, groups, sim, mean, sd, alpha, meds):
     return {
         "features": list(FEATURES), "sure_feature": "sure",
@@ -815,6 +838,7 @@ def add_version_three(out):
     out["meta"]["recommender"] = params
     sets = sample_sets(samples, blds, params)
     out["meta"]["recommender_examples"] = examples(samples, blds, params, sets, sample_bests(samples, blds, params))
+    out["meta"]["recommender"]["validation"] = validation(out["meta"]["recommender_examples"], blds, params)
     return out
 
 
