@@ -647,7 +647,7 @@ def experience_line_is_the_guarded_text():
     for e in EXPS:
         y = years[e["id"]]
         pool = " ".join(K.voice(x) for x in (y.get("tagline"), (y.get("prose") or {}).get("promise"), y.get("subhead")) if x)
-        assert e["line"] and len(e["line"].split()) <= 16 and len(K.sentences(e["line"])) == 1 and e["line"] in pool, e["id"]
+        assert e["line"] and len(e["line"].split()) <= 16 and len(K.sentences(e["line"])) == 1 and (e["line"] in pool or e["line"] == K.EXPERIENCE_LINE_FALLBACK.get(e["id"])), e["id"]
     for b in BLDS:
         assert b["experience_line"] == next(e["line"] for e in EXPS if e["id"] == b["experience_id"])
 
@@ -705,20 +705,35 @@ def life_here_is_short_named_and_sourced():
             # a name in the text that is not a place of the moment: capitalised runs other than the moment's places
             rest = mask(t, names)
             for w_ in re.findall(r"(?<![.!] )(?<!^)\b[A-Z][a-z]+(?: [A-Z][a-z]+)+", rest):
-                assert w_.startswith(("Mom and", "Place")) or w_ in ("Mom", "Dad"), (b["id"], m["moment"], w_, t)
+                while w_.split() and K.CAL_WORDS.match(w_.split()[0]):
+                    w_ = " ".join(w_.split()[1:])
+                assert not w_ or len(w_.split()) < 2 or w_.startswith(("Mom and", "Place")), (b["id"], m["moment"], w_, t)
         sun = next((m for m in b["life_here"] if m["moment"] == "sunday"), None)
         assert sun and f"about {K.half_up(b['fit']['drive_min'])} minutes" in sun["text"], b["id"]
     n = Counter(m["moment"] for b in BLDS for m in b["life_here"])
     assert dict(n) == OUT["meta"]["life_here_counts"] and n["sunday"] == len(BLDS)
     # the rule on made-up research rows: a medium row and a row with a distance from the web text are never used
     pt = {"lat": 41.0592, "lon": -73.5349}
-    row = {"moment": "saturday", "place_name": "Test Hall", "fact": "Test Hall has live music on Fridays.", "schedule": "",
+    row = {"moment": "saturday", "place_name": "Test Hall", "fact": "Test Hall has live music on Saturdays.", "schedule": "",
            "lat": "41.0600", "lon": "-73.5349", "source_name": "Test", "source_url": "https://x.example", "place_kind": "music venue"}
     s, walk, pls, _ = K.fact_sentence(row, pt)
     p = pls[0]
-    assert s.startswith("Test Hall has live music on Fridays") and walk.startswith("It is a ") and p["walk_min"] == K.walk_min_of(K.haversine_km(pt, {"lat": 41.06, "lon": -73.5349}) * 1000)
+    assert s.startswith("Test Hall has live music on Saturdays") and walk.startswith("It is a ") and p["walk_min"] == K.walk_min_of(K.haversine_km(pt, {"lat": 41.06, "lon": -73.5349}) * 1000)
     assert K.fact_sentence(dict(row, fact="Test Hall is 5 minutes from the station."), pt) is None
     assert K.fact_sentence(dict(row, fact="Test Hall is a luxury club."), pt) is None
+    # an event on another day never goes under this moment (the Yonkers tree lighting is on a Friday)
+    assert K.fact_sentence(dict(row, fact="Test Hall has live music on Fridays."), pt) is None
+    assert K.fact_sentence(dict(row, moment="sunday", schedule="Friday, December 4, 2026"), pt) is None
+    # the coordinator's rulings of 2026-11-17: no closed place, no row whose operation is unconfirmed or source old
+    raw = K.OUT.read_text(encoding="utf-8")
+    assert "Four City" not in raw and "four city" in K.BLOCKED
+    assert "Tree Lighting" not in " ".join(m["text"] for b in BLDS for m in b["life_here"] if m["moment"] == "sunday")
+    for r in facts:
+        if K.UNCONFIRMED.search(r.get("notes") or "") and r["place_name"] not in K.FACT_OVERRIDE:
+            frag = str(r.get("fact") or "")[:40]
+            assert frag not in raw, f"an unconfirmed row is used: {r['place_name']}"
+    dan = [m["text"] for b in BLDS if b["neighborhood_id"] == "ct:danbury" for m in b["life_here"]]
+    assert not any(re.search(r"\b(June|July|August|September|October)\b", x) and "market" in x for t in dan for x in K.sentences(t))
 
 
 @test
@@ -726,6 +741,25 @@ def version_one_fields_are_all_still_there():
     for b in BLDS:
         assert {"why", "give_up", "facts", "scores", "day", "apartments", "checked_summary"} <= set(b)
     assert "either_or" in OUT and OUT["meta"]["counts"]["buildings"] == len(BLDS)
+
+
+
+def test_space_line_true_of_kept_set():
+    """The Room-to-Breathe line says the typical apartment is bigger: its median size must beat each other experience's."""
+    import json, statistics as st
+    from pathlib import Path
+    D = json.loads((Path(__file__).resolve().parent.parent / "site" / "concierge_data.json").read_text())
+    med = {}
+    for e in D["experiences"]:
+        xs = [a["sqft"] for b in D["buildings"] if b["experience_id"] == e["id"] for a in b["apartments"] if a.get("sqft")]
+        med[e["id"]] = st.median(xs) if xs else None
+    for e in D["experiences"]:
+        assert " in Hamden" not in (e.get("line") or ""), e["line"]
+        if e.get("line") == "Towns farther out, where the typical apartment is bigger.":
+            assert all(med[e["id"]] > v for k, v in med.items() if k != e["id"] and v), med
+
+
+TESTS.append(test_space_line_true_of_kept_set)
 
 
 def main():

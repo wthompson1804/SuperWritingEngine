@@ -1,6 +1,6 @@
 {
  "meta": {
-  "built_at": "2026-11-17T15:30:14+00:00",
+  "built_at": "2026-11-17T16:00:08+00:00",
   "rent_limit": 2000,
   "counts": {
    "apartments": 38,
@@ -554,16 +554,18 @@
   "walk_pace": "Walking minutes are straight-line metres x 1.3 / 80 m a minute, as the park walks elsewhere on the page; miles are straight line. Counts 'within a 10-minute walk' are mapped places within 800 m.",
   "life_here_facts": {
    "file": "present",
-   "rows": 109,
-   "used_high": 62,
+   "rows": 218,
+   "used_high": 100,
    "skipped": {
-    "confidence medium": 42,
-    "moment neighborhood (not one of the four)": 5
+    "confidence medium": 83,
+    "moment neighborhood (not one of the four)": 19,
+    "operation unconfirmed or source before 2024": 15,
+    "closed or warning": 1
    }
   },
   "life_here_counts": {
    "weekday": 22,
-   "saturday": 21,
+   "saturday": 20,
    "sunday": 22,
    "dog": 22
   }
@@ -667,7 +669,7 @@
      "text": "The typical drive to Mom and Dad is about 82 minutes, each way."
     }
    ],
-   "line": "Towns farther out, with more space for you in Hamden and East Orange."
+   "line": "Towns farther out, where the typical apartment is bigger."
   },
   {
    "id": "middle",
@@ -1708,7 +1710,7 @@
     "What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)"
    ],
    "disclosures": [
-    "floor not published"
+    "Floor not published: confirm it is above the ground floor"
    ],
    "photos_url": "https://www.trulia.com/home/4110-bowne-st-5w-flushing-ny-11355-466185521",
    "listing_url": "https://www.trulia.com/home/4110-bowne-st-5w-flushing-ny-11355-466185521",
@@ -1921,8 +1923,26 @@
     {
      "moment": "saturday",
      "title": "Saturday night",
-     "text": "91 restaurants are within a 10-minute walk. The nearest bar, Zebra Lounge, is 9 minutes on foot. For a night out, Flushing Town Hall is an 11-minute walk.",
+     "text": "91 restaurants are within a 10-minute walk. On Saturday nights the free Queens Night Market brings over 100 food, art and merchandise vendors to Flushing Meadows Corona Park (Saturdays 4pm to midnight, mid-April to October). The nearest bar, Zebra Lounge, is 9 minutes on foot.",
      "places": [
+      {
+       "name": "Queens Night Market",
+       "official_name": "Queens Night Market",
+       "kind": "market",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Queens Night Market, FAQ",
+       "source_url": "https://queensnightmarket.com/faq/"
+      },
+      {
+       "name": "Flushing Meadows Corona Park",
+       "official_name": "Flushing Meadows Corona Park",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Queens Night Market, FAQ",
+       "source_url": "https://queensnightmarket.com/faq/"
+      },
       {
        "name": "Zebra Lounge",
        "kind": "bar",
@@ -1930,14 +1950,6 @@
        "distance_mi": 0.3,
        "source_name": "OpenStreetMap",
        "source_url": "https://www.openstreetmap.org/node/5457983386"
-      },
-      {
-       "name": "Flushing Town Hall",
-       "kind": "cinema or theater",
-       "walk_min": 11.4,
-       "distance_mi": 0.4,
-       "source_name": "OpenStreetMap",
-       "source_url": "https://www.openstreetmap.org/way/284620855"
       }
      ],
      "sources": [
@@ -1946,12 +1958,12 @@
        "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
       },
       {
-       "name": "OpenStreetMap",
-       "url": "https://www.openstreetmap.org/node/5457983386"
+       "name": "Queens Night Market, FAQ",
+       "url": "https://queensnightmarket.com/faq/"
       },
       {
        "name": "OpenStreetMap",
-       "url": "https://www.openstreetmap.org/way/284620855"
+       "url": "https://www.openstreetmap.org/node/5457983386"
       }
      ]
     },
@@ -1983,7 +1995,7 @@
     {
      "moment": "dog",
      "title": "The dog's walk",
-     "text": "Bowne Playground is a 2-minute walk for the daily loop. The nearest vet, Petopia Animal Clinic, is 1.2 miles away.",
+     "text": "Bowne Playground is a 2-minute walk for the daily loop. Flushing Meadows Corona Park, the biggest park in Queens, has lawns, playgrounds and dog runs around the Unisphere and the museums. The nearest vet, Petopia Animal Clinic, is 1.2 miles away.",
      "places": [
       {
        "name": "Bowne Playground",
@@ -1992,6 +2004,15 @@
        "distance_mi": 0.1,
        "source_name": "OpenStreetMap",
        "source_url": "https://www.openstreetmap.org/way/425616456"
+      },
+      {
+       "name": "Flushing Meadows Corona Park",
+       "official_name": "Flushing Meadows Corona Park",
+       "kind": "park",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "NYC Tourism + Conventions: Flushing Meadows Corona Park",
+       "source_url": "https://www.nyctourism.com/attractions-tours/flushing-meadows-corona-park"
       },
       {
        "name": "Petopia Animal Clinic",
@@ -2006,6 +2027,10 @@
       {
        "name": "OpenStreetMap",
        "url": "https://www.openstreetmap.org/way/425616456"
+      },
+      {
+       "name": "NYC Tourism + Conventions: Flushing Meadows Corona Park",
+       "url": "https://www.nyctourism.com/attractions-tours/flushing-meadows-corona-park"
       },
       {
        "name": "OpenStreetMap",
@@ -2064,7 +2089,7 @@
     "What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)"
    ],
    "disclosures": [
-    "condo rented by its owner"
+    "What are the condominium's rules for renting this apartment (application, fees, pets)?"
    ],
    "photos_url": "https://www.trulia.com/home/2781-ocean-ave-6e-brooklyn-ny-11229-466617938",
    "listing_url": "https://www.trulia.com/home/2781-ocean-ave-6e-brooklyn-ny-11229-466617938",
@@ -2273,8 +2298,35 @@
     {
      "moment": "saturday",
      "title": "Saturday night",
-     "text": "21 restaurants are within a 10-minute walk. The nearest bar, Next, is 3 minutes on foot.",
+     "text": "21 restaurants are within a 10-minute walk. Randazzo's on Emmons Avenue is a half-century-old waterfront seafood spot famous for its raw bar, generous plates and marinara known as 'The Sauce'. The nearest bar, Next, is 3 minutes on foot.",
      "places": [
+      {
+       "name": "Randazzo's",
+       "official_name": "Randazzo's Clam Bar",
+       "kind": "restaurant",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "NYC Tourism + Conventions: Randazzo's Clam Bar",
+       "source_url": "https://nyctourism.com/restaurants/randazzos-clam-bar-sheepshead-bay/"
+      },
+      {
+       "name": "Emmons Avenue",
+       "official_name": "Emmons Avenue",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "NYC Tourism + Conventions: Randazzo's Clam Bar",
+       "source_url": "https://nyctourism.com/restaurants/randazzos-clam-bar-sheepshead-bay/"
+      },
+      {
+       "name": "The Sauce'",
+       "official_name": "The Sauce'",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "NYC Tourism + Conventions: Randazzo's Clam Bar",
+       "source_url": "https://nyctourism.com/restaurants/randazzos-clam-bar-sheepshead-bay/"
+      },
       {
        "name": "Next",
        "kind": "bar",
@@ -2290,6 +2342,10 @@
        "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
       },
       {
+       "name": "NYC Tourism + Conventions: Randazzo's Clam Bar",
+       "url": "https://nyctourism.com/restaurants/randazzos-clam-bar-sheepshead-bay/"
+      },
+      {
        "name": "OpenStreetMap",
        "url": "https://www.openstreetmap.org/node/13012366637"
       }
@@ -2298,8 +2354,17 @@
     {
      "moment": "sunday",
      "title": "Sunday with Mom and Dad",
-     "text": "Mom and Dad are about 25 minutes away by car, with no tolls. Bring something from Brooklyn Bread House, an 11-minute walk.",
+     "text": "Mom and Dad are about 25 minutes away by car, with no tolls. In summer, Randazzo's is a classic stop on the way back from the beaches. Bring something from Brooklyn Bread House, an 11-minute walk.",
      "places": [
+      {
+       "name": "Randazzo's",
+       "official_name": "Randazzo's Clam Bar",
+       "kind": "restaurant",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "NYC Tourism + Conventions: Randazzo's Clam Bar",
+       "source_url": "https://nyctourism.com/restaurants/randazzos-clam-bar-sheepshead-bay/"
+      },
       {
        "name": "Brooklyn Bread House",
        "kind": "bakery",
@@ -2315,6 +2380,10 @@
        "url": "https://router.project-osrm.org/route/v1/driving/-73.950050,40.593403;-73.808530,40.699608?overview=full&geometries=geojson&steps=true&alternatives=3"
       },
       {
+       "name": "NYC Tourism + Conventions: Randazzo's Clam Bar",
+       "url": "https://nyctourism.com/restaurants/randazzos-clam-bar-sheepshead-bay/"
+      },
+      {
        "name": "OpenStreetMap",
        "url": "https://www.openstreetmap.org/node/2858289880"
       }
@@ -2323,7 +2392,7 @@
     {
      "moment": "dog",
      "title": "The dog's walk",
-     "text": "Bill Brown Playground is a 5-minute walk for the daily loop. Manhattan Beach Dog Run is 1.2 miles away. The nearest vet, South Brooklyn Animal Clinic, is an 18-minute walk.",
+     "text": "Bill Brown Playground is a 5-minute walk for the daily loop. Manhattan Beach Dog Run on Oriental Boulevard is an active NYC Parks dog run by the beach. It is 1.2 miles away.",
      "places": [
       {
        "name": "Bill Brown Playground",
@@ -2335,19 +2404,30 @@
       },
       {
        "name": "Manhattan Beach Dog Run",
-       "kind": "dog run",
+       "official_name": "Manhattan Beach Dog Run",
+       "kind": "dog_run",
        "walk_min": 30.3,
        "distance_mi": 1.2,
-       "source_name": "OpenStreetMap",
-       "source_url": "https://www.openstreetmap.org/way/955051726"
+       "source_name": "NYC Open Data: NYC Parks Dog Runs (hxx3-bwgv)",
+       "source_url": "https://data.cityofnewyork.us/resource/hxx3-bwgv.json?$limit=2000"
       },
       {
-       "name": "South Brooklyn Animal Clinic",
-       "kind": "vet",
-       "walk_min": 18.2,
-       "distance_mi": 0.7,
-       "source_name": "OpenStreetMap",
-       "source_url": "https://www.openstreetmap.org/node/4478247670"
+       "name": "Oriental Boulevard",
+       "official_name": "Oriental Boulevard",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "NYC Open Data: NYC Parks Dog Runs (hxx3-bwgv)",
+       "source_url": "https://data.cityofnewyork.us/resource/hxx3-bwgv.json?$limit=2000"
+      },
+      {
+       "name": "NYC Parks",
+       "official_name": "NYC Parks",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "NYC Open Data: NYC Parks Dog Runs (hxx3-bwgv)",
+       "source_url": "https://data.cityofnewyork.us/resource/hxx3-bwgv.json?$limit=2000"
       }
      ],
      "sources": [
@@ -2356,12 +2436,8 @@
        "url": "https://www.openstreetmap.org/way/184676319"
       },
       {
-       "name": "OpenStreetMap",
-       "url": "https://www.openstreetmap.org/way/955051726"
-      },
-      {
-       "name": "OpenStreetMap",
-       "url": "https://www.openstreetmap.org/node/4478247670"
+       "name": "NYC Open Data: NYC Parks Dog Runs (hxx3-bwgv)",
+       "url": "https://data.cityofnewyork.us/resource/hxx3-bwgv.json?$limit=2000"
       }
      ]
     }
@@ -2418,8 +2494,8 @@
     "What does a parking spot cost per month, and is one guaranteed in the lease?"
    ],
    "disclosures": [
-    "floor not published",
-    "special offer"
+    "Floor not published: confirm it is above the ground floor",
+    "Special offer: ask what a normal month costs"
    ],
    "photos_url": "https://ethoskelsey.com/",
    "listing_url": "https://www.trulia.com/building/ethos-kelsey-740-748-washington-ave-belleville-nj-07109-2746633852",
@@ -2585,7 +2661,7 @@
     "pick_going_out": "5 restaurants within a 10-minute walk",
     "pick_money": "Total about $2,157 a month"
    },
-   "experience_line": "Towns farther out, with more space for you in Hamden and East Orange.",
+   "experience_line": "Towns farther out, where the typical apartment is bigger.",
    "life_here": [
     {
      "moment": "weekday",
@@ -2611,8 +2687,26 @@
     {
      "moment": "saturday",
      "title": "Saturday night",
-     "text": "5 restaurants are within a 10-minute walk. The nearest bar, JK's Boathouse Pub, is 11 minutes on foot.",
+     "text": "5 restaurants are within a 10-minute walk. Each April Branch Brook Park, partly in Belleville, holds the county Cherry Blossom Festival among thousands of cherry trees; 2026 was its 50th. The nearest bar, JK's Boathouse Pub, is 11 minutes on foot.",
      "places": [
+      {
+       "name": "county Cherry Blossom Festival",
+       "official_name": "Essex County Cherry Blossom Festival",
+       "kind": "event",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Essex County Parks, event calendar",
+       "source_url": "https://essexcountyparks.org/parks/branch-brook-park/calendar/2026-essex-county-cherry-blossom-festival"
+      },
+      {
+       "name": "Branch Brook Park",
+       "official_name": "Branch Brook Park",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Essex County Parks, event calendar",
+       "source_url": "https://essexcountyparks.org/parks/branch-brook-park/calendar/2026-essex-county-cherry-blossom-festival"
+      },
       {
        "name": "JK's Boathouse Pub",
        "kind": "bar",
@@ -2626,6 +2720,10 @@
       {
        "name": "OpenStreetMap (mapped places within 800 m)",
        "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
+      },
+      {
+       "name": "Essex County Parks, event calendar",
+       "url": "https://essexcountyparks.org/parks/branch-brook-park/calendar/2026-essex-county-cherry-blossom-festival"
       },
       {
        "name": "OpenStreetMap",
@@ -2660,7 +2758,7 @@
     {
      "moment": "dog",
      "title": "The dog's walk",
-     "text": "Monsignor Owens Park is a 7-minute walk for the daily loop. The building lists its own dog area. The nearest vet, Rutherford Animal Hospital, is 2.0 miles away.",
+     "text": "Monsignor Owens Park is a 7-minute walk for the daily loop. The building lists its own dog area. Across the Passaic, Bergen County's Riverside County Park runs 85 acres along the river with over seven miles of paved walking paths.",
      "places": [
       {
        "name": "Monsignor Owens Park",
@@ -2671,12 +2769,22 @@
        "source_url": "https://www.openstreetmap.org/way/39647948"
       },
       {
-       "name": "Rutherford Animal Hospital",
-       "kind": "vet",
-       "walk_min": 51.6,
-       "distance_mi": 2.0,
-       "source_name": "OpenStreetMap",
-       "source_url": "https://www.openstreetmap.org/way/650384021"
+       "name": "Riverside County Park",
+       "official_name": "Riverside County Park",
+       "kind": "park",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bergen County: Riverside County Park",
+       "source_url": "https://bergencountynj.gov/?p=4908"
+      },
+      {
+       "name": "Bergen County",
+       "official_name": "Bergen County",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bergen County: Riverside County Park",
+       "source_url": "https://bergencountynj.gov/?p=4908"
       }
      ],
      "sources": [
@@ -2689,8 +2797,8 @@
        "url": "https://www.trulia.com/building/ethos-kelsey-740-748-washington-ave-belleville-nj-07109-2746633852"
       },
       {
-       "name": "OpenStreetMap",
-       "url": "https://www.openstreetmap.org/way/650384021"
+       "name": "Bergen County: Riverside County Park",
+       "url": "https://bergencountynj.gov/?p=4908"
       }
      ]
     }
@@ -2747,8 +2855,8 @@
     "What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)"
    ],
    "disclosures": [
-    "floor not published",
-    "special offer"
+    "Floor not published: confirm it is above the ground floor",
+    "Special offer: ask what a normal month costs"
    ],
    "photos_url": "https://shamcomanagement.com/uncategorized/a-look-at-the-harclay-house/",
    "listing_url": "https://www.trulia.com/building/harclay-house-299-s-harrison-st-east-orange-nj-07018-1001476365",
@@ -2936,7 +3044,7 @@
     "total_2000": "Total from about $2,097 a month",
     "pick_going_out": "No restaurants within a 10-minute walk"
    },
-   "experience_line": "Towns farther out, with more space for you in Hamden and East Orange.",
+   "experience_line": "Towns farther out, where the typical apartment is bigger.",
    "life_here": [
     {
      "moment": "weekday",
@@ -2962,8 +3070,27 @@
     {
      "moment": "sunday",
      "title": "Sunday with Mom and Dad",
-     "text": "Mom and Dad are about 52 minutes away by car, about $43 round trip in tolls.",
-     "places": [],
+     "text": "Mom and Dad are about 52 minutes away by car, about $43 round trip in tolls. Edison's laboratory complex and Glenmont estate in neighboring West Orange are a national park; the lab buildings are open to explore.",
+     "places": [
+      {
+       "name": "Edison",
+       "official_name": "Thomas Edison National Historical Park",
+       "kind": "other",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "National Park Service: Thomas Edison NHP",
+       "source_url": "https://www.nps.gov/edis/planyourvisit/hours.htm"
+      },
+      {
+       "name": "West Orange",
+       "official_name": "West Orange",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "National Park Service: Thomas Edison NHP",
+       "source_url": "https://www.nps.gov/edis/planyourvisit/hours.htm"
+      }
+     ],
      "sources": [
       {
        "name": "OSRM route estimate, no traffic",
@@ -2988,13 +3115,17 @@
       {
        "name": "Toll rates: New Jersey Turnpike Authority",
        "url": "https://www.njta.gov/wp-json/njta/v1/partials?slug=map%2Ftrip-details&tab=turnpike&vehicle-type=1&green-discount=false&senior-discount=false&entrance=16E&exit=15W"
+      },
+      {
+       "name": "National Park Service: Thomas Edison NHP",
+       "url": "https://www.nps.gov/edis/planyourvisit/hours.htm"
       }
      ]
     },
     {
      "moment": "dog",
      "title": "The dog's walk",
-     "text": "Orange Park is a 2-minute walk for the daily loop.",
+     "text": "Orange Park is a 2-minute walk for the daily loop. Monte Irvin Orange Park, beside the building, is a 48-acre Olmsted-designed county park with walking paths, fields and free summer concerts.",
      "places": [
       {
        "name": "Orange Park",
@@ -3003,12 +3134,25 @@
        "distance_mi": 0.1,
        "source_name": "OpenStreetMap",
        "source_url": "https://www.openstreetmap.org/way/39680064"
+      },
+      {
+       "name": "Monte Irvin Orange Park",
+       "official_name": "Monte Irvin Orange Park",
+       "kind": "park",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Essex County Parks: Monte Irvin Orange Park",
+       "source_url": "https://www.essexcountyparks.org/parks/monte-irvin-orange-park"
       }
      ],
      "sources": [
       {
        "name": "OpenStreetMap",
        "url": "https://www.openstreetmap.org/way/39680064"
+      },
+      {
+       "name": "Essex County Parks: Monte Irvin Orange Park",
+       "url": "https://www.essexcountyparks.org/parks/monte-irvin-orange-park"
       }
      ]
     }
@@ -3070,8 +3214,8 @@
     "Who pays for heat and cooking gas?"
    ],
    "disclosures": [
-    "floor not published",
-    "special offer"
+    "Floor not published: confirm it is above the ground floor",
+    "Special offer: ask what a normal month costs"
    ],
    "photos_url": "https://www.trulia.com/building/city-trust-apartments-955-main-st-bridgeport-ct-06604-1002416819",
    "listing_url": "https://www.trulia.com/building/city-trust-apartments-955-main-st-bridgeport-ct-06604-1002416819",
@@ -3404,12 +3548,12 @@
     "pick_parents": "About 82 minutes to Mom and Dad",
     "pick_going_out": "4 restaurants within a 10-minute walk"
    },
-   "experience_line": "Towns farther out, with more space for you in Hamden and East Orange.",
+   "experience_line": "Towns farther out, where the typical apartment is bigger.",
    "life_here": [
     {
      "moment": "weekday",
      "title": "A weekday",
-     "text": "Coffee at Starbucks, 11 minutes on foot, then back to the desk. The downtown district runs a weekday farmers market on McLevy Green, at Main and Bank Streets (Thursdays 10:30am to 2pm, July to October). For groceries, Save-A-Lot is 0.9 miles away.",
+     "text": "Coffee at Starbucks, 11 minutes on foot, then back to the desk. For groceries, Save-A-Lot is 0.9 miles away. For a change of desk, Bridgeport Public Library is a 3-minute walk.",
      "places": [
       {
        "name": "Starbucks",
@@ -3420,30 +3564,20 @@
        "source_url": "https://www.openstreetmap.org/node/3899856136"
       },
       {
-       "name": "McLevy Green",
-       "official_name": "Downtown Market at McLevy Green",
-       "kind": "market",
-       "walk_min": null,
-       "distance_mi": null,
-       "source_name": "Bridgeport Downtown Special Services District (Colorful Bridgeport), Signature Events",
-       "source_url": "https://www.colorfulbridgeport.com/signature-events/"
-      },
-      {
-       "name": "Main and Bank Streets",
-       "official_name": "Main and Bank Streets",
-       "kind": "named in the source",
-       "walk_min": null,
-       "distance_mi": null,
-       "source_name": "Bridgeport Downtown Special Services District (Colorful Bridgeport), Signature Events",
-       "source_url": "https://www.colorfulbridgeport.com/signature-events/"
-      },
-      {
        "name": "Save-A-Lot",
        "kind": "supermarket",
        "walk_min": 22.6,
        "distance_mi": 0.9,
        "source_name": "OpenStreetMap",
        "source_url": "https://www.openstreetmap.org/node/3446734677"
+      },
+      {
+       "name": "Bridgeport Public Library",
+       "kind": "library",
+       "walk_min": 2.8,
+       "distance_mi": 0.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/206485516"
       }
      ],
      "sources": [
@@ -3452,29 +3586,20 @@
        "url": "https://www.openstreetmap.org/node/3899856136"
       },
       {
-       "name": "Bridgeport Downtown Special Services District (Colorful Bridgeport), Signature Events",
-       "url": "https://www.colorfulbridgeport.com/signature-events/"
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/3446734677"
       },
       {
        "name": "OpenStreetMap",
-       "url": "https://www.openstreetmap.org/node/3446734677"
+       "url": "https://www.openstreetmap.org/way/206485516"
       }
      ]
     },
     {
      "moment": "saturday",
      "title": "Saturday night",
-     "text": "4 restaurants are within a 10-minute walk. The Stress Factory comedy club downtown has stand-up shows most Thursday to Sunday nights. The Bijou on Fairfield Avenue has hosted performing arts since 1909 and now runs concerts, comedy and theatre.",
+     "text": "4 restaurants are within a 10-minute walk. The Bijou on Fairfield Avenue has hosted performing arts since 1909 and now runs concerts, comedy and theatre. Berlinetta Brewing's taproom on Golden Hill Street hosts DJ sets and live music on weekends.",
      "places": [
-      {
-       "name": "Stress Factory comedy club",
-       "official_name": "Vinnie Brand's Stress Factory Comedy Club",
-       "kind": "other",
-       "walk_min": null,
-       "distance_mi": null,
-       "source_name": "Bridgeport Downtown Special Services District events calendar",
-       "source_url": "https://www.colorfulbridgeport.com/wp-json/tribe/events/v1/events?per_page=50"
-      },
       {
        "name": "The Bijou",
        "official_name": "The Bijou Theatre",
@@ -3492,6 +3617,24 @@
        "distance_mi": null,
        "source_name": "Bijou Theatre",
        "source_url": "https://www.bijoutheatrect.com/"
+      },
+      {
+       "name": "Berlinetta Brewing",
+       "official_name": "Berlinetta Brewing Company",
+       "kind": "bar",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bridgeport Downtown Special Services District events calendar",
+       "source_url": "https://www.colorfulbridgeport.com/wp-json/tribe/events/v1/events?per_page=50"
+      },
+      {
+       "name": "Golden Hill Street",
+       "official_name": "Golden Hill Street",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bridgeport Downtown Special Services District events calendar",
+       "source_url": "https://www.colorfulbridgeport.com/wp-json/tribe/events/v1/events?per_page=50"
       }
      ],
      "sources": [
@@ -3500,12 +3643,12 @@
        "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
       },
       {
-       "name": "Bridgeport Downtown Special Services District events calendar",
-       "url": "https://www.colorfulbridgeport.com/wp-json/tribe/events/v1/events?per_page=50"
-      },
-      {
        "name": "Bijou Theatre",
        "url": "https://www.bijoutheatrect.com/"
+      },
+      {
+       "name": "Bridgeport Downtown Special Services District events calendar",
+       "url": "https://www.colorfulbridgeport.com/wp-json/tribe/events/v1/events?per_page=50"
       }
      ]
     },
@@ -3546,14 +3689,14 @@
     {
      "moment": "dog",
      "title": "The dog's walk",
-     "text": "The nearest park is a 2-minute walk for the daily loop. Seaside Park is 325 acres of lawns and shore on Long Island Sound, laid out by Olmsted and Vaux. It is 1.4 miles away.",
+     "text": "The nearest park is a 2-minute walk for the daily loop. Seaside Park is 325 acres of lawns and shore on Long Island Sound, laid out by Olmsted and Vaux. The nearest vet, Bridgeport Veternary Hospital, is 1.7 miles away.",
      "places": [
       {
        "name": "Seaside Park",
        "official_name": "Seaside Park",
        "kind": "park",
-       "walk_min": 37.7,
-       "distance_mi": 1.4,
+       "walk_min": null,
+       "distance_mi": null,
        "source_name": "City of Bridgeport, Parks & Recreation: Seaside Park History",
        "source_url": "https://bridgeportct.gov/government/departments/parks-recreation/seaside-park-history"
       },
@@ -3574,6 +3717,14 @@
        "distance_mi": null,
        "source_name": "City of Bridgeport, Parks & Recreation: Seaside Park History",
        "source_url": "https://bridgeportct.gov/government/departments/parks-recreation/seaside-park-history"
+      },
+      {
+       "name": "Bridgeport Veternary Hospital",
+       "kind": "vet",
+       "walk_min": 43.5,
+       "distance_mi": 1.7,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/225871702"
       }
      ],
      "sources": [
@@ -3584,6 +3735,10 @@
       {
        "name": "City of Bridgeport, Parks & Recreation: Seaside Park History",
        "url": "https://bridgeportct.gov/government/departments/parks-recreation/seaside-park-history"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/225871702"
       }
      ]
     }
@@ -3641,9 +3796,9 @@
     "What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)"
    ],
    "disclosures": [
-    "floor not published",
-    "something else to know",
-    "one-time costs"
+    "Floor not published: confirm it is above the ground floor",
+    "Is the broker's studio on Parsons Boulevard at $1,930 this apartment, 5H at 36-25?",
+    "What is due at signing, in total?"
    ],
    "photos_url": "https://www.trulia.com/home/3625-parsons-blvd-5h-flushing-ny-11354-2100688723",
    "listing_url": "https://www.trulia.com/home/3625-parsons-blvd-5h-flushing-ny-11354-2100688723",
@@ -3854,8 +4009,26 @@
     {
      "moment": "saturday",
      "title": "Saturday night",
-     "text": "45 restaurants are within a 10-minute walk. The nearest bar, Zebra Lounge, is 12 minutes on foot. For a night out, Flushing Town Hall is a 10-minute walk.",
+     "text": "45 restaurants are within a 10-minute walk. On Saturday nights the free Queens Night Market brings over 100 food, art and merchandise vendors to Flushing Meadows Corona Park (Saturdays 4pm to midnight, mid-April to October). The nearest bar, Zebra Lounge, is 12 minutes on foot.",
      "places": [
+      {
+       "name": "Queens Night Market",
+       "official_name": "Queens Night Market",
+       "kind": "market",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Queens Night Market, FAQ",
+       "source_url": "https://queensnightmarket.com/faq/"
+      },
+      {
+       "name": "Flushing Meadows Corona Park",
+       "official_name": "Flushing Meadows Corona Park",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Queens Night Market, FAQ",
+       "source_url": "https://queensnightmarket.com/faq/"
+      },
       {
        "name": "Zebra Lounge",
        "kind": "bar",
@@ -3863,14 +4036,6 @@
        "distance_mi": 0.4,
        "source_name": "OpenStreetMap",
        "source_url": "https://www.openstreetmap.org/node/5457983386"
-      },
-      {
-       "name": "Flushing Town Hall",
-       "kind": "cinema or theater",
-       "walk_min": 10.2,
-       "distance_mi": 0.4,
-       "source_name": "OpenStreetMap",
-       "source_url": "https://www.openstreetmap.org/way/284620855"
       }
      ],
      "sources": [
@@ -3879,12 +4044,12 @@
        "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
       },
       {
-       "name": "OpenStreetMap",
-       "url": "https://www.openstreetmap.org/node/5457983386"
+       "name": "Queens Night Market, FAQ",
+       "url": "https://queensnightmarket.com/faq/"
       },
       {
        "name": "OpenStreetMap",
-       "url": "https://www.openstreetmap.org/way/284620855"
+       "url": "https://www.openstreetmap.org/node/5457983386"
       }
      ]
     },
@@ -3916,7 +4081,7 @@
     {
      "moment": "dog",
      "title": "The dog's walk",
-     "text": "Margaret I. Carman Green - Weeping Beech is a 2-minute walk for the daily loop. The nearest vet, Petopia Animal Clinic, is 1.1 miles away.",
+     "text": "Margaret I. Carman Green - Weeping Beech is a 2-minute walk for the daily loop. Flushing Meadows Corona Park, the biggest park in Queens, has lawns, playgrounds and dog runs around the Unisphere and the museums.",
      "places": [
       {
        "name": "Margaret I. Carman Green - Weeping Beech",
@@ -3927,12 +4092,13 @@
        "source_url": "https://www.openstreetmap.org/way/836889897"
       },
       {
-       "name": "Petopia Animal Clinic",
-       "kind": "vet",
-       "walk_min": 29.3,
-       "distance_mi": 1.1,
-       "source_name": "OpenStreetMap",
-       "source_url": "https://www.openstreetmap.org/way/284515144"
+       "name": "Flushing Meadows Corona Park",
+       "official_name": "Flushing Meadows Corona Park",
+       "kind": "park",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "NYC Tourism + Conventions: Flushing Meadows Corona Park",
+       "source_url": "https://www.nyctourism.com/attractions-tours/flushing-meadows-corona-park"
       }
      ],
      "sources": [
@@ -3941,8 +4107,8 @@
        "url": "https://www.openstreetmap.org/way/836889897"
       },
       {
-       "name": "OpenStreetMap",
-       "url": "https://www.openstreetmap.org/way/284515144"
+       "name": "NYC Tourism + Conventions: Flushing Meadows Corona Park",
+       "url": "https://www.nyctourism.com/attractions-tours/flushing-meadows-corona-park"
       }
      ]
     }
@@ -4001,7 +4167,7 @@
     "What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)"
    ],
    "disclosures": [
-    "floor not published"
+    "Floor not published: confirm it is above the ground floor"
    ],
    "photos_url": "https://www.zumper.com/listings/65719910/1-bedroom-flushing-new-york-ny",
    "listing_url": "https://www.trulia.com/home/13324-sanford-ave-2d-flushing-ny-11355-2084734385",
@@ -4216,8 +4382,26 @@
     {
      "moment": "saturday",
      "title": "Saturday night",
-     "text": "89 restaurants are within a 10-minute walk. The nearest bar, The Compass, is 8 minutes on foot. For a night out, Regal Tangram 4DX is a 10-minute walk.",
+     "text": "89 restaurants are within a 10-minute walk. On Saturday nights the free Queens Night Market brings over 100 food, art and merchandise vendors to Flushing Meadows Corona Park (Saturdays 4pm to midnight, mid-April to October). The nearest bar, The Compass, is 8 minutes on foot.",
      "places": [
+      {
+       "name": "Queens Night Market",
+       "official_name": "Queens Night Market",
+       "kind": "market",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Queens Night Market, FAQ",
+       "source_url": "https://queensnightmarket.com/faq/"
+      },
+      {
+       "name": "Flushing Meadows Corona Park",
+       "official_name": "Flushing Meadows Corona Park",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Queens Night Market, FAQ",
+       "source_url": "https://queensnightmarket.com/faq/"
+      },
       {
        "name": "The Compass",
        "kind": "bar",
@@ -4225,14 +4409,6 @@
        "distance_mi": 0.3,
        "source_name": "OpenStreetMap",
        "source_url": "https://www.openstreetmap.org/node/13963058101"
-      },
-      {
-       "name": "Regal Tangram 4DX",
-       "kind": "cinema or theater",
-       "walk_min": 9.8,
-       "distance_mi": 0.4,
-       "source_name": "OpenStreetMap",
-       "source_url": "https://www.openstreetmap.org/node/9649218717"
       }
      ],
      "sources": [
@@ -4241,12 +4417,12 @@
        "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
       },
       {
-       "name": "OpenStreetMap",
-       "url": "https://www.openstreetmap.org/node/13963058101"
+       "name": "Queens Night Market, FAQ",
+       "url": "https://queensnightmarket.com/faq/"
       },
       {
        "name": "OpenStreetMap",
-       "url": "https://www.openstreetmap.org/node/9649218717"
+       "url": "https://www.openstreetmap.org/node/13963058101"
       }
      ]
     },
@@ -4278,7 +4454,7 @@
     {
      "moment": "dog",
      "title": "The dog's walk",
-     "text": "Flushing Meadows-Corona Park is a 7-minute walk for the daily loop. Underbridge Dog Run is 1.7 miles away. The nearest vet, Petopia Animal Clinic, is 1.5 miles away.",
+     "text": "Flushing Meadows-Corona Park is a 7-minute walk for the daily loop. Flushing Meadows Corona Park, the biggest park in Queens, has lawns, playgrounds and dog runs around the Unisphere and the museums. Underbridge Dog Run is 1.7 miles away.",
      "places": [
       {
        "name": "Flushing Meadows-Corona Park",
@@ -4289,20 +4465,21 @@
        "source_url": "https://www.openstreetmap.org/relation/14402283"
       },
       {
+       "name": "Flushing Meadows Corona Park",
+       "official_name": "Flushing Meadows Corona Park",
+       "kind": "park",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "NYC Tourism + Conventions: Flushing Meadows Corona Park",
+       "source_url": "https://www.nyctourism.com/attractions-tours/flushing-meadows-corona-park"
+      },
+      {
        "name": "Underbridge Dog Run",
        "kind": "dog run",
        "walk_min": 45.0,
        "distance_mi": 1.7,
        "source_name": "OpenStreetMap",
        "source_url": "https://www.openstreetmap.org/way/484568724"
-      },
-      {
-       "name": "Petopia Animal Clinic",
-       "kind": "vet",
-       "walk_min": 39.5,
-       "distance_mi": 1.5,
-       "source_name": "OpenStreetMap",
-       "source_url": "https://www.openstreetmap.org/way/284515144"
       }
      ],
      "sources": [
@@ -4311,12 +4488,12 @@
        "url": "https://www.openstreetmap.org/relation/14402283"
       },
       {
-       "name": "OpenStreetMap",
-       "url": "https://www.openstreetmap.org/way/484568724"
+       "name": "NYC Tourism + Conventions: Flushing Meadows Corona Park",
+       "url": "https://www.nyctourism.com/attractions-tours/flushing-meadows-corona-park"
       },
       {
        "name": "OpenStreetMap",
-       "url": "https://www.openstreetmap.org/way/284515144"
+       "url": "https://www.openstreetmap.org/way/484568724"
       }
      ]
     }
@@ -4373,9 +4550,9 @@
     "What does a parking spot cost per month, and is one guaranteed in the lease?"
    ],
    "disclosures": [
-    "floor not published",
-    "special offer",
-    "overnight street parking"
+    "Floor not published: confirm it is above the ground floor",
+    "Special offer: ask what a normal month costs",
+    "Overnight street parking is restricted here: confirm the building has a space, and its cost"
    ],
    "photos_url": "https://www.goldberg-realty.com/nj/bloomfield/64-park-avenue/index.aspx",
    "listing_url": "https://www.apartmentlist.com/nj/bloomfield/64-park-avenue--1",
@@ -4545,7 +4722,7 @@
     {
      "moment": "weekday",
      "title": "A weekday",
-     "text": "Coffee at Starbucks, 3 minutes on foot, then back to the desk. For groceries, Super Foodtown of Bloomfield is an 11-minute walk. For a change of desk, Bloomfield Public Library is a 4-minute walk.",
+     "text": "Coffee at Starbucks, 3 minutes on foot, then back to the desk. Every Friday evening in summer, Washington Street in downtown Bloomfield turns into open-air dining with live music (Dinner Under the Stars). For groceries, Super Foodtown of Bloomfield is an 11-minute walk.",
      "places": [
       {
        "name": "Starbucks",
@@ -4556,20 +4733,30 @@
        "source_url": "https://www.openstreetmap.org/node/11163134605"
       },
       {
+       "name": "Dinner Under the Stars",
+       "official_name": "Dinner Under the Stars",
+       "kind": "event",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bloomfield Center Alliance",
+       "source_url": "https://www.bloomfieldcenter.com/pub/gen/discovery/7"
+      },
+      {
+       "name": "Washington Street",
+       "official_name": "Washington Street",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bloomfield Center Alliance",
+       "source_url": "https://www.bloomfieldcenter.com/pub/gen/discovery/7"
+      },
+      {
        "name": "Super Foodtown of Bloomfield",
        "kind": "supermarket",
        "walk_min": 10.9,
        "distance_mi": 0.4,
        "source_name": "OpenStreetMap",
        "source_url": "https://www.openstreetmap.org/node/9934384058"
-      },
-      {
-       "name": "Bloomfield Public Library",
-       "kind": "library",
-       "walk_min": 4.3,
-       "distance_mi": 0.2,
-       "source_name": "OpenStreetMap",
-       "source_url": "https://www.openstreetmap.org/way/1071175227"
       }
      ],
      "sources": [
@@ -4578,12 +4765,12 @@
        "url": "https://www.openstreetmap.org/node/11163134605"
       },
       {
-       "name": "OpenStreetMap",
-       "url": "https://www.openstreetmap.org/node/9934384058"
+       "name": "Bloomfield Center Alliance",
+       "url": "https://www.bloomfieldcenter.com/pub/gen/discovery/7"
       },
       {
        "name": "OpenStreetMap",
-       "url": "https://www.openstreetmap.org/way/1071175227"
+       "url": "https://www.openstreetmap.org/node/9934384058"
       }
      ]
     },
@@ -4651,7 +4838,7 @@
     {
      "moment": "dog",
      "title": "The dog's walk",
-     "text": "The Glen is a 3-minute walk for the daily loop. The nearest vet, Essex Animal Hospital, is a 2-minute walk.",
+     "text": "The Glen is a 3-minute walk for the daily loop. Watsessing Park, a 69-acre Olmsted-designed county park, has a fenced off-leash dog area with a stone-dust surface, benches and dog fountains. It is a 20-minute walk.",
      "places": [
       {
        "name": "The Glen",
@@ -4662,12 +4849,13 @@
        "source_url": "https://www.openstreetmap.org/way/421886763"
       },
       {
-       "name": "Essex Animal Hospital",
-       "kind": "vet",
-       "walk_min": 1.9,
-       "distance_mi": 0.1,
-       "source_name": "OpenStreetMap",
-       "source_url": "https://www.openstreetmap.org/way/1289202477"
+       "name": "Watsessing Park",
+       "official_name": "Watsessing Park and Dog Park",
+       "kind": "dog_run",
+       "walk_min": 19.7,
+       "distance_mi": 0.8,
+       "source_name": "Essex County Parks: Watsessing Park programs",
+       "source_url": "https://essexcountyparks.org/parks/watsessing-park/programs"
       }
      ],
      "sources": [
@@ -4676,8 +4864,8 @@
        "url": "https://www.openstreetmap.org/way/421886763"
       },
       {
-       "name": "OpenStreetMap",
-       "url": "https://www.openstreetmap.org/way/1289202477"
+       "name": "Essex County Parks: Watsessing Park programs",
+       "url": "https://essexcountyparks.org/parks/watsessing-park/programs"
       }
      ]
     }
@@ -4737,7 +4925,7 @@
     "What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)"
    ],
    "disclosures": [
-    "floor not published"
+    "Floor not published: confirm it is above the ground floor"
    ],
    "photos_url": "https://www.trulia.com/home/1483-shore-pkwy-f-brooklyn-ny-11214-466485024",
    "listing_url": "https://www.trulia.com/home/1483-shore-pkwy-f-brooklyn-ny-11214-466485024",
@@ -4940,12 +5128,26 @@
     {
      "moment": "saturday",
      "title": "Saturday night",
-     "text": "8 restaurants are within a 10-minute walk.",
-     "places": [],
+     "text": "8 restaurants are within a 10-minute walk. The neighborhood's main commercial strip, 86th Street under the elevated D train, is packed with restaurants.",
+     "places": [
+      {
+       "name": "86th Street",
+       "official_name": "86th Street",
+       "kind": "street",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "The Infatuation, Bensonhurst guide",
+       "source_url": "https://www.theinfatuation.com/new-york/guides/best-restaurants-bensonhurst-chinatown"
+      }
+     ],
      "sources": [
       {
        "name": "OpenStreetMap (mapped places within 800 m)",
        "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
+      },
+      {
+       "name": "The Infatuation, Bensonhurst guide",
+       "url": "https://www.theinfatuation.com/new-york/guides/best-restaurants-bensonhurst-chinatown"
       }
      ]
     },
@@ -4977,8 +5179,53 @@
     {
      "moment": "dog",
      "title": "The dog's walk",
-     "text": "The nearest park is a 1-minute walk for the daily loop. The nearest dog run is at Dyker Beach Park, 1.7 miles away. The nearest vet, Faithful Friends Animal Hospital, is 1.6 miles away.",
+     "text": "The nearest park is a 1-minute walk for the daily loop. Across the Belt Parkway, the Shore Parkway Greenway runs along Gravesend Bay past Bath Beach and Bensonhurst Park toward Bay Ridge. The nearest dog run is at Dyker Beach Park, 1.7 miles away.",
      "places": [
+      {
+       "name": "Shore Parkway Greenway",
+       "official_name": "Shore Parkway Greenway",
+       "kind": "park",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "NYC DOT, Shore Parkway Greenway Connector presentation (April 2019)",
+       "source_url": "https://www.nyc.gov/html/dot/downloads/pdf/shore-pkwy-greenway-connector-apr2019.pdf"
+      },
+      {
+       "name": "Belt Parkway",
+       "official_name": "Belt Parkway",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "NYC DOT, Shore Parkway Greenway Connector presentation (April 2019)",
+       "source_url": "https://www.nyc.gov/html/dot/downloads/pdf/shore-pkwy-greenway-connector-apr2019.pdf"
+      },
+      {
+       "name": "Gravesend Bay",
+       "official_name": "Gravesend Bay",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "NYC DOT, Shore Parkway Greenway Connector presentation (April 2019)",
+       "source_url": "https://www.nyc.gov/html/dot/downloads/pdf/shore-pkwy-greenway-connector-apr2019.pdf"
+      },
+      {
+       "name": "Bath Beach and Bensonhurst Park",
+       "official_name": "Bath Beach and Bensonhurst Park",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "NYC DOT, Shore Parkway Greenway Connector presentation (April 2019)",
+       "source_url": "https://www.nyc.gov/html/dot/downloads/pdf/shore-pkwy-greenway-connector-apr2019.pdf"
+      },
+      {
+       "name": "Bay Ridge",
+       "official_name": "Bay Ridge",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "NYC DOT, Shore Parkway Greenway Connector presentation (April 2019)",
+       "source_url": "https://www.nyc.gov/html/dot/downloads/pdf/shore-pkwy-greenway-connector-apr2019.pdf"
+      },
       {
        "name": "Dyker Beach Park",
        "kind": "dog run",
@@ -4986,14 +5233,6 @@
        "distance_mi": 1.7,
        "source_name": "OpenStreetMap",
        "source_url": "https://www.openstreetmap.org/way/1059127012"
-      },
-      {
-       "name": "Faithful Friends Animal Hospital",
-       "kind": "vet",
-       "walk_min": 41.9,
-       "distance_mi": 1.6,
-       "source_name": "OpenStreetMap",
-       "source_url": "https://www.openstreetmap.org/node/7217363802"
       }
      ],
      "sources": [
@@ -5002,12 +5241,12 @@
        "url": "https://www.openstreetmap.org/way/557791673"
       },
       {
-       "name": "OpenStreetMap",
-       "url": "https://www.openstreetmap.org/way/1059127012"
+       "name": "NYC DOT, Shore Parkway Greenway Connector presentation (April 2019)",
+       "url": "https://www.nyc.gov/html/dot/downloads/pdf/shore-pkwy-greenway-connector-apr2019.pdf"
       },
       {
        "name": "OpenStreetMap",
-       "url": "https://www.openstreetmap.org/node/7217363802"
+       "url": "https://www.openstreetmap.org/way/1059127012"
       }
      ]
     }
@@ -5060,8 +5299,8 @@
     "What is due at signing, in total?"
    ],
    "disclosures": [
-    "floor not published",
-    "one-time costs"
+    "Floor not published: confirm it is above the ground floor",
+    "What is due at signing, in total?"
    ],
    "photos_url": "https://gardenhomesmanagement.com/apartments/",
    "listing_url": "https://www.trulia.com/building/summer-street-800-summer-st-stamford-ct-06901-1001672063",
@@ -5272,8 +5511,17 @@
        "source_url": "https://winfieldcoffee.com/locations"
       },
       {
-       "name": "Ferguson Library on Broad Street",
-       "official_name": "Ferguson Library on Broad Street",
+       "name": "Ferguson Library",
+       "official_name": "Ferguson Library",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Winfield Street Coffee, Locations",
+       "source_url": "https://winfieldcoffee.com/locations"
+      },
+      {
+       "name": "Broad Street",
+       "official_name": "Broad Street",
        "kind": "named in the source",
        "walk_min": null,
        "distance_mi": null,
@@ -5307,8 +5555,8 @@
        "source_url": "https://stamford-downtown.com/tribeevents/list/?tribe-bar-search=farmers+market&eventDisplay=past"
       },
       {
-       "name": "Veterans Memorial Park on Saturday",
-       "official_name": "Veterans Memorial Park on Saturday",
+       "name": "Veterans Memorial Park",
+       "official_name": "Veterans Memorial Park",
        "kind": "named in the source",
        "walk_min": null,
        "distance_mi": null,
@@ -5457,8 +5705,8 @@
     "What does a parking spot cost per month, and is one guaranteed in the lease?"
    ],
    "disclosures": [
-    "floor not published",
-    "one-time costs"
+    "Floor not published: confirm it is above the ground floor",
+    "What is due at signing, in total?"
    ],
    "photos_url": "https://gardenhomesmanagement.com/apartments/",
    "listing_url": "https://www.trulia.com/building/the-stanley-1315-washington-blvd-stamford-ct-06902-2737477812",
@@ -5687,8 +5935,8 @@
        "source_url": "https://stamford-downtown.com/tribeevents/list/?tribe-bar-search=farmers+market&eventDisplay=past"
       },
       {
-       "name": "Veterans Memorial Park on Saturday",
-       "official_name": "Veterans Memorial Park on Saturday",
+       "name": "Veterans Memorial Park",
+       "official_name": "Veterans Memorial Park",
        "kind": "named in the source",
        "walk_min": null,
        "distance_mi": null,
@@ -5840,7 +6088,7 @@
     "Who pays for heat and cooking gas?"
    ],
    "disclosures": [
-    "floor not published"
+    "Floor not published: confirm it is above the ground floor"
    ],
    "photos_url": "https://www.liveatfranklin.com/our-communities/whitney-towers/",
    "listing_url": "https://www.trulia.com/building/whitney-towers-2405-whitney-ave-hamden-ct-06518-1004491524",
@@ -6045,7 +6293,7 @@
     "dog_area": "No dog area listed at the building",
     "pick_parents": "About 112 minutes to Mom and Dad"
    },
-   "experience_line": "Towns farther out, with more space for you in Hamden and East Orange.",
+   "experience_line": "Towns farther out, where the typical apartment is bigger.",
    "life_here": [
     {
      "moment": "weekday",
@@ -6128,7 +6376,7 @@
     {
      "moment": "dog",
      "title": "The dog's walk",
-     "text": "Town Center Park is a 9-minute walk for the daily loop. The nearest vet, Spring Glen Veterinary Clinic, is 1.9 miles away.",
+     "text": "Town Center Park is a 9-minute walk for the daily loop. The paved Farmington Canal trail runs about eight miles through Hamden on the old canal and rail bed; dogs are allowed on leash. The nearest vet, Spring Glen Veterinary Clinic, is 1.9 miles away.",
      "places": [
       {
        "name": "Town Center Park",
@@ -6137,6 +6385,15 @@
        "distance_mi": 0.4,
        "source_name": "OpenStreetMap",
        "source_url": "https://www.openstreetmap.org/way/1274528586"
+      },
+      {
+       "name": "Farmington Canal",
+       "official_name": "Farmington Canal Heritage Trail",
+       "kind": "park",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "South Central Regional Council of Governments, trail brochure",
+       "source_url": "https://scrcog.org/wp-content/uploads/2026/04/Farmington_Canal_Heritage_Trail.pdf"
       },
       {
        "name": "Spring Glen Veterinary Clinic",
@@ -6151,6 +6408,10 @@
       {
        "name": "OpenStreetMap",
        "url": "https://www.openstreetmap.org/way/1274528586"
+      },
+      {
+       "name": "South Central Regional Council of Governments, trail brochure",
+       "url": "https://scrcog.org/wp-content/uploads/2026/04/Farmington_Canal_Heritage_Trail.pdf"
       },
       {
        "name": "OpenStreetMap",
@@ -6213,8 +6474,8 @@
     "What does a parking spot cost per month, and is one guaranteed in the lease?"
    ],
    "disclosures": [
-    "floor not published",
-    "one-time costs"
+    "Floor not published: confirm it is above the ground floor",
+    "What is due at signing, in total?"
    ],
    "photos_url": "https://gardenhomesmanagement.com/apartments/",
    "listing_url": "https://www.trulia.com/building/111-prospect-st-111-prospect-st-stamford-ct-06901-1004237339",
@@ -6447,8 +6708,17 @@
        "source_url": "https://winfieldcoffee.com/locations"
       },
       {
-       "name": "Ferguson Library on Broad Street",
-       "official_name": "Ferguson Library on Broad Street",
+       "name": "Ferguson Library",
+       "official_name": "Ferguson Library",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Winfield Street Coffee, Locations",
+       "source_url": "https://winfieldcoffee.com/locations"
+      },
+      {
+       "name": "Broad Street",
+       "official_name": "Broad Street",
        "kind": "named in the source",
        "walk_min": null,
        "distance_mi": null,
@@ -6482,8 +6752,8 @@
        "source_url": "https://stamford-downtown.com/tribeevents/list/?tribe-bar-search=farmers+market&eventDisplay=past"
       },
       {
-       "name": "Veterans Memorial Park on Saturday",
-       "official_name": "Veterans Memorial Park on Saturday",
+       "name": "Veterans Memorial Park",
+       "official_name": "Veterans Memorial Park",
        "kind": "named in the source",
        "walk_min": null,
        "distance_mi": null,
@@ -6551,7 +6821,7 @@
     {
      "moment": "dog",
      "title": "The dog's walk",
-     "text": "Veterans Memorial Park is an 11-minute walk for the daily loop. Mill River Park, in the heart of downtown, is free and open all year; dogs are welcome on leash. It is a 16-minute walk.",
+     "text": "Veterans Memorial Park is an 11-minute walk for the daily loop. Mill River Park, in the heart of downtown, is free and open all year; dogs are welcome on leash. Courtland Dog Park is 1.2 miles away.",
      "places": [
       {
        "name": "Veterans Memorial Park",
@@ -6565,10 +6835,18 @@
        "name": "Mill River Park",
        "official_name": "Mill River Park",
        "kind": "park",
-       "walk_min": 16.1,
-       "distance_mi": 0.6,
+       "walk_min": null,
+       "distance_mi": null,
        "source_name": "Mill River Park Collaborative, Park FAQs",
        "source_url": "https://millriverpark.org/?p=32"
+      },
+      {
+       "name": "Courtland Dog Park",
+       "kind": "dog run",
+       "walk_min": 30.5,
+       "distance_mi": 1.2,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/2912033963"
       }
      ],
      "sources": [
@@ -6579,6 +6857,10 @@
       {
        "name": "Mill River Park Collaborative, Park FAQs",
        "url": "https://millriverpark.org/?p=32"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/2912033963"
       }
      ]
     }
@@ -6638,9 +6920,9 @@
     "What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)"
    ],
    "disclosures": [
-    "floor not published",
-    "special offer",
-    "overnight street parking"
+    "Floor not published: confirm it is above the ground floor",
+    "Special offer: ask what a normal month costs",
+    "Overnight street parking is restricted here: confirm the building has a space, and its cost"
    ],
    "photos_url": "https://www.apartmentlist.com/ct/bridgeport/city-trust-collection-arcade-apartments",
    "listing_url": "https://www.apartmentlist.com/ct/bridgeport/city-trust-collection-arcade-apartments",
@@ -6800,12 +7082,12 @@
     "pick_going_out": "3 restaurants within a 10-minute walk",
     "pick_parking": "Parking not named in the listing"
    },
-   "experience_line": "Towns farther out, with more space for you in Hamden and East Orange.",
+   "experience_line": "Towns farther out, where the typical apartment is bigger.",
    "life_here": [
     {
      "moment": "weekday",
      "title": "A weekday",
-     "text": "Coffee at Starbucks, 11 minutes on foot, then back to the desk. The downtown district runs a weekday farmers market on McLevy Green, at Main and Bank Streets (Thursdays 10:30am to 2pm, July to October). For groceries, Save-A-Lot is 0.8 miles away.",
+     "text": "Coffee at Starbucks, 11 minutes on foot, then back to the desk. For groceries, Save-A-Lot is 0.8 miles away. For a change of desk, Bridgeport Public Library is a 4-minute walk.",
      "places": [
       {
        "name": "Starbucks",
@@ -6816,30 +7098,20 @@
        "source_url": "https://www.openstreetmap.org/node/3899856136"
       },
       {
-       "name": "McLevy Green",
-       "official_name": "Downtown Market at McLevy Green",
-       "kind": "market",
-       "walk_min": null,
-       "distance_mi": null,
-       "source_name": "Bridgeport Downtown Special Services District (Colorful Bridgeport), Signature Events",
-       "source_url": "https://www.colorfulbridgeport.com/signature-events/"
-      },
-      {
-       "name": "Main and Bank Streets",
-       "official_name": "Main and Bank Streets",
-       "kind": "named in the source",
-       "walk_min": null,
-       "distance_mi": null,
-       "source_name": "Bridgeport Downtown Special Services District (Colorful Bridgeport), Signature Events",
-       "source_url": "https://www.colorfulbridgeport.com/signature-events/"
-      },
-      {
        "name": "Save-A-Lot",
        "kind": "supermarket",
        "walk_min": 22.1,
        "distance_mi": 0.8,
        "source_name": "OpenStreetMap",
        "source_url": "https://www.openstreetmap.org/node/3446734677"
+      },
+      {
+       "name": "Bridgeport Public Library",
+       "kind": "library",
+       "walk_min": 4.1,
+       "distance_mi": 0.2,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/206485516"
       }
      ],
      "sources": [
@@ -6848,29 +7120,20 @@
        "url": "https://www.openstreetmap.org/node/3899856136"
       },
       {
-       "name": "Bridgeport Downtown Special Services District (Colorful Bridgeport), Signature Events",
-       "url": "https://www.colorfulbridgeport.com/signature-events/"
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/3446734677"
       },
       {
        "name": "OpenStreetMap",
-       "url": "https://www.openstreetmap.org/node/3446734677"
+       "url": "https://www.openstreetmap.org/way/206485516"
       }
      ]
     },
     {
      "moment": "saturday",
      "title": "Saturday night",
-     "text": "3 restaurants are within a 10-minute walk. The Stress Factory comedy club downtown has stand-up shows most Thursday to Sunday nights. The Bijou on Fairfield Avenue has hosted performing arts since 1909 and now runs concerts, comedy and theatre.",
+     "text": "3 restaurants are within a 10-minute walk. The Bijou on Fairfield Avenue has hosted performing arts since 1909 and now runs concerts, comedy and theatre. Berlinetta Brewing's taproom on Golden Hill Street hosts DJ sets and live music on weekends.",
      "places": [
-      {
-       "name": "Stress Factory comedy club",
-       "official_name": "Vinnie Brand's Stress Factory Comedy Club",
-       "kind": "other",
-       "walk_min": null,
-       "distance_mi": null,
-       "source_name": "Bridgeport Downtown Special Services District events calendar",
-       "source_url": "https://www.colorfulbridgeport.com/wp-json/tribe/events/v1/events?per_page=50"
-      },
       {
        "name": "The Bijou",
        "official_name": "The Bijou Theatre",
@@ -6888,6 +7151,24 @@
        "distance_mi": null,
        "source_name": "Bijou Theatre",
        "source_url": "https://www.bijoutheatrect.com/"
+      },
+      {
+       "name": "Berlinetta Brewing",
+       "official_name": "Berlinetta Brewing Company",
+       "kind": "bar",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bridgeport Downtown Special Services District events calendar",
+       "source_url": "https://www.colorfulbridgeport.com/wp-json/tribe/events/v1/events?per_page=50"
+      },
+      {
+       "name": "Golden Hill Street",
+       "official_name": "Golden Hill Street",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bridgeport Downtown Special Services District events calendar",
+       "source_url": "https://www.colorfulbridgeport.com/wp-json/tribe/events/v1/events?per_page=50"
       }
      ],
      "sources": [
@@ -6896,12 +7177,12 @@
        "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
       },
       {
-       "name": "Bridgeport Downtown Special Services District events calendar",
-       "url": "https://www.colorfulbridgeport.com/wp-json/tribe/events/v1/events?per_page=50"
-      },
-      {
        "name": "Bijou Theatre",
        "url": "https://www.bijoutheatrect.com/"
+      },
+      {
+       "name": "Bridgeport Downtown Special Services District events calendar",
+       "url": "https://www.colorfulbridgeport.com/wp-json/tribe/events/v1/events?per_page=50"
       }
      ]
     },
@@ -6942,14 +7223,14 @@
     {
      "moment": "dog",
      "title": "The dog's walk",
-     "text": "The nearest park is a 1-minute walk for the daily loop. Seaside Park is 325 acres of lawns and shore on Long Island Sound, laid out by Olmsted and Vaux. It is 1.5 miles away.",
+     "text": "The nearest park is a 1-minute walk for the daily loop. Seaside Park is 325 acres of lawns and shore on Long Island Sound, laid out by Olmsted and Vaux. The nearest vet, Bridgeport Veternary Hospital, is 1.6 miles away.",
      "places": [
       {
        "name": "Seaside Park",
        "official_name": "Seaside Park",
        "kind": "park",
-       "walk_min": 39.0,
-       "distance_mi": 1.5,
+       "walk_min": null,
+       "distance_mi": null,
        "source_name": "City of Bridgeport, Parks & Recreation: Seaside Park History",
        "source_url": "https://bridgeportct.gov/government/departments/parks-recreation/seaside-park-history"
       },
@@ -6970,6 +7251,14 @@
        "distance_mi": null,
        "source_name": "City of Bridgeport, Parks & Recreation: Seaside Park History",
        "source_url": "https://bridgeportct.gov/government/departments/parks-recreation/seaside-park-history"
+      },
+      {
+       "name": "Bridgeport Veternary Hospital",
+       "kind": "vet",
+       "walk_min": 42.3,
+       "distance_mi": 1.6,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/225871702"
       }
      ],
      "sources": [
@@ -6980,6 +7269,10 @@
       {
        "name": "City of Bridgeport, Parks & Recreation: Seaside Park History",
        "url": "https://bridgeportct.gov/government/departments/parks-recreation/seaside-park-history"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/225871702"
       }
      ]
     }
@@ -7041,8 +7334,8 @@
     "What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)"
    ],
    "disclosures": [
-    "floor not published",
-    "overnight street parking"
+    "Floor not published: confirm it is above the ground floor",
+    "Overnight street parking is restricted here: confirm the building has a space, and its cost"
    ],
    "photos_url": "https://www.333statestreet.com/",
    "listing_url": "https://www.trulia.com/building/333-state-st-333-state-st-bridgeport-ct-06604-1002139313",
@@ -7211,12 +7504,12 @@
     "pick_going_out": "5 restaurants within a 10-minute walk",
     "pick_parking": "Parking not named in the listing"
    },
-   "experience_line": "Towns farther out, with more space for you in Hamden and East Orange.",
+   "experience_line": "Towns farther out, where the typical apartment is bigger.",
    "life_here": [
     {
      "moment": "weekday",
      "title": "A weekday",
-     "text": "Coffee at Starbucks, 14 minutes on foot, then back to the desk. The downtown district runs a weekday farmers market on McLevy Green, at Main and Bank Streets (Thursdays 10:30am to 2pm, July to October). For groceries, Save-A-Lot is 0.8 miles away.",
+     "text": "Coffee at Starbucks, 14 minutes on foot, then back to the desk. For groceries, Save-A-Lot is 0.8 miles away. For a change of desk, Bridgeport Public Library is a 2-minute walk.",
      "places": [
       {
        "name": "Starbucks",
@@ -7227,30 +7520,20 @@
        "source_url": "https://www.openstreetmap.org/node/3899856136"
       },
       {
-       "name": "McLevy Green",
-       "official_name": "Downtown Market at McLevy Green",
-       "kind": "market",
-       "walk_min": null,
-       "distance_mi": null,
-       "source_name": "Bridgeport Downtown Special Services District (Colorful Bridgeport), Signature Events",
-       "source_url": "https://www.colorfulbridgeport.com/signature-events/"
-      },
-      {
-       "name": "Main and Bank Streets",
-       "official_name": "Main and Bank Streets",
-       "kind": "named in the source",
-       "walk_min": null,
-       "distance_mi": null,
-       "source_name": "Bridgeport Downtown Special Services District (Colorful Bridgeport), Signature Events",
-       "source_url": "https://www.colorfulbridgeport.com/signature-events/"
-      },
-      {
        "name": "Save-A-Lot",
        "kind": "supermarket",
        "walk_min": 21.9,
        "distance_mi": 0.8,
        "source_name": "OpenStreetMap",
        "source_url": "https://www.openstreetmap.org/node/3446734677"
+      },
+      {
+       "name": "Bridgeport Public Library",
+       "kind": "library",
+       "walk_min": 1.9,
+       "distance_mi": 0.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/206485516"
       }
      ],
      "sources": [
@@ -7259,29 +7542,20 @@
        "url": "https://www.openstreetmap.org/node/3899856136"
       },
       {
-       "name": "Bridgeport Downtown Special Services District (Colorful Bridgeport), Signature Events",
-       "url": "https://www.colorfulbridgeport.com/signature-events/"
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/3446734677"
       },
       {
        "name": "OpenStreetMap",
-       "url": "https://www.openstreetmap.org/node/3446734677"
+       "url": "https://www.openstreetmap.org/way/206485516"
       }
      ]
     },
     {
      "moment": "saturday",
      "title": "Saturday night",
-     "text": "5 restaurants are within a 10-minute walk. The Stress Factory comedy club downtown has stand-up shows most Thursday to Sunday nights. The Bijou on Fairfield Avenue has hosted performing arts since 1909 and now runs concerts, comedy and theatre.",
+     "text": "5 restaurants are within a 10-minute walk. The Bijou on Fairfield Avenue has hosted performing arts since 1909 and now runs concerts, comedy and theatre. Berlinetta Brewing's taproom on Golden Hill Street hosts DJ sets and live music on weekends.",
      "places": [
-      {
-       "name": "Stress Factory comedy club",
-       "official_name": "Vinnie Brand's Stress Factory Comedy Club",
-       "kind": "other",
-       "walk_min": null,
-       "distance_mi": null,
-       "source_name": "Bridgeport Downtown Special Services District events calendar",
-       "source_url": "https://www.colorfulbridgeport.com/wp-json/tribe/events/v1/events?per_page=50"
-      },
       {
        "name": "The Bijou",
        "official_name": "The Bijou Theatre",
@@ -7299,6 +7573,24 @@
        "distance_mi": null,
        "source_name": "Bijou Theatre",
        "source_url": "https://www.bijoutheatrect.com/"
+      },
+      {
+       "name": "Berlinetta Brewing",
+       "official_name": "Berlinetta Brewing Company",
+       "kind": "bar",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bridgeport Downtown Special Services District events calendar",
+       "source_url": "https://www.colorfulbridgeport.com/wp-json/tribe/events/v1/events?per_page=50"
+      },
+      {
+       "name": "Golden Hill Street",
+       "official_name": "Golden Hill Street",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bridgeport Downtown Special Services District events calendar",
+       "source_url": "https://www.colorfulbridgeport.com/wp-json/tribe/events/v1/events?per_page=50"
       }
      ],
      "sources": [
@@ -7307,12 +7599,12 @@
        "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
       },
       {
-       "name": "Bridgeport Downtown Special Services District events calendar",
-       "url": "https://www.colorfulbridgeport.com/wp-json/tribe/events/v1/events?per_page=50"
-      },
-      {
        "name": "Bijou Theatre",
        "url": "https://www.bijoutheatrect.com/"
+      },
+      {
+       "name": "Bridgeport Downtown Special Services District events calendar",
+       "url": "https://www.colorfulbridgeport.com/wp-json/tribe/events/v1/events?per_page=50"
       }
      ]
     },
@@ -7353,14 +7645,14 @@
     {
      "moment": "dog",
      "title": "The dog's walk",
-     "text": "The nearest park is a 5-minute walk for the daily loop. Seaside Park is 325 acres of lawns and shore on Long Island Sound, laid out by Olmsted and Vaux. It is 1.3 miles away.",
+     "text": "The nearest park is a 5-minute walk for the daily loop. Seaside Park is 325 acres of lawns and shore on Long Island Sound, laid out by Olmsted and Vaux. The nearest vet, Bridgeport Veternary Hospital, is 1.7 miles away.",
      "places": [
       {
        "name": "Seaside Park",
        "official_name": "Seaside Park",
        "kind": "park",
-       "walk_min": 33.9,
-       "distance_mi": 1.3,
+       "walk_min": null,
+       "distance_mi": null,
        "source_name": "City of Bridgeport, Parks & Recreation: Seaside Park History",
        "source_url": "https://bridgeportct.gov/government/departments/parks-recreation/seaside-park-history"
       },
@@ -7381,6 +7673,14 @@
        "distance_mi": null,
        "source_name": "City of Bridgeport, Parks & Recreation: Seaside Park History",
        "source_url": "https://bridgeportct.gov/government/departments/parks-recreation/seaside-park-history"
+      },
+      {
+       "name": "Bridgeport Veternary Hospital",
+       "kind": "vet",
+       "walk_min": 45.3,
+       "distance_mi": 1.7,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/225871702"
       }
      ],
      "sources": [
@@ -7391,6 +7691,10 @@
       {
        "name": "City of Bridgeport, Parks & Recreation: Seaside Park History",
        "url": "https://bridgeportct.gov/government/departments/parks-recreation/seaside-park-history"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/225871702"
       }
      ]
     }
@@ -7446,8 +7750,8 @@
     "What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)"
    ],
    "disclosures": [
-    "floor not published",
-    "overnight street parking"
+    "Floor not published: confirm it is above the ground floor",
+    "Overnight street parking is restricted here: confirm the building has a space, and its cost"
    ],
    "photos_url": "https://www.brt.com/brookview-west",
    "listing_url": "https://www.apartmentlist.com/ct/danbury/brookview-commons-ii",
@@ -7673,33 +7977,25 @@
     {
      "moment": "saturday",
      "title": "Saturday night",
-     "text": "1 restaurant is within a 10-minute walk. CityCenter Danbury puts on free live music on the CityCenter Green on select summer Fridays; bring a lawn chair (Summer in the City Concert Series). The nearest bar, La Kabanita, is 3 minutes on foot.",
+     "text": "1 restaurant is within a 10-minute walk. There is a Saturday market downtown in season, on the CityCenter Green. On the first Saturday in June, historic Main Street becomes a festival of local artisans, food trucks, music and performances.",
      "places": [
       {
-       "name": "Summer in the City Concert Series",
-       "official_name": "Summer in the City Concert Series",
+       "name": "CityCenter Green",
+       "official_name": "CityCenter Green",
+       "kind": "market",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "CityCenter Danbury, events calendar",
+       "source_url": "https://citycenterdanbury.com/events/list/?tribe-bar-search=farmers&eventDisplay=past"
+      },
+      {
+       "name": "Main Street",
+       "official_name": "Main Street festival",
        "kind": "event",
        "walk_min": null,
        "distance_mi": null,
        "source_name": "CityCenter Danbury: CityCenter Events",
        "source_url": "https://citycenterdanbury.com/explore-2/our-citycenter-events/"
-      },
-      {
-       "name": "CityCenter Green",
-       "official_name": "CityCenter Green",
-       "kind": "named in the source",
-       "walk_min": null,
-       "distance_mi": null,
-       "source_name": "CityCenter Danbury: CityCenter Events",
-       "source_url": "https://citycenterdanbury.com/explore-2/our-citycenter-events/"
-      },
-      {
-       "name": "La Kabanita",
-       "kind": "bar",
-       "walk_min": 3.4,
-       "distance_mi": 0.1,
-       "source_name": "OpenStreetMap",
-       "source_url": "https://www.openstreetmap.org/node/13966532102"
       }
      ],
      "sources": [
@@ -7708,12 +8004,12 @@
        "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
       },
       {
-       "name": "CityCenter Danbury: CityCenter Events",
-       "url": "https://citycenterdanbury.com/explore-2/our-citycenter-events/"
+       "name": "CityCenter Danbury, events calendar",
+       "url": "https://citycenterdanbury.com/events/list/?tribe-bar-search=farmers&eventDisplay=past"
       },
       {
-       "name": "OpenStreetMap",
-       "url": "https://www.openstreetmap.org/node/13966532102"
+       "name": "CityCenter Danbury: CityCenter Events",
+       "url": "https://citycenterdanbury.com/explore-2/our-citycenter-events/"
       }
      ]
     },
@@ -7749,7 +8045,7 @@
     {
      "moment": "dog",
      "title": "The dog's walk",
-     "text": "Rowan Avenue Playground is an 11-minute walk for the daily loop. The building lists its own dog area. Tarrywile is free and open sunrise to sunset every day; city ordinance requires dogs on leash at all times (Daily, sunrise to sunset).",
+     "text": "Rowan Avenue Playground is an 11-minute walk for the daily loop. The building lists its own dog area. Tarrywile Park is a 722-acre city park, a former dairy farm and orchard, with 21 miles of trails, two ponds and a lake.",
      "places": [
       {
        "name": "Rowan Avenue Playground",
@@ -7760,13 +8056,13 @@
        "source_url": "https://www.openstreetmap.org/way/43435920"
       },
       {
-       "name": "Tarrywile",
+       "name": "Tarrywile Park",
        "official_name": "Tarrywile Park",
        "kind": "park",
        "walk_min": null,
        "distance_mi": null,
        "source_name": "Tarrywile Park & Mansion: The Park",
-       "source_url": "https://tarrywile.com/?p=22571"
+       "source_url": "https://tarrywile.com/the-park/"
       }
      ],
      "sources": [
@@ -7780,7 +8076,7 @@
       },
       {
        "name": "Tarrywile Park & Mansion: The Park",
-       "url": "https://tarrywile.com/?p=22571"
+       "url": "https://tarrywile.com/the-park/"
       }
      ]
     }
@@ -7841,9 +8137,9 @@
     "What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)"
    ],
    "disclosures": [
-    "floor not published",
-    "broker fee",
-    "washer and dryer to confirm"
+    "Floor not published: confirm it is above the ground floor",
+    "How much is the broker fee, and who pays it?",
+    "Is there a washer and a dryer inside the apartment?"
    ],
    "photos_url": "https://regencyhudson.com/contact/",
    "listing_url": "https://www.trulia.com/building/regency-on-hudson-56-prospect-st-yonkers-ny-10701-2774413543",
@@ -8049,15 +8345,25 @@
     {
      "moment": "saturday",
      "title": "Saturday night",
-     "text": "3 restaurants are within a 10-minute walk. The nearest bar, Francey Brady's Bar, is 4 minutes on foot.",
+     "text": "3 restaurants are within a 10-minute walk. Yonkers Brewing Co. on Main Street is a brewery and restaurant, open until midnight on its late nights (From 11:30am daily; to 10pm or midnight). It is a 4-minute walk.",
      "places": [
       {
-       "name": "Francey Brady's Bar",
+       "name": "Yonkers Brewing Co.",
+       "official_name": "Yonkers Brewing Co.",
        "kind": "bar",
-       "walk_min": 4.2,
+       "walk_min": 4.0,
        "distance_mi": 0.2,
-       "source_name": "OpenStreetMap",
-       "source_url": "https://www.openstreetmap.org/node/4856391954"
+       "source_name": "Yonkers Brewing Co.",
+       "source_url": "https://www.yonkersbrewing.com/"
+      },
+      {
+       "name": "Main Street",
+       "official_name": "Main Street",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Yonkers Brewing Co.",
+       "source_url": "https://www.yonkersbrewing.com/"
       }
      ],
      "sources": [
@@ -8066,8 +8372,8 @@
        "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
       },
       {
-       "name": "OpenStreetMap",
-       "url": "https://www.openstreetmap.org/node/4856391954"
+       "name": "Yonkers Brewing Co.",
+       "url": "https://www.yonkersbrewing.com/"
       }
      ]
     },
@@ -8103,7 +8409,7 @@
     {
      "moment": "dog",
      "title": "The dog's walk",
-     "text": "Washington Park is a 5-minute walk for the daily loop. Trevor Park Dog Park is 1.4 miles away.",
+     "text": "Washington Park is a 5-minute walk for the daily loop. Van der Donck Park downtown is built around the uncovered Saw Mill River, a stretch of water that replaced a parking lot; eels are returning. Trevor Park Dog Park is 1.4 miles away.",
      "places": [
       {
        "name": "Washington Park",
@@ -8112,6 +8418,24 @@
        "distance_mi": 0.2,
        "source_name": "OpenStreetMap",
        "source_url": "https://www.openstreetmap.org/way/506810762"
+      },
+      {
+       "name": "Van der Donck Park",
+       "official_name": "Van der Donck Park",
+       "kind": "park",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Scenic Hudson",
+       "source_url": "https://www.scenichudson.org/parks/larkinplaza"
+      },
+      {
+       "name": "Saw Mill River",
+       "official_name": "Saw Mill River",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Scenic Hudson",
+       "source_url": "https://www.scenichudson.org/parks/larkinplaza"
       },
       {
        "name": "Trevor Park Dog Park",
@@ -8126,6 +8450,10 @@
       {
        "name": "OpenStreetMap",
        "url": "https://www.openstreetmap.org/way/506810762"
+      },
+      {
+       "name": "Scenic Hudson",
+       "url": "https://www.scenichudson.org/parks/larkinplaza"
       },
       {
        "name": "OpenStreetMap",
@@ -8191,8 +8519,8 @@
     "What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)"
    ],
    "disclosures": [
-    "floor not published",
-    "special offer"
+    "Floor not published: confirm it is above the ground floor",
+    "Special offer: ask what a normal month costs"
    ],
    "photos_url": "https://www.trulia.com/building/symphony-1009-broad-st-newark-nj-07102-2594867367",
    "listing_url": "https://www.trulia.com/building/symphony-1009-broad-st-newark-nj-07102-2594867367",
@@ -8411,7 +8739,7 @@
     {
      "moment": "weekday",
      "title": "A weekday",
-     "text": "Coffee at Espetos cafe, 10 minutes on foot, then back to the desk. For groceries, Angelo's mini market is an 8-minute walk.",
+     "text": "Coffee at Espetos cafe, 10 minutes on foot, then back to the desk. Next door, Newark Symphony Hall, open since 1925, is under a major restoration while still staging concerts and festivals. For groceries, Angelo's mini market is an 8-minute walk.",
      "places": [
       {
        "name": "Espetos cafe",
@@ -8420,6 +8748,15 @@
        "distance_mi": 0.4,
        "source_name": "OpenStreetMap",
        "source_url": "https://www.openstreetmap.org/node/11346879018"
+      },
+      {
+       "name": "Newark Symphony Hall",
+       "official_name": "Newark Symphony Hall",
+       "kind": "other",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Newark Symphony Hall",
+       "source_url": "https://www.newarksymphonyhall.org/"
       },
       {
        "name": "Angelo's mini market",
@@ -8436,6 +8773,10 @@
        "url": "https://www.openstreetmap.org/node/11346879018"
       },
       {
+       "name": "Newark Symphony Hall",
+       "url": "https://www.newarksymphonyhall.org/"
+      },
+      {
        "name": "OpenStreetMap",
        "url": "https://www.openstreetmap.org/node/11356337481"
       }
@@ -8444,8 +8785,26 @@
     {
      "moment": "saturday",
      "title": "Saturday night",
-     "text": "14 restaurants are within a 10-minute walk. The nearest bar, Allure Lounge, is 3 minutes on foot. For a night out, Newark Symphony Hall is a 2-minute walk.",
+     "text": "14 restaurants are within a 10-minute walk. The Ironbound's Ferry Street is Newark's walkable eating street, known for Portuguese, Brazilian and Spanish restaurants and bakeries. The nearest bar, Allure Lounge, is 3 minutes on foot.",
      "places": [
+      {
+       "name": "Ferry Street",
+       "official_name": "Ironbound and Ferry Street",
+       "kind": "street",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Newark Happening (Newark tourism site), Ironbound guide",
+       "source_url": "https://www.newarkhappening.com/neighborhoods/ironbound/"
+      },
+      {
+       "name": "Brazilian and Spanish",
+       "official_name": "Brazilian and Spanish",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Newark Happening (Newark tourism site), Ironbound guide",
+       "source_url": "https://www.newarkhappening.com/neighborhoods/ironbound/"
+      },
       {
        "name": "Allure Lounge",
        "kind": "bar",
@@ -8453,14 +8812,6 @@
        "distance_mi": 0.1,
        "source_name": "OpenStreetMap",
        "source_url": "https://www.openstreetmap.org/way/416584462"
-      },
-      {
-       "name": "Newark Symphony Hall",
-       "kind": "cinema or theater",
-       "walk_min": 1.9,
-       "distance_mi": 0.1,
-       "source_name": "OpenStreetMap",
-       "source_url": "https://www.openstreetmap.org/way/1422133492"
       }
      ],
      "sources": [
@@ -8469,12 +8820,12 @@
        "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
       },
       {
-       "name": "OpenStreetMap",
-       "url": "https://www.openstreetmap.org/way/416584462"
+       "name": "Newark Happening (Newark tourism site), Ironbound guide",
+       "url": "https://www.newarkhappening.com/neighborhoods/ironbound/"
       },
       {
        "name": "OpenStreetMap",
-       "url": "https://www.openstreetmap.org/way/1422133492"
+       "url": "https://www.openstreetmap.org/way/416584462"
       }
      ]
     },
@@ -8599,8 +8950,8 @@
     "What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)"
    ],
    "disclosures": [
-    "floor not published",
-    "special offer"
+    "Floor not published: confirm it is above the ground floor",
+    "Special offer: ask what a normal month costs"
    ],
    "photos_url": "https://www.trulia.com/building/soundview-apartments-855-main-st-bridgeport-ct-06604-2734499849",
    "listing_url": "https://www.trulia.com/building/soundview-apartments-855-main-st-bridgeport-ct-06604-2734499849",
@@ -8767,12 +9118,12 @@
     "pick_going_out": "4 restaurants within a 10-minute walk",
     "pick_money": "Total about $2,117 a month"
    },
-   "experience_line": "Towns farther out, with more space for you in Hamden and East Orange.",
+   "experience_line": "Towns farther out, where the typical apartment is bigger.",
    "life_here": [
     {
      "moment": "weekday",
      "title": "A weekday",
-     "text": "Coffee at Starbucks, 10 minutes on foot, then back to the desk. The downtown district runs a weekday farmers market on McLevy Green, at Main and Bank Streets (Thursdays 10:30am to 2pm, July to October). For groceries, Save-A-Lot is 0.9 miles away.",
+     "text": "Coffee at Starbucks, 10 minutes on foot, then back to the desk. For groceries, Save-A-Lot is 0.9 miles away. For a change of desk, Bridgeport Public Library is a 2-minute walk.",
      "places": [
       {
        "name": "Starbucks",
@@ -8783,30 +9134,20 @@
        "source_url": "https://www.openstreetmap.org/node/3899856136"
       },
       {
-       "name": "McLevy Green",
-       "official_name": "Downtown Market at McLevy Green",
-       "kind": "market",
-       "walk_min": null,
-       "distance_mi": null,
-       "source_name": "Bridgeport Downtown Special Services District (Colorful Bridgeport), Signature Events",
-       "source_url": "https://www.colorfulbridgeport.com/signature-events/"
-      },
-      {
-       "name": "Main and Bank Streets",
-       "official_name": "Main and Bank Streets",
-       "kind": "named in the source",
-       "walk_min": null,
-       "distance_mi": null,
-       "source_name": "Bridgeport Downtown Special Services District (Colorful Bridgeport), Signature Events",
-       "source_url": "https://www.colorfulbridgeport.com/signature-events/"
-      },
-      {
        "name": "Save-A-Lot",
        "kind": "supermarket",
        "walk_min": 24.7,
        "distance_mi": 0.9,
        "source_name": "OpenStreetMap",
        "source_url": "https://www.openstreetmap.org/node/3446734677"
+      },
+      {
+       "name": "Bridgeport Public Library",
+       "kind": "library",
+       "walk_min": 2.3,
+       "distance_mi": 0.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/206485516"
       }
      ],
      "sources": [
@@ -8815,29 +9156,20 @@
        "url": "https://www.openstreetmap.org/node/3899856136"
       },
       {
-       "name": "Bridgeport Downtown Special Services District (Colorful Bridgeport), Signature Events",
-       "url": "https://www.colorfulbridgeport.com/signature-events/"
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/3446734677"
       },
       {
        "name": "OpenStreetMap",
-       "url": "https://www.openstreetmap.org/node/3446734677"
+       "url": "https://www.openstreetmap.org/way/206485516"
       }
      ]
     },
     {
      "moment": "saturday",
      "title": "Saturday night",
-     "text": "4 restaurants are within a 10-minute walk. The Stress Factory comedy club downtown has stand-up shows most Thursday to Sunday nights. The Bijou on Fairfield Avenue has hosted performing arts since 1909 and now runs concerts, comedy and theatre.",
+     "text": "4 restaurants are within a 10-minute walk. The Bijou on Fairfield Avenue has hosted performing arts since 1909 and now runs concerts, comedy and theatre. Berlinetta Brewing's taproom on Golden Hill Street hosts DJ sets and live music on weekends.",
      "places": [
-      {
-       "name": "Stress Factory comedy club",
-       "official_name": "Vinnie Brand's Stress Factory Comedy Club",
-       "kind": "other",
-       "walk_min": null,
-       "distance_mi": null,
-       "source_name": "Bridgeport Downtown Special Services District events calendar",
-       "source_url": "https://www.colorfulbridgeport.com/wp-json/tribe/events/v1/events?per_page=50"
-      },
       {
        "name": "The Bijou",
        "official_name": "The Bijou Theatre",
@@ -8855,6 +9187,24 @@
        "distance_mi": null,
        "source_name": "Bijou Theatre",
        "source_url": "https://www.bijoutheatrect.com/"
+      },
+      {
+       "name": "Berlinetta Brewing",
+       "official_name": "Berlinetta Brewing Company",
+       "kind": "bar",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bridgeport Downtown Special Services District events calendar",
+       "source_url": "https://www.colorfulbridgeport.com/wp-json/tribe/events/v1/events?per_page=50"
+      },
+      {
+       "name": "Golden Hill Street",
+       "official_name": "Golden Hill Street",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bridgeport Downtown Special Services District events calendar",
+       "source_url": "https://www.colorfulbridgeport.com/wp-json/tribe/events/v1/events?per_page=50"
       }
      ],
      "sources": [
@@ -8863,12 +9213,12 @@
        "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
       },
       {
-       "name": "Bridgeport Downtown Special Services District events calendar",
-       "url": "https://www.colorfulbridgeport.com/wp-json/tribe/events/v1/events?per_page=50"
-      },
-      {
        "name": "Bijou Theatre",
        "url": "https://www.bijoutheatrect.com/"
+      },
+      {
+       "name": "Bridgeport Downtown Special Services District events calendar",
+       "url": "https://www.colorfulbridgeport.com/wp-json/tribe/events/v1/events?per_page=50"
       }
      ]
     },
@@ -8909,7 +9259,7 @@
     {
      "moment": "dog",
      "title": "The dog's walk",
-     "text": "The nearest park is a 5-minute walk for the daily loop. The building lists its own dog area. City park rules: dogs on a six-foot leash, no dogs on the beach; parks open 8am to 8pm (Seaside Park).",
+     "text": "The nearest park is a 5-minute walk for the daily loop. The building lists its own dog area. Seaside Park is 325 acres of lawns and shore on Long Island Sound, laid out by Olmsted and Vaux.",
      "places": [
       {
        "name": "Seaside Park",
@@ -8917,8 +9267,26 @@
        "kind": "park",
        "walk_min": null,
        "distance_mi": null,
-       "source_name": "City of Bridgeport, Parks & Recreation: Park Events (park rules)",
-       "source_url": "https://bridgeportct.gov/eventpermit"
+       "source_name": "City of Bridgeport, Parks & Recreation: Seaside Park History",
+       "source_url": "https://bridgeportct.gov/government/departments/parks-recreation/seaside-park-history"
+      },
+      {
+       "name": "Long Island Sound",
+       "official_name": "Long Island Sound",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "City of Bridgeport, Parks & Recreation: Seaside Park History",
+       "source_url": "https://bridgeportct.gov/government/departments/parks-recreation/seaside-park-history"
+      },
+      {
+       "name": "Olmsted and Vaux",
+       "official_name": "Olmsted and Vaux",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "City of Bridgeport, Parks & Recreation: Seaside Park History",
+       "source_url": "https://bridgeportct.gov/government/departments/parks-recreation/seaside-park-history"
       }
      ],
      "sources": [
@@ -8931,8 +9299,8 @@
        "url": "https://www.trulia.com/building/soundview-apartments-855-main-st-bridgeport-ct-06604-2734499849"
       },
       {
-       "name": "City of Bridgeport, Parks & Recreation: Park Events (park rules)",
-       "url": "https://bridgeportct.gov/eventpermit"
+       "name": "City of Bridgeport, Parks & Recreation: Seaside Park History",
+       "url": "https://bridgeportct.gov/government/departments/parks-recreation/seaside-park-history"
       }
      ]
     }
@@ -8986,7 +9354,7 @@
     "What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)"
    ],
    "disclosures": [
-    "floor not published"
+    "Floor not published: confirm it is above the ground floor"
    ],
    "photos_url": "https://www.brt.com/brookview-commons",
    "listing_url": "https://www.apartmentlist.com/ct/danbury/brookview-commons-east-great-downtown-living",
@@ -9232,33 +9600,25 @@
     {
      "moment": "saturday",
      "title": "Saturday night",
-     "text": "1 restaurant is within a 10-minute walk. CityCenter Danbury puts on free live music on the CityCenter Green on select summer Fridays; bring a lawn chair (Summer in the City Concert Series). The nearest bar, La Kabanita, is 2 minutes on foot.",
+     "text": "1 restaurant is within a 10-minute walk. There is a Saturday market downtown in season, on the CityCenter Green. On the first Saturday in June, historic Main Street becomes a festival of local artisans, food trucks, music and performances.",
      "places": [
       {
-       "name": "Summer in the City Concert Series",
-       "official_name": "Summer in the City Concert Series",
+       "name": "CityCenter Green",
+       "official_name": "CityCenter Green",
+       "kind": "market",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "CityCenter Danbury, events calendar",
+       "source_url": "https://citycenterdanbury.com/events/list/?tribe-bar-search=farmers&eventDisplay=past"
+      },
+      {
+       "name": "Main Street",
+       "official_name": "Main Street festival",
        "kind": "event",
        "walk_min": null,
        "distance_mi": null,
        "source_name": "CityCenter Danbury: CityCenter Events",
        "source_url": "https://citycenterdanbury.com/explore-2/our-citycenter-events/"
-      },
-      {
-       "name": "CityCenter Green",
-       "official_name": "CityCenter Green",
-       "kind": "named in the source",
-       "walk_min": null,
-       "distance_mi": null,
-       "source_name": "CityCenter Danbury: CityCenter Events",
-       "source_url": "https://citycenterdanbury.com/explore-2/our-citycenter-events/"
-      },
-      {
-       "name": "La Kabanita",
-       "kind": "bar",
-       "walk_min": 1.8,
-       "distance_mi": 0.1,
-       "source_name": "OpenStreetMap",
-       "source_url": "https://www.openstreetmap.org/node/13966532102"
       }
      ],
      "sources": [
@@ -9267,12 +9627,12 @@
        "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
       },
       {
-       "name": "CityCenter Danbury: CityCenter Events",
-       "url": "https://citycenterdanbury.com/explore-2/our-citycenter-events/"
+       "name": "CityCenter Danbury, events calendar",
+       "url": "https://citycenterdanbury.com/events/list/?tribe-bar-search=farmers&eventDisplay=past"
       },
       {
-       "name": "OpenStreetMap",
-       "url": "https://www.openstreetmap.org/node/13966532102"
+       "name": "CityCenter Danbury: CityCenter Events",
+       "url": "https://citycenterdanbury.com/explore-2/our-citycenter-events/"
       }
      ]
     },
@@ -9308,7 +9668,7 @@
     {
      "moment": "dog",
      "title": "The dog's walk",
-     "text": "Rowan Avenue Playground is an 11-minute walk for the daily loop. The building lists its own dog area. Tarrywile is free and open sunrise to sunset every day; city ordinance requires dogs on leash at all times (Daily, sunrise to sunset).",
+     "text": "Rowan Avenue Playground is an 11-minute walk for the daily loop. The building lists its own dog area. Tarrywile Park is a 722-acre city park, a former dairy farm and orchard, with 21 miles of trails, two ponds and a lake.",
      "places": [
       {
        "name": "Rowan Avenue Playground",
@@ -9319,13 +9679,13 @@
        "source_url": "https://www.openstreetmap.org/way/43435920"
       },
       {
-       "name": "Tarrywile",
+       "name": "Tarrywile Park",
        "official_name": "Tarrywile Park",
        "kind": "park",
        "walk_min": null,
        "distance_mi": null,
        "source_name": "Tarrywile Park & Mansion: The Park",
-       "source_url": "https://tarrywile.com/?p=22571"
+       "source_url": "https://tarrywile.com/the-park/"
       }
      ],
      "sources": [
@@ -9339,7 +9699,7 @@
       },
       {
        "name": "Tarrywile Park & Mansion: The Park",
-       "url": "https://tarrywile.com/?p=22571"
+       "url": "https://tarrywile.com/the-park/"
       }
      ]
     }
@@ -9394,8 +9754,8 @@
     "What does a parking spot cost per month, and is one guaranteed in the lease?"
    ],
    "disclosures": [
-    "floor not published",
-    "lease length"
+    "Floor not published: confirm it is above the ground floor",
+    "What is the rent on a 12-month lease?"
    ],
    "photos_url": "https://tours.liabyvermella.com/",
    "listing_url": "https://www.apartmentlist.com/nj/orange/lia-by-vermella",
@@ -9563,7 +9923,7 @@
     "pick_green": "Nearest park about 16 minutes on foot",
     "pick_money": "Total about $2,176 a month"
    },
-   "experience_line": "Towns farther out, with more space for you in Hamden and East Orange.",
+   "experience_line": "Towns farther out, where the typical apartment is bigger.",
    "life_here": [
     {
      "moment": "weekday",
@@ -9599,31 +9959,29 @@
      ]
     },
     {
-     "moment": "saturday",
-     "title": "Saturday night",
-     "text": "The nearest bar, Four City Brewery, is 4 minutes on foot.",
-     "places": [
-      {
-       "name": "Four City Brewery",
-       "kind": "bar",
-       "walk_min": 3.5,
-       "distance_mi": 0.1,
-       "source_name": "OpenStreetMap",
-       "source_url": "https://www.openstreetmap.org/node/6817946350"
-      }
-     ],
-     "sources": [
-      {
-       "name": "OpenStreetMap",
-       "url": "https://www.openstreetmap.org/node/6817946350"
-      }
-     ]
-    },
-    {
      "moment": "sunday",
      "title": "Sunday with Mom and Dad",
-     "text": "Mom and Dad are about 53 minutes away by car, about $43 round trip in tolls.",
-     "places": [],
+     "text": "Mom and Dad are about 53 minutes away by car, about $43 round trip in tolls. Edison's laboratory complex and Glenmont estate in neighboring West Orange are a national park; the lab buildings are open to explore.",
+     "places": [
+      {
+       "name": "Edison",
+       "official_name": "Thomas Edison National Historical Park",
+       "kind": "other",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "National Park Service: Thomas Edison NHP",
+       "source_url": "https://www.nps.gov/edis/planyourvisit/hours.htm"
+      },
+      {
+       "name": "West Orange",
+       "official_name": "West Orange",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "National Park Service: Thomas Edison NHP",
+       "source_url": "https://www.nps.gov/edis/planyourvisit/hours.htm"
+      }
+     ],
      "sources": [
       {
        "name": "OSRM route estimate, no traffic",
@@ -9648,13 +10006,17 @@
       {
        "name": "Toll rates: New Jersey Turnpike Authority",
        "url": "https://www.njta.gov/wp-json/njta/v1/partials?slug=map%2Ftrip-details&tab=turnpike&vehicle-type=1&green-discount=false&senior-discount=false&entrance=16E&exit=15W"
+      },
+      {
+       "name": "National Park Service: Thomas Edison NHP",
+       "url": "https://www.nps.gov/edis/planyourvisit/hours.htm"
       }
      ]
     },
     {
      "moment": "dog",
      "title": "The dog's walk",
-     "text": "Orange Park is a 16-minute walk for the daily loop. The building lists its own dog area. The nearest vet, Essex Animal Hospital, is 2.5 miles away.",
+     "text": "Orange Park is a 16-minute walk for the daily loop. The building lists its own dog area. Monte Irvin Orange Park is a 48-acre Olmsted-designed county park with walking paths, athletic fields and free summer concerts.",
      "places": [
       {
        "name": "Orange Park",
@@ -9665,12 +10027,13 @@
        "source_url": "https://www.openstreetmap.org/way/39680064"
       },
       {
-       "name": "Essex Animal Hospital",
-       "kind": "vet",
-       "walk_min": 65.1,
-       "distance_mi": 2.5,
-       "source_name": "OpenStreetMap",
-       "source_url": "https://www.openstreetmap.org/way/1289202477"
+       "name": "Monte Irvin Orange Park",
+       "official_name": "Monte Irvin Orange Park",
+       "kind": "park",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Essex County Parks: Monte Irvin Orange Park",
+       "source_url": "https://www.essexcountyparks.org/parks/monte-irvin-orange-park"
       }
      ],
      "sources": [
@@ -9683,8 +10046,8 @@
        "url": "https://www.apartmentlist.com/nj/orange/lia-by-vermella"
       },
       {
-       "name": "OpenStreetMap",
-       "url": "https://www.openstreetmap.org/way/1289202477"
+       "name": "Essex County Parks: Monte Irvin Orange Park",
+       "url": "https://www.essexcountyparks.org/parks/monte-irvin-orange-park"
       }
      ]
     }
@@ -9746,8 +10109,8 @@
     "What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)"
    ],
    "disclosures": [
-    "floor not published",
-    "broker fee"
+    "Floor not published: confirm it is above the ground floor",
+    "How much is the broker fee, and who pays it?"
    ],
    "photos_url": "https://www.trulia.com/home/525-riverdale-ave-5u-yonkers-ny-10705-466334272",
    "listing_url": "https://www.trulia.com/home/525-riverdale-ave-5u-yonkers-ny-10705-466334272",
@@ -9935,8 +10298,26 @@
     {
      "moment": "saturday",
      "title": "Saturday night",
-     "text": "4 restaurants are within a 10-minute walk. The nearest bar, Madisons, is 14 minutes on foot.",
+     "text": "4 restaurants are within a 10-minute walk. Yonkers Brewing Co. on Main Street is a brewery and restaurant, open until midnight on its late nights (From 11:30am daily; to 10pm or midnight). The nearest bar, Madisons, is 14 minutes on foot.",
      "places": [
+      {
+       "name": "Yonkers Brewing Co.",
+       "official_name": "Yonkers Brewing Co.",
+       "kind": "bar",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Yonkers Brewing Co.",
+       "source_url": "https://www.yonkersbrewing.com/"
+      },
+      {
+       "name": "Main Street",
+       "official_name": "Main Street",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Yonkers Brewing Co.",
+       "source_url": "https://www.yonkersbrewing.com/"
+      },
       {
        "name": "Madisons",
        "kind": "bar",
@@ -9950,6 +10331,10 @@
       {
        "name": "OpenStreetMap (mapped places within 800 m)",
        "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
+      },
+      {
+       "name": "Yonkers Brewing Co.",
+       "url": "https://www.yonkersbrewing.com/"
       },
       {
        "name": "OpenStreetMap",
@@ -9976,7 +10361,7 @@
     {
      "moment": "dog",
      "title": "The dog's walk",
-     "text": "Fay Park is a 2-minute walk for the daily loop. The nearest dog run is at Canine Court, 1.1 miles away. The nearest vet, Riverdale Veterinary Group, is 1.9 miles away.",
+     "text": "Fay Park is a 2-minute walk for the daily loop. Tibbetts Brook Park is a 161-acre county park with woodlands, lakes, lawns and playing fields; county rules allow leashed dogs. The nearest dog run is at Canine Court, 1.1 miles away.",
      "places": [
       {
        "name": "Fay Park",
@@ -9987,20 +10372,21 @@
        "source_url": "https://www.openstreetmap.org/way/506835390"
       },
       {
+       "name": "Tibbetts Brook Park",
+       "official_name": "Tibbetts Brook Park",
+       "kind": "park",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Westchester County Parks: Tibbetts Brook Park",
+       "source_url": "https://parks.westchestercountyny.gov/tibbetts-brook-park"
+      },
+      {
        "name": "Canine Court",
        "kind": "dog run",
        "walk_min": 28.8,
        "distance_mi": 1.1,
        "source_name": "OpenStreetMap",
        "source_url": "https://www.openstreetmap.org/way/442203294"
-      },
-      {
-       "name": "Riverdale Veterinary Group",
-       "kind": "vet",
-       "walk_min": 49.6,
-       "distance_mi": 1.9,
-       "source_name": "OpenStreetMap",
-       "source_url": "https://www.openstreetmap.org/node/8641884269"
       }
      ],
      "sources": [
@@ -10009,12 +10395,12 @@
        "url": "https://www.openstreetmap.org/way/506835390"
       },
       {
-       "name": "OpenStreetMap",
-       "url": "https://www.openstreetmap.org/way/442203294"
+       "name": "Westchester County Parks: Tibbetts Brook Park",
+       "url": "https://parks.westchestercountyny.gov/tibbetts-brook-park"
       },
       {
        "name": "OpenStreetMap",
-       "url": "https://www.openstreetmap.org/node/8641884269"
+       "url": "https://www.openstreetmap.org/way/442203294"
       }
      ]
     }

@@ -1008,7 +1008,10 @@ def concierge(b, source):
                 seen.add(c["question"])
                 confirm.append({"label": c.get("label"), "question": c["question"]})
         tq = [q for q, _ in Counter(q for u in us for q in u.get("tour_questions") or [] if q not in seen).most_common()]
-        disc = [d for d, _ in Counter(x.get("label") for u in us for x in u.get("disclosures") or [] if x.get("label")).most_common()]
+        # A disclosure is shown as what to ask (its question), not as its internal label: "something else to know" told
+        # her nothing (2026-11-17). The label is kept only where a disclosure carries no question.
+        disc = [d for d, _ in Counter((x.get("question") or x.get("label")) for u in us for x in u.get("disclosures") or []
+                                      if (x.get("question") or x.get("label"))).most_common()]
         rents = [rent_now(u) for u in us]
         totals = [u["all_in"] for u in us]
         blds.append({
@@ -1122,7 +1125,7 @@ def clean_name(s):
 
 
 def name_ok(s):
-    return bool(s) and not (BANNED.search(s) or CRIME.search(s) or HYPE.search(s) or "?" in s)
+    return bool(s) and not (BANNED.search(s) or CRIME.search(s) or HYPE.search(s) or "?" in s) and name_key(s) not in BLOCKED
 
 
 def a_walk(n):
@@ -1448,12 +1451,21 @@ def chips_for(x, questions, med_total):
 # ---- experience line ---------------------------------------------------------------------------------------------
 def experience_line(e, base_year):
     """One plain sentence on what the kind of life means: the experience's guarded tagline, else the first sentence of
-    its promise, else of its subhead, whichever first has at most 16 words."""
+    its promise, else of its subhead, whichever first has at most 16 words. A sentence that names particular towns is
+    skipped: the line is shown on every building of the experience, and must be true of each one's kind of place."""
+    towns = {str(h.get("name") or "") for h in (base_year.get("_hood_names") or [])}
     for t in (e.get("tagline"), (base_year.get("prose") or {}).get("promise"), base_year.get("subhead")):
         s = sentences(voice(t))
-        if s and words(s[0]) <= 16:
+        if s and words(s[0]) <= 16 and not re.search(r"\bin [A-Z][a-z]+(?: [A-Z][a-z]+)* and [A-Z]", s[0]):
             return s[0]
-    return None
+    return EXPERIENCE_LINE_FALLBACK.get(e.get("id"))
+
+
+# Used only when every guarded sentence names particular towns (Will, 2026-11-17: the line labels every building of
+# the experience). Each is checked against the kept set in test_concierge_data.py.
+EXPERIENCE_LINE_FALLBACK = {
+    "space": "Towns farther out, where the typical apartment is bigger.",
+}
 
 
 # ---- life here ---------------------------------------------------------------------------------------------------
@@ -1527,6 +1539,24 @@ def far_words(pl):
     return a_walk(pl["walk_min"]) if pl["walk_min"] <= WALK_MAX_MIN else f"{pl['distance_mi']:.1f} miles away"
 
 
+# The researcher's doubts, as the coordinator ruled on them (2026-11-17)
+CLOSED = re.compile(r"\(closed\)", re.I)
+CLOSED_NOTE = re.compile(r"\bwarning row\b|\bnot for display\b|\bhas closed\b|\bpermanently closed\b", re.I)
+UNCONFIRMED = re.compile(r"operation (?:is )?not confirmed|not confirmed on (?:its|the cafe's|the restaurant's) own (?:page|site)|"
+                         r"current hours not confirmed|\bpredates\b|\bolder\b.*\b20(?:1\d|2[0-3])\b|"
+                         r"\b(?:article|story|itinerary|report|review|listing)\b[^.]{0,30}\b(?:from|dated)\b[^.]{0,15}\b(?:19\d\d|20(?:[01]\d|2[0-3]))\b|"
+                         r"\b(?:dates?|date from)\b[^.]{0,20}\b(?:19\d\d|20(?:[01]\d|2[0-3]))\b|\bnot confirmed\b[^.]{0,40}\b(?:dates?|rules?)\b|"
+                         r"\b(?:2026|main) dates not confirmed\b|\bappears to date from\b", re.I)
+BLOCKED = set(["four city"])                      # never named: closed June 2025, still mapped (coordinator, 2026-11-17)
+FACT_OVERRIDE = {"CityCenter Danbury Farmers' Market": ("There is a Saturday market downtown in season, on the CityCenter Green.", "",
+                                                         "CityCenter Green")}
+
+
+def name_key(n):
+    """The first two words of a name, lower case: 'Four City Brewing' and the mapped 'Four City Brewery' share it."""
+    return " ".join(re.findall(r"[a-z0-9']+", str(n or "").lower())[:2])
+
+
 def load_life_facts():
     """data/reference/life_here_facts.csv as {building id: [rows]} and {neighborhood id: [rows]}: absent or partial is
     fine (written by a research agent; the script picks up more rows on its next run). Only confidence 'high' rows
@@ -1538,9 +1568,23 @@ def load_life_facts():
         t = pd.read_csv(LIFE_FACTS, dtype=str, keep_default_na=False, on_bad_lines="skip")
     except (OSError, ValueError, pd.errors.ParserError) as e:
         return out_b, out_h, {"file": f"unreadable: {e}"[:200]}
+    BLOCKED.clear()
+    for r in t.to_dict("records"):
+        r = {k: str(v_ or "").strip() for k, v_ in r.items()}
+        if CLOSED.search(r.get("place_name", "")) or CLOSED_NOTE.search(r.get("notes", "")):
+            BLOCKED.add(name_key(re.sub(r"\s*\(closed\)", "", r["place_name"], flags=re.I)))
     for r in t.to_dict("records"):
         r = {k: str(v_ or "").strip() for k, v_ in r.items()}
         conf = r.get("confidence", "").lower()
+        if r.get("place_name") in FACT_OVERRIDE:
+            r["fact"], r["schedule"], r["place_name"] = FACT_OVERRIDE[r["place_name"]]
+            conf = "high"                             # the coordinator's wording (2026-11-17), no dated detail
+        if name_key(r.get("place_name", "")) in BLOCKED:
+            skipped["closed or warning"] += 1
+            continue
+        if UNCONFIRMED.search(r.get("notes", "")):
+            skipped["operation unconfirmed or source before 2024"] += 1
+            continue
         if conf != "high":
             skipped[f"confidence {conf or 'blank'}"] += 1
             continue
@@ -1561,6 +1605,7 @@ def load_life_facts():
                           "skipped": dict(skipped)}
 
 
+DAYS = ("mon", "tue", "wed", "thu", "fri", "sat", "sun")
 MOMENT_ALIASES = {"dog_walk": "dog", "dog's walk": "dog", "sat": "saturday", "sun": "sunday", "work": "weekday"}
 
 
@@ -1605,6 +1650,10 @@ def fact_sentence(r, pt):
         return None
     if re.search(r"\b(minutes?|miles?|blocks?|feet|meters?)\b[^.]{0,12}\b(away|from|walk|drive)\b|\bwalking distance\b", fact, re.I):
         return None
+    days = {d for d in DAYS if re.search(rf"\b{d}", fact + " " + sched, re.I)}
+    want = {"saturday": "sat", "sunday": "sun"}.get(r["moment"])
+    if days and ((want and want not in days) or (r["moment"] == "weekday" and days <= {"sat", "sun"})):
+        return None                                   # an event on another day is never put under this moment
     lat, lon = num(r.get("lat")), num(r.get("lon"))
     m = haversine_km(pt, {"lat": lat, "lon": lon}) * 1000 if (pt and lat is not None and lon is not None) else None
     if m is not None and m > 1609.344 * 25:
@@ -1625,7 +1674,9 @@ def fact_sentence(r, pt):
     cal = {w_.lower().rstrip("s") for w_ in re.findall(r"[A-Za-z]+", sched) if CAL_WORDS.match(w_)}
     says_when = any(re.search(rf"\b{c}", fact, re.I) for c in cal)
     extra = []
-    if sched and sched.lower() not in fact.lower() and (re.search(r"\d", sched) or not says_when):
+    sw = [w_ for w_ in re.findall(r"[a-z0-9:]+", sched.lower()) if len(w_) > 2]
+    overlap = sum(1 for w_ in sw if w_ in fact.lower()) / len(sw) if sw else 1
+    if sched and sched.lower() not in fact.lower() and overlap < 0.6 and (re.search(r"\d", sched) or not says_when):
         extra.append(sched)
     if named_after:
         extra.insert(0, name)
@@ -1637,6 +1688,8 @@ def fact_sentence(r, pt):
         return None
     pl = {"name": span, "official_name": name, "kind": kind, "walk_min": walk_min_of(m), "distance_mi": miles_of(m),
           "source_name": src["name"], "source_url": src["url"]}
+    if kind in ("park", "trail", "greenway", "beach") and pl["walk_min"] is not None:
+        pl["walk_min"] = pl["distance_mi"] = None     # a large area's coordinates are its middle, not its nearest edge
     walk = f"It is {far_words(pl)}." if pl["walk_min"] is not None else None
     return fact, walk, [pl] + mentioned(fact, [span, name], src), None
 
@@ -1652,9 +1705,14 @@ def mentioned(text, own, src):
     for n in sorted(own, key=len, reverse=True):
         t = re.sub(re.escape(n), " ", t, flags=re.I)
     out = []
-    for m in re.finditer(r"(?<![.!?]\s)(?<!^)\b([A-Z][\w'’&]+(?:\s+(?:of|the|and|&|de|on)\s+[A-Z][\w'’&]+|\s+[A-Z][\w'’&]+)+)", t):
+    for m in re.finditer(r"(?<![.!?]\s)(?<!^)\b([A-Z][\w'’&]+(?:\s+(?:of|the|and|&|de)\s+[A-Z][\w'’&]+|\s+[A-Z][\w'’&]+)+)", t):
         run = m.group(1).strip()
+        while run.split() and CAL_WORDS.match(run.split()[0]):
+            run = " ".join(run.split()[1:])            # "Each April Branch Brook Park" names Branch Brook Park
+        run = re.sub(r"'s$|’s$", "", run)
         parts = run.split()
+        if len(parts) < 2:
+            continue
         if all(CAL_WORDS.match(w_) for w_ in parts if w_[0].isupper()) or run in [p["name"] for p in out]:
             continue
         out.append({"name": run, "official_name": run, "kind": "named in the source", "walk_min": None, "distance_mi": None,
@@ -1756,8 +1814,9 @@ def life_here(x, src_b, us, life_b, life_h):
             continue
         take, n_w, n_s = [], 0, 0
         for pri, s, pls, srcs, k, alt in cs:
-            said = {p["name"].lower() for t in take for p in t[2]} | {p.get("official_name", "").lower() for t in take for p in t[2]}
-            if alt and pls and (pls[0]["name"].lower() in said or pls[0]["official_name"].lower() in said):
+            key = lambda n: re.sub(r"[^a-z]", "", str(n or "").lower())
+            said = {key(p["name"]) for t in take for p in t[2]} | {key(p.get("official_name")) for t in take for p in t[2]}
+            if alt and pls and (key(pls[0]["name"]) in said or key(pls[0]["official_name"]) in said):
                 s, k = alt, 1
             if n_s + k > LIFE_MAX_SENTENCES or n_w + words(s) > LIFE_MAX_WORDS or any(s == t[1] for t in take):
                 continue
