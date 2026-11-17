@@ -247,3 +247,11 @@ sheet keeps "More like this" at its bottom).
 ### Validation (must be reported before publishing)
 Simulated users with hidden weights answer the made-up pairs; report how often their true best neighborhood is in the
 three, weight recovery, and how results move with each answer. Five personas as before.
+
+### Version 4.1 (Will, 2026-11-17)
+- Each choice is a pure two-attribute trade-off (better on one, worse on another, everything else the same), with a
+  short headline per side ("More room, but quieter") and clear better/worse marks, aligned across the two sides.
+- A first screen explains the eight imaginary trade-offs, that they train the recommendation, and the promise: three
+  neighborhoods, the three best buildings in each, and everything else browsable, searchable and filterable.
+- The promise is enforced: only neighborhoods with at least three buildings on the page can be recommended (smaller
+  ones stay in Browse everything); Browse everything gets a search box.
