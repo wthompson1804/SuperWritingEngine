@@ -565,6 +565,26 @@ def _bad(k, f, others):
     return f"{_fig_text(k, f)[0].upper() + _fig_text(k, f)[1:]} (the other two: {o})"
 
 
+MARGIN = {"family": "drive at least 10 minutes and 20% longer", "money": "total at least $75 a month higher",
+          "room": "at least 75 sq ft smaller", "going_out": "at least 10 and 30% fewer places to eat and drink",
+          "green": "park walk at least 4 minutes longer", "parking": "a lower kind of parking (garage > off-street > street)"}
+
+
+def clear_margin(k, f, o):
+    """True when f is worse than o on feature k by a margin worth naming (MARGIN); both figures known."""
+    if k == "family":
+        return f["drive"] - o["drive"] >= 10 and f["drive"] >= 1.2 * o["drive"]
+    if k == "money":
+        return f["total"] - o["total"] >= 75
+    if k == "room":
+        return o["sqft"] - f["sqft"] >= 75
+    if k == "going_out":
+        return o["places"] - f["places"] >= 10 and f["places"] <= 0.7 * o["places"]
+    if k == "green":
+        return f["walk"] - o["walk"] >= 4
+    return f["parking"] < o["parking"]
+
+
 UNKNOWN_TEXT = {"room": "The size isn't published yet; ask on the tour", "parking": "Parking isn't stated yet; ask on the tour",
                 "family": "The drive to Mom and Dad isn't known yet", "money": "The monthly total isn't known yet; ask on the tour",
                 "going_out": "Places to eat and drink nearby aren't mapped yet", "green": "The nearest park isn't mapped yet"}
@@ -638,7 +658,7 @@ def recommend(samples, answers, buildings, params):
             if mine is None:                       # the weak point is an unknown: say so plainly
                 give, give_unknown = k, True
                 break
-            if all(x is not None for x in theirs) and all(mine < x for x in theirs):
+            if all(x is not None for x in theirs) and all(clear_margin(k, figs[g], figs[o]) for o in others):
                 give = k
                 break
         bl = []
@@ -728,7 +748,7 @@ def params_block(buildings, groups, sim, mean, sd, alpha, meds):
         "prior": {"distribution": "Dirichlet", "relative_mass": PRIOR_RELATIVE, "concentration": CONCENTRATION, "alpha": alpha,
                   "draw": "Python random.Random(seed).gammavariate(alpha_k, 1) per feature, normalised, rounded to 6 decimals"},
         "min_pairs": MIN_PAIRS, "max_pairs": MAX_PAIRS, "stop_prob": STOP_PROB, "mmr_lambda": MMR_LAMBDA, "relevance_floor": RELEVANCE_FLOOR, "relevance_top_share": RELEVANCE_TOP_SHARE,
-        "pair_pool": PAIR_POOL, "group_km": GROUP_KM, "n_similar": N_SIMILAR, "n_more_like_this": N_MORE, "round_decimals": ROUND, "nudges": list(NUDGES),
+        "pair_pool": PAIR_POOL, "group_km": GROUP_KM, "gives_up_margin": MARGIN, "n_similar": N_SIMILAR, "n_more_like_this": N_MORE, "round_decimals": ROUND, "nudges": list(NUDGES),
         "feature_mean": mean, "feature_sd": sd,
         "groups": [{k: g[k] for k in ("id", "name", "building_ids", "neighborhood_ids")} for g in groups],
         "group_similarity": sim,
@@ -745,7 +765,7 @@ def params_block(buildings, groups, sim, mean, sd, alpha, meds):
             "next_pair": "pool = top pair_pool buildings by round(score_wbar) desc, id; pairs (a, b) with a < b by id, skipping pairs asked; gain = round(H(set distribution under pi) - sum over answers of P(answer) x H(set distribution under the posterior after that answer)); highest gain, ties to the earlier pair in (a, b) id order; entropy in nats",
             "stop": "stop when answers >= max_pairs, or answers >= min_pairs and round(max set probability) >= stop_prob",
             "groups": "a one-apartment neighborhood counts under its parked host only when the host is within group_km and in the same state; otherwise it is its own group (groups lists the result)",
-            "recommend": "groups by MMR on wbar; in each, the three best buildings by round(score) desc, id; why = the two features with the largest wbar_k x (group centroid_k - mean over all buildings_k); gives_up: features in order of wbar_k x (centroid_k - mean of the other two picked centroids_k), negative ones only and never one of the two `why` features (centroids over the buildings shown); the first whose figure is unknown here (sq ft not published, parking not stated) is said plainly (gives_up_unknown true), or the first where this neighborhood's figure is worse than BOTH others' known figures is compared; none: null. Figures are over the buildings shown",
+            "recommend": "groups by MMR on wbar; in each, the three best buildings by round(score) desc, id; why = the two features with the largest wbar_k x (group centroid_k - mean over all buildings_k); gives_up: features in order of wbar_k x (centroid_k - mean of the other two picked centroids_k), negative ones only and never one of the two `why` features (centroids over the buildings shown); the first whose figure is unknown here (sq ft not published, parking not stated) is said plainly (gives_up_unknown true), or the first where this neighborhood's figure is worse than BOTH others' known figures by the margin in gives_up_margin (both figures as in the text: drive median minutes, lowest total, largest sq ft, median places, shortest park walk rounded) is compared; none: null. Figures are over the buildings shown",
             "what_would_change": "multiply one weight by a nudge factor (more) or divide by it (less), renormalise, and see which group has the highest score; levels in `nudges` order, then features in order, then more before less; the first found where the first group changes (for the first neighborhood) or becomes this one (for the second and third)",
             "more_like_this": "for each of the nine buildings shown, in order: up to 3 nearest other buildings by sqrt(sum_k wbar_k x (z_k - z'_k)^2), z = (features - feature_mean)/feature_sd, excluding the nine and the thumbnails already given; ties by id",
             "comparisons": "values compared are rounded to round_decimals; ties go to the smaller id",

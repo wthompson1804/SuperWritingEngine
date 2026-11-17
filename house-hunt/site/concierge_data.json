@@ -750,6 +750,14 @@
    "relevance_top_share": 0.5,
    "pair_pool": 30,
    "group_km": 10.0,
+   "gives_up_margin": {
+    "family": "drive at least 10 minutes and 20% longer",
+    "money": "total at least $75 a month higher",
+    "room": "at least 75 sq ft smaller",
+    "going_out": "at least 10 and 30% fewer places to eat and drink",
+    "green": "park walk at least 4 minutes longer",
+    "parking": "a lower kind of parking (garage > off-street > street)"
+   },
    "n_similar": 5,
    "n_more_like_this": 3,
    "round_decimals": 9,
@@ -1060,7 +1068,7 @@
     "next_pair": "pool = top pair_pool buildings by round(score_wbar) desc, id; pairs (a, b) with a < b by id, skipping pairs asked; gain = round(H(set distribution under pi) - sum over answers of P(answer) x H(set distribution under the posterior after that answer)); highest gain, ties to the earlier pair in (a, b) id order; entropy in nats",
     "stop": "stop when answers >= max_pairs, or answers >= min_pairs and round(max set probability) >= stop_prob",
     "groups": "a one-apartment neighborhood counts under its parked host only when the host is within group_km and in the same state; otherwise it is its own group (groups lists the result)",
-    "recommend": "groups by MMR on wbar; in each, the three best buildings by round(score) desc, id; why = the two features with the largest wbar_k x (group centroid_k - mean over all buildings_k); gives_up: features in order of wbar_k x (centroid_k - mean of the other two picked centroids_k), negative ones only and never one of the two `why` features (centroids over the buildings shown); the first whose figure is unknown here (sq ft not published, parking not stated) is said plainly (gives_up_unknown true), or the first where this neighborhood's figure is worse than BOTH others' known figures is compared; none: null. Figures are over the buildings shown",
+    "recommend": "groups by MMR on wbar; in each, the three best buildings by round(score) desc, id; why = the two features with the largest wbar_k x (group centroid_k - mean over all buildings_k); gives_up: features in order of wbar_k x (centroid_k - mean of the other two picked centroids_k), negative ones only and never one of the two `why` features (centroids over the buildings shown); the first whose figure is unknown here (sq ft not published, parking not stated) is said plainly (gives_up_unknown true), or the first where this neighborhood's figure is worse than BOTH others' known figures by the margin in gives_up_margin (both figures as in the text: drive median minutes, lowest total, largest sq ft, median places, shortest park walk rounded) is compared; none: null. Figures are over the buildings shown",
     "what_would_change": "multiply one weight by a nudge factor (more) or divide by it (less), renormalise, and see which group has the highest score; levels in `nudges` order, then features in order, then more before less; the first found where the first group changes (for the first neighborhood) or becomes this one (for the second and third)",
     "more_like_this": "for each of the nine buildings shown, in order: up to 3 nearest other buildings by sqrt(sum_k wbar_k x (z_k - z'_k)^2), z = (features - feature_mean)/feature_sd, excluding the nine and the thumbnails already given; ties by id",
     "comparisons": "values compared are rounded to round_decimals; ties go to the smaller id"
@@ -1178,7 +1186,7 @@
     },
     "expected_gives_up": {
      "ny:flushing-willets-point": "Parking isn't stated yet; ask on the tour.",
-     "ct:stamford": "Farther from Mom and Dad: about 53 minutes by car (the other two: 12 minutes and 51 minutes).",
+     "ct:stamford": "Smaller: up to 489 sq ft (the other two: 600 sq ft and 564 sq ft).",
      "nj:bloomfield": "Parking isn't stated yet; ask on the tour."
     },
     "expected_what_would_change": {
@@ -1445,7 +1453,7 @@
     },
     "expected_gives_up": {
      "ct:stamford": "Smaller: up to 489 sq ft (the other two: 751 sq ft and 860 sq ft).",
-     "ct:bridgeport": "Quieter: 4 places to eat and drink within a 10-minute walk (the other two: 33 places and 11 places).",
+     "ct:bridgeport": null,
      "ct:hamden": "The nearest park is farther: about 9 minutes on foot (the other two: 4 minutes and 1 minute)."
     },
     "expected_what_would_change": {
@@ -1565,7 +1573,7 @@
     },
     "expected_gives_up": {
      "ny:flushing-willets-point": "Parking isn't stated yet; ask on the tour.",
-     "ct:stamford": "Farther from Mom and Dad: about 53 minutes by car (the other two: 12 minutes and 51 minutes).",
+     "ct:stamford": "Smaller: up to 489 sq ft (the other two: 600 sq ft and 564 sq ft).",
      "nj:bloomfield": "Parking isn't stated yet; ask on the tour."
     },
     "expected_what_would_change": {

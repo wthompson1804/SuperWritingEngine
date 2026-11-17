@@ -946,6 +946,7 @@ def recommender_reference_reproduces_its_examples():
                 mine = R._better(n["gives_up_feature"], figs[n["neighborhood_id"]])
                 theirs = [R._better(n["gives_up_feature"], figs[o]) for o in figs if o != n["neighborhood_id"]]
                 assert mine is not None and all(t is not None and mine < t for t in theirs), (e["persona"], n["gives_up"])
+                assert all(R.clear_margin(n["gives_up_feature"], figs[n["neighborhood_id"]], figs[o]) for o in figs if o != n["neighborhood_id"]), n["gives_up"]
             elif n["gives_up"]:
                 assert "(" not in n["gives_up"] and "ask on the tour" in n["gives_up"] or "yet" in n["gives_up"], n["gives_up"]
         # the stop rule held: stopped at max, or the top set reached stop_prob and not before min_pairs
