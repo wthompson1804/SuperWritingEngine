@@ -140,7 +140,9 @@ async function barSays(page, n, label) {
         for (const a of q.answers) {
           const c = M.countFits(B, QS, Object.assign({}, answers, { [q.id]: a.id }), CFG); counts[a.id] = c;
           const btn = page.locator('#app [data-act="qa"][data-v="' + a.id + '"]');
-          ok((await btn.locator(".none").count()) === (c === 0 ? 1 : 0), q.id + "/" + a.id + ": 'None fit' label iff it leaves none (" + c + ")");
+          ok((await btn.locator(".none").count()) === (q.must_have && c === 0 ? 1 : 0), q.id + "/" + a.id + ": 'None fit' label iff a must-have answer leaves none (" + c + ")");
+          const cnt = await btn.locator(".cnt").allTextContents();
+          ok(q.must_have && c > 0 ? cnt.length === 1 && cnt[0] === c + (c === 1 ? " place" : " places") : cnt.length === 0, q.id + "/" + a.id + ": the count on the button (" + cnt.join("") + ", want " + c + ")");
           if (!opts.fast) {
             await btn.hover();
             const t = (await page.locator("#fitcount").innerText()).replace(/\n/g, " ");
@@ -150,6 +152,13 @@ async function barSays(page, n, label) {
         if (!opts.fast) { await page.mouse.move(2, 2); await page.locator("#app h1").hover(); }
       }
       if (opts.shot && opts.shot[q.id]) await screen(page, opts.shot[q.id]);
+      if (i === QS.length - 1 || q.must_have) {   /* scrolled to the end, the last control clears the bar */
+        const clear = await page.evaluate(() => { window.scrollTo(0, document.scrollingElement.scrollHeight); const bar = document.getElementById("savebar");
+          const last = [...document.querySelectorAll("#app .choice, #app .pchip, #app [data-act=pick-done]")].pop(); if (!bar || !last) return true;
+          return last.getBoundingClientRect().bottom <= bar.getBoundingClientRect().top; });
+        ok(clear, q.id + ": the bar hides the last answer");
+        await page.evaluate(() => window.scrollTo(0, 0));
+      }
       const choice = pickFor(q, counts);
       if (choice == null) { await act(page, "q-skip"); continue; }
       if (q.kind === "pick_two") {
@@ -225,7 +234,7 @@ async function barSays(page, n, label) {
     const answers = await answerAll(page, (q) => {
       if (plan[q.id] !== undefined) return plan[q.id];
       return q.kind === "pick_two" ? q.answers.slice(0, 2).map((a) => a.id) : q.answers[0].id;
-    }, { fast: !!vp.p, shot: vp.p ? { [QS[0].id]: "03-question" } : { [QS[0].id]: "03-question-first", [(QS.find((q) => q.must_have) || QS[0]).id]: "03b-question-must-have", [(QS.find((q) => q.kind === "pick_two") || QS[0]).id + ":picked"]: "03c-question-pick-two" } });
+    }, { fast: !!vp.p, shot: vp.p ? { [QS[0].id]: "03-question", [(QS.find((q) => q.must_have) || QS[0]).id]: "03b-question-must-have" } : { [QS[0].id]: "03-question-first", [(QS.find((q) => q.must_have) || QS[0]).id]: "03b-question-must-have", [(QS.find((q) => q.kind === "pick_two") || QS[0]).id + ":picked"]: "03c-question-pick-two" } });
     if (ex) ok(JSON.stringify(M.match(B, QS, answers, CFG).fits.map((r) => r.b.id)) === JSON.stringify(ex.expected_fits || ex.order), "the walk reproduces the data's first example");
     const R = await checkMatches(page, answers, L + "all answered");
     await everyScreen(page, L + "matches", LIMIT);
@@ -295,6 +304,14 @@ async function barSays(page, n, label) {
     await act(page, "redo"); await barSays(page, 3, "a question"); await everyScreen(page, L + "question with bar", LIMIT); if (!vp.p) await screen(page, "06b-question-with-bar");
     for (let i = 0; i < QS.length; i++) {   /* her answers are remembered: Continue / the pressed answer moves on */
       const q = QS[i];
+      await page.waitForSelector("#q-h");
+      const clear = await page.evaluate(() => { window.scrollTo(0, document.scrollingElement.scrollHeight); const bar = document.getElementById("savebar");
+        const last = [...document.querySelectorAll("#app .choice, #app .pchip, #app [data-act=pick-done], #app [data-act=q-back]")].pop();
+        return !bar || !last || last.getBoundingClientRect().bottom <= bar.getBoundingClientRect().top; });
+      ok(clear, L + q.id + ": with the bar showing, the last answer and Back scroll clear of it");
+      if (i === QS.length - 1) await screen(page, "06c-last-question-with-bar-scrolled");
+      await page.evaluate(() => window.scrollTo(0, 0));
+      if (q.must_have && !vp.p) await screen(page, "06d-must-have-with-counts");
       if (q.kind === "pick_two") { if (answers[q.id]) await act(page, "pick-done"); else await act(page, "q-skip"); }
       else if (answers[q.id]) await act(page, "qa", answers[q.id]); else await act(page, "q-skip");
     }

@@ -96,6 +96,8 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;line-height:1.
 .choice small{display:block;font-family:var(--body);font-weight:600;font-size:15px;color:var(--muted)}
 .choice[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .choice[aria-pressed="true"] small{color:var(--paper);opacity:.85}
+.choice .cnt{justify-self:start;font-family:var(--body);font-size:14px;font-weight:800;color:var(--ok-ink);background:var(--ok-bg);border-radius:999px;padding:2px 10px;margin-top:2px}
+.choice[aria-pressed="true"] .cnt{color:var(--ok-ink)}
 .choice .none{justify-self:start;font-family:var(--body);font-size:14px;font-weight:800;color:var(--low-ink);background:var(--low-bg);border-radius:999px;padding:2px 10px;margin-top:2px}
 .choice[aria-pressed="true"] .none{color:var(--low-ink)}
 .pchips{display:flex;flex-wrap:wrap;gap:10px}
@@ -724,7 +726,7 @@ function question() {
       var c = M.countFits(B, QS, with1, CFG);
       return '<button type="button" class="choice" data-act="qa" data-v="' + esc(a.id) + '" data-count="' + c + '" aria-pressed="' + (picked === a.id) + '">' +
         '<span>' + esc(a.label) + '</span>' + (a.sublabel ? '<small>' + esc(a.sublabel) + '</small>' : '') +
-        (c === 0 ? '<span class="none">None fit with your other answers</span>' : '') + '</button>';
+        (!q.must_have ? '' : c === 0 ? '<span class="none">None fit with your other answers</span>' : '<span class="cnt">' + c + (c === 1 ? ' place' : ' places') + '</span>') + '</button>';
     }).join("") + '</div>';
   }
   return top() + head +
