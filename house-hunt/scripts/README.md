@@ -459,3 +459,22 @@ Second trawl, 2026-11-17 (owner: floor and elevator; $2,200 collection limit; bu
   `concierge_data.floor_text`: "Floor 2, a single flight up, no elevator needed (read from the apartment number)". Tests:
   `test_realtor_lines.py` `FloorAndElevator`, `test_check_published_text.py` `FloorAndElevator`, `test_concierge_data.py`
   `floor_and_elevator_synthetic`.
+
+### Added 2026-11-17 (later): trawl 2, step 6 (rebuild and the review list)
+
+- `build_master.py`: reads `data/reference/unit_floor_reads.csv` (`load_unit_floor_reads`, `floor_from_reads`; written by
+  `building_stories.py`). Precedence: phone, confirmed, stated on the listing, the evidence pass's reading, then this file, then the
+  master's own label reading. A row is used only when it is about the same apartment number and not above the building's floor
+  count, and not where the evidence pass said the floor is unknown. It is stored as `unit_floor_basis = inferred`, label kind
+  `simple`, `unit_floor_source = "unit number (data/reference/unit_floor_reads.csv: <convention>)"`, so it carries the existing
+  disclosure "floor read from the apartment number". The garden-style elevator rule now reads the unit labels of all of a
+  building's listings (`data/listings.csv`), not only those at or under $2,200 (Residences at The Summit).
+- `rank.py`: an apartment the floor-and-elevator rule leaves `unknown` (floor 3+, no elevator stated) or `fail` is dropped as
+  sketchy (`weak_why`); it used to count as one inferred fact and could rank.
+- `tools/crime.py`, `tools/places.py`: their streamed bulk downloads call `lib.check_host` first (refused and off-limits hosts).
+  `lib.py`: the Census geocoder is throttled to 1 request per second.
+- `trawl2_needs_review.py` (new): writes `out/trawl2_needs_review.csv` and the three
+  reviewer files `out/trawl2_needs_review_{nj,ct,ny}.csv` (one building, one file): every unit that would be shown if it had a
+  current verdict (ranked, not an avoid building, base rent at most $2,200, at most one open item), with the area, the open item,
+  whether the building has evidence rows and a priority (1: at most $2,000 in a priority area; 2: at most $2,000 elsewhere; 3:
+  $2,001 to $2,200). `--counts <folder>` adds the before/after table by area (`out/trawl2_counts_before_after.csv`). Reads only.

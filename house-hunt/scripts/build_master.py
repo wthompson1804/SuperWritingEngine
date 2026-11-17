@@ -818,6 +818,47 @@ def load_numbering_conventions(path=None) -> dict:
     return {r.building_id: r.convention for r in T.itertuples() if r.convention in parsers.NUMBERING_CONVENTIONS}
 
 
+UNIT_FLOOR_READS = DATA / "reference" / "unit_floor_reads.csv"
+UNIT_FLOOR_READ_BASIS = "read from the apartment number"
+
+
+def load_unit_floor_reads(path=None) -> dict:
+    """listing_id -> (floor, unit, convention) from data/reference/unit_floor_reads.csv (second trawl, 2026-11-17:
+    written by scripts/building_stories.py; columns listing_id, unit, floor, basis, convention, notes). Only rows whose
+    basis is "read from the apartment number" and whose floor is a whole number are used. The file may be absent or
+    partial. A reading is a floor read from the apartment number: build_master.py stores it as unit_floor_basis
+    'inferred' with label kind 'simple', so it carries the existing disclosure (rank.py: floor_read_from_number)."""
+    f = Path(path) if path else UNIT_FLOOR_READS
+    if not f.exists():
+        return {}
+    try:
+        T = pd.read_csv(f, dtype=str, keep_default_na=False)
+    except (pd.errors.EmptyDataError, pd.errors.ParserError):
+        return {}
+    for c in ("listing_id", "unit", "floor", "basis", "convention"):
+        if c not in T:
+            return {}
+    out = {}
+    for r in T.itertuples():
+        if r.basis.strip() != UNIT_FLOOR_READ_BASIS or not re.fullmatch(r"\d{1,3}", r.floor.strip()):
+            continue
+        out[r.listing_id.strip()] = (int(r.floor), r.unit.strip(), r.convention.strip())
+    return out
+
+
+def floor_from_reads(read, unit, cap=None):
+    """The floor a row of unit_floor_reads.csv gives this listing, or None: the row must be about the same apartment
+    number (a stale row for a relabelled listing is ignored) and must not be above the building's floor count."""
+    if not read:
+        return None
+    f_, lab, _conv = read
+    if not (str(lab) == str(unit) or parsers.units_match(lab, unit) or (parsers.unit_key(lab) and parsers.unit_key(lab) == parsers.unit_key(unit))):
+        return None
+    if cap and f_ > cap:
+        return None
+    return f_
+
+
 def load_overrides(path=None):
     """data/reference/address_overrides.csv: reviewed corrections to a building's name, address or city, or to one
     unit's address (scope building -> key is an addr_key; scope unit -> key is a listing_id). Each row says where the
@@ -1331,6 +1372,17 @@ def main():
     # For those the elevator is an open gate fact: "confirm an elevator serves this apartment". A phone answer settles it.
     DOUBT = load_elevator_doubt()
     labels_by_b = U.groupby("building_id").unit.apply(lambda x: [u for u in x if parsers.unit_label_key(u)]).to_dict()
+    # second trawl (2026-11-17): only listings at or under $2,200 reach units.csv, but the complex's other listings (above
+    # $2,200, or pending) still show how it is numbered: their labels count too (Residences at The Summit: only M2-07 and
+    # M4-22 are under $2,200, the K and L buildings are in the listings above it)
+    try:
+        LA = pd.read_csv(DATA / "listings.csv", dtype=str, keep_default_na=False, low_memory=False, usecols=["addr_key", "unit"])
+        LA["building_id"] = LA.addr_key.map(A2B)
+        for b_, labs in LA[LA.building_id.notna()].groupby("building_id").unit:
+            have = labels_by_b.setdefault(b_, [])
+            have += [u for u in labs if parsers.unit_label_key(u) and u not in have]
+    except (OSError, ValueError):
+        pass
     stated_floor_by_b = U[U.floor_basis.eq("stated")].groupby("building_id").floor_used.apply(list).to_dict() if "floor_used" in U else {}
     for b, d in rows.items():
         if d.get("elevator") != "yes" or d.get("elevator_basis") == PHONE:
@@ -1643,7 +1695,8 @@ def main():
             desc_floor_ok[key] = ok
         return desc_floor_ok[key]
     fl, flb, fls, flk = [], [], [], []
-    for b, un, stated, gbasis, hnote, rawp in zip(MU.building_id, MU.unit, MU.floor_used, MU.floor_basis, MU.notes, MU.raw_path):
+    READS = load_unit_floor_reads()          # second trawl: floors read from the apartment number (scripts/building_stories.py)
+    for lid, b, un, stated, gbasis, hnote, rawp in zip(MU.listing_id, MU.building_id, MU.unit, MU.floor_used, MU.floor_basis, MU.notes, MU.raw_path):
         if gbasis == "stated" and "floor from description text" in str(hnote) and re.fullmatch(r"[\d.]+", str(stated)) and not description_floor(rawp, stated):
             gbasis = "description_amenity"           # the phrase was about an amenity: the floor is not stated
         got = None
@@ -1662,6 +1715,10 @@ def main():
                 and not (got and got[1] == "confirmed") and gbasis != "stated":
             # the evidence pass looked at this unit and said its floor is unknown: a label reading does not stand
             label_floor, kind, got = None, "complex", None
+            ev_unknown = True
+        else:
+            ev_unknown = False
+        read_floor = None if ev_unknown else floor_from_reads(READS.get(lid), un, cap)
         if got and got[1] == "confirmed":
             fl.append(got[0]); flb.append("confirmed"); fls.append(got[2]); flk.append("")
         elif gbasis == "stated" and re.fullmatch(r"[\d.]+", str(stated)):
@@ -1669,6 +1726,8 @@ def main():
         elif got:                                           # the evidence pass read it off the unit number: still inferred
             ok_simple = kind == "simple" and label_floor == got[0]
             fl.append(got[0]); flb.append("inferred"); fls.append("evidence pass, read from the unit number"); flk.append("simple" if ok_simple else "complex")
+        elif read_floor is not None:                        # second trawl: read from the apartment number, with its convention
+            fl.append(read_floor); flb.append("inferred"); fls.append("unit number (data/reference/unit_floor_reads.csv: " + READS[lid][2] + ")"); flk.append("simple")
         elif label_floor is not None and not (cap and label_floor > cap):
             fl.append(label_floor); flb.append("inferred"); fls.append("unit number"); flk.append(kind)
         else:

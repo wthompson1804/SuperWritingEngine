@@ -31,7 +31,7 @@ DEFAULT_DELAY = 1.0
 HOST_DELAY = {
     "nominatim.openstreetmap.org": 1.2,  # usage policy: max 1 req/s
     "router.project-osrm.org": 1.0,
-    "geocoding.geo.census.gov": 0.3,
+    "geocoding.geo.census.gov": 1.0,   # CLAUDE.md: at most 1 request per second per host
     "data.cityofnewyork.us": 0.3,
 }
 

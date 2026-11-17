@@ -1,34 +1,83 @@
 addr_key,building_name,address,city_listed,city,zip5,hood_id
-143 4th ave|11706,Shoregate,143 4th Avenue,Bay Shore,Islip,11706,ny:islip
-1 webb ave|10577,One Webb Ave,1 Webb Avenue,Purchase,Harrison,10577,ny:harrison
-105 corporate park dr|10604,Carraway,105 Corporate Park Drive,West Harrison,Harrison,10604,ny:harrison
-1500 ave at port imperial|07086,RiversEdge at Port Imperial,1500 Avenue at Port Imperial,West New York,Weehawken,7086,nj:weehawken
-1300 ave at port imperial|07086,RiverParc,1300 Avenue at Port Imperial,West New York,Weehawken,7086,nj:weehawken
 55 monroe pl|07003,55 Monroe Place Apartments,55 Monroe Pl,Belleville,Bloomfield,7003,nj:bloomfield
-34 valley rd|07042,Valley and Bloom,34 Valley Rd,Upper Montclair,Montclair,7042,nj:montclair
-2400 vauxhall rd|07083,Avalon Union,2400 Vauxhall Road,Newark,Union,7083,nj:union
-1453 valley rd|07470,Avalon Wayne,1453 Valley Road,Lincoln Park,Wayne,7470,nj:wayne
-153 valley st|07079,Third & Valley,153 Valley Street,East Orange,South Orange,7079,nj:south-orange
 200 boyden ave|07040,Avalon Maplewood,200 Boyden Ave,Newark,Maplewood,7040,nj:maplewood
-555 s ave e|07016,Woodmont Station at Cranford,555 South Ave E,Kenilworth,Cranford,7016,nj:cranford
-118 victory rd|07081,The Cove,118 Victory Rd,Westfield,Springfield,7081,nj:springfield
-7000 avalon way|08854,Avalon Piscataway,7000 Avalon Way,Dunellen,Piscataway,8854,nj:piscataway
-527 old bridge tpke|08816,Kensington Place,527 Old Bridge Tpke,South River,East Brunswick,8816,nj:east-brunswick
-500 bristol blvd|08873,The Grove Somerset,500 Bristol Blvd,Somerset,Franklin,8873,nj:franklin
-100 woodstone circle|08540,Woodmont Way at West Windsor,100 Woodstone Circle,Princeton,West Windsor,8540,nj:west-windsor
 64 regency dr|08060,Northampton Crossing,64 Regency Drive,Burlington,Mount Holly,8060,nj:mount-holly
-100 julia dr|07885,Pondview Estates,100 Julia Drive,"Wharton, Rockaway Township",Rockaway,7885,nj:rockaway
 1100 frank|07029,Vermella Harrison,1100 Frank,E Rodgers Blvd. S Harrison,Harrison,7029,nj:harrison
-430 e main st|10940,The Park at Main,430 E Main St,Middletown,Wallkill,10940,ny:wallkill
-165 overlook rd|12603,Lagrange Farms,165 Overlook Rd,Poughkeepsie,LaGrange,12603,ny:lagrange
-1000 new york ave|11746,Gateway Plaza,1000 New York Ave,Huntington Station,Huntington,11746,ny:huntington
-100 legacy rd|10994,The Reserve at Clarkstown,100 Legacy Rd,West Nyack,Clarkstown,10994,ny:clarkstown
-400 cardinal ct|07852,Parc At Roxbury,400 Cardinal Ct,Ledgewood,Roxbury,7852,nj:roxbury
-1775 windsor rd|07666,Avalon Teaneck,1775 Windsor Road,Bergenfield,Teaneck,7666,nj:teaneck
-500 district dr|07922,RT 500,500 District Drive,Summit,Berkeley Heights,7922,nj:berkeley-heights
+86 ridge st|10965,,86 Ridge St,Pearl River,Orangetown,10965,ny:orangetown
+|11778,,,Rocky Point,Brookhaven,11778,ny:brookhaven
+25 nymph rd d rocky point ny 11778 usa|11778,,25 Nymph Rd,Rocky Point,Brookhaven,11778,ny:brookhaven
+300 glenwood ave|07003,Avalon Bloomfield Station,300 Glenwood Avenue,Newark,Bloomfield,7003,nj:bloomfield
+263 bloomfield ave|07003,263 Bloomfield Avenue Apartments,263 Bloomfield Ave,Belleville,Bloomfield,7003,nj:bloomfield
+218-226 millburn ave|07041,218 Millburn Avenue,218-226 Millburn Avenue,Newark,Millburn,7041,nj:millburn
+510 millburn ave|07078,510 Millburn Avenue Apts,510 Millburn Avenue,Short Hills,Millburn,7078,nj:millburn
+3 ronald dr|07067,Queens Gardens Apartments,3 Ronald Dr,Colonia,Woodbridge,7067,nj:woodbridge
+20 gill ln 1e|08830,Metro Park Station Apartments,20 Gill Lane,Iselin,Woodbridge,8830,nj:woodbridge
 575 easton ave|08904,Harrison Somerset,575 Easton Ave,Somerset,Franklin,8904,nj:franklin
+40 cross rd|07747,Chelsea Village,40 Cross Rd,Matawan,Aberdeen,7747,nj:aberdeen
+33 aberdeen rd|07747,Tree Haven Apartments,33 Aberdeen Rd,Matawan,Aberdeen,7747,nj:aberdeen
+82 finderne ave|08807,Grandview Gardens Apartments,82 Finderne Avenue,Finderne,Bridgewater,8807,nj:bridgewater
+25 nymph rd|11778,25 Nymph Road,25 Nymph Road,Rocky Point,Brookhaven,11778,ny:brookhaven
+348 gemini dr|08844,Beekman Gardens,348 Gemini Dr,New Brunswick,Hillsborough,8844,nj:hillsborough
+1 schindler ct|08844,The Hillmont,1 Schindler Court,Somerset,Franklin,8844,nj:franklin
+2005 quail ridge dr|08536,Quail Ridge,2005 Quail Ridge Drive,Plainsboro Center,Plainsboro,8536,nj:plainsboro
+1000 pheasant hollow dr|08536,Addison at Princeton Meadows,1000 Pheasant Hollow Dr,Princeton Meadows,Plainsboro,8536,nj:plainsboro
+3217 ravens crest dr|08536,The Crest at Princeton Meadows,3217 Ravens Crest Drive,Plainsboro Center,Plainsboro,8536,nj:plainsboro
+900 wessex pl|08540,The Mews at Princeton Junction,900 Wessex Place,Princeton,West Windsor,8540,nj:west-windsor
+1000 jamie brooks ln|08550,eaves West Windsor,1000 Jamie Brooks Lane,Trenton,West Windsor,8550,nj:west-windsor
+1000 town ct s|08648,Artisan at Lawrenceville,1000 Town Court South,Lawrenceville,Lawrence,8648,nj:lawrence
+100 avalon way|08648,The Mercer at Lawrence Station,100 Avalon Way,Lawrenceville,Lawrence,8648,nj:lawrence
+1000 stewards crossing way|08648,Stewards Crossing,1000 Stewards Crossing Way,Lawrenceville,Lawrence,8648,nj:lawrence
+225 red school ln a4|08865,Brakeley Gardens,225 Red School Ln,Phillipsburg,Lopatcong,8865,nj:lopatcong
+231 windmill ct|08865,Warren Heights Apartments,231 Windmill Court,Phillipsburg,Lopatcong,8865,nj:lopatcong
+26000 cornerstone dr|19067,The Edge At Yardley,26000 Cornerstone Drive,Yardley,Lower Makefield,19067,pa:lower-makefield
+1800 kathy dr|19067,Yardley Crossing,1800 Kathy Drive,Yardley,Lower Makefield,19067,pa:lower-makefield
+251 s olds blvd|19030,Lakeview Terrace,251 S Olds Blvd,Fairless Hills,Falls,19030,pa:falls
+29 hudson view dr|12508,Hudson View Park,29 Hudson View Dr,Beacon,Fishkill,12508,ny:fishkill
+700 stratford ln|10940,Country Manor Apartments,700 Stratford Ln,Middletown,Wallkill,10940,ny:wallkill
+644 silver lake scotchtown rd|10941,Stevens Manor Apartments,644 Silver Lake Scotchtown Rd,Middletown,Wallkill,10941,ny:wallkill
+228 route 376|12533,Hopewell Gardens Apartments,228 Route 376,Hopewell Junction,East Fishkill,12533,ny:east-fishkill
+35 penataquit ave|11706,Mid Island Apartments,35 Penataquit Ave,Bay Shore,Islip,11706,ny:islip
+107 wartburg ave|11726,Bunt Commons II: 55+ Senior Living Community,107 Wartburg Ave,Copiague,Babylon,11726,ny:babylon
+45 country club dr|11727,Fairfield Courtyard at Coram,45 Country Club Dr,Coram,Brookhaven,11727,ny:brookhaven
 1 brookwood ln|11772,Conifer Village at Patchogue Senior Apartments 55+,1 Brookwood Ln,East Patchogue,Brookhaven,11772,ny:brookhaven
+1 b country club dr|11949,Villas at Pine Hills,1 b Country Club Dr,Manorville,Brookhaven,11949,ny:brookhaven
+887 montauk hwy|11772,Eagle Rock Apartments at Patchogue Preserve,887 Montauk Hwy,Patchogue,Brookhaven,11772,ny:brookhaven
+100 village dr|11961,Brookwood at Ridge,100 Village Dr,Ridge,Brookhaven,11961,ny:brookhaven
+870 little e neck rd|11704,Fairfield Maples North,870 Little East Neck Rd,West Babylon,Babylon,11704,ny:babylon
 1180 midland ave|10708,1180 Midland,1180 Midland Ave,Bronxville,Yonkers,10708,ny:yonkers
-250 s central ave|10530,Glasshouse,250 S Central Ave,Hartsdale,Greenburgh,10530,ny:greenburgh
-500 parq ln|07054,500 PARQ,500 PARQ Lane,Parisppany,Parsippany-Troy Hills,7054,nj:parsippany-troy-hills
-37 woodmere blvd|11598,Fairfield Estates at Woodmere,37 Woodmere Blvd,Woodmere,Hempstead,11598,ny:hempstead
+225 berkman dr|10941,Imperial Gardens Apartment Homes,225 Berkman Dr,Middletown,Wallkill,10941,ny:wallkill
+201 genung st|10940,Boulder Pointe Apartments,201 Genung St,Middletown,Wallkill,10940,ny:wallkill
+|10507,,,Bedford Hills,Bedford,10507,ny:bedford
+|10941,,,Middletown,Wallkill,10941,ny:wallkill
+71 international dr s|07828,Mt. Olive - Budd Lake,71 International Dr S,Budd Lake,Mount Olive,7828,nj:mount-olive
+4230 us route 1|08852,Princeton - South Brunswick,4230 US Route 1,Monmouth Junction,South Brunswick,8852,nj:south-brunswick
+40 derby ave 1 greenlawn ny 11740 usa|11740,,40 Derby Ave,Greenlawn,Huntington,11740,ny:huntington
+broadway a rocky point ny 11778 usa|11778,,Broadway,Rocky Point,Brookhaven,11778,ny:brookhaven
+17 old allamuchy rd hackettstown nj 07840 usa|07840,,17 Old Allamuchy Rd,Hackettstown,Independence,7840,nj:independence
+asbury park nj 07712 usa|07712,,"Asbury Park, NJ 07712, USA",Asbury Park,Ocean,7712,nj:ocean
+46 titman rd 4 belvidere nj 07823 usa|07823,,46 Titman Rd,Belvidere,White,7823,nj:white
+30 worlds fair dr|08873,Somerset - Franklin,30 Worlds Fair Dr,Somerset,Franklin,8873,nj:franklin
+1 reler ln l|08873,Somerset Mews,1 Reler Lane,Somerset,Franklin,8873,nj:franklin
+201 pickering pl|08873,Somerset Park,201 Pickering Pl,Franklin Park,Franklin,8873,nj:franklin
+4230 u s route 1|08852,Princeton - South Brunswick,4230 U.S. Route 1,New Brunswick,South Brunswick,8852,nj:south-brunswick
+119 main ave|07756,119 Main Avenue,119 Main Avenue,Ocean Grove,Neptune,7756,nj:neptune
+3461 s broad st|08610,Barclay Village,3461 S Broad Street,White Horse,Hamilton,8610,nj:hamilton
+1217 whitney ave|06517,Whitney Avenue,1217 Whitney Ave,New Haven,Hamden,6517,ct:hamden
+1 chelsea ridge mall|12590,Chelsea Ridge Apartments,1 Chelsea Ridge Mall,Wappingers Falls,Wappinger,12590,ny:wappinger
+41 brookfield rd|12589,Hudson Valley Apartments,41 Brookfield Rd,Wallkill,Shawangunk,12589,ny:shawangunk
+405 e main st|11706,Fairfield Hedges at Bay Shore,405 E Main St,Bay Shore,Islip,11706,ny:islip
+727 greenbriar dr|11716,Fairfield Sunrise Gardens at Bohemia,727 Greenbriar Dr,Bohemia,Islip,11716,ny:islip
+1998 route 112|11727,Pinewood Village,1998 Route 112,Coram,Brookhaven,11727,ny:brookhaven
+1 b meadowoods ln|11955,Pine Hills South,1 b Meadowoods Ln,Moriches,Brookhaven,11955,ny:brookhaven
+218 lakeland ave|11782,Fairfield Plaza At Sayville,218 Lakeland Ave,Sayville,Islip,11782,ny:islip
+850 little e neck rd|11704,Fairfield Maples South,850 Little East Neck Rd,West Babylon,Babylon,11704,ny:babylon
+164 rollstone ave|11796,Fairfield Plaza West At West Sayville,164 Rollstone Ave,West Sayville,Islip,11796,ny:islip
+2 skytop dr|10520,55+ Community - Springvale Apartments,2 Skytop Dr,Croton On Hudson,Cortlandt,10520,ny:cortlandt
+|11554,,,East Meadow,Hempstead,11554,ny:hempstead
+|11746,,,Huntington Station,Huntington,11746,ny:huntington
+39 rome ave bedford hills ny 10507 usa|10507,,39 Rome Ave,Bedford Hills,Bedford,10507,ny:bedford
+170 clove branch rd 17 hopewell junction ny 12533 usa|12533,,170 Clove Branch Rd,Hopewell Junction,East Fishkill,12533,ny:east-fishkill
+51 whiting st|06514,Whiting,51 Whiting St,New Haven,Hamden,6514,ct:hamden
+801 long island ave|11729,Fairfield Station At Deer Park,801 Long Island Ave,Deer Park,Babylon,11729,ny:babylon
+1 larchmont ave|10538,,1 Larchmont Ave,Larchmont,Mamaroneck,10538,ny:mamaroneck
+298 route 211 e|10940,,298 Route 211 E,Middletown,Wallkill,10940,ny:wallkill

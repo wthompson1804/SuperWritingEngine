@@ -1,14 +1,16 @@
 building_id,unit_label,floor,basis,source_url,value
-b_812b71fdaf,?,,unparsed,https://www.trulia.com/home/949-w-end-ave-d-new-york-ny-10025-2106139475,top floor (number not stated; city data lists 12 floors)
-b_564c337ac7,*,2.0,confirmed,https://www.avaloncommunities.com/new-jersey/somerville-apartments/avalon-somerville-station/apartment/NJ033-NJ033-022-265,2
-b_1897e7d980,231,2.0,confirmed,https://bygomes.com/page-data/property/envy/231/page-data.json,unit 231: 2nd Floor
-b_1897e7d980,308,3.0,confirmed,https://bygomes.com/page-data/property/envy/308/page-data.json,unit 308: 3rd Floor
-b_1897e7d980,309,3.0,confirmed,https://bygomes.com/page-data/property/envy/309/page-data.json,unit 309: 3rd Floor
-b_1897e7d980,G02,1.0,confirmed,https://bygomes.com/page-data/property/envy/G02/page-data.json,unit G02: Ground Floor
-b_3c6898b295,?,,unparsed,https://www.trulia.com/home/12333-83rd-ave-3203-kew-gardens-ny-11415-2086095362,high floor (unit 3203)
-b_89871dc4dd,*,3.0,confirmed,https://www.avaloncommunities.com/new-jersey/union-apartments/avalon-union/apartment/NJ026-NJ026-005-5306,3
-b_144b021ca5,S0904,9.0,confirmed,https://www.greystar.com/continuum-55-white-plains-ny/p_22789,S0904: floor 9; N1119: floor 11
-b_3f9fc0b756,*,5.0,confirmed,https://www.avaloncommunities.com/new-york/yonkers-apartments/avalon-yonkers/apartment/NY047-NY047-001-1555,5
-b_4317e61e15,*,6.0,confirmed,https://www.zumper.com/listings/28902181p/1-bedroom-flushing-new-york-ny,6
-b_4317e61e15,*,6.0,confirmed,https://www.zumper.com/listings/28902181p/1-bedroom-flushing-new-york-ny,6
-b_8055c78811,?,,unparsed,https://www.noblenj.com/,no unit number; every residence is on floor 3 or higher
+b_c703305174,1031,1,confirmed,https://theaugust.com/floorplans/,1 (unit 1031)
+b_b5e1e32afb,*,1,confirmed,https://www.jcentraburlington.com/floorplans/,1
+b_b5e1e32afb,*,1,confirmed,https://www.jcentraburlington.com/floorplans/,1
+b_e2d2c14006,*,2,confirmed,https://www.avaloncommunities.com/new-jersey/boonton-apartments/avalon-boonton/apartment/NJ029-NJ029-001-2154,2
+b_e2d2c14006,*,2,confirmed,https://www.avaloncommunities.com/new-jersey/boonton-apartments/avalon-boonton/apartment/NJ029-NJ029-001-2182,2
+b_27056882d3,56-118,1,confirmed,https://www.greystar.com/the-brownstones-at-englewood-south-englewood-nj/p_13462,09-426: floor 4; 56-118: floor 1 (ground floor)
+b_1897e7d980,231,2,confirmed,https://bygomes.com/page-data/property/envy/231/page-data.json,unit 231: 2nd Floor
+b_1897e7d980,308,3,confirmed,https://bygomes.com/page-data/property/envy/308/page-data.json,unit 308: 3rd Floor
+b_1897e7d980,309,3,confirmed,https://bygomes.com/page-data/property/envy/309/page-data.json,unit 309: 3rd Floor
+b_1897e7d980,G02,1,confirmed,https://bygomes.com/page-data/property/envy/G02/page-data.json,unit G02: Ground Floor
+b_84739a68fb,O-0404,4,confirmed,https://bltliveworkplay.com/apartments/jersey-city/the-beacon/availability/,O-0404: 4; P-1203: 12
+b_84739a68fb,P-1203,12,confirmed,https://bltliveworkplay.com/apartments/jersey-city/the-beacon/availability/,O-0404: 4; P-1203: 12
+b_5d1b685d2d,001-436,4,confirmed,https://www.avaloncommunities.com/new-jersey/maplewood-apartments/avalon-maplewood,001-436: 4; 001-324: 3
+b_5d1b685d2d,001-324,3,confirmed,https://www.avaloncommunities.com/new-jersey/maplewood-apartments/avalon-maplewood,001-436: 4; 001-324: 3
+b_e2d2c14006,1177,1,confirmed,https://www.avaloncommunities.com/new-jersey/boonton-apartments/avalon-boonton/,unit 1177: 1

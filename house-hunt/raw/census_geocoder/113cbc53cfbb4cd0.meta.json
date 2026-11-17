@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=996+Jennings+St%2C+New+York%2C+NY+10460&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-17T19:13:18+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/113cbc53cfbb4cd0.json",
+ "source": "census_geocoder"
+}

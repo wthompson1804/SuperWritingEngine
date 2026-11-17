@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=630+Chapel+St%2C+New+Haven%2C+CT+06510&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-17T19:13:51+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/caa6860875568a14.json",
+ "source": "census_geocoder"
+}

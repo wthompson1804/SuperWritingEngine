@@ -3,15 +3,16 @@ ct:beacon-falls,Beacon Falls,1,3.6386,2.5869,4.9476,5.8908,4.5073,3.6314,space,m
 ct:bridgeport,Bridgeport,7,6.7091,4.6701,5.8324,5.1084,4.7512,4.895,space,settled,0.9829,True,space,,space
 ct:brookfield,Brookfield,1,2.7844,2.7482,6.2153,6.5861,5.1737,4.2367,space,enclave,0.987,True,space,,space
 ct:danbury,Danbury,5,4.4298,3.1909,4.1924,4.9583,3.9844,2.9095,middle,space,0.9118,True,middle,,middle
+ct:derby,Derby,1,4.6766,3.2303,4.7913,5.7187,4.377,4.0063,space,middle,0.8063,False,space,,space
+ct:east-haven,East Haven,6,3.8628,1.8044,5.8813,5.6463,3.7511,3.7022,space,middle,0.4874,False,space,,space
 ct:fairfield,Fairfield,2,1.3869,1.6938,4.5946,4.8377,3.4953,2.0015,enclave,space,0.8188,False,enclave,,enclave
 ct:hamden,Hamden,2,4.2693,2.2765,5.1279,4.9933,3.9523,3.482,space,middle,0.6538,False,space,,space
 ct:milford-city-balance-,Milford,6,3.7986,2.5619,3.7233,3.6882,3.0421,1.8546,middle,space,0.7239,False,middle,,middle
+ct:naugatuck,Naugatuck,4,4.5336,2.5139,6.0163,5.7109,4.4544,4.19,space,middle,0.6,False,space,,space
 ct:new-haven,New Haven,26,6.654,5.7526,4.2993,2.6764,4.6838,4.3466,pre_car,new_water,0.6225,False,pre_car,,pre_car
-ct:newtown,Newtown,1,2.1943,2.1675,5.9073,6.2993,4.8949,3.5899,space,enclave,0.9878,True,space,,space
+ct:new-milford,New Milford,2,6.3806,4.6336,7.946,7.4619,6.4986,6.4653,space,enclave,0.7262,False,space,,space
 ct:north-haven,North Haven,1,2.0402,1.679,4.8288,5.5533,3.7849,2.4373,space,enclave,0.823,False,space,,space
 ct:norwalk,Norwalk,11,4.7833,3.5741,2.145,4.0201,3.2018,2.3057,new_water,middle,0.9303,True,new_water,,new_water
-ct:orange,Orange,1,2.7892,1.5027,5.0522,5.1275,3.3899,2.6418,space,middle,0.5688,False,space,,space
-ct:oxford,Oxford,1,2.5889,2.3684,5.8543,6.4889,4.8728,3.7764,space,enclave,0.9148,True,space,,space
 ct:seymour,Seymour,2,5.1045,3.8964,6.8443,7.0469,5.9968,5.626,space,enclave,0.7633,False,space,,space
 ct:shelton,Shelton,5,3.2626,1.5725,4.9643,5.2309,3.82,2.8448,space,middle,0.5527,False,space,,space
 ct:stamford,Stamford,44,4.5583,3.8454,2.3388,3.2451,3.2756,1.9634,middle,new_water,0.8395,False,middle,,middle
@@ -19,178 +20,193 @@ ct:stratford,Stratford,1,3.1386,1.5305,4.8194,4.745,3.3732,2.5305,space,middle,0
 ct:trumbull,Trumbull,2,2.3733,1.9934,6.0269,6.1601,4.8002,3.8429,space,enclave,0.8399,False,space,,space
 ct:waterbury,Waterbury,1,8.4396,6.4176,9.4877,8.3097,7.4654,8.113,space,settled,0.8597,False,space,,space
 ct:west-haven,West Haven,5,4.577,2.2966,6.0708,5.2032,3.8255,3.9599,space,settled,0.6003,False,space,,space
-ct:westport,Westport,2,1.4273,3.5038,6.2009,6.7069,5.6399,4.031,enclave,space,0.4074,False,enclave,,enclave
-nj:atlantic-highlands,Atlantic Highlands,1,2.5571,2.7478,4.4265,5.0324,4.1058,2.6148,enclave,middle,0.9779,True,enclave,,enclave
+ct:wilton,Wilton,1,1.1729,2.809,5.4199,6.0114,4.8148,3.1596,enclave,space,0.4175,False,enclave,,enclave
+ct:woodbury,Woodbury,1,2.6059,1.7369,4.7972,5.1181,3.3942,2.1143,space,middle,0.8215,False,space,,space
+nj:aberdeen,Aberdeen,2,2.668,1.5684,4.8645,5.2598,3.9709,2.8176,space,enclave,0.5879,False,space,,space
+nj:asbury-park,Asbury Park,2,2.928,1.9848,5.6733,5.2422,3.4104,3.02,space,enclave,0.6779,False,space,,space
 nj:bayonne,Bayonne,13,3.4645,1.3974,4.5945,4.0503,2.1783,2.1471,space,middle,0.6508,False,space,,space
 nj:belleville,Belleville,3,4.0157,1.8682,4.8839,4.4945,2.4343,2.7213,space,settled,0.7675,False,space,,space
-nj:berkeley-heights,Berkeley Heights,2,1.1892,3.1294,6.1055,6.2436,5.0335,3.5989,enclave,space,0.38,False,enclave,,enclave
 nj:bloomfield,Bloomfield,4,4.1154,2.8131,4.2449,3.2175,2.4861,2.0095,middle,settled,0.8083,False,middle,,middle
-nj:bogota,Bogota,2,3.4414,3.0738,5.3504,5.6327,3.8637,3.5327,space,enclave,0.8932,False,space,,space
+nj:boonton,Boonton,3,2.061,1.7529,5.293,5.0638,3.6461,2.3963,space,enclave,0.8505,False,space,,space
 nj:bordentown,Bordentown,1,2.8942,1.7574,5.8648,5.968,4.4174,3.6073,space,enclave,0.6072,False,space,,space
 nj:bound-brook,Bound Brook,2,3.8434,1.8775,4.3212,4.4379,2.7941,2.7061,space,middle,0.6938,False,space,,space
+nj:bridgewater,Bridgewater,1,3.0947,1.5855,5.602,5.4189,4.1264,3.3143,space,enclave,0.5123,False,space,,space
 nj:burlington,Burlington,1,3.8141,2.728,6.0926,5.8652,4.7293,3.8239,space,enclave,0.7152,False,space,,space
 nj:carteret,Carteret,1,3.5452,1.7643,6.183,5.7847,3.9347,3.8956,space,enclave,0.4977,False,space,,space
 nj:city-of-orange,City of Orange,5,3.6757,2.0705,6.4204,5.5627,3.5353,3.6442,space,settled,0.5857,False,space,,space
+nj:cliffside-park,Cliffside Park,1,3.4127,1.8106,3.6908,3.9788,2.1691,1.3455,middle,space,0.7431,False,middle,,middle
 nj:clifton,Clifton,2,3.1509,1.4055,4.9429,4.4098,2.4424,2.277,space,middle,0.6173,False,space,,space
 nj:cranford,Cranford,1,2.874,1.8768,4.388,3.8457,3.0555,1.755,middle,space,0.9351,True,middle,,middle
 nj:dover,Dover,1,3.9126,2.2172,6.1047,4.6308,3.1536,3.6124,space,settled,0.7031,False,space,,space
-nj:east-brunswick,East Brunswick,2,3.4181,1.8758,4.8226,4.8583,3.8929,3.0829,space,middle,0.6085,False,space,,space
 nj:east-orange,East Orange,10,4.4246,2.0938,5.7803,4.8636,3.0425,3.3996,space,settled,0.6882,False,space,,space
-nj:east-rutherford,East Rutherford,2,2.9714,2.0551,4.0063,3.8766,2.601,1.1855,middle,space,0.5769,False,middle,,middle
-nj:edgewater,Edgewater,3,4.6861,4.0857,1.9412,3.9216,4.0422,2.5444,new_water,middle,0.7629,False,new_water,,new_water
+nj:eatontown,Eatontown,1,3.405,1.9873,4.5995,4.7645,2.8956,1.9343,middle,space,0.9733,True,middle,,middle
+nj:edison,Edison,3,2.6375,1.0246,5.309,5.1889,3.3452,2.5106,space,middle,0.4081,False,space,,space
+nj:elizabeth,Elizabeth,1,7.0553,5.9918,6.2782,6.6502,6.3027,5.6921,middle,space,0.95,True,middle,,middle
 nj:englewood,Englewood,3,3.8715,3.158,2.9624,5.1687,3.7824,2.2596,middle,new_water,0.7628,False,middle,,middle
+nj:fairview,Fairview,2,3.6134,2.3806,4.3919,4.6649,2.0286,1.9525,middle,settled,0.9625,True,middle,,middle
 nj:flemington,Flemington,4,3.265,1.2048,5.3641,4.7385,3.2609,2.6731,space,middle,0.4507,False,space,,space
+nj:florence,Florence,1,4.694,3.2293,7.1064,6.8333,5.5407,5.2377,space,enclave,0.688,False,space,,space
 nj:fort-lee,Fort Lee,3,4.927,4.6759,2.1322,4.6257,4.5109,3.1553,new_water,middle,0.6757,False,new_water,middle,middle
 nj:franklin,Franklin,2,3.6178,2.8464,2.8814,4.7059,3.4672,1.9404,middle,space,0.6817,False,middle,,middle
-nj:garwood,Garwood,1,4.0704,2.0921,5.6856,4.6266,3.5211,3.5456,space,settled,0.5942,False,space,,space
+nj:freehold,Freehold,1,4.2794,2.0405,5.816,5.3018,3.4988,3.632,space,settled,0.5832,False,space,,space
+nj:garfield,Garfield,1,4.8339,2.6227,6.2129,5.6572,3.8016,4.2409,space,settled,0.6899,False,space,,space
 nj:hackensack,Hackensack,13,3.6379,2.3737,3.3239,3.8513,2.5014,1.068,middle,space,0.4499,False,middle,,middle
+nj:hackettstown,Hackettstown,1,2.8858,1.9956,5.983,6.0249,4.5057,3.5421,space,enclave,0.6915,False,space,,space
+nj:hamilton,Hamilton,1,3.7886,2.1566,5.91,6.0173,4.5392,4.0001,space,enclave,0.5692,False,space,,space
 nj:harrison,Harrison,11,5.5036,4.9566,0.8772,4.4441,4.2391,3.1822,new_water,middle,0.2757,False,new_water,,new_water
 nj:hawthorne,Hawthorne,1,3.2799,2.0457,4.5816,4.7553,2.9697,2.5145,space,middle,0.8136,False,space,,space
+nj:hillsborough,Hillsborough,1,4.9816,3.2947,6.0545,5.4931,4.8503,4.4522,space,middle,0.74,False,space,,space
+nj:howell,Howell,1,1.9447,2.4247,6.2529,6.5176,4.8213,3.6934,enclave,space,0.802,False,enclave,,enclave
+nj:independence,Independence,1,2.5666,2.6907,5.5855,6.1966,4.5465,3.13,enclave,space,0.9539,True,enclave,,enclave
+nj:irvington,Irvington,2,4.8667,2.7404,6.5586,5.3742,4.1587,4.3169,space,settled,0.659,False,space,,space
 nj:jersey-city-bergen-lafayette,Jersey City – Bergen-Lafayette,10,5.195,4.6953,1.776,4.1979,3.9189,2.6439,new_water,middle,0.6717,False,new_water,,new_water
-nj:jersey-city-downtown,Jersey City – Downtown,6,5.4857,5.2532,2.5586,3.1116,4.1578,3.3127,new_water,pre_car,0.8223,False,new_water,,new_water
+nj:jersey-city-greenville,Jersey City – Greenville,2,4.1667,1.8776,5.3307,4.5404,2.4797,3.1321,space,settled,0.7572,False,space,,space
 nj:jersey-city-journal-square,Jersey City – Journal Square,8,4.5161,3.5274,3.9023,2.445,2.0409,1.9879,middle,settled,0.974,True,middle,,middle
 nj:jersey-city-mcginley-square,Jersey City – McGinley Square,4,4.846,3.6557,4.4024,2.2081,2.0772,2.4188,settled,pre_car,0.9407,True,settled,pre_car,pre_car
-nj:jersey-city-newport,Jersey City – Newport,1,6.6613,6.7645,2.6845,4.9491,5.73,4.6617,new_water,middle,0.5759,False,new_water,,new_water
 nj:jersey-city-the-heights,Jersey City – The Heights,1,4.3271,4.1551,3.9148,3.287,3.0007,2.4527,middle,settled,0.8174,False,middle,,middle
 nj:jersey-city-west-side,Jersey City – West Side,6,3.1289,2.0375,3.4527,4.4329,2.4833,1.4369,middle,space,0.7052,False,middle,,middle
+nj:keansburg,Keansburg,1,3.4201,2.4059,5.1391,5.9732,3.6495,3.2964,space,middle,0.7299,False,space,,space
+nj:kearny,Kearny,1,3.356,2.0395,5.4392,4.5918,2.2531,2.8592,space,settled,0.9052,True,space,,space
+nj:lawrence,Lawrence,3,4.2073,3.3716,5.1111,5.0988,5.0261,3.6457,space,middle,0.9248,True,space,,space
+nj:linden,Linden,1,3.2796,1.3721,4.5456,5.0339,2.8385,2.421,space,middle,0.5668,False,space,,space
 nj:long-branch,Long Branch,1,4.2726,2.8476,3.0768,3.9979,2.405,1.7972,middle,settled,0.7473,False,middle,,middle
+nj:lopatcong,Lopatcong,2,3.6239,2.0547,5.89,5.7349,4.5098,3.7149,space,enclave,0.567,False,space,,space
+nj:mahwah,Mahwah,1,3.9378,3.1714,6.4643,6.2686,5.4492,4.5003,space,enclave,0.8054,False,space,,space
+nj:manville,Manville,1,2.4718,1.9499,5.1157,5.5853,3.6639,2.9813,space,enclave,0.7889,False,space,,space
 nj:maplewood,Maplewood,1,2.3287,1.2194,5.6489,4.5741,3.2779,2.7251,space,enclave,0.5236,False,space,,space
+nj:middlesex,Middlesex,1,3.5069,1.7444,6.1835,5.9493,4.0777,3.6975,space,enclave,0.4974,False,space,,space
+nj:millburn,Millburn,1,2.7349,3.7388,6.9625,5.8424,5.2789,4.5264,enclave,space,0.7315,False,enclave,,enclave
 nj:montclair,Montclair,4,4.0806,3.7355,4.2294,2.9089,3.4541,2.2795,middle,pre_car,0.7836,False,middle,,middle
-nj:montvale,Montvale,1,1.6555,2.4981,5.845,5.9965,4.7889,3.2903,enclave,space,0.6627,False,enclave,,enclave
-nj:morris-plains,Morris Plains,1,1.9339,1.8438,5.5905,5.3702,4.0969,3.1655,space,enclave,0.9534,True,space,,space
+nj:morristown,Morristown,1,2.603,1.8813,4.2291,4.3511,3.1259,1.9638,space,middle,0.958,True,space,,space
 nj:mount-arlington,Mount Arlington,2,3.8763,2.6451,5.5117,5.7939,4.597,3.6336,space,middle,0.728,False,space,,space
 nj:mount-holly,Mount Holly,2,3.8557,2.0801,5.8729,5.6618,4.4179,3.7972,space,middle,0.5478,False,space,,space
+nj:mount-olive,Mount Olive,1,2.8414,4.4321,5.8257,7.4468,5.8857,4.4078,enclave,middle,0.6446,False,enclave,,enclave
+nj:neptune,Neptune,2,2.6372,1.9056,5.638,6.0066,4.4369,3.3269,space,enclave,0.7226,False,space,,space
+nj:neptune-city,Neptune City,1,4.1414,2.245,6.3246,5.7569,4.4147,4.101,space,middle,0.5474,False,space,,space
+nj:netcong,Netcong,1,3.5112,2.2321,5.4468,5.207,4.2545,3.399,space,middle,0.6567,False,space,,space
 nj:new-brunswick,New Brunswick,7,5.1019,3.9046,2.1258,3.3941,3.0453,2.5843,new_water,middle,0.8226,False,new_water,,new_water
 nj:newark,Newark,18,4.538,2.4804,4.285,3.8986,1.597,2.5575,settled,space,0.6438,False,settled,,settled
 nj:north-bergen,North Bergen,5,4.8539,3.891,2.2938,3.7934,3.2047,2.3952,new_water,middle,0.9577,True,new_water,,new_water
-nj:old-bridge,Old Bridge,2,2.8846,2.2611,6.5212,6.4051,4.8068,3.9536,space,enclave,0.7839,False,space,,space
+nj:north-brunswick,North Brunswick,1,4.4187,3.0285,5.9423,6.0897,4.9523,4.5544,space,enclave,0.6854,False,space,,space
+nj:north-plainfield,North Plainfield,2,4.5859,2.4755,6.7845,5.6337,4.0302,4.1824,space,settled,0.6142,False,space,,space
+nj:nutley,Nutley,2,2.6821,1.719,4.3862,4.4888,2.7159,1.76,space,middle,0.9767,True,space,,space
+nj:ocean,Ocean,1,3.3299,1.9384,5.6248,5.5066,4.1595,3.3371,space,enclave,0.5821,False,space,,space
 nj:parsippany-troy-hills,Parsippany-Troy Hills,3,2.3654,1.869,3.8871,4.5889,3.3291,1.3647,middle,space,0.7302,False,middle,,middle
 nj:paterson,Paterson,1,5.9125,3.694,6.6751,5.998,4.2541,5.1832,space,settled,0.8683,False,space,,space
 nj:piscataway,Piscataway,2,1.9632,1.5478,5.147,5.5425,3.9002,2.7215,space,enclave,0.7884,False,space,,space
 nj:plainfield,Plainfield,1,3.3707,1.9845,6.4594,5.7737,4.09,3.6453,space,enclave,0.5887,False,space,,space
-nj:princeton,Princeton,1,1.4143,3.0623,5.3691,5.8004,5.1078,3.4367,enclave,space,0.4618,False,enclave,,enclave
+nj:plainsboro,Plainsboro,1,4.116,3.1398,3.9539,4.4869,4.1791,2.7658,middle,space,0.8809,False,middle,,middle
 nj:rahway,Rahway,4,4.4046,2.694,4.1778,4.195,3.5667,3.2524,space,middle,0.8283,False,space,,space
+nj:raritan,Raritan,1,4.0989,2.0615,4.828,4.2806,2.8063,2.8571,space,settled,0.7346,False,space,,space
 nj:red-bank,Red Bank,1,4.3041,3.1356,2.9614,3.4892,2.8728,1.8448,middle,settled,0.6422,False,middle,,middle
-nj:ridgewood,Ridgewood,1,2.5797,2.4963,4.8784,3.8872,3.2191,2.2106,middle,space,0.8855,False,middle,,middle
-nj:riverdale,Riverdale,1,3.2934,2.315,3.4583,5.1143,3.3775,2.0608,middle,space,0.8902,False,middle,,middle
-nj:rockaway,Rockaway,1,2.319,2.6246,5.6239,6.3688,5.0248,3.4207,enclave,space,0.8836,False,enclave,,enclave
-nj:roxbury,Roxbury,1,2.3367,2.4703,5.8575,6.268,5.0504,3.774,enclave,space,0.9459,True,enclave,,enclave
+nj:sayreville,Sayreville,1,3.888,2.2766,4.4323,5.4695,3.5994,3.0529,space,middle,0.7457,False,space,,space
 nj:somerville,Somerville,2,4.1427,2.6476,3.4595,3.6533,3.3172,2.3621,middle,space,0.8922,False,middle,,middle
+nj:south-brunswick,South Brunswick,2,3.0246,4.1629,5.0863,6.4187,5.0416,3.2357,enclave,middle,0.9348,True,enclave,,enclave
 nj:south-orange,South Orange,2,4.0143,3.4366,3.2204,3.5121,3.3611,1.8548,middle,new_water,0.576,False,middle,,middle
-nj:springfield,Springfield,1,2.5264,1.7215,5.7937,5.1965,4.2252,3.2231,space,enclave,0.6814,False,space,,space
-nj:teaneck,Teaneck,2,1.0349,2.6631,5.9153,5.8104,4.8162,3.3087,enclave,space,0.3886,False,enclave,,enclave
-nj:union,Union,2,2.6753,1.3793,5.1538,4.6309,3.1389,2.2837,space,middle,0.604,False,space,,space
+nj:trenton,Trenton,6,5.3289,3.1985,6.2069,5.3676,4.0141,4.5249,space,settled,0.7968,False,space,,space
 nj:union-city,Union City,2,4.3585,2.7984,4.0426,3.4773,0.8781,2.0516,settled,middle,0.428,False,settled,,settled
-nj:watchung,Watchung,1,2.4584,2.8295,6.6728,6.4433,5.3604,4.1106,enclave,space,0.8688,False,enclave,,enclave
-nj:wayne,Wayne,2,2.8253,2.6596,3.5074,4.7695,3.1909,1.628,middle,space,0.6121,False,middle,,middle
-nj:weehawken,Weehawken,2,6.2733,6.1677,1.692,5.4404,5.6845,4.3335,new_water,middle,0.3905,False,new_water,,new_water
+nj:verona,Verona,1,2.6889,2.8644,5.3835,4.9381,3.7651,2.8206,enclave,middle,0.9533,True,enclave,,enclave
 nj:west-new-york,West New York,5,4.5437,2.5863,4.2842,3.4847,0.916,2.3251,settled,middle,0.394,False,settled,new_water,new_water
+nj:west-orange,West Orange,2,3.3188,1.5481,6.1773,5.1455,3.3116,3.2546,space,middle,0.4757,False,space,,space
 nj:west-windsor,West Windsor,3,2.9604,2.897,5.929,5.7396,5.2922,3.9432,space,enclave,0.9786,True,space,,space
-ny:amityville,Amityville,1,4.2278,2.389,5.4244,5.3119,3.3703,3.4735,space,settled,0.7088,False,space,,space
+nj:white,White,1,7.7315,6.0721,9.3622,8.7495,7.8796,7.8375,space,enclave,0.7854,False,space,,space
+nj:woodbridge,Woodbridge,4,3.1213,0.8278,5.3609,5.1214,3.0798,2.796,space,middle,0.2961,False,space,,space
 ny:astoria-central-,Astoria (Central),2,6.3875,5.0825,6.0028,1.6835,3.927,4.7304,pre_car,settled,0.4287,False,pre_car,,pre_car
-ny:astoria-east-woodside-north-,Astoria (East)-Woodside (North),1,5.8613,4.443,5.837,1.9821,2.7031,4.0076,pre_car,settled,0.7333,False,pre_car,,pre_car
+ny:babylon,Babylon,4,2.018,1.3417,5.4311,5.5963,3.6628,2.7133,space,enclave,0.6648,False,space,,space
 ny:bath-beach,Bath Beach,4,4.9868,3.7048,4.154,4.1178,2.5113,3.1367,settled,middle,0.8006,False,settled,,settled
 ny:bay-ridge,Bay Ridge,2,5.4525,4.1696,3.5672,1.8486,2.4324,2.8321,pre_car,settled,0.76,False,pre_car,,pre_car
-ny:bay-terrace-clearview,Bay Terrace-Clearview,3,3.3701,2.409,3.6496,4.2747,2.9208,1.9811,middle,space,0.8224,False,middle,,middle
+ny:bayside,Bayside,1,2.2678,1.8642,5.1844,4.6219,3.0975,2.6589,space,enclave,0.822,False,space,,space
 ny:beacon,Beacon,1,3.91,2.5792,4.2292,3.8509,2.9081,2.6074,space,middle,0.9892,True,space,,space
-ny:bedford-park,Bedford Park,1,5.3518,3.6942,5.5556,4.5574,2.1749,3.7707,settled,space,0.5887,False,settled,,settled
-ny:bedford-stuyvesant-east-,Bedford-Stuyvesant (East),3,5.2646,3.783,4.7887,2.5766,1.7397,3.1213,settled,pre_car,0.6752,False,settled,,settled
-ny:bedford-stuyvesant-west-,Bedford-Stuyvesant (West),2,6.0638,4.9004,4.0247,1.9873,3.2256,3.6011,pre_car,settled,0.6161,False,pre_car,,pre_car
+ny:bedford,Bedford,2,3.3176,1.9945,6.117,5.7148,4.2663,3.8089,space,enclave,0.6012,False,space,,space
 ny:bensonhurst,Bensonhurst,2,5.1939,3.1487,5.7349,3.4043,2.384,3.6423,settled,space,0.7571,False,settled,,settled
-ny:brighton-beach,Brighton Beach,2,4.5175,3.3041,4.6352,3.6667,1.3234,2.8291,settled,middle,0.4678,False,settled,,settled
+ny:brewster,Brewster,1,2.9877,1.6594,4.7661,4.7318,2.9283,2.1917,space,middle,0.7571,False,space,,space
+ny:brightwaters,Brightwaters,1,2.6309,4.3749,6.5936,6.9773,5.5282,4.3615,enclave,middle,0.6032,False,enclave,,enclave
 ny:brookhaven,Brookhaven,2,3.294,1.4708,5.0873,5.2822,3.2803,2.5767,space,middle,0.5708,False,space,,space
 ny:brooklyn-heights,Brooklyn Heights,1,6.7373,5.8131,4.2653,3.6148,4.9038,4.9032,pre_car,new_water,0.8475,False,pre_car,,pre_car
-ny:bushwick-west-,Bushwick (West),1,6.2942,5.2823,4.9852,1.042,3.6579,4.1616,pre_car,settled,0.2849,False,pre_car,,pre_car
-ny:clarkstown,Clarkstown,1,2.1712,2.0548,5.4445,5.8761,4.2937,3.2348,space,enclave,0.9464,True,space,,space
-ny:concourse-concourse-village,Concourse-Concourse Village,1,5.3279,3.788,4.8346,3.7617,2.1389,3.3988,settled,middle,0.6293,False,settled,,settled
+ny:cortlandt,Cortlandt,1,4.6878,3.454,3.1205,4.8518,3.3462,2.6298,middle,new_water,0.8427,False,middle,,middle
+ny:croton-on-hudson,Croton-on-Hudson,1,3.3406,2.5403,5.5183,5.221,4.6187,3.8645,space,enclave,0.7604,False,space,,space
+ny:crotona-park-east,Crotona Park East,1,7.0383,4.9561,6.5004,6.2881,4.823,5.872,settled,space,0.9731,True,settled,,settled
 ny:crown-heights-north-,Crown Heights (North),1,5.8624,4.9899,4.7981,1.3102,3.8291,3.8146,pre_car,middle,0.3435,False,pre_car,,pre_car
-ny:east-flatbush-erasmus,East Flatbush-Erasmus,9,5.1974,4.0682,4.8507,2.8396,2.2245,2.9787,settled,pre_car,0.7834,False,settled,,settled
-ny:east-flatbush-farragut,East Flatbush-Farragut,5,4.1912,2.7254,5.2929,3.6724,1.6638,2.5667,settled,middle,0.6482,False,settled,,settled
-ny:east-harlem-north-,East Harlem (North),5,6.3751,5.5676,4.0829,4.3433,3.3874,3.8601,settled,middle,0.8775,False,settled,,settled
-ny:east-harlem-south-,East Harlem (South),1,5.8409,4.3812,4.8516,3.7048,1.9828,3.8986,settled,pre_car,0.5352,False,settled,,settled
-ny:east-midtown-turtle-bay,East Midtown-Turtle Bay,1,6.5185,5.4407,4.38,1.9917,4.4008,4.4729,pre_car,new_water,0.4547,False,pre_car,,pre_car
-ny:east-new-york-north-,East New York (North),2,4.8029,3.3945,6.6772,5.3463,2.9238,4.2001,settled,space,0.8613,False,settled,,settled
+ny:dobbs-ferry,Dobbs Ferry,2,2.0767,1.7199,4.794,4.4188,3.4735,2.3752,space,enclave,0.8282,False,space,,space
+ny:east-fishkill,East Fishkill,2,2.0432,2.3999,6.2162,6.7031,4.9529,3.8793,enclave,space,0.8514,False,enclave,,enclave
+ny:east-williamsburg,East Williamsburg,1,7.5576,6.5225,5.7327,2.5002,5.2296,5.5971,pre_car,settled,0.4781,False,pre_car,,pre_car
+ny:eastchester,Eastchester,1,1.969,1.5587,4.3651,4.5305,2.8872,1.7223,space,middle,0.905,True,space,,space
+ny:eastchester-edenwald-baychester,Eastchester-Edenwald-Baychester,1,5.3561,5.139,6.5294,6.1303,4.0105,4.3944,settled,middle,0.9127,True,settled,,settled
 ny:elmhurst,Elmhurst,3,5.6815,3.7491,5.6161,2.9864,2.1909,3.8851,settled,pre_car,0.7336,False,settled,,settled
-ny:financial-district-battery-park-city,Financial District-Battery Park City,1,7.0299,6.6966,3.9274,3.2753,5.4253,4.8759,pre_car,new_water,0.834,False,pre_car,,pre_car
-ny:flatbush,Flatbush,4,4.9885,3.8508,5.2196,3.1598,1.679,3.2623,settled,pre_car,0.5314,False,settled,,settled
+ny:fishkill,Fishkill,1,3.844,3.6978,3.7525,5.4434,4.1963,2.4581,middle,space,0.6648,False,middle,,middle
 ny:flatbush-west-ditmas-park-parkville,Flatbush (West)-Ditmas Park-Parkville,4,4.088,2.6326,5.1099,3.1955,2.2729,2.5571,settled,middle,0.8889,False,settled,,settled
 ny:flatlands,Flatlands,2,4.3371,2.749,5.0512,3.7273,1.5987,2.4062,settled,middle,0.6644,False,settled,,settled
+ny:florida,Florida,1,2.3893,2.6089,6.4667,6.6955,4.9028,3.9156,enclave,space,0.9158,True,enclave,,enclave
 ny:flushing-willets-point,Flushing-Willets Point,19,5.537,3.871,4.8566,3.2526,1.7717,3.3731,settled,pre_car,0.5447,False,settled,,settled
 ny:forest-hills,Forest Hills,4,5.073,3.235,5.3505,3.5036,3.1194,3.8089,settled,space,0.9643,True,settled,,settled
-ny:glen-cove,Glen Cove,1,4.5742,3.7364,2.8781,4.4883,2.882,2.2752,middle,new_water,0.7905,False,middle,,middle
+ny:fresh-meadows-utopia,Fresh Meadows-Utopia,1,3.644,2.0482,4.716,3.9926,1.9647,1.9582,middle,settled,0.9967,True,middle,,middle
+ny:glendale,Glendale,2,4.9452,2.8396,5.7801,3.6243,2.5937,3.601,settled,space,0.9134,True,settled,,settled
+ny:goshen,Goshen,3,5.6839,3.7859,6.8463,5.9017,4.933,5.2114,space,settled,0.7675,False,space,,space
 ny:gravesend-east-homecrest,Gravesend (East)-Homecrest,2,3.9731,2.886,4.8098,3.8039,1.4403,2.148,settled,middle,0.6705,False,settled,,settled
 ny:gravesend-south-,Gravesend (South),2,4.5639,3.3145,4.0118,4.16,1.9361,2.7387,settled,middle,0.7069,False,settled,,settled
-ny:gravesend-west-,Gravesend (West),1,4.5066,2.33,5.1056,3.7412,1.7195,2.9848,settled,space,0.738,False,settled,,settled
-ny:greenburgh,Greenburgh,1,2.8382,2.2808,3.5874,3.9987,2.9027,1.4276,middle,space,0.6259,False,middle,,middle
-ny:hamilton-heights-sugar-hill,Hamilton Heights-Sugar Hill,3,5.9795,4.572,4.9199,2.8252,2.5323,3.7653,settled,pre_car,0.8964,False,settled,,settled
+ny:greenwood-lake,Greenwood Lake,1,5.2824,4.4722,6.0671,6.968,5.7928,5.332,space,enclave,0.8466,False,space,,space
 ny:harlem-north-,Harlem (North),7,5.905,5.2057,4.347,3.7251,3.0238,3.5456,settled,middle,0.8528,False,settled,,settled
-ny:harlem-south-,Harlem (South),2,5.9881,5.3565,4.2068,3.1513,3.1337,3.5983,settled,pre_car,0.9944,True,settled,pre_car,pre_car
-ny:harrison,Harrison,3,1.4886,3.8621,6.4973,6.8951,5.8027,4.2274,enclave,space,0.3854,False,enclave,,enclave
-ny:haverstraw,Haverstraw,3,3.9706,2.5994,4.4216,5.1456,3.4839,3.1966,space,middle,0.8132,False,space,,space
 ny:hempstead,Hempstead,6,4.1607,2.2455,5.4787,4.2169,2.0533,3.0853,settled,space,0.9144,True,settled,,settled
 ny:huntington,Huntington,1,3.0576,3.5944,5.1984,5.8778,4.17,2.8391,middle,enclave,0.9286,True,middle,,middle
-ny:inwood,Inwood,5,6.1188,4.6315,5.0087,2.9886,2.251,3.9241,settled,pre_car,0.7532,False,settled,,settled
 ny:islip,Islip,2,2.2705,2.279,4.5279,4.6068,3.325,1.6907,middle,enclave,0.7446,False,middle,,middle
 ny:jackson-heights,Jackson Heights,9,5.2445,3.5454,4.9424,2.7488,1.1401,3.0342,settled,pre_car,0.4148,False,settled,,settled
 ny:jamaica,Jamaica,10,4.5357,3.3168,4.9661,3.9105,1.5143,2.782,settled,middle,0.5443,False,settled,,settled
 ny:jamaica-estates-holliswood,Jamaica Estates-Holliswood,1,3.1677,1.6197,5.4329,4.3725,2.6551,2.7036,space,settled,0.61,False,space,,space
 ny:jamaica-hills-briarwood,Jamaica Hills-Briarwood,11,4.0732,2.8419,4.0533,2.7514,1.2189,1.6871,settled,middle,0.7225,False,settled,,settled
-ny:kensington,Kensington,1,3.993,2.818,4.7264,2.9088,2.2062,2.4382,settled,middle,0.9048,True,settled,,settled
 ny:kew-gardens,Kew Gardens,6,5.0508,3.8226,3.7994,1.624,2.2417,2.6195,pre_car,settled,0.7244,False,pre_car,,pre_car
 ny:kew-gardens-hills,Kew Gardens Hills,1,3.4602,2.0016,4.217,3.6814,1.7482,1.6397,middle,settled,0.9379,True,middle,,middle
 ny:kingsbridge-heights-van-cortlandt-village,Kingsbridge Heights-Van Cortlandt Village,1,5.2174,3.8809,5.2491,4.6306,2.8476,3.848,settled,middle,0.74,False,settled,,settled
-ny:kingsbridge-marble-hill,Kingsbridge-Marble Hill,1,4.4933,3.0662,3.6527,2.7024,1.2941,1.8906,settled,middle,0.6845,False,settled,,settled
-ny:lagrange,LaGrange,1,2.9676,2.9357,7.0242,7.111,5.6727,4.6745,space,enclave,0.9892,True,space,,space
-ny:lindenhurst,Lindenhurst,1,1.7444,1.9482,5.2649,5.2335,3.615,2.7056,enclave,space,0.8954,False,enclave,,enclave
 ny:long-beach,Long Beach,3,3.4034,2.6956,3.5084,3.4637,2.8477,1.5356,middle,space,0.5697,False,middle,,middle
 ny:long-island-city-hunters-point,Long Island City-Hunters Point,1,8.0487,7.7661,3.6668,6.3569,6.8451,6.3842,new_water,pre_car,0.5768,False,new_water,,new_water
-ny:lynbrook,Lynbrook,1,3.4974,2.0752,4.3716,3.5096,1.6083,1.799,settled,middle,0.894,False,settled,,settled
-ny:madison,Madison,5,4.2166,2.0986,5.3259,3.9177,2.0305,2.8535,settled,space,0.9676,True,settled,,settled
-ny:manhattanville-west-harlem,Manhattanville-West Harlem,3,6.3563,4.8643,4.632,3.0879,2.7337,3.9756,settled,pre_car,0.8853,False,settled,,settled
+ny:mamaroneck,Mamaroneck,1,1.3765,3.097,6.0313,5.7712,5.1743,3.7791,enclave,space,0.4445,False,enclave,,enclave
+ny:maybrook,Maybrook,1,8.9293,7.225,10.0834,9.325,8.689,8.882,space,settled,0.8315,False,space,,space
 ny:middle-village,Middle Village,1,4.4167,2.8791,5.2396,4.2509,1.4401,2.8095,settled,middle,0.5126,False,settled,,settled
 ny:middletown,Middletown,2,3.7047,1.4737,5.2059,4.8392,2.9891,2.8908,space,middle,0.5098,False,space,,space
-ny:midwood,Midwood,4,4.0112,2.99,5.1387,4.0948,1.9352,2.4282,settled,middle,0.797,False,settled,,settled
-ny:mineola,Mineola,2,3.2856,2.667,3.8517,3.4178,2.5105,1.1876,middle,settled,0.4731,False,middle,,middle
 ny:morris-park,Morris Park,1,5.9429,3.9383,4.8673,4.4678,3.782,4.0067,settled,space,0.9603,True,settled,,settled
 ny:mott-haven-port-morris,Mott Haven-Port Morris,9,5.5158,3.8935,4.4873,4.602,2.0846,3.5782,settled,middle,0.5826,False,settled,,settled
 ny:mount-hope,Mount Hope,2,5.8616,3.7657,6.6263,4.7039,3.3538,4.7815,settled,space,0.8906,False,settled,,settled
+ny:mount-kisco,Mount Kisco,1,1.5872,1.3152,5.0401,5.1332,3.4143,2.185,space,enclave,0.8286,False,space,,space
 ny:mount-vernon,Mount Vernon,2,4.8372,3.2094,4.3014,3.3135,2.3997,2.8638,settled,middle,0.838,False,settled,,settled
 ny:murray-hill-broadway-flushing,Murray Hill-Broadway Flushing,1,5.2677,3.584,4.8733,3.6574,1.5411,3.264,settled,middle,0.4721,False,settled,,settled
-ny:murray-hill-kips-bay,Murray Hill-Kips Bay,1,7.2906,6.9476,4.179,3.6793,5.3236,4.9356,pre_car,new_water,0.8804,False,pre_car,,pre_car
+ny:new-dorp-midland-beach,New Dorp-Midland Beach,2,3.6596,2.6615,4.597,5.0063,2.4287,2.5892,settled,middle,0.938,True,settled,,settled
 ny:new-paltz,New Paltz,1,3.3457,2.2322,3.6438,4.5633,3.4488,1.8324,middle,space,0.8209,False,middle,,middle
 ny:new-rochelle,New Rochelle,18,2.9006,2.7166,3.8608,4.4526,3.0987,1.5811,middle,space,0.582,False,middle,,middle
 ny:new-springville-willowbrook-bulls-head-travis,New Springville-Willowbrook-Bulls Head-Travis,1,4.1538,3.4421,3.1371,4.397,2.3661,1.9077,middle,settled,0.8062,False,middle,,middle
+ny:new-windsor,New Windsor,3,5.0944,2.8814,5.7346,5.5647,4.0181,4.1179,space,settled,0.7171,False,space,,space
 ny:newburgh,Newburgh,2,3.036,1.7313,5.6407,5.4092,3.4528,3.0086,space,middle,0.5754,False,space,,space
-ny:north-corona,North Corona,2,4.9322,4.5719,5.4932,5.1908,3.0674,3.8178,settled,middle,0.8035,False,settled,,settled
+ny:north-salem,North Salem,1,4.6875,4.0734,8.0681,7.4198,6.6909,6.0339,space,enclave,0.869,False,space,,space
 ny:norwood,Norwood,3,6.4878,4.4134,6.254,4.9212,3.1362,4.8049,settled,space,0.7106,False,settled,,settled
-ny:nyack,Nyack,1,4.153,3.722,2.6707,3.3776,2.9975,1.7638,middle,new_water,0.6604,False,middle,,middle
-ny:ocean-hill,Ocean Hill,2,4.9772,3.4765,5.3946,3.1405,1.6048,3.1241,settled,middle,0.5137,False,settled,,settled
-ny:old-astoria-hallets-point,Old Astoria-Hallets Point,4,6.0384,4.2878,4.3809,4.6789,2.3276,3.779,settled,middle,0.6159,False,settled,,settled
+ny:orangetown,Orangetown,1,2.197,2.7562,5.9088,5.7259,4.0511,3.0118,enclave,space,0.7971,False,enclave,,enclave
+ny:ossining,Ossining,1,3.2654,1.4587,4.5045,4.5793,2.9177,2.3168,space,middle,0.6296,False,space,,space
 ny:patchogue,Patchogue,2,2.95,2.475,4.5235,4.9283,3.6296,2.3069,middle,space,0.9321,True,middle,,middle
 ny:peekskill,Peekskill,4,3.1848,1.9952,4.159,4.5774,2.3416,1.8832,middle,space,0.9439,True,middle,,middle
-ny:pelham-bay-country-club-city-island,Pelham Bay-Country Club-City Island,1,4.7742,3.4604,4.7707,4.8295,2.5486,3.3066,settled,middle,0.7708,False,settled,,settled
 ny:pelham-parkway-van-nest,Pelham Parkway-Van Nest,2,5.7549,4.4833,5.0816,4.2811,2.822,3.9459,settled,middle,0.7152,False,settled,,settled
-ny:pomonok-electchester-hillcrest,Pomonok-Electchester-Hillcrest,1,5.1085,3.2309,5.1376,4.652,1.8561,3.1683,settled,middle,0.5858,False,settled,,settled
 ny:port-chester,Port Chester,5,3.6661,2.9818,4.6698,5.0208,2.8127,2.5493,middle,settled,0.9064,True,middle,,middle
-ny:prospect-lefferts-gardens-wingate,Prospect Lefferts Gardens-Wingate,3,5.2399,3.6968,4.8767,2.1852,1.6859,2.9997,settled,pre_car,0.7715,False,settled,,settled
+ny:poughkeepsie,Poughkeepsie,2,4.637,2.4688,6.0842,5.6205,4.0643,3.8694,space,middle,0.638,False,space,,space
+ny:pound-ridge,Pound Ridge,1,5.7169,5.1339,8.5124,8.0156,7.5844,6.8501,space,enclave,0.898,False,space,,space
+ny:putnam-valley,Putnam Valley,1,4.6232,3.936,7.8961,7.5927,6.5352,5.9872,space,enclave,0.8514,False,space,,space
+ny:queens-village,Queens Village,1,4.2495,2.2108,6.5294,4.8411,2.9132,3.6428,space,settled,0.7589,False,space,,space
 ny:rego-park,Rego Park,1,4.1855,2.578,4.5158,3.1765,0.69,2.1765,settled,middle,0.317,False,settled,,settled
 ny:riverdale-spuyten-duyvil,Riverdale-Spuyten Duyvil,6,4.0695,3.1847,3.3207,3.4557,2.2344,1.8532,middle,settled,0.8294,False,middle,,middle
-ny:rockaway-beach-arverne-edgemere,Rockaway Beach-Arverne-Edgemere,4,4.4378,3.3877,3.7947,4.5084,2.0638,2.6444,settled,middle,0.7804,False,settled,,settled
+ny:riverhead,Riverhead,1,2.9137,2.3977,5.8652,6.4041,4.3662,3.519,space,enclave,0.8229,False,space,,space
+ny:shawangunk,Shawangunk,1,2.8987,2.6886,6.0704,6.5423,4.8454,3.6736,space,enclave,0.9275,True,space,,space
 ny:sheepshead-bay-manhattan-beach-gerritsen-beach,Sheepshead Bay-Manhattan Beach-Gerritsen Beach,2,4.5136,2.7897,4.3449,2.6938,0.9641,2.3169,settled,middle,0.4161,False,settled,,settled
 ny:smithtown,Smithtown,1,2.0105,3.4297,5.7077,6.4522,4.77,3.6507,enclave,space,0.5862,False,enclave,,enclave
-ny:st-george-new-brighton,St. George-New Brighton,1,4.2696,2.9073,3.9306,3.74,1.8403,2.5569,settled,middle,0.7197,False,settled,,settled
+ny:st-albans,St. Albans,1,7.4536,5.7792,9.1586,7.5104,7.0148,7.555,space,settled,0.8239,False,space,,space
 ny:sunnyside,Sunnyside,2,5.7377,4.6037,5.1349,1.8,2.5007,3.6641,pre_car,settled,0.7198,False,pre_car,,pre_car
+ny:sunset-park-east-borough-park-west-,Sunset Park (East)-Borough Park (West),1,4.391,2.9383,5.9609,4.0452,1.8625,3.3283,settled,space,0.6339,False,settled,,settled
+ny:throgs-neck-schuylerville,Throgs Neck-Schuylerville,1,3.8717,2.9639,4.6501,5.2918,3.3761,3.1326,space,middle,0.9461,True,space,,space
 ny:tompkinsville-stapleton-clifton-fox-hills,Tompkinsville-Stapleton-Clifton-Fox Hills,1,5.2293,4.1632,3.035,4.7797,2.9812,3.2302,settled,new_water,0.9823,True,settled,,settled
 ny:tremont,Tremont,1,5.8093,3.9847,5.1448,5.1553,2.4586,3.7784,settled,middle,0.6507,False,settled,,settled
+ny:tuckahoe,Tuckahoe,2,3.5396,2.4202,3.0919,3.5633,2.8297,1.45,middle,space,0.5991,False,middle,,middle
 ny:university-heights-south-morris-heights,University Heights (South)-Morris Heights,1,5.7543,4.086,5.6724,4.6701,2.2268,4.0909,settled,space,0.545,False,settled,,settled
-ny:upper-west-side-central-,Upper West Side (Central),1,5.7162,4.9627,4.6996,1.8186,3.5812,3.8261,pre_car,settled,0.5078,False,pre_car,,pre_car
-ny:upper-west-side-lincoln-square,Upper West Side-Lincoln Square,1,7.1143,6.4053,5.216,2.3498,4.9878,5.1382,pre_car,settled,0.4711,False,pre_car,,pre_car
-ny:upper-west-side-manhattan-valley,Upper West Side-Manhattan Valley,2,6.0609,5.156,5.0233,2.1359,3.5418,4.158,pre_car,settled,0.6031,False,pre_car,,pre_car
-ny:valley-stream,Valley Stream,3,2.9555,2.3353,5.8107,5.1718,3.7108,3.5292,space,enclave,0.7902,False,space,,space
+ny:wakefield-woodlawn,Wakefield-Woodlawn,1,3.3442,2.0703,5.2391,4.8951,2.3962,2.7572,space,settled,0.864,False,space,,space
 ny:wallkill,Wallkill,3,3.7853,1.889,5.2737,5.4458,3.7287,3.2364,space,middle,0.5837,False,space,,space
-ny:washington-heights-north-,Washington Heights (North),5,5.9194,4.863,4.986,3.0204,2.6963,3.8867,settled,pre_car,0.8927,False,settled,,settled
-ny:washington-heights-south-,Washington Heights (South),3,5.8269,4.394,4.9221,3.0406,2.2036,3.6623,settled,pre_car,0.7247,False,settled,,settled
-ny:white-plains,White Plains,17,4.0887,3.0318,2.9543,3.4332,2.123,1.0906,middle,settled,0.5137,False,middle,,middle
+ny:wappinger,Wappinger,1,4.4012,2.4585,5.4496,5.3587,4.2149,3.5844,space,middle,0.6859,False,space,,space
+ny:warwick,Warwick,1,3.7893,2.3671,6.9906,5.3033,4.3727,4.261,space,enclave,0.6247,False,space,,space
 ny:williamsbridge-olinville,Williamsbridge-Olinville,1,4.5852,3.3034,4.259,4.8132,2.5237,3.1649,settled,middle,0.7974,False,settled,,settled
-ny:windsor-terrace-south-slope,Windsor Terrace-South Slope,1,3.565,3.0659,5.1908,3.4477,2.847,3.0296,settled,middle,0.9397,True,settled,,settled
+ny:woodside,Woodside,1,5.5519,3.8938,5.4821,2.8875,3.004,4.0182,pre_car,settled,0.9612,True,pre_car,,pre_car
 ny:yonkers,Yonkers,20,4.6403,3.6617,2.3961,4.4175,2.7497,2.221,middle,new_water,0.9269,True,middle,,middle
+pa:falls,Falls,1,4.1325,1.9463,5.9605,5.6908,3.5071,3.619,space,settled,0.555,False,space,,space
+pa:lower-makefield,Lower Makefield,2,2.8874,1.928,4.9183,5.0635,4.2011,3.0185,space,enclave,0.6677,False,space,,space
+pa:morrisville,Morrisville,3,4.1249,2.5497,6.7744,6.0802,4.8849,4.6262,space,enclave,0.6181,False,space,,space

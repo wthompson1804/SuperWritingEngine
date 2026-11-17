@@ -1,247 +1,263 @@
 # Checkpoint A: neighborhoods and proposed years
 
-Passing units: 2505 in 608 buildings, across 195 neighborhoods; 100 neighborhoods have 3+ passing places.
+Passing units: 1176 in 680 buildings, across 211 neighborhoods; 84 neighborhoods have 3+ passing places.
 
-Cluster quality (silhouette; higher is cleaner): {5: 0.116, 6: 0.125}. Using k=6.
+Cluster quality (silhouette; higher is cleaner): {5: 0.158, 6: 0.169}. Using k=6.
 
-## Group 1: 23 neighborhoods, 371 places
+## Group 1: 12 neighborhoods, 108 places
 
-Distinguishing traits (standard deviations from the average): bars_800m +1.1, restaurants_800m +0.9, drive_min -0.8, transit_min -0.7
+Distinguishing traits (standard deviations from the average): sqft_med -1.3, all_in_med -1.0, park_ha_800m -0.9, restaurants_800m -0.8
 
-| hood                              | area                                |   units |   buildings |   drive_min |   transit_min |   all_in_med |   sqft_med |   restaurants_800m |   bars_800m |   park_walk_min |   water_m |   bfloors |   violent_per_1000 |   mvt_per_1000 |
-|:----------------------------------|:------------------------------------|--------:|------------:|------------:|--------------:|-------------:|-----------:|-------------------:|------------:|----------------:|----------:|----------:|-------------------:|---------------:|
-| Jamaica Hills-Briarwood           | Queens                              |      11 |          10 |         3.8 |          16.8 |       2489   |      600   |               10   |         2   |             4.2 |    1793   |       6   |                2.4 |            2.2 |
-| Kew Gardens                       | Queens                              |       6 |           6 |         4.2 |          13.6 |       2755.5 |      750   |               24.5 |         3   |             4.4 |    1118.5 |       6   |                3.1 |            2.1 |
-| Forest Hills                      | Queens                              |       4 |           4 |         9.7 |          30.5 |       2418.5 |      708   |               45   |         1   |             7.6 |    1166   |       6.5 |                2.1 |            1.4 |
-| Flushing-Willets Point            | Queens                              |      19 |          19 |        11.8 |          44.6 |       2394   |      614.5 |               82   |         3   |             3.7 |     894   |       6   |                2.6 |            2.2 |
-| Jackson Heights                   | Queens                              |       5 |           5 |        12.8 |          32   |       2294   |      639   |               60   |         3   |             5   |    1808   |       6   |                4.8 |            1.4 |
-| Elmhurst                          | Queens                              |       3 |           3 |        13.5 |          32   |       2494   |      850   |               69   |         4   |             3.4 |    2721   |       6   |                6.1 |            1.4 |
-| Valley Stream                     | Nassau County                       |       3 |           3 |        13.5 |          43   |       2871   |      806   |               17   |         1   |             6   |     773   |     nan   |                1.6 |            0.3 |
-| Old Astoria-Hallets Point         | Queens                              |       4 |           4 |        18.2 |          55   |       2793   |      nan   |               12.5 |         1   |             6   |     200.5 |       7.5 |                3.7 |            1.7 |
-| Prospect Lefferts Gardens-Wingate | Brooklyn                            |       3 |           3 |        21.1 |          50   |       2944   |      nan   |               17   |         6   |             6.6 |    1447   |       7   |                5.9 |            1   |
-| East Flatbush-Erasmus             | Brooklyn                            |       8 |           8 |        21.8 |          52.5 |       2843.5 |      600   |               16.5 |         4.5 |            11.8 |    1254   |       7   |                6.6 |            1.2 |
-| Manhattanville-West Harlem        | Manhattan                           |       4 |           3 |        25.1 |          58   |       2925.5 |      nan   |               29   |         4   |             2.2 |     261.5 |       5.5 |                4.6 |            1.3 |
-| Hamilton Heights-Sugar Hill       | Manhattan                           |       3 |           3 |        25.5 |          56   |       2636   |      nan   |               31   |         2   |             1.2 |     494   |      10   |                4.6 |            1.3 |
-| Rockaway Beach-Arverne-Edgemere   | Queens                              |       4 |           4 |        25.8 |          62.8 |       2881   |      650   |                4   |         2.5 |             4.6 |     269   |       7   |                3.2 |            0.6 |
-| Washington Heights (South)        | Manhattan                           |       3 |           3 |        26.3 |          56   |       2683   |      nan   |               13   |         2   |             4.2 |     442   |       6   |                6   |            1.9 |
-| Fort Lee                          | Bergen County                       |       4 |           2 |        28.4 |          76   |       3162   |      715   |               36   |         1   |             9   |     668   |     nan   |                1.1 |            1   |
-| Washington Heights (North)        | Manhattan                           |       6 |           5 |        28.4 |          64   |       2852   |      700   |               18   |         6.5 |             2.3 |     543   |       6   |                5.3 |            1.8 |
-| Inwood                            | Manhattan                           |       5 |           5 |        28.9 |          70   |       2838   |      nan   |               23   |         7   |             2.1 |     475   |       6   |                5.3 |            1.8 |
-| Hackensack                        | Bergen County                       |      41 |          10 |        36.7 |         100   |       2827   |      735   |                7   |         1   |             4.6 |     498   |     nan   |                2.4 |            1.3 |
-| Newark                            | Essex County                        |      46 |          10 |        46.9 |          68   |       2505.5 |      634   |               40   |         5   |             1.9 |     491   |       6   |                5.2 |            6.9 |
-| Bloomfield                        | Essex County                        |      10 |           4 |        51.8 |          98   |       2354.5 |      587   |               15   |         1   |             3.8 |    3777   |     nan   |                0.8 |            1.3 |
-| Stamford                          | Western Connecticut Planning Region |     161 |          42 |        52.8 |         115   |       2829   |      702.5 |               27   |         5   |             3.1 |     804   |       8   |                1.5 |            1.2 |
-| Montclair                         | Essex County                        |      11 |           2 |        53.9 |         113   |       2794   |      540   |               64   |         3   |             4.5 |    4092   |     nan   |                0.8 |            0.9 |
-| Rahway                            | Union County                        |       7 |           3 |        57.4 |          98   |       2568   |      665   |                9   |         4   |             9.2 |      81   |     nan   |                1.9 |            0.8 |
+| hood            | area                                      |   units |   buildings |   drive_min |   transit_min |   all_in_med |   sqft_med |   restaurants_800m |   bars_800m |   park_walk_min |   water_m |   bfloors |   violent_per_1000 |   mvt_per_1000 |
+|:----------------|:------------------------------------------|--------:|------------:|------------:|--------------:|-------------:|-----------:|-------------------:|------------:|----------------:|----------:|----------:|-------------------:|---------------:|
+| Irvington       | Essex County                              |       7 |           7 |        52.1 |         107   |         1352 |        550 |                2   |           0 |            14.1 |      3538 |       nan |                4   |            9.1 |
+| Islip           | Suffolk County                            |       6 |           5 |        54.6 |         103.5 |         2245 |        400 |                0.5 |           0 |            20.5 |       949 |       nan |                1   |            1.1 |
+| Edison          | Middlesex County                          |       7 |           3 |        66.8 |         158   |         2121 |        300 |                1   |           0 |            15.2 |      1550 |       nan |                1.8 |            0.9 |
+| Piscataway      | Middlesex County                          |       9 |           2 |        75   |         nan   |         2061 |        300 |                0   |           0 |            21.7 |      1587 |       nan |                1.1 |            0.8 |
+| Franklin        | Somerset County                           |      20 |           5 |        81.7 |         nan   |         1997 |        300 |                1   |           0 |             9.4 |      1130 |       nan |                0.3 |            0.4 |
+| Brookhaven      | Suffolk County                            |      11 |          11 |        83.4 |         168.5 |         2135 |        465 |                0   |           0 |             5.9 |      1420 |       nan |                1   |            1.1 |
+| Mount Olive     | Morris County                             |       6 |           1 |        83.8 |         nan   |         1748 |        300 |                4   |           0 |            16.1 |       571 |       nan |                0.4 |            0.2 |
+| South Brunswick | Middlesex County                          |       6 |           2 |        88.6 |         nan   |         2091 |        300 |                0   |           0 |            18.4 |      2771 |       nan |                1.2 |            0.6 |
+| Hackettstown    | Warren County                             |       4 |           1 |        97   |         nan   |         1893 |        580 |                0   |           0 |            24.4 |      1622 |       nan |                0.4 |            0.2 |
+| New Milford     | Western Connecticut Planning Region       |       3 |           2 |       106.2 |         nan   |         1704 |        700 |                1   |           0 |            15   |       980 |       nan |                0.4 |            0.6 |
+| East Haven      | South Central Connecticut Planning Region |      25 |           6 |       111.8 |         220   |         1672 |        425 |                2   |           0 |             5   |      1414 |       nan |                0.9 |            2.1 |
+| Morrisville     | Bucks County                              |       4 |           3 |       113.9 |         nan   |         1644 |        715 |                2   |           0 |            12.2 |      1116 |       nan |                1.6 |            1.8 |
 
-## Group 2: 8 neighborhoods, 68 places
+## Group 2: 36 neighborhoods, 308 places
 
-Distinguishing traits (standard deviations from the average): violent_per_1000 +2.3, sqft_med -1.2, drive_min -0.9, transit_min -0.9
+Distinguishing traits (standard deviations from the average): sqft_med +0.7, drive_min +0.5, transit_min +0.5, restaurants_800m -0.5
+
+| hood            | area                                      |   units |   buildings |   drive_min |   transit_min |   all_in_med |   sqft_med |   restaurants_800m |   bars_800m |   park_walk_min |   water_m |   bfloors |   violent_per_1000 |   mvt_per_1000 |
+|:----------------|:------------------------------------------|--------:|------------:|------------:|--------------:|-------------:|-----------:|-------------------:|------------:|----------------:|----------:|----------:|-------------------:|---------------:|
+| Hackensack      | Bergen County                             |       3 |           3 |        37.6 |         100   |       2152   |      787.5 |                1   |         0   |             4.2 |     926   |       nan |                2.4 |            1.3 |
+| Babylon         | Suffolk County                            |       4 |           4 |        40   |          75   |       2298   |      605   |                1.5 |         0   |            12.4 |    1990   |       nan |                1   |            1.1 |
+| Belleville      | Essex County                              |       4 |           4 |        47.6 |         107   |       2302   |      700   |                6   |         1.5 |            14.5 |    2217   |       nan |                2.4 |            2.9 |
+| East Orange     | Essex County                              |       7 |           6 |        51.7 |          98   |       1901   |      806   |                0   |         0   |             3.9 |    3515   |       nan |                4.2 |            4.7 |
+| City of Orange  | Essex County                              |       7 |           5 |        53.2 |          98   |       2127   |      500   |                0   |         1   |            15.7 |    3903   |       nan |                4.2 |            5.6 |
+| Linden          | Union County                              |       3 |           1 |        53.7 |          98   |       2373   |      701   |                1   |         0   |             9.5 |     861   |       nan |                1.9 |            2   |
+| Carteret        | Middlesex County                          |       4 |           1 |        58.5 |         108.5 |       2296.5 |      801.5 |                0   |         0   |             9.6 |     692   |       nan |                2   |            1.2 |
+| Woodbridge      | Middlesex County                          |      22 |           7 |        62.9 |         123.5 |       2244   |      715   |                0.5 |         0   |             5.2 |    2234   |       nan |                1.4 |            0.8 |
+| Ossining        | Westchester County                        |       3 |           1 |        63.3 |         145   |       2188   |      700   |                1   |         0   |             5.9 |     943   |       nan |                0.7 |            0.3 |
+| Boonton         | Morris County                             |       4 |           3 |        68.2 |         182   |       2136.5 |      523   |                3   |         0   |            17.6 |    1440   |       nan |                0.6 |            0.4 |
+| Aberdeen        | Monmouth County                           |       3 |           2 |        75.4 |         nan   |       2262   |      811   |                1   |         0   |            13.5 |    1396   |       nan |                1.6 |            0.4 |
+| Mount Arlington | Morris County                             |       4 |           1 |        78.7 |         nan   |       2236.5 |      751.5 |                2   |         0   |            23.4 |    1837   |       nan |                0   |            0   |
+| Raritan         | Somerset County                           |       3 |           1 |        86.5 |         151   |       2325   |      770   |               10   |         1   |             9.6 |     625   |       nan |                1.2 |            0.2 |
+| Stratford       | Greater Bridgeport Planning Region        |      11 |           4 |        87.4 |         164   |       2367   |      720   |                6   |         0   |             7.5 |     404   |       nan |                0.5 |            1.7 |
+| Trumbull        | Greater Bridgeport Planning Region        |       5 |           1 |        87.8 |         nan   |       2247   |      713   |                0   |         0   |             8.7 |    1269   |       nan |                0.8 |            0.8 |
+| Danbury         | Western Connecticut Planning Region       |      12 |           5 |        90.8 |         265   |       2248.5 |      746   |                1   |         0   |            11   |    2408.5 |       nan |                1.4 |            0.6 |
+| Milford         | South Central Connecticut Planning Region |      16 |           9 |        91.9 |         193   |       2067   |      579   |                3.5 |         1   |            11.9 |    1318   |       nan |                0.7 |            2.1 |
+| Plainsboro      | Middlesex County                          |      34 |           3 |        92.1 |         211   |       2075.5 |      647   |                0   |         0   |            11.9 |    1566   |       nan |                0.4 |            0.4 |
+| Goshen          | Orange County                             |       3 |           3 |        96.2 |         nan   |       1843   |      800   |                8   |         1   |             1.2 |    2326   |       nan |                0.9 |            0   |
+| Hillsborough    | Somerset County                           |       6 |           1 |        96.5 |         nan   |       2097   |      882.5 |                4   |         0   |             9.5 |    3621   |       nan |                1   |            0.1 |
+| New Windsor     | Orange County                             |       3 |           3 |        99.4 |         nan   |       2122   |      835.5 |                2   |         0   |             1.4 |    1772   |       nan |                1   |            0.1 |
+| Lawrence        | Mercer County                             |      14 |           3 |       101.3 |         182   |       2311   |      742.5 |                4   |         0   |            14.7 |    2463   |       nan |                0.4 |            1   |
+| West Windsor    | Mercer County                             |      14 |           5 |       101.7 |         197   |       2264   |      825   |                3   |         0   |            14.2 |    2872   |       nan |                0.5 |            0.3 |
+| West Haven      | South Central Connecticut Planning Region |      17 |          10 |       102.9 |         181   |       2052   |      898   |                2   |         0   |             5.7 |     986   |       nan |                0.6 |            1.6 |
+| Hamilton        | Mercer County                             |       6 |           1 |       103.9 |         182   |       2072   |      768   |                0   |         0   |            11.5 |     462   |       nan |                1.6 |            1.6 |
+| Middletown      | Orange County                             |       3 |           2 |       103.9 |         nan   |       2360   |      763.5 |               10   |         2   |             6.9 |    2063   |       nan |                3.6 |            0.6 |
+| Seymour         | Naugatuck Valley Planning Region          |       3 |           2 |       104.3 |         271   |       2179   |      850   |                7   |         0   |            15   |     277   |       nan |                0.5 |            0.9 |
+| Wallkill        | Orange County                             |       7 |           6 |       104.3 |         nan   |       2090   |      655   |                2   |         0   |            12.6 |    1701   |       nan |                0.5 |            0.1 |
+| Flemington      | Hunterdon County                          |       6 |           5 |       104.7 |         nan   |       2265.5 |      672.5 |                8   |         0   |             9.7 |    2517   |       nan |                3   |            0.4 |
+| Beacon Falls    | Naugatuck Valley Planning Region          |       8 |           1 |       108.8 |         310   |       1984   |      650   |                2   |         1   |            11.3 |     108   |       nan |              nan   |          nan   |
+| Hamden          | South Central Connecticut Planning Region |      40 |          14 |       112.7 |         226   |       2008.5 |      713   |                0   |         0   |            16.2 |    1238.5 |       nan |                1.7 |            3.9 |
+| Lopatcong       | Warren County                             |       7 |           2 |       114.4 |         nan   |       2087   |      816   |                2   |         0   |            15.8 |    2876   |       nan |                0.6 |            0.4 |
+| Naugatuck       | Naugatuck Valley Planning Region          |       7 |           4 |       114.8 |         325   |       2012   |      850   |                0   |         0   |             8.2 |     709   |       nan |                0.6 |            0.9 |
+| North Haven     | South Central Connecticut Planning Region |       3 |           2 |       115.9 |         286   |       1848   |      nan   |                0   |         0   |             7   |     990   |       nan |                0.4 |            3.1 |
+| Lower Makefield | Bucks County                              |       5 |           2 |       118   |         257   |       2307   |      775   |                2   |         0   |             0.4 |     389   |       nan |                0.3 |            0.4 |
+| Burlington      | Burlington County                         |       7 |           2 |       118.2 |         247   |       2371   |      705   |                2   |         0   |            59.4 |    3406   |       nan |                1.6 |            1.1 |
+
+## Group 3: 4 neighborhoods, 200 places
+
+Distinguishing traits (standard deviations from the average): bars_800m +3.3, restaurants_800m +2.2, bfloors -1.0, all_in_med +0.7
+
+| hood              | area                                      |   units |   buildings |   drive_min |   transit_min |   all_in_med |   sqft_med |   restaurants_800m |   bars_800m |   park_walk_min |   water_m |   bfloors |   violent_per_1000 |   mvt_per_1000 |
+|:------------------|:------------------------------------------|--------:|------------:|------------:|--------------:|-------------:|-----------:|-------------------:|------------:|----------------:|----------:|----------:|-------------------:|---------------:|
+| Astoria (Central) | Queens                                    |       3 |           3 |        16.8 |          42.5 |       2203   |        700 |                122 |          30 |            11.3 |      1378 |         2 |                3.7 |            1.7 |
+| Morristown        | Morris County                             |       3 |           2 |        72.2 |         143   |       2345   |        488 |                 53 |           5 |             7.5 |       451 |       nan |                0.7 |            0.2 |
+| Dover             | Morris County                             |       4 |           1 |        74.8 |         172   |       2304   |        613 |                 27 |           7 |             2.2 |      2682 |       nan |                0.8 |            0.6 |
+| New Haven         | South Central Connecticut Planning Region |     190 |          44 |       108.4 |         181   |       2067.5 |        537 |                 55 |          17 |             4.1 |      1177 |       nan |                4   |            6.1 |
+
+## Group 4: 4 neighborhoods, 63 places
+
+Distinguishing traits (standard deviations from the average): violent_per_1000 +3.2, all_in_med -1.4, park_ha_800m +1.2, water_m -0.7
+
+| hood     | area           |   units |   buildings |   drive_min |   transit_min |   all_in_med |   sqft_med |   restaurants_800m |   bars_800m |   park_walk_min |   water_m |   bfloors |   violent_per_1000 |   mvt_per_1000 |
+|:---------|:---------------|--------:|------------:|------------:|--------------:|-------------:|-----------:|-------------------:|------------:|----------------:|----------:|----------:|-------------------:|---------------:|
+| Norwood  | Bronx          |       3 |           3 |        27.6 |          82.6 |         2202 |      750   |                  3 |           0 |             3   |       811 |         8 |               10.3 |            2.2 |
+| Paterson | Passaic County |      41 |          38 |        46.4 |         122   |         1870 |      750   |                  5 |           1 |             6.2 |       642 |       nan |                8.8 |            4.7 |
+| Newburgh | Orange County  |      13 |          12 |       102.4 |         nan   |         1697 |      635.5 |                  2 |           1 |             5.8 |       556 |       nan |                9.8 |            1.8 |
+| Trenton  | Mercer County  |       6 |           6 |       114.6 |         169.5 |         1442 |      600   |                  2 |           0 |             1.6 |       381 |       nan |                8.1 |            5.3 |
+
+## Group 5: 27 neighborhoods, 321 places
+
+Distinguishing traits (standard deviations from the average): drive_min -0.9, restaurants_800m +0.6, transit_min -0.6, park_ha_800m +0.6
+
+| hood                           | area                                |   units |   buildings |   drive_min |   transit_min |   all_in_med |   sqft_med |   restaurants_800m |   bars_800m |   park_walk_min |   water_m |   bfloors |   violent_per_1000 |   mvt_per_1000 |
+|:-------------------------------|:------------------------------------|--------:|------------:|------------:|--------------:|-------------:|-----------:|-------------------:|------------:|----------------:|----------:|----------:|-------------------:|---------------:|
+| Jamaica Hills-Briarwood        | Queens                              |       8 |           8 |         4   |          17.2 |       2244   |      525   |                8   |         1.5 |             4.9 |    1749   |       6   |                2.4 |            2.2 |
+| Forest Hills                   | Queens                              |       3 |           3 |         6.3 |          27.5 |       1779   |      500   |               38   |         1   |             7.3 |    1295   |       6.5 |                2.1 |            1.4 |
+| Flushing-Willets Point         | Queens                              |      10 |          10 |        11.6 |          41.6 |       2308.5 |      590   |               86.5 |         3   |             4   |     746   |       6   |                2.6 |            2.2 |
+| Jackson Heights                | Queens                              |      10 |          10 |        12.8 |          32   |       2235.5 |      639   |               61   |         3   |             4.9 |    1802   |       6   |                4.8 |            1.4 |
+| Hempstead                      | Nassau County                       |       5 |           4 |        23   |          57   |       2160   |      nan   |               22   |         5   |             1.3 |    2167   |     nan   |                5.6 |            2.3 |
+| Long Beach                     | Nassau County                       |       4 |           2 |        27.9 |          74   |       2285   |      nan   |                6   |         2   |            29.6 |     194   |     nan   |                0.8 |            0   |
+| Riverdale-Spuyten Duyvil       | Bronx                               |       3 |           3 |        32.2 |          85   |       2283   |      898   |                5   |         0   |             2   |     660   |       6   |                3.4 |            2.6 |
+| Tuckahoe                       | Westchester County                  |       3 |           2 |        33.6 |         101   |       2278   |      650   |                3   |         1   |             1.9 |     248   |     nan   |                0.3 |            0.2 |
+| West New York                  | Hudson County                       |       8 |           8 |        34.8 |          73.5 |       1947   |      550   |               18   |         0   |             8.5 |     939   |     nan   |                2.4 |            1.1 |
+| North Bergen                   | Hudson County                       |       4 |           4 |        35.5 |          76.5 |       2208   |      626   |                9.5 |         0   |             4.2 |     488.5 |     nan   |                1.3 |            1.3 |
+| Jersey City – Journal Square   | Hudson County                       |       4 |           4 |        35.6 |          70   |       2097   |      570   |               25.5 |         1   |            15.7 |    1255   |     nan   |                4.9 |            2.9 |
+| Yonkers                        | Westchester County                  |      11 |           9 |        36.7 |         106   |       2183   |      500   |                3   |         1   |             3.2 |     607   |     nan   |                3.9 |            1.5 |
+| Jersey City – Bergen-Lafayette | Hudson County                       |       5 |           5 |        39.2 |          85   |       2002   |      680   |                6   |         0   |             2.6 |    1753   |     nan   |                4.9 |            2.9 |
+| Jersey City – West Side        | Hudson County                       |      12 |           7 |        40.7 |          85   |       2223   |      443   |                5   |         0   |             8.4 |     819   |     nan   |                4.9 |            2.9 |
+| Jersey City – Greenville       | Hudson County                       |       8 |           8 |        41.4 |          91   |       2002   |      650   |                4   |         0   |             2.2 |    1029   |     nan   |                4.9 |            2.9 |
+| Bayonne                        | Hudson County                       |      21 |          18 |        45.6 |         101   |       1952   |      600   |                2   |         0   |             6.2 |     274   |     nan   |                2.8 |            1.1 |
+| Kearny                         | Hudson County                       |       5 |           4 |        46.4 |         100   |       2027   |      547.5 |               11   |         1   |             7.8 |     851   |     nan   |                2.2 |            1.8 |
+| Newark                         | Essex County                        |      56 |          45 |        47.7 |          84   |       1902   |      608.5 |                8   |         1   |             4.6 |    1024   |       6   |                5.2 |            6.9 |
+| Elizabeth                      | Union County                        |       7 |           7 |        51.5 |          98   |       1839   |      600   |                7   |         0   |             8   |     697   |     nan   |                3.4 |            4.8 |
+| Bloomfield                     | Essex County                        |      13 |           9 |        51.8 |         107   |       2265   |      587   |               14   |         1   |             3.3 |    3453   |     nan   |                0.8 |            1.3 |
+| Stamford                       | Western Connecticut Planning Region |      27 |          16 |        53.6 |         130   |       2074   |      500   |               15   |         3   |             7.4 |    1222   |     nan   |                1.5 |            1.2 |
+| Millburn                       | Essex County                        |       3 |           2 |        58.3 |         115   |       2205   |      480   |                7   |         1   |             6.9 |    4113   |     nan   |                0.1 |            0.3 |
+| Norwalk                        | Western Connecticut Planning Region |      22 |          12 |        63.9 |         149   |       2129   |      559   |                9   |         0   |             7.3 |     620   |       3   |                0.5 |            1.2 |
+| Patchogue                      | Suffolk County                      |       3 |           3 |        68.5 |         105   |       2345   |      485   |                2   |         0   |            15.3 |      96   |     nan   |                1   |            1.1 |
+| New Brunswick                  | Middlesex County                    |      16 |           3 |        73.7 |         136   |       2017   |      620   |                2   |         0   |             5.5 |     172   |     nan   |                5.1 |            1.6 |
+| Bridgeport                     | Greater Bridgeport Planning Region  |      41 |          15 |        82.7 |         151   |       2017   |      491   |                4   |         0   |             9.9 |     267   |     nan   |                2.5 |            3.4 |
+| Long Branch                    | Monmouth County                     |       9 |           3 |        99.9 |         190   |       1977   |      500   |                4   |         0   |             4.9 |     498   |     nan   |                2.3 |            0.5 |
+
+## Group 6: 1 neighborhoods, 11 places
+
+Distinguishing traits (standard deviations from the average): bfloors +7.6, violent_per_1000 +1.2, restaurants_800m +1.1, sqft_med -1.1
 
 | hood                          | area          |   units |   buildings |   drive_min |   transit_min |   all_in_med |   sqft_med |   restaurants_800m |   bars_800m |   park_walk_min |   water_m |   bfloors |   violent_per_1000 |   mvt_per_1000 |
 |:------------------------------|:--------------|--------:|------------:|------------:|--------------:|-------------:|-----------:|-------------------:|------------:|----------------:|----------:|----------:|-------------------:|---------------:|
-| Jamaica                       | Queens        |      11 |           9 |         2.2 |          11.4 |       2629   |      600   |                 27 |           2 |             5.5 |      2687 |        11 |                9.8 |            1.7 |
-| East New York (North)         | Brooklyn      |       4 |           2 |        11.9 |          32.5 |       2814.5 |      nan   |                  5 |           1 |             5.7 |      2543 |        14 |                8.4 |            2.4 |
-| East Harlem (North)           | Manhattan     |       5 |           5 |        22   |          57.5 |       2903   |      400   |                 41 |           1 |             5.4 |       572 |         6 |               11.2 |            1.3 |
-| Mott Haven-Port Morris        | Bronx         |       9 |           9 |        22.6 |          60.5 |       2575   |      734   |                 13 |           0 |             3.2 |       250 |        12 |               17.2 |            2.6 |
-| Harlem (North)                | Manhattan     |       7 |           7 |        24.5 |          55   |       2798   |      466   |                 21 |           2 |             3   |       543 |         7 |                8.9 |            0.8 |
-| Norwood                       | Bronx         |       3 |           3 |        27.6 |          82.6 |       2202   |      750   |                  3 |           0 |             3   |       811 |         8 |               10.3 |            2.2 |
-| Jersey City – Newport         | Hudson County |       4 |           1 |        35.2 |          55   |       3129   |      443.5 |                 22 |           1 |             8   |        68 |       nan |                4.9 |            2.9 |
-| Jersey City – McGinley Square | Hudson County |      25 |           3 |        36.7 |          79   |       2605   |      612.5 |                 15 |           2 |            10.1 |      1402 |        14 |                4.9 |            2.9 |
-
-## Group 3: 22 neighborhoods, 763 places
-
-Distinguishing traits (standard deviations from the average): drive_min +1.4, transit_min +1.4, all_in_med -0.7, park_ha_800m -0.5
-
-| hood                  | area                                      |   units |   buildings |   drive_min |   transit_min |   all_in_med |   sqft_med |   restaurants_800m |   bars_800m |   park_walk_min |   water_m |   bfloors |   violent_per_1000 |   mvt_per_1000 |
-|:----------------------|:------------------------------------------|--------:|------------:|------------:|--------------:|-------------:|-----------:|-------------------:|------------:|----------------:|----------:|----------:|-------------------:|---------------:|
-| Parsippany-Troy Hills | Morris County                             |     114 |           3 |        69.2 |           187 |       2865   |      730   |                  3 |         0   |            13.1 |    1061   |         6 |                0.7 |            0.4 |
-| East Brunswick        | Middlesex County                          |      18 |           1 |        73.4 |           143 |       2789   |      817   |                 17 |         1   |            15.9 |     720   |       nan |                1.2 |            0.5 |
-| Dover                 | Morris County                             |      41 |           1 |        74.8 |           172 |       2562   |      787   |                 27 |         7   |             2.2 |    2682   |       nan |                0.8 |            0.6 |
-| New Brunswick         | Middlesex County                          |      23 |           6 |        75.1 |           122 |       2900   |      750   |                 30 |         4   |             3.9 |     365   |         2 |                5.1 |            1.6 |
-| Bound Brook           | Somerset County                           |       5 |           2 |        81.6 |           136 |       2605   |      789   |                 13 |         2   |             4.4 |     283   |       nan |                1.2 |            0.7 |
-| Bridgeport            | Greater Bridgeport Planning Region        |     108 |           7 |        82.7 |           151 |       2904   |      725   |                  3 |         0   |            12.5 |      75   |       nan |                2.5 |            3.4 |
-| Somerville            | Somerset County                           |       7 |           2 |        86.2 |           151 |       3008   |      928   |                 19 |         4   |             6.1 |     475   |       nan |                1.3 |            0.9 |
-| Stratford             | Greater Bridgeport Planning Region        |       4 |           1 |        87.6 |           164 |       2367   |      720   |                  6 |         0   |             7.5 |     404   |       nan |                0.5 |            1.7 |
-| Danbury               | Western Connecticut Planning Region       |      23 |           4 |        88.7 |           265 |       2570   |      722   |                  1 |         3   |            12.9 |    2252   |       nan |                1.4 |            0.6 |
-| Red Bank              | Monmouth County                           |       4 |           1 |        90.4 |           157 |       2867   |      740   |                 18 |         1   |             5.5 |     231   |       nan |                2.3 |            1   |
-| Milford               | South Central Connecticut Planning Region |      16 |           6 |        92.9 |           160 |       2452   |      593   |                 10 |         0.5 |             6.5 |     535   |       nan |                0.7 |            2.1 |
-| Shelton               | Naugatuck Valley Planning Region          |      14 |           5 |        97.6 |           241 |       2582.5 |      801.5 |                  8 |         1.5 |             5.9 |      88.5 |       nan |                0.3 |            1.1 |
-| Brookfield            | Western Connecticut Planning Region       |       3 |           1 |        97.9 |           nan |       2769   |      863   |                  8 |         0   |            15.1 |     483   |       nan |                0.3 |            0.3 |
-| Long Branch           | Monmouth County                           |      11 |           1 |       101.5 |           175 |       2569   |      645   |                 13 |         2   |             8.2 |     335   |       nan |                2.3 |            0.5 |
-| Middletown            | Orange County                             |       6 |           1 |       103.9 |           nan |       2482.5 |      763.5 |                 10 |         2   |             6.9 |    2063   |       nan |                3.6 |            0.6 |
-| West Haven            | South Central Connecticut Planning Region |       8 |           4 |       103.9 |           181 |       2093.5 |      900   |                  2 |         0   |            16.6 |    1178   |       nan |                0.6 |            1.6 |
-| Seymour               | Naugatuck Valley Planning Region          |       3 |           2 |       104.3 |           271 |       2179   |      850   |                  7 |         0   |            15   |     277   |       nan |                0.5 |            0.9 |
-| Flemington            | Hunterdon County                          |      18 |           4 |       104.7 |           nan |       2564   |      690   |                  8 |         0   |             9.7 |    2441   |       nan |                3   |            0.4 |
-| Beacon Falls          | Naugatuck Valley Planning Region          |       8 |           1 |       108.8 |           310 |       1984   |      650   |                  2 |         1   |            11.3 |     108   |       nan |              nan   |          nan   |
-| New Haven             | South Central Connecticut Planning Region |     303 |          24 |       109.4 |           181 |       2353   |      653   |                 55 |        17   |             4.1 |    1177   |       nan |                4   |            6.1 |
-| Hamden                | South Central Connecticut Planning Region |       5 |           2 |       111.8 |           226 |       2032   |      730   |                 11 |         0   |             9.2 |     391   |       nan |                1.7 |            3.9 |
-| Burlington            | Burlington County                         |      21 |           1 |       118.2 |           247 |       2551   |      824   |                  2 |         0   |            59.4 |    3406   |       nan |                1.6 |            1.1 |
-
-## Group 4: 2 neighborhoods, 154 places
-
-Distinguishing traits (standard deviations from the average): bfloors +5.9, water_m -1.0, all_in_med +0.9, drive_min -0.6
-
-| hood         | area               |   units |   buildings |   drive_min |   transit_min |   all_in_med |   sqft_med |   restaurants_800m |   bars_800m |   park_walk_min |   water_m |   bfloors |   violent_per_1000 |   mvt_per_1000 |
-|:-------------|:-------------------|--------:|------------:|------------:|--------------:|-------------:|-----------:|-------------------:|------------:|----------------:|----------:|----------:|-------------------:|---------------:|
-| New Rochelle | Westchester County |      85 |          16 |        28.9 |           101 |         2914 |        662 |                  7 |           1 |            13.9 |       844 |        26 |                1.6 |            0.7 |
-| Yonkers      | Westchester County |      69 |          20 |        37.9 |           100 |         2932 |        677 |                  2 |           1 |             2.7 |        65 |        25 |                3.9 |            1.5 |
-
-## Group 5: 14 neighborhoods, 210 places
-
-Distinguishing traits (standard deviations from the average): restaurants_800m -1.4, water_m +1.0, bars_800m -0.7, sqft_med +0.7
-
-| hood             | area                                |   units |   buildings |   drive_min |   transit_min |   all_in_med |   sqft_med |   restaurants_800m |   bars_800m |   park_walk_min |   water_m |   bfloors |   violent_per_1000 |   mvt_per_1000 |
-|:-----------------|:------------------------------------|--------:|------------:|------------:|--------------:|-------------:|-----------:|-------------------:|------------:|----------------:|----------:|----------:|-------------------:|---------------:|
-| Englewood        | Bergen County                       |      19 |           3 |        35   |          85   |       2902   |        767 |                  0 |           0 |            11.3 |       917 |       nan |                2.3 |            1.3 |
-| Teaneck          | Bergen County                       |       8 |           2 |        37.9 |          93.5 |       2810   |        709 |                  1 |           0 |            13.8 |      1951 |       nan |                1.3 |            0.2 |
-| Harrison         | Westchester County                  |      23 |           3 |        43.2 |         131   |       3213   |        570 |                  0 |           0 |            13.1 |      2799 |         6 |                0.1 |            0.1 |
-| Clifton          | Passaic County                      |      22 |           2 |        46   |         107   |       2854   |        858 |                  2 |           1 |             3.7 |      2437 |       nan |                1.7 |            2.1 |
-| East Orange      | Essex County                        |       9 |           5 |        51.7 |         107   |       2402   |        850 |                  0 |           0 |             3.9 |      3709 |       nan |                4.2 |            4.7 |
-| City of Orange   | Essex County                        |      12 |           4 |        53.2 |          83   |       2542.5 |        770 |                  0 |           1 |            15.7 |      4149 |       nan |                4.2 |            5.6 |
-| Maplewood        | Essex County                        |       9 |           1 |        54.4 |         113   |       2752   |        815 |                 10 |           1 |            10.1 |      4451 |       nan |                0.5 |            1.4 |
-| Carteret         | Middlesex County                    |       5 |           1 |        58.5 |         108.5 |       2323   |        807 |                  0 |           0 |             9.6 |       692 |       nan |                2   |            1.2 |
-| Berkeley Heights | Union County                        |      60 |           2 |        65.9 |         143   |       2970   |        718 |                  0 |           0 |            19.9 |      4020 |       nan |                0.3 |            0.1 |
-| Westport         | Western Connecticut Planning Region |       5 |           2 |        72.3 |         nan   |       2862   |        712 |                  0 |           0 |            13.2 |      2155 |       nan |                0.3 |            2.6 |
-| Mount Arlington  | Morris County                       |      10 |           2 |        80.4 |         nan   |       2567   |        890 |                  2 |           0 |            28.5 |      1855 |       nan |                0   |            0   |
-| Trumbull         | Greater Bridgeport Planning Region  |      19 |           2 |        87.8 |         nan   |       2492   |        853 |                  0 |           0 |             8.7 |      1269 |       nan |                0.8 |            0.8 |
-| Newburgh         | Orange County                       |       6 |           2 |        98.7 |         nan   |       2491   |        700 |                  1 |           0 |            46.8 |      1946 |       nan |                1.1 |            0.5 |
-| West Windsor     | Mercer County                       |       3 |           1 |        99.2 |         167   |       2812   |        860 |                  7 |           0 |             9.8 |      2376 |       nan |                0.5 |            0.3 |
-
-## Group 6: 31 neighborhoods, 813 places
-
-Distinguishing traits (standard deviations from the average): bars_800m -0.6, all_in_med +0.4, drive_min -0.3, water_m -0.3
-
-| hood                                  | area                                |   units |   buildings |   drive_min |   transit_min |   all_in_med |   sqft_med |   restaurants_800m |   bars_800m |   park_walk_min |   water_m |   bfloors |   violent_per_1000 |   mvt_per_1000 |
-|:--------------------------------------|:------------------------------------|--------:|------------:|------------:|--------------:|-------------:|-----------:|-------------------:|------------:|----------------:|----------:|----------:|-------------------:|---------------:|
-| Bay Terrace-Clearview                 | Queens                              |       3 |           3 |        17.3 |          65   |       2753   |      800   |                9   |         0   |            14.4 |     193   |         6 |                2.6 |            2.2 |
-| Hempstead                             | Nassau County                       |      11 |           6 |        22.4 |          50   |       2821   |      820   |                8   |         1   |             9   |    1922   |       nan |                5.6 |            2.3 |
-| East Flatbush-Farragut                | Brooklyn                            |       5 |           5 |        22.7 |          60   |       2891   |      nan   |                5   |         0   |             7   |    2898   |         6 |                6.6 |            1.2 |
-| Madison                               | Brooklyn                            |       5 |           5 |        23.9 |          70   |       2544   |      800   |                8   |         0   |             7.4 |    1559   |         6 |                2.7 |            1.4 |
-| Midwood                               | Brooklyn                            |       4 |           4 |        24.7 |          60   |       2881   |      650   |                5   |         0   |             7.9 |    2719   |         8 |                4.1 |            0.8 |
-| Flatbush (West)-Ditmas Park-Parkville | Brooklyn                            |       4 |           4 |        26.4 |          62.5 |       2786.5 |      650   |                7.5 |         1   |            17.8 |    2552.5 |         7 |                4.1 |            0.8 |
-| Long Beach                            | Nassau County                       |      10 |           3 |        28.2 |          74   |       2718   |      715.5 |                1   |         1   |            20.7 |     293   |       nan |                0.8 |            0   |
-| Bath Beach                            | Brooklyn                            |       3 |           3 |        28.7 |          80   |       2444   |      700   |                8   |         0   |             0.8 |     141   |         6 |                2   |            0.9 |
-| Weehawken                             | Hudson County                       |       6 |           2 |        31.3 |          62   |       3090   |      802   |               11   |         0   |             3.2 |      82   |       nan |                1.3 |            1.1 |
-| Riverdale-Spuyten Duyvil              | Bronx                               |       7 |           6 |        32   |          85   |       2803   |      875.5 |               11   |         0   |             2.8 |     688   |         7 |                3.4 |            2.6 |
-| Glen Cove                             | Nassau County                       |       3 |           1 |        32.7 |         106   |       2900   |      570   |               20   |         1   |             4.5 |     421   |       nan |                1.1 |            0.2 |
-| West New York                         | Hudson County                       |      11 |           2 |        33.8 |          71   |       3067   |      739   |               12   |         0   |             8.7 |    1083   |       nan |                2.4 |            1.1 |
-| North Bergen                          | Hudson County                       |       5 |           4 |        34.3 |          70   |       2692   |      681.5 |               12   |         0   |             2.9 |     188   |       nan |                1.3 |            1.3 |
-| Jersey City – Downtown                | Hudson County                       |       7 |           4 |        34.9 |          76   |       2990   |      540   |               18   |         0   |             2.1 |    1364   |       nan |                4.9 |            2.9 |
-| Bogota                                | Bergen County                       |      31 |           2 |        35.6 |          92   |       2880   |      658   |                2   |         0   |             6.9 |     123   |       nan |                0.7 |            0.1 |
-| Jersey City – Journal Square          | Hudson County                       |     112 |           8 |        37   |          71   |       2908   |      530   |               12   |         1   |            20.3 |     766   |       nan |                4.9 |            2.9 |
-| Jersey City – Bergen-Lafayette        | Hudson County                       |     135 |           9 |        38.5 |          85   |       2957   |      532   |                3   |         0   |             0.6 |     947   |       nan |                4.9 |            2.9 |
-| Jersey City – West Side               | Hudson County                       |      50 |           6 |        40.6 |          85   |       2602   |      606   |                5   |         0   |            11.4 |     858   |       nan |                4.9 |            2.9 |
-| Port Chester                          | Westchester County                  |      59 |           5 |        41.5 |         106   |       2903   |      567   |               10   |         0   |            11.3 |     300   |       nan |                0.8 |            0.4 |
-| Belleville                            | Essex County                        |       9 |           2 |        44.1 |         100   |       2402   |      791   |                5   |         1   |             6.6 |     450   |       nan |                2.4 |            2.9 |
-| White Plains                          | Westchester County                  |      58 |          16 |        44.5 |         115   |       2997   |      633.5 |                8   |         0   |             3.1 |     183.5 |        15 |                1.1 |            0.5 |
-| Bayonne                               | Hudson County                       |      64 |          11 |        45.1 |         100   |       2668.5 |      763   |                6   |         0   |            12.2 |     853   |       nan |                2.8 |            1.1 |
-| Hawthorne                             | Passaic County                      |       3 |           1 |        46.4 |         122   |       3002   |      815   |                3   |         0   |             9.3 |     237   |       nan |                0.1 |            0.6 |
-| Harrison                              | Hudson County                       |      45 |          11 |        46.9 |          77   |       2747   |      612   |               10   |         1   |             2.4 |     180   |       nan |                2.1 |            1.1 |
-| Wayne                                 | Passaic County                      |       4 |           2 |        54.5 |         107   |       2712   |      600   |                8   |         1   |             3.6 |     180   |       nan |                1   |            0.5 |
-| South Orange                          | Essex County                        |      10 |           1 |        57.3 |         107   |       2862.5 |      669   |               16   |         0   |             3.1 |    2676   |       nan |                1   |            1.2 |
-| Riverdale                             | Morris County                       |       4 |           1 |        61.1 |         130   |       2750.5 |      744   |                1   |         0   |             6.5 |     361   |       nan |                0.5 |            1   |
-| Norwalk                               | Western Connecticut Planning Region |      96 |          10 |        63.1 |         149   |       2918.5 |      787   |               15   |         0   |             1.3 |     327   |         7 |                0.5 |            1.2 |
-| Haverstraw                            | Rockland County                     |      16 |           3 |        67   |         nan   |       2910   |      755   |                1   |         0   |            10.2 |      57   |       nan |                2.1 |            0.5 |
-| Peekskill                             | Westchester County                  |      16 |           4 |        77.1 |         148   |       2919.5 |      766   |                1.5 |         0.5 |             3.8 |     696.5 |       nan |                2.3 |            0.6 |
-| Franklin                              | Somerset County                     |      17 |           2 |        81.9 |         nan   |       2779   |      746   |                0   |         0   |             6.9 |     435   |       nan |                0.3 |            0.4 |
+| Jersey City – McGinley Square | Hudson County |      11 |           9 |        37.6 |            77 |         2002 |        474 |                 15 |           2 |             7.8 |      1804 |        14 |                4.9 |            2.9 |
 
 ## Neighborhoods with fewer than 3 passing places (not shown on the page)
 
-| hood                                           | area                                      | state   |   units |   drive_min |   all_in_med |
-|:-----------------------------------------------|:------------------------------------------|:--------|--------:|------------:|-------------:|
-| Jamaica Estates-Holliswood                     | Queens                                    | NY      |       1 |         6.4 |       2394   |
-| Kew Gardens Hills                              | Queens                                    | NY      |       1 |         7.3 |       2378   |
-| Pomonok-Electchester-Hillcrest                 | Queens                                    | NY      |       1 |         7.9 |       2994   |
-| North Corona                                   | Queens                                    | NY      |       2 |        10.1 |       2641.5 |
-| Rego Park                                      | Queens                                    | NY      |       1 |        10.6 |       2529   |
-| Middle Village                                 | Queens                                    | NY      |       1 |        11.8 |       1979   |
-| Murray Hill-Broadway Flushing                  | Queens                                    | NY      |       1 |        11.9 |       2118   |
-| Ocean Hill                                     | Brooklyn                                  | NY      |       2 |        13.6 |       2746.5 |
-| Astoria (East)-Woodside (North)                | Queens                                    | NY      |       1 |        14.9 |       2694   |
-| Lynbrook                                       | Nassau County                             | NY      |       2 |        15   |       3005   |
-| Bushwick (West)                                | Brooklyn                                  | NY      |       1 |        17.3 |       3044   |
-| Sunnyside                                      | Queens                                    | NY      |       2 |        17.4 |       2361   |
-| Astoria (Central)                              | Queens                                    | NY      |       2 |        17.5 |       2478   |
-| Bedford-Stuyvesant (East)                      | Brooklyn                                  | NY      |       2 |        17.8 |       2789   |
-| Long Island City-Hunters Point                 | Queens                                    | NY      |       1 |        18.9 |       1577   |
-| Bedford-Stuyvesant (West)                      | Brooklyn                                  | NY      |       2 |        20.3 |       2661   |
-| Mineola                                        | Nassau County                             | NY      |       2 |        20.8 |       2993   |
-| Crown Heights (North)                          | Brooklyn                                  | NY      |       1 |        20.8 |       2979   |
-| Morris Park                                    | Bronx                                     | NY      |       1 |        21.2 |       2302   |
-| Pelham Bay-Country Club-City Island            | Bronx                                     | NY      |       1 |        21.4 |       2983   |
-| Murray Hill-Kips Bay                           | Manhattan                                 | NY      |       1 |        21.6 |       3188   |
-| East Midtown-Turtle Bay                        | Manhattan                                 | NY      |       1 |        22.2 |       2393   |
-| Concourse-Concourse Village                    | Bronx                                     | NY      |       1 |        22.6 |       2438   |
-| Flatlands                                      | Brooklyn                                  | NY      |       2 |        22.6 |       2224.5 |
-| Flatbush                                       | Brooklyn                                  | NY      |       2 |        23.1 |       2835.5 |
-| Harlem (South)                                 | Manhattan                                 | NY      |       1 |        23.3 |       2908   |
-| East Harlem (South)                            | Manhattan                                 | NY      |       1 |        23.8 |       2578   |
-| Tremont                                        | Bronx                                     | NY      |       1 |        24.4 |       2187   |
-| Brooklyn Heights                               | Brooklyn                                  | NY      |       1 |        24.9 |       1744   |
-| Brighton Beach                                 | Brooklyn                                  | NY      |       2 |        24.9 |       2769.5 |
-| Pelham Parkway-Van Nest                        | Bronx                                     | NY      |       2 |        25   |       2403   |
-| Sheepshead Bay-Manhattan Beach-Gerritsen Beach | Brooklyn                                  | NY      |       1 |        25   |       1879   |
-| Mount Hope                                     | Bronx                                     | NY      |       2 |        25.1 |       1975.5 |
-| Gravesend (East)-Homecrest                     | Brooklyn                                  | NY      |       2 |        25.6 |       2536.5 |
-| Gravesend (South)                              | Brooklyn                                  | NY      |       2 |        26.2 |       2286.5 |
-| Windsor Terrace-South Slope                    | Brooklyn                                  | NY      |       1 |        26.2 |       2779   |
-| Kensington                                     | Brooklyn                                  | NY      |       1 |        26.3 |       2844   |
-| Upper West Side-Lincoln Square                 | Manhattan                                 | NY      |       1 |        26.7 |       2938   |
-| Williamsbridge-Olinville                       | Bronx                                     | NY      |       1 |        27   |       2108   |
-| Upper West Side-Manhattan Valley               | Manhattan                                 | NY      |       2 |        27   |       2960.5 |
-| Upper West Side (Central)                      | Manhattan                                 | NY      |       1 |        27.4 |       3038   |
-| University Heights (South)-Morris Heights      | Bronx                                     | NY      |       1 |        27.8 |       1880   |
-| Financial District-Battery Park City           | Manhattan                                 | NY      |       1 |        28.1 |       3103   |
-| Bensonhurst                                    | Brooklyn                                  | NY      |       2 |        28.4 |       2186.5 |
-| Gravesend (West)                               | Brooklyn                                  | NY      |       1 |        29   |       2494   |
-| Kingsbridge Heights-Van Cortlandt Village      | Bronx                                     | NY      |       1 |        29.1 |       2238   |
-| Bedford Park                                   | Bronx                                     | NY      |       1 |        29.1 |       2698   |
-| Mount Vernon                                   | Westchester County                        | NY      |       1 |        30.9 |       2145   |
-| Kingsbridge-Marble Hill                        | Bronx                                     | NY      |       1 |        30.9 |       2478   |
-| Bay Ridge                                      | Brooklyn                                  | NY      |       2 |        31.8 |       2314   |
-| Amityville                                     | Suffolk County                            | NY      |       1 |        33.1 |       3171   |
-| Edgewater                                      | Bergen County                             | NJ      |       2 |        33.4 |       2944.5 |
-| Union City                                     | Hudson County                             | NJ      |       1 |        34.6 |       2252   |
-| Jersey City – The Heights                      | Hudson County                             | NJ      |       1 |        35.2 |       3141   |
-| Lindenhurst                                    | Suffolk County                            | NY      |       1 |        38.8 |       3166   |
-| East Rutherford                                | Bergen County                             | NJ      |       2 |        42   |       2681   |
-| Tompkinsville-Stapleton-Clifton-Fox Hills      | Staten Island                             | NY      |       1 |        42.1 |       2361   |
-| Greenburgh                                     | Westchester County                        | NY      |       1 |        45   |       3203   |
-| St. George-New Brighton                        | Staten Island                             | NY      |       1 |        45.8 |       2944   |
-| Paterson                                       | Passaic County                            | NJ      |       2 |        46.3 |       1829   |
-| Huntington                                     | Suffolk County                            | NY      |       2 |        47.3 |       3153.5 |
-| New Springville-Willowbrook-Bulls Head-Travis  | Staten Island                             | NY      |       1 |        47.8 |       2579   |
-| Islip                                          | Suffolk County                            | NY      |       2 |        48.3 |       2944   |
-| Ridgewood                                      | Bergen County                             | NJ      |       1 |        49.3 |       2527   |
-| Union                                          | Union County                              | NJ      |       2 |        55.5 |       2959   |
-| Nyack                                          | Rockland County                           | NY      |       2 |        55.9 |       2940   |
-| Montvale                                       | Bergen County                             | NJ      |       1 |        56.6 |       2847   |
-| Smithtown                                      | Suffolk County                            | NY      |       1 |        58.8 |       3211   |
-| Springfield                                    | Union County                              | NJ      |       2 |        59   |       2767   |
-| Clarkstown                                     | Rockland County                           | NY      |       1 |        59.3 |       3065   |
-| Cranford                                       | Union County                              | NJ      |       1 |        59.9 |       3109   |
-| Garwood                                        | Union County                              | NJ      |       1 |        63.9 |       2949   |
-| Patchogue                                      | Suffolk County                            | NY      |       2 |        67.3 |       2623.5 |
-| Watchung                                       | Somerset County                           | NJ      |       2 |        70.8 |       2869   |
-| Brookhaven                                     | Suffolk County                            | NY      |       1 |        71.5 |       1223   |
-| Morris Plains                                  | Morris County                             | NJ      |       1 |        71.5 |       2637   |
-| Plainfield                                     | Union County                              | NJ      |       1 |        71.5 |       2432   |
-| Piscataway                                     | Middlesex County                          | NJ      |       1 |        76.4 |       2672   |
-| Rockaway                                       | Morris County                             | NJ      |       1 |        77.1 |       2737   |
-| Old Bridge                                     | Middlesex County                          | NJ      |       1 |        79.2 |       2770   |
-| Fairfield                                      | Greater Bridgeport Planning Region        | CT      |       2 |        81.2 |       2712.5 |
-| Roxbury                                        | Morris County                             | NJ      |       2 |        83.2 |       2812.5 |
-| Atlantic Highlands                             | Monmouth County                           | NJ      |       1 |        92.2 |       2837   |
-| Newtown                                        | Western Connecticut Planning Region       | CT      |       1 |        97.3 |       2479   |
-| Princeton                                      | Mercer County                             | NJ      |       1 |        99.4 |       2773   |
-| Orange                                         | South Central Connecticut Planning Region | CT      |       1 |        99.8 |       2692   |
-| Wallkill                                       | Orange County                             | NY      |       1 |       101.3 |       2615   |
-| Beacon                                         | Dutchess County                           | NY      |       1 |       106.6 |       3097   |
-| Bordentown                                     | Burlington County                         | NJ      |       1 |       107.2 |       2452   |
-| Oxford                                         | Naugatuck Valley Planning Region          | CT      |       1 |       109.9 |       2804   |
-| LaGrange                                       | Dutchess County                           | NY      |       1 |       117.2 |       2597   |
-| North Haven                                    | South Central Connecticut Planning Region | CT      |       1 |       118.2 |       1482   |
-| Waterbury                                      | Naugatuck Valley Planning Region          | CT      |       1 |       118.7 |       1666   |
-| New Paltz                                      | Ulster County                             | NY      |       2 |       119.3 |       2669.5 |
-| Mount Holly                                    | Burlington County                         | NJ      |       1 |       120.5 |       1807   |
+| hood                                           | area                                | state   |   units |   drive_min |   all_in_med |
+|:-----------------------------------------------|:------------------------------------|:--------|--------:|------------:|-------------:|
+| Jamaica                                        | Queens                              | NY      |       2 |         2.7 |       1900   |
+| Kew Gardens                                    | Queens                              | NY      |       1 |         4.9 |       2294   |
+| Jamaica Estates-Holliswood                     | Queens                              | NY      |       1 |         6.4 |       2394   |
+| Kew Gardens Hills                              | Queens                              | NY      |       1 |         7.3 |       2378   |
+| St. Albans                                     | Queens                              | NY      |       1 |         7.8 |       1649   |
+| Fresh Meadows-Utopia                           | Queens                              | NY      |       1 |         8.7 |       1094   |
+| Glendale                                       | Queens                              | NY      |       2 |         8.7 |       2051.5 |
+| Queens Village                                 | Queens                              | NY      |       1 |        10.4 |       2194   |
+| Rego Park                                      | Queens                              | NY      |       1 |        10.5 |       2179   |
+| Middle Village                                 | Queens                              | NY      |       1 |        11.8 |       1979   |
+| Murray Hill-Broadway Flushing                  | Queens                              | NY      |       2 |        12.4 |       2210.5 |
+| Elmhurst                                       | Queens                              | NY      |       2 |        13.8 |       2053.5 |
+| Woodside                                       | Queens                              | NY      |       1 |        14.9 |       2394   |
+| Bayside                                        | Queens                              | NY      |       1 |        15.1 |       2198   |
+| Sunnyside                                      | Queens                              | NY      |       1 |        18.3 |       1878   |
+| East Williamsburg                              | Brooklyn                            | NY      |       1 |        18.9 |       1994   |
+| Long Island City-Hunters Point                 | Queens                              | NY      |       1 |        18.9 |       1577   |
+| Throgs Neck-Schuylerville                      | Bronx                               | NY      |       1 |        20.2 |       2303   |
+| Mott Haven-Port Morris                         | Bronx                               | NY      |       2 |        21.8 |       2262.5 |
+| Crown Heights (North)                          | Brooklyn                            | NY      |       1 |        21.8 |       2379   |
+| Morris Park                                    | Bronx                               | NY      |       2 |        22   |       2252.5 |
+| Flatlands                                      | Brooklyn                            | NY      |       1 |        22.4 |       1928   |
+| Crotona Park East                              | Bronx                               | NY      |       1 |        23.7 |       1583   |
+| Tremont                                        | Bronx                               | NY      |       2 |        24.6 |       2137   |
+| Eastchester-Edenwald-Baychester                | Bronx                               | NY      |       1 |        24.7 |       1503   |
+| Brooklyn Heights                               | Brooklyn                            | NY      |       1 |        24.9 |       1744   |
+| Pelham Parkway-Van Nest                        | Bronx                               | NY      |       2 |        25   |       2403   |
+| Harlem (North)                                 | Manhattan                           | NY      |       2 |        25   |       2343   |
+| Mount Hope                                     | Bronx                               | NY      |       2 |        25.1 |       1975.5 |
+| Sheepshead Bay-Manhattan Beach-Gerritsen Beach | Brooklyn                            | NY      |       2 |        25.4 |       1904   |
+| Gravesend (South)                              | Brooklyn                            | NY      |       1 |        26.2 |       2079   |
+| Gravesend (East)-Homecrest                     | Brooklyn                            | NY      |       1 |        27   |       2394   |
+| Williamsbridge-Olinville                       | Bronx                               | NY      |       1 |        27   |       2108   |
+| Sunset Park (East)-Borough Park (West)         | Brooklyn                            | NY      |       1 |        27.6 |       2094   |
+| University Heights (South)-Morris Heights      | Bronx                               | NY      |       1 |        27.8 |       1880   |
+| Flatbush (West)-Ditmas Park-Parkville          | Brooklyn                            | NY      |       1 |        28.3 |       2294   |
+| Bensonhurst                                    | Brooklyn                            | NY      |       2 |        28.4 |       2186.5 |
+| Bath Beach                                     | Brooklyn                            | NY      |       1 |        28.7 |       2004   |
+| New Rochelle                                   | Westchester County                  | NY      |       2 |        28.8 |       2287.5 |
+| Fort Lee                                       | Bergen County                       | NJ      |       1 |        29.4 |       2197   |
+| Wakefield-Woodlawn                             | Bronx                               | NY      |       1 |        29.7 |       1688   |
+| Kingsbridge Heights-Van Cortlandt Village      | Bronx                               | NY      |       2 |        30   |       1920.5 |
+| Mount Vernon                                   | Westchester County                  | NY      |       2 |        30.6 |       2189.5 |
+| Bay Ridge                                      | Brooklyn                            | NY      |       1 |        32.5 |       1839   |
+| Union City                                     | Hudson County                       | NJ      |       2 |        32.8 |       2049.5 |
+| Eastchester                                    | Westchester County                  | NY      |       1 |        32.8 |       2398   |
+| Cliffside Park                                 | Bergen County                       | NJ      |       1 |        33.2 |       2252   |
+| Mamaroneck                                     | Westchester County                  | NY      |       1 |        34.8 |       2328   |
+| Englewood                                      | Bergen County                       | NJ      |       2 |        35   |       2400   |
+| Fairview                                       | Bergen County                       | NJ      |       2 |        35.2 |       2052   |
+| Jersey City – The Heights                      | Hudson County                       | NJ      |       1 |        36.9 |       1947   |
+| Port Chester                                   | Westchester County                  | NY      |       1 |        41.9 |       2303   |
+| Tompkinsville-Stapleton-Clifton-Fox Hills      | Staten Island                       | NY      |       1 |        42.1 |       2361   |
+| Garfield                                       | Bergen County                       | NJ      |       1 |        42.8 |       2247   |
+| Dobbs Ferry                                    | Westchester County                  | NY      |       2 |        43.2 |       2352.5 |
+| New Dorp-Midland Beach                         | Staten Island                       | NY      |       2 |        43.7 |       1579   |
+| Nutley                                         | Essex County                        | NJ      |       2 |        45.4 |       1882   |
+| Clifton                                        | Passaic County                      | NJ      |       1 |        46   |       2275   |
+| Hawthorne                                      | Passaic County                      | NJ      |       1 |        46.4 |       2252   |
+| Harrison                                       | Hudson County                       | NJ      |       2 |        46.4 |       2342.5 |
+| Brightwaters                                   | Suffolk County                      | NY      |       1 |        47.8 |       2160   |
+| Huntington                                     | Suffolk County                      | NY      |       2 |        47.9 |       1895.5 |
+| New Springville-Willowbrook-Bulls Head-Travis  | Staten Island                       | NY      |       1 |        48.3 |       1579   |
+| Montclair                                      | Essex County                        | NJ      |       2 |        52.2 |       2299   |
+| Orangetown                                     | Rockland County                     | NY      |       1 |        54.3 |       2265   |
+| Maplewood                                      | Essex County                        | NJ      |       1 |        54.4 |       2342   |
+| Verona                                         | Essex County                        | NJ      |       1 |        56.2 |       2042   |
+| West Orange                                    | Essex County                        | NJ      |       2 |        56.4 |       2074.5 |
+| Mahwah                                         | Bergen County                       | NJ      |       1 |        57   |       2246   |
+| South Orange                                   | Essex County                        | NJ      |       1 |        57.5 |       2242   |
+| Rahway                                         | Union County                        | NJ      |       2 |        58   |       2254   |
+| Smithtown                                      | Suffolk County                      | NY      |       1 |        59.9 |       2350   |
+| Cranford                                       | Union County                        | NJ      |       1 |        61.3 |       2399   |
+| Parsippany-Troy Hills                          | Morris County                       | NJ      |       1 |        63.6 |       2429   |
+| Mount Kisco                                    | Westchester County                  | NY      |       2 |        63.7 |       2095.5 |
+| Croton-on-Hudson                               | Westchester County                  | NY      |       1 |        67.2 |       1897   |
+| Bedford                                        | Westchester County                  | NY      |       2 |        67.8 |       2115.5 |
+| Sayreville                                     | Middlesex County                    | NJ      |       1 |        70.8 |       2333   |
+| Cortlandt                                      | Westchester County                  | NY      |       1 |        71.4 |       1623   |
+| North Plainfield                               | Somerset County                     | NJ      |       2 |        72   |       1767   |
+| Pound Ridge                                    | Westchester County                  | NY      |       1 |        73.2 |       2263   |
+| Wilton                                         | Western Connecticut Planning Region | CT      |       1 |        74   |       2129   |
+| Plainfield                                     | Union County                        | NJ      |       2 |        74.7 |       1769.5 |
+| Peekskill                                      | Westchester County                  | NY      |       1 |        77.1 |       2298   |
+| Brewster                                       | Putnam County                       | NY      |       1 |        78.2 |       1984   |
+| Fairfield                                      | Greater Bridgeport Planning Region  | CT      |       2 |        78.8 |       1760   |
+| North Brunswick                                | Middlesex County                    | NJ      |       1 |        79.1 |       2047   |
+| Middlesex                                      | Middlesex County                    | NJ      |       1 |        79.5 |       2147   |
+| North Salem                                    | Westchester County                  | NY      |       1 |        80.4 |       2263   |
+| Bound Brook                                    | Somerset County                     | NJ      |       2 |        81.9 |       2250.5 |
+| Bridgewater                                    | Somerset County                     | NJ      |       1 |        83.6 |       1951   |
+| Putnam Valley                                  | Putnam County                       | NY      |       1 |        83.8 |       2367   |
+| Keansburg                                      | Monmouth County                     | NJ      |       1 |        84.2 |       1887   |
+| Greenwood Lake                                 | Orange County                       | NY      |       1 |        84.5 |       1854   |
+| Netcong                                        | Morris County                       | NJ      |       1 |        84.7 |       2327   |
+| Somerville                                     | Somerset County                     | NJ      |       1 |        86.2 |       2347   |
+| Manville                                       | Somerset County                     | NJ      |       1 |        87.7 |       2102   |
+| Shelton                                        | Naugatuck Valley Planning Region    | CT      |       2 |        89.5 |       2024   |
+| Red Bank                                       | Monmouth County                     | NJ      |       1 |        89.8 |       1737   |
+| Freehold                                       | Monmouth County                     | NJ      |       1 |        93.6 |       2202   |
+| Eatontown                                      | Monmouth County                     | NJ      |       1 |        93.6 |       2212   |
+| Florida                                        | Orange County                       | NY      |       1 |        95.3 |       1965   |
+| Independence                                   | Warren County                       | NJ      |       1 |        96.4 |       1624   |
+| Derby                                          | Naugatuck Valley Planning Region    | CT      |       1 |        97.2 |       1696   |
+| Warwick                                        | Orange County                       | NY      |       1 |        97.3 |       1965   |
+| Riverhead                                      | Suffolk County                      | NY      |       1 |        98.6 |       2250   |
+| Brookfield                                     | Western Connecticut Planning Region | CT      |       1 |        98.7 |       2328   |
+| Neptune City                                   | Monmouth County                     | NJ      |       1 |        99.5 |       2142   |
+| Ocean                                          | Monmouth County                     | NJ      |       1 |       100.4 |       2032   |
+| East Fishkill                                  | Dutchess County                     | NY      |       2 |       100.5 |       1947   |
+| Asbury Park                                    | Monmouth County                     | NJ      |       2 |       100.6 |       1959.5 |
+| Neptune                                        | Monmouth County                     | NJ      |       1 |       102.6 |       1729   |
+| Maybrook                                       | Orange County                       | NY      |       1 |       104.2 |       1797   |
+| Howell                                         | Monmouth County                     | NJ      |       1 |       104.3 |       1937   |
+| Fishkill                                       | Dutchess County                     | NY      |       1 |       104.4 |       1786   |
+| Beacon                                         | Dutchess County                     | NY      |       1 |       106.4 |       2147   |
+| Bordentown                                     | Burlington County                   | NJ      |       1 |       108.5 |       2018   |
+| Wappinger                                      | Dutchess County                     | NY      |       1 |       109.7 |       1917   |
+| White                                          | Warren County                       | NJ      |       1 |       111.2 |       1787   |
+| Shawangunk                                     | Ulster County                       | NY      |       1 |       114.8 |       1847   |
+| Florence                                       | Burlington County                   | NJ      |       1 |       115.2 |       1877   |
+| Woodbury                                       | Naugatuck Valley Planning Region    | CT      |       1 |       116.4 |       1875   |
+| Waterbury                                      | Naugatuck Valley Planning Region    | CT      |       2 |       118.8 |       1660   |
+| New Paltz                                      | Ulster County                       | NY      |       2 |       119.2 |       1641   |
+| Poughkeepsie                                   | Dutchess County                     | NY      |       2 |       120.2 |       2072   |
+| Mount Holly                                    | Burlington County                   | NJ      |       1 |       120.5 |       1807   |
+| Falls                                          | Bucks County                        | PA      |       1 |       122.1 |       2057   |

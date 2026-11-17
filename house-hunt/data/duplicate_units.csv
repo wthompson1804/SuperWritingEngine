@@ -1,55 +1,83 @@
 listing_id,kept_listing_id,building_id,unit,beds,sqft,listed_rent,source_site,url
+zumper-65730243,apartmentlist:p127178171-3,b_04afcc5547,3,1,750.0,1718,zumper,https://www.zumper.com/listings/30032659p/1-bedroom-eastside-paterson-nj
+zumper-65773305,apartmentlist:p125220904-2B,b_0574ac1a01,2B,1,700.0,1695,zumper,https://www.zumper.com/listings/30090571p/1-bedroom-forest-hill-newark-nj
+zumper-65794096,apartmentlist:p127556945-1_bed_1.0_bath_700_sqft,b_09026e5b80,,1,700.0,1900,zumper,https://www.zumper.com/listings/30130422p/1-bedroom-downtown-milford-harbor-post-road-south-milford-city-ct
 zumper-65719902,trulia:2084734385,b_0f0fcfc79c,2D,0,600.0,1850,zumper,https://www.zumper.com/listings/65719902/studio-flushing-new-york-ny
-greystar:22789:3121236,region_wr:continuum_wp:N0910,b_144b021ca5,N0910,1,713.0,2937,greystar.com,https://www.greystar.com/continuum-55-white-plains-ny/p_22789
-greystar:22789:3121284,region_wr:continuum_wp:N1119,b_144b021ca5,N1119,0,528.0,2455,greystar.com,https://www.greystar.com/continuum-55-white-plains-ny/p_22789
-greystar:22789:3121263,region_wr:continuum_wp:N1018,b_144b021ca5,N1018,1,723.0,2962,greystar.com,https://www.greystar.com/continuum-55-white-plains-ny/p_22789
-greystar:22789:3121144,region_wr:continuum_wp:N0419,b_144b021ca5,N0419,0,528.0,2335,greystar.com,https://www.greystar.com/continuum-55-white-plains-ny/p_22789
-greystar:22789:3121117,region_wr:continuum_wp:N0311,b_144b021ca5,N0311,0,557.0,2294,greystar.com,https://www.greystar.com/continuum-55-white-plains-ny/p_22789
-greystar:22790:3121653,region_wr:continuum_wp:S1617,b_144b021ca5,S1617,0,422.0,2407,greystar.com,https://www.greystar.com/continuum-57-white-plains-ny/p_22790
-greystar:22790:3121645,region_wr:continuum_wp:S1609,b_144b021ca5,S1609,1,596.0,2830,greystar.com,https://www.greystar.com/continuum-57-white-plains-ny/p_22790
-greystar:22790:3121451,region_wr:continuum_wp:S0515,b_144b021ca5,S0515,0,424.0,2222,greystar.com,https://www.greystar.com/continuum-57-white-plains-ny/p_22790
-greystar:22790:3121552,region_wr:continuum_wp:S1016,b_144b021ca5,S1016,1,625.0,2628,greystar.com,https://www.greystar.com/continuum-57-white-plains-ny/p_22790
-greystar:22790:3121520,region_wr:continuum_wp:S0904,b_144b021ca5,S0904,1,632.0,2600,greystar.com,https://www.greystar.com/continuum-57-white-plains-ny/p_22790
-trulia:b2734175071:Unit_S0515:456728064,region_wr:continuum_wp:S0515,b_144b021ca5,S0515,0,424.0,2348,trulia,https://www.trulia.com/building/continuum-55-bank-st-white-plains-ny-10606-2734175071
-trulia:b2734175071:Unit_S0904:457236545,region_wr:continuum_wp:S0904,b_144b021ca5,S0904,1,632.0,2726,trulia,https://www.trulia.com/building/continuum-55-bank-st-white-plains-ny-10606-2734175071
-zumper-57136966,apartmentlist:p75976018-1-1,b_27104c3bf3,1-1,1,,2795,zumper,https://www.zumper.com/listings/26999984p/1-bedroom-bayonne-nj
-apartmentlist:p8968813-001-1555,avalon:AVB-NY047-001-1555,b_3f9fc0b756,001-1555,0,490.0,2475,apartmentlist.com,https://www.apartmentlist.com/ny/yonkers/avalon-yonkers
-zumper-65335189,trulia:2083737834,b_403d0ca679,5A,0,600.0,2150,zumper,https://www.zumper.com/listings/29569994p/studio-flushing-new-york-ny
-zumper-64736422,trulia:2062165222,b_4317e61e15,6D,1,800.0,2450,zumper,https://www.zumper.com/listings/28902181p/1-bedroom-flushing-new-york-ny
+zumper-65035675,trulia:2064261698,b_27ace0b35e,E42,0,520.0,1800,zumper,https://www.zumper.com/listings/29641750p/studio-jackson-heights-new-york-ny
+apartmentlist:p80474879-u44030941,apartmentlist:p80474879-u43666387,b_3130621181,Plan A-2,0,300.0,1979,apartmentlist.com,https://www.apartmentlist.com/nj/edison/edison-raritan-center
+apartmentlist:p80474879-u45942783,apartmentlist:p80474879-u43666387,b_3130621181,Plan A-3,0,300.0,1979,apartmentlist.com,https://www.apartmentlist.com/nj/edison/edison-raritan-center
+apartmentlist:p80474879-u45942789,apartmentlist:p80474879-u43666387,b_3130621181,Plan A-4,0,300.0,1979,apartmentlist.com,https://www.apartmentlist.com/nj/edison/edison-raritan-center
+apartmentlist:p80474879-u45942798,apartmentlist:p80474879-u43666387,b_3130621181,Plan A-5,0,300.0,1979,apartmentlist.com,https://www.apartmentlist.com/nj/edison/edison-raritan-center
+apartmentlist:p107926336-u43666422,trulia:b2755864758:plan-Plan_A:450092846,b_33b4dd3df6,Plan A-1,0,300.0,1949,apartmentlist.com,https://www.apartmentlist.com/nj/new-brunswick/princeton-south-brunswick
+apartmentlist:p107926336-u44031387,trulia:b2755864758:plan-Plan_A:450092846,b_33b4dd3df6,Plan A-2,0,300.0,1949,apartmentlist.com,https://www.apartmentlist.com/nj/new-brunswick/princeton-south-brunswick
+apartmentlist:p107926336-u45944088,trulia:b2755864758:plan-Plan_A:450092846,b_33b4dd3df6,Plan A-3,0,300.0,1949,apartmentlist.com,https://www.apartmentlist.com/nj/new-brunswick/princeton-south-brunswick
+apartmentlist:p107926336-u45944089,trulia:b2755864758:plan-Plan_A:450092846,b_33b4dd3df6,Plan A-4,0,300.0,1949,apartmentlist.com,https://www.apartmentlist.com/nj/new-brunswick/princeton-south-brunswick
+apartmentlist:p107926336-u45944093,trulia:b2755864758:plan-Plan_A:450092846,b_33b4dd3df6,Plan A-5,0,300.0,1949,apartmentlist.com,https://www.apartmentlist.com/nj/new-brunswick/princeton-south-brunswick
+zumper-65730242,apartmentlist:p65925773-3,b_393172ce2c,3,1,750.0,1636,zumper,https://www.zumper.com/listings/30032658p/1-bedroom-eastside-paterson-nj
+apartmentlist:p80474829-u43685302,trulia:b2756117320:plan-Plan_A:450092839,b_3b1615d584,Plan A-1,0,300.0,1619,apartmentlist.com,https://www.apartmentlist.com/nj/budd-lake/mt-olive-budd-lake
+apartmentlist:p80474829-u44030787,trulia:b2756117320:plan-Plan_A:450092839,b_3b1615d584,Plan A-2,0,300.0,1619,apartmentlist.com,https://www.apartmentlist.com/nj/budd-lake/mt-olive-budd-lake
+apartmentlist:p80474829-u45942273,trulia:b2756117320:plan-Plan_A:450092839,b_3b1615d584,Plan A-3,0,300.0,1619,apartmentlist.com,https://www.apartmentlist.com/nj/budd-lake/mt-olive-budd-lake
+apartmentlist:p80474829-u45942278,trulia:b2756117320:plan-Plan_A:450092839,b_3b1615d584,Plan A-4,0,300.0,1619,apartmentlist.com,https://www.apartmentlist.com/nj/budd-lake/mt-olive-budd-lake
+apartmentlist:p80474829-u45942281,trulia:b2756117320:plan-Plan_A:450092839,b_3b1615d584,Plan A-5,0,300.0,1619,apartmentlist.com,https://www.apartmentlist.com/nj/budd-lake/mt-olive-budd-lake
+zumper-65701618,apartmentlist:p127017866-3,b_3b801d186d,3,1,750.0,1636,zumper,https://www.zumper.com/listings/30002531p/1-bedroom-eastside-paterson-nj
+trulia:2083737834,zumper-65335189,b_403d0ca679,5A,0,600.0,2100,trulia,https://www.trulia.com/home/3208-union-st-5a-flushing-ny-11354-2083737834
+zumper-65362056,apartmentlist:p127464014-2,b_4271b39ed9,2,1,,1550,zumper,https://www.zumper.com/listings/29509734p/2-bedroom-newburgh-ny
 zumper-65150692,trulia:465602188,b_44dc4a8686,5C,0,580.0,2150,zumper,https://www.zumper.com/listings/29783777p/studio-flushing-new-york-ny
 rc:trulia:b2780310215:Unit_208:2071010128,apartmentlist:p10133311-a727d8f5-5e0a-11ed-bc6e-06927b267943,b_49aac6dc4f,208,0,300.0,1395,trulia,https://www.trulia.com/building/100-howe-street-100-howe-st-new-haven-ct-06511-2780310215
-rn:12-brooklyn-ave-valley-stream:zumper-43894935,rn:12-brooklyn-ave-valley-stream:2098736887,b_7377274696,,1,806.0,2700,zumper,https://www.zumper.com/listings/20529380p/1-bedroom-valley-stream-ny
+zumper-65648199,apartmentlist:p115743392-104B,b_4ebdf3eefb,104B,1,600.0,1850,zumper,https://www.zumper.com/listings/7061907p/1-bedroom-west-new-york-nj
+zumper-65701620,apartmentlist:p127017868-3,b_551b34a9ed,3,1,750.0,1718,zumper,https://www.zumper.com/listings/30002533p/1-bedroom-downtown-paterson-paterson-nj
+zumper-60376877,zumper-60376876,b_57c194c2a8,in,1,,1750,zumper,https://www.zumper.com/listings/60376877/1-bedroom-north-haven-ct
+zumper-65443034,apartmentlist:p9805810-1,b_5f667364a3,1,1,600.0,1895,zumper,https://www.zumper.com/listings/25869671p/1-bedroom-glenbrook-stamford-ct
+apartmentlist:p62842051-Studio,zumper-50189518,b_5fae1d0ac3,Studio,0,370.0,1400,apartmentlist.com,https://www.apartmentlist.com/ny/staten-island/339-hamden-avenue
+zumper-60545540,rc:trulia:b2005373238:Unit_57:466143709,b_6378d133d3,,1,,1600,zumper,https://www.zumper.com/apartment-buildings/p1247475/blake-gardens-west-rock-new-haven-ct
+apartmentlist:p45136852-u43666781,trulia:b2755701356:plan-Plan_A:451826090,b_674228896a,Plan A-1,0,300.0,1919,apartmentlist.com,https://www.apartmentlist.com/nj/piscataway/piscataway-rutgers-university
+apartmentlist:p45136852-u44031304,trulia:b2755701356:plan-Plan_A:451826090,b_674228896a,Plan A-2,0,300.0,1919,apartmentlist.com,https://www.apartmentlist.com/nj/piscataway/piscataway-rutgers-university
+apartmentlist:p45136852-u45944169,trulia:b2755701356:plan-Plan_A:451826090,b_674228896a,Plan A-3,0,300.0,1919,apartmentlist.com,https://www.apartmentlist.com/nj/piscataway/piscataway-rutgers-university
+apartmentlist:p45136852-u45944172,trulia:b2755701356:plan-Plan_A:451826090,b_674228896a,Plan A-4,0,300.0,1919,apartmentlist.com,https://www.apartmentlist.com/nj/piscataway/piscataway-rutgers-university
+apartmentlist:p45136852-u45944175,trulia:b2755701356:plan-Plan_A:451826090,b_674228896a,Plan A-5,0,300.0,1919,apartmentlist.com,https://www.apartmentlist.com/nj/piscataway/piscataway-rutgers-university
+rc:trulia:b2751900945:plan-:449611971,rc:trulia:b2751900945:Unit_446-B24:466386453,b_7afbc5dab4,,1,650.0,1795,trulia,https://www.trulia.com/building/cedar-heights-446-556-hollister-st-stratford-ct-06615-2751900945
+zumper-65745328,apartmentlist:p64705369-3,b_7afd5ff958,3,1,750.0,1800,zumper,https://www.zumper.com/listings/30057418p/1-bedroom-eastside-paterson-nj
+zumper-64824938,apartmentlist:p121566230-2,b_80ee12b0ae,2,1,,1200,zumper,https://www.zumper.com/listings/28986025p/1-bedroom-irvington-nj
+trulia:b1002376888:plan-:464431825,region_mid_hudson:z:76623281a4df,b_85b3c88ff8,,1,600.0,1925,trulia,https://www.trulia.com/building/stevens-manor-apartments-644-silver-lake-scotchtown-rd-middletown-ny-10941-1002376888
+zumper-65720519,apartmentlist:p127128154-8,b_86da59be48,8,0,750.0,1309,zumper,https://www.zumper.com/listings/30022543p/studio-downtown-paterson-paterson-nj
+zumper-65709444,apartmentlist:p125209968-1,b_8778c9e418,1,1,995.0,2150,zumper,https://www.zumper.com/listings/29666550p/1-bedroom-bloomfield-nj
+apartmentlist:p71886763-2B,zumper-65672165,b_879c33564e,2B,1,673.0,2000,apartmentlist.com,https://www.apartmentlist.com/nj/newark/378-broad-street
 trulia:2115755043,zumper-65656212,b_88aba75841,4B,1,,1999,trulia,https://www.trulia.com/home/3505-rochambeau-ave-4b-bronx-ny-10467-2115755043
-zumper-65721378,apartmentlist:p74886798-7K,b_8a827222e4,7K,1,650.0,2850,zumper,https://www.zumper.com/listings/25138880p/1-bedroom-midwood-new-york-ny
-apartmentlist:p37529906-1000-1210,trulia:b2737130865:Unit_1000-1210:347363377,b_8d9e8ce2a9,1210,1,756.0,2785,apartmentlist.com,https://www.apartmentlist.com/nj/bogota/the-atwater--3
-apartmentlist:p37529906-1000-1214,trulia:b2737130865:Unit_1000-1214:2077049943,b_8d9e8ce2a9,1214,1,756.0,2725,apartmentlist.com,https://www.apartmentlist.com/nj/bogota/the-atwater--3
-apartmentlist:p37529906-1000-1310,trulia:b2737130865:Unit_1000-1310:2058461382,b_8d9e8ce2a9,1310,1,756.0,2800,apartmentlist.com,https://www.apartmentlist.com/nj/bogota/the-atwater--3
-apartmentlist:p37529906-1000-1405,trulia:b2737130865:Unit_1000-1405:2076442095,b_8d9e8ce2a9,1405,1,658.0,2624,apartmentlist.com,https://www.apartmentlist.com/nj/bogota/the-atwater--3
-apartmentlist:p37529906-1000-1505,trulia:b2737130865:Unit_1000-1505:2075360313,b_8d9e8ce2a9,1505,1,658.0,2655,apartmentlist.com,https://www.apartmentlist.com/nj/bogota/the-atwater--3
-apartmentlist:p37529906-1000-1512,trulia:b2737130865:Unit_1000-1512:465249171,b_8d9e8ce2a9,1512,1,658.0,2750,apartmentlist.com,https://www.apartmentlist.com/nj/bogota/the-atwater--3
-apartmentlist:p37529906-2000-2106,trulia:b2737130865:Unit_2000-2106:465071181,b_8d9e8ce2a9,2106,1,730.0,2678,apartmentlist.com,https://www.apartmentlist.com/nj/bogota/the-atwater--3
-apartmentlist:p37529906-2000-2110,trulia:b2737130865:Unit_2000-2110:461710068,b_8d9e8ce2a9,2110,1,658.0,2538,apartmentlist.com,https://www.apartmentlist.com/nj/bogota/the-atwater--3
-apartmentlist:p37529906-4000-4123,trulia:b2737130865:Unit_4000-4123:465249168,b_8d9e8ce2a9,4123,1,658.0,2705,apartmentlist.com,https://www.apartmentlist.com/nj/bogota/the-atwater--3
-apartmentlist:p37529906-4000-4223,trulia:b2737130865:Unit_4000-4223:461077017,b_8d9e8ce2a9,4223,1,658.0,2686,apartmentlist.com,https://www.apartmentlist.com/nj/bogota/the-atwater--3
-apartmentlist:p37529906-4000-4226,trulia:b2737130865:Unit_4000-4226:462791634,b_8d9e8ce2a9,4226,1,658.0,2650,apartmentlist.com,https://www.apartmentlist.com/nj/bogota/the-atwater--3
-apartmentlist:p37529906-4000-4302,trulia:b2737130865:Unit_4000-4302:462884343,b_8d9e8ce2a9,4302,1,692.0,2625,apartmentlist.com,https://www.apartmentlist.com/nj/bogota/the-atwater--3
-apartmentlist:p37529906-4000-4306,trulia:b2737130865:Unit_4000-4306:464769620,b_8d9e8ce2a9,4306,1,658.0,2660,apartmentlist.com,https://www.apartmentlist.com/nj/bogota/the-atwater--3
-apartmentlist:p37529906-4000-4308,trulia:b2737130865:Unit_4000-4308:449959258,b_8d9e8ce2a9,4308,1,658.0,2660,apartmentlist.com,https://www.apartmentlist.com/nj/bogota/the-atwater--3
-apartmentlist:p37529906-4000-4406,trulia:b2737130865:Unit_4000-4406:462791629,b_8d9e8ce2a9,4406,1,658.0,2710,apartmentlist.com,https://www.apartmentlist.com/nj/bogota/the-atwater--3
-rc:trulia:b1001444574:Unit_4-4211:2054528632,apartmentlist:p10015-15572326,b_8f7ec4f0f6,4-4211,1,713.0,2000,trulia,https://www.trulia.com/building/the-royce-at-trumbull-100-avalon-gates-trumbull-ct-06611-1001444574
-rc:trulia:b1001444574:Unit_4-4311:465318096,apartmentlist:p10015-15572340,b_8f7ec4f0f6,4-4311,1,713.0,2080,trulia,https://www.trulia.com/building/the-royce-at-trumbull-100-avalon-gates-trumbull-ct-06611-1001444574
-rc:trulia:b1001444574:Unit_6-6103:464873554,apartmentlist:p10015-15572377,b_8f7ec4f0f6,6-6103,1,713.0,2220,trulia,https://www.trulia.com/building/the-royce-at-trumbull-100-avalon-gates-trumbull-ct-06611-1001444574
-rc:trulia:b1001444574:Unit_4-4234:466400723,apartmentlist:p10015-15572337,b_8f7ec4f0f6,4-4234,1,849.0,2250,trulia,https://www.trulia.com/building/the-royce-at-trumbull-100-avalon-gates-trumbull-ct-06611-1001444574
-rc:trulia:b1001444574:Unit_1-1123:452917297,apartmentlist:p10015-15572184,b_8f7ec4f0f6,1-1123,1,853.0,2480,trulia,https://www.trulia.com/building/the-royce-at-trumbull-100-avalon-gates-trumbull-ct-06611-1001444574
-rc:trulia:b1001444574:Unit_1-1212:440312989,apartmentlist:p10015-15572191,b_8f7ec4f0f6,1-1212,1,853.0,2480,trulia,https://www.trulia.com/building/the-royce-at-trumbull-100-avalon-gates-trumbull-ct-06611-1001444574
-rc:trulia:b1001444574:Unit_1-1221:2078017796,apartmentlist:p10015-15572194,b_8f7ec4f0f6,1-1221,1,853.0,2480,trulia,https://www.trulia.com/building/the-royce-at-trumbull-100-avalon-gates-trumbull-ct-06611-1001444574
-rc:trulia:b1001444574:Unit_9-9114:465713994,apartmentlist:p10015-15572479,b_8f7ec4f0f6,9-9114,1,853.0,2265,trulia,https://www.trulia.com/building/the-royce-at-trumbull-100-avalon-gates-trumbull-ct-06611-1001444574
-rc:trulia:b1001444574:Unit_1-1133:2093995748,apartmentlist:p10015-15572186,b_8f7ec4f0f6,1-1133,1,1003.0,2700,trulia,https://www.trulia.com/building/the-royce-at-trumbull-100-avalon-gates-trumbull-ct-06611-1001444574
-trulia:b2750787516:Unit_605:464733213,apartmentlist:p74616990-15-73,b_91abe27336,605,0,602.0,2700,trulia,https://www.trulia.com/building/the-illustrator-600-north-ave-new-rochelle-ny-10801-2750787516
-zumper-65691353,apartmentlist:p6296923-2F,b_b19425751b,2F,1,820.0,2650,zumper,https://www.zumper.com/listings/1103429p/1-bedroom-hempstead-ny
+zumper-65747890,apartmentlist:p66598735-1,b_8f01469adc,1,1,,1700,zumper,https://www.zumper.com/listings/30060014p/1-bedroom-goshen-ny
+rc:trulia:b1001444574:Unit_4-4211:2054528632,rc:apartmentlist:p10015-15572326,b_8f7ec4f0f6,4-4211,1,713.0,2000,trulia,https://www.trulia.com/building/the-royce-at-trumbull-100-avalon-gates-trumbull-ct-06611-1001444574
+rc:trulia:b1001444574:Unit_4-4311:465318096,rc:apartmentlist:p10015-15572340,b_8f7ec4f0f6,4-4311,1,713.0,2080,trulia,https://www.trulia.com/building/the-royce-at-trumbull-100-avalon-gates-trumbull-ct-06611-1001444574
+zumper-65730244,apartmentlist:p127178169-3,b_924f67af6e,3,1,750.0,1718,zumper,https://www.zumper.com/listings/30032660p/1-bedroom-eastside-paterson-nj
+zumper-65730245,apartmentlist:p127178168-3,b_92e8f7bf16,3,0,750.0,1500,zumper,https://www.zumper.com/listings/30032661p/studio-eastside-paterson-nj
+apartmentlist:p121527590-17,zumper-65648198,b_92f883f46d,17,1,550.0,1795,apartmentlist.com,https://www.apartmentlist.com/nj/west-new-york/6120-monroe-pl--1
+zumper-65293128,apartmentlist:p124426133-1_bed_1.0_bath_600_sqft,b_997440dae7,,1,600.0,1450,zumper,https://www.zumper.com/listings/29521554p/1-bedroom-hamden-ct
+zumper-65750299,apartmentlist:p127406695-3,b_a4b404a6f9,3,1,,1500,zumper,https://www.zumper.com/listings/30062091p/1-bedroom-newburgh-ny
+region_wr:apartmentlist:p126151323-1_bed_1.0_bath_650_sqft,trulia:33012528,b_ab7f45cc30,1 Bed,1,650.0,2075,apartmentlist.com,https://www.apartmentlist.com/ny/tuckahoe/158-lake-avenue
+zumper-65720494,apartmentlist:p127128137-3,b_b087de2a4e,3,1,750.0,1718,zumper,https://www.zumper.com/listings/30022522p/1-bedroom-eastside-paterson-nj
 apartmentlist:p7630984-8dc0ef5a-1dcf-425e-8486-1d575c05d1dc,apartmentlist:p7630984-4bec8063-f064-11ee-8ab6-12de4bf481cd,b_b29a9ae0e3,"1 bed, 1 bath, $1675",1,751.0,1675,apartmentlist.com,https://www.apartmentlist.com/ct/bridgeport/city-trust-collection-arcade-apartments
 rc:trulia:b1002416797:plan-:463389282,apartmentlist:p7630984-4bec8063-f064-11ee-8ab6-12de4bf481cd,b_b29a9ae0e3,,1,751.0,1675,trulia,https://www.trulia.com/building/city-trust-collection-arcade-apartments-991-main-st-bridgeport-ct-06604-1002416797
-zumper-60557027,trulia:b2740011249:Unit_01-328:2081849536,b_c1467fc815,,1,718.0,2669,zumper,https://www.zumper.com/apartment-buildings/p288235/modera-hudson-riverfront-downtown-yonkers-yonkers-ny
-trulia:2061738454,zumper-62505591,b_c7dc5c431d,6K,1,,2595,trulia,https://www.trulia.com/home/13828-queens-blvd-6k-jamaica-ny-11435-2061738454
-apartmentlist:p33489-u36308196,apartmentlist:p33489-ignore-me-i-am-fake-4259777,b_db5afd9d03,1 Bed - 1 Bath,1,920.0,2575,apartmentlist.com,https://www.apartmentlist.com/nj/westfield/the-cove
-apartmentlist:p11978175-001-215,avalon:AVB-NJ030-001-215,b_ed64a2ae75,001-215,1,702.0,2516,apartmentlist.com,https://www.apartmentlist.com/nj/bergenfield/avalon-teaneck
+zumper-65745326,apartmentlist:p11166981-3,b_b843266803,3,1,750.0,1718,zumper,https://www.zumper.com/listings/30057416p/1-bedroom-eastside-paterson-nj
+zumper-65669040,apartmentlist:p126796126-2B,b_c843c3aa61,2B,1,700.0,2150,zumper,https://www.zumper.com/listings/29961441p/1-bedroom-mount-pleasant-lower-broadway-newark-nj
+zumper-65720495,apartmentlist:p25428225-3,b_cc4f428813,3,1,750.0,1718,zumper,https://www.zumper.com/listings/30022523p/1-bedroom-eastside-paterson-nj
+zumper-65720493,apartmentlist:p127128142-3,b_cf3696e7df,3,1,750.0,1718,zumper,https://www.zumper.com/listings/30022521p/1-bedroom-eastside-paterson-nj
+zumper-65764799,apartmentlist:p127406755-3,b_daaf117041,3,1,750.0,1718,zumper,https://www.zumper.com/listings/30079213p/1-bedroom-eastside-paterson-nj
+apartmentlist:p22968-u43666244,trulia:b2756078277:plan-Plan_A:452165283,b_db2aa8d5f7,Plan A-1,0,300.0,2159,apartmentlist.com,https://www.apartmentlist.com/nj/woodbridge/newark-woodbridge
+apartmentlist:p22968-u44030707,trulia:b2756078277:plan-Plan_A:452165283,b_db2aa8d5f7,Plan A-2,0,300.0,2159,apartmentlist.com,https://www.apartmentlist.com/nj/woodbridge/newark-woodbridge
+apartmentlist:p22968-u45942230,trulia:b2756078277:plan-Plan_A:452165283,b_db2aa8d5f7,Plan A-3,0,300.0,2159,apartmentlist.com,https://www.apartmentlist.com/nj/woodbridge/newark-woodbridge
+apartmentlist:p22968-u45942233,trulia:b2756078277:plan-Plan_A:452165283,b_db2aa8d5f7,Plan A-4,0,300.0,2159,apartmentlist.com,https://www.apartmentlist.com/nj/woodbridge/newark-woodbridge
+apartmentlist:p22968-u45942235,trulia:b2756078277:plan-Plan_A:452165283,b_db2aa8d5f7,Plan A-5,0,300.0,2159,apartmentlist.com,https://www.apartmentlist.com/nj/woodbridge/newark-woodbridge
+zumper-65723648,apartmentlist:p127128087-3,b_de7a38d702,3,1,750.0,1800,zumper,https://www.zumper.com/listings/30025322p/1-bedroom-eastside-paterson-nj
+apartmentlist:p127464030-D,zumper-65775269,b_df7c68e3de,D,1,350.0,1650,apartmentlist.com,https://www.apartmentlist.com/ny/rocky-point/25-nymph-road
+zumper-65720517,apartmentlist:p127128151-3,b_dfa4dffbcc,3,0,750.0,1590,zumper,https://www.zumper.com/listings/30022541p/studio-eastside-paterson-nj
+apartmentlist:p3266455-2154,avalon:AVB-NJ029-001-2154,b_e2d2c14006,2154,0,547.0,2010,apartmentlist.com,https://www.apartmentlist.com/nj/boonton/avalon-boonton
+apartmentlist:p3266455-2182,avalon:AVB-NJ029-001-2182,b_e2d2c14006,2182,0,499.0,1945,apartmentlist.com,https://www.apartmentlist.com/nj/boonton/avalon-boonton
+zumper-65543433,apartmentlist:p127537822-Unit #1,b_e300f254bf,1,1,,2000,zumper,https://www.zumper.com/listings/29813656p/1-bedroom-kearny-nj
+zumper-62618940,zumper-65737647,b_f024a95d88,B,1,,1850,zumper,https://www.zumper.com/listings/26628153p/1-bedroom-mcginley-square-jersey-city-nj
+apartmentlist:p45136771-u46478833,trulia:b2754109941:plan-Plan_A:450092861,b_f84dfee134,Plan A-1,0,300.0,1799,apartmentlist.com,https://www.apartmentlist.com/nj/somerset/somerset-franklin
+apartmentlist:p45136771-u46478835,trulia:b2754109941:plan-Plan_A:450092861,b_f84dfee134,Plan A-2,0,300.0,1799,apartmentlist.com,https://www.apartmentlist.com/nj/somerset/somerset-franklin
+apartmentlist:p45136771-u46478837,trulia:b2754109941:plan-Plan_A:450092861,b_f84dfee134,Plan A-3,0,300.0,1799,apartmentlist.com,https://www.apartmentlist.com/nj/somerset/somerset-franklin
+apartmentlist:p45136771-u46478839,trulia:b2754109941:plan-Plan_A:450092861,b_f84dfee134,Plan A-4,0,300.0,1799,apartmentlist.com,https://www.apartmentlist.com/nj/somerset/somerset-franklin
+apartmentlist:p45136771-u46478840,trulia:b2754109941:plan-Plan_A:450092861,b_f84dfee134,Plan A-5,0,300.0,1799,apartmentlist.com,https://www.apartmentlist.com/nj/somerset/somerset-franklin
+zumper-65730241,apartmentlist:p127178165-3,b_f973bd3cb7,3,1,750.0,1800,zumper,https://www.zumper.com/listings/30032657p/1-bedroom-paterson-nj
+zumper-65189014,zumper-65470057,b_fc7257973e,1205-8,1,,1475,zumper,https://www.zumper.com/listings/29402971p/1-bedroom-berkeley-square-and-parkside-trenton-nj
+zumper-56945785,rc:trulia:b1010530225:Unit_2:2121681528,b_fef4eacc3b,,0,550.0,1295,zumper,https://www.zumper.com/apartment-buildings/p78102/209-greene-st-wooster-square-mill-river-new-haven-ct
+zumper-65684474,apartmentlist:p126877629-2C,b_ffbbf4428e,2C,1,,1700,zumper,https://www.zumper.com/listings/29984674p/1-bedroom-north-ironbound-newark-nj

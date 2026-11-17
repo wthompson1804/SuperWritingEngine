@@ -151,6 +151,7 @@ def _num(x):
 def _download(url: str, path: Path) -> None:
     import requests
     path.parent.mkdir(parents=True, exist_ok=True)
+    lib.check_host(url)                 # refused / off-limits hosts are never requested (CLAUDE.md)
     lib._throttle(url.split("/")[2])
     with requests.get(url, headers={"User-Agent": USER_AGENT}, stream=True, timeout=300) as r:
         r.raise_for_status()

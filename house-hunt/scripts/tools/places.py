@@ -118,6 +118,7 @@ def bbox() -> tuple[float, float, float, float]:
 def _download(url: str, dest: Path) -> dict:
     """Streamed download (lib.cached_get holds the body in memory, which a multi-GB file cannot afford)."""
     import requests
+    lib.check_host(url)                 # refused / off-limits hosts are never requested (CLAUDE.md)
     BIG.mkdir(parents=True, exist_ok=True)
     tmp = dest.with_suffix(dest.suffix + ".part")
     with requests.get(url, headers={"User-Agent": lib.USER_AGENT}, stream=True, timeout=120) as r:

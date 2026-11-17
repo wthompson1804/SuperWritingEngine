@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=2005+Quail+Ridge+Drive%2C+Plainsboro+Center%2C+NJ+08536&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-17T19:12:15+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/5656c0a4543de326.json",
+ "source": "census_geocoder"
+}

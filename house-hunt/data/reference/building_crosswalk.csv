@@ -1,157 +1,38 @@
 addr_key,building_id,street_key
 58 norfolk st|07103,b_1897e7d980,58 norfolk st|07103
-1000 pacific st|06902,b_17baeace72,1000 pacific st|06902
-150 broad st|06901,b_d1ea8abdfa,150 broad st|06901
-18 dock st|06902,b_471f212cb0,18 dock st|06902
-370 w ave|06850,b_9ce4184194,370 w ave|06850
 48 n st|10940,b_7dd39c415b,48 n st|10940
-143 4th ave|11706,b_9af0566916,143 4 ave|11706
-1 webb ave|10577,b_94325f7ae4,1 webb ave|10577
-45 main st|10701,b_4c962752d0,45 main st|10701
-360 huguenot st|10801,b_e478ea9fe4,360 huguenot st|10801
 40 memorial hwy|10801,b_e47702d4fd,40 memorial hwy|10801
 1108 brown st|10566,b_4122082ecc,1108 brown st|10566
 56 prospect st|10701,b_ee2549a834,56 prospect st|10701
-1 alexander st|10701,b_4370d798d0,1 alexander st|10701
-146 westchester ave|10573,b_a3f450804e,146 westchester ave|10573
-30 broad st|10573,b_d307dffa61,30 broad st|10573
-1 martine ave|10606,b_d5180b7992,1 martine ave|10606
-34 s lexington ave|10606,b_3d2423b7ea,34 s lexington ave|10606
-111 centre ave|10801,b_489356c5ef,111 centre ave|10801
-2 canfield ave|10601,b_1e00950185,2 canfield ave|10601
-12 church st|10801,b_9ef71faae0,12 church st|10801
-10 commerce dr|10801,b_13d50af205,10 commerce dr|10801
-55-57 bank st|10606,b_144b021ca5,5557 bank st|10606
-105 corporate park dr|10604,b_46e40b788b,105 corporate park dr|10604
-27 barker ave|10601,b_46e1b0feda,27 barker ave|10601
-142-38 37th ave|11354,b_7edaa5c8f9,14238 37 ave|11354
-3440 guider ave|11235,b_0de5d2fecc,3440 guider ave|11235
-98-76 queens blvd|11374,b_95b26f1096,9876 queens blvd|11374
-318 e 53rd st|10022,b_75a1922a14,318 e 53 st|10022
-479 front st|11550,b_b19425751b,479 front st|11550
-1775 e 18th st|11229,b_2c38337736,1775 e 18 st|11229
-1775 coney island ave|11230,b_8a827222e4,1775 coney island ave|11230
-10 lecount pl|10801,b_70cede3f5b,10 lecount pl|10801
-600 n ave|10801,b_91abe27336,600 n ave|10801
-50 clinton pl|10801,b_65e32f9559,50 clinton pl|10801
-1 shearwood pl|10801,b_e238fa37aa,1 shearwood pl|10801
-2030 hudson st|07024,b_ae0767b0ee,2030 hudson st|07024
-310 riverside blvd|11561,b_26d909bb7c,310 riverside blvd|11561
-100 river mews ln|07020,b_d41f46a197,100 river mews ln|07020
-1500 ave at port imperial|07086,b_14c8cec640,1500 ave at port imperial|07086
-1300 ave at port imperial|07086,b_a30d1faa4d,1300 ave at port imperial|07086
-4 ave at port imperial|07093,b_1aba148005,4 ave at port imperial|07093
-100 sterling blvd|07631,b_a26b70374e,100 sterling blvd|07631
-75 sterling blvd|07631,b_21fbf6ebd4,75 sterling blvd|07631
+|10522,b_8b9eca22d3,|10522
+9060 palisade ave d710 n bergen nj 07047 usa|07047,b_9a0a9c2936,9060 palisade ave|07047
 73 brownstone way|07631,b_27056882d3,73 brownstone way|07631
-121 town square pl|07310,b_6bae7df79f,121 town sq pl|07310
-110 hoboken ave|07310,b_6f4f9e37fc,110 hoboken ave|07310
-155 washington st|07302,b_c1607b0d4a,155 washington st|07302
-8300 jfk blvd e|07047,b_6d81c8af68,8300 jfk blvd e|07047
-7601 river rd|07047,b_2fddf1ece8,7601 river rd|07047
-2935 john f kennedy blvd|07306,b_3a07c86ab9,2935 john f kennedy blvd|07306
-675 monmouth st|07306,b_b98b841520,675 monmouth st|07306
-39 new york ave|07307,b_a66b44d4fd,39 new york ave|07307
 345 prospect ave|07601,b_e061032ad7,345 prospect ave|07601
-390 prospect ave|07601,b_b81e79ffd5,390 prospect ave|07601
-18 e camden st|07601,b_8d1c13e53f,18 e camden st|07601
-300 prospect ave|07601,b_9a47252ef5,300 prospect ave|07601
-435 main st|07601,b_e41267b140,435 main st|07601
-150 main st|07601,b_e6690a8dff,150 main st|07601
-57 alexander st|10701,b_84d5cbaa59,57 alexander st|10701
-80 oak st|07073,b_8c4bec58e2,80 oak st|07073
-89 monitor st|07304,b_6d57683834,89 monitor st|07304
-65 maple st|07304,b_b1f3a2019a,65 maple st|07304
-66 monitor st|07304,b_5cc8b234f8,66 monitor st|07304
-270 johnston ave|07304,b_4198b94bd5,270 johnston ave|07304
-189 phillip st|07305,b_1047916803,189 phillip st|07305
 15 carbon pl|07305,b_0c05fe5d61,15 carbon pl|07305
 49 fisk st|07305,b_e9ed2d15f9,49 fisk st|07305
-743 passaic ave|07012,b_9497f4c42d,743 passaic ave|07012
-1200 frank e rodgers blvd s|07029,b_67dec821b2,1200 frank e rodgers blvd s|07029
-1200 s fifth st|07029,b_a1ee76c074,1200 s fifth st|07029
-600 frank e rodgers blvd s|07029,b_97fa1feb74,600 frank e rodgers blvd s|07029
-1100 s 5th st|07029,b_273f321ed8,1100 s 5 st|07029
+10 central ave|07102,b_168f97f40c,10 central ave|07102
 1180 raymond blvd|07102,b_dfaca9601b,1180 raymond blvd|07102
-25 n lexington ave|10601,b_d06ad3d154,25 n lexington ave|10601
-51 s broadway|10601,b_eae0c32a7f,51 s broadway|10601
 691 clifton ave|07011,b_f2ce0eea53,691 clifton ave|07011
-19 e 19th st|07002,b_a599969c76,19 e 19 st|07002
-957 broadway|07002,b_7ef6ff0d18,957 broadway|07002
-100 ave g|07002,b_c64d94e5f7,100 ave g|07002
 318 ave e|07002,b_e79c764e1a,318 ave e|07002
 302 constitution ave|07002,b_5c4193202c,302 constitution ave|07002
-42 john f kennedy blvd|07002,b_f891ecbf1b,42 john f kennedy blvd|07002
-204 wagaraw rd|07506,b_5068297f80,204 wagaraw rd|07506
 64 park ave|07003,b_e39cde86f4,64 park ave|07003
 110 washington st|07003,b_e3e0c1feeb,110 washington st|07003
 55 monroe pl|07003,b_63439f0a5f,55 monroe pl|07003
-263 franklin ave|07450,b_36f6133a09,263 franklin ave|07450
 51 lincoln ave|07050,b_022934bcb2,51 lincoln ave|07050
-416 highland ave|07050,b_6b76a797dc,416 highland ave|07050
-355 atlantic st|06901,b_a57d7ba933,355 atlantic st|06901
-201 broad st|06901,b_4170a769f2,201 broad st|06901
-75 tresser blvd|06901,b_4c467fb1c9,75 tresser blvd|06901
-100 tresser blvd|06901,b_e645cc44c6,100 tresser blvd|06901
-405 atlantic st|06901,b_820e875f32,405 atlantic st|06901
-184 summer st|06901,b_1abf5ba427,184 summer st|06901
-777 summer st|06901,b_680b3b2121,777 summer st|06901
-34 valley rd|07042,b_0ca6525af4,34 valley rd|07042
 2 s willow st|07042,b_aba0227b86,2 s willow st|07042
-1340 washington blvd|06902,b_e68d1f265c,1340 washington blvd|06902
-150 southfield ave|06902,b_80ba75dc8e,150 southfield ave|06902
-1455 washington blvd|06902,b_9240f06ba5,1455 washington blvd|06902
-28 southfield ave|06902,b_4ca8069d49,28 southfield ave|06902
-44 john st|06902,b_035753b38d,44 john st|06902
-2400 vauxhall rd|07083,b_89871dc4dd,2400 vauxhall rd|07083
-12 van riper rd|07645,b_a72ba2ad8c,12 van riper rd|07645
-1453 valley rd|07470,b_88f39b8818,1453 valley rd|07470
-153 valley st|07079,b_2eb70a1398,153 valley st|07079
 200 boyden ave|07040,b_5d1b685d2d,200 boyden ave|07040
 36 washington ave|07008,b_7dae0bd718,36 washington ave|07008
-555 s ave e|07016,b_ac78dbda55,555 s ave e|07016
-81 monroe st|07065,b_a81f1f6d72,81 monroe st|07065
-6000 riverdale rd|07457,b_a74b0e921a,6000 riverdale rd|07457
-118 victory rd|07081,b_db5afd9d03,118 victory rd|07081
-500 n ave|07027,b_ff810fe7db,500 n ave|07027
 1715 us hwy 46|07054,b_69b15e8ab5,1715 us hwy 46|07054
-1515 route 10|07054,b_8adc45b97f,1515 route 10|07054
-26 belden ave|06850,b_c09175294c,26 belden ave|06850
-515 w ave|06850,b_b57f2bb5ea,515 w ave|06850
-467 w ave|06850,b_7ea630c9cc,467 w ave|06850
-1 crystal ridge dr|07069,b_b861a56bf0,1 crystal ridge dr|07069
 8 norden pl|06855,b_38a468290d,8 norden pl|06855
-1222 s ave|07062,b_a5c17fa36a,1222 s ave|07062
-793 post rd e|06880,b_1794606df9,793 post rd e|06880
-1177 post rd e|06880,b_55e6c6ee84,1177 post rd e|06880
-120 neilson st|08901,b_faa3612c6d,120 neilson st|08901
-7 livingston ave|08901,b_6bc3457842,7 livingston ave|08901
-11 us hwy 1|08901,b_71aaaa2555,11 us hwy 1|08901
-100 fieldstone dr|07856,b_35d0f28e17,100 fieldstone dr|07856
 1 hillside dr|07856,b_e2dabb89e6,1 hillside dr|07856
-7000 avalon way|08854,b_455de16026,7000 avalon way|08854
-99 old amboy rd|08857,b_9ef9007b35,99 old amboy rd|08857
-527 old bridge tpke|08816,b_15bd92512c,527 old bridge tpke|08816
 100 hamilton st|08805,b_8135c20760,100 hamilton st|08805
-500 bristol blvd|08873,b_05730a14a8,500 bristol blvd|08873
 30 crosby st|06810,b_e2378bf884,30 crosby st|06810
-1 kennedy ave|06810,b_1e10bbe444,1 kennedy ave|06810
-19 morford pl|07701,b_5f4b88bd67,19 morford pl|07701
-125 w main st|08876,b_e87f8c7ad9,125 w main st|08876
-22 robeson st|08876,b_564c337ac7,22 robeson st|08876
 100 avalon gates|06611,b_8f7ec4f0f6,100 avalon gates|06611
 158 cherry st|06460,b_676c8b535c,158 cherry st|06460
-1-5 schooner ln|06460,b_519bad81b0,15 schooner ln|06460
-185 canal st e|06484,b_f46c768510,185 canal st e|06484
-7 lakeside rd|12550,b_10247a14f8,7 lakeside rd|12550
-100 woodstone circle|08540,b_8f4f5d4e63,100 woodstone circle|08540
-275 n harrison st|08540,b_7f859112e7,275 n harrison st|08540
 278 main st|06516,b_4288d20128,278 main st|06516
-50 chelsea ave|07740,b_21207b8393,50 chelsea ave|07740
 70 church st|08822,b_a28bdea078,70 church st|08822
 100 howe st|06511,b_49aac6dc4f,100 howe st|06511
 301 winchester ave|06511,b_5f808df29b,301 winchester ave|06511
-1245 chapel st|06511,b_020757e642,1245 chapel st|06511
 1050 state st|06511,b_b6644e74d6,1050 state st|06511
 201 munson st|06511,b_4cb8699147,201 munson st|06511
 360 state st|06510,b_ac5792c23c,360 state st|06510
@@ -159,451 +40,642 @@ addr_key,building_id,street_key
 265 college st|06510,b_a471763ace,265 college st|06510
 64 regency dr|08060,b_de9c110ff5,64 regency dr|08060
 3000 emily ln|08016,b_b5e1e32afb,3000 emily ln|08016
-1775 windsor rd 215|07666,b_ed64a2ae75,1775 windsor rd|07666
-137 alexander st 2336|10701,b_060f0d5d4b,137 alexander st|10701
-79 alexander st 1555|10701,b_3f9fc0b756,79 alexander st|10701
-80 alexander st 3326|10701,b_05f5f16a9e,80 alexander st|10701
-2 kinderkamack rd|07601,b_c50c86f346,2 kinderkamack rd|07601
-100 julia dr|07885,b_7b23516660,100 julia dr|07885
-508 51st st|07093,b_36012bfe17,508 51 st|07093
-1100 frank|07029,b_a28f20fe2a,1100 frank|07029
-100 prospect st|06901,b_73b8a98e37,100 prospect st|06901
+1 avalon way 2182|07005,b_e2d2c14006,1 avalon way|07005
+1 avalon way 2154|07005,b_e2d2c14006,1 avalon way|07005
+16221 travis square|08550,b_f2d5aadd51,16221 travis sq|08550
+6223 kaitlyn ct|08550,b_e66167c0e5,6223 kaitlyn ct|08550
+9124 taylor ct|08550,b_dd0d58f3e4,9124 taylor ct|08550
+1100 frank|07029,b_0639851fca,1100 frank|07029
 111 prospect st|06901,b_377a717d0d,111 prospect st|06901
-163 franklin st|06901,b_ac4d07e2a6,163 franklin st|06901
-460 summer st|06901,b_e9f7955a96,460 summer st|06901
-66 summer st|06901,b_305a1d704f,66 summer st|06901
-750 summer st|06901,b_aa4d79a926,750 summer st|06901
-545 bedford st|06901,b_e3d250695d,545 bedford st|06901
-130 tresser blvd|06901,b_3473f533ec,130 tresser blvd|06901
-101 summer st|06901,b_f4dd76b672,101 summer st|06901
-65-77 prospect st|06901,b_5979f96e04,6577 prospect st|06901
 800 summer st|06901,b_893edb6df8,800 summer st|06901
-400 main st|06901,b_6e6cfb4f4f,400 main st|06901
-119-121 towne st|06902,b_89cd7221ed,119121 towne st|06902
-100 morgan st|06902,b_34cc6956e6,100 morgan st|06902
-25 glenbrook rd|06902,b_6af16b0872,25 glenbrook rd|06902
 821 e main st|06902,b_ebf8161734,821 e main st|06902
-66 glenbrook rd|06902,b_d1c1453103,66 glenbrook rd|06902
 112-120 strawberry hill ave|06902,b_33e6a4014f,112120 strawberry hill ave|06902
+44 john st|06902,b_035753b38d,44 john st|06902
 9 w main st|06902,b_b453d2429a,9 w main st|06902
 1315 washington blvd|06902,b_f95c86db48,1315 washington blvd|06902
-504 glenbrook rd|06906,b_302b24436c,504 glenbrook rd|06906
 25 3rd st|06905,b_817a8190f6,25 3 st|06905
 112 hoyt st|06905,b_5d97820359,112 hoyt st|06905
-83-95 morgan st|06905,b_f174e31529,8395 morgan st|06905
 1032 hope st|06907,b_56ef9f918d,1032 hope st|06907
 93 richards ave|06854,b_25eb91dd66,93 richards ave|06854
-123 water st|06854,b_29e62faac1,123 water st|06854
-19 day st|06854,b_9923471f8f,19 day st|06854
-101 washington st|06854,b_3a4ad63654,101 washington st|06854
-1401 kings hwy|06824,b_369ef87344,1401 kings hwy|06824
-5545 park ave|06825,b_17ce0d3e2b,5545 park ave|06825
 1269 main st|06604,b_45da625b76,1269 main st|06604
 955 main st|06604,b_917f6a1ed1,955 main st|06604
 855 main st|06604,b_0e634d994b,855 main st|06604
 2340 n ave|06604,b_9c3af00248,2340 n ave|06604
 100 reserve rd|06810,b_450dac94fa,100 reserve rd|06810
-100 oakview dr|06611,b_5fb7581277,100 oakview dr|06611
-121 w main st|06460,b_031fd4a62b,121 w main st|06460
-1 new haven ave|06460,b_90f290fe80,1 new haven ave|06460
-135 broad st|06460,b_1cdf16cc59,135 broad st|06460
-249 bridgeport ave|06460,b_16ade2ff1d,249 bridgeport ave|06460
-301 bridgeport ave|06484,b_c28fc0a8b6,301 bridgeport ave|06484
-7 acadia ln|06484,b_ce6f6b6f5a,7 acadia ln|06484
-1039 howe ave|06484,b_572507a48a,1039 howe ave|06484
-303 bridgeport ave|06484,b_1d9468a7ae,303 bridgeport ave|06484
-33 old tavern rd|06477,b_0749bfd0b7,33 old tavern rd|06477
 165 richards st|06516,b_99f4caa269,165 richards st|06516
 62 treat st|06516,b_9b5d350f09,62 treat st|06516
 200 elm st|06516,b_64a23c1a69,200 elm st|06516
-9 covered bridge rd|06470,b_d3a475b665,9 covered bridge rd|06470
 29 maple st|06483,b_4d77efaaab,29 maple st|06483
 336 roosevelt dr|06483,b_ba72863b95,336 roosevelt dr|06483
 9 tower ln|06519,b_c26f265f35,9 tower ln|06519
 33 sylvan ave|06519,b_83fa0fba9c,33 sylvan ave|06519
 400 blake st|06515,b_1fe2d8745d,400 blake st|06515
 275 winchester ave|06511,b_2e80c9d15b,275 winchester ave|06511
-152 temple st|06510,b_bb53803e08,152 temple st|06510
 129 church st|06510,b_42105ac012,129 church st|06510
 2 n main st|06403,b_8cb8bf6346,2 n main st|06403
 676 mix ave|06514,b_572274af1a,676 mix ave|06514
 2405 whitney ave|06518,b_0ba5cc966d,2405 whitney ave|06518
-500 boulder pass|06478,b_68b642ce48,500 boulder pass|06478
 619 s main st|06706,b_5121e39549,619 s main st|06706
-364 main st|12508,b_22ad0a354c,364 main st|12508
-430 e main st|10940,b_93660f3f95,430 e main st|10940
 90 grand st|12550,b_06b8297a11,90 grand st|12550
-165 overlook rd|12603,b_43607af7ea,165 overlook rd|12603
-137 & 145 n chestnut st|12561,b_753311e28b,137 145 n chestnut st|12561
-119 searing ave|11501,b_d9ef1fdf18,119 searing ave|11501
-1100 avalon sq|11542,b_656fb6e623,1100 avalon sq|11542
-25 w broadway|11561,b_b7a5b07800,25 w broadway|11561
-12 brooklyn ave|11581,b_7377274696,12 brooklyn ave|11581
-12 brooklyn ave valley stream ny 11581 usa|11581,b_7377274696,12 brooklyn ave|11581
-142 main st|11501,b_18f1af71f9,142 main st|11501
-124 greene ave|11701,b_8269777a50,124 greene ave|11701
-75 e hoffman ave|11757,b_30cce10da5,75 e hoffman ave|11757
-1000 new york ave|11746,b_19267cbfa1,1000 new york ave|11746
-38 rider ave|11772,b_45b2ed056d,38 rider ave|11772
-102 w main st|11787,b_3f8f9c9739,102 w main st|11787
-131 mamaroneck ave|10601,b_0a91d162cc,131 mamaroneck ave|10601
-44 hudson st|10701,b_78bfa7e9f6,44 hudson st|10701
-66 main st|10701,b_c8365848f7,66 main st|10701
-601 ridge hill blvd|10710,b_53d252c630,601 ridge hill blvd|10710
-1133 warburton ave|10701,b_1e46d43b31,1133 warburton ave|10701
-1 saint marys convent|10566,b_b344cdc054,1 saint marys convent|10566
-1100 admirals cove blvd|10927,b_57390dcb5d,1100 admirals cove blvd|10927
-4100 southernly pointe dr|10927,b_15f83d9018,4100 southernly pointe dr|10927
-2100 round pointe dr|10927,b_0d453fae87,2100 round pointe dr|10927
-55 clinton pl|10801,b_5e0963f022,55 clinton pl|10801
-11 park pl|10801,b_f797e94b71,11 park pl|10801
-135 wakefield ave|10704,b_b41be7418c,135 wakefield ave|10704
 70 ashburton ave|10701,b_25f6c84954,70 ashburton ave|10701
-20 water grant st|10701,b_c1467fc815,20 water grant st|10701
-550 halstead ave|10528,b_1d08fdca43,550 halstead ave|10528
-1 dekalb ave|10605,b_977c61dd13,1 dekalb ave|10605
-229 willett ave|10573,b_3bcc8df6fe,229 willett ave|10573
-21 willett ave|10573,b_81a1eea6ec,21 willett ave|10573
-1 n main st|10573,b_b53ef24324,1 n main st|10573
-42 waller ave|10601,b_7640a44745,42 waller ave|10601
-1 city pl|10601,b_cd7931c94a,1 city pl|10601
-10 lyon pl|10601,b_a656b90408,10 lyon pl|10601
-305 chateau rive|10566,b_d034747b73,305 chateau rive|10566
-20 s broadway|10960,b_3f4f6650fb,20 s broadway|10960
-216 s division st|10566,b_749f596cd7,216 s division st|10566
-100 legacy rd|10994,b_edd781fd31,100 legacy rd|10994
-14725 94th ave|11435,b_515920cea8,14725 94 ave|11435
-13828 queens blvd|11435,b_c7dc5c431d,13828 queens blvd|11435
-103-14 northern blvd|11368,b_b9faedd58f,10314 northern blvd|11368
+295 main st|10709,b_e3c586ac4c,295 main st|10709
+86 ridge st|10965,b_69b89d33e1,86 ridge st|10965
 13702 northern blvd|11354,b_44dc4a8686,13702 northern blvd|11354
-2183 3rd ave|10035,b_596cc15ca9,2183 3 ave|10035
-138 bruckner blvd|10454,b_a86558c301,138 bruckner blvd|10454
-190 beach 69th st|11692,b_b2a7c747f6,190 beach 69 st|11692
 8100 bay pkwy|11214,b_a411bcfb57,8100 bay pkwy|11214
-2055 center ave|07024,b_fb4ffb6c5b,2055 center ave|07024
-405 w 206th st|10034,b_16b8f7a571,405 w 206 st|10034
-99 gorge rd|07020,b_f6510edcbf,99 gorge rd|07020
-26 brook st|07302,b_70724f09d0,26 brook st|07302
-1000 w fort lee rd|07603,b_8d9e8ce2a9,1000 w fort lee rd|07603
-7711 river rd|07047,b_8055c78811,7711 river rd|07047
 134 baldwin ave|07306,b_dccf5a20bc,134 baldwin ave|07306
-19 rock st|07306,b_9e83a06984,19 rock st|07306
-161 van wagenen ave|07306,b_cd45a04dde,161 van wagenen ave|07306
-32 oakland ave|07306,b_5091e3cfb3,32 oakland ave|07306
-198 academy st|07306,b_907a63d547,198 academy st|07306
 400 claremont ave|07304,b_bb9407059c,400 claremont ave|07304
-2 ash st|07304,b_3495451d48,2 ash st|07304
-187 culver ave|07305,b_0f3900d556,187 culver ave|07305
 176 w side ave|07305,b_eeeae85d3f,176 w side ave|07305
-155 washington st|07102,b_ba4ef1f4db,155 washington st|07102
 1009 broad st|07102,b_fec325fa9f,1009 broad st|07102
 260 ave e|07002,b_0c7b226ae6,260 ave e|07002
-740-748 washington ave|07109,b_66dc364565,740748 washington ave|07109
 5 lawrence st|07003,b_cbc9a7d36b,5 lawrence st|07003
 440 elizabeth ave|07112,b_003540ccc9,440 elizabeth ave|07112
 258 s harrison st|07018,b_cb023e642b,258 s harrison st|07018
-240 s harrison st|07018,b_d5dd4fec65,240 s harrison st|07018
 299 s harrison st|07018,b_296b3095f3,299 s harrison st|07018
-1 carriage city plz|07065,b_b0b828868b,1 carriage city plz|07065
 1423 irving st|07065,b_1ca1a20627,1423 irving st|07065
-434 springfield ave|07922,b_8f7d73bc33,434 springfield ave|07922
-100 hiram sq|08901,b_d4eb1f509c,100 hiram sq|08901
-285 george st|08901,b_019f7c8a4e,285 george st|08901
 80 e mcfarlan st|07801,b_7c7ca93ac4,80 e mcfarlan st|07801
-40 e hanover ave|07950,b_b8bb8fc759,40 e hanover ave|07950
-400 cardinal ct|07852,b_251c8f64be,400 cardinal ct|07852
-10 ocean blvd|07716,b_29d3b31442,10 ocean blvd|07716
+|11778,b_4efd7dfb2e,|11778
+337 main st|06516,b_1d16d4f251,337 main st|06516
 135-23 82nd ave 3e queens ny 11435 us|11435,b_687bc98c0f,13523 82 ave|11435
-138-28 queens blvd 5k new york ny 11435 usa|11435,b_c7dc5c431d,13828 queens blvd|11435
-kew gardens rd & 83rd ave 2107 new york ny 11415 usa|11415,b_812f8e4d2a,kew gardens rd 83 ave|11415
+32-08 union st 5a 32-08 union st flushing ny 11354 us|11354,b_403d0ca679,3208 union st|11354
 9508 65th rd a3 rego park ny 11374 usa|11374,b_8eed87ff58,9508 65 rd|11374
-41-42 elbertson st 41-42 elbertson st elmhurst ny 11373 us|11373,b_985a688811,4142 elbertson st|11373
 3925 51st st 3e woodside ny 11377 usa|11377,b_187b60f664,3925 51 st|11377
-948 new york ave 2 948 new york ave brooklyn ny 11203 us|11203,b_d0e90924a0,948 new york ave|11203
-e 44th st 1001 new york ny 10017 usa|10017,b_a95c477a4a,e 44 st|10017
-479 front st 2f hempstead ny 11550 usa|11550,b_b19425751b,479 front st|11550
 3505 rochambeau ave 4b 3505 rochambeau ave bronx ny 10467 us|10467,b_88aba75841,3505 rochambeau ave|10467
 3215 netherland ave 3a bronx ny 10463 usa|10463,b_fae18a2c17,3215 netherland ave|10463
-1000 w fort lee rd 2408 bogota nj 07603 us|07603,b_8d9e8ce2a9,1000 w fort lee rd|07603
-9060 palisade ave d710 n bergen nj 07047 usa|07047,b_9a0a9c2936,9060 palisade ave|07047
 821 bergen ave jersey city nj 07306 usa|07306,b_de46cba073,821 bergen ave|07306
-140 main st hackensack nj 07601 us|07601,b_0c8c54dd56,140 main st|07601
-10 park ave 509 hackensack nj 07601 us|07601,b_016cd15918,10 park ave|07601
-1100 frank e rodgers blvd s 2114 harrison nj 07029 us|07029,b_a28f20fe2a,1100 frank e rodgers blvd s|07029
-525 1st st 224 harrison nj 07029 us|07029,b_822c2a02f2,525 1 st|07029
-1100 frank e rodgers blvd s 3118 harrison nj 07029 us|07029,b_a28f20fe2a,1100 frank e rodgers blvd s|07029
 10 bergen st 435 harrison nj 07029 us|07029,b_60c72d10d9,10 bergen st|07029
-bergen st 412 harrison nj 07029 usa|07029,b_de1f77fcf6,bergen st|07029
-s 5th st 308 harrison nj 07029 usa|07029,b_4fd29fde13,s 5 st|07029
 42 vesey st 211 newark nj 07105 us|07105,b_5d743e7988,42 vesey st|07105
 42 vesey st 406 newark nj 07105 us|07105,b_5d743e7988,42 vesey st|07105
 110 washington st e orange nj 07017 usa|07017,b_3a9b3ed505,110 washington st|07017
-475 main st 404 city of orange nj 07050 usa|07050,b_56ce49fbe4,475 main st|07050
+1148 william st bridgeport ct 06608 usa|06608,b_2b2b5e70b4,1148 william st|06608
 127 talmage ave 307 bound brook nj 08805 us|08805,b_ebe49b24a3,127 talmage ave|08805
+25 nymph rd d rocky point ny 11778 usa|11778,b_df7c68e3de,25 nymph rd|11778
+188 broad st 188a red bank nj 07701 usa|07701,b_852c2aac67,188 broad st|07701
+18 old n plank rd newburgh ny 12550 usa|12550,b_b7418d66f1,18 old n plank rd|12550
+301 tower ave 4 maybrook ny 12543 usa|12543,b_f0a7059dca,301 tower ave|12543
+368 leonard st|11211,b_cb8c8f7f70,368 leonard st|11211
 90 furman st|11201,b_e5d7dfd6f0,90 furman st|11201
-3260 henry hudson pkwy|10463,b_07f83acc47,3260 henry hudson pkwy|10463
+1452 center ave|07024,b_28f8d1e653,1452 center ave|07024
+3465 fort independence st|10463,b_0b0c82509e,3465 fort independence st|10463
 500 central ave|07087,b_5dc72ae94a,500 central ave|07087
-1775 windsor rd|07666,b_ed64a2ae75,1775 windsor rd|07666
-1075 w side ave|07306,b_bba4e91f2c,1075 w side ave|07306
-79 alexander st|10701,b_3f9fc0b756,79 alexander st|10701
+4828 tonnelle ave|07047,b_4453fc8f96,4828 tonnelle ave|07047
 132 yale ave|07304,b_fd5b97710e,132 yale ave|07304
+125-133 kearny ave|07032,b_945e343e83,125133 kearny ave|07032
+625 elm st|07032,b_5efa056884,625 elm st|07032
+80 freeman st|07105,b_5c415287ea,80 freeman st|07105
 10 commerce ct|07102,b_d1e8eb4f85,10 commerce ct|07102
-145 goldsborough dr|07002,b_27104c3bf3,145 goldsborough dr|07002
-190 w 54th st|07002,b_2eb7945a67,190 w 54 st|07002
-500 district dr|07922,b_f60305ba7b,500 district dr|07922
+1040 j f kennedy blvd|07002,b_b5e0e1c599,1040 j f kennedy blvd|07002
+1143 kennedy blvd|07002,b_958f1540e1,1143 kennedy blvd|07002
+556 washington ave|07109,b_61f988d1e0,556 washington ave|07109
+140 celia ter|07109,b_f77f665f74,140 celia ter|07109
+539 joralemon st|07109,b_85614a9a02,539 joralemon st|07109
+1143 louisa st|07201,b_e79bab3c6d,1143 louisa st|07201
+5 beaumont pl|07104,b_0574ac1a01,5 beaumont pl|07104
+339 hamden ave|10306,b_5fae1d0ac3,339 hamden ave|10306
+226 roseville ave|07107,b_68e3f26c07,226 roseville ave|07107
+300 glenwood ave|07003,b_f12df1d03a,300 glenwood ave|07003
+206 montgomery st|07003,b_e2ceefe11e,206 montgomery st|07003
+263 bloomfield ave|07003,b_00b6de3f80,263 bloomfield ave|07003
+246 edgar pl|07202,b_d1d90b5d6c,246 edgar pl|07202
+314 oakwood ave|07050,b_dcf883e349,314 oakwood ave|07050
+86 hillyer st|07050,b_bc8f54c413,86 hillyer st|07050
+1078 e main st|06902,b_5f667364a3,1078 e main st|06902
+307 w elizabeth ave|07036,b_10f8e8daa8,307 w elizabeth ave|07036
+218-226 millburn ave|07041,b_de3818e972,218226 millburn ave|07041
+113-117 vose ave|07079,b_51fb4bda76,113117 vose ave|07079
+40 verona pl|07044,b_34f1e89a8d,40 verona pl|07044
+23 wilfred st|07052,b_ba5321262d,23 wilfred st|07052
+17-19 n union ave|07016,b_fe71bae805,1719 n union ave|07016
+24 walter dr|07001,b_a91175af63,24 walter dr|07001
+510 millburn ave|07078,b_1aff39f3ba,510 millburn ave|07078
+17 ferris ave|06854,b_66685241d8,17 ferris ave|06854
+3 ronald dr|07067,b_764bb90d59,3 ronald dr|07067
+10 green st|07095,b_ed929002b2,10 green st|07095
+1 pikeview ln|07095,b_4d7c7e5bc4,1 pikeview ln|07095
+20 gill ln 1e|08830,b_08fbde9607,20 gill ln|08830
+289 main ave|06851,b_846f44689f,289 main ave|06851
+73 wolff ave|08837,b_56b1a952d8,73 wolff ave|08837
+145 grandview ave|08837,b_6a41b999a5,145 grandview ave|08837
+1 avalon way|07005,b_e2d2c14006,1 avalon way|07005
+1101 klimek pl|08879,b_8977a1a8ab,1101 klimek pl|08879
+one chester circle|08901,b_d7e3a4e75a,one chester circle|08901
 60 paterson st|08901,b_e5db6f016a,60 paterson st|08901
 575 easton ave|08904,b_a8d8cf1df6,575 easton ave|08904
+55 prospect st|07960,b_163b7d8598,55 prospect st|07960
+44 prospect st|07960,b_a000b80116,44 prospect st|07960
+40 cross rd|07747,b_b42bc7607d,40 cross rd|07747
+33 aberdeen rd|07747,b_4135534fff,33 aberdeen rd|07747
+600 bound brook rd|08846,b_8399c2d877,600 bound brook rd|08846
+186 carlton club dr|08854,b_d7dfca187b,186 carlton club dr|08854
 55 e main st|06608,b_c703305174,55 e main st|06608
+82 finderne ave|08807,b_1f01e63a65,82 finderne ave|08807
+1155 livingston ave|08902,b_3ed79a7a29,1155 livingston ave|08902
+25 nymph rd|11778,b_df7c68e3de,25 nymph rd|11778
 991 main st|06604,b_b29a9ae0e3,991 main st|06604
+59 2nd ave|08869,b_45cee0248f,59 2 ave|08869
+211 ferry blvd|06615,b_cd91f15007,211 ferry blvd|06615
+2 mountainview ter|06810,b_1b517ef44f,2 mountainview ter|06810
 333 main st|06810,b_5204934871,333 main st|06810
+11 new st|08876,b_819a4aeebc,11 new st|08876
+1 avalon dr|06460,b_8171dad306,1 avalon dr|06460
+365 boston post rd|06460,b_09026e5b80,365 boston post rd|06460
+348 gemini dr|08844,b_f98b417aac,348 gemini dr|08844
+1 schindler ct|08844,b_49bc050dd3,1 schindler ct|08844
+2005 quail ridge dr|08536,b_58407f7fcf,2005 quail ridge dr|08536
+1000 pheasant hollow dr|08536,b_568001caee,1000 pheasant hollow dr|08536
+3217 ravens crest dr|08536,b_1c1dc924e1,3217 ravens crest dr|08536
+1001 bridgeport ave|06484,b_6a3a573216,1001 bridgeport ave|06484
+77-81 s st|07728,b_f9cac12ae7,7781 s st|07728
+900 wessex pl|08540,b_32d4cd3c62,900 wessex pl|08540
+401 w sylvania ave|07753,b_c6bfde0b61,401 w sylvania ave|07753
+175 long branch ave|07740,b_8ecf6b0ada,175 long branch ave|07740
+81 avenel blvd|07740,b_b569c7430d,81 avenel blvd|07740
+355 bath ave|07740,b_74dd2c289c,355 bath ave|07740
+1000 jamie brooks ln|08550,b_11d7a6233c,1000 jamie brooks ln|08550
+1000 town ct s|08648,b_9c5998f31d,1000 town ct s|08648
+100 avalon way|08648,b_328e1d8b89,100 avalon way|08648
+1000 stewards crossing way|08648,b_a7597f1bc7,1000 stewards crossing way|08648
+1021 us-206 n|08505,b_0a2d3f799f,1021 us-206 n|08505
 33 crown st|06510,b_2f9fedb973,33 crown st|06510
 38 crown st|06510,b_e624f3ffb0,38 crown st|06510
 900 chapel st|06510,b_0b58d6c3dd,900 chapel st|06510
 78 olive st|06510,b_5bd2e71f71,78 olive st|06510
-55 bank st|10606,b_144b021ca5,55 bank st|10606
-57 bank st|10606,b_144b021ca5,57 bank st|10606
-650 nj-23|07470,b_0284360938,650 nj-23|07470
-589 bedford st|06901,b_cf509a364e,589 bedford st|06901
+510 main st|06512,b_f55732231a,510 main st|06512
+90 gerrish ave|06512,b_7757a6f93e,90 gerrish ave|06512
+270 spring st|06770,b_4fe6444f45,270 spring st|06770
+225 red school ln a4|08865,b_ffe62ed6b2,225 red school ln|08865
+231 windmill ct|08865,b_cd3383c7fe,231 windmill ct|08865
+100 town walk dr|06518,b_c7c4e6e0fd,100 town walk dr|06518
+28 wesley st|06708,b_4aeeb003f0,28 wesley st|06708
+26000 cornerstone dr|19067,b_198bddc631,26000 cornerstone dr|19067
+1800 kathy dr|19067,b_840dbf0554,1800 kathy dr|19067
+1 e pearl st|08016,b_344ef8aaec,1 e pearl st|08016
+251 s olds blvd|19030,b_bb09ca3aed,251 s olds blvd|19030
 84 w park pl|06901,b_f6c77f554e,84 w park pl|06901
+990 hope st|06907,b_91f59673c2,990 hope st|06907
+6 elm st|06850,b_3001d263a5,6 elm st|06850
+32 prospect ave|06850,b_52e97e0521,32 prospect ave|06850
 61 wall st|06850,b_ed492a0e67,61 wall st|06850
+306 canfield ave|06605,b_2284b60f63,306 canfield ave|06605
+130 fairchild ave|06825,b_6f7ea5dc32,130 fairchild ave|06825
+150 anton st|06606,b_4278658026,150 anton st|06606
+120 morgan ave|06606,b_81914484f2,120 morgan ave|06606
 333 state st|06604,b_5f84c933a2,333 state st|06604
 335 ferry blvd|06615,b_9b44b7b349,335 ferry blvd|06615
-7 station rd|06804,b_8b059f657b,7 station rd|06804
+1126 stratford ave|06615,b_731a059c3c,1126 stratford ave|06615
+53 sand pit rd|06810,b_c15874960b,53 sand pit rd|06810
+540 bond st|06610,b_c69106f348,540 bond st|06610
+92 plains rd|06461,b_38b484e26d,92 plains rd|06461
+117 cascade blvd|06460,b_b5263a5909,117 cascade blvd|06460
+26 golden hill st|06460,b_afa4737951,26 golden hill st|06460
+50 derby ave|06418,b_28dfcfaa15,50 derby ave|06418
+998-1008 campbell ave|06516,b_a82df6f46d,9981008 campbell ave|06516
+511 main st|06516,b_17404543c0,511 main st|06516
+500 fountain st|06515,b_a5d4a22400,500 fountain st|06515
 222 canal st|06511,b_e14f456bec,222 canal st|06511
-274 crown st|06511,b_a7a6d5359b,274 crown st|06511
+750 whitney ave|06511,b_2a734c539a,750 whitney ave|06511
+87 union st|06511,b_a9ff4714d6,87 union st|06511
+367 orange st|06511,b_a0f917d390,367 orange st|06511
+269 orange st|06510,b_d6c2bb093d,269 orange st|06510
 78 olive st|06511,b_5bd2e71f71,78 olive st|06511
+630 chapel st|06510,b_893bfa1b2e,630 chapel st|06510
+164 coe ave|06512,b_37b5f7553b,164 coe ave|06512
+99 hemingway ave|06512,b_1f30aad7b0,99 hemingway ave|06512
+151 andrew ave|06770,b_9036d08473,151 andrew ave|06770
+547-597 millville ave|06770,b_c241fffec9,547597 millville ave|06770
 337 eastern st|06513,b_f3628da2f9,337 eastern st|06513
+339 eastern st|06513,b_ec6254d7ec,339 eastern st|06513
+1 hill dr|06776,b_61fc34f384,1 hill dr|06776
+925 mix ave|06514,b_a70d51cf28,925 mix ave|06514
+2 skiff st|06514,b_55cc89df7d,2 skiff st|06514
+835-865 mix ave|06514,b_39261f672c,835865 mix ave|06514
+190 pine rock ave|06514,b_9c631a6641,190 pine rock ave|06514
+1 kaye plz|06514,b_1c05810e6d,1 kaye plz|06514
 67 sackett point rd|06473,b_c0fea56c00,67 sackett point rd|06473
-5 freer st|11563,b_59e78a7022,5 freer st|11563
-49 n central ave|11580,b_cab04375b2,49 n central ave|11580
+1800 aspen glen dr|06518,b_ea4604b20e,1800 aspen glen dr|06518
+29 hudson view dr|12508,b_503fed5d78,29 hudson view dr|12508
+700 stratford ln|10940,b_9004425fd0,700 stratford ln|10940
+644 silver lake scotchtown rd|10941,b_85b3c88ff8,644 silver lake scotchtown rd|10941
+1000 clark st|12553,b_ad80181e24,1000 clark st|12553
+428 liberty st|12550,b_fba573bcce,428 liberty st|12550
+a54 powell ave|12550,b_492ea2b4d1,a54 powell ave|12550
+101 drake dr|12550,b_785c55cb01,101 drake dr|12550
+106 van wagner rd|12603,b_7177d95a52,106 van wagner rd|12603
+6 jackman dr|12603,b_1fcfb8109d,6 jackman dr|12603
+228 route 376|12533,b_e1acbb46bb,228 route 376|12533
+4 southside ave|12561,b_1d0117e963,4 southside ave|12561
 159 main st|11550,b_4d19060e13,159 main st|11550
 10 wendell st|11550,b_df44b1602f,10 wendell st|11550
 316 fulton ave|11550,b_8b12192229,316 fulton ave|11550
-|11561,b_5794f2e8e4,|11561
+35 penataquit ave|11706,b_e7ab1481ec,35 penataquit ave|11706
+140 orinoco dr|11718,b_10dd65500d,140 orinoco dr|11718
+107 wartburg ave|11726,b_ae8fd01671,107 wartburg ave|11726
+45 country club dr|11727,b_3fa14ca7fb,45 country club dr|11727
 1 brookwood ln|11772,b_90a32285dc,1 brookwood ln|11772
-99 hale ave|10605,b_58488ee9fa,99 hale ave|10605
-247 n ave|10801,b_cedc13467d,247 n ave|10801
+1 b country club dr|11949,b_1871606758,1 b country club dr|11949
+887 montauk hwy|11772,b_d483c41f4d,887 montauk hwy|11772
+234 river ave|11772,b_8940e3487a,234 river ave|11772
+100 village dr|11961,b_e446f87652,100 village dr|11961
+870 little e neck rd|11704,b_7860495d1d,870 little e neck rd|11704
 40 westchester pl|10801,b_e7d45fd69a,40 westchester pl|10801
-33 westchester pl|10801,b_4c62e93141,33 westchester pl|10801
-64 centre ave|10801,b_32fef574de,64 centre ave|10801
 80 w grand st|10552,b_1988849226,80 w grand st|10552
 1180 midland ave|10708,b_45c9a65dbf,1180 midland ave|10708
-60 point st|10701,b_7dd0e6688e,60 point st|10701
 305 warburton ave|10701,b_1fd93a9d52,305 warburton ave|10701
-7-11 s broadway|10601,b_c56d2bc7d9,711 s broadway|10601
-250 s central ave|10530,b_a14b339b28,250 s central ave|10530
-14202 84th dr|11435,b_b64ad8f2fa,14202 84 dr|11435
-12333 83rd ave|11415,b_3c6898b295,12333 83 ave|11415
-8267 austin st|11415,b_ce1a448e4a,8267 austin st|11415
-92-27 160th st|11433,b_b8b875d9b9,9227 160 st|11433
-92-29 guy r brewer blvd|11433,b_91455b9fcb,9229 guy r brewer blvd|11433
-153-10 88th ave|11432,b_a89060ec31,15310 88 ave|11432
+119 carpenter ave|10549,b_72b44547fd,119 carpenter ave|10549
+24 claremont gdns|10562,b_8909728008,24 claremont gdns|10562
+94 grand st|10520,b_d10188b89f,94 grand st|10520
+225 berkman dr|10941,b_ddf1698dca,225 berkman dr|10941
+201 genung st|10940,b_594b6447ff,201 genung st|10940
+158 lake ave|10707,b_ab7f45cc30,158 lake ave|10707
+|10701,b_e201dca991,|10701
+|10549,b_709742f61a,|10549
+|10507,b_dbbeeb3bdd,|10507
+70 westchester ave|10576,b_311c0d0ef8,70 westchester ave|10576
+21 wallace rd|10560,b_2e629e0c3d,21 wallace rd|10560
+|10579,b_d3d01ca756,|10579
+|10990,b_6ac890b6ea,|10990
+|10941,b_67a1bf6bb9,|10941
+138-28 90th ave|11435,b_cffdb3842e,13828 90 ave|11435
+13915 88th rd|11435,b_9ef6fbbdae,13915 88 rd|11435
 87-46 chelsea st|11432,b_6cee3ea39a,8746 chelsea st|11432
-89-25 162nd st|11432,b_8f85e594e6,8925 162 st|11432
 7525 153rd st|11367,b_54f92f7495,7525 153 st|11367
-71-82 parsons blvd|11365,b_e989b40a9d,7182 parsons blvd|11365
 13324 sanford ave|11355,b_0f0fcfc79c,13324 sanford ave|11355
 136-35 maple ave|11355,b_f74c7dfbaf,13635 maple ave|11355
 4110 bowne st|11355,b_d007846fe9,4110 bowne st|11355
-139-81 35th ave|11354,b_4317e61e15,13981 35 ave|11354
-13981 35th ave|11354,b_4317e61e15,13981 35 ave|11354
-14016 34th ave|11354,b_82cac2e795,14016 34 ave|11354
 3208 union st|11354,b_403d0ca679,3208 union st|11354
-44-10 ketcham st|11373,b_8d79dcfb2a,4410 ketcham st|11373
+|11385,b_9d8b4ebe1a,|11385
 85-05 elmhurst ave|11373,b_fb625767b9,8505 elmhurst ave|11373
-17 somers st|11233,b_86843cbdd1,17 somers st|11233
-26-02 4th st|11102,b_f2545991df,2602 4 st|11102
-23-50 waters edge dr|11360,b_a16237714f,2350 waters edge dr|11360
 56-27 2nd st|11101,b_474962f771,5627 2 st|11101
 1545 rhinelander ave|10461,b_3f9309af44,1545 rhinelander ave|10461
 1840 grand concourse|10457,b_8b5f8269c0,1840 grand concourse|10457
 |10457,b_24b08f5886,|10457
-375 lefferts ave|11225,b_16ee2baac1,375 lefferts ave|11225
-25 bruckner blvd|10454,b_d1e70f0c63,25 bruckner blvd|10454
-123 linden blvd|11226,b_9bf415dd57,123 linden blvd|11226
-1616 beverly rd|11226,b_84a2ae272a,1616 beverly rd|11226
-230 w 126th st|10027,b_6948ec10cf,230 w 126 st|10027
 2781 ocean ave|11229,b_84bbe8d99e,2781 ocean ave|11229
-3280-3310 nostrand ave|11229,b_8a60db0f24,32803310 nostrand ave|11229
-3310 nostrand ave|11229,b_23925e7c86,3310 nostrand ave|11229
-320 w 135th st|10030,b_3ab5cf9503,320 w 135 st|10030
-224 e 135th st|10451,b_6a4461acdf,224 e 135 st|10451
-228 e 135th st|10451,b_5b0d5b1f23,228 e 135 st|10451
-310 grand concourse|10451,b_78b9422b95,310 grand concourse|10451
 3505 rochambeau ave|10467,b_88aba75841,3505 rochambeau ave|10467
 3560 olinville ave|10467,b_5402e048f0,3560 olinville ave|10467
-623 ave h|11230,b_f66997b6c5,623 ave h|11230
-260 beach 81st st|11693,b_1f1d9c2290,260 beach 81 st|11693
-1941 coney island ave|11223,b_769c2e5583,1941 coney island ave|11223
-2611 w 2nd st|11223,b_70c1cba0d0,2611 w 2 st|11223
-1429 shore pkwy|11214,b_bfa351f6c8,1429 shore pkwy|11214
-204 sherman ave|10034,b_7bd07ee1c0,204 sherman ave|10034
-2600 netherland ave|10463,b_8733cfdf7a,2600 netherland ave|10463
 76 cottage st|07306,b_bf42e361a0,76 cottage st|07306
-5 linden st|07601,b_77ee25a0b4,5 linden st|07601
-509 martin luther king jr dr|07304,b_cc5e558663,509 martin luther king jr dr|07304
+181-183 grand ave|07601,b_4d6e40bc9b,181183 grand ave|07601
 127 16th ave|07501,b_daaf117041,127 16 ave|07501
-50 washington st|07017,b_dbcb291def,50 washington st|07017
-448 scotland rd|07050,b_55c25d9226,448 scotland rd|07050
-83rd ave new york ny 11415 usa|11415,b_2004f43850,83 ave|11415
-83-33 118th st 6m 83-33 118th st kew gardens ny 11415 us|11415,b_cd7ba15e25,8333 118 st|11415
-139-81 35th ave 6d 139-81 35th ave flushing ny 11354 us|11354,b_4317e61e15,13981 35 ave|11354
+255 franklin ave|07109,b_852c6b0630,255 franklin ave|07109
+800 s 14th st|07108,b_2a184be67b,800 s 14 st|07108
+1 hoover way|07095,b_db2aa8d5f7,1 hoover way|07095
+410 s randolphville rd|08854,b_674228896a,410 s randolphville rd|08854
+30 worlds fair dr|08873,b_f84dfee134,30 worlds fair dr|08873
+71 international dr s|07828,b_3b1615d584,71 international dr s|07828
+4230 us route 1|08852,b_33b4dd3df6,4230 us route 1|08852
 137-02 northern blvd 5c 137-02 northern blvd flushing ny 11354 us|11354,b_44dc4a8686,13702 northern blvd|11354
-32-08 union st 5a 32-08 union st flushing ny 11354 us|11354,b_403d0ca679,3208 union st|11354
+34-10 84th st h2 queens ny 11372 us|11372,b_6b0a5d8f58,3410 84 st|11372
 34-47 90th st h41 34-47 90th st jackson heights ny 11372 us|11372,b_cb2d5d4fde,3447 90 st|11372
 34-32 91st st e63 34-32 91st st jackson heights ny 11372 us|11372,b_679a923f3a,3432 91 st|11372
-16-70 bell blvd 317 16-70 bell blvd bayside ny 11360 us|11360,b_4bbd550e01,1670 bell blvd|11360
-23-50 waters edge dr 4t new york ny 11360 usa|11360,b_a16237714f,2350 waters edge dr|11360
-1890 pelham pkwy s 4g 1890 pelham pkwy s bronx ny 10461 us|10461,b_ca76ea6ebd,1890 pelham pkwy s|10461
-2128 ocean ave brooklyn ny 11229 usa|11229,b_4fb58f7a95,2128 ocean ave|11229
-1775 coney island ave 7k brooklyn ny 11230 usa|11230,b_8a827222e4,1775 coney island ave|11230
-3333 broadway new york ny 10031 us|10031,b_85ac86085f,3333 broadway|10031
-william st & john st 6e new york ny 10038 usa|10038,b_4e18914e44,william st john st|10038
-64 centre ave new rochelle ny 10801 usa|10801,b_32fef574de,64 centre ave|10801
-20 water grant st yonkers ny 10701 usa|10701,b_c1467fc815,20 water grant st|10701
+2665 homecrest ave 22 brooklyn ny 11235 usa|11235,b_4d513e5f09,2665 homecrest ave|11235
+6120 monroe pl 17 w new york nj 07093 usa|07093,b_92f883f46d,6120 monroe pl|07093
 7 navy pier ct staten island ny 10304 usa|10304,b_45879c10c7,7 navy pier ct|10304
+1 karl pl garfield nj 07026 usa|07026,b_325fd5d736,1 karl pl|07026
+502 market st 4e newark nj 07105 usa|07105,b_292cef6657,502 market st|07105
+78 jefferson st 1 newark nj 07105 usa|07105,b_e053355398,78 jefferson st|07105
 30 clinton st newark nj 07102 usa|07102,b_eebabe90f2,30 clinton st|07102
-145 goldsborough dr 1-1 bayonne nj 07002 usa|07002,b_27104c3bf3,145 goldsborough dr|07002
-100 washington ave 212 belleville nj 07109 us|07109,b_24405054f4,100 washington ave|07109
+378 broad st 2b newark nj 07104 usa|07104,b_879c33564e,378 broad st|07104
+15 branch brook pl 1 newark nj 07104 usa|07104,b_080e9e0293,15 branch brook pl|07104
+5 beaumont pl 2b newark nj 07104 usa|07104,b_0574ac1a01,5 beaumont pl|07104
+339 hamden ave staten island ny 10306 usa|10306,b_5fae1d0ac3,339 hamden ave|10306
+196 roseville ave newark nj 07107 usa|07107,b_f2bb3ed318,196 roseville ave|07107
+106 n grove st 502 e orange nj 07017 usa|07017,b_f699e1aa5f,106 n grove st|07017
+12 canfield st 14 orange nj 07050 usa|07050,b_8c1dae166a,12 canfield st|07050
+40 derby ave 1 greenlawn ny 11740 usa|11740,b_a08fcaa4e1,40 derby ave|11740
+1425 bedford st stamford ct 06905 usa|06905,b_25626181bf,1425 bedford st|06905
+rahway 1203 nj 07065 usa|07065,b_bbae18b262,rahway|07065
+65 winfield st 12 norwalk ct 06855 usa|06855,b_e5991fd70b,65 winfield st|06855
+821 central ave plainfield nj plainfield nj 07060 usa|07060,b_b6537b627d,821 central ave nj|07060
+821 central ave plainfield nj 07060 usa|07060,b_b6537b627d,821 central ave|07060
+1 chester cir new brunswick nj 08901 usa|08901,b_4860848cca,1 chester cir|08901
+broadway a rocky point ny 11778 usa|11778,b_9e5b72e85f,broadway|11778
+17 old allamuchy rd hackettstown nj 07840 usa|07840,b_a740458ac8,17 old allamuchy rd|07840
+asbury park nj 07712 usa|07712,b_b3381be471,asbury park|07712
+39 mine st 2b flemington nj 08822 usa|08822,b_f1e7192924,39 mine st|08822
 70 church st 208 flemington nj 08822 usa|08822,b_a28bdea078,70 church st|08822
-6500 k johnson blvd 211 bordentown nj 08505 usa|08505,b_1d55a03272,6500 k johnson blvd|08505
-2404 cortelyou rd|11226,b_37918a8b58,2404 cortelyou rd|11226
-30 dongan pl|10040,b_371c778392,30 dongan pl|10040
-500 parq ln|07054,b_5682f2bdfa,500 parq ln|07054
+2206 state st 1 hamden ct 06517 usa|06517,b_83debd3403,2206 state st|06517
+26 river rd 4 new milford ct 06776 usa|06776,b_dea7446bf3,26 river rd|06776
+1205 edgewood ave 8 trenton nj 08618 usa|08618,b_fc7257973e,1205 edgewood ave|08618
+florence nj 08518 usa|08518,b_67850cd563,florence|08518
+46 titman rd 4 belvidere nj 07823 usa|07823,b_45a90dd054,46 titman rd|07823
+640 lincoln ave morrisville pa 19067 usa|19067,b_c669ebf933,640 lincoln ave|19067
+498 plaza blvd morrisville pa 19067 usa|19067,b_18f80e5b17,498 plz blvd|19067
+5304 palisade ave|07093,b_4ebdf3eefb,5304 palisade ave|07093
+6120 monroe pl|07093,b_92f883f46d,6120 monroe pl|07093
+6208 palisade ave|07093,b_d0733fc788,6208 palisade ave|07093
+5902 madison st|07093,b_86b4ce0d7c,5902 madison st|07093
+7505 palisade ave|07047,b_8ec77fbf38,7505 palisade ave|07047
+8600 1st ave|07047,b_33ba1e33b3,8600 1 ave|07047
+280 sedore ave|07022,b_a2b50755ff,280 sedore ave|07022
+545 bramhall ave|07304,b_2aa270e8ab,545 bramhall ave|07304
+199 chestnut st|07032,b_e300f254bf,199 chestnut st|07032
+146 hamilton ave|07501,b_b843266803,146 hamilton ave|07501
+229 rosa parks blvd|07501,b_3b801d186d,229 rosa parks blvd|07501
+117 hamilton ave|07501,b_551b34a9ed,117 hamilton ave|07501
+240 rosa parks blvd|07501,b_de7a38d702,240 rosa parks blvd|07501
+198 harrison st|07501,b_b087de2a4e,198 harrison st|07501
+60 carroll st|07501,b_cf3696e7df,60 carroll st|07501
+96 16th ave|07501,b_dfa4dffbcc,96 16 ave|07501
+83 auburn st|07501,b_92e8f7bf16,83 auburn st|07501
+188 21st ave|07501,b_924f67af6e,188 21 ave|07501
+83 godwin ave|07501,b_04afcc5547,83 godwin ave|07501
+100 carroll st|07501,b_cc4f428813,100 carroll st|07501
+362 hamilton ave|07501,b_7afd5ff958,362 hamilton ave|07501
+41 godwin ave|07501,b_393172ce2c,41 godwin ave|07501
+50 clinton st|07522,b_86da59be48,50 clinton st|07522
+14-20 arlington st|07522,b_f973bd3cb7,1420 arlington st|07522
+575 13th ave|07103,b_3180b530b6,575 13 ave|07103
+255 rea ave|07506,b_67dd1e23e1,255 rea ave|07506
+376 broad st|07104,b_c843c3aa61,376 broad st|07104
+325 grafton ave|07104,b_c6dd7b7e18,325 grafton ave|07104
+378 broad st|07104,b_879c33564e,378 broad st|07104
+42 llewellyn ave|07003,b_8778c9e418,42 llewellyn ave|07003
+282 lyons ave|07112,b_0974007fa3,282 lyons ave|07112
+809 garden st|07202,b_27d02b04b6,809 garden st|07202
+16 stuyvesant ave|07106,b_a5fd5d0800,16 stuyvesant ave|07106
+435 westminster ave|07208,b_05b4346d2e,435 westminster ave|07208
+228 s 5th st|07206,b_205b8e9313,228 s 5 st|07206
+34 glenwood ave|06854,b_bdba3ce8ce,34 glenwood ave|06854
+1 fieldcrest ave|08837,b_3130621181,1 fieldcrest ave|08837
+1 reler ln l|08873,b_2e88e7db34,1 reler ln|08873
+201 pickering pl|08873,b_c538004604,201 pickering pl|08873
+365 huff ave|08835,b_9045aa9425,365 huff ave|08835
+4230 u s route 1|08852,b_33b4dd3df6,4230 u s route 1|08852
+190 main st|10924,b_b6f6e7d714,190 main st|10924
+134 chambers st|12550,b_a4b404a6f9,134 chambers st|12550
+15 clark st|12550,b_4271b39ed9,15 clark st|12550
+97 countryside dr|07840,b_ce877fe2ec,97 countryside dr|07840
+1411 3rd ave|07712,b_ce8682044d,1411 3 ave|07712
+119 main ave|07756,b_a2284d9882,119 main ave|07756
 23 bloomfield|08822,b_7efd7313e6,23 bloomfield|08822
+827 elm st|06511,b_fe71d62fa0,827 elm st|06511
+831 elm st|06511,b_4693890873,831 elm st|06511
 254 college st|06510,b_a6055f4608,254 college st|06510
+3461 s broad st|08610,b_7158f20e1b,3461 s broad st|08610
+40 shelter st|06513,b_8173657bad,40 shelter st|06513
+1217 whitney ave|06517,b_ba72f1d2af,1217 whitney ave|06517
+1349 dixwell ave|06514,b_997440dae7,1349 dixwell ave|06514
 20 beacon way|07304,b_84739a68fb,20 beacon way|07304
+101 maple tree ave|06906,b_00e2bac717,101 maple tree ave|06906
+31 ferris ave|06854,b_72747f630d,31 ferris ave|06854
+8 union ave|06851,b_a786c9f75d,8 union ave|06851
+505 jewett ave|06606,b_fdd7da44a0,505 jewett ave|06606
+838 wood ave|06604,b_9c96ca3c49,838 wood ave|06604
+446-556 hollister st|06615,b_7afbc5dab4,446556 hollister st|06615
+129 plains rd|06461,b_30731dadf4,129 plains rd|06461
+101 laurel hill rd|06804,b_0f0226d6ec,101 laurel hill rd|06804
+101 e ramsdell st|06515,b_d9426b9135,101 e ramsdell st|06515
+311 blake st|06515,b_6378d133d3,311 blake st|06515
+209 greene st|06511,b_fef4eacc3b,209 greene st|06511
+451 orange st|06511,b_e95c2a59b6,451 orange st|06511
+3 long wharf dr|06511,b_428fe44c2a,3 long wharf dr|06511
 901 chapel st|06510,b_383ee6a134,901 chapel st|06510
-37 woodmere blvd|11598,b_0ddb4c49c4,37 woodmere blvd|11598
+2 short beach rd|06512,b_2cd37adfe3,2 short beach rd|06512
+270 n spring st|06770,b_fdd45ed063,270 n spring st|06770
+311 eastern st|06513,b_6d9a8e8447,311 eastern st|06513
+6 putnam ave|10509,b_1a444b1a2c,6 putnam ave|10509
+835 blooming grove tpke|12553,b_014afd2768,835 blooming grove tpke|12553
+2201 vails gate heights dr|12553,b_8bb7d4f696,2201 vails gate heights dr|12553
+88 washington st|12550,b_99dac32fc9,88 washington st|12550
+1 chelsea ridge mall|12590,b_b836b71bd4,1 chelsea ridge mall|12590
+5 southside ave|12561,b_ee2bdf290e,5 southside ave|12561
+41 brookfield rd|12589,b_346474fc20,41 brookfield rd|12589
+310 riverside blvd|11561,b_26d909bb7c,310 riverside blvd|11561
+233 shore rd|11561,b_c6aca8d245,233 shore rd|11561
+405 e main st|11706,b_18c4968781,405 e main st|11706
+727 greenbriar dr|11716,b_c1176f661a,727 greenbriar dr|11716
+1998 route 112|11727,b_f4dcd81502,1998 route 112|11727
+1 b meadowoods ln|11955,b_89686929b0,1 b meadowoods ln|11955
+33 midship ln|11772,b_52b1f60097,33 midship ln|11772
+1355 roanoke ave|11901,b_a3546c10ee,1355 roanoke ave|11901
+218 lakeland ave|11782,b_45f2ab5a16,218 lakeland ave|11782
+35 elliott pl|11787,b_68a0a8a909,35 elliott pl|11787
+850 little e neck rd|11704,b_2be790d90b,850 little e neck rd|11704
+164 rollstone ave|11796,b_74ecfecf25,164 rollstone ave|11796
+669 n ter ave|10552,b_33e589d1b3,669 n ter ave|10552
+2 skytop dr|10520,b_7bd1859351,2 skytop dr|10520
+1133 midland ave|10708,b_5d0586e20b,1133 midland ave|10708
+|10707,b_edbd1ae7bf,|10707
 525 riverdale ave|10705,b_c4831201c1,525 riverdale ave|10705
-13523 82nd ave|11435,b_687bc98c0f,13523 82 ave|11435
+23 lincoln ter|10701,b_be63479678,23 lincoln ter|10701
+|10703,b_ddeb36fd2f,|10703
+212 ashford ave|10522,b_8a04f8084e,212 ashford ave|10522
+|10573,b_125c9e94e1,|10573
+14133 pershing cres|11435,b_dce4e41f34,14133 pershing cres|11435
 139-05 85th dr|11435,b_03a57f0fab,13905 85 dr|11435
 141-24 84th dr|11435,b_74e62668df,14124 84 dr|11435
 143-25 84th ave|11435,b_e85a43e0b1,14325 84 ave|11435
-148-33 90th ave|11435,b_a0425450a7,14833 90 ave|11435
-148-37 88th ave|11435,b_a60abe1f16,14837 88 ave|11435
 84-18 143rd st|11435,b_0c3a7051d4,8418 143 st|11435
-8625 van wyck expy|11435,b_9f3d0888b8,8625 van wyck expy|11435
 83-83 118th st|11415,b_8392d503a2,8383 118 st|11415
 16420 highland ave|11432,b_16a0bf0db6,16420 highland ave|11432
-89-61 162nd st|11432,b_ff3c9ffbcd,8961 162 st|11432
-109-10 queens blvd|11375,b_9e514949ae,10910 queens blvd|11375
-14212 41st ave|11355,b_54a6ce4965,14212 41 ave|11355
 14227 barclay ave|11355,b_77093283c9,14227 barclay ave|11355
 14345 sanford ave|11355,b_5edffc6c22,14345 sanford ave|11355
-139-55 35th ave|11354,b_dbb042aeab,13955 35 ave|11354
+3250 93rd st|11369,b_08687030f7,3250 93 st|11369
 3625 parsons blvd|11354,b_1d1be12629,3625 parsons blvd|11354
-63-60 102nd st|11374,b_4e6dc7f820,6360 102 st|11374
 61-57 84th st|11379,b_653abe788c,6157 84 st|11379
-2840 atlantic ave|11207,b_60d8a7b488,2840 atlantic ave|11207
-33-25 junction blvd|11372,b_835cdf803b,3325 junction blvd|11372
 34-33 90th st|11372,b_27ace0b35e,3433 90 st|11372
 3447 90th st|11372,b_cb2d5d4fde,3447 90 st|11372
-1875 atlantic ave|11233,b_3fe0739004,1875 atlantic ave|11233
-2258 fulton st|11233,b_bc04ae8c20,2258 fulton st|11233
-4545 46th st|11377,b_1a026d2b36,4545 46 st|11377
-1143 dekalb ave|11221,b_6322efa6fa,1143 dekalb ave|11221
-867 dekalb ave|11221,b_691dee64c7,867 dekalb ave|11221
-1105 30th rd|11102,b_2c32a4f4eb,1105 30 rd|11102
-2-24 26th ave|11102,b_1c9b172301,224 26 ave|11102
-26-25 4th st|11102,b_948ec703ad,2625 4 st|11102
-1244 new york ave|11203,b_5286219761,1244 new york ave|11203
-824 e new york ave|11203,b_6ff90732d8,824 e new york ave|11203
-232 e 124th st|10035,b_36241f920a,232 e 124 st|10035
-2338 2nd ave|10035,b_0b5de0894c,2338 2 ave|10035
-340 e 117th st|10035,b_6459772155,340 e 117 st|10035
 2197 cruger ave|10462,b_ade8defdd4,2197 cruger ave|10462
-109 bruckner blvd|10454,b_af9f6e7743,109 bruckner blvd|10454
 333 cypress ave|10454,b_daaae2724b,333 cypress ave|10454
 40 bruckner blvd|10454,b_8d071cc6d6,40 bruckner blvd|10454
-1010 rogers ave|11226,b_fefa6b0d9b,1010 rogers ave|11226
-1710 newkirk ave|11226,b_477dd98886,1710 newkirk ave|11226
-250 clarkson ave|11226,b_e03951c019,250 clarkson ave|11226
-290 linden blvd|11226,b_d19c276bb4,290 linden blvd|11226
-61 clarkson ave|11226,b_1e55665226,61 clarkson ave|11226
-2920 brighton 4th st|11235,b_54acdfff28,2920 brighton 4 st|11235
-15 w 139th st|10037,b_4b5ce4da0f,15 w 139 st|10037
-45 w 139th st|10037,b_a836bae308,45 w 139 st|10037
-1634 flatbush ave|11210,b_1f9437f0b4,1634 flatbush ave|11210
-1644 new york ave|11210,b_ccf1ed1f07,1644 new york ave|11210
-3308 glenwood rd|11210,b_7efda054b3,3308 glenwood rd|11210
-3415 farragut rd|11210,b_6d08891c91,3415 farragut rd|11210
 3420 ave h|11210,b_56358e06ff,3420 ave h|11210
-408 w 130th st|10027,b_c692867c77,408 w 130 st|10027
-2900 nostrand ave|11229,b_cb5f2b5355,2900 nostrand ave|11229
-20 ter pl|11218,b_5665b35f35,20 ter pl|11218
-490 ocean pkwy|11218,b_9c801811ec,490 ocean pkwy|11218
 1920 osborne pl|10453,b_810c8d60bd,1920 osborne pl|10453
 100 w 139th st|10030,b_3220c57d3f,100 w 139 st|10030
 137 w 137th st|10030,b_7e46dd6914,137 w 137 st|10030
-2419 adam clayton powell jr blvd|10030,b_7c192a6f8b,2419 adam clayton powell jr blvd|10030
-120 e 144th st|10451,b_b3b92606aa,120 e 144 st|10451
-276 grand concourse|10451,b_ff9a13ad3a,276 grand concourse|10451
-101 e 116th st|10029,b_87f399eef9,101 e 116 st|10029
-315 e 108th st|10029,b_d902d19b24,315 e 108 st|10029
 3464 knox pl|10467,b_b8dc99c8d3,3464 knox pl|10467
-1802 ocean ave|11230,b_14d2600246,1802 ocean ave|11230
-1825 ocean ave|11230,b_9a78be3788,1825 ocean ave|11230
-644 w 185th st|10033,b_3122b67cf8,644 w 185 st|10033
 770 ocean pkwy|11230,b_61bba819ab,770 ocean pkwy|11230
-7914 rockaway beach blvd|11693,b_314038495a,7914 rockaway beach blvd|11693
-345 w 145th st|10031,b_423af7d8ea,345 w 145 st|10031
-3657 broadway|10031,b_90f75d9efd,3657 broadway|10031
-612 w 137th st|10031,b_153625e0fa,612 w 137 st|10031
 387 ave s|11223,b_41c213ec9d,387 ave s|11223
-2763 morris ave|10468,b_e0e45aa7a7,2763 morris ave|10468
 2828 university ave|10468,b_5d26e23ae0,2828 university ave|10468
-26 sherman ave|10040,b_d569138218,26 sherman ave|10040
-610 w 196th st|10040,b_c922e556c9,610 w 196 st|10040
-1224 saint nicholas ave|10032,b_dab0d2e762,1224 saint nicholas ave|10032
 1483 shore pkwy|11214,b_674db3118a,1483 shore pkwy|11214
-2072 20th ln|11214,b_0f188a1129,2072 20 ln|11214
 2121 shore pkwy|11214,b_d47c36cd31,2121 shore pkwy|11214
-545 edgecombe ave|10032,b_c3a930749c,545 edgecombe ave|10032
-66 saint nicholas pl|10032,b_04e8293ccf,66 saint nicholas pl|10032
-8700 25th ave|11214,b_033b7f6ade,8700 25 ave|11214
-728 amsterdam ave|10025,b_8d4cd43f59,728 amsterdam ave|10025
-949 w end ave|10025,b_812b71fdaf,949 w end ave|10025
-10 park ter e|10034,b_50c0b40c76,10 park ter e|10034
-121 seaman ave|10034,b_6030c76e6b,121 seaman ave|10034
-4778 broadway|10034,b_fde74d08bb,4778 broadway|10034
-101-19 rockaway beach blvd|11694,b_4c67386d57,10119 rockaway beach blvd|11694
-3660 waldo ave|10463,b_d07798aff2,3660 waldo ave|10463
+|11554,b_3f19ce4697,|11554
 500 kappock st|10463,b_17a3181bf5,500 kappock st|10463
+5008 palisade ave|07093,b_31d135b158,5008 palisade ave|07093
 5550 netherland ave|10471,b_c8c1c03aeb,5550 netherland ave|10471
 310 94th st|11209,b_2667ea0819,310 94 st|11209
-9949 shore rd|11209,b_5501c5080b,9949 shore rd|11209
-270 luis m marin blvd|07302,b_adb2958068,270 luis m marin blvd|07302
-55 jordan ave|07306,b_7ca633b7e0,55 jordan ave|07306
-328 pacific ave|07304,b_5c74c9e542,328 pacific ave|07304
-52 mcwhorter st|07105,b_a189a087b5,52 mcwhorter st|07105
-5 stuyvesant pl|10301,b_1a5b06c704,5 stuyvesant pl|10301
-80 richmond hill rd|10314,b_7f16c1c2ef,80 richmond hill rd|10314
-143 goldsborough dr|07002,b_ba434d8bf1,143 goldsborough dr|07002
+122 corbin ave|07306,b_71dc77b8b9,122 corbin ave|07306
+5 elm ave|07601,b_c51cb765f9,5 elm ave|07601
+29 clarke ave|07304,b_e066ab3d40,29 clarke ave|07304
+65 atlantic st|07304,b_c4cb43f49a,65 atlantic st|07304
+33 university pl blvd|07305,b_45f42b8b6a,33 university pl blvd|07305
+171 ocean ave|07305,b_99e0dbc360,171 ocean ave|07305
+38 bartholdi ave|07305,b_da041a23f6,38 bartholdi ave|07305
+2 e passaic ave|07110,b_a10fa44978,2 e passaic ave|07110
+168 rosa parks blvd|07501,b_c49cf97885,168 rosa parks blvd|07501
+203 12th ave|07501,b_846e1a6137,203 12 ave|07501
+71 16th ave|07501,b_e2674c376c,71 16 ave|07501
+8 lake st|07501,b_8fdb5b436e,8 lake st|07501
+|10314,b_e374feeda0,|10314
+|11746,b_7a69f494ed,|11746
+14 arlington st|07522,b_f973bd3cb7,14 arlington st|07522
+179 w 48th st|07002,b_1af8fa985c,179 w 48 st|07002
+102 s 8th st|07107,b_99ec10a746,102 s 8 st|07107
+479 roseville ave|07107,b_907642bd40,479 roseville ave|07107
+11 thomas st|07114,b_a6ae52079b,11 thomas st|07114
+85 astor st|07114,b_3eea33c4f6,85 astor st|07114
+384 stuyvesant ave|07111,b_b498bbce17,384 stuyvesant ave|07111
+39 fabyan pl|07108,b_8b3af85359,39 fabyan pl|07108
+394 stuyvesant ave|07111,b_c7864faf41,394 stuyvesant ave|07111
+749-755 chancellor ave|07111,b_c088830f43,749755 chancellor ave|07111
+10 columbia ave|07106,b_62ca4d5f02,10 columbia ave|07106
+|07106,b_1bec75266c,|07106
+539 n broad st|07208,b_15461d36cf,539 n broad st|07208
+95 high st|07052,b_504c6d47ab,95 high st|07052
+1010 cricket ln|07095,b_eb88c83c55,1010 cricket ln|07095
+34 bank st|07857,b_e4776726de,34 bank st|07857
+204 cherry st|06460,b_581c159c1f,204 cherry st|06460
+621 campbell ave|06516,b_cd02cb068d,621 campbell ave|06516
 23 bloomfield ave|08822,b_7efd7313e6,23 bloomfield ave|08822
+31 austin st|06515,b_17baddb411,31 austin st|06515
+4445 route 9 n|07731,b_4b6674a70c,4445 route 9 n|07731
+75 whitney ave|06510,b_7e4b082687,75 whitney ave|06510
+11824 180th st jamaica ny 11434 usa|11434,b_bbf6f496af,11824 180 st|11434
+7235 juno st 1 forest hills ny 11375 usa|11375,b_ba6b2a5bc8,7235 juno st|11375
+11141 77th ave 1 forest hills ny 11375 usa|11375,b_e444e0868e,11141 77 ave|11375
+9330 224th st queens village ny 11428 usa|11428,b_e1b05cf404,9330 224 st|11428
 13324 sanford ave 2d flushing ny 11355 usa|11355,b_0f0fcfc79c,13324 sanford ave|11355
-13324 sanford ave 6g flushing ny 11355 usa|11355,b_0f0fcfc79c,13324 sanford ave|11355
-140-16 34th ave 714 140-16 34th ave flushing ny 11354 us|11354,b_82cac2e795,14016 34 ave|11354
-31-20 54th st 2fl 31-20 54th st flushing ny 11377 us|11377,b_e7f9e0227d,3120 54 st|11377
+6803 central ave b1 glendale ny 11385 usa|11385,b_ac9d55c640,6803 central ave|11385
+63-44 saunders st 2e 63-44 saunders st flushing ny 11374 us|11374,b_91121ba2c7,6344 saunders st|11374
+7617 47th ave 2b elmhurst ny 11373 usa|11373,b_73eecaf004,7617 47 ave|11373
+34-46 91st st h51 queens ny 11372 us|11372,b_8e1e111ea4,3446 91 st|11372
+34-33 90th st e12 34-33 90th st jackson heights ny 11372 us|11372,b_27ace0b35e,3433 90 st|11372
+6908 woodside ave 1 woodside ny 11377 usa|11377,b_45b35a12a1,6908 woodside ave|11377
 3242 33rd st d3 astoria ny 11106 usa|11106,b_0a790d79c1,3242 33 st|11106
-3516 34th st 5e astoria ny 11106 usa|11106,b_1170c85e08,3516 34 st|11106
-255 nostrand ave 3b2 brooklyn ny 11205 usa|11205,b_5d870eb472,255 nostrand ave|11205
-53 w 72nd st 4c new york ny 10023 usa|10023,b_e948475fde,53 w 72 st|10023
-720 w 181st st|10033,b_c82499653d,720 w 181 st|10033
-630 w 163rd st|10032,b_8aaada74c2,630 w 163 st|10032
-63-45 saunders st|11374,b_8ffc9f852c,6345 saunders st|11374
+3262 33rd st 1 astoria ny 11106 usa|11106,b_47421b433e,3262 33 st|11106
+3263 33rd st 1 astoria ny 11106 usa|11106,b_55b3ec38b3,3263 33 st|11106
+785 fairmount pl 2p 785 fairmount pl bronx ny 10460 us|10460,b_e79667bd59,785 fairmount pl|10460
+996 jennings st bronx ny 10460 usa|10460,b_6182714c85,996 jennings st|10460
+3180 fish ave bronx ny 10469 usa|10469,b_e592a422f5,3180 fish ave|10469
+5304 palisade ave 104b w new york nj 07093 usa|07093,b_4ebdf3eefb,5304 palisade ave|07093
+45 liberty ave 2ndfl jersey city nj 07306 usa|07306,b_828d290b4d,45 liberty ave|07306
+149 zabriskie st 41m jersey city nj 07307 usa|07307,b_9f9be10aa9,149 zabriskie st|07307
+37 bergen blvd 1 fairview nj 07022 usa|07022,b_b51cc47873,37 bergen blvd|07022
+65 atlantic st 3m jersey city nj 07304 usa|07304,b_c4cb43f49a,65 atlantic st|07304
+590 bergen ave g8 jersey city nj 07304 usa|07304,b_f024a95d88,590 bergen ave|07304
+20 reed st 16m jersey city nj 07304 usa|07304,b_21c3c3e483,20 reed st|07304
+164 sterling ave 41 jersey city nj 07305 us|07305,b_bcb2458625,164 sterling ave|07305
+2005 john f kennedy blvd 45 jersey city nj 07305 us|07305,b_b32625d7b7,2005 john f kennedy blvd|07305
+225 lembeck ave 3m jersey city nj 07305 usa|07305,b_dd652af452,225 lembeck ave|07305
+232 bidwell ave 1 jersey city nj 07305 usa|07305,b_e0477f0239,232 bidwell ave|07305
+171 martin luther king jr dr 37 jersey city nj 07305 usa|07305,b_0a993fd9f1,171 martin luther king jr dr|07305
+229 rosa parks blvd 3 paterson nj 07501 usa|07501,b_3b801d186d,229 rosa parks blvd|07501
+117 hamilton ave 3 paterson nj 07501 usa|07501,b_551b34a9ed,117 hamilton ave|07501
+60 albert m tyler pl 3 paterson nj 07501 usa|07501,b_cf3696e7df,60 albert m tyler pl|07501
+198 harrison st 3 paterson nj 07501 usa|07501,b_b087de2a4e,198 harrison st|07501
+100 carroll st 3 paterson nj 07501 usa|07501,b_cc4f428813,100 carroll st|07501
+96 16th ave 3 paterson nj 07501 usa|07501,b_dfa4dffbcc,96 16 ave|07501
+240 rosa parks blvd 3 paterson nj 07501 usa|07501,b_de7a38d702,240 rosa parks blvd|07501
+41 godwin ave 3 paterson nj 07501 usa|07501,b_393172ce2c,41 godwin ave|07501
+83 godwin ave 3 paterson nj 07501 usa|07501,b_04afcc5547,83 godwin ave|07501
+188 21st ave 3 paterson nj 07501 usa|07501,b_924f67af6e,188 21 ave|07501
+83 auburn st 3 paterson nj 07501 usa|07501,b_92e8f7bf16,83 auburn st|07501
+146 hamilton ave 3 paterson nj 07501 usa|07501,b_b843266803,146 hamilton ave|07501
+362 hamilton ave 3 paterson nj 07501 usa|07501,b_7afd5ff958,362 hamilton ave|07501
+127 16th ave 3 paterson nj 07501 usa|07501,b_daaf117041,127 16 ave|07501
+50 clinton st 8 paterson nj 07522 usa|07522,b_86da59be48,50 clinton st|07522
+14-20 arlington st 3 paterson nj 07522 usa|07522,b_f973bd3cb7,1420 arlington st|07522
+662 ave a 17m bayonne nj 07002 usa|07002,b_85752517cb,662 ave a|07002
+735 ave a 15m bayonne nj 07002 usa|07002,b_fb14d43bac,735 ave a|07002
+1200 kennedy blvd 44 bayonne nj 07002 usa|07002,b_6bccb58efa,1200 kennedy blvd|07002
+399 ave c 4m bayonne nj 07002 usa|07002,b_94f3623de3,399 ave c|07002
+403 ave c a3m bayonne nj 07002 usa|07002,b_b936d61bd9,403 ave c|07002
+548 ave c 14m bayonne nj 07002 usa|07002,b_81aa7d8100,548 ave c|07002
+729 ave a 2m bayonne nj 07002 usa|07002,b_8ed8b97134,729 ave a|07002
+50 oak st 102m bayonne nj 07002 usa|07002,b_5391fa9f17,50 oak st|07002
+434 ave c 436 2m bayonne nj 07002 usa|07002,b_84ae829ad5,434 ave c|07002
+731 ave a 8m bayonne nj 07002 usa|07002,b_33b84fb2cc,731 ave a|07002
+179 w 48th st 11m bayonne nj 07002 usa|07002,b_1af8fa985c,179 w 48 st|07002
+548 ave c 2m bayonne nj 07002 usa|07002,b_81aa7d8100,548 ave c|07002
+233 littleton ave 12 newark nj 07103 usa|07103,b_9fd0366ed0,233 littleton ave|07103
+376 broad st 2b newark nj 07104 usa|07104,b_c843c3aa61,376 broad st|07104
+171 mount prospect ave 3 newark nj 07104 usa|07104,b_a564f7a7f5,171 mount prospect ave|07104
+226 roseville ave 202 newark nj 07107 usa|07107,b_68e3f26c07,226 roseville ave|07107
+42 llewellyn ave 1 bloomfield nj 07003 usa|07003,b_8778c9e418,42 llewellyn ave|07003
+166-170 emmet st 201 newark nj 07114 us|07114,b_2de6eb06b7,166170 emmet st|07114
+814 s 12th st 2 newark nj 07108 usa|07108,b_8cf2509cd7,814 s 12 st|07108
+385 stuyvesant ave 385-1a irvington nj 07111 usa|07111,b_656a756d2f,385 stuyvesant ave|07111
+749 chancellor ave 204-404 irvington nj 07111 usa|07111,b_c088830f43,749 chancellor ave|07111
+79-83 tillinghast st 79a3 newark nj 07108 usa|07108,b_3293e8ba54,7983 tillinghast st|07108
+1078 e main st 1 stamford ct 06902 usa|06902,b_5f667364a3,1078 e main st|06902
+mahwah 62 nj usa|07430,b_4b51d6d6af,mahwah|07430
+39 rome ave bedford hills ny 10507 usa|10507,b_43b3c5d04e,39 rome ave|10507
+393 grove st n plainfield nj 07060 usa|07060,b_228292d6ba,393 grove st|07060
+365 boston post rd milford ct 06460 usa|06460,b_09026e5b80,365 boston post rd|06460
+170 clove branch rd 17 hopewell junction ny 12533 usa|12533,b_f4ee46a0c1,170 clove branch rd|12533
+428 liberty st newburgh ny 12550 usa|12550,b_fba573bcce,428 liberty st|12550
+620 jersey ave 8 greenwood lake ny 10925 usa|10925,b_dbf1c25d0e,620 jersey ave|10925
+311 blake st new haven ct 06515 usa|06515,b_6378d133d3,311 blake st|06515
+222 e main st beacon ny 12508 usa|12508,b_0d0df4ccf5,222 e main st|12508
+197 wooster st new haven ct 06511 usa|06511,b_517d7999c4,197 wooster st|06511
+209 greene st new haven ct 06511 usa|06511,b_fef4eacc3b,209 greene st|06511
+451 orange st new haven ct 06511 usa|06511,b_e95c2a59b6,451 orange st|06511
+e haven 85ahemingwayavea22 ct 06512 usa|06512,b_90a4ca82be,e haven|06512
+489 w state st 1099 trenton nj 08618 usa|08618,b_ea70513df6,489 w state st|08618
+911 sanhican dr a8 trenton nj 08618 usa|08618,b_69f3fd5725,911 sanhican dr|08618
+1349 dixwell ave hamden ct 06514 usa|06514,b_997440dae7,1349 dixwell ave|06514
+504 woodland ave morrisville pa 19067 usa|19067,b_7c88f4567e,504 woodland ave|19067
+140 fleming ave|07105,b_ffbbf4428e,140 fleming ave|07105
+817 18th ave|07111,b_80ee12b0ae,817 18 ave|07111
+101 treacy ave|07108,b_cfacfae45a,101 treacy ave|07108
+157 main st|10924,b_8f01469adc,157 main st|10924
+12 borden ave|07712,b_756a45c92b,12 borden ave|07712
+3 bedford ave|06850,b_39bce8e231,3 bedford ave|06850
+3 hubbard rd|06897,b_63c3f64478,3 hubbard rd|06897
+51 whiting st|06514,b_fd00a92a6c,51 whiting st|06514
+311 w main st|11772,b_1b42ea105d,311 w main st|11772
+801 long island ave|11729,b_e15b244c3f,801 long island ave|11729
+1 larchmont ave|10538,b_a637d41883,1 larchmont ave|10538
+77 randall st|10921,b_1362380a2c,77 randall st|10921
+364 n st|10940,b_3d86019ee6,364 n st|10940
+298 route 211 e|10940,b_c1ad23e674,298 route 211 e|10940
+141-15 84th dr|11435,b_25caa353a4,14115 84 dr|11435
+|11361,b_b08dd2e5a3,|11361
+34-10 84th st|11372,b_6b0a5d8f58,3410 84 st|11372
 34-19 90th st|11372,b_6a86a5dbf8,3419 90 st|11372
-96 hart st|11206,b_75fb8f1cdb,96 hart st|11206
 2180 bronx park e|10462,b_2e6e82bf8c,2180 bronx park e|10462
-273 w 131st st|10027,b_396638662e,273 w 131 st|10027
 |10453,b_e5fae248dd,|10453
-1256 ocean ave|11230,b_efae72f3ab,1256 ocean ave|11230
 8635 21st ave|11214,b_4b56376dd7,8635 21 ave|11214
-241 w 101st st|10025,b_88f22a09d9,241 w 101 st|10025
-4499 henry hudson pkwy w|10471,b_b8ffb99181,4499 henry hudson pkwy w|10471
-2840 atlantic ave new york ny 11207 usa|11207,b_60d8a7b488,2840 atlantic ave|11207
-1499 bedford ave 10b brooklyn ny 11216 usa|11216,b_90b8e5c692,1499 bedford ave|11216
-60 clarkson ave 4d brooklyn ny 11226 usa|11226,b_9a0af6b1c9,60 clarkson ave|11226
-270 clarkson ave 608 brooklyn ny 11226 usa|11226,b_c001b28184,270 clarkson ave|11226
-219 lenox rd 5g brooklyn ny 11226 usa|11226,b_3473bc3db7,219 lenox rd|11226
-1629 brooklyn ave 4d brooklyn ny 11210 usa|11210,b_8e72bb3b77,1629 brooklyn ave|11210
+|10470,b_fde9dbdf4f,|10470
+137-148 36th st|07087,b_84041889c3,137148 36 st|07087
+6700 park ave|07093,b_7e7f8992f2,6700 park ave|07093
+215 mallory ave|07304,b_3821f36730,215 mallory ave|07304
+232 bidwell ave|07305,b_e0477f0239,232 bidwell ave|07305
+280 verona ave|07104,b_12be042caa,280 verona ave|07104
+405 main st|06516,b_2f7efd4d62,405 main st|06516
+57 hotchkiss st|06511,b_f6560ba156,57 hotchkiss st|06511
+6711 utopia pkwy fresh meadows ny 11365 usa|11365,b_6279eaa45b,6711 utopia pkwy|11365
+flushing 1stfl ny 11358 usa|11358,b_91aaca6dc4,flushing|11358
+2829 schurz ave 1 bronx ny 10465 usa|10465,b_fe8557458d,2829 schurz ave|10465
+1145 dean st 1 brooklyn ny 11216 usa|11216,b_2f0f4a8e19,1145 dean st|11216
+1563 paulding ave 2b bronx ny 10462 usa|10462,b_7e77edeab8,1563 paulding ave|10462
+945 41st st 2d brooklyn ny 11219 usa|11219,b_d03c93be22,945 41 st|11219
+341 palisade ave cliffside park nj 07010 usa|07010,b_26dd4105a4,341 palisade ave|07010
+2615 john f kennedy blvd 204 jersey city nj 07306 usa|07306,b_8f314b2e2f,2615 john f kennedy blvd|07306
+590 bergen ave b2 jersey city nj 07304 usa|07304,b_f024a95d88,590 bergen ave|07304
+35 kensington ave e2 jersey city nj 07304 usa|07304,b_963b07def0,35 kensington ave|07304
+590 bergen ave b jersey city nj 07304 usa|07304,b_f024a95d88,590 bergen ave|07304
+590 bergen ave b6 jersey city nj 07304 usa|07304,b_f024a95d88,590 bergen ave|07304
+199 chestnut st 1 kearny nj 07032 usa|07032,b_e300f254bf,199 chestnut st|07032
+19 winfield ave jersey city nj 07305 usa|07305,b_51702b3533,19 winfield ave|07305
+river rd & park ave nutley nj 07110 usa|07110,b_44177ee689,river rd park ave|07110
+140 fleming ave 2c newark nj 07105 usa|07105,b_ffbbf4428e,140 fleming ave|07105
+188 lafayette st paterson nj 07501 usa|07501,b_a8a375b1de,188 lafayette st|07501
+55-57 2nd ave b6 newark nj 07104 usa|07104,b_afec34bc3d,5557 2 ave|07104
+380 n 11th st 7 newark nj 07107 usa|07107,b_e4066e3234,380 n 11 st|07107
+817 18th ave 2 irvington nj 07111 usa|07111,b_80ee12b0ae,817 18 ave|07111
+132 n grove st 6 e orange nj 07017 usa|07017,b_87dd805d41,132 n grove st|07017
+143 n walnut st 12 e orange nj 07017 usa|07017,b_8abf514d25,143 n walnut st|07017
+758 jersey ave d5 elizabeth nj 07202 usa|07202,b_fcd2954af4,758 jersey ave|07202
+641 lincoln ave 42 orange nj 07050 usa|07050,b_a7fdbb1c51,641 lincoln ave|07050
+6 duer st 6c n plainfield nj 07060 usa|07060,b_c7b71538da,6 duer st|07060
+544 beachway ave 5 keansburg nj 07734 usa|07734,b_db7eabb082,544 beachway ave|07734
+1608 barnum ave 2ndand3rdfl bridgeport ct 06610 usa|06610,b_07332c251e,1608 barnum ave|06610
+175 s st 15 eatontown nj 07724 usa|07724,b_e9d019fd0c,175 s st|07724
+157 main st 1 goshen ny 10924 usa|10924,b_8f01469adc,157 main st|10924
+430 liberty st newburgh ny 12550 usa|12550,b_3a6f3a1659,430 liberty st|12550
+15 clark st 2 newburgh ny 12550 usa|12550,b_4271b39ed9,15 clark st|12550
+134 chambers st 3 newburgh ny 12550 usa|12550,b_a4b404a6f9,134 chambers st|12550
+w haven 571-3rdavenue ct 06516 usa|06516,b_c82449d08b,w haven|06516
+9 sanhican dr b4 trenton nj 08618 usa|08618,b_40567bb75b,9 sanhican dr|08618
+1 bruce park dr b2 trenton nj 08618 usa|08618,b_ff09f25407,1 bruce park dr|08618
+1205 edgewood ave 1205-8 trenton nj 08618 usa|08618,b_fc7257973e,1205 edgewood ave|08618
+n haven ct 06473 usa|06473,b_57c194c2a8,n haven|06473
+woodbury 2 ct 06798 usa|06798,b_80d27e82ee,woodbury|06798

@@ -1,69 +1,35 @@
 building_id,field,chosen,chosen_basis,others
-b_17baeace72,parking_fee_monthly,75,confirmed,150 (community_page) | 150 (amenities_page) | 150 (stated)
-b_4370d798d0,parking_fee_monthly,109,confirmed,180 (confirmed)
-b_13d50af205,parking_fee_monthly,200,community_page,235 (amenities_page)
-b_144b021ca5,pet_rent_monthly,40,confirmed,60 (stated)
-b_144b021ca5,building_floors,2,amenities_page,17 (stated)
-b_26d909bb7c,dogs_allowed,no,confirmed,yes (stated)
-b_3a07c86ab9,parking_fee_monthly,200,confirmed,325 (community_page) | 325 (amenities_page)
-b_a1ee76c074,parking_fee_monthly,150,confirmed,225 (amenities_page)
-b_97fa1feb74,parking_fee_monthly,250,confirmed,225 (stated)
-b_9240f06ba5,dogs_allowed,conflicting,confirmed,yes (stated)
-b_89871dc4dd,pet_rent_monthly,60,confirmed,65 (stated)
-b_89871dc4dd,parking_fee_monthly,20,confirmed,0 (amenities_page) | 0 (stated)
 b_5d1b685d2d,parking_fee_monthly,75,confirmed,95 (community_page)
 b_69b15e8ab5,parking_fee_monthly,175,confirmed,100 (amenities_page)
-b_b57f2bb5ea,parking_fee_monthly,100,confirmed,50 (stated)
-b_7ea630c9cc,dogs_allowed,conflicting,confirmed,yes (stated)
 b_38a468290d,dogs_allowed,conflicting,confirmed,yes (stated)
-b_1794606df9,dogs_allowed,conflicting,confirmed,yes (stated)
-b_faa3612c6d,parking_fee_monthly,195,confirmed,150 (stated)
-b_455de16026,parking_fee_monthly,0,confirmed,15 (community_page)
-b_1e10bbe444,dog_weight_limit_lb,50,confirmed,80 (confirmed)
-b_e87f8c7ad9,dogs_allowed,conflicting,confirmed,yes (stated)
 b_4288d20128,pet_rent_monthly,25,confirmed,35 (stated)
-b_020757e642,parking_fee_monthly,175,amenities_page,200 (stated)
-b_e9f7955a96,parking_fee_monthly,150,confirmed,100 (amenities_page) | 100 (stated)
-b_34cc6956e6,parking_fee_monthly,0,confirmed,50 (stated)
+b_e2d2c14006,pet_rent_monthly,60,confirmed,55 (confirmed) | 55 (stated)
+b_e66167c0e5,pet_rent_monthly,55,confirmed,60 (stated)
+b_dd0d58f3e4,pet_rent_monthly,55,confirmed,60 (stated)
 b_33e6a4014f,parking_fee_monthly,0,confirmed,95 (amenities_page)
 b_8cb8bf6346,parking_fee_monthly,0,confirmed,50 (amenities_page)
 b_572274af1a,pet_rent_monthly,50,confirmed,35 (stated)
 b_5121e39549,dogs_allowed,conflicting,confirmed,yes (stated)
-b_b19425751b,parking_fee_monthly,75,confirmed,50 (amenities_page)
 b_44dc4a8686,dogs_allowed,no,confirmed,yes (stated)
-b_596cc15ca9,year_built,2019,amenities_page,2015 (official_record)
-b_019f7c8a4e,pet_rent_monthly,40,confirmed,50 (stated)
-b_019f7c8a4e,parking_fee_monthly,185,confirmed,125 (stated)
+b_f12df1d03a,parking_fee_monthly,90,community_page,0 (amenities_page) | 0 (stated)
+b_8171dad306,parking_fee_monthly,0,confirmed,75 (amenities_page)
+b_11d7a6233c,parking_fee_monthly,15,community_page,5 (stated)
 b_8b12192229,dogs_allowed,no,confirmed,yes (stated)
-b_c56d2bc7d9,parking_fee_monthly,140,confirmed,64 (confirmed)
-b_8f85e594e6,building_floors,14,confirmed,11 (official_record)
-b_e989b40a9d,dogs_allowed,conflicting,confirmed,yes (stated)
 b_f74c7dfbaf,year_built,1973,confirmed,1974 (amenities_page)
-b_4317e61e15,dogs_allowed,no,confirmed,yes (stated)
-b_82cac2e795,dogs_allowed,no,confirmed,yes (stated)
-b_a16237714f,dogs_allowed,no,confirmed,yes (stated)
-b_e9ed2d15f9,parking_fee_monthly,195,stated,250 (stated)
-b_cd7ba15e25,dogs_allowed,no,confirmed,yes (stated)
 b_cb2d5d4fde,elevator,conflicting,confirmed,no (confirmed) | yes (amenities_page) | yes (stated)
 b_679a923f3a,elevator,conflicting,confirmed,no (confirmed) | yes (amenities_page) | yes (stated)
-b_4bbd550e01,dogs_allowed,no,confirmed,yes (stated)
+b_84739a68fb,building_floors,14,amenities_page,17 (official_record)
+b_26d909bb7c,dogs_allowed,no,confirmed,yes (stated)
+b_27ace0b35e,elevator,conflicting,confirmed,no (confirmed) | yes (amenities_page) | yes (stated)
 b_61bba819ab,dogs_allowed,no,confirmed,yes (stated)
-b_50c0b40c76,dogs_allowed,conflicting,confirmed,yes (stated)
+b_907642bd40,dogs_allowed,conflicting,confirmed,yes (stated)
 b_6a86a5dbf8,elevator,conflicting,confirmed,no (confirmed) | yes (official_record) | yes (inferred)
 b_4b56376dd7,elevator,yes,official_record,no (official_record)
-b_060f0d5d4b,parking_fee_monthly,116,confirmed,116.26 (amenities_page)
 b_27056882d3,year_built,2006,confirmed,2007 (confirmed)
-b_3f9fc0b756,parking_fee_monthly,116,confirmed,116.26 (amenities_page)
-b_05f5f16a9e,parking_fee_monthly,116,confirmed,116.26 (amenities_page)
-b_9af0566916,building_floors,,dropped,4 (amenities_page) is below a unit label that reads as floor 30
-b_46e40b788b,building_floors,,dropped,5 (stated) is below a unit label that reads as floor 40
-b_84d5cbaa59,building_floors,,dropped,2 (stated) is below a unit label that reads as floor 4
-b_144b021ca5,lat_lon,"41.029893,-73.774507",census_geocoder,"listing rows disagree by 266 m (continuumwhiteplains.com: 41.03009,-73.77471; greystar.com: 41.02931,-73.77771; greystar.com: 41.02938,-73.77743; trulia: 41.02938,-73.77512); Census geocoder matched '57 BANK ST, WHITE PLAINS, NY, 10606'"
+b_8e1e111ea4,elevator,conflicting,confirmed,no (confirmed)
 b_5c4193202c,lat_lon,"40.672560,-74.098197",census_geocoder (address check),"the listing's point is outside the address's ZIP area and 6889 m from where the address geocodes (point 40.67096,-74.17977 is in ZIP area 07201, Elizabeth; the address says Bayonne 07002); Census geocoder matched '302 CONSTITUTION AVE, BAYONNE, NJ, 07002'."
-b_10247a14f8,lat_lon,"41.522140,-74.110900",census_geocoder (address check),"the listing's point is outside the address's ZIP area and 1841 m from where the address geocodes (point 41.52087,-74.13292 is in ZIP area 12575, Montgomery; the address says Newburgh 12550); Census geocoder matched '7 LAKESIDE RD, NEWBURGH, NY, 12550'."
-b_36012bfe17,lat_lon,"40.783258,-74.020860",census_geocoder (address check),"the listing's point is outside the address's ZIP area and 248 m from where the address geocodes (point 40.78363,-74.02377 is in ZIP area 07047, North Bergen; the address says West New York 07093); Census geocoder matched '508 51ST ST, WEST NEW YORK, NJ, 07093'."
-b_c7dc5c431d,lat_lon,"40.708102,-73.818187",census_geocoder,"listing rows disagree by 1023 m (trulia: 40.70125,-73.80981; zumper: 40.70785,-73.81824); Census geocoder matched '138-28 QUEENS BLVD, JAMAICA, NY, 11435'"
+b_e2d2c14006,lat_lon,"40.911011,-74.397863","listing majority, unverified","listing rows disagree by 4634 m (avaloncommunities.com: 40.91101,-74.39786; apartmentlist.com: 40.92139,-74.45121); the Census geocoder found no match"
 b_cbc9a7d36b,lat_lon,"40.780762,-74.199995",census_geocoder (address check),"the listing's point is outside the address's ZIP area and 168 m from where the address geocodes (point 40.77926,-74.19988 is in ZIP area 07017, East Orange; the address says Bloomfield 07003); Census geocoder matched '5 LAWRENCE ST, BLOOMFIELD, NJ, 07003'."
-b_fd5b97710e,lat_lon,"40.717330,-74.091010",census_geocoder,"listing rows disagree by 4775 m (apartmentlist.com: 40.71480,-74.03628; trulia: 40.71861,-74.09265); Census geocoder matched '132 YALE AVE, JERSEY CITY, NJ, 07304'"
-b_27104c3bf3,lat_lon,"40.670174,-74.100065",census_geocoder,"listing rows disagree by 317 m (apartmentlist.com: 40.66920,-74.09752; zumper: 40.67013,-74.10107); Census geocoder matched '145 GOLDSBOROUGH DR, BAYONNE, NJ, 07002'"
-b_5794f2e8e4,lat_lon,"40.585033,-73.649933","listing majority, unverified","listing rows disagree by 638 m (trulia: 40.58503,-73.64993; trulia: 40.58446,-73.65543; trulia: 40.58381,-73.64945; trulia: 40.58342,-73.65533; trulia: 40.58398,-73.65700; trulia: 40.58403,-73.65002); the Census geocoder found no match"
+b_fd5b97710e,lat_lon,"40.717330,-74.091010",census_geocoder (address check),"the listing's point is outside the address's ZIP area and 4626 m from where the address geocodes (point 40.71480,-74.03628 is in ZIP area 07302, Jersey City; the address says Jersey City 07304); Census geocoder matched '132 YALE AVE, JERSEY CITY, NJ, 07304'."
+b_58407f7fcf,lat_lon,"40.334768,-74.560934",census_geocoder,"listing rows disagree by 212 m (apartmentlist.com: 40.33360,-74.56024; trulia: 40.33170,-74.56004); Census geocoder matched '2005 QUAIL RIDGE DR, PLAINSBORO, NJ, 08536'"
+b_4b6674a70c,lat_lon,"40.146251,-74.225683",census_geocoder (address check),"the listing's point is outside the address's ZIP area and 75185 m from where the address geocodes (point 39.93972,-75.06693 is in ZIP area 08109, Pennsauken; the address says Howell 07731); Census geocoder matched '4445 US HWY 9, HOWELL, NJ, 07731'."

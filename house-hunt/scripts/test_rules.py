@@ -510,14 +510,17 @@ def data():
     ok((pd.to_numeric(M.cap_margin) == 3000 - pd.to_numeric(M.all_in)).all(), "D12: cap_margin = 3000 - all_in")
     near = S[(pd.to_numeric(S.all_in) <= 3000) & (pd.to_numeric(S.all_in_likely) > 3000)]       # owner, 2026-11-16: replaces "cost near the cap"
     ok(near.disclosures.str.contains('"what": "could pass $3,000"', regex=False).all(), "D12: every shown unit that would pass $3,000 once parking and fees are known carries the disclosure")
-    ok(not S.confirm_what.str.contains("cost near the cap|lease term|condo|floor").any(), "disclosures never count as the open gate fact")
-    npub = S[~S.unit_floor_basis.isin(["confirmed", "stated"])]
+    # owner, 2026-11-17: "floor and elevator" (floor_or_elevator) is an open GATE fact, not the floor disclosure; where it
+    # is open the floor is asked there and not listed a second time as "floor not published" (rank.py: inf_f)
+    ok(not S.confirm_what.str.replace(P.FLOOR_OR_ELEVATOR_LABEL, "", regex=False).str.contains("cost near the cap|lease term|condo|floor").any(), "disclosures never count as the open gate fact")
+    npub = S[~S.unit_floor_basis.isin(["confirmed", "stated"]) & (S.floor_elevator_code != P.FLOOR_OR_ELEVATOR_CODE)]
     ok(npub.disclosures.str.contains('"what": "floor not published"', regex=False).all() and npub.tour_confirm.str.contains("above the ground floor").all(),
        "a shown unit whose floor is not published carries the disclosure and the tour question")
     ok(not (pd.to_numeric(S.unit_floor, errors="coerce") < 2).any(), "no shown unit on floor 1 or the ground floor")
     ok((S.open_gate_facts.astype(float) <= 1).all(), "a shown unit has at most one open gate fact")
     sk_ = pd.read_csv(DATA / "excluded_sketchy.csv", dtype=str, keep_default_na=False, low_memory=False)
-    ok(not sk_.sketchy_reason.str.contains("cost near the cap|lease term|floor(?! plan)").any() or not sk_.sketchy_reason.str.contains("unconfirmed: [^;]*floor").any(), "no unit is dropped as sketchy because of a disclosure")
+    sk_r = sk_.sketchy_reason.str.replace(P.FLOOR_OR_ELEVATOR_LABEL, "", regex=False).str.replace(r"floor 3 or above \(\w+\) and no elevator stated[^;]*", "", regex=True)
+    ok(not sk_r.str.contains("cost near the cap|lease term|floor(?! plan)").any() or not sk_r.str.contains("unconfirmed: [^;]*floor").any(), "no unit is dropped as sketchy because of a disclosure")
     ok("more_in_building" in S.columns and (S.groupby("building_id").size() <= 8).all(), "at most 8 shown per building (owner, 2026-11-16), with more_in_building recorded")
     # D13 / D14 / D15
     for lid, c, want in [("rc:sightmap:scribe:508", "required building fees\", \"amount\": 100", True), ("rc:sightmap:the-asher:530", "required building fees\", \"amount\": 100", True)]:
@@ -751,7 +754,9 @@ def data_4(M, R, S):
     ok(not S.building_name.str.contains("Regency on Hudson").any() or S[S.building_name.str.contains("Regency on Hudson")].confirm_what.eq("listing").all(), "pending fix: Regency on Hudson carries one open 'listing' fact")
     # ---- step 3: elevator doubt
     DT = pd.read_csv(DATA / "reference" / "elevator_doubt.csv", dtype=str, keep_default_na=False)
-    ok(set(DT.building_id) <= set(M.building_id) | set(), "step 3: every row of the doubt table names a building in the master")
+    # second trawl (2026-11-17): a reviewed row may name a building whose listings are all above $2,200 and so no longer in
+    # the master; what must hold is that every doubt-table building in the master carries the doubt (checked below)
+    ok(len(DT) > 0 and DT.building_id.str.fullmatch(r"b_[0-9a-f]{10}").all(), "step 3: every row of the doubt table names a building id")
     dm = M[M.building_id.isin(set(DT.building_id)) & (M.elevator == "yes") & (M.elevator_basis != "confirmed_by_phone")]
     ok((dm.elevator_doubt != "").all(), "step 3: every building of the doubt table has the elevator doubt set")
     # owner, 2026-11-17: an elevator in doubt (doubt table, garden-style rule) no longer matters on floor 2 (floor_2: settled);
@@ -927,10 +932,11 @@ def data_b20(M, R, S):
         ok(not (R.building_name.str.contains(b, regex=False) & R.unit.eq(un)).any(), f"b20: {b} {un} is gone and not ranked")
     for b, units_, in [("The Leaf", ["2318", "2418", "2505", "2518"]), ("The Asher", ["308", "610", "730", "830"]), ("Scribe", ["425"]), ("Motif", ["523"]), ("Harbor Landing Apartments", ["452"])]:
         x = M[M.building_name.eq(b) & M.unit.isin(units_)]
-        ok(len(x) == len(units_) and (x.cost_gate == "fail").all() and (num(x.rent_basis) == num(x.price_12_month)).all(), f"b20: {b} {units_} are costed on the 12-month price and are over $3,000")
+        # second trawl (owner, 2026-11-17): listings above $2,200 base rent no longer reach the master (they stay in data/listings.csv)
+        ok(len(x) in (0, len(units_)) and (x.cost_gate == "fail").all() and (num(x.rent_basis) == num(x.price_12_month)).all(), f"b20: {b} {units_} are costed on the 12-month price and are over $3,000 (or, above $2,200, not in the master)")
         ok(not (R.building_name.eq(b) & R.unit.isin(units_)).any(), f"b20: {b} {units_} are not ranked")
     x = M[M.building_name.eq("Scribe") & M.unit.isin(["502", "507", "542", "544", "546"])]
-    ok(len(x) == 5 and (num(x.rent_basis) == 2395).all() and (x.cost_gate == "pass").all(), "b20: Scribe 502/507/542/544/546 use $2,395 and stay under")
+    ok((len(x) == 5 and (num(x.rent_basis) == 2395).all() and (x.cost_gate == "pass").all()) or len(x) == 0, "b20: Scribe 502/507/542/544/546 use $2,395 and stay under (or, above $2,200, are not in the master)")
     x = M[M.building_name.eq("Scribe") & M.unit.eq("616")]
     ok(len(x) == 0 or (x.price_12_month == "").all(), "b20: Scribe 616 does not take unit 425's 12-month price ('14 months $2,616' is not unit 616)")
     x = M[M.building_name.eq("Avalon Somerville Station") & M.unit.eq("022-415")]
@@ -946,7 +952,7 @@ def data_b20(M, R, S):
         if S.at[lid, "rent_12_month_used"] == "yes":
             ok('"what": "lease term"' in S.at[lid, "disclosures"] and "12-month price is $" in S.at[lid, "disclosures"], f"b20: {lid} uses the 12-month price and says so in the lease-term disclosure")
     g = M[M.building_name.eq("Grandville Towers")]
-    ok(len(g) and (g.page_modified_date == "2026-07-30").all() and (g.listing_stale == "open").all(), "b20: every Grandville Towers unit carries the page date 2026-07-30 and the open staleness item")
+    ok(len(g) == 0 or ((g.page_modified_date == "2026-07-30").all() and (g.listing_stale == "open").all()), "b20: every Grandville Towers unit carries the page date 2026-07-30 and the open staleness item (all are above $2,200 since 2026-11-17)")
     gs = S[S.building_name.eq("Grandville Towers")]
     ok((gs.confirm_what == "listing").all(), "b20: shown Grandville Towers units carry the open item 'listing' alike")
 
@@ -1148,7 +1154,7 @@ def data_6(L_):
     ok((pd.to_numeric(R.open_items) == pd.to_numeric(R.open_gate_facts)).all(), "no live flag: open_items is the number of open gate facts, nothing more")
     never = S_[~S_.live_status.isin(["live", "changed"])]
     ok(len(never) > 0 and (never[pd.to_numeric(never.open_gate_facts) == 0].confirm_asterisk == "").all(), "no live flag: a shown unit never re-read with no open gate fact has no asterisk")
-    ok(((S_.confirm_asterisk == "yes") == (pd.to_numeric(S_.open_gate_facts) == 1)).all() and S_.confirm_what[S_.confirm_asterisk == "yes"].isin(["elevator", "dogs allowed", "availability", "listing", "eligibility"]).all(),
+    ok(((S_.confirm_asterisk == "yes") == (pd.to_numeric(S_.open_gate_facts) == 1)).all() and S_.confirm_what[S_.confirm_asterisk == "yes"].isin(["elevator", "dogs allowed", "availability", "listing", "eligibility", P.FLOOR_OR_ELEVATOR_LABEL]).all(),
        "no live flag: every asterisk on a shown unit names one open gate fact")
     ok((pd.to_numeric(S_.open_gate_facts) <= 1).all(), "no live flag: two real open gate facts still hide a unit")
     ok(not (R.live_status == "gone").any(), "no live flag: a unit found gone at a re-read is still removed")
@@ -2224,6 +2230,30 @@ def pure_floor_elevator():
         bad.write_text("addr_key,stories\n")
         eq(len(build_master.BuildingStories(bad, xw)), 0, "storeys: a header-only (partial) file gives nothing")
         eq(len(build_master.BuildingStories(td / "empty.csv" if (td / "empty.csv").write_text("") == 0 else td / "empty.csv", xw)), 0, "storeys: an empty file gives nothing")
+        # unit_floor_reads.csv (second trawl): the floor read from the apartment number, per listing
+        eq(build_master.load_unit_floor_reads(td / "missing.csv"), {}, "floor reads: an absent file gives nothing")
+        fr = td / "reads.csv"
+        fr.write_text("listing_id,unit,floor,basis,convention,notes\n"
+                      "z:1,2B,2,read from the apartment number,floor_then_letter,x\n"
+                      "z:2,305,3,read from the apartment number,floor_then_two_digits,x\n"
+                      "z:3,A,,read from the apartment number,,x\n"
+                      "z:4,2C,2,guessed,floor_then_letter,x\n"
+                      "z:5,1A,1,read from the apartment number,floor_then_letter,x\n")
+        FR_ = build_master.load_unit_floor_reads(fr)
+        eq(sorted(FR_), ["z:1", "z:2", "z:5"], "floor reads: rows with no floor or another basis are dropped")
+        eq(build_master.floor_from_reads(FR_["z:1"], "2B"), 2, "floor reads: '2B' reads as floor 2")
+        eq(build_master.floor_from_reads(FR_["z:1"], "Unit 2B"), 2, "floor reads: the same apartment number written differently")
+        eq(build_master.floor_from_reads(FR_["z:1"], "4D"), None, "floor reads: a row about another apartment number is ignored")
+        eq(build_master.floor_from_reads(FR_["z:2"], "305", cap=2), None, "floor reads: a reading above the building's floor count is not a floor")
+        eq(build_master.floor_from_reads(None, "2B"), None, "floor reads: no row, no floor")
+        # how the reading counts in the gate: 'inferred' + 'simple' is a label reading (disclosure, not a page floor)
+        row_fr = {"unit_floor": "2", "unit_floor_basis": "inferred", "unit_floor_label_kind": "simple"}
+        eq(P.floor_how(row_fr["unit_floor_basis"], row_fr["unit_floor_label_kind"]), "label", "floor reads: counted as read from the apartment number")
+        eq(P.floor_elevator_master(lambda c: row_fr.get(c, ""), "unknown"), ("settled", "floor_2"), "floor reads: floor 2 read from the number settles a walk-up")
+        row_fr["unit_floor"] = "1"
+        eq(P.floor_elevator_master(lambda c: row_fr.get(c, ""), "established"), ("fail", "ground_floor"), "floor reads: floor 1 read from the number fails")
+        row_fr["unit_floor"] = "3"
+        eq(P.floor_elevator_master(lambda c: row_fr.get(c, ""), "unknown"), ("unknown", ""), "floor reads: floor 3 with no elevator stated is not shown")
 
 
 if __name__ == "__main__":

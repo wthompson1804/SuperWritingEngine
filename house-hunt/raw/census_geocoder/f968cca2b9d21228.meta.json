@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=1+Avalon+Way%2C+Boonton%2C+NJ+07005&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-17T19:12:16+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/f968cca2b9d21228.json",
+ "source": "census_geocoder"
+}

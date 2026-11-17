@@ -238,6 +238,21 @@ master_units,parking_assigned,display,build_master.py,"independent check 5, N1: 
 master_units,parking_reviewed,display,build_master.py,"independent check 5, N1: structured parking from every source's words (parsers.parking_facts): shown in the page data's parking block; the score reads parking_type, whose head is the primary kind (parking_kind)"
 master_units,parking_all_sources,display,build_master.py,"independent check 5, N1: structured parking from every source's words (parsers.parking_facts): shown in the page data's parking block; the score reads parking_type, whose head is the primary kind (parking_kind)"
 master_units,elevator_aggregator_only,display,build_master.py,"the date and sentence behind the staleness rule, the elevator-evidence count and the overnight-parking disclosure"
+master_units,dog_size_only,used,build_master.py;rank.py,
+master_units,dog_size_only_basis,provenance,,travels with dog_size_only
+master_units,dog_size_only_source,provenance,,travels with dog_size_only
+master_units,balconies,used,build_master.py;rank.py,
+master_units,balconies_basis,provenance,,travels with balconies
+master_units,balconies_source,provenance,,travels with balconies
+master_units,elevator_evidence_open,used,build_master.py;rank.py,
+master_units,elevator_evidence_open_basis,provenance,,travels with elevator_evidence_open
+master_units,elevator_evidence_open_source,provenance,,travels with elevator_evidence_open
+master_units,dogs_evidence_open,used,build_master.py;rank.py,
+master_units,dogs_evidence_open_basis,provenance,,travels with dogs_evidence_open
+master_units,dogs_evidence_open_source,provenance,,travels with dogs_evidence_open
+master_units,dog_weight_unstated,used,build_master.py;rank.py,
+master_units,dog_weight_unstated_basis,provenance,,travels with dog_weight_unstated
+master_units,dog_weight_unstated_source,provenance,,travels with dog_weight_unstated
 master_units,parking_fee_monthly,used,gates.py;build_master.py;all_in.py;rank.py,
 master_units,parking_fee_monthly_basis,used,build_master.py;all_in.py,
 master_units,parking_fee_monthly_source,provenance,build_master.py,travels with parking_fee_monthly
@@ -247,33 +262,35 @@ master_units,parking_fee_note_source,provenance,,travels with parking_fee_note
 master_units,parking_options,used,build_master.py;all_in.py,
 master_units,parking_options_basis,provenance,,travels with parking_options
 master_units,parking_options_source,provenance,,travels with parking_options
-master_units,balconies,used,build_master.py;rank.py,
-master_units,balconies_basis,provenance,,travels with balconies
-master_units,balconies_source,provenance,,travels with balconies
-master_units,dog_weight_unstated,used,build_master.py;rank.py,
-master_units,dog_weight_unstated_basis,provenance,,travels with dog_weight_unstated
-master_units,dog_weight_unstated_source,provenance,,travels with dog_weight_unstated
-master_units,listing_warning,used,build_master.py;rank.py,
-master_units,listing_warning_basis,provenance,,travels with listing_warning
-master_units,listing_warning_source,provenance,,travels with listing_warning
-master_units,unit_count,used,build_master.py;rank.py,
-master_units,unit_count_basis,provenance,,travels with unit_count
-master_units,unit_count_source,provenance,,travels with unit_count
-master_units,dog_size_only,used,build_master.py;rank.py,
-master_units,dog_size_only_basis,provenance,,travels with dog_size_only
-master_units,dog_size_only_source,provenance,,travels with dog_size_only
-master_units,elevator_evidence_open,used,build_master.py;rank.py,
-master_units,elevator_evidence_open_basis,provenance,,travels with elevator_evidence_open
-master_units,elevator_evidence_open_source,provenance,,travels with elevator_evidence_open
-master_units,dogs_evidence_open,used,build_master.py;rank.py,
-master_units,dogs_evidence_open_basis,provenance,,travels with dogs_evidence_open
-master_units,dogs_evidence_open_source,provenance,,travels with dogs_evidence_open
 master_units,building_type,used,gates.py;build_master.py;rank.py;avoid.py,
 master_units,building_type_basis,used,rank.py,
 master_units,building_type_source,provenance,,travels with building_type
+master_units,unit_count,used,build_master.py;rank.py,
+master_units,unit_count_basis,provenance,,travels with unit_count
+master_units,unit_count_source,provenance,,travels with unit_count
+master_units,elevator_doubt,used,build_master.py;rank.py,
+master_units,elevator_doubt_source,provenance,build_master.py,travels with elevator_doubt
+master_units,one_time_costs_text,display,build_master.py,"independent check 5: the sentences behind the one-time-cost and broker-fee disclosures, a dog weight limit no page states (kept beside the removed value), which appliances an in-unit laundry source names, and the name, system and kind of the nearest rail station (shown on the page)"
+master_units,one_time_costs_text_basis,provenance,,travels with one_time_costs_text
+master_units,one_time_costs_text_source,provenance,,travels with one_time_costs_text
+master_units,income_requirement,used,build_master.py;rank.py,
+master_units,income_requirement_basis,provenance,,travels with income_requirement
+master_units,income_requirement_source,provenance,,travels with income_requirement
+master_units,dogs_allowed_note,display,build_master.py,source sentence kept for display beside the parsed value (shown with an asterisk when the parse is unknown)
+master_units,dogs_allowed_note_basis,provenance,,travels with dogs_allowed_note
+master_units,dogs_allowed_note_source,provenance,,travels with dogs_allowed_note
+master_units,optional_fees_text,display,build_master.py,source sentence kept for display beside the parsed value (shown with an asterisk when the parse is unknown)
+master_units,optional_fees_text_basis,provenance,,travels with optional_fees_text
+master_units,optional_fees_text_source,provenance,,travels with optional_fees_text
 master_units,pet_rent_note,used,build_master.py;all_in.py,
 master_units,pet_rent_note_basis,provenance,,travels with pet_rent_note
 master_units,pet_rent_note_source,provenance,,travels with pet_rent_note
+master_units,eligibility_open,used,build_master.py;rank.py,
+master_units,eligibility_open_basis,provenance,,travels with eligibility_open
+master_units,eligibility_open_source,provenance,,travels with eligibility_open
+master_units,listing_warning,used,build_master.py;rank.py,
+master_units,listing_warning_basis,provenance,,travels with listing_warning
+master_units,listing_warning_source,provenance,,travels with listing_warning
 master_units,pluto_lot_ok,used,build_master.py;rank.py,
 master_units,pluto_lot_ok_basis,provenance,,travels with pluto_lot_ok
 master_units,pluto_lot_ok_source,provenance,,travels with pluto_lot_ok
@@ -283,32 +300,15 @@ master_units,pluto_lot_address_source,provenance,,travels with pluto_lot_address
 master_units,dob_active_elevators,display,build_master.py,"the city's count of active passenger elevators on the lot: gate input in build_master.py, asserted in this script"
 master_units,dob_active_elevators_basis,provenance,,travels with dob_active_elevators
 master_units,dob_active_elevators_source,provenance,,travels with dob_active_elevators
-master_units,one_time_costs_text,display,build_master.py,"independent check 5: the sentences behind the one-time-cost and broker-fee disclosures, a dog weight limit no page states (kept beside the removed value), which appliances an in-unit laundry source names, and the name, system and kind of the nearest rail station (shown on the page)"
-master_units,one_time_costs_text_basis,provenance,,travels with one_time_costs_text
-master_units,one_time_costs_text_source,provenance,,travels with one_time_costs_text
-master_units,dogs_allowed_note,display,build_master.py,source sentence kept for display beside the parsed value (shown with an asterisk when the parse is unknown)
-master_units,dogs_allowed_note_basis,provenance,,travels with dogs_allowed_note
-master_units,dogs_allowed_note_source,provenance,,travels with dogs_allowed_note
-master_units,elevator_doubt,used,build_master.py;rank.py,
-master_units,elevator_doubt_source,provenance,build_master.py,travels with elevator_doubt
-master_units,income_requirement,used,build_master.py;rank.py,
-master_units,income_requirement_basis,provenance,,travels with income_requirement
-master_units,income_requirement_source,provenance,,travels with income_requirement
-master_units,optional_fees_text,display,build_master.py,source sentence kept for display beside the parsed value (shown with an asterisk when the parse is unknown)
-master_units,optional_fees_text_basis,provenance,,travels with optional_fees_text
-master_units,optional_fees_text_source,provenance,,travels with optional_fees_text
-master_units,eligibility_open,used,build_master.py;rank.py,
-master_units,eligibility_open_basis,provenance,,travels with eligibility_open
-master_units,eligibility_open_source,provenance,,travels with eligibility_open
+master_units,credit_requirement,used,build_master.py;rank.py,
+master_units,credit_requirement_basis,provenance,,travels with credit_requirement
+master_units,credit_requirement_source,provenance,,travels with credit_requirement
 master_units,furnished,used,build_master.py;rank.py,
 master_units,furnished_basis,provenance,,travels with furnished
 master_units,furnished_source,provenance,,travels with furnished
 master_units,rent_regulation,display,build_master.py,text shown on the unit card or cost receipt
 master_units,rent_regulation_basis,provenance,,travels with rent_regulation
 master_units,rent_regulation_source,provenance,,travels with rent_regulation
-master_units,credit_requirement,used,build_master.py;rank.py,
-master_units,credit_requirement_basis,provenance,,travels with credit_requirement
-master_units,credit_requirement_source,provenance,,travels with credit_requirement
 master_units,addr_keys,not_used,build_master.py,bookkeeping or already folded into a merged field
 master_units,building_stories,used,gates.py;build_master.py;rank.py,
 master_units,building_stories_basis,used,gates.py;build_master.py;rank.py,
@@ -750,6 +750,21 @@ master_buildings,parking_assigned,display,build_master.py,"independent check 5, 
 master_buildings,parking_reviewed,display,build_master.py,"independent check 5, N1: structured parking from every source's words (parsers.parking_facts): shown in the page data's parking block; the score reads parking_type, whose head is the primary kind (parking_kind)"
 master_buildings,parking_all_sources,display,build_master.py,"independent check 5, N1: structured parking from every source's words (parsers.parking_facts): shown in the page data's parking block; the score reads parking_type, whose head is the primary kind (parking_kind)"
 master_buildings,elevator_aggregator_only,display,build_master.py,"the date and sentence behind the staleness rule, the elevator-evidence count and the overnight-parking disclosure"
+master_buildings,dog_size_only,used,build_master.py;rank.py,
+master_buildings,dog_size_only_basis,provenance,,travels with dog_size_only
+master_buildings,dog_size_only_source,provenance,,travels with dog_size_only
+master_buildings,balconies,used,build_master.py;rank.py,
+master_buildings,balconies_basis,provenance,,travels with balconies
+master_buildings,balconies_source,provenance,,travels with balconies
+master_buildings,elevator_evidence_open,used,build_master.py;rank.py,
+master_buildings,elevator_evidence_open_basis,provenance,,travels with elevator_evidence_open
+master_buildings,elevator_evidence_open_source,provenance,,travels with elevator_evidence_open
+master_buildings,dogs_evidence_open,used,build_master.py;rank.py,
+master_buildings,dogs_evidence_open_basis,provenance,,travels with dogs_evidence_open
+master_buildings,dogs_evidence_open_source,provenance,,travels with dogs_evidence_open
+master_buildings,dog_weight_unstated,used,build_master.py;rank.py,
+master_buildings,dog_weight_unstated_basis,provenance,,travels with dog_weight_unstated
+master_buildings,dog_weight_unstated_source,provenance,,travels with dog_weight_unstated
 master_buildings,parking_fee_monthly,used,gates.py;build_master.py;all_in.py;rank.py,
 master_buildings,parking_fee_monthly_basis,used,build_master.py;all_in.py,
 master_buildings,parking_fee_monthly_source,provenance,build_master.py,travels with parking_fee_monthly
@@ -759,33 +774,35 @@ master_buildings,parking_fee_note_source,provenance,,travels with parking_fee_no
 master_buildings,parking_options,used,build_master.py;all_in.py,
 master_buildings,parking_options_basis,provenance,,travels with parking_options
 master_buildings,parking_options_source,provenance,,travels with parking_options
-master_buildings,balconies,used,build_master.py;rank.py,
-master_buildings,balconies_basis,provenance,,travels with balconies
-master_buildings,balconies_source,provenance,,travels with balconies
-master_buildings,dog_weight_unstated,used,build_master.py;rank.py,
-master_buildings,dog_weight_unstated_basis,provenance,,travels with dog_weight_unstated
-master_buildings,dog_weight_unstated_source,provenance,,travels with dog_weight_unstated
-master_buildings,listing_warning,used,build_master.py;rank.py,
-master_buildings,listing_warning_basis,provenance,,travels with listing_warning
-master_buildings,listing_warning_source,provenance,,travels with listing_warning
-master_buildings,unit_count,used,build_master.py;rank.py,
-master_buildings,unit_count_basis,provenance,,travels with unit_count
-master_buildings,unit_count_source,provenance,,travels with unit_count
-master_buildings,dog_size_only,used,build_master.py;rank.py,
-master_buildings,dog_size_only_basis,provenance,,travels with dog_size_only
-master_buildings,dog_size_only_source,provenance,,travels with dog_size_only
-master_buildings,elevator_evidence_open,used,build_master.py;rank.py,
-master_buildings,elevator_evidence_open_basis,provenance,,travels with elevator_evidence_open
-master_buildings,elevator_evidence_open_source,provenance,,travels with elevator_evidence_open
-master_buildings,dogs_evidence_open,used,build_master.py;rank.py,
-master_buildings,dogs_evidence_open_basis,provenance,,travels with dogs_evidence_open
-master_buildings,dogs_evidence_open_source,provenance,,travels with dogs_evidence_open
 master_buildings,building_type,used,gates.py;build_master.py;rank.py;avoid.py,
 master_buildings,building_type_basis,used,rank.py,
 master_buildings,building_type_source,provenance,,travels with building_type
+master_buildings,unit_count,used,build_master.py;rank.py,
+master_buildings,unit_count_basis,provenance,,travels with unit_count
+master_buildings,unit_count_source,provenance,,travels with unit_count
+master_buildings,elevator_doubt,used,build_master.py;rank.py,
+master_buildings,elevator_doubt_source,provenance,build_master.py,travels with elevator_doubt
+master_buildings,one_time_costs_text,display,build_master.py,"independent check 5: the sentences behind the one-time-cost and broker-fee disclosures, a dog weight limit no page states (kept beside the removed value), which appliances an in-unit laundry source names, and the name, system and kind of the nearest rail station (shown on the page)"
+master_buildings,one_time_costs_text_basis,provenance,,travels with one_time_costs_text
+master_buildings,one_time_costs_text_source,provenance,,travels with one_time_costs_text
+master_buildings,income_requirement,used,build_master.py;rank.py,
+master_buildings,income_requirement_basis,provenance,,travels with income_requirement
+master_buildings,income_requirement_source,provenance,,travels with income_requirement
+master_buildings,dogs_allowed_note,display,build_master.py,source sentence kept for display beside the parsed value (shown with an asterisk when the parse is unknown)
+master_buildings,dogs_allowed_note_basis,provenance,,travels with dogs_allowed_note
+master_buildings,dogs_allowed_note_source,provenance,,travels with dogs_allowed_note
+master_buildings,optional_fees_text,display,build_master.py,source sentence kept for display beside the parsed value (shown with an asterisk when the parse is unknown)
+master_buildings,optional_fees_text_basis,provenance,,travels with optional_fees_text
+master_buildings,optional_fees_text_source,provenance,,travels with optional_fees_text
 master_buildings,pet_rent_note,used,build_master.py;all_in.py,
 master_buildings,pet_rent_note_basis,provenance,,travels with pet_rent_note
 master_buildings,pet_rent_note_source,provenance,,travels with pet_rent_note
+master_buildings,eligibility_open,used,build_master.py;rank.py,
+master_buildings,eligibility_open_basis,provenance,,travels with eligibility_open
+master_buildings,eligibility_open_source,provenance,,travels with eligibility_open
+master_buildings,listing_warning,used,build_master.py;rank.py,
+master_buildings,listing_warning_basis,provenance,,travels with listing_warning
+master_buildings,listing_warning_source,provenance,,travels with listing_warning
 master_buildings,pluto_lot_ok,used,build_master.py;rank.py,
 master_buildings,pluto_lot_ok_basis,provenance,,travels with pluto_lot_ok
 master_buildings,pluto_lot_ok_source,provenance,,travels with pluto_lot_ok
@@ -795,32 +812,15 @@ master_buildings,pluto_lot_address_source,provenance,,travels with pluto_lot_add
 master_buildings,dob_active_elevators,display,build_master.py,"the city's count of active passenger elevators on the lot: gate input in build_master.py, asserted in this script"
 master_buildings,dob_active_elevators_basis,provenance,,travels with dob_active_elevators
 master_buildings,dob_active_elevators_source,provenance,,travels with dob_active_elevators
-master_buildings,one_time_costs_text,display,build_master.py,"independent check 5: the sentences behind the one-time-cost and broker-fee disclosures, a dog weight limit no page states (kept beside the removed value), which appliances an in-unit laundry source names, and the name, system and kind of the nearest rail station (shown on the page)"
-master_buildings,one_time_costs_text_basis,provenance,,travels with one_time_costs_text
-master_buildings,one_time_costs_text_source,provenance,,travels with one_time_costs_text
-master_buildings,dogs_allowed_note,display,build_master.py,source sentence kept for display beside the parsed value (shown with an asterisk when the parse is unknown)
-master_buildings,dogs_allowed_note_basis,provenance,,travels with dogs_allowed_note
-master_buildings,dogs_allowed_note_source,provenance,,travels with dogs_allowed_note
-master_buildings,elevator_doubt,used,build_master.py;rank.py,
-master_buildings,elevator_doubt_source,provenance,build_master.py,travels with elevator_doubt
-master_buildings,income_requirement,used,build_master.py;rank.py,
-master_buildings,income_requirement_basis,provenance,,travels with income_requirement
-master_buildings,income_requirement_source,provenance,,travels with income_requirement
-master_buildings,optional_fees_text,display,build_master.py,source sentence kept for display beside the parsed value (shown with an asterisk when the parse is unknown)
-master_buildings,optional_fees_text_basis,provenance,,travels with optional_fees_text
-master_buildings,optional_fees_text_source,provenance,,travels with optional_fees_text
-master_buildings,eligibility_open,used,build_master.py;rank.py,
-master_buildings,eligibility_open_basis,provenance,,travels with eligibility_open
-master_buildings,eligibility_open_source,provenance,,travels with eligibility_open
+master_buildings,credit_requirement,used,build_master.py;rank.py,
+master_buildings,credit_requirement_basis,provenance,,travels with credit_requirement
+master_buildings,credit_requirement_source,provenance,,travels with credit_requirement
 master_buildings,furnished,used,build_master.py;rank.py,
 master_buildings,furnished_basis,provenance,,travels with furnished
 master_buildings,furnished_source,provenance,,travels with furnished
 master_buildings,rent_regulation,display,build_master.py,text shown on the unit card or cost receipt
 master_buildings,rent_regulation_basis,provenance,,travels with rent_regulation
 master_buildings,rent_regulation_source,provenance,,travels with rent_regulation
-master_buildings,credit_requirement,used,build_master.py;rank.py,
-master_buildings,credit_requirement_basis,provenance,,travels with credit_requirement
-master_buildings,credit_requirement_source,provenance,,travels with credit_requirement
 master_buildings,addr_keys,not_used,build_master.py,bookkeeping or already folded into a merged field
 master_buildings,building_stories,used,gates.py;build_master.py;rank.py,
 master_buildings,building_stories_basis,used,gates.py;build_master.py;rank.py,

@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=1+Schindler+Court%2C+Somerset%2C+NJ+08844&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-17T19:13:03+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/c58b036eac4a9ba3.json",
+ "source": "census_geocoder"
+}

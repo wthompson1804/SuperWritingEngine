@@ -668,7 +668,10 @@ def main():
     u["review_verdict"], u["review_kind"] = vd("verdict"), vd("kind")
     u["unknown_cost_lines"] = unknown_lines.str.replace(" / ", "; ")
     u["open_gate_facts"] = n_inf
-    u["confidence"] = np.where(reasons != "", "sketchy", np.where(n_inf == 0, "clean", np.where(n_inf == 1, "one_inferred", "sketchy")))
+    # owner, 2026-11-17: an apartment the floor-and-elevator rule leaves 'unknown' (floor 3+ with no elevator stated) or
+    # 'fail' is not shown and not ranked: it is dropped as sketchy with weak_why (it used to count only as one inferred
+    # fact, which let a floor-3 reading from data/reference/unit_floor_reads.csv rank with the elevator unknown)
+    u["confidence"] = np.where((reasons != "") | weak_e, "sketchy", np.where(n_inf == 0, "clean", np.where(n_inf == 1, "one_inferred", "sketchy")))
     weak_why = np.where(fe_st.eq("fail"), fe_code.map(FE_FAIL_WHY).fillna("fails the floor-and-elevator rule"),
                         "floor 3 or above (" + fb + ") and no elevator stated on any page or record, and the building's height is not known (owner, 2026-11-17: floor 3 and above need an elevator)")
     u["sketchy_reason"] = np.where(reasons != "", reasons, np.where(weak_e, weak_why, np.where(n_inf >= 2, "two or more things unconfirmed: " + u.confirm_what, "")))
