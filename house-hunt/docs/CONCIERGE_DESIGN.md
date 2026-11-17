@@ -203,3 +203,47 @@ buildings[].similar: [ids]                     # unweighted nearest, for the pag
 neighborhoods[].tags: ["Lively", "near family"]
 meta.recommender_examples: [{answers:[{a,b,choice}], expected_pairs:[...], expected_top:[[hood,[b1,b2,b3]],...]}]
 ```
+
+---
+
+## Version 4 (Will, 2026-11-17): hypothetical trade-offs, and a results page you can read in order
+
+Will's review of version 3: choosing between three real places is gimmicky and can't be predictive (real places
+differ on everything at once, so a choice says little about why); and the results overwhelm, with no clear reading
+order. Instead: **"this or that" between made-up apartments**, the way pricing studies in behavioral economics do it
+(choice-based conjoint), and a results page that says plainly: these are the three neighborhoods, these are the three
+places in each, and you can browse everything else.
+
+### The choices (choice-based conjoint, partial profiles)
+- Each choice shows two made-up apartments, "Apartment A" and "Apartment B", described only by attribute levels.
+  To keep each choice easy, the two differ on **two or three attributes**; the rest read "Same for both" (partial
+  profiles). Levels are drawn from the real spread of the places on the page, so every trade-off is a real one.
+- Attributes and levels (plain words; each maps onto the recommender's features with the same value functions):
+  - Monthly total with utilities and fees: four levels across the real range (about $1,700 to $2,300).
+  - Drive to Mom and Dad: 15, 35, 60, 90 minutes.
+  - Space: studio about 450 sq ft; studio about 600; one bedroom about 700; one bedroom about 900.
+  - Going out: quiet (a couple of places on foot); some (about 15); lively (40+).
+  - Parking: street only; a spot in a lot; garage.
+  - A park for the dog: 2, 8, 15 minutes on foot.
+- Answers: A, B, or "No real difference to me". No dominated pairs (one never better on everything).
+- **Eight choices**, adaptive: each next pair is the one expected to teach most about her weights (largest expected
+  reduction in posterior uncertainty over the weight samples, utility-balanced), with a fixed progress "3 of 8".
+  The research on choice-based conjoint is that a handful of tasks gives usable individual weights only when the
+  pairs are chosen adaptively and kept simple; eight is the floor we use, not a promise of precision.
+- Then one confirmation screen: "Here's what you told me", her learned priorities in plain words, top first ("Space
+  matters most to you, then being near Mom and Dad; parking matters least"), with "That's right" and "Not quite".
+  "Not quite" lets her move one priority up or down (a small, explicit correction), then re-ranks.
+
+### The results, in one reading order
+1. One sentence: what she cares about.
+2. **Three neighborhoods**, numbered 1 to 3. Each is a card: name, two tags, one line why, one line what you give
+   up. The first is open; 2 and 3 are closed and open on tap.
+3. Inside each neighborhood: **three places**, as compact rows: name, rent and total, one fact that matters to her,
+   the checked line. Tap a row to open the place.
+4. Below the three: "Browse everything" (filters, map), "Change my answers".
+Nothing else on the results page: no "what would change it", no "more like this" row under every card (the place
+sheet keeps "More like this" at its bottom).
+
+### Validation (must be reported before publishing)
+Simulated users with hidden weights answer the made-up pairs; report how often their true best neighborhood is in the
+three, weight recovery, and how results move with each answer. Five personas as before.

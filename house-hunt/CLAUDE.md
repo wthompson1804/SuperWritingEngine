@@ -270,3 +270,8 @@ Decisions by Will that changed or replaced an earlier one. Dates are UTC days of
   "this or that" choices between real places (three to six, chosen so each one changes the recommendation), then sees
   the top three neighborhoods, each with its top three buildings, and under each building two or three "more like this"
   thumbnails; all inventory stays one tap away. Spec: "Version 3" in `docs/CONCIERGE_DESIGN.md`.
+
+- **The short version, version 4 (Will, 2026-11-17):** the "this or that" choices are between made-up apartments
+  described by a few attributes (price, drive to Mom and Dad, space, going out, parking, a park for the dog), the way
+  pricing studies do it, not between real places; and the results page reads in one order: what she cares about, three
+  neighborhoods, three places in each, then browse everything. Spec: "Version 4" in `docs/CONCIERGE_DESIGN.md`.
