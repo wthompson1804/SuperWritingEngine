@@ -665,7 +665,12 @@ def trawl2(a, grid, grid_zips, cities, unmatched):
             reason = f"gone_http_{status}"
         elif status == 200:
             L = parse_listing(html)
-            if not L:
+            if not L and "NEXT_HTTP_ERROR_FALLBACK;404" in html:
+                # soft 404: HTTP 200 carrying Next.js' "404: This page could not be found." (the property was removed)
+                for lid in hp:
+                    mark_gone(lid, "property page says '404: This page could not be found' (served with HTTP 200)", at, status)
+                reason = "gone_soft_404"
+            elif not L:
                 reason = "no_listing_object"
                 stats["unparsed_pages"].append(pslug)
             else:
@@ -701,7 +706,7 @@ def trawl2(a, grid, grid_zips, cities, unmatched):
 
     def fresh(pslug):
         c = checked.get(pslug)
-        if not c:
+        if not c or c.get("reason") == "no_listing_object":   # re-read (from the fresh cache) by the current parser
             return False
         age = (datetime.now(timezone.utc) - datetime.fromisoformat(c["at"])).total_seconds() / 3600
         return age <= (MAX_AGE_H or 24)

@@ -11,17 +11,32 @@
   "min_drive": 0,
   "minutes": 0
  },
- "srp_pages": 299,
- "props_considered": 652,
- "props_skipped_lowprice": 270,
- "props_read": 382,
+ "srp_pages": 911,
+ "props_considered": 1729,
+ "props_skipped_lowprice": 812,
+ "props_read": 943,
  "reasons": {
-  "ok": 381,
-  "no_unit_le_3000": 1
+  "ok": 900,
+  "no_unit_le_3000": 20,
+  "outside_grid": 11,
+  "no_listing_object": 12
  },
  "transient": [],
  "blocked": null,
- "unparsed_pages": [],
+ "unparsed_pages": [
+  "/nj/guttenberg/6812-polk-street--1",
+  "/nj/jamesburg/37-hooker-st",
+  "/nj/metuchen/the-jax",
+  "/nj/north-bergen/8300-boulevard-e",
+  "/nj/passaic/377-madison-street",
+  "/nj/paterson/353-marshall-st",
+  "/ny/brooklyn/2925-w-5th-st--1",
+  "/ny/brooklyn/77-eastern-pkwy-40",
+  "/ct/ansonia/central-street-associates-llc",
+  "/ct/new-haven/98-howe-st",
+  "/ct/west-haven/campbell-ave-apartments",
+  "/ct/west-haven/hilltop-terrace-apartments-1-and-2-bedrooms"
+ ],
  "cities_done": [
   {
    "city": "nj/fort-lee",
@@ -533,6 +548,1315 @@
    "drive_min": 57.7,
    "props": 1,
    "read": 0
+  },
+  {
+   "city": "nj/cranford",
+   "group": "New Jersey",
+   "drive_min": 58.4,
+   "props": 5,
+   "read": 5
+  },
+  {
+   "city": "nj/pompton-lakes",
+   "group": "New Jersey",
+   "drive_min": 58.4,
+   "props": 3,
+   "read": 3
+  },
+  {
+   "city": "nj/rahway",
+   "group": "New Jersey",
+   "drive_min": 58.4,
+   "props": 3,
+   "read": 1
+  },
+  {
+   "city": "nj/caldwell",
+   "group": "New Jersey",
+   "drive_min": 58.9,
+   "props": 7,
+   "read": 5
+  },
+  {
+   "city": "nj/summit",
+   "group": "New Jersey",
+   "drive_min": 60.5,
+   "props": 7,
+   "read": 1
+  },
+  {
+   "city": "nj/avenel",
+   "group": "New Jersey",
+   "drive_min": 60.7,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "nj/butler",
+   "group": "New Jersey",
+   "drive_min": 60.8,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "nj/riverdale",
+   "group": "New Jersey",
+   "drive_min": 60.8,
+   "props": 3,
+   "read": 1
+  },
+  {
+   "city": "nj/short-hills",
+   "group": "New Jersey",
+   "drive_min": 60.9,
+   "props": 2,
+   "read": 1
+  },
+  {
+   "city": "nj/wanaque",
+   "group": "New Jersey",
+   "drive_min": 61.2,
+   "props": 2,
+   "read": 2
+  },
+  {
+   "city": "nj/garwood",
+   "group": "New Jersey",
+   "drive_min": 61.5,
+   "props": 2,
+   "read": 0
+  },
+  {
+   "city": "nj/parsippany-troy-hills",
+   "group": "New Jersey",
+   "drive_min": 62.0,
+   "props": 13,
+   "read": 8
+  },
+  {
+   "city": "nj/perth-amboy",
+   "group": "New Jersey",
+   "drive_min": 62.0,
+   "props": 5,
+   "read": 5
+  },
+  {
+   "city": "nj/livingston",
+   "group": "New Jersey",
+   "drive_min": 63.3,
+   "props": 2,
+   "read": 0
+  },
+  {
+   "city": "nj/westfield",
+   "group": "New Jersey",
+   "drive_min": 63.3,
+   "props": 5,
+   "read": 3
+  },
+  {
+   "city": "nj/colonia",
+   "group": "New Jersey",
+   "drive_min": 63.6,
+   "props": 1,
+   "read": 1
+  },
+  {
+   "city": "nj/woodbridge",
+   "group": "New Jersey",
+   "drive_min": 63.6,
+   "props": 11,
+   "read": 10
+  },
+  {
+   "city": "nj/bloomingdale",
+   "group": "New Jersey",
+   "drive_min": 64.2,
+   "props": 1,
+   "read": 1
+  },
+  {
+   "city": "nj/new-providence",
+   "group": "New Jersey",
+   "drive_min": 64.6,
+   "props": 2,
+   "read": 0
+  },
+  {
+   "city": "nj/iselin",
+   "group": "New Jersey",
+   "drive_min": 64.8,
+   "props": 3,
+   "read": 3
+  },
+  {
+   "city": "nj/fords",
+   "group": "New Jersey",
+   "drive_min": 65.7,
+   "props": 3,
+   "read": 2
+  },
+  {
+   "city": "nj/chatham",
+   "group": "New Jersey",
+   "drive_min": 66.6,
+   "props": 3,
+   "read": 0
+  },
+  {
+   "city": "nj/madison",
+   "group": "New Jersey",
+   "drive_min": 66.6,
+   "props": 4,
+   "read": 1
+  },
+  {
+   "city": "nj/watchung",
+   "group": "New Jersey",
+   "drive_min": 67.6,
+   "props": 2,
+   "read": 2
+  },
+  {
+   "city": "nj/rockaway",
+   "group": "New Jersey",
+   "drive_min": 68.3,
+   "props": 1,
+   "read": 1
+  },
+  {
+   "city": "nj/edison",
+   "group": "New Jersey",
+   "drive_min": 68.4,
+   "props": 5,
+   "read": 5
+  },
+  {
+   "city": "nj/florham-park",
+   "group": "New Jersey",
+   "drive_min": 68.5,
+   "props": 5,
+   "read": 2
+  },
+  {
+   "city": "nj/metuchen",
+   "group": "New Jersey",
+   "drive_min": 68.9,
+   "props": 7,
+   "read": 1
+  },
+  {
+   "city": "nj/clark",
+   "group": "New Jersey",
+   "drive_min": 69.5,
+   "props": 2,
+   "read": 2
+  },
+  {
+   "city": "nj/sayreville",
+   "group": "New Jersey",
+   "drive_min": 70.4,
+   "props": 3,
+   "read": 2
+  },
+  {
+   "city": "nj/boonton",
+   "group": "New Jersey",
+   "drive_min": 71.8,
+   "props": 2,
+   "read": 2
+  },
+  {
+   "city": "nj/south-amboy",
+   "group": "New Jersey",
+   "drive_min": 71.9,
+   "props": 2,
+   "read": 0
+  },
+  {
+   "city": "nj/north-plainfield",
+   "group": "New Jersey",
+   "drive_min": 72.0,
+   "props": 2,
+   "read": 1
+  },
+  {
+   "city": "nj/plainfield",
+   "group": "New Jersey",
+   "drive_min": 72.0,
+   "props": 5,
+   "read": 5
+  },
+  {
+   "city": "nj/basking-ridge",
+   "group": "New Jersey",
+   "drive_min": 74.0,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "nj/south-plainfield",
+   "group": "New Jersey",
+   "drive_min": 74.0,
+   "props": 1,
+   "read": 1
+  },
+  {
+   "city": "nj/new-brunswick",
+   "group": "New Jersey",
+   "drive_min": 74.1,
+   "props": 11,
+   "read": 7
+  },
+  {
+   "city": "nj/dover",
+   "group": "New Jersey",
+   "drive_min": 74.2,
+   "props": 1,
+   "read": 1
+  },
+  {
+   "city": "nj/morris-plains",
+   "group": "New Jersey",
+   "drive_min": 74.2,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "nj/wharton",
+   "group": "New Jersey",
+   "drive_min": 74.2,
+   "props": 2,
+   "read": 1
+  },
+  {
+   "city": "nj/dunellen",
+   "group": "New Jersey",
+   "drive_min": 74.5,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "nj/laurence-harbor",
+   "group": "New Jersey",
+   "drive_min": 74.8,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "nj/highland-park",
+   "group": "New Jersey",
+   "drive_min": 75.4,
+   "props": 4,
+   "read": 4
+  },
+  {
+   "city": "nj/morristown",
+   "group": "New Jersey",
+   "drive_min": 76.7,
+   "props": 12,
+   "read": 5
+  },
+  {
+   "city": "nj/matawan",
+   "group": "New Jersey",
+   "drive_min": 77.6,
+   "props": 6,
+   "read": 4
+  },
+  {
+   "city": "nj/mount-arlington",
+   "group": "New Jersey",
+   "drive_min": 78.3,
+   "props": 4,
+   "read": 2
+  },
+  {
+   "city": "nj/south-river",
+   "group": "New Jersey",
+   "drive_min": 78.4,
+   "props": 2,
+   "read": 1
+  },
+  {
+   "city": "nj/middlesex",
+   "group": "New Jersey",
+   "drive_min": 79.5,
+   "props": 4,
+   "read": 3
+  },
+  {
+   "city": "nj/old-bridge",
+   "group": "New Jersey",
+   "drive_min": 79.7,
+   "props": 3,
+   "read": 1
+  },
+  {
+   "city": "nj/piscataway",
+   "group": "New Jersey",
+   "drive_min": 79.7,
+   "props": 4,
+   "read": 3
+  },
+  {
+   "city": "nj/keyport",
+   "group": "New Jersey",
+   "drive_min": 79.8,
+   "props": 4,
+   "read": 2
+  },
+  {
+   "city": "nj/union-beach",
+   "group": "New Jersey",
+   "drive_min": 79.8,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "nj/south-bound-brook",
+   "group": "New Jersey",
+   "drive_min": 80.3,
+   "props": 1,
+   "read": 1
+  },
+  {
+   "city": "nj/kenvil",
+   "group": "New Jersey",
+   "drive_min": 80.7,
+   "props": 1,
+   "read": 1
+  },
+  {
+   "city": "nj/bound-brook",
+   "group": "New Jersey",
+   "drive_min": 81.7,
+   "props": 4,
+   "read": 4
+  },
+  {
+   "city": "nj/netcong",
+   "group": "New Jersey",
+   "drive_min": 81.8,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "nj/somerville",
+   "group": "New Jersey",
+   "drive_min": 81.8,
+   "props": 6,
+   "read": 3
+  },
+  {
+   "city": "nj/north-brunswick",
+   "group": "New Jersey",
+   "drive_min": 83.1,
+   "props": 1,
+   "read": 1
+  },
+  {
+   "city": "nj/franklin",
+   "group": "New Jersey",
+   "drive_min": 83.8,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "nj/bradley-gardens",
+   "group": "New Jersey",
+   "drive_min": 84.2,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "nj/raritan",
+   "group": "New Jersey",
+   "drive_min": 84.2,
+   "props": 2,
+   "read": 1
+  },
+  {
+   "city": "nj/hopatcong",
+   "group": "New Jersey",
+   "drive_min": 84.7,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "nj/somerset",
+   "group": "New Jersey",
+   "drive_min": 85.0,
+   "props": 6,
+   "read": 4
+  },
+  {
+   "city": "nj/keansburg",
+   "group": "New Jersey",
+   "drive_min": 85.1,
+   "props": 7,
+   "read": 5
+  },
+  {
+   "city": "nj/finderne",
+   "group": "New Jersey",
+   "drive_min": 85.6,
+   "props": 1,
+   "read": 1
+  },
+  {
+   "city": "nj/robertsville",
+   "group": "New Jersey",
+   "drive_min": 85.7,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "nj/stanhope",
+   "group": "New Jersey",
+   "drive_min": 86.5,
+   "props": 3,
+   "read": 3
+  },
+  {
+   "city": "nj/north-middletown",
+   "group": "New Jersey",
+   "drive_min": 87.3,
+   "props": 1,
+   "read": 1
+  },
+  {
+   "city": "nj/manville",
+   "group": "New Jersey",
+   "drive_min": 87.4,
+   "props": 2,
+   "read": 2
+  },
+  {
+   "city": "nj/budd-lake",
+   "group": "New Jersey",
+   "drive_min": 87.5,
+   "props": 1,
+   "read": 1
+  },
+  {
+   "city": "nj/jamesburg",
+   "group": "New Jersey",
+   "drive_min": 87.9,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "nj/lake-mohawk",
+   "group": "New Jersey",
+   "drive_min": 87.9,
+   "props": 2,
+   "read": 1
+  },
+  {
+   "city": "nj/dayton",
+   "group": "New Jersey",
+   "drive_min": 88.3,
+   "props": 2,
+   "read": 2
+  },
+  {
+   "city": "nj/heathcote",
+   "group": "New Jersey",
+   "drive_min": 88.6,
+   "props": 1,
+   "read": 1
+  },
+  {
+   "city": "nj/franklin-park",
+   "group": "New Jersey",
+   "drive_min": 88.7,
+   "props": 1,
+   "read": 1
+  },
+  {
+   "city": "nj/red-bank",
+   "group": "New Jersey",
+   "drive_min": 89.0,
+   "props": 14,
+   "read": 4
+  },
+  {
+   "city": "nj/hamburg",
+   "group": "New Jersey",
+   "drive_min": 89.4,
+   "props": 1,
+   "read": 1
+  },
+  {
+   "city": "nj/lincroft",
+   "group": "New Jersey",
+   "drive_min": 91.5,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "nj/vernon-center",
+   "group": "New Jersey",
+   "drive_min": 92.2,
+   "props": 2,
+   "read": 2
+  },
+  {
+   "city": "nj/atlantic-highlands",
+   "group": "New Jersey",
+   "drive_min": 92.9,
+   "props": 5,
+   "read": 0
+  },
+  {
+   "city": "nj/little-silver",
+   "group": "New Jersey",
+   "drive_min": 92.9,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "nj/highland-lakes",
+   "group": "New Jersey",
+   "drive_min": 93.1,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "nj/plainsboro-center",
+   "group": "New Jersey",
+   "drive_min": 95.1,
+   "props": 3,
+   "read": 3
+  },
+  {
+   "city": "nj/princeton-junction",
+   "group": "New Jersey",
+   "drive_min": 95.1,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "nj/princeton-meadows",
+   "group": "New Jersey",
+   "drive_min": 95.1,
+   "props": 9,
+   "read": 9
+  },
+  {
+   "city": "nj/hightstown",
+   "group": "New Jersey",
+   "drive_min": 95.3,
+   "props": 2,
+   "read": 2
+  },
+  {
+   "city": "nj/eatontown",
+   "group": "New Jersey",
+   "drive_min": 95.5,
+   "props": 2,
+   "read": 2
+  },
+  {
+   "city": "nj/tinton-falls",
+   "group": "New Jersey",
+   "drive_min": 95.5,
+   "props": 2,
+   "read": 1
+  },
+  {
+   "city": "nj/oceanport",
+   "group": "New Jersey",
+   "drive_min": 96.0,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "nj/west-long-branch",
+   "group": "New Jersey",
+   "drive_min": 96.4,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "nj/freehold",
+   "group": "New Jersey",
+   "drive_min": 97.1,
+   "props": 4,
+   "read": 2
+  },
+  {
+   "city": "nj/west-freehold",
+   "group": "New Jersey",
+   "drive_min": 97.1,
+   "props": 4,
+   "read": 4
+  },
+  {
+   "city": "nj/hackettstown",
+   "group": "New Jersey",
+   "drive_min": 97.2,
+   "props": 3,
+   "read": 3
+  },
+  {
+   "city": "nj/rumson",
+   "group": "New Jersey",
+   "drive_min": 98.8,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "nj/oakhurst",
+   "group": "New Jersey",
+   "drive_min": 99.8,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "nj/princeton",
+   "group": "New Jersey",
+   "drive_min": 100.2,
+   "props": 14,
+   "read": 5
+  },
+  {
+   "city": "nj/long-branch",
+   "group": "New Jersey",
+   "drive_min": 100.7,
+   "props": 20,
+   "read": 9
+  },
+  {
+   "city": "nj/monmouth-beach",
+   "group": "New Jersey",
+   "drive_min": 101.0,
+   "props": 5,
+   "read": 3
+  },
+  {
+   "city": "nj/sea-bright",
+   "group": "New Jersey",
+   "drive_min": 101.0,
+   "props": 5,
+   "read": 2
+  },
+  {
+   "city": "nj/allentown",
+   "group": "New Jersey",
+   "drive_min": 102.2,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "nj/deal",
+   "group": "New Jersey",
+   "drive_min": 102.3,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "nj/sussex",
+   "group": "New Jersey",
+   "drive_min": 103.1,
+   "props": 3,
+   "read": 3
+  },
+  {
+   "city": "nj/bradley-beach",
+   "group": "New Jersey",
+   "drive_min": 103.5,
+   "props": 7,
+   "read": 6
+  },
+  {
+   "city": "nj/neptune-city",
+   "group": "New Jersey",
+   "drive_min": 103.5,
+   "props": 4,
+   "read": 2
+  },
+  {
+   "city": "nj/asbury-park",
+   "group": "New Jersey",
+   "drive_min": 103.6,
+   "props": 21,
+   "read": 1
+  },
+  {
+   "city": "nj/ocean-grove",
+   "group": "New Jersey",
+   "drive_min": 103.6,
+   "props": 12,
+   "read": 7
+  },
+  {
+   "city": "nj/highlands",
+   "group": "New Jersey",
+   "drive_min": 103.8,
+   "props": 6,
+   "read": 4
+  },
+  {
+   "city": "nj/wanamassa",
+   "group": "New Jersey",
+   "drive_min": 103.8,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "nj/hamilton-square",
+   "group": "New Jersey",
+   "drive_min": 104.7,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "nj/lawrenceville",
+   "group": "New Jersey",
+   "drive_min": 104.9,
+   "props": 4,
+   "read": 4
+  },
+  {
+   "city": "nj/avon-by-the-sea",
+   "group": "New Jersey",
+   "drive_min": 105.4,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "nj/belmar",
+   "group": "New Jersey",
+   "drive_min": 105.4,
+   "props": 8,
+   "read": 2
+  },
+  {
+   "city": "nj/flemington",
+   "group": "New Jersey",
+   "drive_min": 105.4,
+   "props": 3,
+   "read": 2
+  },
+  {
+   "city": "nj/bordentown",
+   "group": "New Jersey",
+   "drive_min": 107.1,
+   "props": 4,
+   "read": 4
+  },
+  {
+   "city": "nj/hamilton-township",
+   "group": "New Jersey",
+   "drive_min": 107.2,
+   "props": 3,
+   "read": 0
+  },
+  {
+   "city": "nj/mercerville",
+   "group": "New Jersey",
+   "drive_min": 107.2,
+   "props": 2,
+   "read": 0
+  },
+  {
+   "city": "nj/newton",
+   "group": "New Jersey",
+   "drive_min": 107.3,
+   "props": 9,
+   "read": 9
+  },
+  {
+   "city": "nj/brielle",
+   "group": "New Jersey",
+   "drive_min": 107.6,
+   "props": 3,
+   "read": 1
+  },
+  {
+   "city": "nj/white-horse",
+   "group": "New Jersey",
+   "drive_min": 107.8,
+   "props": 1,
+   "read": 1
+  },
+  {
+   "city": "nj/manasquan",
+   "group": "New Jersey",
+   "drive_min": 108.3,
+   "props": 2,
+   "read": 1
+  },
+  {
+   "city": "nj/sea-girt",
+   "group": "New Jersey",
+   "drive_min": 108.9,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "nj/lake-como",
+   "group": "New Jersey",
+   "drive_min": 109.0,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "nj/spring-lake",
+   "group": "New Jersey",
+   "drive_min": 109.0,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "nj/spring-lake-heights",
+   "group": "New Jersey",
+   "drive_min": 109.0,
+   "props": 3,
+   "read": 1
+  },
+  {
+   "city": "nj/west-belmar",
+   "group": "New Jersey",
+   "drive_min": 109.0,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "nj/trenton",
+   "group": "New Jersey",
+   "drive_min": 110.8,
+   "props": 14,
+   "read": 9
+  },
+  {
+   "city": "nj/phillipsburg",
+   "group": "New Jersey",
+   "drive_min": 111.9,
+   "props": 7,
+   "read": 7
+  },
+  {
+   "city": "nj/bay-head",
+   "group": "New Jersey",
+   "drive_min": 112.2,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "nj/mantoloking",
+   "group": "New Jersey",
+   "drive_min": 112.2,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "nj/point-pleasant",
+   "group": "New Jersey",
+   "drive_min": 112.2,
+   "props": 2,
+   "read": 1
+  },
+  {
+   "city": "nj/point-pleasant-beach",
+   "group": "New Jersey",
+   "drive_min": 112.2,
+   "props": 2,
+   "read": 1
+  },
+  {
+   "city": "nj/washington",
+   "group": "New Jersey",
+   "drive_min": 112.3,
+   "props": 2,
+   "read": 1
+  },
+  {
+   "city": "nj/florence",
+   "group": "New Jersey",
+   "drive_min": 114.7,
+   "props": 1,
+   "read": 1
+  },
+  {
+   "city": "nj/dover-beaches-north",
+   "group": "New Jersey",
+   "drive_min": 116.1,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "nj/burlington",
+   "group": "New Jersey",
+   "drive_min": 119.4,
+   "props": 8,
+   "read": 8
+  },
+  {
+   "city": "ny/brooklyn",
+   "group": "Brooklyn",
+   "drive_min": 22.7,
+   "props": 361,
+   "read": 104
+  },
+  {
+   "city": "ct/byram",
+   "group": "Connecticut",
+   "drive_min": 44.1,
+   "props": 2,
+   "read": 0
+  },
+  {
+   "city": "ct/greenwich",
+   "group": "Connecticut",
+   "drive_min": 46.2,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "ct/cos-cob",
+   "group": "Connecticut",
+   "drive_min": 51.7,
+   "props": 2,
+   "read": 0
+  },
+  {
+   "city": "ct/darien",
+   "group": "Connecticut",
+   "drive_min": 55.9,
+   "props": 6,
+   "read": 0
+  },
+  {
+   "city": "ct/stamford",
+   "group": "Connecticut",
+   "drive_min": 57.9,
+   "props": 53,
+   "read": 19
+  },
+  {
+   "city": "ct/norwalk",
+   "group": "Connecticut",
+   "drive_min": 62.5,
+   "props": 25,
+   "read": 13
+  },
+  {
+   "city": "ct/westport",
+   "group": "Connecticut",
+   "drive_min": 71.2,
+   "props": 4,
+   "read": 0
+  },
+  {
+   "city": "ct/ridgefield",
+   "group": "Connecticut",
+   "drive_min": 78.0,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "ct/bridgeport",
+   "group": "Connecticut",
+   "drive_min": 80.8,
+   "props": 31,
+   "read": 29
+  },
+  {
+   "city": "ct/danbury",
+   "group": "Connecticut",
+   "drive_min": 88.4,
+   "props": 11,
+   "read": 9
+  },
+  {
+   "city": "ct/stratford",
+   "group": "Connecticut",
+   "drive_min": 91.1,
+   "props": 6,
+   "read": 5
+  },
+  {
+   "city": "ct/trumbull",
+   "group": "Connecticut",
+   "drive_min": 92.6,
+   "props": 3,
+   "read": 2
+  },
+  {
+   "city": "ct/milford-city",
+   "group": "Connecticut",
+   "drive_min": 93.6,
+   "props": 7,
+   "read": 4
+  },
+  {
+   "city": "ct/shelton",
+   "group": "Connecticut",
+   "drive_min": 96.6,
+   "props": 6,
+   "read": 5
+  },
+  {
+   "city": "ct/bethel",
+   "group": "Connecticut",
+   "drive_min": 97.1,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "ct/derby",
+   "group": "Connecticut",
+   "drive_min": 98.0,
+   "props": 2,
+   "read": 2
+  },
+  {
+   "city": "ct/orange",
+   "group": "Connecticut",
+   "drive_min": 98.3,
+   "props": 1,
+   "read": 1
+  },
+  {
+   "city": "ct/ansonia",
+   "group": "Connecticut",
+   "drive_min": 99.2,
+   "props": 3,
+   "read": 3
+  },
+  {
+   "city": "ct/west-haven",
+   "group": "Connecticut",
+   "drive_min": 99.9,
+   "props": 7,
+   "read": 7
+  },
+  {
+   "city": "ct/new-haven",
+   "group": "Connecticut",
+   "drive_min": 107.8,
+   "props": 32,
+   "read": 30
+  },
+  {
+   "city": "ct/branford-center",
+   "group": "Connecticut",
+   "drive_min": 110.0,
+   "props": 2,
+   "read": 2
+  },
+  {
+   "city": "ct/east-haven",
+   "group": "Connecticut",
+   "drive_min": 110.0,
+   "props": 4,
+   "read": 4
+  },
+  {
+   "city": "ct/naugatuck",
+   "group": "Connecticut",
+   "drive_min": 110.2,
+   "props": 3,
+   "read": 3
+  },
+  {
+   "city": "ct/hamden",
+   "group": "Connecticut",
+   "drive_min": 113.6,
+   "props": 3,
+   "read": 3
+  },
+  {
+   "city": "ct/oakville",
+   "group": "Connecticut",
+   "drive_min": 117.5,
+   "props": 1,
+   "read": 1
+  },
+  {
+   "city": "ct/waterbury",
+   "group": "Connecticut",
+   "drive_min": 118.0,
+   "props": 13,
+   "read": 13
+  },
+  {
+   "city": "ny/floral-park",
+   "group": "Long Island",
+   "drive_min": 14.9,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "ny/elmont",
+   "group": "Long Island",
+   "drive_min": 16.0,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "ny/lynbrook",
+   "group": "Long Island",
+   "drive_min": 16.4,
+   "props": 3,
+   "read": 0
+  },
+  {
+   "city": "ny/north-valley-stream",
+   "group": "Long Island",
+   "drive_min": 17.1,
+   "props": 2,
+   "read": 0
+  },
+  {
+   "city": "ny/valley-stream",
+   "group": "Long Island",
+   "drive_min": 17.1,
+   "props": 3,
+   "read": 0
+  },
+  {
+   "city": "ny/woodmere",
+   "group": "Long Island",
+   "drive_min": 18.3,
+   "props": 1,
+   "read": 1
+  },
+  {
+   "city": "ny/great-neck-plaza",
+   "group": "Long Island",
+   "drive_min": 18.8,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "ny/franklin-square",
+   "group": "Long Island",
+   "drive_min": 18.9,
+   "props": 2,
+   "read": 1
+  },
+  {
+   "city": "ny/hewlett",
+   "group": "Long Island",
+   "drive_min": 19.3,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "ny/mineola",
+   "group": "Long Island",
+   "drive_min": 20.0,
+   "props": 7,
+   "read": 0
+  },
+  {
+   "city": "ny/rockville-centre",
+   "group": "Long Island",
+   "drive_min": 20.1,
+   "props": 3,
+   "read": 0
+  },
+  {
+   "city": "ny/west-hempstead",
+   "group": "Long Island",
+   "drive_min": 20.7,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "ny/atlantic-beach",
+   "group": "Long Island",
+   "drive_min": 21.0,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "ny/east-atlantic-beach",
+   "group": "Long Island",
+   "drive_min": 21.0,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "ny/williston-park",
+   "group": "Long Island",
+   "drive_min": 21.4,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "ny/great-neck",
+   "group": "Long Island",
+   "drive_min": 22.0,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "ny/oceanside",
+   "group": "Long Island",
+   "drive_min": 22.0,
+   "props": 1,
+   "read": 1
+  },
+  {
+   "city": "ny/garden-city",
+   "group": "Long Island",
+   "drive_min": 22.8,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "ny/hempstead",
+   "group": "Long Island",
+   "drive_min": 23.1,
+   "props": 3,
+   "read": 1
+  },
+  {
+   "city": "ny/freeport",
+   "group": "Long Island",
+   "drive_min": 23.5,
+   "props": 2,
+   "read": 0
+  },
+  {
+   "city": "ny/roslyn",
+   "group": "Long Island",
+   "drive_min": 25.2,
+   "props": 2,
+   "read": 0
+  },
+  {
+   "city": "ny/merrick",
+   "group": "Long Island",
+   "drive_min": 25.9,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "ny/island-park",
+   "group": "Long Island",
+   "drive_min": 26.0,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "ny/uniondale",
+   "group": "Long Island",
+   "drive_min": 26.3,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "ny/westbury",
+   "group": "Long Island",
+   "drive_min": 28.3,
+   "props": 4,
+   "read": 0
   }
  ],
  "cities_unmatched_far": [
@@ -556,5 +1880,10 @@
    "city": "pa/fox-run",
    "km_to_grid": 416.1
   }
- ]
+ ],
+ "sweeps": {
+  "New Jersey": 16,
+  "Brooklyn": 5,
+  "Connecticut": 5
+ }
 }

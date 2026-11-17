@@ -2188,5 +2188,2810 @@
 "at": "2026-11-17T17:19:25+00:00",
 "status": 200,
 "reason": "ok"
+},
+"/nj/cranford/112-lincoln-park": {
+"at": "2026-11-17T17:19:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/cranford/112-roosevelt-ave": {
+"at": "2026-11-17T17:19:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/cranford/17-19-north-union-avenue": {
+"at": "2026-11-17T17:19:50+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/cranford/46-f-parkway-village": {
+"at": "2026-11-17T17:19:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/cranford/6-riverside-dr": {
+"at": "2026-11-17T17:19:55+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/pompton-lakes/15-broad": {
+"at": "2026-11-17T17:20:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/pompton-lakes/220-colfax-avenue": {
+"at": "2026-11-17T17:20:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/pompton-lakes/422-ringwood-ave--1": {
+"at": "2026-11-17T17:20:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/rahway/580-e-milton-ave": {
+"at": "2026-11-17T17:20:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/caldwell/293-bloomfield-ave": {
+"at": "2026-11-17T17:20:35+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/caldwell/48-roseland-avenue--2": {
+"at": "2026-11-17T17:20:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/caldwell/79-roseland-ave": {
+"at": "2026-11-17T17:20:39+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/caldwell/87-elm-rd": {
+"at": "2026-11-17T17:20:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/caldwell/mary-ann-apts": {
+"at": "2026-11-17T17:20:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/summit/306-springfield-ave": {
+"at": "2026-11-17T17:20:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/riverdale/48-mountainview-ct": {
+"at": "2026-11-17T17:21:20+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/short-hills/510-millburn-avenue-apts": {
+"at": "2026-11-17T17:21:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/wanaque/1141-ringwood-ave": {
+"at": "2026-11-17T17:21:40+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/wanaque/72-haskell-ave": {
+"at": "2026-11-17T17:21:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/parsippany-troy-hills/189-littleton-rd--2": {
+"at": "2026-11-17T17:22:00+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/parsippany-troy-hills/191-n-beverwyck-rd": {
+"at": "2026-11-17T17:22:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/parsippany-troy-hills/199-n-beverwyck-rd--2": {
+"at": "2026-11-17T17:22:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/parsippany-troy-hills/20-lincoln-gdns": {
+"at": "2026-11-17T17:22:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/parsippany-troy-hills/avalon-montville": {
+"at": "2026-11-17T17:22:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/parsippany-troy-hills/avalon-parsippany": {
+"at": "2026-11-17T17:22:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/parsippany-troy-hills/colonial-heights": {
+"at": "2026-11-17T17:22:15+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/parsippany-troy-hills/halstead-parsippany--1": {
+"at": "2026-11-17T17:22:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/perth-amboy/110-market-street--1": {
+"at": "2026-11-17T17:22:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/perth-amboy/226-new-brunswick-avenue": {
+"at": "2026-11-17T17:22:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/perth-amboy/593-penn-street": {
+"at": "2026-11-17T17:22:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/perth-amboy/639-johnstone-st": {
+"at": "2026-11-17T17:22:35+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/perth-amboy/725-parker-street": {
+"at": "2026-11-17T17:22:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/westfield/220-e-broad-st--1": {
+"at": "2026-11-17T17:22:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/westfield/38-sandra-cir--1": {
+"at": "2026-11-17T17:22:55+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/westfield/541-downer-st": {
+"at": "2026-11-17T17:22:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/colonia/queens-gardens-apartments": {
+"at": "2026-11-17T17:23:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/woodbridge/117-cricket-lane": {
+"at": "2026-11-17T17:23:20+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/woodbridge/124-beverly-hills-terrace": {
+"at": "2026-11-17T17:23:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/woodbridge/135-c-beverly-hill-terrace": {
+"at": "2026-11-17T17:23:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/woodbridge/187-main-street": {
+"at": "2026-11-17T17:23:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/woodbridge/324-sharon-garden-court": {
+"at": "2026-11-17T17:23:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/woodbridge/835-cricket-lane": {
+"at": "2026-11-17T17:23:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/woodbridge/crossroads-gardens-apartments": {
+"at": "2026-11-17T17:23:35+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/woodbridge/kings-gardens-apartments": {
+"at": "2026-11-17T17:23:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/woodbridge/newark-woodbridge": {
+"at": "2026-11-17T17:23:40+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/woodbridge/the-point-woodbridge": {
+"at": "2026-11-17T17:23:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bloomingdale/152-hamburg-tpke": {
+"at": "2026-11-17T17:23:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/iselin/103-woodbridge-common": {
+"at": "2026-11-17T17:24:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/iselin/georgian-arms": {
+"at": "2026-11-17T17:24:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/iselin/metro-park-station-apartments": {
+"at": "2026-11-17T17:24:15+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/fords/531-new-brunswick-avenue": {
+"at": "2026-11-17T17:24:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/fords/the-crossings-at-one": {
+"at": "2026-11-17T17:24:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/madison/10-waverly-pl": {
+"at": "2026-11-17T17:24:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/watchung/89-east-dr": {
+"at": "2026-11-17T17:24:55+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/watchung/crystal-ridge-at-watchung": {
+"at": "2026-11-17T17:24:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/rockaway/156-us-46": {
+"at": "2026-11-17T17:25:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/edison/18-judson-street--1": {
+"at": "2026-11-17T17:25:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/edison/44-judson-street--1": {
+"at": "2026-11-17T17:25:20+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/edison/clara-barton-apartments": {
+"at": "2026-11-17T17:25:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/edison/edison-raritan-center": {
+"at": "2026-11-17T17:25:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/edison/grandview-gardens": {
+"at": "2026-11-17T17:25:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/florham-park/26-hanover": {
+"at": "2026-11-17T17:25:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/florham-park/96-burnet-road": {
+"at": "2026-11-17T17:25:40+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/metuchen/the-crossings-at-menlo-park": {
+"at": "2026-11-17T17:25:50+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/clark/10-washington-st": {
+"at": "2026-11-17T17:25:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/clark/riverview-terrace": {
+"at": "2026-11-17T17:26:00+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/sayreville/226-washington-road": {
+"at": "2026-11-17T17:26:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/sayreville/morgan-s-bluff--1": {
+"at": "2026-11-17T17:26:15+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/boonton/128b-wilson-st": {
+"at": "2026-11-17T17:26:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/boonton/avalon-boonton": {
+"at": "2026-11-17T17:26:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/north-plainfield/watchung-view-apartments": {
+"at": "2026-11-17T17:26:49+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/plainfield/1315-murray-avenue": {
+"at": "2026-11-17T17:27:00+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/plainfield/821-central-ave": {
+"at": "2026-11-17T17:27:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/plainfield/821-central-st": {
+"at": "2026-11-17T17:27:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/plainfield/citivillage-plainfield-station": {
+"at": "2026-11-17T17:27:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/plainfield/the-quin": {
+"at": "2026-11-17T17:27:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/south-plainfield/the-highlands-at-south-plainfield": {
+"at": "2026-11-17T17:27:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/new-brunswick/88-harvey-street": {
+"at": "2026-11-17T17:27:40+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/new-brunswick/beekman-gardens": {
+"at": "2026-11-17T17:27:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/new-brunswick/colony-house-apartments--1": {
+"at": "2026-11-17T17:27:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/new-brunswick/new-brunswick-arms-apartments": {
+"at": "2026-11-17T17:27:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/new-brunswick/princeton-south-brunswick": {
+"at": "2026-11-17T17:27:50+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/new-brunswick/skyline-tower--1": {
+"at": "2026-11-17T17:27:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/new-brunswick/the-gardens-at-raritan--1": {
+"at": "2026-11-17T17:27:55+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/dover/69-fox-hill-dr": {
+"at": "2026-11-17T17:28:04+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/wharton/avalon-wharton": {
+"at": "2026-11-17T17:28:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/highland-park/123-s-adelaide-avenue-s--1": {
+"at": "2026-11-17T17:28:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/highland-park/235-montgomery-street": {
+"at": "2026-11-17T17:28:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/highland-park/64-lawrence-avenue": {
+"at": "2026-11-17T17:28:50+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/highland-park/76-s-adelaide-avenue--1": {
+"at": "2026-11-17T17:28:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/morristown/98-maple-ave": {
+"at": "2026-11-17T17:29:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/morristown/franklin-manor-apartments": {
+"at": "2026-11-17T17:29:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/morristown/jefferson-apartments--1": {
+"at": "2026-11-17T17:29:09+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/morristown/modera-44": {
+"at": "2026-11-17T17:29:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/morristown/modera-55": {
+"at": "2026-11-17T17:29:15+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/matawan/165-broad-street": {
+"at": "2026-11-17T17:29:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/matawan/chelsea-village": {
+"at": "2026-11-17T17:29:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/matawan/the-link-at-aberdeen-station": {
+"at": "2026-11-17T17:29:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/matawan/tree-haven-apartments": {
+"at": "2026-11-17T17:29:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/mount-arlington/382-howard-blvd": {
+"at": "2026-11-17T17:29:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/mount-arlington/carriage-club-at-mt-arlington": {
+"at": "2026-11-17T17:29:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/south-river/sherwood-court--1": {
+"at": "2026-11-17T17:29:54+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/middlesex/124-runyon-avenue": {
+"at": "2026-11-17T17:30:04+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/middlesex/307-2nd-street": {
+"at": "2026-11-17T17:30:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/middlesex/hampton-gardens": {
+"at": "2026-11-17T17:30:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/old-bridge/country-living-at-mapleview--1": {
+"at": "2026-11-17T17:30:20+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/piscataway/138-hamilton-blvd": {
+"at": "2026-11-17T17:30:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/piscataway/carlton-club-apartments--1": {
+"at": "2026-11-17T17:30:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/piscataway/piscataway-rutgers-university": {
+"at": "2026-11-17T17:30:35+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/keyport/19-broadway": {
+"at": "2026-11-17T17:30:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/keyport/26-main-street": {
+"at": "2026-11-17T17:30:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/south-bound-brook/172-high-st": {
+"at": "2026-11-17T17:31:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/kenvil/501-route46ken": {
+"at": "2026-11-17T17:31:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bound-brook/18-mountain-ave": {
+"at": "2026-11-17T17:31:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bound-brook/229-thompson-ave": {
+"at": "2026-11-17T17:31:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bound-brook/306-w-main-st": {
+"at": "2026-11-17T17:31:29+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bound-brook/rail-at-bound-brook": {
+"at": "2026-11-17T17:31:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/somerville/brookside-gardens": {
+"at": "2026-11-17T17:31:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/somerville/the-roosevelt": {
+"at": "2026-11-17T17:31:55+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/somerville/the-warehouse": {
+"at": "2026-11-17T17:31:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/north-brunswick/livingston-gardens": {
+"at": "2026-11-17T17:32:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/raritan/crossings-at-raritan-station": {
+"at": "2026-11-17T17:32:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/somerset/harrison-somerset": {
+"at": "2026-11-17T17:32:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/somerset/somerset-franklin": {
+"at": "2026-11-17T17:32:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/somerset/somerset-mews": {
+"at": "2026-11-17T17:32:49+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/somerset/the-hillmont": {
+"at": "2026-11-17T17:32:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/keansburg/17-walters-street": {
+"at": "2026-11-17T17:33:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/keansburg/213-main-street--2": {
+"at": "2026-11-17T17:33:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/keansburg/71-oak-street": {
+"at": "2026-11-17T17:33:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/keansburg/73-morningside-avenue--1": {
+"at": "2026-11-17T17:33:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/keansburg/carr-avenue": {
+"at": "2026-11-17T17:33:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/finderne/grandview-gardens-apartments": {
+"at": "2026-11-17T17:33:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/stanhope/10182-dell-pl": {
+"at": "2026-11-17T17:33:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/stanhope/151-state-route-183": {
+"at": "2026-11-17T17:33:40+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/stanhope/8140-ashland-ct": {
+"at": "2026-11-17T17:33:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/north-middletown/174-ocean-avenue": {
+"at": "2026-11-17T17:33:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/manville/18-s-5th-ave": {
+"at": "2026-11-17T17:34:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/manville/365-huff-avenue": {
+"at": "2026-11-17T17:34:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/budd-lake/mt-olive-budd-lake": {
+"at": "2026-11-17T17:34:15+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/lake-mohawk/27-w-shore-trl": {
+"at": "2026-11-17T17:34:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/dayton/485-georges-road": {
+"at": "2026-11-17T17:34:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/dayton/702-jacob-court": {
+"at": "2026-11-17T17:34:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/heathcote/53-foxtail-lane": {
+"at": "2026-11-17T17:34:55+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/franklin-park/somerset-park": {
+"at": "2026-11-17T17:35:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/red-bank/10-monmouth-street--1": {
+"at": "2026-11-17T17:35:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/red-bank/33-drs-james-parker-boulevard--1": {
+"at": "2026-11-17T17:35:20+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/red-bank/grandville-towers": {
+"at": "2026-11-17T17:35:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/red-bank/red-bank-middletown": {
+"at": "2026-11-17T17:35:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/hamburg/55-gingerbread-castle-rd--1": {
+"at": "2026-11-17T17:35:35+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/vernon-center/3-sugar-loaf-ct": {
+"at": "2026-11-17T17:35:50+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/vernon-center/5-brandywine-ct": {
+"at": "2026-11-17T17:35:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/plainsboro-center/icon-riverwalk-55-active-adult-apartment-homes": {
+"at": "2026-11-17T17:36:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/plainsboro-center/quail-ridge": {
+"at": "2026-11-17T17:36:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/plainsboro-center/the-crest-at-princeton-meadows": {
+"at": "2026-11-17T17:36:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/princeton-meadows/1105-aspen-dr": {
+"at": "2026-11-17T17:36:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/princeton-meadows/1213-ravens-crest-drive": {
+"at": "2026-11-17T17:36:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/princeton-meadows/1219-ravens-crest-drive": {
+"at": "2026-11-17T17:36:50+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/princeton-meadows/1317-ravens-crest-drive": {
+"at": "2026-11-17T17:36:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/princeton-meadows/1513-ravens-crest-drive--1": {
+"at": "2026-11-17T17:36:55+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/princeton-meadows/1604-ravens-crest-drive": {
+"at": "2026-11-17T17:36:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/princeton-meadows/420-ravens-crest-drive": {
+"at": "2026-11-17T17:37:00+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/princeton-meadows/5322-ravens-crest-drive": {
+"at": "2026-11-17T17:37:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/princeton-meadows/addison-at-princeton-meadows--1": {
+"at": "2026-11-17T17:37:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/hightstown/132-william-street--1": {
+"at": "2026-11-17T17:37:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/hightstown/299-ward-street": {
+"at": "2026-11-17T17:37:20+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/eatontown/17-azalea-court": {
+"at": "2026-11-17T17:37:29+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/eatontown/garrison-apartments--1": {
+"at": "2026-11-17T17:37:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/tinton-falls/80-diane-dr": {
+"at": "2026-11-17T17:37:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/freehold/45-broad-street": {
+"at": "2026-11-17T17:38:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/freehold/freehold-in-town-commons--1": {
+"at": "2026-11-17T17:38:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/west-freehold/35-manchester-court--1": {
+"at": "2026-11-17T17:38:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/west-freehold/77-stonehurst-boulevard": {
+"at": "2026-11-17T17:38:20+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/west-freehold/79-stonehurst-boulevard": {
+"at": "2026-11-17T17:38:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/west-freehold/84-manchester-court": {
+"at": "2026-11-17T17:38:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/hackettstown/644-washington-st": {
+"at": "2026-11-17T17:38:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/hackettstown/countryside-apartments": {
+"at": "2026-11-17T17:38:40+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/hackettstown/greenview-gardens": {
+"at": "2026-11-17T17:38:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/princeton/10-lytle-street": {
+"at": "2026-11-17T17:39:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/princeton/charming-victorian-apartment-in-the-heart-of-princeton": {
+"at": "2026-11-17T17:39:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/princeton/princeton-west-windsor": {
+"at": "2026-11-17T17:39:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/princeton/studio-apartment-in-palmer-square": {
+"at": "2026-11-17T17:39:15+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/princeton/the-mews-at-princeton-junction": {
+"at": "2026-11-17T17:39:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/long-branch/199-west-end-avenue--1": {
+"at": "2026-11-17T17:39:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/long-branch/258-bath-avenue": {
+"at": "2026-11-17T17:39:35+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/long-branch/364-westwood-avenue--4": {
+"at": "2026-11-17T17:39:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/long-branch/455-ocean-boulevard--5": {
+"at": "2026-11-17T17:39:40+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/long-branch/581-broadway": {
+"at": "2026-11-17T17:39:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/long-branch/892-elberon-avenue--1": {
+"at": "2026-11-17T17:39:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/long-branch/buena-vista--1": {
+"at": "2026-11-17T17:39:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/long-branch/edgewater-east": {
+"at": "2026-11-17T17:39:50+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/long-branch/shore-gardens--1": {
+"at": "2026-11-17T17:39:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/monmouth-beach/151-wharfside-dr": {
+"at": "2026-11-17T17:40:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/monmouth-beach/153-wharfside-drive": {
+"at": "2026-11-17T17:40:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/monmouth-beach/3-wharfside-drive": {
+"at": "2026-11-17T17:40:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/sea-bright/1198-ocean-avenue": {
+"at": "2026-11-17T17:40:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/sea-bright/1382-ocean-avenue--2": {
+"at": "2026-11-17T17:40:20+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/sussex/12-loomis-ave": {
+"at": "2026-11-17T17:40:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/sussex/19-main-st--1": {
+"at": "2026-11-17T17:40:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/sussex/3-church-st": {
+"at": "2026-11-17T17:40:50+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bradley-beach/100-ocean-avenue-n--2": {
+"at": "2026-11-17T17:41:00+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bradley-beach/109-mccabe-avenue--3": {
+"at": "2026-11-17T17:41:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bradley-beach/200-lareine-avenue--3": {
+"at": "2026-11-17T17:41:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bradley-beach/308-mccabe-avenue": {
+"at": "2026-11-17T17:41:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bradley-beach/515-monmouth-avenue--1": {
+"at": "2026-11-17T17:41:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bradley-beach/803-ocean-avenue-n": {
+"at": "2026-11-17T17:41:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/neptune-city/65-steiner-avenue--1": {
+"at": "2026-11-17T17:41:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/neptune-city/brighton-arms--1": {
+"at": "2026-11-17T17:41:24+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/asbury-park/606-1st-ave": {
+"at": "2026-11-17T17:41:40+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/ocean-grove/119-main-avenue": {
+"at": "2026-11-17T17:41:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/ocean-grove/136-mount-tabor-way": {
+"at": "2026-11-17T17:41:55+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/ocean-grove/151-stockton-avenue--1": {
+"at": "2026-11-17T17:41:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/ocean-grove/23-ocean-avenue": {
+"at": "2026-11-17T17:42:00+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/ocean-grove/23-surf-avenue": {
+"at": "2026-11-17T17:42:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/ocean-grove/46-broadway-avenue": {
+"at": "2026-11-17T17:42:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/ocean-grove/57-franklin-avenue": {
+"at": "2026-11-17T17:42:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/highlands/18-5th-street": {
+"at": "2026-11-17T17:42:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/highlands/195-bay-avenue": {
+"at": "2026-11-17T17:42:20+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/highlands/30-navesink-avenue--1": {
+"at": "2026-11-17T17:42:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/highlands/321-shore-drive--2": {
+"at": "2026-11-17T17:42:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/lawrenceville/artisan-at-lawrenceville": {
+"at": "2026-11-17T17:42:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/lawrenceville/charming-second-floor-apartment-near-the-village-of-lawrenceville": {
+"at": "2026-11-17T17:42:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/lawrenceville/stewards-crossing--1": {
+"at": "2026-11-17T17:42:50+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/lawrenceville/the-mercer-at-lawrence-station": {
+"at": "2026-11-17T17:42:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/belmar/205-ocean-avenue--2": {
+"at": "2026-11-17T16:51:41+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/belmar/210-5th-avenue--3": {
+"at": "2026-11-17T16:51:43+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/flemington/spice-factory": {
+"at": "2026-11-17T17:43:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/flemington/the-residences-at-courthouse-square": {
+"at": "2026-11-17T17:43:20+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bordentown/110-crosswicks-street": {
+"at": "2026-11-17T17:43:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bordentown/laurel-run-village": {
+"at": "2026-11-17T17:43:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bordentown/park-apartments": {
+"at": "2026-11-17T17:43:35+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bordentown/waterfront-village-affordable-housing": {
+"at": "2026-11-17T17:43:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newton/180-spring-st": {
+"at": "2026-11-17T17:44:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newton/4c-swartswood-rd": {
+"at": "2026-11-17T17:44:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newton/69-sparta-ave--4": {
+"at": "2026-11-17T17:44:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newton/7-hillside-ave--2": {
+"at": "2026-11-17T17:44:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newton/71b-sparta-ave--12": {
+"at": "2026-11-17T17:44:15+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newton/73d-sparta-ave": {
+"at": "2026-11-17T17:44:18+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newton/brook-bridge-apartments--1": {
+"at": "2026-11-17T17:44:19+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newton/brookside-terrace-apartments": {
+"at": "2026-11-17T17:44:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newton/newtonian-gardens-apartments": {
+"at": "2026-11-17T17:44:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/brielle/602-harris-avenue--1": {
+"at": "2026-11-17T17:44:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/white-horse/barclay-village": {
+"at": "2026-11-17T17:44:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/manasquan/55-beach-front": {
+"at": "2026-11-17T17:44:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/spring-lake-heights/610-central-ave": {
+"at": "2026-11-17T17:45:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/trenton/29-tyler-streetapt-10": {
+"at": "2026-11-17T17:45:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/trenton/345-garfield-avenue": {
+"at": "2026-11-17T17:45:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/trenton/38-bayard-street": {
+"at": "2026-11-17T17:45:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/trenton/720-anderson-street": {
+"at": "2026-11-17T17:45:50+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/trenton/915-pennsylvania-avenue": {
+"at": "2026-11-17T17:45:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/trenton/eaves-west-windsor": {
+"at": "2026-11-17T17:45:55+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/trenton/kuser": {
+"at": "2026-11-17T17:45:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/trenton/scudder-falls-east": {
+"at": "2026-11-17T17:46:00+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/trenton/wingate-apartments": {
+"at": "2026-11-17T17:46:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/phillipsburg/1041-ridge-st-b41": {
+"at": "2026-11-17T17:46:15+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/phillipsburg/151-s-main-st": {
+"at": "2026-11-17T17:46:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/phillipsburg/249-heckman-st": {
+"at": "2026-11-17T17:46:20+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/phillipsburg/45-fox-st": {
+"at": "2026-11-17T17:46:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/phillipsburg/610-corliss-ave": {
+"at": "2026-11-17T17:46:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/phillipsburg/brakeley-gardens--1": {
+"at": "2026-11-17T17:46:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/phillipsburg/warren-heights-apartments": {
+"at": "2026-11-17T17:46:29+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/point-pleasant/601-mistletoe-avenue": {
+"at": "2026-11-17T17:46:50+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/point-pleasant-beach/310-maryland-avenue--1": {
+"at": "2026-11-17T17:47:00+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/washington/midtown-apartments": {
+"at": "2026-11-17T17:47:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/florence/4-5-florence-tollgate-place": {
+"at": "2026-11-17T17:47:20+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/burlington/108-thompson-street-front-apartment": {
+"at": "2026-11-17T17:47:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/burlington/26-w-union-street": {
+"at": "2026-11-17T17:47:40+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/burlington/34-w-broad-street-w": {
+"at": "2026-11-17T17:47:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/burlington/j-centra-burlington": {
+"at": "2026-11-17T17:47:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/burlington/northampton-crossing": {
+"at": "2026-11-17T17:47:49+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/burlington/pearl-pointe-apartments": {
+"at": "2026-11-17T17:47:49+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/burlington/village-square": {
+"at": "2026-11-17T17:47:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/burlington/whitehall-apartments": {
+"at": "2026-11-17T17:47:54+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/nj/bloomfield/61-montgomery-st": {
+"at": "2026-11-17T17:47:57+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/nj/guttenberg/6812-polk-street--1": {
+"at": "2026-11-17T17:47:59+00:00",
+"status": 200,
+"reason": "no_listing_object"
+},
+"/nj/irvington/166-elmwood-ave": {
+"at": "2026-11-17T17:48:02+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/nj/iselin/the-grande-at-metropark": {
+"at": "2026-11-17T17:48:05+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/nj/jamesburg/37-hooker-st": {
+"at": "2026-11-17T17:48:07+00:00",
+"status": 200,
+"reason": "no_listing_object"
+},
+"/nj/jersey-city/650-montgomery-st-apt-403": {
+"at": "2026-11-17T17:48:10+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/nj/jersey-city/le-leo": {
+"at": "2026-11-17T17:48:12+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/nj/metuchen/the-jax": {
+"at": "2026-11-17T17:48:15+00:00",
+"status": 200,
+"reason": "no_listing_object"
+},
+"/nj/newark/21-huntington-ter": {
+"at": "2026-11-17T17:48:17+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/nj/newark/267-s-10th-st-g": {
+"at": "2026-11-17T17:48:20+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/nj/north-bergen/8300-boulevard-e": {
+"at": "2026-11-17T17:48:22+00:00",
+"status": 200,
+"reason": "no_listing_object"
+},
+"/nj/ocean-grove/84-main-avenue": {
+"at": "2026-11-17T17:48:25+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/nj/passaic/377-madison-street": {
+"at": "2026-11-17T17:48:27+00:00",
+"status": 200,
+"reason": "no_listing_object"
+},
+"/nj/paterson/353-marshall-st": {
+"at": "2026-11-17T17:48:29+00:00",
+"status": 200,
+"reason": "no_listing_object"
+},
+"/nj/rutherford/74-hastings-avenue": {
+"at": "2026-11-17T17:48:32+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/nj/woodbridge/1334-cricket-lane": {
+"at": "2026-11-17T17:48:35+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ny/brooklyn/10-elton-st": {
+"at": "2026-11-17T17:49:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/10-lenox-rd-apt-4b": {
+"at": "2026-11-17T17:49:45+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ny/brooklyn/1040-carroll-st-apt-2k": {
+"at": "2026-11-17T17:49:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/110-thatford-avenue--1": {
+"at": "2026-11-17T17:49:50+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/1136-sterling-place": {
+"at": "2026-11-17T17:49:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/1142-flatbush-ave": {
+"at": "2026-11-17T17:49:55+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/1205-avenue-r": {
+"at": "2026-11-17T17:49:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/124-31st-st--1": {
+"at": "2026-11-17T17:50:00+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/1266-e-56th-st": {
+"at": "2026-11-17T17:50:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/1289-e-19th-st--2": {
+"at": "2026-11-17T17:50:04+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/1297-bergen-st-apt-4": {
+"at": "2026-11-17T17:50:08+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/13-jefferson-st--1": {
+"at": "2026-11-17T17:50:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/133-conselyea-st": {
+"at": "2026-11-17T17:50:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/1332-bushwick-ave-apt-2f": {
+"at": "2026-11-17T17:50:15+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/1335-bushwick-ave-apt-2f": {
+"at": "2026-11-17T17:50:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/135-hawthorne-st": {
+"at": "2026-11-17T17:50:20+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/1400-e-4-street": {
+"at": "2026-11-17T17:50:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/149-96th-st": {
+"at": "2026-11-17T17:50:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/1511-fulton-st-apt-2b": {
+"at": "2026-11-17T17:50:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/1512-park-pl": {
+"at": "2026-11-17T17:50:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/1520-fulton-st-apt-8d": {
+"at": "2026-11-17T17:50:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/157-91st-street": {
+"at": "2026-11-17T17:50:35+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/1577-e-17th-st-apt-6m": {
+"at": "2026-11-17T17:50:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/1581-mcdonald-avenue--1": {
+"at": "2026-11-17T17:50:40+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/1612-nostrand-avenue": {
+"at": "2026-11-17T17:50:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/1687-86th-st": {
+"at": "2026-11-17T17:50:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/1917-avenue-w-unit-2b": {
+"at": "2026-11-17T17:50:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/2-w-end-ave-apt-4g--2": {
+"at": "2026-11-17T17:50:50+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/2016-avenue-m": {
+"at": "2026-11-17T17:50:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/2066-62nd-street": {
+"at": "2026-11-17T17:50:55+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/2066-e-15th-st--2": {
+"at": "2026-11-17T17:50:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/2115-e-16th-street": {
+"at": "2026-11-17T17:50:59+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/2152-e-73rd-st": {
+"at": "2026-11-17T17:51:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/22-chapel-street": {
+"at": "2026-11-17T17:51:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/2216-kimball-street": {
+"at": "2026-11-17T17:51:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/227-neptune-avenue": {
+"at": "2026-11-17T17:51:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/23-chapel-st-apt-14b": {
+"at": "2026-11-17T17:51:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/2300-e-13th-street": {
+"at": "2026-11-17T17:51:15+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/231-irving-ave": {
+"at": "2026-11-17T17:51:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/2312-coney-island-avenue": {
+"at": "2026-11-17T17:51:20+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/235-martense-st": {
+"at": "2026-11-17T17:51:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/237-fountain-avenue": {
+"at": "2026-11-17T17:51:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/240-suydam-st-1": {
+"at": "2026-11-17T17:51:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/248-e-92nd-street": {
+"at": "2026-11-17T17:51:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/248-mckibben-st--8": {
+"at": "2026-11-17T17:51:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/2546-e-13th-st--1": {
+"at": "2026-11-17T17:51:35+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/2580-ocean-pkwy-6654--1": {
+"at": "2026-11-17T17:51:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/2733-east-27th-street": {
+"at": "2026-11-17T17:51:40+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/2761-bath-ave-apt-1b": {
+"at": "2026-11-17T17:51:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/2912-brighton-12th-street--1": {
+"at": "2026-11-17T17:51:44+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/3015-brighton-6th-st": {
+"at": "2026-11-17T17:51:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/3016-west-22nd-street1a": {
+"at": "2026-11-17T17:51:49+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/3022-avenue-i": {
+"at": "2026-11-17T17:51:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/3025-ocean-ave-apt-6a": {
+"at": "2026-11-17T17:51:55+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/310-94th-st": {
+"at": "2026-11-17T17:51:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/3100-brighton-3rd-st-5544--1": {
+"at": "2026-11-17T17:52:00+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/315-berry-st-apt-6": {
+"at": "2026-11-17T17:52:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/357-grove-st": {
+"at": "2026-11-17T17:52:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/367-avenue-s-2211": {
+"at": "2026-11-17T17:52:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/368-leonard-street": {
+"at": "2026-11-17T17:52:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/373-berriman-st-apt-1": {
+"at": "2026-11-17T17:52:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/390-lorimer-st--1": {
+"at": "2026-11-17T17:52:15+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/410-douglass-st-apt-3": {
+"at": "2026-11-17T17:52:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/434-hancock-st": {
+"at": "2026-11-17T17:52:20+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/444-halsey-street": {
+"at": "2026-11-17T17:52:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/4577-kingshighway": {
+"at": "2026-11-17T17:52:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/460-throop-ave-apt-4": {
+"at": "2026-11-17T17:52:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/47-bridge-st-76576": {
+"at": "2026-11-17T17:52:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/476-jefferson-st-322": {
+"at": "2026-11-17T17:52:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/5115-13th-ave": {
+"at": "2026-11-17T17:52:34+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/54-orange-st-apt-4f": {
+"at": "2026-11-17T17:52:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/570-westminster-rd-7654": {
+"at": "2026-11-17T17:52:40+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/577-lafayette-ave": {
+"at": "2026-11-17T17:52:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/579-74th-street": {
+"at": "2026-11-17T17:52:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/59-pineapple-st-5545": {
+"at": "2026-11-17T17:52:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/6-stanhope-st": {
+"at": "2026-11-17T17:52:50+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/6002-20th-avenue": {
+"at": "2026-11-17T17:52:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/63-brighton-2nd-pl-apt-4a--1": {
+"at": "2026-11-17T17:52:55+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/64-clark-st": {
+"at": "2026-11-17T17:52:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/651-10th-st-apt-2": {
+"at": "2026-11-17T17:53:00+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/662-4th-ave--1": {
+"at": "2026-11-17T17:53:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/67-grand-ave-apt-3k": {
+"at": "2026-11-17T17:53:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/6815-owls-head-ct": {
+"at": "2026-11-17T17:53:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/7-lenox-rd-apt-14b": {
+"at": "2026-11-17T17:53:10+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ny/brooklyn/701-gerald-ct-apt-2e": {
+"at": "2026-11-17T17:53:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/709-sterling-pl": {
+"at": "2026-11-17T17:53:14+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/7108-14th-avenue": {
+"at": "2026-11-17T17:53:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/7119-shore-rd-8765": {
+"at": "2026-11-17T17:53:20+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/7225-new-utrecht-avenue": {
+"at": "2026-11-17T17:53:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/726-monroe-street": {
+"at": "2026-11-17T17:53:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/74-palmetto-st": {
+"at": "2026-11-17T17:53:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/74-weirfield-st-apt-a4f": {
+"at": "2026-11-17T17:53:30+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ny/brooklyn/7405-18th-avenue--1": {
+"at": "2026-11-17T17:53:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/79-e-28th-st": {
+"at": "2026-11-17T17:53:35+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/80-avenue-p-apt-f2--1": {
+"at": "2026-11-17T17:53:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/864-willoughby-ave-apt-3a": {
+"at": "2026-11-17T17:53:40+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/865-rogers-ave-apt-402": {
+"at": "2026-11-17T17:53:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/873-monroe-st-apt-10": {
+"at": "2026-11-17T17:53:45+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ny/brooklyn/90-furman-st": {
+"at": "2026-11-17T17:53:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/910-park-pl-apt-1d": {
+"at": "2026-11-17T17:53:50+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/92-e-55th-street": {
+"at": "2026-11-17T17:53:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/95-weirfield-st-apt-3d": {
+"at": "2026-11-17T17:53:55+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/98-fleet-pl-apt-15b": {
+"at": "2026-11-17T17:53:57+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ny/brooklyn/clifton-place--1": {
+"at": "2026-11-17T17:54:00+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/brooklyn/1457-flatbush-ave": {
+"at": "2026-11-17T17:54:02+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ny/brooklyn/2925-w-5th-st--1": {
+"at": "2026-11-17T17:54:05+00:00",
+"status": 200,
+"reason": "no_listing_object"
+},
+"/ny/brooklyn/321-53rd-st": {
+"at": "2026-11-17T17:54:07+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ny/brooklyn/578-ralph-ave": {
+"at": "2026-11-17T17:54:10+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ny/brooklyn/77-eastern-pkwy-40": {
+"at": "2026-11-17T17:54:12+00:00",
+"status": 200,
+"reason": "no_listing_object"
+},
+"/ct/stamford/1078-east-main-street": {
+"at": "2026-11-17T17:54:59+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/stamford/125-prospect-street--1": {
+"at": "2026-11-17T17:55:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/stamford/132-summer-street": {
+"at": "2026-11-17T17:55:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/stamford/1462-summer-street": {
+"at": "2026-11-17T17:55:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/stamford/162-lockwood-avenue": {
+"at": "2026-11-17T17:55:09+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/stamford/180-5th-street": {
+"at": "2026-11-17T17:55:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/stamford/20-spring-st": {
+"at": "2026-11-17T17:55:15+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/stamford/22-glenbrook-road--2": {
+"at": "2026-11-17T17:55:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/stamford/230-belltown-road": {
+"at": "2026-11-17T17:55:20+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/stamford/24-adams-avenue": {
+"at": "2026-11-17T17:55:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/stamford/29-hoyt-street": {
+"at": "2026-11-17T17:55:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/stamford/394-courtland-avenue--1": {
+"at": "2026-11-17T17:55:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/stamford/398-courtland-avenue--1": {
+"at": "2026-11-17T17:55:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/stamford/51-schuyler-avenue--1": {
+"at": "2026-11-17T17:55:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/stamford/66-highland-road": {
+"at": "2026-11-17T17:55:35+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/stamford/7-fourth-street--1": {
+"at": "2026-11-17T17:55:38+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/stamford/900-hope-street--1": {
+"at": "2026-11-17T17:55:40+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/stamford/94-colonial-road": {
+"at": "2026-11-17T17:55:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/stamford/the-hazel": {
+"at": "2026-11-17T17:55:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/norwalk/1-north-avenue": {
+"at": "2026-11-17T17:56:00+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/norwalk/10-fairview-avenue": {
+"at": "2026-11-17T17:56:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/norwalk/17-ferris-ave--1": {
+"at": "2026-11-17T17:56:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/norwalk/18-knapp-street": {
+"at": "2026-11-17T17:56:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/norwalk/207-flax-hill-road": {
+"at": "2026-11-17T17:56:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/norwalk/266-main-avenue": {
+"at": "2026-11-17T17:56:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/norwalk/34-glenwood-ave--1": {
+"at": "2026-11-17T17:56:15+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/norwalk/36-woodbury-avenue": {
+"at": "2026-11-17T17:56:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/norwalk/57-ledgewood-drive": {
+"at": "2026-11-17T17:56:20+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/norwalk/94-washington-street--2": {
+"at": "2026-11-17T17:56:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/norwalk/halstead-norwalk": {
+"at": "2026-11-17T17:56:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/norwalk/norwalk-stamford": {
+"at": "2026-11-17T17:56:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/norwalk/the-flats-at-289-main": {
+"at": "2026-11-17T17:56:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/bridgeport/120-nash-lane-17-a": {
+"at": "2026-11-17T17:57:00+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/bridgeport/1300-capitol-avenue": {
+"at": "2026-11-17T17:57:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/bridgeport/205-bretton-street": {
+"at": "2026-11-17T17:57:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/bridgeport/213-golden-hill-street": {
+"at": "2026-11-17T17:57:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/bridgeport/215-edgemoor-road": {
+"at": "2026-11-17T17:57:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/bridgeport/225-golden-hill-st": {
+"at": "2026-11-17T17:57:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/bridgeport/24-teresa-place": {
+"at": "2026-11-17T17:57:15+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/bridgeport/252-harlem-avenue": {
+"at": "2026-11-17T17:57:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/bridgeport/267-ellsworth-street-8-c": {
+"at": "2026-11-17T17:57:20+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/bridgeport/297-ellsworth-street-10-e": {
+"at": "2026-11-17T17:57:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/bridgeport/3006-madison-avenue": {
+"at": "2026-11-17T17:57:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/bridgeport/326-330-bradley-street": {
+"at": "2026-11-17T17:57:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/bridgeport/333-vincellette-street--3": {
+"at": "2026-11-17T17:57:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/bridgeport/343-wayne-street": {
+"at": "2026-11-17T17:57:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/bridgeport/345-benham-avenue": {
+"at": "2026-11-17T17:57:35+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/bridgeport/37-enid-street": {
+"at": "2026-11-17T17:57:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/bridgeport/375-glendale-avenue--4": {
+"at": "2026-11-17T17:57:40+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/bridgeport/392-lexington-avenue": {
+"at": "2026-11-17T17:57:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/bridgeport/54-orland-street": {
+"at": "2026-11-17T17:57:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/bridgeport/65-james-st": {
+"at": "2026-11-17T17:57:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/bridgeport/76-palisade-avenue--4": {
+"at": "2026-11-17T17:57:50+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/bridgeport/860-wood-avenue": {
+"at": "2026-11-17T17:57:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/bridgeport/beers": {
+"at": "2026-11-17T17:57:55+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/bridgeport/city-trust-collection-arcade-apartments": {
+"at": "2026-11-17T17:57:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/bridgeport/golden-hill": {
+"at": "2026-11-17T17:58:00+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/bridgeport/oasis": {
+"at": "2026-11-17T17:58:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/bridgeport/soundview": {
+"at": "2026-11-17T17:58:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/bridgeport/the-august-at-steelpointe-harbor": {
+"at": "2026-11-17T17:58:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/bridgeport/wayne-street": {
+"at": "2026-11-17T17:58:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/danbury/1-kennedy-flats": {
+"at": "2026-11-17T17:58:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/danbury/19-somers-street": {
+"at": "2026-11-17T17:58:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/danbury/45-park-avenue": {
+"at": "2026-11-17T17:58:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/danbury/76-town-hill-avenue-unit-b": {
+"at": "2026-11-17T17:58:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/danbury/brookview-commons-east-great-downtown-living": {
+"at": "2026-11-17T17:58:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/danbury/brookview-commons-ii": {
+"at": "2026-11-17T17:58:35+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/danbury/overland-crossing": {
+"at": "2026-11-17T17:58:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/danbury/ridgeway-place": {
+"at": "2026-11-17T17:58:40+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/danbury/the-point-at-still-river": {
+"at": "2026-11-17T17:58:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/stratford/115-short-beach-road": {
+"at": "2026-11-17T17:58:50+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/stratford/155-short-beach-road--4": {
+"at": "2026-11-17T17:58:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/stratford/1620-n-peters-lane": {
+"at": "2026-11-17T17:58:54+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/stratford/211-ferry-boulevard--1": {
+"at": "2026-11-17T17:58:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/stratford/584-california-street": {
+"at": "2026-11-17T17:59:00+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/trumbull/42-mulberry-st": {
+"at": "2026-11-17T17:59:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/trumbull/the-royce-at-trumbull": {
+"at": "2026-11-17T17:59:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/milford-city/365-boston-post-road-105": {
+"at": "2026-11-17T17:59:20+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/milford-city/merion-milford": {
+"at": "2026-11-17T17:59:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/milford-city/spinnaker-brook": {
+"at": "2026-11-17T17:59:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/milford-city/spinnaker-station--2": {
+"at": "2026-11-17T17:59:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/shelton/292-coram-avenue": {
+"at": "2026-11-17T17:59:39+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/shelton/502-howe-avenue": {
+"at": "2026-11-17T17:59:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/shelton/552-asbury-ridge": {
+"at": "2026-11-17T17:59:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/shelton/shelton-fairfield-county": {
+"at": "2026-11-17T17:59:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/shelton/the-shelton-grove": {
+"at": "2026-11-17T17:59:50+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/derby/227-olivia-street": {
+"at": "2026-11-17T18:00:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/derby/third-amp-minerva-mixed-use": {
+"at": "2026-11-17T18:00:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/orange/256-peck-lane": {
+"at": "2026-11-17T18:00:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/ansonia/ansonia-on-main--1": {
+"at": "2026-11-17T18:00:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/ansonia/francis-street-52": {
+"at": "2026-11-17T18:00:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/ansonia/riverview-apartments": {
+"at": "2026-11-17T18:00:35+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/west-haven/1044-campbell-avenue--2": {
+"at": "2026-11-17T18:00:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/west-haven/165-richards-street": {
+"at": "2026-11-17T18:00:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/west-haven/278-main-street": {
+"at": "2026-11-17T18:00:50+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/west-haven/3-bayview-place--1": {
+"at": "2026-11-17T18:00:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/west-haven/303-2nd-ave-blue-pod": {
+"at": "2026-11-17T18:00:55+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/west-haven/63-glade-street": {
+"at": "2026-11-17T18:00:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/west-haven/880-1st-avenue": {
+"at": "2026-11-17T18:01:00+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/new-haven/100-howe-street": {
+"at": "2026-11-17T18:01:15+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/new-haven/1085-2-whalley-avenue": {
+"at": "2026-11-17T18:01:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/new-haven/124-court-street--2": {
+"at": "2026-11-17T18:01:20+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/new-haven/21-pond-lily-avenue": {
+"at": "2026-11-17T18:01:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/new-haven/254-college-street": {
+"at": "2026-11-17T18:01:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/new-haven/30-bassett-street": {
+"at": "2026-11-17T18:01:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/new-haven/360-state-street": {
+"at": "2026-11-17T18:01:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/new-haven/38-crown-street": {
+"at": "2026-11-17T18:01:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/new-haven/40-shelter-st": {
+"at": "2026-11-17T18:01:35+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/new-haven/42-52-warren-llc": {
+"at": "2026-11-17T18:01:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/new-haven/488-chapel-street--2": {
+"at": "2026-11-17T18:01:40+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/new-haven/607-chapel-street": {
+"at": "2026-11-17T18:01:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/new-haven/804-chapel-street--1": {
+"at": "2026-11-17T18:01:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/new-haven/827-elm-st-apt-c2--2": {
+"at": "2026-11-17T18:01:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/new-haven/831-elm-st-apt-a3--2": {
+"at": "2026-11-17T18:01:50+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/new-haven/84-howe-street": {
+"at": "2026-11-17T18:01:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/new-haven/acme-timber-lofts": {
+"at": "2026-11-17T18:01:55+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/new-haven/axis-201": {
+"at": "2026-11-17T18:01:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/new-haven/cambridge-oxford": {
+"at": "2026-11-17T18:02:00+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/new-haven/corsair": {
+"at": "2026-11-17T18:02:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/new-haven/curio-269": {
+"at": "2026-11-17T18:02:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/new-haven/fantastic-location-in-downtown-new-haven-studio-1-bed-and-4-bedroom": {
+"at": "2026-11-17T18:02:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/new-haven/residence-court": {
+"at": "2026-11-17T18:02:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/new-haven/residence-on-the-green": {
+"at": "2026-11-17T18:02:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/new-haven/spacious-studio-apartment-near-yale-remodeled-convenient": {
+"at": "2026-11-17T18:02:15+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/new-haven/strouse-adler--1": {
+"at": "2026-11-17T18:02:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/new-haven/the-atwater-at-ninth-square": {
+"at": "2026-11-17T18:02:20+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/new-haven/the-taft-apartments": {
+"at": "2026-11-17T18:02:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/new-haven/the-winston": {
+"at": "2026-11-17T18:02:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/new-haven/whitney-avenue": {
+"at": "2026-11-17T18:02:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/branford-center/1118-main-street--1": {
+"at": "2026-11-17T18:02:37+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/ct/branford-center/54-monroe-street": {
+"at": "2026-11-17T18:02:40+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/ct/east-haven/130-coe-avenue--1": {
+"at": "2026-11-17T18:02:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/east-haven/510-main-apartments": {
+"at": "2026-11-17T18:02:55+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/east-haven/53-moulthrop-street": {
+"at": "2026-11-17T18:02:58+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/east-haven/autumn-ridge--1": {
+"at": "2026-11-17T18:03:00+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/naugatuck/20-washington-street": {
+"at": "2026-11-17T18:03:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/naugatuck/68-anderson-street--1": {
+"at": "2026-11-17T18:03:15+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/naugatuck/parkview-apartments": {
+"at": "2026-11-17T18:03:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/hamden/1349-dixwell-avenue-24--37": {
+"at": "2026-11-17T18:03:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/hamden/garage-365-circular-avenue": {
+"at": "2026-11-17T18:03:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/hamden/town-walk-at-hamden-hills": {
+"at": "2026-11-17T18:03:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/oakville/95-hillcrest-avenue": {
+"at": "2026-11-17T18:03:42+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/ct/waterbury/150-mark-ln": {
+"at": "2026-11-17T18:03:55+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/ct/waterbury/1660-e-main-street": {
+"at": "2026-11-17T18:03:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/waterbury/29-wilson-street--1": {
+"at": "2026-11-17T18:04:00+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/waterbury/58-kellogg-street": {
+"at": "2026-11-17T18:04:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/waterbury/61-field-street--1": {
+"at": "2026-11-17T18:04:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/waterbury/954-north-main-street-studio--1": {
+"at": "2026-11-17T18:04:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/waterbury/975-meriden-road--3": {
+"at": "2026-11-17T18:04:10+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/ct/waterbury/deerfield-gardens": {
+"at": "2026-11-17T18:04:12+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/ct/waterbury/lakeview-apartments": {
+"at": "2026-11-17T18:04:15+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/ct/waterbury/redmount-properties-llc": {
+"at": "2026-11-17T18:04:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ct/waterbury/rivers-edge--1": {
+"at": "2026-11-17T18:04:20+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/ct/waterbury/southford-park-apartments": {
+"at": "2026-11-17T18:04:22+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/ct/waterbury/sunset-gardens": {
+"at": "2026-11-17T18:04:25+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/ct/ansonia/central-street-associates-llc": {
+"at": "2026-11-17T18:04:27+00:00",
+"status": 200,
+"reason": "no_listing_object"
+},
+"/ct/new-haven/98-howe-st": {
+"at": "2026-11-17T18:04:30+00:00",
+"status": 200,
+"reason": "no_listing_object"
+},
+"/ct/west-haven/358-blohm-street": {
+"at": "2026-11-17T18:04:32+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ct/west-haven/campbell-ave-apartments": {
+"at": "2026-11-17T18:04:35+00:00",
+"status": 200,
+"reason": "no_listing_object"
+},
+"/ct/west-haven/hilltop-terrace-apartments-1-and-2-bedrooms": {
+"at": "2026-11-17T18:04:37+00:00",
+"status": 200,
+"reason": "no_listing_object"
+},
+"/ny/woodmere/874-w-broadway--1": {
+"at": "2026-11-17T18:05:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/franklin-square/1000-russell-street": {
+"at": "2026-11-17T18:05:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/oceanside/107-fairview-ave": {
+"at": "2026-11-17T18:06:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/hempstead/70-stewart-avenue": {
+"at": "2026-11-17T18:07:05+00:00",
+"status": 200,
+"reason": "ok"
 }
 }
