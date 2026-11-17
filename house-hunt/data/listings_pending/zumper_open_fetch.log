@@ -36,3 +36,4 @@
 cap of 900 requests reached
 fetch finished: requests this run 745, total 900
 opened rows written: 1197 | summary: {'opened': 1252, 'gone': 114, 'not_requested': 1012}
+2026-11-17T16:54:23+00:00 requests this run 25, total 926/1700

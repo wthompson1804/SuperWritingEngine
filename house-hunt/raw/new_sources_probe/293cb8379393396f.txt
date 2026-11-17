@@ -1,0 +1,7 @@
+Sitemap: https://www.veryapt.com/sitemap.xml
+User-agent: *
+Crawl-delay: 10
+Disallow: /vote/
+Disallow: /manage/
+Disallow: /admin/
+Disallow: /ajax/

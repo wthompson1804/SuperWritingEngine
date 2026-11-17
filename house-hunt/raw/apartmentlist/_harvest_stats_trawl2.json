@@ -11,9 +11,9 @@
   "min_drive": 0,
   "minutes": 0
  },
- "srp_pages": 34,
- "props_considered": 25,
- "props_skipped_lowprice": 12,
+ "srp_pages": 40,
+ "props_considered": 30,
+ "props_skipped_lowprice": 17,
  "props_read": 13,
  "reasons": {
   "ok": 13
@@ -35,6 +35,20 @@
    "drive_min": 29.2,
    "props": 4,
    "read": 3
+  },
+  {
+   "city": "nj/englewood-cliffs",
+   "group": "New Jersey",
+   "drive_min": 29.9,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "nj/edgewater",
+   "group": "New Jersey",
+   "drive_min": 31.4,
+   "props": 5,
+   "read": 0
   }
  ],
  "cities_unmatched_far": [
