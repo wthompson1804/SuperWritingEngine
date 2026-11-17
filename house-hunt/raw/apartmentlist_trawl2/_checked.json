@@ -1128,5 +1128,610 @@
 "at": "2026-11-17T17:06:05+00:00",
 "status": 200,
 "reason": "ok"
+},
+"/nj/newark/10-columbia-ave": {
+"at": "2026-11-17T17:06:24+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/1009-broad-st": {
+"at": "2026-11-17T17:06:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/101-camden-st": {
+"at": "2026-11-17T17:06:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/101-treacy-ave": {
+"at": "2026-11-17T17:06:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/102-s-8th-st": {
+"at": "2026-11-17T17:06:35+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/1086-s-orange-ave--1": {
+"at": "2026-11-17T17:06:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/11-thomas-street--1": {
+"at": "2026-11-17T17:06:39+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/140-fleming-ave": {
+"at": "2026-11-17T17:06:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/145-roseville-ave": {
+"at": "2026-11-17T17:06:44+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/16-stuyvesant-ave": {
+"at": "2026-11-17T17:06:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/19-31-lyons-ave-612": {
+"at": "2026-11-17T17:06:50+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/218-millburn-avenue": {
+"at": "2026-11-17T17:06:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/226-roseville-ave": {
+"at": "2026-11-17T17:06:55+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/24-millington-ave": {
+"at": "2026-11-17T17:06:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/277-clinton-pl": {
+"at": "2026-11-17T17:06:59+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/282-lyons-avenue": {
+"at": "2026-11-17T17:07:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/289-rose-street": {
+"at": "2026-11-17T17:07:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/31-33-tillinghast-st--1": {
+"at": "2026-11-17T17:07:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/325-grafton-ave": {
+"at": "2026-11-17T17:07:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/36-s-12th-st": {
+"at": "2026-11-17T17:07:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/363-377-mt-prospect-ave": {
+"at": "2026-11-17T17:07:14+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/37-peck-ave": {
+"at": "2026-11-17T17:07:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/376-broad-st": {
+"at": "2026-11-17T17:07:20+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/377-clinton-pl": {
+"at": "2026-11-17T17:07:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/378-broad-street": {
+"at": "2026-11-17T17:07:24+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/38-s-12th-st": {
+"at": "2026-11-17T17:07:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/432-central-ave": {
+"at": "2026-11-17T17:07:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/46-parkhurst-st": {
+"at": "2026-11-17T17:07:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/5-beaumont-pl": {
+"at": "2026-11-17T17:07:35+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/502-market-street": {
+"at": "2026-11-17T17:07:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/52-kent-st": {
+"at": "2026-11-17T17:07:40+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/57-branch-brook-pl--1": {
+"at": "2026-11-17T17:07:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/575-13th-ave": {
+"at": "2026-11-17T17:07:44+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/58-n-5th-st-unit-2": {
+"at": "2026-11-17T17:07:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/58-new-st": {
+"at": "2026-11-17T17:07:50+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/61-new-jersey-railroad-ave": {
+"at": "2026-11-17T17:07:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/63-cedar-ave": {
+"at": "2026-11-17T17:07:55+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/633-s-19th-st": {
+"at": "2026-11-17T17:07:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/684-summer-ave": {
+"at": "2026-11-17T17:08:00+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/716-sanford-ave": {
+"at": "2026-11-17T17:08:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/794-s-15th-st": {
+"at": "2026-11-17T17:08:04+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/814-clinton-ave": {
+"at": "2026-11-17T17:08:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/816-clinton-ave": {
+"at": "2026-11-17T17:08:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/85-forest-hill-pkwy--1": {
+"at": "2026-11-17T17:08:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/923-s-17th-st--1": {
+"at": "2026-11-17T17:08:14+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/94-s-10th-st": {
+"at": "2026-11-17T17:08:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/946-mayor-gibson-blvd": {
+"at": "2026-11-17T17:08:19+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/avalon-bloomfield-station": {
+"at": "2026-11-17T17:08:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/avalon-maplewood": {
+"at": "2026-11-17T17:08:24+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/eleven80": {
+"at": "2026-11-17T17:08:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/the-ballantine--1": {
+"at": "2026-11-17T17:08:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/the-kislak": {
+"at": "2026-11-17T17:08:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/newark/the-mercer-10-commerce-court-newark-nj": {
+"at": "2026-11-17T17:08:35+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paterson/100-carroll-st": {
+"at": "2026-11-17T17:08:49+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paterson/114-lafayette-street-2": {
+"at": "2026-11-17T17:08:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paterson/117-hamilton-ave": {
+"at": "2026-11-17T17:08:54+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paterson/119-glover-ave": {
+"at": "2026-11-17T17:08:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paterson/127-16th-ave": {
+"at": "2026-11-17T17:09:00+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paterson/14-20-arlington-st": {
+"at": "2026-11-17T17:09:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paterson/14-sro-llc": {
+"at": "2026-11-17T17:09:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paterson/146-hamilton-ave": {
+"at": "2026-11-17T17:09:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paterson/154-hamilton-ave": {
+"at": "2026-11-17T17:09:09+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paterson/165-pearl-st": {
+"at": "2026-11-17T17:09:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paterson/16th-garden-llc": {
+"at": "2026-11-17T17:09:15+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paterson/188-21st-ave": {
+"at": "2026-11-17T17:09:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paterson/197-12th-ave": {
+"at": "2026-11-17T17:09:20+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paterson/198-harrison-st": {
+"at": "2026-11-17T17:09:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paterson/229-rosa-parks-blvd": {
+"at": "2026-11-17T17:09:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paterson/240-rosa-parks-blvd": {
+"at": "2026-11-17T17:09:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paterson/275-main-st": {
+"at": "2026-11-17T17:09:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paterson/329-madison-ave": {
+"at": "2026-11-17T17:09:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paterson/362-hamilton-ave": {
+"at": "2026-11-17T17:09:34+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paterson/41-godwin-ave": {
+"at": "2026-11-17T17:09:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paterson/43-carroll-st": {
+"at": "2026-11-17T17:09:39+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paterson/50-clinton-st": {
+"at": "2026-11-17T17:09:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paterson/54-sassafras-st": {
+"at": "2026-11-17T17:09:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paterson/59-cedar-st": {
+"at": "2026-11-17T17:09:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paterson/60-carroll-st": {
+"at": "2026-11-17T17:09:50+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paterson/76-78-market-st": {
+"at": "2026-11-17T17:09:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paterson/83-auburn-st": {
+"at": "2026-11-17T17:09:54+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paterson/83-godwin-ave": {
+"at": "2026-11-17T17:09:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paterson/90-broadway": {
+"at": "2026-11-17T17:09:59+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paterson/942-e-19th-st": {
+"at": "2026-11-17T17:10:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paterson/96-16th-ave": {
+"at": "2026-11-17T17:10:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paterson/994-996-28th-street": {
+"at": "2026-11-17T17:10:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paterson/cloverdale-apartments": {
+"at": "2026-11-17T17:10:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bayonne/45-edwards-ct": {
+"at": "2026-11-17T17:10:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/clifton/1004-unicorn-way": {
+"at": "2026-11-17T17:10:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/clifton/1055-main-ave": {
+"at": "2026-11-17T17:10:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/clifton/12-lake-ave": {
+"at": "2026-11-17T17:10:50+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/clifton/124-rowland-ave": {
+"at": "2026-11-17T17:10:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/clifton/23-7th-street": {
+"at": "2026-11-17T17:10:54+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/clifton/23-e-7th-st": {
+"at": "2026-11-17T17:10:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/clifton/246-lakeview-ave": {
+"at": "2026-11-17T17:11:00+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/clifton/297-lakeview-ave": {
+"at": "2026-11-17T17:11:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/clifton/305-piaget-avenue": {
+"at": "2026-11-17T17:11:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/clifton/55-e-1st-st": {
+"at": "2026-11-17T17:11:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/clifton/682-allwood-rd": {
+"at": "2026-11-17T17:11:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/clifton/77-center-st": {
+"at": "2026-11-17T17:11:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/clifton/80-union-ave-c6": {
+"at": "2026-11-17T17:11:15+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/clifton/clifton-co": {
+"at": "2026-11-17T17:11:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/clifton/maple-garden-apartments": {
+"at": "2026-11-17T17:11:19+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/belleville/16-clark-terrace-4--104": {
+"at": "2026-11-17T17:11:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/belleville/833-main-unit-e": {
+"at": "2026-11-17T16:51:33+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/belleville/belleview-gardens": {
+"at": "2026-11-17T16:51:35+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/belleville/crestview-garden-apartments": {
+"at": "2026-11-17T16:51:38+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/elizabeth/100-union-st--1": {
+"at": "2026-11-17T17:11:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/elizabeth/1116-anna": {
+"at": "2026-11-17T17:11:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/elizabeth/1143-louisa-street": {
+"at": "2026-11-17T17:11:49+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/elizabeth/15-s-spring-st": {
+"at": "2026-11-17T17:11:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/elizabeth/17-john-st": {
+"at": "2026-11-17T17:11:55+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/elizabeth/228-s-5th-st": {
+"at": "2026-11-17T17:11:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/elizabeth/425-3rd-st": {
+"at": "2026-11-17T17:12:00+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/elizabeth/435-westminster-ave": {
+"at": "2026-11-17T17:12:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/elizabeth/557-s-broad-st--1": {
+"at": "2026-11-17T17:12:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/elizabeth/809-garden-st": {
+"at": "2026-11-17T17:12:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/elizabeth/chilton-towers--2": {
+"at": "2026-11-17T17:12:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/elizabeth/edgar-gardens--2": {
+"at": "2026-11-17T17:12:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/elizabeth/elizabeth-newark-airport": {
+"at": "2026-11-17T17:12:15+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/hawthorne/255-rea-avenue": {
+"at": "2026-11-17T17:12:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/woodland-park/482-notch-rd": {
+"at": "2026-11-17T17:12:37+00:00",
+"status": 200,
+"reason": "ok"
 }
 }

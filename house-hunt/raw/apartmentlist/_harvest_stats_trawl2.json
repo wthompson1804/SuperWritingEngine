@@ -11,12 +11,12 @@
   "min_drive": 0,
   "minutes": 0
  },
- "srp_pages": 171,
- "props_considered": 379,
- "props_skipped_lowprice": 209,
- "props_read": 170,
+ "srp_pages": 211,
+ "props_considered": 526,
+ "props_skipped_lowprice": 235,
+ "props_read": 291,
  "reasons": {
-  "ok": 169,
+  "ok": 290,
   "no_unit_le_3000": 1
  },
  "transient": [],
@@ -279,6 +279,69 @@
    "city": "nj/closter",
    "group": "New Jersey",
    "drive_min": 43.8,
+   "props": 2,
+   "read": 1
+  },
+  {
+   "city": "nj/newark",
+   "group": "New Jersey",
+   "drive_min": 43.9,
+   "props": 59,
+   "read": 53
+  },
+  {
+   "city": "nj/paterson",
+   "group": "New Jersey",
+   "drive_min": 44.1,
+   "props": 34,
+   "read": 33
+  },
+  {
+   "city": "nj/harrington-park",
+   "group": "New Jersey",
+   "drive_min": 44.9,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "nj/bayonne",
+   "group": "New Jersey",
+   "drive_min": 45.7,
+   "props": 39,
+   "read": 1
+  },
+  {
+   "city": "nj/clifton",
+   "group": "New Jersey",
+   "drive_min": 45.8,
+   "props": 16,
+   "read": 15
+  },
+  {
+   "city": "nj/belleville",
+   "group": "New Jersey",
+   "drive_min": 46.5,
+   "props": 19,
+   "read": 4
+  },
+  {
+   "city": "nj/elizabeth",
+   "group": "New Jersey",
+   "drive_min": 46.9,
+   "props": 16,
+   "read": 13
+  },
+  {
+   "city": "nj/hawthorne",
+   "group": "New Jersey",
+   "drive_min": 47.4,
+   "props": 2,
+   "read": 1
+  },
+  {
+   "city": "nj/woodland-park",
+   "group": "New Jersey",
+   "drive_min": 47.6,
    "props": 2,
    "read": 1
   }

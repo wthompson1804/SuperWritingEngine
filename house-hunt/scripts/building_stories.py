@@ -272,7 +272,8 @@ _UNIT_TAIL = re.compile(r"\s(?:#|APT|APARTMENT|UNIT|STE|SUITE|FL|FLOOR|BLDG|BUIL
 
 
 def split_address(addr: str):
-    """'243-247 Stewart Ave.' -> ('243', '247', 'STEWART AVE'); '142-38 37th Ave' -> ('142-38', None, '37 AVE').
+    """'243-247 Stewart Ave.' -> ('243', '247', 'STEWART AVE'); '100 W. Second St' -> ('100', None, 'W 2 ST').
+    (NYC's hyphenated Queens numbers are compared with nyc_number instead.)
     Returns (number, range_end or None, street) with the street normalised; (None, None, '') when no number."""
     s = str(addr or "").upper().split(",")[0]
     s = s.split("/")[0]                               # MOD-IV 'A ST/AKA B ST': the first address
@@ -354,6 +355,11 @@ def numbers_match(a1, b1, a2, b2) -> bool:
         return False
     if (b1 is None and re.search(r"[A-Z]", a1)) or (b2 is None and re.search(r"[A-Z]", a2)):
         return False                                   # '5B' is not '5'
+    # a range keeps to one side of the street: '71-79' (odd) does not hold 76
+    par1 = r1[0] % 2 if r1[0] % 2 == r1[1] % 2 else None
+    par2 = r2[0] % 2 if r2[0] % 2 == r2[1] % 2 else None
+    if par1 is not None and par2 is not None and par1 != par2:
+        return False
     return r1[0] <= r2[1] and r2[0] <= r1[1]
 
 
@@ -805,7 +811,8 @@ def build_floors(stories_rows):
                 top = None
             if top is not None and f > math.ceil(top):
                 skipped["reading above the building's storeys"] += 1
-                above[r.addr_key].append(f)
+                if name not in ("floor_then_letter", "house_number_then_floor_letter"):
+                    above[r.addr_key].append(f)  # '43L' over a 4-storey record is the label's doing, not the record's
                 continue
             notes.append(f"building has {s[0]} storeys ({s[1]})")
         elif f >= 10 and name in ("floor_then_letter", "house_number_then_floor_letter"):
@@ -828,7 +835,7 @@ def build_floors(stories_rows):
 def build() -> None:
     rows, _ = build_stories()
     _, above = build_floors(rows)
-    # a record that unit labels contradict is flagged where build_master.py will read it
+    # a record that three-digit unit labels contradict is flagged where build_master.py will read it
     flagged = 0
     for r in rows:
         fl = above.get(r["addr_key"])

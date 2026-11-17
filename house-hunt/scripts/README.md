@@ -446,5 +446,16 @@ Second trawl, 2026-11-17 (owner: floor and elevator; $2,200 collection limit; bu
   `check_registry.py` asserts the same on the shown list (and base rent at most $2,200); `verdicts.py digest` prints the rule's result.
 - Tests: `test_rules.py` `pure_floor_elevator` (every elevator x floor x storeys combination, the gate, the rent limit, the stories file
   loader, the doubt and garden-style cases, an established elevator unaffected) and the floor/elevator and rent checks in `--data`.
-- Pages (`build_page_data.py`, the concierge builders) are not changed by this: they need a reader sentence for the open code
-  `elevator:floor_or_elevator` before such an apartment is published.
+- Pages (same day, later): `build_page_data.py` writes the open item `floor_or_elevator` as label "the floor, and whether there
+  is an elevator" (star line "To confirm: the floor, and whether there is an elevator") with the question
+  `parsers.FLOOR_OR_ELEVATOR_READER_Q` ("... Without an elevator, it must be floor 2 (a single flight up)."), and
+  `elevator.rule`, `elevator.walkup_floor_2`, `elevator.words` (`parsers.walkup_words`: "A single flight up, no elevator" where a
+  page or record says there is none, "A single flight up, no elevator needed" otherwise; the house rule allows no spelled-out
+  "one"); a walk-up whose floor is read under its complex's convention carries that floor. `site/index.html` uses
+  `elevator.words` for the fact line and the compare row and never says "in an elevator building" for a walk-up.
+  `realtor_lines.py`: catch kinds `confirm:floor and elevator` and `floor:walkup inferred`, lead `walkup`, warning
+  `tour_walkup`; a walk-up never gets "The building has an elevator.". `check_published_text.py`: "has an elevator" fails on a
+  walk-up or with the open item; claims "a single flight up" (walk-up only) and "no elevator" (only where a page says so).
+  `concierge_data.floor_text`: "Floor 2, a single flight up, no elevator needed (read from the apartment number)". Tests:
+  `test_realtor_lines.py` `FloorAndElevator`, `test_check_published_text.py` `FloorAndElevator`, `test_concierge_data.py`
+  `floor_and_elevator_synthetic`.

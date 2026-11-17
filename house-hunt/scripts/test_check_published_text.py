@@ -624,7 +624,7 @@ class FloorAndElevator(unittest.TestCase):
                   "To confirm: " + parsers.FLOOR_OR_ELEVATOR_READER_LABEL + "."):
             self.assertIsNone(G.NUMBER_WORDS.search(t), t)
             # a tour question is a question: only the scene-text rule against question marks does not apply to it
-            self.assertEqual([b for rx, b in G.BANNED if rx.search(t) and not (b == "question mark" and t.endswith((")", "?")))], [], t)
+            self.assertEqual([b for rx, b in G.BANNED if rx.search(t) and not (b == "question mark" and t == parsers.FLOOR_OR_ELEVATOR_READER_Q)], [], t)
 
 
 if __name__ == "__main__":

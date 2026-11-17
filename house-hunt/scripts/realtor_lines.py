@@ -1309,6 +1309,7 @@ WARNINGS = {                                           # key: (topic, text); the
     "weight": ("dog", "The listing says small dogs and gives no weight, so ask for the limit."),
     "overnight": ("street", "The town restricts overnight street parking, so get a parking space in writing."),
     "tour": ("tour", "On the tour, look at the hallways, the elevator and the mail room."),
+    "tour_walkup": ("tour", "On the tour, look at the hallways, the stairs and the mail room."),
 }
 PARKING_NAMES = {"garage": "garage", "covered": "covered parking", "lot": "parking lot", "off_street": "off-street parking",
                  "offsite": "off-site parking", "assigned": "assigned parking", "unspecified": "parking"}
@@ -1782,6 +1783,8 @@ def building_facts(group):
     b["n_units"] = len(group)
     b["dog_open"] = next((f["dog_open"] for f in fs if f["dog_open"]), None)
     b["elevator_open"] = any(f["elevator_open"] for f in fs)
+    b["walkup_all"] = all(f["walkup"] for f in fs)          # owner, 2026-11-17: every listed apartment is a floor-2 walk-up
+    b["elevator_sure"] = b["elevator_sure"] and not any(f["walkup"] for f in fs)
     b["unknown"] = sorted({x for f in fs for x in f["unknown"]})
     b["disclosures"] = set().union(*(f["disclosures"] for f in fs))
     b["pet_rent_known"] = all(f["pet_rent_known"] for f in fs)
@@ -1841,7 +1844,7 @@ def building_warning(b):
         return "weight"
     if "overnight street parking" in b["disclosures"]:
         return "overnight"
-    return "tour"
+    return "tour_walkup" if b.get("walkup_all") else "tour"
 
 
 def building_conditions(b, peers):

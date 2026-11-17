@@ -41,3 +41,6 @@ opened rows written: 1197 | summary: {'opened': 1252, 'gone': 114, 'not_requeste
 2026-11-17T16:59:29+00:00 requests this run 75, total 976/1700
 2026-11-17T17:02:07+00:00 requests this run 100, total 1001/1700
 2026-11-17T17:04:54+00:00 requests this run 125, total 1026/1700
+2026-11-17T17:07:30+00:00 requests this run 150, total 1051/1700
+2026-11-17T17:10:12+00:00 requests this run 175, total 1076/1700
+2026-11-17T17:12:43+00:00 requests this run 200, total 1101/1700

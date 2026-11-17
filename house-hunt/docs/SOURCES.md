@@ -404,3 +404,18 @@ standard MLS clause against automated or high-volume access; none is usable. Bro
 their own NYC inventory almost all prohibit scraping in their terms. Regional managers in NJ, LI and CT mostly lease
 through RentCafe/securecafe or RealPage and publish no unit prices on their own pages. Openigloo is the one new source
 that passes.
+
+## Building storeys (2026-11-17, scripts/building_stories.py)
+
+Second trawl step 3: storeys per candidate building and floor per apartment label. Detail in
+`docs/harvest_notes/building_stories.md`. No host refused us; nothing was added to `raw/_host_kill_shared.json`.
+
+| Source | Result | Note |
+|---|---|---|
+| NJ Office of GIS, county "Parcels & MOD-IV" file geodatabases, `https://geoapps.nj.gov/njgin/parcel/parcels_gdb_<County>.zip` (linked from `https://www.nj.gov/njgin/edata/parcels/` via ArcGIS item records on `www.arcgis.com`) | **Works.** 16 counties, 9.5 to 56.9 MB each (573 MB in all), every request 200. `geoapps.nj.gov` has no robots.txt (404) and sits behind Imperva; `www.nj.gov` robots does not cover `/njgin/`; `www.arcgis.com` robots allows all. Licence text: not survey data, acknowledgement of NJOGIS requested; owner names already redacted (Daniel's Law). The tax list's `BLDG_DESC` starts with the storey count (`3S-B-D-6U-H`, `4B-8U-H`, `16S-C-348U`) | zips git-ignored (`raw/building_stories/.gitignore`); re-created by `building_stories.py download` |
+| `njogis-newjersey.opendata.arcgis.com` (the Hub pages) | Not fetched beyond robots.txt (`Crawl-delay: 60`); the same files are reached through their ArcGIS item records | — |
+| CT GIS Office "Connecticut CAMA and Parcel Layer" (and its 2025 layer), `services3.arcgis.com/3FL1kr7L4LvwA2Kb` | Layer metadata read (200). **No storey field** (Model, Occupancy, Living_Area, AYB, ... only). Not used for storeys. Its robots.txt could not be fetched through the proxy (502, not a refusal) | — |
+| NYS Tax Parcels Public (NYSGIS_GPO, `services6.arcgis.com/EbVsqZ18sv1kVJ3k`) | Layer metadata read (200). ORPTS fields carry no storey count (BLDG_STYLE, SQFT_LIVING, GFA); Nassau and Suffolk sharing not stated. Not used | `gisservices.its.ny.gov`: robots 404, service list empty |
+| Suffolk County GIS `TaxParcelPolygon` (`gis.suffolkcountyny.gov`) | Layer metadata read (200). No building fields. Not used. No official Nassau bulk parcel source found | — |
+| NYC PLUTO (held copy `raw/big/pluto/pluto_res4plus.csv`, 2026-11-15) | Used as is; **no request to data.cityofnewyork.us** (refused 2026-11-17). Lots with fewer than 4 residential units were never downloaded, so small NYC buildings have no record here | — |
+| OpenStreetMap `building:levels` (held Geofabrik extract, data 2026-11-14) | Used where no record exists; only about 98,000 of 5.4 million outlines in the extract carry the tag | — |

@@ -762,6 +762,33 @@ def test_space_line_true_of_kept_set():
 TESTS.append(test_space_line_true_of_kept_set)
 
 
+@test
+def floor_and_elevator_synthetic():
+    """Owner, 2026-11-17 (second trawl): a floor-2 walk-up reads in plain words, and the open item 'floor and elevator'
+    reads as its star line and question. Synthetic apartments of each kind."""
+    import parsers
+    base = {"id": "x", "unit": "2B", "beds": 1, "sqft": 600, "rent": {"listed": 1800}, "all_in": 2300, "available": "now",
+            "disclosures": [], "links": {"listing": "https://example.org/x"}}
+    walk = dict(base, floor="2", floor_basis="inferred", confirm={"asterisk": False},
+                elevator={"value": "", "walkup_floor_2": True, "rule": "floor_2", "words": parsers.walkup_words("floor_2", "")})
+    a = K.apartment(walk)
+    assert a["floor_text"] == "Floor 2, a single flight up, no elevator needed (read from the apartment number)", a["floor_text"]
+    assert not a["star"] and a["confirm_label"] is None
+    none_ = dict(walk, floor_basis="stated", elevator=dict(walk["elevator"], value="no", words=parsers.walkup_words("floor_2", "no")))
+    assert K.apartment(none_)["floor_text"] == "Floor 2, a single flight up, no elevator", K.apartment(none_)["floor_text"]
+    lift = dict(base, floor="5", floor_basis="stated", confirm={"asterisk": False}, elevator={"value": "yes", "walkup_floor_2": False, "words": None})
+    assert K.apartment(lift)["floor_text"] == "Floor 5", "an elevator building is unaffected"
+    fe = dict(base, floor=None, floor_basis="unknown", elevator={"value": "", "walkup_floor_2": False, "rule": "floor_or_elevator", "words": None},
+              confirm={"asterisk": True, "what": "floor and elevator", "label": parsers.FLOOR_OR_ELEVATOR_READER_LABEL,
+                       "question": parsers.FLOOR_OR_ELEVATOR_READER_Q, "code": "floor_or_elevator"})
+    a = K.apartment(fe)
+    assert a["star"] and a["confirm_label"] == "To confirm: the floor, and whether there is an elevator", a["confirm_label"]
+    assert "it must be floor 2 (a single flight up)" in a["confirm_question"], a["confirm_question"]
+    assert a["floor_text"] is None
+    for t in (a["confirm_label"], K.apartment(walk)["floor_text"], K.apartment(none_)["floor_text"]):
+        assert not K.BANNED.search(t) and not K.CRIME.search(t), t
+
+
 def main():
     failed = 0
     for f in TESTS:

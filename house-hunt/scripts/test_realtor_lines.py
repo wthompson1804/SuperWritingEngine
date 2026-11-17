@@ -635,6 +635,56 @@ class Catch(unittest.TestCase):
                     self.assertTrue(R.dog_open(u) == "conflict" or R.get(u, "dog", "allowed") == "conflicting", r["listing_id"])
 
 
+class FloorAndElevator(unittest.TestCase):
+    """Owner, 2026-11-17 (second trawl): a walk-up on floor 2 (elevator.walkup_floor_2) and the open item 'floor and
+    elevator' (code floor_or_elevator). Synthetic apartments of each kind."""
+    WALK = {"value": "", "listing_site_only": False, "walkup_floor_2": True, "rule": "floor_2", "words": "A single flight up, no elevator needed"}
+
+    def test_the_open_item_floor_and_elevator(self):
+        ask = {"asterisk": True, "what": "floor and elevator", "label": "the floor, and whether there is an elevator",
+               "why": "No page we read gives the floor or says the building has an elevator.", "question": "Which floor?", "code": "floor_or_elevator"}
+        row = run([unit("a", floor=None, floor_basis="unknown", elevator={"value": "", "walkup_floor_2": False}, confirm=ask)])["a"]
+        self.assertEqual(catch_kind(row), "confirm:floor and elevator")
+        self.assertRegex(row["host_catch"], r"floor")
+        self.assertRegex(row["host_catch"], r"elevator")
+        self.assertEqual(guard(row["host_catch"]), [], row["host_catch"])
+        self.assertNotRegex(row["host_line"] + " " + row["host_catch"], r"The building has an elevator")
+
+    def test_a_walkup_on_floor_2_stated(self):
+        us = [unit("a", building="W", floor=2.0, floor_basis="stated", elevator=self.WALK, scores={"hood_rank": 1.0}),
+              unit("b", building="W", floor=2.0, floor_basis="stated", elevator=self.WALK, scores={"hood_rank": 2.0}, sqft=650.0)]
+        rows = run(us)
+        for r_ in rows.values():
+            self.assertNotRegex(r_["host_line"] + " " + r_["host_catch"], r"The building has an elevator")
+        b = buildings(us)["W"]
+        text = b["about_building"] + " " + " ".join(p["text"] for p in points(b))
+        self.assertNotIn("The building has an elevator.", text)
+        self.assertNotIn("the elevator and the mail room", text)
+        # the plain fact, when the floor is the lead
+        f = R.facts(us[0])
+        self.assertTrue(f["walkup"] and not f["elevator_sure"])
+
+    def test_a_walkup_with_an_elevator_named_in_doubt_never_claims_it(self):
+        doubt = dict(self.WALK, value="yes")
+        us = [unit("a", building="D", floor=2.0, floor_basis="stated", elevator=doubt)]
+        b = buildings(us)["D"]
+        self.assertNotIn("The building has an elevator.", b["about_building"] + " " + " ".join(p["text"] for p in points(b)))
+
+    def test_a_walkup_floor_read_from_the_number(self):
+        row = run([unit("a", floor=2.0, floor_basis="inferred", elevator=self.WALK)])["a"]
+        self.assertEqual(catch_kind(row), "floor:walkup inferred")
+        self.assertIn("single flight up", row["host_catch"])
+        self.assertIn("2", numbers(row["host_catch"]))
+        self.assertEqual(guard(row["host_catch"]), [], row["host_catch"])
+
+    def test_an_elevator_building_is_unaffected(self):
+        row = run([unit("a", floor=6.0, floor_basis="inferred")])["a"]
+        self.assertEqual(catch_kind(row), "floor:inferred")
+        f = R.facts(unit("e", building="E"))
+        self.assertTrue(f["elevator_sure"] and not f["walkup"])
+        self.assertEqual(R.building_warning(R.building_facts([unit("e", building="E", dog={"pet_rent": 50.0})])), "tour")
+
+
 class Subheads(unittest.TestCase):
     COLS = ("sub_cost", "sub_parking", "sub_dog", "sub_building")
 
