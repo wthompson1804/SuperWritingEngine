@@ -970,9 +970,8 @@ def recommender_reference_reproduces_its_examples():
         hidden = [e["hidden_weights"][k] for k in R.FEATURES] if e["hidden_weights"] else None
         ans = R.run_conjoint(RS, RP, lambda t: R.task_answer(t, hidden, RP))      # version 4: made-up apartments
         assert ans == e["answers"] and [x["task_index"] for x in ans] == e["expected_tasks"], e["persona"]
-        assert len(ans) == RP["conjoint"]["n_tasks"] == 8 and len({R._key(x["task"]) for x in ans}) == 8
-        for x, y in zip(ans, ans[1:]):
-            assert {k for k, _, _ in x["task"]} != {k for k, _, _ in y["task"]}, "two tasks in a row on the same attributes"
+        assert len(ans) == RP["conjoint"]["n_tasks"] == 8
+        check_coverage(ans, e["persona"])
         assert [R.task_display(x["task"], RP) for x in ans] == e["expected_tasks_shown"]
         rec = R.recommend(RS, ans, BLDS, RP)
         assert [[n["neighborhood_id"], [b["id"] for b in n["buildings"]]] for n in rec["neighborhoods"]] == e["expected_top"]
@@ -1133,6 +1132,7 @@ def recommender_conjoint_design():
         assert any(better_a) and not all(better_a) and all(lv[k][a] != lv[k][b] for k, a, b in t), t   # never dominated
     assert sum(1 for i, t in enumerate(cj["pool"]) if lv[t[0][0]][t[0][1]] > lv[t[0][0]][t[0][2]]) == (len(cj["pool"]) + 1) // 2   # sides alternate
     # priorities and the nudge
+    assert re.fullmatch(r"v4-[0-9a-f]{10}", OUT["meta"]["data_version"]) and OUT["meta"]["data_version"] == R.data_version(RP, RS)
     fb = RP["conjoint"]["flat_below"]
     assert fb == R.flat_threshold(RS) and 0 < fb < 0.3
     flat = R.priorities([0.17, 0.16, 0.17, 0.16, 0.17, 0.17], fb)
@@ -1159,6 +1159,14 @@ def recommender_conjoint_design():
         assert all(not K.BANNED.search(e["expected_priorities_sentence"]) for _ in [0])
 
 
+def check_coverage(ans, who):
+    """No attribute pair twice in the eight; every attribute at least twice."""
+    pairs = [frozenset(k for k, _, _ in x["task"]) for x in ans]
+    assert len(set(pairs)) == len(pairs), (who, "an attribute pair repeats")
+    c = Counter(k for x in ans for k, _, _ in x["task"])
+    assert set(c) == set(R.FEATURES) and min(c.values()) >= 2, (who, dict(c))
+
+
 def simulate(answer_mode, n=200, seed=11):
     """200 users with flat-Dirichlet hidden weights answer the eight made-up pairs: 'noisy' samples each answer from
     the model's own likelihood at its temperature (seed per user), 'exact' answers as the personas do."""
@@ -1181,6 +1189,8 @@ def simulate(answer_mode, n=200, seed=11):
             x = r_.random()
             return "a" if x < pa else "b" if x < pa + pb else "either"
         a = fast.run(ans)
+        assert len(a) == 8
+        check_coverage(a, u)
         w = [float(x) for x in fast.pi(a) @ fast.W]
         rec = R.recommend_from_weights(w, BLDS, RP)
         top = [n["neighborhood_id"] for n in rec["neighborhoods"]]

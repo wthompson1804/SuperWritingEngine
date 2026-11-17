@@ -44,6 +44,7 @@ THE MODEL
 """
 from __future__ import annotations
 
+import json
 import math
 import random
 import statistics
@@ -906,6 +907,7 @@ def add_version_three(out):
     params["conjoint"]["flat_below"] = flat_threshold(samples)
     out["meta"]["recommender_examples"] = conjoint_examples(samples, blds, params)
 
+    out["meta"]["data_version"] = data_version(params, samples)
     out["meta"]["recommender"]["validation"] = validation(out["meta"]["recommender_examples"], blds, params)
     return out
 
@@ -1101,20 +1103,32 @@ def _key(task):
     return tuple(tuple(x) for x in task)
 
 
+def coverage_rank(task, counts):
+    """The coverage key of a task: (times its two attributes have been asked in all, the larger of the two)."""
+    c = [counts.get(k, 0) for k, _, _ in task]
+    return (sum(c), max(c))
+
+
 def next_task(samples, answers, params, explain=False):
-    """The next task index into the pool, or None after n_tasks. Candidates: the pool minus tasks already asked and
-    minus tasks on the same attributes as the previous one; the POOL_PREFILTER most utility-balanced at her mean
-    weights (round(|gap|), index); of those, the one with the largest expected reduction in posterior uncertainty:
-    the trace of the posterior covariance of the weights, expected over the three answers. Ties: lower index."""
+    """The next task index into the pool, or None after n_tasks. Candidates: the pool minus every task on an attribute
+    PAIR already asked (15 pairs for 6 attributes, so no pair repeats within the eight); of those, only the ones whose
+    two attributes have appeared least so far (coverage_rank: lowest sum of their counts, then lowest larger count),
+    so each attribute appears at least twice in eight; of those, the `prefilter` most utility-balanced at her mean
+    weights (round(|gap|), index); of those, the one with the largest expected reduction in posterior uncertainty: the
+    trace of the posterior covariance of the weights, expected over the three answers. Ties: lower index."""
     cj = params["conjoint"]
     if len(answers) >= cj["n_tasks"]:
         return None
     pool = cj["pool"]
     pi = posterior(samples, answers, [], params)
     w = mean_weights(samples, pi)
-    asked = {_key(x["task"]) for x in answers}
-    prev = {k for k, _, _ in answers[-1]["task"]} if answers else None
-    cand = [i for i, t in enumerate(pool) if _key(t) not in asked and {k for k, _, _ in t} != prev]
+    asked_pairs = {frozenset(k for k, _, _ in x["task"]) for x in answers}
+    counts = Counter(k for x in answers for k, _, _ in x["task"])
+    cand = [i for i, t in enumerate(pool) if frozenset(k for k, _, _ in t) not in asked_pairs]
+    if not cand:
+        return None
+    least = min(coverage_rank(pool[i], counts) for i in cand)
+    cand = [i for i in cand if coverage_rank(pool[i], counts) == least]
     cand.sort(key=lambda i: (q(abs(task_gap(w, pool[i], params))), i))
     cand = sorted(cand[:cj["prefilter"]])
     T, band = params["temperature"], params["either_band"]
@@ -1255,6 +1269,20 @@ def conjoint_examples(samples, buildings, params):
     return out
 
 
+def data_version(params, samples):
+    """A short hash of what saved answers depend on: the conjoint pool, n_tasks, the levels and the recommender
+    parameters that read answers (features, value functions, temperature, band, prior, seed) and the samples. A page
+    discards answers saved under another version."""
+    import hashlib
+    cj = params["conjoint"]
+    blob = {"pool": cj["pool"], "n_tasks": cj["n_tasks"], "prefilter": cj["prefilter"],
+            "levels": [[a["id"], [x["value"] for x in a["levels"]]] for a in cj["attributes"]],
+            "params": {k: params[k] for k in ("features", "value_functions", "temperature", "either_band", "seed", "prior",
+                                              "min_buildings", "relevance_floor", "mmr_lambda")},
+            "samples": samples}
+    return "v4-" + hashlib.sha1(json.dumps(blob, sort_keys=True).encode()).hexdigest()[:10]
+
+
 def conjoint_block(buildings):
     attrs = conjoint_attributes(buildings)
     return {"attributes": attrs, "n_tasks": N_TASKS, "prefilter": POOL_PREFILTER, "pool": build_pool(attrs),
@@ -1305,10 +1333,14 @@ class FastCJ:
             return None
         pi = self.pi(answers)
         w = pi @ self.W
-        asked = {_key(x["task"]) for x in answers}
-        prev = frozenset(k for k, _, _ in answers[-1]["task"]) if answers else None
+        asked_pairs = {frozenset(k for k, _, _ in x["task"]) for x in answers}
+        counts = Counter(k for x in answers for k, _, _ in x["task"])
         gb = np.round(np.abs(self.D @ w), ROUND)
-        cand = [i for i in range(len(self.pool)) if self.keys[i] not in asked and self.sets[i] != prev]
+        cand = [i for i in range(len(self.pool)) if self.sets[i] not in asked_pairs]
+        if not cand:
+            return None
+        least = min(coverage_rank(self.pool[i], counts) for i in cand)
+        cand = [i for i in cand if coverage_rank(self.pool[i], counts) == least]
         cand.sort(key=lambda i: (gb[i], i))
         cand = sorted(cand[:cj["prefilter"]])
         gain = 0

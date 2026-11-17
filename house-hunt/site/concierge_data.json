@@ -1,6 +1,6 @@
 {
  "meta": {
-  "built_at": "2026-11-17T23:02:09+00:00",
+  "built_at": "2026-11-17T23:28:25+00:00",
   "rent_limit": 2000,
   "counts": {
    "apartments": 230,
@@ -7691,7 +7691,7 @@
      "parking": "worse parking",
      "green": "park farther"
     },
-    "selection": "The next task index into the pool, or None after n_tasks. Candidates: the pool minus tasks already asked and\nminus tasks on the same attributes as the previous one; the POOL_PREFILTER most utility-balanced at her mean\nweights (round(|gap|), index); of those, the one with the largest expected reduction in posterior uncertainty:\nthe trace of the posterior covariance of the weights, expected over the three answers. Ties: lower index.",
+    "selection": "The next task index into the pool, or None after n_tasks. Candidates: the pool minus every task on an attribute\nPAIR already asked (15 pairs for 6 attributes, so no pair repeats within the eight); of those, only the ones whose\ntwo attributes have appeared least so far (coverage_rank: lowest sum of their counts, then lowest larger count),\nso each attribute appears at least twice in eight; of those, the `prefilter` most utility-balanced at her mean\nweights (round(|gap|), index); of those, the one with the largest expected reduction in posterior uncertainty: the\ntrace of the posterior covariance of the weights, expected over the three answers. Ties: lower index.",
     "levels_rule": "Attributes and levels, worst to best by feature value. Totals: the TOTAL_QUANTILES of the buildings' lowest\ntotals, rounded to $50 (the real spread); the other levels are the design's.",
     "priorities_rule": "Her weights in plain-word order (highest first; ties in FEATURES order) and the one-sentence summary. When the\nspread of her weights (max - min) is below flat_below (flat_threshold of the samples), flat is true and the\nsentence says nothing stood out, adding \"if anything, X a little more\" when the top weight leads by LEAN_STEP.",
     "nudge_rule": "Move one priority up or down one place: swap its weight with the weight of the priority just above (up) or just\nbelow (down) it in priorities() order; nothing else changes (the sum stays 1). If the two weights are equal (to\nROUND decimals), the moved one is set NUDGE_TIE_STEP above (up) or below (down) the other, floored at 0, and the six\nare renormalised to sum 1. At the top (up) or bottom (down) nothing changes. Returns the new weights.",
@@ -7811,7 +7811,71 @@
       "choice": "a"
      },
      {
-      "task_index": 89,
+      "task_index": 60,
+      "task": [
+       [
+        "money",
+        3,
+        1
+       ],
+       [
+        "going_out",
+        0,
+        2
+       ]
+      ],
+      "choice": "b"
+     },
+     {
+      "task_index": 139,
+      "task": [
+       [
+        "family",
+        0,
+        2
+       ],
+       [
+        "parking",
+        2,
+        0
+       ]
+      ],
+      "choice": "b"
+     },
+     {
+      "task_index": 154,
+      "task": [
+       [
+        "family",
+        2,
+        0
+       ],
+       [
+        "green",
+        0,
+        2
+       ]
+      ],
+      "choice": "a"
+     },
+     {
+      "task_index": 211,
+      "task": [
+       [
+        "going_out",
+        0,
+        1
+       ],
+       [
+        "parking",
+        2,
+        0
+       ]
+      ],
+      "choice": "b"
+     },
+     {
+      "task_index": 41,
       "task": [
        [
         "money",
@@ -7819,12 +7883,12 @@
         3
        ],
        [
-        "green",
-        1,
+        "room",
+        2,
         0
        ]
       ],
-      "choice": "either"
+      "choice": "b"
      },
      {
       "task_index": 124,
@@ -7843,80 +7907,16 @@
       "choice": "a"
      },
      {
-      "task_index": 160,
-      "task": [
-       [
-        "family",
-        3,
-        1
-       ],
-       [
-        "green",
-        0,
-        2
-       ]
-      ],
-      "choice": "a"
-     },
-     {
-      "task_index": 147,
-      "task": [
-       [
-        "family",
-        2,
-        3
-       ],
-       [
-        "parking",
-        1,
-        0
-       ]
-      ],
-      "choice": "b"
-     },
-     {
-      "task_index": 163,
-      "task": [
-       [
-        "family",
-        2,
-        3
-       ],
-       [
-        "green",
-        2,
-        0
-       ]
-      ],
-      "choice": "either"
-     },
-     {
-      "task_index": 132,
-      "task": [
-       [
-        "family",
-        3,
-        2
-       ],
-       [
-        "going_out",
-        0,
-        1
-       ]
-      ],
-      "choice": "either"
-     },
-     {
-      "task_index": 19,
+      "task_index": 90,
       "task": [
        [
         "money",
-        1,
-        3
+        3,
+        1
        ],
        [
-        "family",
-        3,
+        "green",
+        0,
         2
        ]
       ],
@@ -7925,13 +7925,13 @@
     ],
     "expected_tasks": [
      199,
-     89,
+     60,
+     139,
+     154,
+     211,
+     41,
      124,
-     160,
-     147,
-     163,
-     132,
-     19
+     90
     ],
     "expected_tasks_shown": [
      {
@@ -7951,8 +7951,72 @@
       ]
      },
      {
-      "headline_a": "Park closer, but pricier",
-      "headline_b": "Cheaper, but park farther",
+      "headline_a": "Cheaper, but quieter",
+      "headline_b": "Livelier, but pricier",
+      "rows": [
+       {
+        "attribute": "Monthly total with utilities and fees",
+        "a": "$1,700 a month",
+        "b": "$2,100 a month"
+       },
+       {
+        "attribute": "Going out",
+        "a": "Quiet: a couple of places to eat nearby",
+        "b": "Lively: 40 or more places to eat and drink nearby"
+       }
+      ]
+     },
+     {
+      "headline_a": "Better parking, but longer drive",
+      "headline_b": "Nearer family, but worse parking",
+      "rows": [
+       {
+        "attribute": "Drive to Mom and Dad",
+        "a": "90 minutes by car",
+        "b": "35 minutes by car"
+       },
+       {
+        "attribute": "Parking",
+        "a": "A garage space",
+        "b": "Street parking only"
+       }
+      ]
+     },
+     {
+      "headline_a": "Nearer family, but park farther",
+      "headline_b": "Park closer, but longer drive",
+      "rows": [
+       {
+        "attribute": "Drive to Mom and Dad",
+        "a": "35 minutes by car",
+        "b": "90 minutes by car"
+       },
+       {
+        "attribute": "A park for the dog",
+        "a": "15 minutes' walk",
+        "b": "2 minutes' walk"
+       }
+      ]
+     },
+     {
+      "headline_a": "Better parking, but quieter",
+      "headline_b": "Livelier, but worse parking",
+      "rows": [
+       {
+        "attribute": "Going out",
+        "a": "Quiet: a couple of places to eat nearby",
+        "b": "Some: about 15 places to eat and drink nearby"
+       },
+       {
+        "attribute": "Parking",
+        "a": "A garage space",
+        "b": "Street parking only"
+       }
+      ]
+     },
+     {
+      "headline_a": "More room, but pricier",
+      "headline_b": "Cheaper, but smaller",
       "rows": [
        {
         "attribute": "Monthly total with utilities and fees",
@@ -7960,9 +8024,9 @@
         "b": "$1,700 a month"
        },
        {
-        "attribute": "A park for the dog",
-        "a": "8 minutes' walk",
-        "b": "15 minutes' walk"
+        "attribute": "Space",
+        "a": "One bedroom, about 700 sq ft",
+        "b": "Studio, about 450 sq ft"
        }
       ]
      },
@@ -7983,13 +8047,13 @@
       ]
      },
      {
-      "headline_a": "Nearer family, but park farther",
-      "headline_b": "Park closer, but longer drive",
+      "headline_a": "Cheaper, but park farther",
+      "headline_b": "Park closer, but pricier",
       "rows": [
        {
-        "attribute": "Drive to Mom and Dad",
-        "a": "15 minutes by car",
-        "b": "60 minutes by car"
+        "attribute": "Monthly total with utilities and fees",
+        "a": "$1,700 a month",
+        "b": "$2,100 a month"
        },
        {
         "attribute": "A park for the dog",
@@ -7997,86 +8061,22 @@
         "b": "2 minutes' walk"
        }
       ]
-     },
-     {
-      "headline_a": "Better parking, but longer drive",
-      "headline_b": "Nearer family, but worse parking",
-      "rows": [
-       {
-        "attribute": "Drive to Mom and Dad",
-        "a": "35 minutes by car",
-        "b": "15 minutes by car"
-       },
-       {
-        "attribute": "Parking",
-        "a": "A spot in a lot",
-        "b": "Street parking only"
-       }
-      ]
-     },
-     {
-      "headline_a": "Park closer, but longer drive",
-      "headline_b": "Nearer family, but park farther",
-      "rows": [
-       {
-        "attribute": "Drive to Mom and Dad",
-        "a": "35 minutes by car",
-        "b": "15 minutes by car"
-       },
-       {
-        "attribute": "A park for the dog",
-        "a": "2 minutes' walk",
-        "b": "15 minutes' walk"
-       }
-      ]
-     },
-     {
-      "headline_a": "Nearer family, but quieter",
-      "headline_b": "Livelier, but longer drive",
-      "rows": [
-       {
-        "attribute": "Drive to Mom and Dad",
-        "a": "15 minutes by car",
-        "b": "35 minutes by car"
-       },
-       {
-        "attribute": "Going out",
-        "a": "Quiet: a couple of places to eat nearby",
-        "b": "Some: about 15 places to eat and drink nearby"
-       }
-      ]
-     },
-     {
-      "headline_a": "Nearer family, but pricier",
-      "headline_b": "Cheaper, but longer drive",
-      "rows": [
-       {
-        "attribute": "Monthly total with utilities and fees",
-        "a": "$2,100 a month",
-        "b": "$1,700 a month"
-       },
-       {
-        "attribute": "Drive to Mom and Dad",
-        "a": "15 minutes by car",
-        "b": "35 minutes by car"
-       }
-      ]
      }
     ],
     "expected_mean_weights": {
-     "family": 0.461322,
-     "money": 0.078169,
-     "room": 0.106389,
-     "going_out": 0.16106,
-     "green": 0.121322,
-     "parking": 0.071739
+     "family": 0.403996,
+     "money": 0.103834,
+     "room": 0.070676,
+     "going_out": 0.233011,
+     "green": 0.13337,
+     "parking": 0.055113
     },
     "expected_priorities": [
      "family",
      "going_out",
      "green",
-     "room",
      "money",
+     "room",
      "parking"
     ],
     "expected_priorities_sentence": "Being near Mom and Dad matters most to you, then going out; parking matters least.",
@@ -8091,19 +8091,19 @@
       ]
      ],
      [
-      "nj:bloomfield",
-      [
-       "b_63439f0a5f",
-       "b_e39cde86f4",
-       "b_00b6de3f80"
-      ]
-     ],
-     [
       "ct:stamford",
       [
        "b_893edb6df8",
-       "b_377a717d0d",
-       "b_f95c86db48"
+       "b_f95c86db48",
+       "b_377a717d0d"
+      ]
+     ],
+     [
+      "nj:bloomfield",
+      [
+       "b_e39cde86f4",
+       "b_63439f0a5f",
+       "b_e2ceefe11e"
       ]
      ]
     ],
@@ -8116,64 +8116,64 @@
      "b_91121ba2c7": [
       "b_84bbe8d99e",
       "b_d007846fe9",
-      "b_7e7f8992f2"
+      "b_8f314b2e2f"
      ],
      "b_73eecaf004": [
+      "b_a564f7a7f5",
       "b_92f883f46d",
-      "b_31d135b158",
       "b_d03c93be22"
      ],
-     "b_63439f0a5f": [
-      "b_bbae18b262",
-      "b_39bce8e231",
-      "b_21c3c3e483"
-     ],
-     "b_e39cde86f4": [
-      "b_879c33564e",
-      "b_8f314b2e2f",
-      "b_e4066e3234"
-     ],
-     "b_00b6de3f80": [
-      "b_bdba3ce8ce",
-      "b_68e3f26c07",
-      "b_72747f630d"
-     ],
      "b_893edb6df8": [
-      "b_e2ceefe11e",
-      "b_a6ae52079b",
-      "b_fec325fa9f"
-     ],
-     "b_377a717d0d": [
       "b_afec34bc3d",
       "b_e053355398",
-      "b_66685241d8"
+      "b_e4066e3234"
      ],
      "b_f95c86db48": [
+      "b_fec325fa9f",
+      "b_7e7f8992f2",
+      "b_39bce8e231"
+     ],
+     "b_377a717d0d": [
+      "b_00b6de3f80",
+      "b_31d135b158",
+      "b_4278658026"
+     ],
+     "b_e39cde86f4": [
+      "b_21c3c3e483",
+      "b_bbae18b262",
+      "b_879c33564e"
+     ],
+     "b_63439f0a5f": [
+      "b_4ebdf3eefb",
       "b_a786c9f75d",
-      "b_66dc364565",
-      "b_a564f7a7f5"
+      "b_e79bab3c6d"
+     ],
+     "b_e2ceefe11e": [
+      "b_84ae829ad5",
+      "b_a6ae52079b",
+      "b_8b3af85359"
      ]
     },
     "expected_why": {
      "ny:flushing-willets-point": "About 12 minutes by car to Mom and Dad. 48 places to eat and drink within a 10-minute walk.",
-     "nj:bloomfield": "About 51 minutes by car to Mom and Dad. 18 places to eat and drink within a 10-minute walk.",
-     "ct:stamford": "33 places to eat and drink within a 10-minute walk. About 53 minutes by car to Mom and Dad."
+     "ct:stamford": "33 places to eat and drink within a 10-minute walk. About 53 minutes by car to Mom and Dad.",
+     "nj:bloomfield": "18 places to eat and drink within a 10-minute walk. About 51 minutes by car to Mom and Dad."
     },
     "expected_gives_up": {
      "ny:flushing-willets-point": "Parking isn't stated yet; ask on the tour.",
-     "nj:bloomfield": "Costs more: monthly totals from $2,097 (the other two: $1,879 and $1,806).",
-     "ct:stamford": "Smaller: up to 489 sq ft (the other two: 600 sq ft and 623 sq ft)."
+     "ct:stamford": "Smaller: up to 489 sq ft (the other two: 600 sq ft and 623 sq ft).",
+     "nj:bloomfield": "Parking isn't stated yet; ask on the tour."
     },
     "nudge_example": {
      "feature": "going_out",
      "direction": "up",
      "weights_after": {
-      "family": 0.16106,
-      "money": 0.078169,
-      "room": 0.106389,
-      "going_out": 0.461322,
-      "green": 0.121322,
-      "parking": 0.071739
+      "family": 0.233011,
+      "money": 0.103834,
+      "room": 0.070676,
+      "going_out": 0.403996,
+      "green": 0.13337,
+      "parking": 0.055113
      },
      "priorities_sentence_after": "Going out matters most to you, then being near Mom and Dad; parking matters least.",
      "expected_top_after": [
@@ -8233,11 +8233,11 @@
       "choice": "b"
      },
      {
-      "task_index": 187,
+      "task_index": 139,
       "task": [
        [
-        "room",
-        1,
+        "family",
+        0,
         2
        ],
        [
@@ -8246,26 +8246,10 @@
         0
        ]
       ],
-      "choice": "b"
-     },
-     {
-      "task_index": 95,
-      "task": [
-       [
-        "family",
-        0,
-        1
-       ],
-       [
-        "room",
-        1,
-        0
-       ]
-      ],
       "choice": "a"
      },
      {
-      "task_index": 40,
+      "task_index": 60,
       "task": [
        [
         "money",
@@ -8273,47 +8257,63 @@
         1
        ],
        [
-        "room",
+        "going_out",
         0,
-        1
+        2
        ]
       ],
       "choice": "either"
      },
      {
-      "task_index": 177,
+      "task_index": 76,
       "task": [
        [
-        "room",
-        2,
-        3
+        "money",
+        3,
+        1
        ],
        [
-        "going_out",
+        "parking",
         1,
+        2
+       ]
+      ],
+      "choice": "either"
+     },
+     {
+      "task_index": 102,
+      "task": [
+       [
+        "family",
+        2,
         0
+       ],
+       [
+        "room",
+        1,
+        2
        ]
       ],
       "choice": "b"
      },
      {
-      "task_index": 153,
+      "task_index": 223,
       "task": [
        [
-        "family",
+        "going_out",
         0,
         2
        ],
        [
         "green",
-        1,
+        2,
         0
        ]
       ],
       "choice": "either"
      },
      {
-      "task_index": 196,
+      "task_index": 180,
       "task": [
        [
         "room",
@@ -8321,25 +8321,25 @@
         0
        ],
        [
-        "green",
+        "parking",
         0,
-        2
+        1
        ]
       ],
       "choice": "either"
      },
      {
-      "task_index": 222,
+      "task_index": 16,
       "task": [
        [
-        "going_out",
-        2,
-        0
+        "money",
+        3,
+        1
        ],
        [
-        "green",
+        "family",
         0,
-        1
+        2
        ]
       ],
       "choice": "either"
@@ -8347,13 +8347,13 @@
     ],
     "expected_tasks": [
      199,
-     187,
-     95,
-     40,
-     177,
-     153,
-     196,
-     222
+     139,
+     60,
+     76,
+     102,
+     223,
+     180,
+     16
     ],
     "expected_tasks_shown": [
      {
@@ -8373,13 +8373,13 @@
       ]
      },
      {
-      "headline_a": "Better parking, but smaller",
-      "headline_b": "More room, but worse parking",
+      "headline_a": "Better parking, but longer drive",
+      "headline_b": "Nearer family, but worse parking",
       "rows": [
        {
-        "attribute": "Space",
-        "a": "Studio, about 600 sq ft",
-        "b": "One bedroom, about 700 sq ft"
+        "attribute": "Drive to Mom and Dad",
+        "a": "90 minutes by car",
+        "b": "35 minutes by car"
        },
        {
         "attribute": "Parking",
@@ -8389,24 +8389,8 @@
       ]
      },
      {
-      "headline_a": "More room, but longer drive",
-      "headline_b": "Nearer family, but smaller",
-      "rows": [
-       {
-        "attribute": "Drive to Mom and Dad",
-        "a": "90 minutes by car",
-        "b": "60 minutes by car"
-       },
-       {
-        "attribute": "Space",
-        "a": "Studio, about 600 sq ft",
-        "b": "Studio, about 450 sq ft"
-       }
-      ]
-     },
-     {
-      "headline_a": "Cheaper, but smaller",
-      "headline_b": "More room, but pricier",
+      "headline_a": "Cheaper, but quieter",
+      "headline_b": "Livelier, but pricier",
       "rows": [
        {
         "attribute": "Monthly total with utilities and fees",
@@ -8414,47 +8398,63 @@
         "b": "$2,100 a month"
        },
        {
-        "attribute": "Space",
-        "a": "Studio, about 450 sq ft",
-        "b": "Studio, about 600 sq ft"
+        "attribute": "Going out",
+        "a": "Quiet: a couple of places to eat nearby",
+        "b": "Lively: 40 or more places to eat and drink nearby"
        }
       ]
      },
      {
-      "headline_a": "Livelier, but smaller",
-      "headline_b": "More room, but quieter",
+      "headline_a": "Cheaper, but worse parking",
+      "headline_b": "Better parking, but pricier",
       "rows": [
        {
-        "attribute": "Space",
-        "a": "One bedroom, about 700 sq ft",
-        "b": "One bedroom, about 900 sq ft"
+        "attribute": "Monthly total with utilities and fees",
+        "a": "$1,700 a month",
+        "b": "$2,100 a month"
        },
        {
-        "attribute": "Going out",
-        "a": "Some: about 15 places to eat and drink nearby",
-        "b": "Quiet: a couple of places to eat nearby"
+        "attribute": "Parking",
+        "a": "A spot in a lot",
+        "b": "A garage space"
        }
       ]
      },
      {
-      "headline_a": "Park closer, but longer drive",
-      "headline_b": "Nearer family, but park farther",
+      "headline_a": "Nearer family, but smaller",
+      "headline_b": "More room, but longer drive",
       "rows": [
        {
         "attribute": "Drive to Mom and Dad",
-        "a": "90 minutes by car",
-        "b": "35 minutes by car"
+        "a": "35 minutes by car",
+        "b": "90 minutes by car"
+       },
+       {
+        "attribute": "Space",
+        "a": "Studio, about 600 sq ft",
+        "b": "One bedroom, about 700 sq ft"
+       }
+      ]
+     },
+     {
+      "headline_a": "Park closer, but quieter",
+      "headline_b": "Livelier, but park farther",
+      "rows": [
+       {
+        "attribute": "Going out",
+        "a": "Quiet: a couple of places to eat nearby",
+        "b": "Lively: 40 or more places to eat and drink nearby"
        },
        {
         "attribute": "A park for the dog",
-        "a": "8 minutes' walk",
+        "a": "2 minutes' walk",
         "b": "15 minutes' walk"
        }
       ]
      },
      {
-      "headline_a": "More room, but park farther",
-      "headline_b": "Park closer, but smaller",
+      "headline_a": "More room, but worse parking",
+      "headline_b": "Better parking, but smaller",
       "rows": [
        {
         "attribute": "Space",
@@ -8462,46 +8462,46 @@
         "b": "Studio, about 450 sq ft"
        },
        {
-        "attribute": "A park for the dog",
-        "a": "15 minutes' walk",
-        "b": "2 minutes' walk"
+        "attribute": "Parking",
+        "a": "Street parking only",
+        "b": "A spot in a lot"
        }
       ]
      },
      {
-      "headline_a": "Livelier, but park farther",
-      "headline_b": "Park closer, but quieter",
+      "headline_a": "Cheaper, but longer drive",
+      "headline_b": "Nearer family, but pricier",
       "rows": [
        {
-        "attribute": "Going out",
-        "a": "Lively: 40 or more places to eat and drink nearby",
-        "b": "Quiet: a couple of places to eat nearby"
+        "attribute": "Monthly total with utilities and fees",
+        "a": "$1,700 a month",
+        "b": "$2,100 a month"
        },
        {
-        "attribute": "A park for the dog",
-        "a": "15 minutes' walk",
-        "b": "8 minutes' walk"
+        "attribute": "Drive to Mom and Dad",
+        "a": "90 minutes by car",
+        "b": "35 minutes by car"
        }
       ]
      }
     ],
     "expected_mean_weights": {
-     "family": 0.069414,
-     "money": 0.085352,
-     "room": 0.555311,
-     "going_out": 0.074614,
-     "green": 0.14852,
-     "parking": 0.066789
+     "family": 0.049477,
+     "money": 0.060959,
+     "room": 0.53779,
+     "going_out": 0.084221,
+     "green": 0.12154,
+     "parking": 0.146012
     },
     "expected_priorities": [
      "room",
+     "parking",
      "green",
-     "money",
      "going_out",
-     "family",
-     "parking"
+     "money",
+     "family"
     ],
-    "expected_priorities_sentence": "Space matters most to you, then a park for the dog; parking matters least.",
+    "expected_priorities_sentence": "Space matters most to you, then parking; being near Mom and Dad matters least.",
     "expected_flat": false,
     "expected_top": [
      [
@@ -8513,19 +8513,19 @@
       ]
      ],
      [
-      "nj:jersey-city-greenville",
-      [
-       "b_bcb2458625",
-       "b_b32625d7b7",
-       "b_0a993fd9f1"
-      ]
-     ],
-     [
       "ct:hamden",
       [
        "b_0ba5cc966d",
        "b_83debd3403",
        "b_c7c4e6e0fd"
+      ]
+     ],
+     [
+      "nj:jersey-city-greenville",
+      [
+       "b_bcb2458625",
+       "b_b32625d7b7",
+       "b_0a993fd9f1"
       ]
      ]
     ],
@@ -8533,32 +8533,17 @@
      "b_63439f0a5f": [
       "b_7e7f8992f2",
       "b_39bce8e231",
-      "b_bbae18b262"
+      "b_21c3c3e483"
      ],
      "b_e39cde86f4": [
-      "b_21c3c3e483",
       "b_4ebdf3eefb",
-      "b_8f314b2e2f"
+      "b_8f314b2e2f",
+      "b_92f883f46d"
      ],
      "b_00b6de3f80": [
       "b_bdba3ce8ce",
       "b_581c159c1f",
       "b_72747f630d"
-     ],
-     "b_bcb2458625": [
-      "b_c4cb43f49a",
-      "b_e0477f0239",
-      "b_99e0dbc360"
-     ],
-     "b_b32625d7b7": [
-      "b_1af8fa985c",
-      "b_958f1540e1",
-      "b_25caa353a4"
-     ],
-     "b_0a993fd9f1": [
-      "b_62ca4d5f02",
-      "b_8abf514d25",
-      "b_3eea33c4f6"
      ],
      "b_0ba5cc966d": [
       "b_9c5998f31d",
@@ -8571,20 +8556,35 @@
       "b_9036d08473"
      ],
      "b_c7c4e6e0fd": [
-      "b_cd3383c7fe",
       "b_1c1dc924e1",
+      "b_cd3383c7fe",
       "b_4d77efaaab"
+     ],
+     "b_bcb2458625": [
+      "b_c4cb43f49a",
+      "b_e0477f0239",
+      "b_99e0dbc360"
+     ],
+     "b_b32625d7b7": [
+      "b_1af8fa985c",
+      "b_bbae18b262",
+      "b_5f84c933a2"
+     ],
+     "b_0a993fd9f1": [
+      "b_62ca4d5f02",
+      "b_8abf514d25",
+      "b_3eea33c4f6"
      ]
     },
     "expected_why": {
-     "nj:bloomfield": "A separate bedroom, up to 623 sq ft. 18 places to eat and drink within a 10-minute walk.",
-     "nj:jersey-city-greenville": "A separate bedroom, up to 800 sq ft. A park about 1 minute on foot.",
-     "ct:hamden": "A separate bedroom, up to 925 sq ft. Garage or covered parking."
+     "nj:bloomfield": "18 places to eat and drink within a 10-minute walk. A separate bedroom, up to 623 sq ft.",
+     "ct:hamden": "A separate bedroom, up to 925 sq ft. Garage or covered parking.",
+     "nj:jersey-city-greenville": "A separate bedroom, up to 800 sq ft. A park about 1 minute on foot."
     },
     "expected_gives_up": {
-     "nj:bloomfield": "Costs more: monthly totals from $2,097 (the other two: $1,802 and $1,617).",
-     "nj:jersey-city-greenville": "Parking isn't stated yet; ask on the tour.",
-     "ct:hamden": "Farther from Mom and Dad: about 112 minutes by car (the other two: 51 minutes and 40 minutes)."
+     "nj:bloomfield": "Costs more: monthly totals from $2,097 (the other two: $1,617 and $1,802).",
+     "ct:hamden": "Farther from Mom and Dad: about 112 minutes by car (the other two: 51 minutes and 40 minutes).",
+     "nj:jersey-city-greenville": "Parking isn't stated yet; ask on the tour."
     }
    },
    {
@@ -8616,12 +8616,28 @@
       "choice": "either"
      },
      {
-      "task_index": 124,
+      "task_index": 139,
       "task": [
        [
         "family",
+        0,
+        2
+       ],
+       [
+        "parking",
         2,
         0
+       ]
+      ],
+      "choice": "b"
+     },
+     {
+      "task_index": 60,
+      "task": [
+       [
+        "money",
+        3,
+        1
        ],
        [
         "going_out",
@@ -8632,60 +8648,28 @@
       "choice": "a"
      },
      {
-      "task_index": 136,
+      "task_index": 8,
       "task": [
+       [
+        "money",
+        2,
+        0
+       ],
        [
         "family",
         1,
-        0
-       ],
-       [
-        "parking",
-        0,
-        2
-       ]
-      ],
-      "choice": "either"
-     },
-     {
-      "task_index": 31,
-      "task": [
-       [
-        "money",
-        0,
-        2
-       ],
-       [
-        "room",
-        2,
-        0
-       ]
-      ],
-      "choice": "b"
-     },
-     {
-      "task_index": 16,
-      "task": [
-       [
-        "money",
-        3,
-        1
-       ],
-       [
-        "family",
-        0,
-        2
+        3
        ]
       ],
       "choice": "a"
      },
      {
-      "task_index": 81,
+      "task_index": 223,
       "task": [
        [
-        "money",
+        "going_out",
         0,
-        1
+        2
        ],
        [
         "green",
@@ -8693,31 +8677,31 @@
         0
        ]
       ],
-      "choice": "b"
+      "choice": "either"
      },
      {
-      "task_index": 1,
+      "task_index": 184,
       "task": [
        [
-        "money",
-        0,
-        1
-       ],
-       [
-        "family",
+        "room",
         2,
         0
+       ],
+       [
+        "parking",
+        0,
+        2
        ]
       ],
       "choice": "either"
      },
      {
-      "task_index": 232,
+      "task_index": 160,
       "task": [
        [
-        "parking",
-        2,
-        0
+        "family",
+        3,
+        1
        ],
        [
         "green",
@@ -8726,17 +8710,33 @@
        ]
       ],
       "choice": "either"
+     },
+     {
+      "task_index": 26,
+      "task": [
+       [
+        "money",
+        1,
+        0
+       ],
+       [
+        "room",
+        0,
+        2
+       ]
+      ],
+      "choice": "a"
      }
     ],
     "expected_tasks": [
      199,
-     124,
-     136,
-     31,
-     16,
-     81,
-     1,
-     232
+     139,
+     60,
+     8,
+     223,
+     184,
+     160,
+     26
     ],
     "expected_tasks_shown": [
      {
@@ -8756,13 +8756,29 @@
       ]
      },
      {
-      "headline_a": "Nearer family, but quieter",
-      "headline_b": "Livelier, but longer drive",
+      "headline_a": "Better parking, but longer drive",
+      "headline_b": "Nearer family, but worse parking",
       "rows": [
        {
         "attribute": "Drive to Mom and Dad",
-        "a": "35 minutes by car",
-        "b": "90 minutes by car"
+        "a": "90 minutes by car",
+        "b": "35 minutes by car"
+       },
+       {
+        "attribute": "Parking",
+        "a": "A garage space",
+        "b": "Street parking only"
+       }
+      ]
+     },
+     {
+      "headline_a": "Cheaper, but quieter",
+      "headline_b": "Livelier, but pricier",
+      "rows": [
+       {
+        "attribute": "Monthly total with utilities and fees",
+        "a": "$1,700 a month",
+        "b": "$2,100 a month"
        },
        {
         "attribute": "Going out",
@@ -8772,61 +8788,29 @@
       ]
      },
      {
-      "headline_a": "Nearer family, but worse parking",
-      "headline_b": "Better parking, but longer drive",
-      "rows": [
-       {
-        "attribute": "Drive to Mom and Dad",
-        "a": "60 minutes by car",
-        "b": "90 minutes by car"
-       },
-       {
-        "attribute": "Parking",
-        "a": "Street parking only",
-        "b": "A garage space"
-       }
-      ]
-     },
-     {
-      "headline_a": "More room, but pricier",
-      "headline_b": "Cheaper, but smaller",
-      "rows": [
-       {
-        "attribute": "Monthly total with utilities and fees",
-        "a": "$2,250 a month",
-        "b": "$1,950 a month"
-       },
-       {
-        "attribute": "Space",
-        "a": "One bedroom, about 700 sq ft",
-        "b": "Studio, about 450 sq ft"
-       }
-      ]
-     },
-     {
       "headline_a": "Cheaper, but longer drive",
       "headline_b": "Nearer family, but pricier",
       "rows": [
        {
         "attribute": "Monthly total with utilities and fees",
-        "a": "$1,700 a month",
-        "b": "$2,100 a month"
+        "a": "$1,950 a month",
+        "b": "$2,250 a month"
        },
        {
         "attribute": "Drive to Mom and Dad",
-        "a": "90 minutes by car",
-        "b": "35 minutes by car"
+        "a": "60 minutes by car",
+        "b": "15 minutes by car"
        }
       ]
      },
      {
-      "headline_a": "Park closer, but pricier",
-      "headline_b": "Cheaper, but park farther",
+      "headline_a": "Park closer, but quieter",
+      "headline_b": "Livelier, but park farther",
       "rows": [
        {
-        "attribute": "Monthly total with utilities and fees",
-        "a": "$2,250 a month",
-        "b": "$2,100 a month"
+        "attribute": "Going out",
+        "a": "Quiet: a couple of places to eat nearby",
+        "b": "Lively: 40 or more places to eat and drink nearby"
        },
        {
         "attribute": "A park for the dog",
@@ -8836,29 +8820,29 @@
       ]
      },
      {
-      "headline_a": "Nearer family, but pricier",
-      "headline_b": "Cheaper, but longer drive",
+      "headline_a": "More room, but worse parking",
+      "headline_b": "Better parking, but smaller",
       "rows": [
        {
-        "attribute": "Monthly total with utilities and fees",
-        "a": "$2,250 a month",
-        "b": "$2,100 a month"
+        "attribute": "Space",
+        "a": "One bedroom, about 700 sq ft",
+        "b": "Studio, about 450 sq ft"
        },
        {
-        "attribute": "Drive to Mom and Dad",
-        "a": "35 minutes by car",
-        "b": "90 minutes by car"
+        "attribute": "Parking",
+        "a": "Street parking only",
+        "b": "A garage space"
        }
       ]
      },
      {
-      "headline_a": "Better parking, but park farther",
-      "headline_b": "Park closer, but worse parking",
+      "headline_a": "Nearer family, but park farther",
+      "headline_b": "Park closer, but longer drive",
       "rows": [
        {
-        "attribute": "Parking",
-        "a": "A garage space",
-        "b": "Street parking only"
+        "attribute": "Drive to Mom and Dad",
+        "a": "15 minutes by car",
+        "b": "60 minutes by car"
        },
        {
         "attribute": "A park for the dog",
@@ -8866,22 +8850,38 @@
         "b": "2 minutes' walk"
        }
       ]
+     },
+     {
+      "headline_a": "Cheaper, but smaller",
+      "headline_b": "More room, but pricier",
+      "rows": [
+       {
+        "attribute": "Monthly total with utilities and fees",
+        "a": "$2,100 a month",
+        "b": "$2,250 a month"
+       },
+       {
+        "attribute": "Space",
+        "a": "Studio, about 450 sq ft",
+        "b": "One bedroom, about 700 sq ft"
+       }
+      ]
      }
     ],
     "expected_mean_weights": {
-     "family": 0.145641,
-     "money": 0.455335,
-     "room": 0.124466,
-     "going_out": 0.095376,
-     "green": 0.096364,
-     "parking": 0.082817
+     "family": 0.149765,
+     "money": 0.504529,
+     "room": 0.075487,
+     "going_out": 0.089966,
+     "green": 0.129303,
+     "parking": 0.05095
     },
     "expected_priorities": [
      "money",
      "family",
-     "room",
      "green",
      "going_out",
+     "room",
      "parking"
     ],
     "expected_priorities_sentence": "The monthly cost matters most to you, then being near Mom and Dad; parking matters least.",
@@ -8915,18 +8915,18 @@
     "expected_more_like_this": {
      "b_893edb6df8": [
       "b_e2ceefe11e",
-      "b_4278658026",
-      "b_cffdb3842e"
+      "b_cffdb3842e",
+      "b_84bbe8d99e"
      ],
      "b_377a717d0d": [
+      "b_4278658026",
       "b_846f44689f",
-      "b_66685241d8",
-      "b_e053355398"
+      "b_66685241d8"
      ],
      "b_f95c86db48": [
+      "b_e39cde86f4",
       "b_1d1be12629",
-      "b_d007846fe9",
-      "b_91121ba2c7"
+      "b_d007846fe9"
      ],
      "b_84ae829ad5": [
       "b_fcd2954af4",
@@ -8945,17 +8945,17 @@
      ],
      "b_f699e1aa5f": [
       "b_99ec10a746",
-      "b_3eea33c4f6",
-      "b_080e9e0293"
+      "b_8b3af85359",
+      "b_afec34bc3d"
      ],
      "b_8abf514d25": [
       "b_62ca4d5f02",
       "b_0a993fd9f1",
-      "b_1af8fa985c"
+      "b_0574ac1a01"
      ],
      "b_87dd805d41": [
-      "b_b29a9ae0e3",
       "b_fd00a92a6c",
+      "b_b29a9ae0e3",
       "b_58407f7fcf"
      ]
     },
@@ -8966,7 +8966,7 @@
     },
     "expected_gives_up": {
      "ct:stamford": null,
-     "nj:bayonne": "Parking isn't stated yet; ask on the tour.",
+     "nj:bayonne": "The nearest park is farther: about 8 minutes on foot (the other two: 4 minutes and 3 minutes).",
      "nj:east-orange": "Parking isn't stated yet; ask on the tour."
     }
    },
@@ -8999,28 +8999,12 @@
       "choice": "a"
      },
      {
-      "task_index": 89,
+      "task_index": 60,
       "task": [
        [
         "money",
-        1,
-        3
-       ],
-       [
-        "green",
-        1,
-        0
-       ]
-      ],
-      "choice": "either"
-     },
-     {
-      "task_index": 124,
-      "task": [
-       [
-        "family",
-        2,
-        0
+        3,
+        1
        ],
        [
         "going_out",
@@ -9031,27 +9015,27 @@
       "choice": "b"
      },
      {
-      "task_index": 232,
+      "task_index": 139,
       "task": [
+       [
+        "family",
+        0,
+        2
+       ],
        [
         "parking",
         2,
         0
-       ],
-       [
-        "green",
-        0,
-        2
        ]
       ],
-      "choice": "either"
+      "choice": "b"
      },
      {
-      "task_index": 220,
+      "task_index": 154,
       "task": [
        [
-        "going_out",
-        1,
+        "family",
+        2,
         0
        ],
        [
@@ -9063,28 +9047,12 @@
       "choice": "a"
      },
      {
-      "task_index": 18,
+      "task_index": 211,
       "task": [
        [
-        "money",
-        3,
-        1
-       ],
-       [
-        "family",
-        1,
-        3
-       ]
-      ],
-      "choice": "either"
-     },
-     {
-      "task_index": 139,
-      "task": [
-       [
-        "family",
+        "going_out",
         0,
-        2
+        1
        ],
        [
         "parking",
@@ -9109,17 +9077,49 @@
        ]
       ],
       "choice": "b"
+     },
+     {
+      "task_index": 124,
+      "task": [
+       [
+        "family",
+        2,
+        0
+       ],
+       [
+        "going_out",
+        0,
+        2
+       ]
+      ],
+      "choice": "b"
+     },
+     {
+      "task_index": 90,
+      "task": [
+       [
+        "money",
+        3,
+        1
+       ],
+       [
+        "green",
+        0,
+        2
+       ]
+      ],
+      "choice": "either"
      }
     ],
     "expected_tasks": [
      199,
-     89,
-     124,
-     232,
-     220,
-     18,
+     60,
      139,
-     41
+     154,
+     211,
+     41,
+     124,
+     90
     ],
     "expected_tasks_shown": [
      {
@@ -9139,72 +9139,8 @@
       ]
      },
      {
-      "headline_a": "Park closer, but pricier",
-      "headline_b": "Cheaper, but park farther",
-      "rows": [
-       {
-        "attribute": "Monthly total with utilities and fees",
-        "a": "$2,100 a month",
-        "b": "$1,700 a month"
-       },
-       {
-        "attribute": "A park for the dog",
-        "a": "8 minutes' walk",
-        "b": "15 minutes' walk"
-       }
-      ]
-     },
-     {
-      "headline_a": "Nearer family, but quieter",
-      "headline_b": "Livelier, but longer drive",
-      "rows": [
-       {
-        "attribute": "Drive to Mom and Dad",
-        "a": "35 minutes by car",
-        "b": "90 minutes by car"
-       },
-       {
-        "attribute": "Going out",
-        "a": "Quiet: a couple of places to eat nearby",
-        "b": "Lively: 40 or more places to eat and drink nearby"
-       }
-      ]
-     },
-     {
-      "headline_a": "Better parking, but park farther",
-      "headline_b": "Park closer, but worse parking",
-      "rows": [
-       {
-        "attribute": "Parking",
-        "a": "A garage space",
-        "b": "Street parking only"
-       },
-       {
-        "attribute": "A park for the dog",
-        "a": "15 minutes' walk",
-        "b": "2 minutes' walk"
-       }
-      ]
-     },
-     {
-      "headline_a": "Livelier, but park farther",
-      "headline_b": "Park closer, but quieter",
-      "rows": [
-       {
-        "attribute": "Going out",
-        "a": "Some: about 15 places to eat and drink nearby",
-        "b": "Quiet: a couple of places to eat nearby"
-       },
-       {
-        "attribute": "A park for the dog",
-        "a": "15 minutes' walk",
-        "b": "2 minutes' walk"
-       }
-      ]
-     },
-     {
-      "headline_a": "Cheaper, but longer drive",
-      "headline_b": "Nearer family, but pricier",
+      "headline_a": "Cheaper, but quieter",
+      "headline_b": "Livelier, but pricier",
       "rows": [
        {
         "attribute": "Monthly total with utilities and fees",
@@ -9212,9 +9148,9 @@
         "b": "$2,100 a month"
        },
        {
-        "attribute": "Drive to Mom and Dad",
-        "a": "60 minutes by car",
-        "b": "15 minutes by car"
+        "attribute": "Going out",
+        "a": "Quiet: a couple of places to eat nearby",
+        "b": "Lively: 40 or more places to eat and drink nearby"
        }
       ]
      },
@@ -9226,6 +9162,38 @@
         "attribute": "Drive to Mom and Dad",
         "a": "90 minutes by car",
         "b": "35 minutes by car"
+       },
+       {
+        "attribute": "Parking",
+        "a": "A garage space",
+        "b": "Street parking only"
+       }
+      ]
+     },
+     {
+      "headline_a": "Nearer family, but park farther",
+      "headline_b": "Park closer, but longer drive",
+      "rows": [
+       {
+        "attribute": "Drive to Mom and Dad",
+        "a": "35 minutes by car",
+        "b": "90 minutes by car"
+       },
+       {
+        "attribute": "A park for the dog",
+        "a": "15 minutes' walk",
+        "b": "2 minutes' walk"
+       }
+      ]
+     },
+     {
+      "headline_a": "Better parking, but quieter",
+      "headline_b": "Livelier, but worse parking",
+      "rows": [
+       {
+        "attribute": "Going out",
+        "a": "Quiet: a couple of places to eat nearby",
+        "b": "Some: about 15 places to eat and drink nearby"
        },
        {
         "attribute": "Parking",
@@ -9249,25 +9217,57 @@
         "b": "Studio, about 450 sq ft"
        }
       ]
+     },
+     {
+      "headline_a": "Nearer family, but quieter",
+      "headline_b": "Livelier, but longer drive",
+      "rows": [
+       {
+        "attribute": "Drive to Mom and Dad",
+        "a": "35 minutes by car",
+        "b": "90 minutes by car"
+       },
+       {
+        "attribute": "Going out",
+        "a": "Quiet: a couple of places to eat nearby",
+        "b": "Lively: 40 or more places to eat and drink nearby"
+       }
+      ]
+     },
+     {
+      "headline_a": "Cheaper, but park farther",
+      "headline_b": "Park closer, but pricier",
+      "rows": [
+       {
+        "attribute": "Monthly total with utilities and fees",
+        "a": "$1,700 a month",
+        "b": "$2,100 a month"
+       },
+       {
+        "attribute": "A park for the dog",
+        "a": "15 minutes' walk",
+        "b": "2 minutes' walk"
+       }
+      ]
      }
     ],
     "expected_mean_weights": {
-     "family": 0.183843,
-     "money": 0.120608,
-     "room": 0.063933,
-     "going_out": 0.437915,
-     "green": 0.128225,
-     "parking": 0.065477
+     "family": 0.254667,
+     "money": 0.113019,
+     "room": 0.055744,
+     "going_out": 0.408881,
+     "green": 0.124196,
+     "parking": 0.043493
     },
     "expected_priorities": [
      "going_out",
      "family",
      "green",
      "money",
-     "parking",
-     "room"
+     "room",
+     "parking"
     ],
-    "expected_priorities_sentence": "Going out matters most to you, then being near Mom and Dad; space matters least.",
+    "expected_priorities_sentence": "Going out matters most to you, then being near Mom and Dad; parking matters least.",
     "expected_flat": false,
     "expected_top": [
      [
@@ -9291,38 +9291,38 @@
       [
        "b_e39cde86f4",
        "b_63439f0a5f",
-       "b_00b6de3f80"
+       "b_e2ceefe11e"
       ]
      ]
     ],
     "expected_more_like_this": {
      "b_1d1be12629": [
-      "b_6b0a5d8f58",
       "b_0f0fcfc79c",
-      "b_cffdb3842e"
+      "b_6b0a5d8f58",
+      "b_d007846fe9"
      ],
      "b_91121ba2c7": [
+      "b_cffdb3842e",
       "b_84bbe8d99e",
-      "b_8f314b2e2f",
-      "b_d007846fe9"
+      "b_8f314b2e2f"
      ],
      "b_73eecaf004": [
       "b_a564f7a7f5",
-      "b_e4066e3234",
-      "b_e053355398"
+      "b_e053355398",
+      "b_e4066e3234"
      ],
      "b_893edb6df8": [
-      "b_4278658026",
       "b_afec34bc3d",
-      "b_e2ceefe11e"
+      "b_4278658026",
+      "b_92f883f46d"
      ],
      "b_f95c86db48": [
       "b_fec325fa9f",
-      "b_7e7f8992f2",
-      "b_879c33564e"
+      "b_879c33564e",
+      "b_7e7f8992f2"
      ],
      "b_377a717d0d": [
-      "b_92f883f46d",
+      "b_00b6de3f80",
       "b_31d135b158",
       "b_d03c93be22"
      ],
@@ -9336,10 +9336,10 @@
       "b_a786c9f75d",
       "b_e79bab3c6d"
      ],
-     "b_00b6de3f80": [
-      "b_bdba3ce8ce",
-      "b_68e3f26c07",
-      "b_581c159c1f"
+     "b_e2ceefe11e": [
+      "b_84ae829ad5",
+      "b_a6ae52079b",
+      "b_81aa7d8100"
      ]
     },
     "expected_why": {
@@ -9350,7 +9350,7 @@
     "expected_gives_up": {
      "ny:flushing-willets-point": "Parking isn't stated yet; ask on the tour.",
      "ct:stamford": "Smaller: up to 489 sq ft (the other two: 600 sq ft and 623 sq ft).",
-     "nj:bloomfield": "Costs more: monthly totals from $2,097 (the other two: $1,879 and $1,806)."
+     "nj:bloomfield": "Parking isn't stated yet; ask on the tour."
     }
    },
    {
@@ -9375,12 +9375,28 @@
       "choice": "either"
      },
      {
-      "task_index": 124,
+      "task_index": 139,
       "task": [
        [
         "family",
+        0,
+        2
+       ],
+       [
+        "parking",
         2,
         0
+       ]
+      ],
+      "choice": "either"
+     },
+     {
+      "task_index": 60,
+      "task": [
+       [
+        "money",
+        3,
+        1
        ],
        [
         "going_out",
@@ -9391,60 +9407,28 @@
       "choice": "either"
      },
      {
-      "task_index": 68,
+      "task_index": 41,
       "task": [
        [
         "money",
-        2,
-        0
-       ],
-       [
-        "parking",
-        0,
-        1
-       ]
-      ],
-      "choice": "either"
-     },
-     {
-      "task_index": 112,
-      "task": [
-       [
-        "family",
-        3,
-        1
-       ],
-       [
-        "room",
         1,
-        2
-       ]
-      ],
-      "choice": "either"
-     },
-     {
-      "task_index": 90,
-      "task": [
-       [
-        "money",
-        3,
-        1
+        3
        ],
        [
-        "green",
-        0,
-        2
+        "room",
+        2,
+        0
        ]
       ],
       "choice": "either"
      },
      {
-      "task_index": 160,
+      "task_index": 154,
       "task": [
        [
         "family",
-        3,
-        1
+        2,
+        0
        ],
        [
         "green",
@@ -9455,10 +9439,10 @@
       "choice": "either"
      },
      {
-      "task_index": 184,
+      "task_index": 214,
       "task": [
        [
-        "room",
+        "going_out",
         2,
         0
        ],
@@ -9471,10 +9455,10 @@
       "choice": "either"
      },
      {
-      "task_index": 145,
+      "task_index": 75,
       "task": [
        [
-        "family",
+        "money",
         1,
         3
        ],
@@ -9485,17 +9469,33 @@
        ]
       ],
       "choice": "either"
+     },
+     {
+      "task_index": 101,
+      "task": [
+       [
+        "family",
+        0,
+        2
+       ],
+       [
+        "room",
+        2,
+        0
+       ]
+      ],
+      "choice": "either"
      }
     ],
     "expected_tasks": [
      199,
-     124,
-     68,
-     112,
-     90,
-     160,
-     184,
-     145
+     139,
+     60,
+     41,
+     154,
+     214,
+     75,
+     101
     ],
     "expected_tasks_shown": [
      {
@@ -9515,13 +9515,29 @@
       ]
      },
      {
-      "headline_a": "Nearer family, but quieter",
-      "headline_b": "Livelier, but longer drive",
+      "headline_a": "Better parking, but longer drive",
+      "headline_b": "Nearer family, but worse parking",
       "rows": [
        {
         "attribute": "Drive to Mom and Dad",
-        "a": "35 minutes by car",
-        "b": "90 minutes by car"
+        "a": "90 minutes by car",
+        "b": "35 minutes by car"
+       },
+       {
+        "attribute": "Parking",
+        "a": "A garage space",
+        "b": "Street parking only"
+       }
+      ]
+     },
+     {
+      "headline_a": "Cheaper, but quieter",
+      "headline_b": "Livelier, but pricier",
+      "rows": [
+       {
+        "attribute": "Monthly total with utilities and fees",
+        "a": "$1,700 a month",
+        "b": "$2,100 a month"
        },
        {
         "attribute": "Going out",
@@ -9531,50 +9547,18 @@
       ]
      },
      {
-      "headline_a": "Cheaper, but worse parking",
-      "headline_b": "Better parking, but pricier",
+      "headline_a": "More room, but pricier",
+      "headline_b": "Cheaper, but smaller",
       "rows": [
        {
         "attribute": "Monthly total with utilities and fees",
-        "a": "$1,950 a month",
-        "b": "$2,250 a month"
-       },
-       {
-        "attribute": "Parking",
-        "a": "Street parking only",
-        "b": "A spot in a lot"
-       }
-      ]
-     },
-     {
-      "headline_a": "Nearer family, but smaller",
-      "headline_b": "More room, but longer drive",
-      "rows": [
-       {
-        "attribute": "Drive to Mom and Dad",
-        "a": "15 minutes by car",
-        "b": "60 minutes by car"
+        "a": "$2,100 a month",
+        "b": "$1,700 a month"
        },
        {
         "attribute": "Space",
-        "a": "Studio, about 600 sq ft",
-        "b": "One bedroom, about 700 sq ft"
-       }
-      ]
-     },
-     {
-      "headline_a": "Cheaper, but park farther",
-      "headline_b": "Park closer, but pricier",
-      "rows": [
-       {
-        "attribute": "Monthly total with utilities and fees",
-        "a": "$1,700 a month",
-        "b": "$2,100 a month"
-       },
-       {
-        "attribute": "A park for the dog",
-        "a": "15 minutes' walk",
-        "b": "2 minutes' walk"
+        "a": "One bedroom, about 700 sq ft",
+        "b": "Studio, about 450 sq ft"
        }
       ]
      },
@@ -9584,8 +9568,8 @@
       "rows": [
        {
         "attribute": "Drive to Mom and Dad",
-        "a": "15 minutes by car",
-        "b": "60 minutes by car"
+        "a": "35 minutes by car",
+        "b": "90 minutes by car"
        },
        {
         "attribute": "A park for the dog",
@@ -9595,13 +9579,13 @@
       ]
      },
      {
-      "headline_a": "More room, but worse parking",
-      "headline_b": "Better parking, but smaller",
+      "headline_a": "Livelier, but worse parking",
+      "headline_b": "Better parking, but quieter",
       "rows": [
        {
-        "attribute": "Space",
-        "a": "One bedroom, about 700 sq ft",
-        "b": "Studio, about 450 sq ft"
+        "attribute": "Going out",
+        "a": "Lively: 40 or more places to eat and drink nearby",
+        "b": "Quiet: a couple of places to eat nearby"
        },
        {
         "attribute": "Parking",
@@ -9611,13 +9595,13 @@
       ]
      },
      {
-      "headline_a": "Better parking, but longer drive",
-      "headline_b": "Nearer family, but worse parking",
+      "headline_a": "Better parking, but pricier",
+      "headline_b": "Cheaper, but worse parking",
       "rows": [
        {
-        "attribute": "Drive to Mom and Dad",
-        "a": "60 minutes by car",
-        "b": "15 minutes by car"
+        "attribute": "Monthly total with utilities and fees",
+        "a": "$2,100 a month",
+        "b": "$1,700 a month"
        },
        {
         "attribute": "Parking",
@@ -9625,23 +9609,39 @@
         "b": "Street parking only"
        }
       ]
+     },
+     {
+      "headline_a": "More room, but longer drive",
+      "headline_b": "Nearer family, but smaller",
+      "rows": [
+       {
+        "attribute": "Drive to Mom and Dad",
+        "a": "90 minutes by car",
+        "b": "35 minutes by car"
+       },
+       {
+        "attribute": "Space",
+        "a": "One bedroom, about 700 sq ft",
+        "b": "Studio, about 450 sq ft"
+       }
+      ]
      }
     ],
     "expected_mean_weights": {
-     "family": 0.195989,
-     "money": 0.119843,
-     "room": 0.191047,
-     "going_out": 0.205343,
-     "green": 0.157484,
-     "parking": 0.130294
+     "family": 0.14242,
+     "money": 0.150789,
+     "room": 0.207308,
+     "going_out": 0.142554,
+     "green": 0.207331,
+     "parking": 0.149598
     },
     "expected_priorities": [
-     "going_out",
-     "family",
-     "room",
      "green",
+     "room",
+     "money",
      "parking",
-     "money"
+     "going_out",
+     "family"
     ],
     "expected_priorities_sentence": "Nothing stood out strongly; you seem fairly open on all of these.",
     "expected_flat": true,
@@ -9663,11 +9663,11 @@
       ]
      ],
      [
-      "ny:flushing-willets-point",
+      "nj:bayonne",
       [
-       "b_1d1be12629",
-       "b_91121ba2c7",
-       "b_73eecaf004"
+       "b_8ed8b97134",
+       "b_84ae829ad5",
+       "b_81aa7d8100"
       ]
      ]
     ],
@@ -9685,51 +9685,52 @@
      "b_00b6de3f80": [
       "b_bdba3ce8ce",
       "b_72747f630d",
-      "b_68e3f26c07"
+      "b_581c159c1f"
      ],
      "b_893edb6df8": [
-      "b_84bbe8d99e",
       "b_4278658026",
-      "b_e2ceefe11e"
+      "b_84bbe8d99e",
+      "b_cffdb3842e"
      ],
      "b_377a717d0d": [
       "b_846f44689f",
-      "b_66685241d8",
-      "b_a70d51cf28"
+      "b_a70d51cf28",
+      "b_66685241d8"
      ],
      "b_f95c86db48": [
+      "b_91121ba2c7",
       "b_fec325fa9f",
-      "b_d007846fe9",
-      "b_cffdb3842e"
+      "b_d007846fe9"
      ],
-     "b_1d1be12629": [
-      "b_6b0a5d8f58",
-      "b_0f0fcfc79c",
-      "b_92f883f46d"
+     "b_8ed8b97134": [
+      "b_33b84fb2cc",
+      "b_3180b530b6",
+      "b_3293e8ba54"
      ],
-     "b_91121ba2c7": [
-      "b_31d135b158",
-      "b_d03c93be22",
+     "b_84ae829ad5": [
+      "b_fcd2954af4",
+      "b_a6ae52079b",
       "b_c4831201c1"
      ],
-     "b_73eecaf004": [
-      "b_a564f7a7f5",
-      "b_e4066e3234",
-      "b_afec34bc3d"
+     "b_81aa7d8100": [
+      "b_504c6d47ab",
+      "b_99ec10a746",
+      "b_87dd805d41"
      ]
     },
     "expected_why": {
      "nj:bloomfield": "18 places to eat and drink within a 10-minute walk. About 51 minutes by car to Mom and Dad.",
      "ct:stamford": "33 places to eat and drink within a 10-minute walk. Off-street parking.",
-     "ny:flushing-willets-point": "48 places to eat and drink within a 10-minute walk. About 12 minutes by car to Mom and Dad."
+     "nj:bayonne": "Monthly totals from $1,817 with utilities and fees. About 46 minutes by car to Mom and Dad."
     },
     "expected_gives_up": {
-     "nj:bloomfield": "Costs more: monthly totals from $2,097 (the other two: $1,806 and $1,879).",
+     "nj:bloomfield": "Costs more: monthly totals from $2,097 (the other two: $1,806 and $1,817).",
      "ct:stamford": "Smaller: up to 489 sq ft (the other two: 623 sq ft and 600 sq ft).",
-     "ny:flushing-willets-point": "Parking isn't stated yet; ask on the tour."
+     "nj:bayonne": "Quieter: 5 places to eat and drink within a 10-minute walk (the other two: 18 places and 33 places)."
     }
    }
-  ]
+  ],
+  "data_version": "v4-808bbb2871"
  },
  "experiences": [
   {

@@ -364,6 +364,11 @@ details.filter .fbody{display:grid;gap:14px;padding:0 16px 16px}
 .askform input{min-width:0;min-height:52px;border:2px solid var(--ink);border-radius:16px;background:var(--card);color:var(--ink);font:inherit;padding:8px 14px}
 .askform .btn{width:auto}
 .answer{background:var(--card);border:2px solid var(--ink);border-radius:18px;padding:14px 16px;font-size:18px;white-space:pre-wrap}
+.oops{position:fixed;left:0;right:0;top:0;z-index:70;background:var(--low-bg);color:var(--low-ink);border-bottom:2px solid var(--low-ink);padding-top:calc(10px + env(safe-area-inset-top,0px));padding-bottom:12px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.oops .in{max-width:520px;margin:0 auto;display:grid;gap:8px}
+.oops p{font-size:16px}
+.oops-b{display:flex;flex-wrap:wrap;gap:8px}
+.oops-b .btn{width:auto;flex:1 1 auto}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
@@ -938,18 +943,39 @@ function position(key, v, lowWord, highWord) {
 }
 
 /* ---------- her choices and her list, kept on this phone only ---------- */
-var KEY = "lamia-concierge-v4";
-function fresh() { return { v: 4, step: "welcome", cj: [], moves: [], saved: [], ticked: [], tour: [] }; }
-var S = fresh();
+/* Her answers are indexes into this data's task pool, so they are kept only for the same data: the key carries
+   meta.data_version (else a fingerprint of the pool), and saved answers from any other version are dropped (her list
+   and tour plan are kept, by building id). Older keys are read once for the list and plan, then removed. */
 var CJ = CAN ? R.cj(MODEL) : null;
+var DATA_VERSION = String(META.data_version || (CJ ? "p" + CJ.pool.length + "n" + CJ.n + "t" + (CJ.pool[0] || []).join("|") + (CJ.pool[CJ.pool.length - 1] || []).join("|") : "list"));
+var KEY = "lamia-concierge";
+var OLD_KEYS = ["lamia-concierge-v4", "lamia-concierge-v3", "lamia-concierge-v2"];
+function fresh() { return { v: 42, data_version: DATA_VERSION, step: "welcome", cj: [], moves: [], saved: [], ticked: [], tour: [] }; }
+var S = fresh();
+function keepList(o) { ["saved", "ticked", "tour"].forEach(function (k) { if (Array.isArray(o[k])) S[k] = o[k].filter(function (id, i, a) { return BY[id] && a.indexOf(id) === i; }); }); }
+/* answers as they should be: known tasks, no task twice, at most n_tasks */
+function cleanAnswers(list) {
+  var seen = {}, out = [];
+  (list || []).forEach(function (x) {
+    if (!x || !isNum(x.task_index) || !CJ.pool[x.task_index] || !/^(a|b|either)$/.test(x.choice) || seen[x.task_index]) return;
+    seen[x.task_index] = 1; out.push({ task_index: x.task_index, choice: x.choice });
+  });
+  return out.slice(0, CJ.n);
+}
 (function load() {
   try {
+    OLD_KEYS.forEach(function (k) {
+      var r = window.localStorage.getItem(k); if (!r) return;
+      try { var o0 = JSON.parse(r); if (o0 && typeof o0 === "object") keepList(o0); } catch (e) { /* ignore */ }
+      window.localStorage.removeItem(k);
+    });
     var raw = window.localStorage.getItem(KEY); if (!raw) return;
     var o = JSON.parse(raw); if (!o || typeof o !== "object") return;
+    keepList(o);
+    if (o.data_version !== DATA_VERSION) return;          /* answers from other data: start the choices fresh */
     if (typeof o.step === "string") S.step = o.step;
-    if (Array.isArray(o.cj) && CJ) S.cj = o.cj.filter(function (x) { return x && isNum(x.task_index) && CJ.pool[x.task_index] && /^(a|b|either)$/.test(x.choice); }).slice(0, CJ.n);
+    if (Array.isArray(o.cj) && CJ) S.cj = cleanAnswers(o.cj);
     if (Array.isArray(o.moves) && MODEL) S.moves = o.moves.filter(function (m) { return Array.isArray(m) && MODEL.feats.indexOf(m[0]) >= 0 && (m[1] === "up" || m[1] === "down"); }).slice(0, 20);
-    ["saved", "ticked", "tour"].forEach(function (k) { if (Array.isArray(o[k])) S[k] = o[k].filter(function (id, i, a) { return BY[id] && a.indexOf(id) === i; }); });
   } catch (e) { /* storage is a convenience; the page works without it */ }
   if (["welcome", "choose", "confirm", "results", "plan"].indexOf(S.step) < 0) S.step = "welcome";
   if (!CAN && S.step !== "plan") S.step = "welcome";
@@ -1125,6 +1151,8 @@ function duelTable(id, task) {
 var CHOICE_LAYOUT = "table";
 function chooseScreen() {
   var id = nextNow(); if (id === null) { S.step = "confirm"; return confirmScreen(); }
+  if (S.cj.some(function (x) { return x.task_index === id; })) throw new Error("a task already answered came up again");
+  VIEW.cjShownAt = Date.now();
   var task = CJ.pool[id], n = S.cj.length, inTask = task.map(function (x) { return x[0]; });
   var same = CJ.c.attributes.filter(function (a) { return inTask.indexOf(a.id) < 0; }).map(function (a) { return a.label.charAt(0).toLowerCase() + a.label.slice(1); });
   return top() +
@@ -1544,7 +1572,35 @@ function saveBar() {
 
 /* ---------- render ---------- */
 var lastFocusKey = null;
+/* if anything throws while drawing a screen or doing what she tapped, say so and offer three ways on, never nothing */
+function oops(err) {
+  try { if (window.console) console.warn("concierge:", err && err.message || err); } catch (e) { /* ignore */ }
+  var o = document.getElementById("oops"); if (o) o.remove();
+  o = document.createElement("div"); o.id = "oops"; o.className = "oops"; o.setAttribute("role", "alert");
+  var done = !!(CAN && S && S.cj && S.cj.length >= CJ.n);
+  o.innerHTML = '<div class="in"><p><b>Something went wrong.</b> Try one of these:</p><div class="oops-b">' +
+    (done ? '<button type="button" class="btn sm main" data-oops="results">See my results</button>' : '') +
+    '<button type="button" class="btn sm" data-oops="restart">Start over</button><button type="button" class="btn sm" data-oops="all">See everything</button></div></div>';
+  document.body.appendChild(o);
+  var f = o.querySelector("button"); if (f) f.focus();
+}
+function recover(how) {
+  var o = document.getElementById("oops"); if (o) o.remove();
+  VIEW.stack = []; VIEW.fixing = false; VIEW.confirmReset = false; CACHE = {};
+  if (how === "all") { VIEW.all = true; VIEW.tab = "list"; }
+  else if (how === "results") { VIEW.all = false; S.step = "results"; VIEW.areaOpen = { 0: true }; }
+  else { var keep = { saved: S.saved, ticked: S.ticked, tour: S.tour }; S = fresh(); S.saved = keep.saved; S.ticked = keep.ticked; S.tour = keep.tour; VIEW.all = false; }
+  lastFocusKey = null;
+  try { render(); } catch (e) { S = fresh(); VIEW.all = true; try { render(); } catch (e2) { /* nothing more to try */ } }
+}
+document.addEventListener("click", function (ev) {
+  var b = ev.target.closest ? ev.target.closest("[data-oops]") : null;
+  if (b) { ev.stopPropagation(); recover(b.getAttribute("data-oops")); }
+}, true);
 function render(opts) {
+  try { renderNow(opts); } catch (err) { oops(err); }
+}
+function renderNow(opts) {
   opts = opts || {};
   if (mapApi) { try { mapApi.destroy(); } catch (e) { /* ignore */ } mapApi = null; }
   var v = topView(), sheetScroll = null, old = document.getElementById("sheet");
@@ -1567,6 +1623,9 @@ function render(opts) {
     var ot = document.getElementById("toast"); if (ot && !opts.keepToast) ot.remove();
     var h = (inner ? layer : app).querySelector("h1[tabindex],h2[tabindex]");
     if (sh) sh.scrollTop = 0; else window.scrollTo(0, 0);
+    /* in an auto-height frame window.scrollTo does nothing: bring the new heading into view so a new screen never
+       renders above where she is looking */
+    if (!sh && opts.focus !== false) { try { (h || app).scrollIntoView({ block: "start" }); } catch (e) { /* ignore */ } }
     if (h && opts.focus !== false) h.focus({ preventScroll: true });
   }
 }
@@ -1595,6 +1654,9 @@ function act(a, el) {
     case "results": VIEW.stack = []; VIEW.all = false; S.step = CAN && S.cj.length >= CJ.n ? "results" : CAN ? "choose" : "welcome"; render(); break;
     case "cj": {
       var cid = nextNow(); if (cid === null) { afterChoice(); break; }
+      /* a quick second tap lands on the next choice before she has seen it: ignore taps in the first moment */
+      if (VIEW.cjShownAt && Date.now() - VIEW.cjShownAt < 350) break;
+      if (S.cj.some(function (x) { return x.task_index === cid; })) { afterChoice(); break; }
       S.cj.push({ task_index: cid, choice: v === "a" || v === "b" ? v : "either" });
       live.textContent = v === "either" ? "No real difference." : "Apartment " + v.toUpperCase() + ".";
       afterChoice(); break; }
@@ -1639,7 +1701,11 @@ function act(a, el) {
 }
 document.addEventListener("click", function (ev) {
   var el = ev.target.closest ? ev.target.closest("[data-act]") : null;
-  if (el && !el.disabled) act(el.getAttribute("data-act"), el);
+  if (!el || el.disabled) return;
+  try {
+    if (window.__conciergeThrowOn === el.getAttribute("data-act")) throw new Error("a test of the error fallback");
+    act(el.getAttribute("data-act"), el);
+  } catch (err) { oops(err); }
 });
 document.addEventListener("toggle", function (ev) { if (ev.target && ev.target.id === "filters") VIEW.fOpen = ev.target.open; }, true);
 document.addEventListener("change", function (ev) {
