@@ -1,0 +1,136 @@
+# Broker Public Portal, LLC.
+
+# Default rules + social media preview bots (same rules, so previews still work)
+User-agent: *
+User-agent: facebookexternalhit
+User-agent: Twitterbot
+User-agent: LinkedInBot
+User-agent: Pinterestbot
+# Allow property listing pages
+Allow: /home-details/
+Allow: /home-details/*
+
+# Disallow common non-content paths
+Disallow: /admin/
+Disallow: /ajax/
+Disallow: /search?*
+Disallow: /?*searchQueryState=*
+Disallow: /*?*sort=
+Disallow: /*?*view=
+Disallow: /*?*filter=
+Disallow: /user/
+Disallow: /account/
+Disallow: /login/
+Disallow: /register/
+Disallow: /logout/
+Disallow: /cart/
+Disallow: /checkout/
+Disallow: /payment/
+Disallow: /internal/
+Disallow: /private/
+Disallow: /static/admin/
+Disallow: /*?*debug*
+Disallow: /*?*preview*
+Disallow: /widgets/
+Disallow: /analytics/
+Disallow: /tracking/
+
+# Query cleanup for crawlers that support it
+Clean-param: sort /home-details/
+Clean-param: view /home-details/
+Clean-param: filter /home-details/
+
+# Bing: same rules as above, plus a crawl delay
+User-agent: bingbot
+Crawl-delay: 1
+# Allow property listing pages
+Allow: /home-details/
+Allow: /home-details/*
+
+# Disallow common non-content paths
+Disallow: /admin/
+Disallow: /ajax/
+Disallow: /search?*
+Disallow: /?*searchQueryState=*
+Disallow: /*?*sort=
+Disallow: /*?*view=
+Disallow: /*?*filter=
+Disallow: /user/
+Disallow: /account/
+Disallow: /login/
+Disallow: /register/
+Disallow: /logout/
+Disallow: /cart/
+Disallow: /checkout/
+Disallow: /payment/
+Disallow: /internal/
+Disallow: /private/
+Disallow: /static/admin/
+Disallow: /*?*debug*
+Disallow: /*?*preview*
+Disallow: /widgets/
+Disallow: /analytics/
+Disallow: /tracking/
+
+# Query cleanup for crawlers that support it
+Clean-param: sort /home-details/
+Clean-param: view /home-details/
+Clean-param: filter /home-details/
+
+# GPTBot: same rules as above, plus a crawl delay and /api/
+User-agent: GPTBot
+Crawl-delay: 1
+# Allow property listing pages
+Allow: /home-details/
+Allow: /home-details/*
+
+# Disallow common non-content paths
+Disallow: /admin/
+Disallow: /ajax/
+Disallow: /search?*
+Disallow: /?*searchQueryState=*
+Disallow: /*?*sort=
+Disallow: /*?*view=
+Disallow: /*?*filter=
+Disallow: /user/
+Disallow: /account/
+Disallow: /login/
+Disallow: /register/
+Disallow: /logout/
+Disallow: /cart/
+Disallow: /checkout/
+Disallow: /payment/
+Disallow: /internal/
+Disallow: /private/
+Disallow: /static/admin/
+Disallow: /*?*debug*
+Disallow: /*?*preview*
+Disallow: /widgets/
+Disallow: /analytics/
+Disallow: /tracking/
+Disallow: /api/
+
+# Query cleanup for crawlers that support it
+Clean-param: sort /home-details/
+Clean-param: view /home-details/
+Clean-param: filter /home-details/
+
+# Ads bots
+User-agent: Mediapartners-Google
+Disallow: /api/
+Disallow: /admin/
+
+User-agent: AdsBot-Google
+Disallow: /api/
+Disallow: /admin/
+
+User-agent: AdsBot-Google-Mobile
+Disallow: /api/
+Disallow: /admin/
+
+# PetalBot (Huawei): blocked entirely
+User-agent: PetalBot
+Disallow: /
+
+# Sitemaps
+Sitemap: https://www.onekeymls.com/sitemap_index.xml.gz

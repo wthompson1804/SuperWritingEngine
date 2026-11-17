@@ -1,0 +1,60 @@
+addr_key,fact,value,quote,source_url,status
+511 main st|06516,floor,G08 and G09 are two-level townhouse plans (lowest level not stated),"plan name: ""1 Bed Townhouse + Den Renovated""",https://www.trulia.com/building/retro-five-eleven-511-main-st-west-haven-ct-06516-1013412172,unconfirmed
+511 main st|06516,elevator,not stated,"amenity list names a fitness center, surface lot and ""Historic Building""; no elevator",https://www.trulia.com/building/retro-five-eleven-511-main-st-west-haven-ct-06516-1013412172,unconfirmed
+511 main st|06516,dogs_allowed,yes,"""Cats, small dogs, large dogs allowed""; dogs ""Restrictions: None""",https://www.trulia.com/building/retro-five-eleven-511-main-st-west-haven-ct-06516-1013412172,confirmed
+1 kaye plz|06514,floor,1st or 2nd floor (not stated per apartment),"""We have 1st and 2nd Floor Units""",https://www.trulia.com/building/seramonte-1-kaye-plz-hamden-ct-06514-2770970596,unconfirmed
+1 kaye plz|06514,dogs_allowed,"yes, small dogs (no pound limit given)","""Cats, small dogs allowed""",https://www.trulia.com/building/seramonte-1-kaye-plz-hamden-ct-06514-2770970596,confirmed
+337 main st|06516,floor,2,"""Newly Renovated 1BR Apt Second Floor""",https://www.trulia.com/home/337-main-st-10-west-haven-ct-06516-455530356,confirmed
+337 main st|06516,dog_weight_limit,30,"""Dog - $300 Pet Fee (Small Breed Up to 30 lbs - Subject to Approval)""",https://www.trulia.com/home/337-main-st-10-west-haven-ct-06516-455530356,confirmed
+99 hemingway ave|06512,dog_weight_limit,40,"""40 lbs max weight""; ""Max 80 lb total weight of all pets combined""",https://www.trulia.com/building/encore-99-99-hemingway-ave-east-haven-ct-06512-1001599283,confirmed
+99 hemingway ave|06512,elevator,not stated,amenity list names a fitness center and surface lot; no elevator,https://www.trulia.com/building/encore-99-99-hemingway-ave-east-haven-ct-06512-1001599283,unconfirmed
+50 derby ave|06418,dogs_allowed,yes,"""Cats, small dogs, large dogs allowed""",https://www.trulia.com/building/franklin-school-lofts-50-derby-ave-derby-ct-06418-2776764321,confirmed
+50 derby ave|06418,elevator,not stated,"converted brick schoolhouse; ""Controlled access""; no elevator named",https://www.trulia.com/building/franklin-school-lofts-50-derby-ave-derby-ct-06418-2776764321,unconfirmed
+2 short beach rd|06512,dogs_allowed,yes,"""Cats, small dogs, large dogs allowed""",https://www.trulia.com/building/kelsey-s-landing-2-short-beach-rd-east-haven-ct-06512-2770920909,confirmed
+405 main st|06516,dogs_allowed,"yes, small dogs (no pound limit given)","""Cats, small dogs allowed""",https://www.trulia.com/home/405-main-st-o4-west-haven-ct-06516-466331961,confirmed
+6 elm st|06850,dogs_allowed,"yes, small dogs (no pound limit given)","""Cats, small dogs allowed""",https://www.trulia.com/building/6-elm-st-6-elm-st-norwalk-ct-06850-2793432247,confirmed
+129 plains rd|06461,dogs_allowed,yes,"""Cats, small dogs, large dogs allowed""",https://www.trulia.com/building/the-milford-grove-129-plains-rd-milford-ct-06461-2778072929,confirmed
+164 coe ave|06512,dog_weight_limit,80,"""80 lbs max weight""",https://www.trulia.com/building/bay-shore-apartments-164-coe-ave-east-haven-ct-06512-2005344318,confirmed
+835-865 mix ave|06514,dogs_allowed,yes,"""Cats, small dogs, large dogs allowed""",https://www.trulia.com/building/chestnut-hill-south-835-865-mix-ave-hamden-ct-06514-2734128011,confirmed
+3 bedford ave|06850,dogs_allowed,yes,"""Cats, small dogs, large dogs allowed""",https://www.trulia.com/building/3-bedford-llc-3-bedford-ave-norwalk-ct-06850-2005716174,confirmed
+150 anton st|06606,dogs_allowed,yes,"""Cats, small dogs, large dogs allowed""",https://www.trulia.com/building/brookside-gardens-150-anton-st-bridgeport-ct-06606-2777941616,confirmed
+204 cherry st|06460,floor,2,"""Gorgeous updated 1 BR apartment on the 2 floor""",https://www.trulia.com/home/204-cherry-st-11-milford-ct-06460-2077073408,confirmed
+204 cherry st|06460,dog_weight_limit,30,"""Cats and small dogs under 30 pounds allowed""",https://www.trulia.com/home/204-cherry-st-11-milford-ct-06460-2077073408,confirmed
+130 fairchild ave|06825,elevator,no (stairs to upper floors),"""2nd & 3rd Floor Apartments require stairs to access.""",https://www.trulia.com/building/fairchild-apartments-130-fairchild-ave-fairfield-ct-06825-2737390441,confirmed
+130 fairchild ave|06825,dog_weight_limit,50,"""Two cats or a dog under 50 lbs. welcome.""",https://www.trulia.com/building/fairchild-apartments-130-fairchild-ave-fairfield-ct-06825-2737390441,confirmed
+117 cascade blvd|06460,elevator,no (stairs),"special features include ""Requires Stairs""",https://www.trulia.com/building/cascade-boulevard-117-cascade-blvd-milford-ct-06460-1030687705,confirmed
+151 andrew ave|06770,dog_weight_limit,50,"""Two cats or a dog under 50 lbs. welcome!""",https://www.trulia.com/building/horizon-homes-151-andrew-ave-naugatuck-ct-06770-1002250149,confirmed
+990 hope st|06907,dog_weight_limit,50,"""1 dog (under 50lbs, non-aggressive breeds)""",https://www.trulia.com/building/990-hope-st-990-hope-st-stamford-ct-06907-2756510728,confirmed
+990 hope st|06907,floor,not stated; labels 1-C and 3-C read as floor 1 and floor 3,"unit labels ""1-C"" and ""3-C""",https://www.trulia.com/building/990-hope-st-990-hope-st-stamford-ct-06907-2756510728,unconfirmed
+547-597 millville ave|06770,dog_weight_limit,50,"""Two cats or one dog under 50 lbs.""",https://www.trulia.com/building/west-hill-apartments-547-597-millville-ave-naugatuck-ct-06770-2749337052,confirmed
+621 campbell ave|06516,floor,1,"""Beautiful 1 BR apartment located on the 1 floor""",https://www.trulia.com/home/621-campbell-ave-1-0-west-haven-ct-06516-466137691,confirmed
+621 campbell ave|06516,dog_weight_limit,30,"""Cats and small dogs under 30 pounds allowed""",https://www.trulia.com/home/621-campbell-ave-1-0-west-haven-ct-06516-466137691,confirmed
+1800 aspen glen dr|06518,dog_weight_limit,100 combined (two pets),"""with a max combined weight of 100lbs""",https://www.trulia.com/building/aspen-glen-1800-aspen-glen-dr-hamden-ct-06518-1002179972,confirmed
+540 bond st|06610,dogs_allowed,yes,"""Cats, small dogs, large dogs allowed""",https://www.trulia.com/building/oasis-apartments-540-bond-st-bridgeport-ct-06610-2780336919,confirmed
+998-1008 campbell ave|06516,dogs_allowed,yes,"""Small dogs, large dogs allowed""",https://www.trulia.com/building/campbell-ave-apartments-998-1008-campbell-ave-west-haven-ct-06516-2790802098,confirmed
+26 golden hill st|06460,dogs_allowed,yes,"""Cats, small dogs, large dogs allowed""",https://www.trulia.com/building/golden-hill-apartments-26-golden-hill-st-milford-ct-06460-1001724767,confirmed
+505 jewett ave|06606,dogs_allowed,yes,"""Dogs: Large dogs allowed""",https://www.trulia.com/building/lynn-apartments-505-jewett-ave-bridgeport-ct-06606-2776981224,confirmed
+838 wood ave|06604,dogs_allowed,yes,"""Dogs: Large dogs allowed""",https://www.trulia.com/building/doral-apts-838-wood-ave-bridgeport-ct-06604-2762266717,confirmed
+925 mix ave|06514,dogs_allowed,yes,"""Dogs: Large dogs allowed""",https://www.trulia.com/building/925-at-north-925-mix-ave-hamden-ct-06514-1004491475,confirmed
+8 union ave|06851,dogs_allowed,yes,"""Cats, small dogs, large dogs allowed""",https://www.trulia.com/building/8-union-ave-llc-8-union-ave-norwalk-ct-06851-2734512999,confirmed
+31 ferris ave|06854,dogs_allowed,yes,"""Cats, small dogs, large dogs allowed""",https://www.trulia.com/building/31-ferris-llc-31-ferris-ave-norwalk-ct-06854-1002094829,confirmed
+3 hubbard rd|06897,dogs_allowed,yes,"""Cats, small dogs, large dogs allowed""",https://www.trulia.com/building/three-hubbard-rd-llc-3-hubbard-rd-wilton-ct-06897-2757884237,confirmed
+92 plains rd|06461,elevator,yes (listing site amenity list),"""Levels, Entrance, & Accessibility: Elevator""",https://www.trulia.com/building/star-deluxe-milford-92-plains-rd-milford-ct-06461-2753632782,confirmed
+92 plains rd|06461,dogs_allowed,yes,"""Cats, small dogs, large dogs allowed""",https://www.trulia.com/building/star-deluxe-milford-92-plains-rd-milford-ct-06461-2753632782,confirmed
+32 prospect ave|06850,floor,"2 (from unit labels 2E, 2F)","unit labels ""2E"" and ""2F""",https://www.trulia.com/building/soundview-apartments-32-prospect-ave-norwalk-ct-06850-1002097917,unconfirmed
+289 main ave|06851,building_floors,3 (parking under the building),"""(40) Units in a 3 story podium building with covered parking underneath.""",https://www.apartmentlist.com/ct/norwalk/the-flats-at-289-main,confirmed
+289 main ave|06851,elevator,not stated,"amenity list: Parking, Cats allowed, Dogs allowed, Microwave, Range, Refrigerator",https://www.apartmentlist.com/ct/norwalk/the-flats-at-289-main,unconfirmed
+100 town walk dr|06518,building_floors,"3.5 storeys (8 apartment buildings on this parcel, wood frame, built 1994)","Hamden assessor card, parcel 0 Hamden Hills Dr: ""Style: Apartments ... Stories: 3.5""",https://gis.vgsi.com/hamdenct/Parcel.aspx?pid=100302,confirmed
+100 town walk dr|06518,elevator,not stated (neither the assessor card nor the listing names one),"listing: ""loft-style layouts with open breezeway entrance to your home""",https://www.apartmentlist.com/ct/hamden/town-walk-at-hamden-hills,unconfirmed
+100 town walk dr|06518,floor,"not stated; five-digit labels read as building (2 digits), floor (1 digit), apartment (2 digits)","e.g. ""02211"", ""21321"", ""05113""; middle digit runs 1 to 3, matching the three full storeys",https://www.apartmentlist.com/ct/hamden/town-walk-at-hamden-hills,unconfirmed
+100 town walk dr|06518,dog_weight_limit,50,"pet restrictions: ""Aggressive breeds, 50lbs""",https://www.apartmentlist.com/ct/hamden/town-walk-at-hamden-hills,confirmed
+1 avalon dr|06460,floor,"not stated; labels read as building, floor, apartment (4113 = building 4, floor 1)","unit labels ""7211"", ""2232"", ""4113""",https://www.apartmentlist.com/ct/milford-city/merion-milford,unconfirmed
+100 avalon gates|06611,elevator,listing site amenity list only; multi-building complex,"amenity list includes ""Elevator""; labels such as 4302, 11113 name buildings 1 to 11",https://www.apartmentlist.com/ct/trumbull/the-royce-at-trumbull,unconfirmed
+8 norden pl|06855,elevator,yes (listing site amenity list),"amenity list includes ""Elevator""",https://www.apartmentlist.com/ct/norwalk/halstead-norwalk,confirmed
+8 norden pl|06855,dogs_allowed,listed as allowed; no policy or weight limit given,"amenities ""Dogs allowed""; pet policy fields blank on the page and on the manager page bozzuto.com (no pet text)",https://www.apartmentlist.com/ct/norwalk/halstead-norwalk,unconfirmed
+woodbury 2 ct 06798 usa|06798,floor,two-storey apartment entered at ground level (living space on the first floor),"""Light and bright 2 Story 1 Bedroom Condo ... spacious and open first floor lay out""",https://www.zumper.com/listings/28080497p/1-bedroom-woodbury-ct,confirmed
+26 river rd 4 new milford ct 06776 usa|06776,floor,3,"""older apartment ... located on the 3rd floor""",https://www.zumper.com/listings/29908236p/2-bedroom-new-milford-ct,confirmed
+26 river rd 4 new milford ct 06776 usa|06776,elevator,not stated,no elevator among the listing text or amenities,https://www.zumper.com/listings/29908236p/2-bedroom-new-milford-ct,unconfirmed
+2206 state st 1 hamden ct 06517 usa|06517,dogs_allowed,"yes, small dogs (no pound limit given)","""Small dogs welcome.""",https://www.zumper.com/listings/30078361p/1-bedroom-hamden-ct,confirmed
+e haven 85ahemingwayavea22 ct 06512 usa|06512,dogs_allowed,"yes, small dogs (no pound limit given)","""Cats and small dogs welcome.""",https://www.zumper.com/listings/29932506p/1-bedroom-east-haven-ct,confirmed
+365 boston post rd|06460,floor,not stated; the listing title names apartment 105 (reads as floor 1),"listing title ""365 Boston Post Road - 105""",https://www.apartmentlist.com/ct/milford-city/365-boston-post-road-105,unconfirmed

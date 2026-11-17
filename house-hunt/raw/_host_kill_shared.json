@@ -164,5 +164,23 @@
   "url": "https://www.prgrealestate.com/",
   "at": "2026-11-17T16:54:14+00:00",
   "by": "new_sources_trawl2"
+ },
+ "www.carltonclubapts.com": {
+  "reason": "HTTP 403",
+  "url": "https://www.carltonclubapts.com/robots.txt",
+  "at": "2026-11-17T19:49:30+00:00",
+  "by": "evidence_batch_22"
+ },
+ "www.brightonarmsapts.com": {
+  "reason": "HTTP 403",
+  "url": "https://www.brightonarmsapts.com/",
+  "at": "2026-11-17T19:49:52+00:00",
+  "by": "evidence_batch_22"
+ },
+ "www.propertyshark.com": {
+  "reason": "HTTP 403",
+  "url": "https://www.propertyshark.com/robots.txt",
+  "at": "2026-11-17T19:51:20+00:00",
+  "by": "evidence_batch_24"
  }
 }
