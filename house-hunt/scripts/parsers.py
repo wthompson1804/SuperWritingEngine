@@ -2367,7 +2367,7 @@ def parking_facts(sources, fee=None) -> dict:
             optional.append({"kind": k, "fee": None, "fee_high": None, "label": ""})
     return {"kinds": kinds, "primary_kind": primary, "included_kind": included_kind, "included_quote": included_quote[:200],
             "included_basis": included_basis, "optional": optional, "fee_kind": fee_kind if (f is not None and f > 0) else (included_kind if f == 0 else ""),
-            "kind_basis": {k: kind_basis.get(k, "") for k in kinds}, "assigned": assigned}
+            "kind_basis": {k: kind_basis.get(k, "") for k in kinds}, "assigned": assigned, "unpriced_kinds": sorted(set(kinds) & (unpriced - priced)), "option_kinds": sorted({o["kind"] for o in options})}
 
 
 def parking_kind_rank(kind):
@@ -2598,3 +2598,271 @@ def laundry_tag_text(appliances) -> str:
 
 def laundry_tag_question(appliances) -> str:
     return "Is there a washer and a dryer inside the apartment?"
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# independent check 6 (docs/INDEPENDENT_CHECK_6.md): what the apartment's own listing page says, read from the cached
+# page (build_master.read_listing_page). Each rule below is a pattern the check found on more than one apartment.
+
+# ---- 2. townhomes: a home whose door and living floor are at ground level
+_TOWNHOME_WORD = re.compile(r"\btown ?homes?\b|\btown ?houses?\b|\btownhome-style\b(?! front)", re.I)
+_TOWNHOME_MIXED = re.compile(r"(?:apartments?|flats?|lofts?|one[-, ]|two[-, ]|studios?)[^.!?]{0,60}?(?:\band\b|&|,|\bor\b)\s*(?:\w+[- ]bedroom\s+)?town ?(?:homes?|houses?)|"
+                             r"town ?(?:homes?|houses?)\s*(?:and|&|or)\s*(?:apartments?|flats?)|town ?(?:homes?|houses?) (?:units|rentals?)\b[^.!?]{0,80}\bapartments?|"
+                             r"\bapartments?\b[^.!?]{0,120}\btown ?(?:homes?|houses?) (?:units|rentals?)|townhouse[- ]style (?:front )?stoops?", re.I)
+_TOWNHOME_SELF = re.compile(r"(?:spacious|beautiful|our|these|the|luxury)\s+(?:\w+\s+){0,2}town ?(?:homes|houses)\b(?![^.!?]{0,30}\b(?:and|&)\s+apartments)|"
+                            r"town ?(?:home|house) (?:features|living)|multi-level town ?(?:home|house)|two[- ]level town ?(?:home|house)|"
+                            r"main level\b[^.!?]{0,200}\b(?:upper|second) level|\btown ?(?:home|house)\b[^.!?]{0,40}\b(?:private|own) (?:front )?entrance", re.I)
+_TOWNHOME_PLAN = re.compile(r"\btown ?(?:home|house)\b|home with (?:a )?patio|\bpatio home\b|\bgarden home with patio\b|\bduplex\b[^;]{0,30}\bground|two[- ]level\b[^;]{0,40}ground[- ]floor entr", re.I)
+_UPPER_FLAT = re.compile(r"(?:second|2nd|third|3rd|upper|top)[- ]floor (?:flat|apartment|unit)|(?:flat|apartment|unit) on the (?:second|2nd|third|3rd|upper|top) floor|upstairs (?:flat|apartment|unit)|\(upstairs\)", re.I)
+
+
+def townhome_home(building_type="", plan_name="", description="") -> str:
+    """Independent check 6, #16 (West Hill Apartments, Naugatuck): a townhome is a ground-floor home (its door and its
+    living floor are at ground level), so the no-ground-floor rule removes it. Returns the words that make the home a
+    townhome, or ''. It is a townhome when
+      - our data types the building 'townhome' / 'townhouse' (data/reference/community_facts.csv, the manager's page), or
+      - the plan name says so ('Townhome', 'One Bedroom Home with Patio', a two-level plan with a ground-floor entry), or
+      - the listing's own description calls the homes townhomes ('these beautiful, spacious Townhomes', 'townhouse
+        features: main level ...', 'multi-level townhouse living')
+    and NOT where the community offers 'apartments and townhomes' (the apartment itself may be a flat), and never when
+    the page states the apartment is an upper-floor flat ('One Bedroom (Upstairs)', 'second-floor apartment')."""
+    bt, pl, d = str(building_type or "").lower(), str(plan_name or ""), str(description or "")
+    if _UPPER_FLAT.search(pl) or _UPPER_FLAT.search(d):
+        return ""
+    if re.search(r"town ?(?:home|house)", bt):
+        return f"building type: {building_type}"
+    m = _TOWNHOME_PLAN.search(pl)
+    if m:
+        return f"plan: {pl.strip()}"
+    if _TOWNHOME_WORD.search(d) and not _TOWNHOME_MIXED.search(d):
+        m = _TOWNHOME_SELF.search(d)
+        if m:
+            return d[max(0, m.start() - 30):m.end() + 30].strip()
+    return ""
+
+
+# ---- 3. furnished, from the plan name and the description
+_FURN_DESC = re.compile(r"\b(?:fully|completely|newly|professionally|tastefully|beautifully)\s+furnished\b|\bfurnished\s+(?:\d|one|1|studio|apartment|unit|residence|rental|loft|suite|flat)"
+                        r"|\bcomes? furnished\b|\b(?:is|are|rented|offered|available|delivered) (?:fully |optionally )?furnished\b|\(furnished\)|\bfurnished:\s*yes\b", re.I)
+_FURN_OPTIONAL = re.compile(r"optional(?:ly)?[^.!?]{0,20}furnished|furnished[^.!?]{0,25}(?:optional|upon request|if desired|or unfurnished)|furnished or unfurnished", re.I)
+
+
+def furnished_statement(plan_name="", description="") -> str:
+    """'furnished' / 'furnished (optional)' when the plan name ('Studio D-Line (Furnished)') or the listing's own
+    description ('Move-in ready and fully furnished') says the apartment is let furnished, else ''. A furnished lounge,
+    roof deck or model is not the apartment (independent check 6, #12, #14)."""
+    pl, d = str(plan_name or ""), str(description or "")
+    if re.search(r"(?<!un)furnished", pl, re.I) and not re.search(r"unfurnished", pl, re.I):
+        return "furnished"
+    d2 = _NOT_FURNISHED.sub(" ", d)
+    if _FURN_DESC.search(d2):
+        return "furnished (optional)" if _FURN_OPTIONAL.search(d2) else "furnished"
+    return ""
+
+
+# ---- 4. the apartment number: never a listing site's index
+_UNIT_IN_TEXT = re.compile(r"(?:(?<![\w$])#\s?|\b(?:apt\.?|apartment|unit|suite)\s*#?\s*)([A-Z]?\d{1,4}[A-Z]?)(?![\w,$])", re.I)
+
+
+def unit_number_in_text(description="", title="") -> str:
+    """The apartment number a listing's own words give: '146 Hamilton · 1BED #204' -> '204', 'Fleming Ave, Unit 2C' ->
+    '2C', a title '1349 Dixwell Avenue - 24' -> '24'. '' when none, or when the words name more than one number
+    (a building's description listing several apartments names none of them)."""
+    t = title_unit(title)
+    if t:
+        return t
+    found = []
+    for m in _UNIT_IN_TEXT.finditer(str(description or "")):
+        v = m.group(1).upper()
+        pre = str(description)[max(0, m.start() - 12):m.start()].lower()
+        if re.search(r"\d\s*$", pre) or re.search(r"(?:no|route|rt|exit|highway|i-|bus|po box)\s*$", pre):
+            continue
+        if v not in found:
+            found.append(v)
+    return found[0] if len(found) == 1 else ""
+
+
+def site_index_label(label, site="", unit_rows_on_page="", description="", title="") -> bool:
+    """True when the label a listing site gives the unit is the site's own index, not the apartment's number
+    (independent check 6, #2, #6, #7, #22): Apartment List's '1 Bed' plan label, or a bare one-digit label on a page
+    that lists a single unit and whose own words never use it as a number ('Apartment 3' on 96 16th Ave, Paterson,
+    where the listing names no apartment)."""
+    lab = clean_unit(label)
+    if str(site) != "apartmentlist" or not lab:
+        return False
+    if is_plan_label(label) or re.fullmatch(r"\d\s*beds?|studio|\d\s*br", lab):
+        return True
+    one_row = str(unit_rows_on_page).strip() in ("", "1")
+    if one_row and re.fullmatch(r"\d", lab) and not re.search(r"#|apt|unit|suite", str(label), re.I):
+        said = re.search(r"(?:#\s?|\b(?:apt\.?|apartment|unit)\s*#?\s*)" + re.escape(lab) + r"(?![\w])", f"{description} {title}", re.I)
+        return not said
+    return False
+
+
+def shown_unit_number(label, site="", unit_rows_on_page="", description="", title="") -> tuple:
+    """(number to print, basis): the site's label when it is the apartment's number; a number stated in the listing's own
+    words where the label is the site's index or a single-unit page names another ('3' -> '#204'); else ('', 'site
+    index, no number on the page'). basis: 'label', 'listing text', 'listing title' or 'site index, no number on the page'."""
+    own = unit_number_in_text(description, title)
+    idx = site_index_label(label, site, unit_rows_on_page, description, title)
+    one_row = str(unit_rows_on_page).strip() in ("", "1")
+    if idx or (str(site) == "apartmentlist" and one_row and own and unit_key(own) != unit_key(label) and re.fullmatch(r"\d", clean_unit(label) or "")):
+        if own:
+            return own, ("listing title" if title_unit(title) else "listing text")
+        return "", "site index, no number on the page"
+    return str(label or ""), "label"
+
+
+# ---- 5. parking included in the rent, from the listing's own words
+_PK_INCL = re.compile(r"(?:\b(?:dedicated|reserved|assigned|designated|one|1|free)\b[^.!?\n]{0,30}\b(?:parking|spot|space)s?\b[^.!?\n]{0,25}\bincluded\b|"
+                      r"\bparking (?:is )?included(?: (?:with|in) (?:the )?rent)?\b|\bincludes?\s+(?:1|one|a)\s+(?:free\s+)?(?:off[- ]street\s+)?parking (?:spot|space)\b|"
+                      r"\bfree parking\b(?! for a limited)|\bparking[^.!?\n]{0,15}\bat no (?:extra |additional )?(?:cost|charge)\b|"
+                      r"\b(?:off[- ]street|on[- ]site) parking (?:space |spot )?(?:is )?included\b)", re.I)
+
+
+def parking_included_statement(description="") -> str:
+    """The words in a listing's own description that include a parking space in the rent ('Dedicated off-street parking
+    space included', 'Includes 1 free parking spot', 'Parking included with rent'), else ''. A paid space, a guest spot or a
+    time-limited free offer is not (independent check 6, #14, #27, #29)."""
+    d = str(description or "")
+    for m in _PK_INCL.finditer(d):
+        ctx = d[max(0, m.start() - 40):m.end() + 40].lower()
+        if re.search(r"\$\s?\d|for a fee|extra charge|guest|visitor|first (?:month|year)|limited time|months? free|not included|\bno\b[^.]{0,8}parking", ctx):
+            continue
+        return re.sub(r"\s+", " ", m.group(0)).strip()
+    return ""
+
+
+def free_plain_lot_beside_paid(kinds, unpriced_kinds, fee, fee_kind, option_kinds=(), texts=()) -> str:
+    """Independent check 5 N1 / check 6 pattern 5 (Kings Gardens 'surface lot ... Garages: $150 per month', Town Walk at
+    Hamden Hills 'Open lot, carports $42/month'): a plain lot the building names with no price, where every published
+    parking price is for a garage, carport or covered space. Returns that lot's kind (the free choice the total uses; the
+    paid kind is named as optional), else ''. Not where any source says parking is not included, where a price belongs to
+    parking of no named kind or to a lot ('Unassigned parking: $5/month', 'Parking: 15-350'), or where the "lot" is a view."""
+    try:
+        f = float(fee)
+    except (TypeError, ValueError):
+        return ""
+    if not f > 0 or PARKING_KIND_RANK.get(str(fee_kind), 0) < 3:
+        return ""
+    if any(k not in ("garage", "covered", "gated_lot") for k in (option_kinds or [])):
+        return ""
+    blob = " | ".join(str(t) for t in texts or [])
+    if re.search(r"included:\s*no|not included|included\s*=\s*false|lot view", blob, re.I):
+        return ""
+    same_clause = re.search(r"\b(?:open|surface|outdoor)(?: parking)? lots?\s*,\s*(?:carports?|garages?|covered)[^$|;]{0,25}\$\s?\d", blob, re.I)
+    for k in ("open_lot", "off_street", "assigned_lot"):
+        if k in (kinds or []) and (k in (unpriced_kinds or []) or (same_clause and k == "open_lot")):
+            return k
+    return ""
+
+
+# ---- 6. a special offer applies to this apartment only
+_OFFER_NAMES_UNITS = re.compile(r"\b(?:apts?|apartments?|units?)\.?\s*#?\s*((?:[A-Z]?\d{1,4}[A-Z]?\s*(?:,|&|and|\+)?\s*)+)\s*(?:only|exclusively)\b|"
+                                r"\bonly (?:on |for |in )?(?:apts?|apartments?|units?)\.?\s*#?\s*((?:[A-Z]?\d{1,4}[A-Z]?\s*(?:,|&|and|\+)?\s*)+)", re.I)
+_OFFER_BY_DATE = re.compile(r"(?:move[- ]?in|moving in|moves? in|lease(?: signed)?|sign(?:ed)?|apply|applications?)\b[^.!?]{0,40}?\b(?:by|before|no later than|on or before)\s+"
+                            r"(\d{1,2})/(\d{1,2})/(\d{2,4})", re.I)
+
+
+def offer_applies(offer_text, unit="", as_of="2026-11-22") -> tuple:
+    """(applies, why). An offer that names the apartments it is for and not this one ('$500 rent credit ... (APT 41 & 36
+    ONLY)' on apartment 039), or whose move-in / signing deadline is before the first tour day ('move in by 11/15/2026')
+    does not apply, and sets no special-offer star (independent check 6, #4, #5, #15)."""
+    t = str(offer_text or "")
+    if not t.strip():
+        return True, ""
+    names = []
+    for m in _OFFER_NAMES_UNITS.finditer(t):
+        names += [x.upper() for x in re.findall(r"[A-Z]?\d{1,4}[A-Z]?", m.group(1) or m.group(2) or "", re.I)]
+    if names:
+        mine = clean_unit(unit).upper()
+        norm = lambda x: re.sub(r"^0+(?=\d)", "", x)
+        tails = {norm(mine), norm(unit_tail(unit).upper()) if unit_tail(unit) else norm(mine)}
+        if not mine or not any(norm(n) in tails for n in names):
+            return False, f"the offer names other apartments ({', '.join(dict.fromkeys(names))}), not this one"
+    for m in _OFFER_BY_DATE.finditer(t):
+        mo, dd, yy = int(m.group(1)), int(m.group(2)), int(m.group(3))
+        yy = yy + 2000 if yy < 100 else yy
+        try:
+            from datetime import date
+            dl = date(yy, mo, dd).isoformat()
+        except ValueError:
+            continue
+        if dl < str(as_of)[:10]:
+            return False, f"the offer's deadline ({dl}) is before the first tour day ({str(as_of)[:10]})"
+    return True, ""
+
+
+# ---- 7. laundry: the listing's own words over a listing site's in-unit tag
+_SHARED_LAUNDRY = re.compile(r"\b(?:shared|common|coin[- ]?(?:operated)?|community|on[- ]?site|building)\s+laundry\b|\blaundry (?:room|facilit\w+|area)s?\b[^.!?]{0,30}\b(?:in|on) (?:the )?(?:building|basement|premises|site)|"
+                             r"\blaundry (?:room )?in (?:the )?(?:building|basement)|\bwasher and dryer nearby\b|\blaundromat nearby\b|\bbasement with coin", re.I)
+_OWN_WD = re.compile(r"\b(?:in[- ]unit|in[- ]apartment|in[- ]home|private)\s+(?:washer|laundry|w/d)|\bwasher\s*(?:/|and|&)\s*dryer\s+(?:in|inside) (?:the )?(?:unit|apartment|home)|\bwasher/dryer in unit\b", re.I)
+
+
+def shared_laundry_statement(description="") -> str:
+    """The words of a listing's own description that put the laundry in the building, not the apartment ('Shared Laundry
+    in the Building', 'Washer and dryer nearby'), where it does not also say the apartment has its own; else ''.
+    Independent check 6, #20, #28: such words outrank a listing site's in-unit tag."""
+    d = str(description or "")
+    if _OWN_WD.search(d):
+        return ""
+    m = _SHARED_LAUNDRY.search(d)
+    return re.sub(r"\s+", " ", m.group(0)).strip() if m else ""
+
+
+# ---- 8. a required flat utilities fee
+_FLAT_UTIL = re.compile(r"utilit(?:y|ies)[^.!?\n]{0,40}?\b(?:included\s+)?for an?\s+(?:flat|monthly|fixed)\s+(?:fee|rate|charge)\s+of\s+\$\s?(\d{2,3})|"
+                        r"utilit(?:y|ies)[^.!?\n]{0,30}?\bincluded for (?:an? )?\$\s?(\d{2,3})(?:\s*/\s*mo|\s+(?:a|per) month)?\s+(?:flat\s+)?fee|"
+                        r"\$\s?(\d{2,3})\s*(?:/\s*mo(?:nth)?|(?:a|per) month)?\s+(?:flat\s+)?(?:fee\s+)?(?:for|covers)\s+(?:all\s+)?utilit(?:y|ies)|"
+                        r"(?:flat|fixed)[- ](?:fee|rate)\s+(?:for\s+)?utilit(?:y|ies)\s*(?:of|:)?\s*\$\s?(\d{2,3})", re.I)
+
+
+def flat_utilities_fee(description="", fees_json="") -> tuple:
+    """(monthly amount, words) of a REQUIRED flat utilities fee: the listing's own description says the utilities are
+    included for a flat fee ('Utilities are Included for a Flat Fee of $150/mo', 405 Main St O4, West Haven), confirmed or
+    priced by the listing site's 'Monthly utilities fee' line where there is one. (None, '') otherwise. The fee replaces
+    the estimated electricity and gas it covers (scripts/all_in.py)."""
+    d = str(description or "")
+    m = _FLAT_UTIL.search(d)
+    if not m:
+        return None, ""
+    amt = float(next(g for g in m.groups() if g))
+    fj = str(fees_json or "")
+    m2 = re.search(r"utilit(?:y|ies) fee\"?\s*,\s*\"value\"\s*:\s*\"\$\s?(\d{2,3})", fj, re.I)
+    if m2 and abs(float(m2.group(1)) - amt) > 0.5:
+        return None, ""                                   # the two sources disagree: leave the estimate and the fee line as they were
+    return amt, re.sub(r"\s+", " ", m.group(0)).strip()
+
+
+# ---- 9. an ordinary income requirement ('3x the rent')
+_INCOME_X = re.compile(r"(\d(?:\.\d)?)\s*(?:x|times)\s*(?:of\s+)?(?:the\s+)?(?:monthly\s+)?(?:rent|rental)|(?:double|twice) the (?:monthly )?rent|"
+                       r"(?:income|earn|salary)[^.!?|]{0,40}?\b(\d(?:\.\d)?)\s*(?:x|times)\b", re.I)
+
+
+def income_requirement_statement(text) -> str:
+    """'3x the rent in household income' from a listing's requirement ('Must have 3x the rent in total household income
+    (before taxes)', 'Tenants must have an income 3x the rent', 'Income must be at least double the monthly rent'), else ''.
+    A guarantor's multiple ('Guarantors ... income must be 6x the rent') is not the renter's. Affordable-housing income
+    caps are not ordinary screening (income_restricted) and are left to the eligibility rule."""
+    t = str(text or "")
+    for m in _INCOME_X.finditer(t):
+        ctx = t[max(0, m.start() - 80):m.end() + 40]
+        if not re.search(r"income|earn|salary|pay ?stubs|qualif|household|gross|requirement", ctx, re.I):
+            continue
+        sent = re.split(r"(?<=[.!?|])\s+", t[max(0, m.start() - 200):m.end() + 120])
+        if any(income_restricted(x) and re.search(r"income|ami|afford", x, re.I) and m.group(0) in x for x in sent):
+            continue                                       # the multiple belongs to an income-capped program
+        pre = t[max(0, m.start() - 60):m.start()].lower()
+        if re.search(r"guarantor|co-?signer", pre) and not re.search(r"tenant|applicant|renter", pre[-30:]):
+            continue
+        x = m.group(1) or m.group(2)
+        x = "2" if x is None else x
+        x = x[:-2] if x.endswith(".0") else x
+        if not 1.5 <= float(x) <= 5:
+            continue
+        return f"{x}x the rent in household income"
+    return ""
+
+
+# ---- 10. one agent's template listings (independent check 6, #2, #6, #7)
+TEMPLATE_PATERSON = re.compile(r"Looking for a comfortable, affordable place to call home\?\s*This spacious and modern apartment offers the perfect combination of convenience, style, and value", re.I)

@@ -296,8 +296,21 @@ def cost_unit(r, util, RT, MED):
         inc -= ten
         u = util.get((r["building_id"], "utilities_studio" if str(r["beds"]).startswith("0") else "utilities_1br"), {})
         ub = r.get("utilities_included_basis") or "stated"
+        # independent check 6, sweep 8 (405 Main St O4): a REQUIRED flat monthly utilities fee the listing states is a line
+        # of the total, and it replaces the electricity and gas estimates it covers (internet is never "utilities")
+        flat = num(r.get("utilities_flat_fee"))
+        if flat is not None and flat > 0:
+            lines.append({"line": "utilities (fixed monthly fee)", "amount": round(flat), "basis": "stated", "note": str(r.get("utilities_flat_fee_words", ""))[:200],
+                          "code": "utilities_flat_fee", "data": {"covers": ["electric", "gas"]}})
+            for l_ in lines:
+                if l_.get("code") == "fees_in_price":
+                    l_["data"]["utilities_fee_separate"] = True       # the price includes the building fees, not the utilities fee
         for name, key in [("electricity (est.)", "electric"), ("gas (est.)", "gas"), ("internet (est.)", "internet")]:
             amt = num(u.get(key))
+            if flat is not None and flat > 0 and key in ("electric", "gas"):
+                lines.append({"line": name.replace(" (est.)", " (in the utilities fee)"), "amount": 0, "basis": "stated", "note": "covered by the fixed monthly utilities fee above",
+                              "code": "utility_in_flat_fee", "data": {}})
+                continue
             if key in inc:
                 lines.append({"line": name.replace(" (est.)", " (included in rent)"), "amount": 0, "basis": ub, "code": "utility_included", "data": {}})
             elif key == "internet" and fee_has_internet:
@@ -342,13 +355,18 @@ def cost_unit(r, util, RT, MED):
         if not offer_text and str(r.get("concession_text", "")).strip() and not re.search(r"not stated|\[|capture|field\)|[:=]\s*\w+;", str(r.get("concession_text", ""))):
             offer_text = str(r.get("concession_text", "")).strip()[:300]
         otype = t.get("offer_type", "") if t else ""
+        # independent check 6, sweep 6 (#4, #5, #15): an offer that names other apartments, or whose deadline is before the
+        # first tour day, does not apply to this apartment: no special-offer star or disclosure
+        applies, not_why = parsers.offer_applies(offer_text, r.get("unit_shown") or r.get("unit", ""), parsers.TOUR_START)
         offer_kind = "net_effective" if is_net else ("special_offer" if (otype in ("months_free", "weeks_free", "dollar_credit", "look_and_lease")
                                                                          or (otype == "other" and t.get("listed_price_is") == "unknown")) else
                                                      ("deposit_or_fee" if otype == "reduced_deposit_or_fee" else ("special_offer" if has_offer and not t else "")))
+        if not applies and offer_kind in ("special_offer", "deposit_or_fee"):
+            offer_kind = ""
         return ({"listing_id": r["listing_id"], "rent_basis": rent_basis_val, "rent_basis_kind": "net_effective" if is_net else "listed",
-                    "rent_gross": rent_gross_val, "rent_asterisk": "yes" if has_offer else "",
+                    "rent_gross": rent_gross_val, "rent_asterisk": "yes" if has_offer and (applies or is_net) else "",
                     "rent_listed_price_is": t.get("listed_price_is", ""), "rent_offer_text": offer_text, "rent_offer_kind": offer_kind,
-                    "rent_offer_type": otype, "all_in_likely": all_in_likely, "all_in_likely_note": "; ".join(likely_notes),
+                    "rent_offer_type": otype, "rent_offer_not_applied": "" if applies else not_why, "all_in_likely": all_in_likely, "all_in_likely_note": "; ".join(likely_notes),
                     "rent_free_months": t.get("free_months", ""), "rent_lease_months": t.get("lease_months", ""),
                     # independent check 4, D20: the offer's own qualifier is kept ("up to 2 months free" is not "2 months free")
                     "rent_offer_up_to": "yes" if parsers.offer_is_up_to(t.get("conditions", ""), t.get("offer_text_page", "") or t.get("offer_text", ""), t.get("free_months", "")) else "",

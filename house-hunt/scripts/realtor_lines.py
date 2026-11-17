@@ -858,7 +858,9 @@ CATCHES = {
     # conditions the renter must meet or know (independent check 4, D8): the figure itself is on the disclosure
     "conditions:income": [
         "The listing sets an income requirement: {income}. Check that you meet it, or ask whether a guarantor counts.",
-        "This apartment has an income requirement: {income}. Ask whether a guarantor counts."],
+        "This apartment has an income requirement: {income}. Ask whether a guarantor counts.",
+        "Applicants need {income}. If that is tight, ask whether a guarantor counts.",
+        "The application asks for {income}. Ask whether a guarantor or savings can stand in."],
     "conditions:income_plain": [
         "The listing sets an income requirement. Check that you meet it, or ask whether a guarantor counts."],
     "conditions:credit": [
@@ -1627,16 +1629,19 @@ def catch_options(u, f):
     open item comes before everything (said with its own reason where the open item gives one); then a price that
     includes an offer; costs that could pass her limit; an offer whose effect is not stated; the lease term; an
     unpublished dog weight limit; a condo rented by its owner; the floor; else its weakest own fact."""
-    # a condition she must meet comes first, with the listing's own figure (independent check 4, D8)
+    # a condition she must meet, with the listing's own figure (independent check 4, D8). Independent check 6, sweep 9:
+    # since the listing sites' own requirement fields are read, an ordinary income or credit requirement is on half the
+    # page; it is routine screening, so it follows the open item and the cost and lease points, before the floor
     income = str(get(u, "conditions", "income_requirement") or "").strip().rstrip(".")
     income = re.sub(r"\b(?:a|per|each) year\b", "yearly", income)      # the page keeps "year" for a building's age
     credit = str(get(u, "conditions", "credit_score_requirement") or "").strip().rstrip(".")
+    conditions = []
     if "income requirement" in f["disclosures"]:
-        return [("conditions:income", {"income": income}, {"income_requirement": income}) if income else
-                ("conditions:income_plain", {}, {"disclosure": "income requirement"})]
-    if "credit score requirement" in f["disclosures"]:
-        return [("conditions:credit", {"credit": credit}, {"credit_score_requirement": credit}) if credit else
-                ("conditions:credit_plain", {}, {"disclosure": "credit score requirement"})]
+        conditions.append(("conditions:income", {"income": income}, {"income_requirement": income}) if income else
+                          ("conditions:income_plain", {}, {"disclosure": "income requirement"}))
+    elif "credit score requirement" in f["disclosures"]:
+        conditions.append(("conditions:credit", {"credit": credit}, {"credit_score_requirement": credit}) if credit else
+                          ("conditions:credit_plain", {}, {"disclosure": "credit score requirement"}))
     c = u.get("confirm") or {}
     if c.get("asterisk") and c.get("what"):
         what = str(c["what"])
@@ -1672,6 +1677,7 @@ def catch_options(u, f):
         out.append(("dog_weight", {}, {"disclosure": "dog weight limit not published"}))
     if "condo rented by its owner" in f["disclosures"]:
         out.append(("condo", {}, {"disclosure": "condo rented by its owner"}))
+    out += conditions
     if num(u.get("floor")) is None:
         out.append(("floor:unpublished", {}, {"floor": None}))
     elif not f["floor_sure"] and f["floor"] and f["walkup"]:

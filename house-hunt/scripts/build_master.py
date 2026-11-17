@@ -600,6 +600,17 @@ def structured_parking(rows, M, reviewed=None):
             d["parking_fee_monthly_source"] = "data/reference/parking_reviewed.csv"
             d["parking_fee_note"] = ("a spot is included or free: " if float(rv["fee"]) == 0 else "") + str(rv.get("quote", ""))[:120]
         f = parsers.parking_facts(items, d.get("parking_fee_monthly"))
+        # independent check 6, pattern 5 (Kings Gardens, 263 Bloomfield Ave, Town Walk): a plain lot named with no price
+        # beside a priced garage or carport is the free choice; the total uses it and the paid kind is optional
+        free_lot = "" if rv else parsers.free_plain_lot_beside_paid(f["kinds"], f.get("unpriced_kinds", []), d.get("parking_fee_monthly"), f["fee_kind"],
+                                                                        f.get("option_kinds", []), [x[0] for x in items])
+        if free_lot:
+            paid = d.get("parking_fee_monthly")
+            d["parking_fee_monthly"], d["parking_fee_monthly_basis"] = "0", d.get("parking_fee_monthly_basis", "stated")
+            d["parking_fee_note"] = (f"a spot is included or free: the {parsers.PARKING_KIND_WORDS.get(free_lot, free_lot)} carries no price; "
+                                     f"the ${float(paid):g} is for a {parsers.PARKING_KIND_WORDS.get(f['fee_kind'], f['fee_kind'])}, an optional extra")
+            f = parsers.parking_facts(items, "0")
+            d["parking_free_lot_beside_paid"] = f"{free_lot}; paid {f['optional'][0]['kind'] if f['optional'] else ''} ${float(paid):g}"
         if rv:
             if rv.get("kinds", "").strip():
                 f["kinds"] = [k.strip() for k in rv["kinds"].split(";") if k.strip()]
@@ -1079,7 +1090,8 @@ def read_listing_page(raw_path, listing_id) -> dict:
             m = re.search(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', txt, re.S)
             if m:
                 hd = ((json.loads(m.group(1)).get("props") or {}).get("homeDetails")) or {}
-                out["description"] = clean((hd.get("description") or {}).get("value"))[:6000]
+                # Trulia runs bullet lines together ("space includedQuiet"): a lower-case letter followed by a capital starts a new line
+                out["description"] = re.sub(r"(?<=[a-z.!)])(?=[A-Z][a-z])", " ", clean((hd.get("description") or {}).get("value")))[:6000]
                 out["title"] = clean(((hd.get("community") or {}) if isinstance(hd.get("community"), dict) else {}).get("name") or (hd.get("location") or {}).get("streetAddress"))
                 fees = []
                 for grp in (((hd.get("rentalCostsAndFees") or {}).get("costAndFeeCalculator") or {}).get("fees") or {}).values():
@@ -1138,6 +1150,58 @@ def listing_page_facts(MU) -> dict:
     return {r["listing_id"]: r for r in df.to_dict("records")}
 
 
+def apply_listing_page_facts(MU, PF):
+    """Independent check 6: unit-level facts from the apartment's own cached listing page (read_listing_page), over the
+    building-level fields the unit took from its building:
+      furnished              the plan name ('Studio D-Line (Furnished)') or the description says it   (sweep 3)
+      income_requirement     an ordinary '3x the rent' requirement in the site's requirement field or the description (sweep 9)
+      credit_requirement     a credit-score requirement in the same words                            (sweep 9)
+      in_unit_laundry        a listing site's in-unit tag gives way to the description's shared laundry (sweep 7)
+      townhome_home          the words that make the home a townhome (ground floor; rank.py removes it) (sweep 2)
+      utilities_flat_fee     a required flat monthly utilities fee and the words that state it (all_in.py) (sweep 8)
+    Every change keeps the page's own words in a *_page_words column."""
+    MU = MU.copy()
+    for c in ("furnished", "income_requirement", "credit_requirement", "in_unit_laundry", "laundry", "in_unit_laundry_source_kind", "in_unit_appliances", "building_type"):
+        if c not in MU:
+            MU[c] = ""
+        MU[c] = MU[c].fillna("").astype(str)
+    plan = MU.notes.fillna("").astype(str).str.extract(r"(?:floorplan=|floor plan: )([^;]+)")[0].fillna("")
+    furn, inc, cred, laund, town, uf, uf_w = [], [], [], [], [], [], []
+    for i, (lid, pl) in enumerate(zip(MU.listing_id, plan)):
+        f = PF.get(lid, {})
+        d, ex = f.get("description", ""), f.get("extra_text", "")
+        fs = parsers.furnished_statement(pl, d)
+        furn.append(fs)
+        inc.append(parsers.income_requirement_statement(ex + " | " + d))
+        cr = parsers.renter_conditions(ex + " | " + d).get("credit", "")
+        m = re.search(r"\b([5-8]\d0)\s*(?:or (?:higher|above|better|more)|\+)\s*(?:fico\s*)?credit", ex + " " + d, re.I) if not cr else None
+        cred.append(cr or (m.group(1) + "+" if m else ""))
+        laund.append(parsers.shared_laundry_statement(d))
+        town.append(parsers.townhome_home(MU.building_type.iloc[i], pl, d))
+        amt, words = parsers.flat_utilities_fee(d, MU.other_monthly_fees_json.iloc[i] if "other_monthly_fees_json" in MU else "")
+        uf.append("" if amt is None else f"{amt:g}"); uf_w.append(words)
+    furn_s = pd.Series(furn, index=MU.index)
+    MU["furnished_page_words"] = furn_s
+    MU["furnished"] = MU.furnished.where(MU.furnished.ne("") | furn_s.eq(""), "yes: " + furn_s + " (the listing's own page)")
+    inc_s = pd.Series(inc, index=MU.index)
+    MU["income_requirement"] = MU.income_requirement.where(MU.income_requirement.ne("") | inc_s.eq(""), inc_s)
+    cred_s = pd.Series(cred, index=MU.index)
+    MU["credit_requirement"] = MU.credit_requirement.where(MU.credit_requirement.ne("") | cred_s.eq(""), cred_s)
+    sh = pd.Series(laund, index=MU.index)
+    drop = sh.ne("") & MU.in_unit_laundry.eq("yes") & ~MU.get("laundry_all_sources", pd.Series("", index=MU.index)).fillna("").str.contains(r"\((?:confirmed|confirmed_by_phone)\)")
+    MU["laundry_page_words"] = np.where(drop, sh, "")
+    MU.loc[drop, "in_unit_laundry"] = "on_site_only"
+    MU.loc[drop, "in_unit_laundry_source_kind"] = ""
+    MU.loc[drop, "in_unit_appliances"] = ""
+    MU.loc[drop, "laundry"] = "Shared laundry in the building (the listing's own words: " + sh[drop] + ")"
+    MU["townhome_home"] = town
+    MU["utilities_flat_fee"], MU["utilities_flat_fee_words"] = uf, uf_w
+    print(f"  listing pages (independent check 6): furnished {int(furn_s.ne('').sum())}, income requirement read {int(inc_s.ne('').sum())}, "
+          f"credit {int(cred_s.ne('').sum())}, in-unit tag dropped for shared laundry {int(drop.sum())}, townhome {int(pd.Series(town).ne('').sum())}, "
+          f"flat utilities fee {int(pd.Series(uf).ne('').sum())}, apartment number not the site's label {int((MU.unit_shown != MU.unit).sum()) if 'unit_shown' in MU else 0}")
+    return MU
+
+
 def main():
     U = pd.read_csv(DATA / "units.csv", dtype=str, keep_default_na=False, low_memory=False)
     U["zip5"] = U.zip5.map(lambda z: z.zfill(5) if re.fullmatch(r"\d{3,5}", z) else z)        # NJ / CT ZIPs keep their leading zero
@@ -1191,9 +1255,16 @@ def main():
     cp_addr, cp_name = community_parking_snippets()
     community_parking_words = lambda addr_key, name: cp_addr.get(str(addr_key)) or cp_name.get(str(name).lower().strip(), [])
     community_dog_words = lambda addr_key, name: cf_dog_addr.get(str(addr_key)) or cf_dog_name.get(str(name).lower().strip(), "")
+    # independent check 6: what each listing's own cached page says (description, last-modified date, unit label)
+    PF = listing_page_facts(U)
     # ------------------------------------------------------------------ 5/6. listing rows + inference
     for r in U.itertuples():
         b, src = r.building_id, r.url
+        # independent check 6, pattern 2 (#14, #27, #29): a parking space the listing's own description includes in the rent
+        pk_incl = parsers.parking_included_statement(PF.get(r.listing_id, {}).get("description", ""))
+        if pk_incl:
+            M.note_parking(b, pk_incl, "stated", src, "listing description")
+            add_parking(M, b, pk_incl, "stated", src)
         el_basis, el_status = getattr(r, "elevator_basis", ""), getattr(r, "elevator_rule_status", "")
         # The listing gate decided with parsers.elevator_rule; its basis is entered here. A basis that rests on an evidence
         # row or an amenities page is not a statement of this listing's own page: that evidence enters below from its own
@@ -1284,6 +1355,24 @@ def main():
         # the management page's bare "yes" for a dog park / pet spa, with the sentence it was read from
         if not is_blank(getattr(r, "community_dog_park_pet_spa", "")):
             M.note_dog(b, r.community_dog_park_pet_spa, community_dog_words(r.addr_key, r.building_name))
+
+    # independent check 6, #6 (146 Hamilton Ave): another listing of the same building that did not pass the listing gates
+    # (data/listings.csv, not in data/units.csv) still publishes the building's parking: its fee lines ("Garage parking
+    # fee: $150/mo") and parking words count for the building, as any listing's do
+    LL = pd.read_csv(DATA / "listings.csv", dtype=str, keep_default_na=False, low_memory=False,
+                     usecols=["listing_id", "addr_key", "url", "parking_type", "parking_fee", "other_monthly_fees_json"])
+    LL = LL[~LL.listing_id.isin(set(U.listing_id)) & LL.addr_key.isin(set(U.addr_key))]
+    n_sib_pk = 0
+    for r in LL.itertuples():
+        b = bid_of(r.addr_key)
+        fj_ = parsers.fees_from_json(r.other_monthly_fees_json)
+        if b is None or not (fj_["parking_text"] or not is_blank(r.parking_type)):
+            continue
+        n_sib_pk += 1
+        M.note_parking(b, r.parking_type, "stated", r.url, "listing (another listing of the building)")
+        M.note_parking(b, fj_["parking_text"], "stated", r.url, "listing fee lines (another listing of the building)")
+        add_parking(M, b, fj_["parking_text"], "stated", r.url)
+    print(f"  parking words from {n_sib_pk} other listings of the buildings that did not pass the listing gates")
 
     # ------------------------------------------------------------------ 3. amenities parsed from cached pages
     af = DATA / "reference" / "building_amenities.csv"
@@ -1823,6 +1912,12 @@ def main():
     if "live_page_gone" not in MU:
         MU["live_page_gone"] = ""
 
+    # independent check 6, pattern 1 (#2, #6, #7, #22): the apartment number printed is never a listing site's index
+    # ('3', '1 Bed' on Apartment List); a number the listing's own words state ('1BED #204') is used, else none. The
+    # floor is read from that number. `unit` keeps the site's label (the join key of the evidence and the verdicts).
+    sn = [parsers.shown_unit_number(un_, PF.get(l_, {}).get("site", ""), PF.get(l_, {}).get("unit_rows_on_page", ""), PF.get(l_, {}).get("description", ""),
+                                    PF.get(l_, {}).get("title", "")) for l_, un_ in zip(MU.listing_id, MU.unit)]
+    MU["unit_shown"], MU["unit_number_basis"] = [x[0] for x in sn], [x[1] for x in sn]
     # floor: confirmed per unit > stated on the listing > inferred from the unit label (W1, W17)
     bf_good = {b: v for b, v, bs in zip(B.index, B.get("building_floors", pd.Series(dtype=str)), B.get("building_floors_basis", pd.Series(dtype=str))) if bs in GOOD_FLOORCOUNT}
     bf_any = B.get("building_floors", pd.Series(dtype=str)).to_dict()
@@ -1858,7 +1953,7 @@ def main():
         return desc_floor_ok[key]
     fl, flb, fls, flk = [], [], [], []
     READS = load_unit_floor_reads()          # second trawl: floors read from the apartment number (scripts/building_stories.py)
-    for lid, b, un, stated, gbasis, hnote, rawp in zip(MU.listing_id, MU.building_id, MU.unit, MU.floor_used, MU.floor_basis, MU.notes, MU.raw_path):
+    for lid, b, un, stated, gbasis, hnote, rawp, un_shown in zip(MU.listing_id, MU.building_id, MU.unit, MU.floor_used, MU.floor_basis, MU.notes, MU.raw_path, MU.unit_shown):
         if gbasis == "stated" and "floor from description text" in str(hnote) and re.fullmatch(r"[\d.]+", str(stated)) and not description_floor(rawp, stated):
             gbasis = "description_amenity"           # the phrase was about an amenity: the floor is not stated
         got = None
@@ -1871,7 +1966,7 @@ def main():
                     break
             if got:
                 break
-        label_floor, kind = parsers.floor_from_label(un, bf_good.get(b))
+        label_floor, kind = parsers.floor_from_label(un_shown, bf_good.get(b))
         cap = parsers._bf(bf_any.get(b))
         if parsers.unit_label_key(un) and any(b_ == b and re.search(r"(?<![\w-])" + re.escape(un) + r"(?![\w-])", t_, re.I) for b_, t_ in floor_unknown) \
                 and not (got and got[1] == "confirmed") and gbasis != "stated":
@@ -1880,7 +1975,7 @@ def main():
             ev_unknown = True
         else:
             ev_unknown = False
-        read_floor = None if ev_unknown else floor_from_reads(READS.get(lid), un, cap)
+        read_floor = None if ev_unknown or un_shown != un else floor_from_reads(READS.get(lid), un, cap)
         if got and got[1] == "confirmed":
             fl.append(got[0]); flb.append("confirmed"); fls.append(got[2]); flk.append("")
         elif gbasis == "stated" and re.fullmatch(r"[\d.]+", str(stated)):
@@ -1899,7 +1994,7 @@ def main():
     # (data/reference/unit_numbering_conventions.csv), or as a tower label ('01-16C' = floor 16). A reading, never a
     # stated floor: rank.py removes a unit that reads as floor 1 and uses it for nothing else.
     CONV = load_numbering_conventions()
-    rd = [parsers.floor_by_convention(un, CONV[b]) if b in CONV else parsers.tower_label_floor(un) for b, un in zip(MU.building_id, MU.unit)]
+    rd = [parsers.floor_by_convention(un, CONV[b]) if b in CONV else parsers.tower_label_floor(un) for b, un in zip(MU.building_id, MU.unit_shown)]
     MU["unit_floor_reading"] = ["" if x is None else x for x in rd]
     MU["unit_floor_reading_basis"] = [("numbering convention of this complex: " + CONV[b]) if (x is not None and b in CONV) else ("tower label: building, then floor, then line" if x is not None else "")
                                       for x, b in zip(rd, MU.building_id)]
@@ -1913,6 +2008,7 @@ def main():
         if hit.any() and r.field in ("address", "city"):
             MU.loc[hit, r.field] = r.value
             MU.loc[hit, "address_override_source"] = r.source
+    MU = apply_listing_page_facts(MU, PF)
     # D8: the lease term the listed price belongs to, from the unit's own live-check note, else the building's
     # lease-term fact, else the listing's own price basis ('12-month lease', 'lease term 24 Months').
     ltm, lt12, ltq, ltsrc, ltlow = [], [], [], [], []
@@ -2015,8 +2111,8 @@ def main():
             if b0:
                 pd_corr[(b0, page_key(r.listing_url), parsers.unit_key(r.unit) if r.unit.strip() else "")] = (r.page_modified_date, r.read_on, r.evidence_file)
     pm, pms, st_lvl, st_days, st_why = [], [], [], [], []
-    for b, url_, note, lc, ls, av, also, dupu, called, lst, lurl, un_ in zip(MU.building_id, MU.url, MU.live_notes, MU.live_checked_at, MU.last_seen, MU.available_date, MU.also_seen_at,
-                                                                            dup_urls, MU.call_called_at, MU.live_status, MU.live_url, MU.unit):
+    for lid_, b, url_, note, lc, ls, av, also, dupu, called, lst, lurl, un_ in zip(MU.listing_id, MU.building_id, MU.url, MU.live_notes, MU.live_checked_at, MU.last_seen, MU.available_date,
+                                                                                  MU.also_seen_at, dup_urls, MU.call_called_at, MU.live_status, MU.live_url, MU.unit):
         d_, src_ = parsers.page_modified_date(note), "live-check note"
         read_on = str(lc)[:10] or str(ls)[:10]
         seen_live = lst in ("live", "changed")
@@ -2032,6 +2128,14 @@ def main():
                 d_, src_, read_on = sib, "live-check note of another unit on the same building page", str(lc)[:10] or str(ls)[:10]
             if d_ and read_on < d_:
                 read_on = str(lc)[:10] or d_
+        # independent check 6, sweep 1 (280 Verona Ave V5): the cached listing page's own last-modified date (Trulia's
+        # lastDateModified, the Apartment List unit record's updated_at, Zumper's modified_on), where no note, fact or
+        # correction gave one. It never replaces a date a checker recorded: a feed's record date can be a sync time
+        # (Spinnaker Brook 158-2H: the checker's page date is 2026-01-26, the Apartment List record says 2026-11-17).
+        pf_ = PF.get(lid_, {})
+        if same_page_check and pf_.get("modified") and not d_:
+            d_, src_ = pf_["modified"], f"cached listing page ({pf_.get('modified_field', '')}, read {pf_.get('read_on', '')})"
+            read_on = max(read_on, str(pf_.get("read_on", ""))[:10])
         corr = pd_corr.get((b, page_key(url_), parsers.unit_key(un_))) or pd_corr.get((b, page_key(url_), ""))
         if corr:
             d_, src_ = corr[0], f"reviewed correction ({corr[2]})"

@@ -177,6 +177,12 @@ def read_apartmentlist(text):
     pieces, exp = [], ""
     if not best:
         return pieces, exp, "listing object not found in cached page"
+    # independent check 6, #12 (The Kislak): a long description is a flight text row the listing points to ("$87"); read
+    # it the way the harvester does (scripts/h_apartmentlist.py: parse_listing), or its offer sentences are never seen
+    if isinstance(best.get("description"), str) and re.fullmatch(r"\$[0-9a-f]+", best["description"]):
+        import h_apartmentlist as _HA
+        full = _HA.parse_listing(text) or {}
+        best = dict(best, description=full.get("description", "") if str(full.get("rental_id")) == str(best.get("rental_id")) else "")
     # The page carries the listing twice; only the shorter copy (big fields replaced by "$ref" pointers) has its
     # `specials` list filled, and `best` is the longer one, whose specials are always []. Collect specials from every
     # copy of the same rental_id, as scripts/h_apartmentlist.py: parse_listing does (independent check W6).

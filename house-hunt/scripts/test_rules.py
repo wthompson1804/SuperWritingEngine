@@ -826,6 +826,7 @@ def data_4(M, R, S):
     data_b20(M, R, S)
     data_ic4(M, R, S)
     data_ic5(M, R, S)
+    data_ic6(M, R, S)
     data_b21(M, R, S)
 
 
@@ -2290,6 +2291,145 @@ def pure_floor_elevator():
         eq(P.floor_elevator_master(lambda c: row_fr.get(c, ""), "unknown"), ("unknown", ""), "floor reads: floor 3 with no elevator stated is not shown")
 
 
+def pure_ic6():
+    """Independent check 6 (docs/INDEPENDENT_CHECK_6.md): the ten sweeps, as pure rules, with the check's own cases."""
+    # 1. staleness from the cached page's own last-modified date (280 Verona Ave V5: 2026-05-07, 199 days at Nov 22)
+    eq(P.staleness("2026-05-07", "2026-11-15", as_of=P.TOUR_START)[0], "remove", "IC6 #3: a page last changed 2026-05-07 is removed (199 days by the first tour day)")
+    eq(P.staleness("2026-09-18", "2026-11-15", as_of=P.TOUR_START)[0], "open", "IC6 sweep 1: 65 days unchanged at the first tour day is one open item")
+    eq(P.staleness("2026-09-24", "2026-11-15", as_of=P.TOUR_START)[0], "", "IC6 #21: Bay Shore, 59 days at Nov 22, is not stale")
+    # 2. townhomes are ground-floor homes
+    ok(P.townhome_home("townhome", "", ""), "IC6 #16: building_type townhome (West Hill Apartments) is a townhome")
+    ok(P.townhome_home("", "", "BEAUTIFUL, SPACIOUS TOWNHOMES PET FRIENDLY ... TOWNHOUSE FEATURES MAIN LEVEL: Modern Kitchen"), "IC6 #16: the manager's 'spacious Townhomes' text is a townhome")
+    ok(P.townhome_home("", "", "Enjoy multi-level townhouse living with complete modern convenience!"), "IC6 sweep 2: 'multi-level townhouse living' is a townhome")
+    ok(P.townhome_home("", "One Bedroom Home with Patio", ""), "IC6 sweep 2: a 'Home with Patio' plan is a ground-floor home")
+    ok(P.townhome_home("", "Townhome A", ""), "IC6 sweep 2: a 'Townhome' plan")
+    eq(P.townhome_home("", "", "The apartments and townhomes at Encore 99 offer you all the comforts of home"), "", "IC6 sweep 2: 'apartments and townhomes' does not make every home a townhome")
+    eq(P.townhome_home("", "", "one, two, three, and four bedroom apartments and townhomes come with"), "", "IC6 sweep 2: Cortlandt Living offers apartments and townhomes")
+    eq(P.townhome_home("", "", "stately two-tone brick buildings with townhouse-style front stoops"), "", "IC6 sweep 2: 'townhouse-style stoops' is a facade, not a townhome")
+    eq(P.townhome_home("", "One Bedroom (Upstairs)", "spacious townhomes, townhouse features: main level"), "", "IC6 sweep 2: a page that states an upper-floor flat is not removed")
+    # 3. furnished
+    eq(P.furnished_statement("Studio D-Line (Furnished)", ""), "furnished", "IC6 #12: the Kislak plan '(Furnished)'")
+    eq(P.furnished_statement("", "This clean and cozy furnished 1-bedroom ... Move-in ready and fully furnished"), "furnished", "IC6 #14: 255 Franklin Ave 'fully furnished'")
+    eq(P.furnished_statement("", "offered optional fully furnished and completely move-in ready"), "furnished (optional)", "IC6 sweep 3: optional furniture")
+    eq(P.furnished_statement("Unfurnished", "a furnished rooftop lounge and a furnished model"), "", "IC6 sweep 3: a furnished lounge or model is not the apartment")
+    # 4. the apartment number
+    eq(P.shown_unit_number("3", "apartmentlist", "1", "146 Hamilton\n1BED #204\nMove-In Details * Monthly Rent: $2,100", ""), ("204", "listing text"), "IC6 #6: '3' is the site's index; the listing says #204")
+    eq(P.shown_unit_number("3", "apartmentlist", "1", "100 Carroll · 1 BED Move-In Details * Monthly Rent: $2,100", ""), ("", "site index, no number on the page"), "IC6 #7: no number on the listing: none printed")
+    eq(P.shown_unit_number("1 Bed", "apartmentlist", "1", "Welcome to this bright 1-bedroom", "1349 Dixwell Avenue - 24"), ("24", "listing title"), "IC6 #22: '1 Bed' is a plan label; the title names 24")
+    eq(P.shown_unit_number("2C", "apartmentlist", "1", "Bright 1-bedroom apartment at 140 Fleming Ave, Unit 2C", ""), ("2C", "label"), "IC6 sweep 4: a real label stays")
+    eq(P.shown_unit_number("APT#2", "apartmentlist", "1", "ALL UTILITIES INCLUDED", ""), ("APT#2", "label"), "IC6 sweep 4: a label that says APT#2 is a number")
+    eq(P.shown_unit_number("6", "apartmentlist", "11", "", ""), ("6", "label"), "IC6 sweep 4: a one-digit label on a page of many units stays (Autumn Ridge 6)")
+    eq(P.shown_unit_number("V5", "trulia", "", "", ""), ("V5", "label"), "IC6 sweep 4: other sites' labels are not touched")
+    eq(P.floor_from_label("204")[0], 2, "IC6 #6: #204 reads as floor 2")
+    # 5. parking included / the free lot
+    eq(P.parking_included_statement("Building & Convenience Dedicated off-street parking space included Quiet"), "Dedicated off-street parking space included", "IC6 #14")
+    eq(P.parking_included_statement("Includes 1 free parking spot. NO FEE!!"), "Includes 1 free parking spot", "IC6 #29")
+    eq(P.parking_included_statement("Newly renovated Parking included with rent Heat and hot water included"), "Parking included with rent", "IC6 #27")
+    eq(P.parking_included_statement("Parking available: $160 (spot) / $210 (garage)"), "", "IC6 sweep 5: a priced space is not included")
+    eq(P.parking_included_statement("Free parking for the first month"), "", "IC6 sweep 5: a time-limited free offer is not included")
+    eq(P.parse_parking("Dedicated off-street parking space included")["fee"], 0.0, "IC6 #14: the included space costs $0")
+    f = P.parking_facts([("surface_lot; garage_lot; other; Parking; Garage | Garages: $150 per month", "stated", "u", "listing")], 150)
+    eq(P.free_plain_lot_beside_paid(f["kinds"], f["unpriced_kinds"], 150, f["fee_kind"], f["option_kinds"], ["surface_lot; garage_lot; Garages: $150 per month"]), "open_lot",
+       "IC6 #4: Kings Gardens: the unpriced lot is the free choice beside the $150 garage")
+    f = P.parking_facts([("Parking | Open lot, carports $42/month / Covered Parking", "stated", "u", "listing")], 42)
+    eq(P.free_plain_lot_beside_paid(f["kinds"], f["unpriced_kinds"], 42, f["fee_kind"], f["option_kinds"], ["Parking | Open lot, carports $42/month"]), "open_lot",
+       "IC6 #23: Town Walk: 'Open lot, carports $42/month' uses the free open lot")
+    src = ["Garage; Parking; Guest parking | Unassigned parking: $5/month per vehicle; Detached garage available", "fee: 15-350 | Parking: 15-350"]
+    f = P.parking_facts([(t, "stated", "u", "listing") for t in src], 15)
+    eq(P.free_plain_lot_beside_paid(f["kinds"], f["unpriced_kinds"], 15, f["fee_kind"], f["option_kinds"], src), "", "IC6 sweep 5: a priced lot ('Unassigned parking: $5') is not free")
+    eq(P.free_plain_lot_beside_paid(["open_lot", "garage"], ["open_lot"], 75, "garage", ["garage"], ["included: no (fee stated)"]), "", "IC6 sweep 5: 'included: no' keeps the fee")
+    s0 = P.parking_summary("open_lot", "open_lot", 0, [{"kind": "garage", "fee": 150.0, "fee_high": None}])
+    eq(s0, "A free open lot; garage spaces are $150 a month.", "IC6 #4: the words name the paid garage as optional")
+    # 6. offers that apply to this apartment only
+    eq(P.offer_applies("$500 rent credit when you move 12/1/26(APT 41 & 36 ONLY) - must qualify", "039")[0], False, "IC6 #4: an offer for APT 41 & 36 is not apartment 039's")
+    eq(P.offer_applies("A ONE MONTH FREE (APT 96,33 & 111 only) when you move in by 12/1/26", "040")[0], False, "IC6 #5")
+    eq(P.offer_applies("A ONE MONTH FREE (APT 96,33 & 111 only) when you move in by 12/1/26", "033")[0], True, "IC6 #5: apartment 033 is named (033 = 33)")
+    eq(P.offer_applies("Apply within 72 hours of touring and move in by 11/15/2026 to receive your second full months' rent free!", "1906")[0], False, "IC6 #15: expired before the first tour day")
+    eq(P.offer_applies("Move in by 12/15/2026 for one month free", "1906")[0], True, "IC6 sweep 6: a deadline after the first tour day stands")
+    eq(P.offer_applies("Up to 1 month free on select units", "CRS-2228")[0], True, "IC6 #13: 'select units' alone does not name other apartments")
+    # 7. laundry
+    eq(P.shared_laundry_statement("This Unit has a Dishwasher and Shared Laundry in the Building."), "Shared Laundry", "IC6 #20")
+    eq(P.shared_laundry_statement("newly renovated studio, washer and dryer nearby, sunny"), "washer and dryer nearby", "IC6 #28")
+    eq(P.shared_laundry_statement("Washer/Dryer in unit. A laundry room in the basement too."), "", "IC6 sweep 7: an in-unit washer in the same words wins")
+    # 8. a flat utilities fee
+    eq(P.flat_utilities_fee("Utilities are Included for a Flat Fee of $150/mo. Shared laundry", '{"title":"Monthly utilities fee","value":"$150/mo"}')[0], 150.0, "IC6 #20: 405 Main St O4 $150")
+    eq(P.flat_utilities_fee("Utilities are Included for a Flat Fee of $150/mo.", '{"title":"Monthly utilities fee","value":"$125/mo"}')[0], None, "IC6 sweep 8: two sources disagreeing leave the estimate")
+    eq(P.flat_utilities_fee("Heat and hot water included. Tenant pays electric.", "")[0], None, "IC6 sweep 8: no flat fee")
+    # 9. income and credit requirements
+    eq(P.income_requirement_statement("income_requirement_text: Must have 3x the rent in total household income (before taxes) | Looking for a comfortable, affordable place to call home?"),
+       "3x the rent in household income", "IC6 #4 / sweep 9: Apartment List's requirement field, beside the word 'affordable' in the marketing text")
+    eq(P.income_requirement_statement("Tenants must have an income 3x the rent. Guarantors must have great credit, and income must be 6x the rent."), "3x the rent in household income", "IC6 #20: the tenant's multiple, not the guarantor's")
+    eq(P.income_requirement_statement("Must have 2.5x the rent in total household income (before taxes)"), "2.5x the rent in household income", "IC6 #4: 2.5x")
+    eq(P.income_requirement_statement("Income must be at least double the monthly rent after taxes"), "2x the rent in household income", "IC6 sweep 9: 'double the rent'")
+    eq(P.income_requirement_statement("Affordable housing: household income must not exceed 60% AMI; income 2x the rent"), "", "IC6 sweep 9: an income-capped program is left to the eligibility rule")
+    # 10. the template listings
+    ok(P.TEMPLATE_PATERSON.search("Looking for a comfortable, affordable place to call home? This spacious and modern apartment offers the perfect combination of convenience, style, and value."),
+       "IC6 #2/#6/#7: the template text is recognised")
+
+
+def data_ic6(M, R, S):
+    """Independent check 6 on the pipeline's output: the six wrong items and the sweeps."""
+    import pandas as pd
+    import verdicts as VD
+    shown = set(S.index)
+    rid = lambda l, c: R.at[l, c] if l in R.index else None
+    import build_master as BM
+    pg = BM.read_listing_page("raw/trulia/da17c2de30b480cc.html", "trulia:460669961")
+    if pg["bytes"]:
+        eq((pg["modified"], pg["modified_field"]), ("2026-05-07", "Trulia lastDateModified"), "IC6 #3: the cached Trulia page's lastDateModified is read")
+    pg = BM.read_listing_page("raw/apartmentlist/d42ef6376874a1aa.html", "apartmentlist:p11166981-3")
+    if pg["bytes"]:
+        ok("1BED #204" in pg["description"] and pg["unit_label"] == "3" and pg["unit_rows_on_page"] == "1", "IC6 #6: the Apartment List page gives the description, the site's label '3' and one unit row")
+    ok("trulia:460669961" not in shown, "IC6 #3: 280 Verona Ave V5 (page last changed 2026-05-07) is not shown")
+    if "trulia:460669961" in M.index:
+        eq(M.at["trulia:460669961", "listing_stale"], "remove", "IC6 #3: 280 Verona Ave V5 is removed by the staleness rule")
+    ok("rc:trulia:b2749337052:Unit_5-08:450005189" not in shown, "IC6 #16: West Hill Apartments 5-08 (townhomes) is not shown")
+    ok(not S.get("townhome_home", pd.Series("", index=S.index)).ne("").any(), "IC6 sweep 2: no shown apartment is a townhome")
+    l6 = "apartmentlist:p11166981-3"
+    if l6 in R.index:
+        eq(rid(l6, "unit_shown"), "204", "IC6 #6: 146 Hamilton Ave is apartment #204, not the site's '3'")
+        eq(str(rid(l6, "unit_floor")).replace(".0", ""), "2", "IC6 #6: #204 reads as floor 2")
+        eq(rid(l6, "parking_fee"), "150.0", "IC6 #6: the building's $150 garage fee is in the total")
+    for l in ("apartmentlist:p25428225-3", "apartmentlist:p127128151-3"):
+        if l in R.index:
+            eq(rid(l, "unit_shown"), "", f"IC6 #2 / #7: {l} prints no apartment number")
+    kis = [l for l in S.index if l.startswith("apartmentlist:p119939081-")]
+    ok(all("furnished" in str(S.at[l, "disclosures"]) for l in kis), "IC6 #12: every shown Kislak apartment carries the furnished disclosure")
+    ok(all(S.at[l, "rent_offer_kind"] == "special_offer" for l in kis), "IC6 #12: the Kislak's long-lease free months are a special offer")
+    if "trulia:464204348" in S.index:
+        ok("furnished" in S.at["trulia:464204348", "disclosures"], "IC6 #14: 255 Franklin Ave 1 is furnished")
+        eq(S.at["trulia:464204348", "parking_fee"], "0.0", "IC6 #14: its off-street space is included")
+    if "trulia:466331961" in S.index:
+        r = S.loc["trulia:466331961"]
+        lines = json.loads(r.all_in_lines)
+        ok(any(l["code"] == "utilities_flat_fee" and l["amount"] == 150 for l in lines), "IC6 #20: 405 Main St O4 counts the $150 flat utilities fee")
+        ok(not any(l["code"] == "utility_estimate" and l["line"].startswith(("electricity", "gas")) and l["amount"] for l in lines), "IC6 #20: no electricity or gas estimate beside the flat fee")
+        eq(r.in_unit_laundry, "on_site_only", "IC6 #20: shared laundry, not a washer in the apartment")
+        ok("income requirement" in r.disclosures, "IC6 #20: the 3x income rule is disclosed")
+        eq(sum(l["amount"] or 0 for l in lines), float(r.all_in), "IC6 #20: the lines sum to the total")
+    for l in ("apartmentlist:p40059-1B194-039", "apartmentlist:p1263841-1B200-040", "apartmentlist:p33289-7168A1P-1906"):
+        if l in S.index:
+            ok(S.at[l, "rent_offer_kind"] == "" and "special offer" not in S.at[l, "disclosures"], f"IC6 #4/#5/#15: {l} carries no special offer that is not its own")
+    if "apartmentlist:p40059-1B194-039" in S.index:
+        eq((S.at["apartmentlist:p40059-1B194-039", "parking_fee"], S.at["apartmentlist:p40059-1B194-039", "parking_kind"]), ("0.0", "open_lot"), "IC6 #4: the free lot, with the garage optional")
+    if "apartmentlist:p14807-A2-08223" in S.index:
+        eq(S.at["apartmentlist:p14807-A2-08223", "parking_fee"], "0.0", "IC6 #23: Town Walk uses the free open lot, not the $42 carport")
+    for l in ("zumper-65723749", "rn:233-shore-rd-long-beach:b2750784396:Unit_20:2120211539"):
+        if l in S.index:
+            eq(S.at[l, "parking_fee"], "0.0", f"IC6 #27 / #29: {l}: the space included in the rent is $0, not 'not published'")
+    if "zumper-65719911" in S.index:
+        eq(S.at["zumper-65719911", "in_unit_laundry"], "on_site_only", "IC6 #28: 'washer and dryer nearby' is not in-unit laundry")
+    # sweep 9 on every shown apartment: a requirement the page states is disclosed
+    inc = S[S.income_requirement.ne("") & ~S.income_requirement.map(P.income_restricted)]
+    ok(all("income requirement" in d for d in inc.disclosures), "IC6 sweep 9: every shown apartment with an income requirement discloses it")
+    # sweep 10: every template listing carries 'asterisk | unverified'
+    V = VD.by_unit()
+    F_ = pd.read_csv(DATA / "reference" / "listing_page_facts.csv", dtype=str, keep_default_na=False).set_index("listing_id")
+    tmpl = [l for l in S.index if l in F_.index and P.TEMPLATE_PATERSON.search(F_.at[l, "description"])]
+    ok(all("unverified" in V.get(l, {}).get("gate", []) for l in tmpl), "IC6 sweep 10: every shown template listing carries the 'unverified' asterisk")
+    ok(all(S.at[l, "confirm_what"] != "" for l in tmpl), "IC6 sweep 10: and it is the apartment's one open item")
+
+
 if __name__ == "__main__":
     if "--data" not in sys.argv:
         pure_floor_elevator()
@@ -2297,6 +2437,7 @@ if __name__ == "__main__":
         pure_ic4_text()
         pure_cleanup()
         pure_ic5()
+        pure_ic6()
         pure_b21()
     (data if "--data" in sys.argv else pure)()
     print(f"test_rules {'(data)' if '--data' in sys.argv else '(rules)'}: {N[0]} checks, {len(FAILS)} failed")

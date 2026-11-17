@@ -268,6 +268,10 @@ def main():
                       (no_el & fe_st0.eq("fail"), fe_code0.map(FE_FAIL_WHY).fillna("no elevator") + np.where(el.eq("conflicting"), " (the sources conflict on the elevator)", "")),
                       (s("dogs_allowed").str.lower().eq("no"), "dogs not allowed (confirmed)"),
                       (wl < 25, "dog weight limit under 25 lb"), (fl < 2, "ground-floor unit"),
+                      # independent check 6, sweep 2 (West Hill Apartments 5-08): a townhome's door and living floor are at
+                      # ground level, so it is a ground-floor home, unless a page states the apartment is on floor 2 or above
+                      (s("townhome_home").ne("") & ~(s("unit_floor_basis").isin(["confirmed", "stated", "confirmed_by_phone"]) & (fl >= 2)),
+                       "ground-floor home: a townhome (" + s("townhome_home").str[:120] + ")"),
                       # independent check 4, D22: reads as floor 1 under the complex's reviewed numbering convention
                       ((pd.to_numeric(s("unit_floor_reading"), errors="coerce") == 1) & ~s("unit_floor_basis").isin(["confirmed", "stated", "confirmed_by_phone"]),
                        "ground-floor unit: the unit number reads as floor 1 under this complex's numbering (" + s("unit_floor_reading_basis") + ")"),
@@ -566,12 +570,13 @@ def main():
         if key_ in GATE_KEYS:
             n_inf = n_inf + flag.astype(int)
     u["dog_size_note"] = np.where(dog_small, parsers.SMALL_DOG_NOTE, "")
-    floor_q = np.where(fb.eq("inferred"), "Which floor is the unit on? (" + s("unit_floor").str.replace(r"\.0$", "", regex=True) + " is only a guess from the unit number " + s("unit") + "); ",
+    unum = s("unit_shown") if "unit_shown" in u else s("unit")          # independent check 6: the apartment's number, not a site's index
+    floor_q = np.where(fb.eq("inferred"), "Which floor is the unit on? (" + s("unit_floor").str.replace(r"\.0$", "", regex=True) + " is only a guess from the unit number " + unum + "); ",
                        "Which floor is the unit on?; ")
     fnum = s("unit_floor").str.replace(r"\.0$", "", regex=True)
-    floor_why = np.where(inf_f & fb.eq("inferred"), "No page states the floor; " + fnum + " is only read from the unit number " + s("unit") + ".",
+    floor_why = np.where(inf_f & fb.eq("inferred"), "No page states the floor; " + fnum + " is only read from the unit number " + unum + ".",
                          np.where(inf_f & rd_walkup2, "No page states the floor; " + s("unit_floor_reading").str.replace(r"\.0$", "", regex=True) + " is only read from the unit number "
-                                  + s("unit") + " (" + s("unit_floor_reading_basis") + ").",
+                                  + unum + " (" + s("unit_floor_reading_basis") + ").",
                                   "The listing does not give the floor, and the unit number does not show it."))
     # the reviewer's own words per key: {key: (why, question)} for each unit
     v_text = [{KIND_KEY.get(r["kind"], ""): (r["why"], r["what_to_confirm"]) for r in VU[l]["rows"] if r["verdict"] in ("asterisk", "disclose")} if l in VU else {} for l in u.listing_id]

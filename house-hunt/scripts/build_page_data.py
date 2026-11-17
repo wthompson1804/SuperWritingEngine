@@ -476,7 +476,11 @@ def receipt_note(l):
     elif code == "fees_unknown":
         bits.append("The building charges a monthly fee, but the amount is not published." if d.get("fee_exists") else "Not published. Ask which monthly fees are added to the rent.")
     elif code == "fees_in_price":
-        bits.append("Already inside the price shown.")
+        bits.append("Already inside the price shown; the utilities fee below is not." if d.get("utilities_fee_separate") else "Already inside the price shown.")
+    elif code == "utilities_flat_fee":
+        bits.append("A required fixed monthly fee for the utilities, on top of the rent, as the listing states it.")
+    elif code == "utility_in_flat_fee":
+        bits.append("Covered by the monthly utilities fee.")
     elif code == "fees_published":
         bits.append("The required monthly fees published for this building.")
         if d.get("alternatives"):
@@ -771,7 +775,10 @@ def parking_block(g):
 def unit_core(r, g, qs):
     return {
         "id": g("listing_id"), "building_id": g("building_id"), "hood_id": g("hood_id"), "year": g("group_key"),
-        "building": g("building_name"), "address": g("address"), "unit": g("unit"), "kind": g("listing_kind") or "unit", "beds": g("beds"), "sqft": g("sqft"),
+        "building": g("building_name"), "address": g("address"),
+        # independent check 6, pattern 1: the apartment's number, never a listing site's index ('3', '1 Bed'); None when the
+        # listing gives none (the site's own label stays in data/ranked_units.csv: unit)
+        "unit": (g("unit_shown") or None) if "unit_shown" in r else g("unit"), "unit_number_basis": g("unit_number_basis"), "kind": g("listing_kind") or "unit", "beds": g("beds"), "sqft": g("sqft"),
         # owner, 2026-11-17: a floor-2 walk-up whose floor is read under the complex's numbering convention carries that floor
         **({"floor": g("unit_floor"), "floor_basis": g("unit_floor_basis")} if not (g("floor_elevator_code") == "floor_2" and g("unit_floor") is None and g("unit_floor_reading") is not None)
            else {"floor": g("unit_floor_reading"), "floor_basis": "inferred"}),
