@@ -256,3 +256,12 @@ Decisions by Will that changed or replaced an earlier one. Dates are UTC days of
   straight to the places that fit; each place names its experience and says what life there is like, with sourced
   local detail; saved places and Compare sit in a bar on every screen. The stories stay reachable but no longer stand
   in front of the matches. Spec: "Version 2" in `docs/CONCIERGE_DESIGN.md`.
+
+- **Second trawl (Will, 2026-11-17):** collect nothing above **$2,200 listed base rent** (the $3,000 total test is
+  unchanged). The short version still **shows up to $2,000**. Priority areas: New Jersey, Brooklyn, Connecticut,
+  Long Island (Nassau/Suffolk), Long Island City. **Floor and elevator, replacing "elevator buildings only":** a
+  building without an elevator is allowed when the apartment is on floor 2 (one flight up); the ground floor stays
+  out; floor 3 and above need an elevator; with no elevator stated and no floor stated, that is one open gate fact
+  ("Confirm the floor, and whether there is an elevator"). Trulia stays closed: a person solving its CAPTCHA for our
+  tools would be getting around a bot wall. Listings Will or Lamia find by hand go in `inbox/` (any site, saved by
+  them). Plan: `/root/.claude/plans/linear-hatching-swan.md` (copied in `docs/TRAWL_2_PLAN.md`).
