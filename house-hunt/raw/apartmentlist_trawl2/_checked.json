@@ -1798,5 +1798,295 @@
 "at": "2026-11-17T17:13:05+00:00",
 "status": 200,
 "reason": "ok"
+},
+"/nj/totowa/142-totowa-rd": {
+"at": "2026-11-17T17:13:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/ridgewood/10-s-irving-street": {
+"at": "2026-11-17T17:13:35+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/ridgewood/129-prospect-street": {
+"at": "2026-11-17T17:13:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/ridgewood/268-s-van-dien-avenue": {
+"at": "2026-11-17T17:13:39+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/ridgewood/318-oak-st-apt-d": {
+"at": "2026-11-17T17:13:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/midland-park/76-prospect-street": {
+"at": "2026-11-17T17:13:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/irvington/11-welland-ave": {
+"at": "2026-11-17T17:14:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/irvington/110-eastern-pkwy": {
+"at": "2026-11-17T17:14:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/irvington/110-s-durand-pl": {
+"at": "2026-11-17T17:14:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/irvington/175-s-munn-ave": {
+"at": "2026-11-17T17:14:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/irvington/179-isabella-ave": {
+"at": "2026-11-17T17:14:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/irvington/268-ellis-ave": {
+"at": "2026-11-17T17:14:15+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/irvington/29-highland-ter": {
+"at": "2026-11-17T17:14:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/irvington/30-rutgers-st": {
+"at": "2026-11-17T17:14:20+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/irvington/46-norwood-ave": {
+"at": "2026-11-17T17:14:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/irvington/66-harper-ave": {
+"at": "2026-11-17T17:14:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/irvington/749-chancellor-ave": {
+"at": "2026-11-17T17:14:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/irvington/817-18th-ave": {
+"at": "2026-11-17T17:14:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/irvington/955-grove-st": {
+"at": "2026-11-17T17:14:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/irvington/958-grove-st": {
+"at": "2026-11-17T17:14:35+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/irvington/maple-gardens--1": {
+"at": "2026-11-17T17:14:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/east-orange/106-n-grove-st": {
+"at": "2026-11-17T17:15:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/east-orange/106-north-16th-street-3--3": {
+"at": "2026-11-17T17:15:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/east-orange/110-washington": {
+"at": "2026-11-17T17:15:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/east-orange/120-n-oraton-pkwy": {
+"at": "2026-11-17T17:15:15+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/east-orange/132-n-grove-st": {
+"at": "2026-11-17T17:15:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/east-orange/195-prospect-st": {
+"at": "2026-11-17T17:15:19+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/east-orange/25-n-harrison-st": {
+"at": "2026-11-17T17:15:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/east-orange/418-prospect-st": {
+"at": "2026-11-17T17:15:24+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/east-orange/60-parkway-dr--22": {
+"at": "2026-11-17T17:15:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/east-orange/7-chestnut-st": {
+"at": "2026-11-17T17:15:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/east-orange/embark": {
+"at": "2026-11-17T17:15:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/east-orange/harrison-manor": {
+"at": "2026-11-17T17:15:35+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/east-orange/the-harvard": {
+"at": "2026-11-17T17:15:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/orange/204-cleveland-st": {
+"at": "2026-11-17T17:15:59+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/orange/354-ogden-st": {
+"at": "2026-11-17T17:16:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/orange/369-park-ave": {
+"at": "2026-11-17T17:16:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/orange/421-lincoln-ave": {
+"at": "2026-11-17T17:16:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/orange/49-s-day-st-203": {
+"at": "2026-11-17T17:16:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/orange/765-vose-ave": {
+"at": "2026-11-17T17:16:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/orange/86-hillyer": {
+"at": "2026-11-17T17:16:14+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/orange/lia-by-vermella": {
+"at": "2026-11-17T17:16:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/orange/manlow-corp-314-oakwood-avenue": {
+"at": "2026-11-17T17:16:20+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/orange/ridge-gardens-apartments": {
+"at": "2026-11-17T17:16:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/north-haledon/63-manchester-ave--19": {
+"at": "2026-11-17T17:16:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/montclair/43-s-willow-street": {
+"at": "2026-11-17T17:16:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/montclair/46-new-st": {
+"at": "2026-11-17T17:16:55+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/montclair/48-gates-ave": {
+"at": "2026-11-17T17:16:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/montclair/83-n-willow-st": {
+"at": "2026-11-17T17:17:00+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/montclair/two-south-willow": {
+"at": "2026-11-17T17:17:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/linden/10-n-wood-ave--12": {
+"at": "2026-11-17T17:17:15+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/linden/24-e-price-st": {
+"at": "2026-11-17T17:17:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/linden/409-bacheller-ave": {
+"at": "2026-11-17T17:17:20+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/linden/citivillage-st-georges-ave--1": {
+"at": "2026-11-17T17:17:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/linden/the-hartlan": {
+"at": "2026-11-17T17:17:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/south-orange/113-117-vose-avenue": {
+"at": "2026-11-17T17:17:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/south-orange/123-milligan-pl": {
+"at": "2026-11-17T17:17:50+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/south-orange/465-73-valley-st-unit-3g": {
+"at": "2026-11-17T17:17:52+00:00",
+"status": 200,
+"reason": "ok"
 }
 }

@@ -11,12 +11,12 @@
   "min_drive": 0,
   "minutes": 0
  },
- "srp_pages": 215,
- "props_considered": 539,
- "props_skipped_lowprice": 235,
- "props_read": 304,
+ "srp_pages": 276,
+ "props_considered": 627,
+ "props_skipped_lowprice": 265,
+ "props_read": 362,
  "reasons": {
-  "ok": 303,
+  "ok": 361,
   "no_unit_le_3000": 1
  },
  "transient": [],
@@ -351,6 +351,139 @@
    "drive_min": 48.1,
    "props": 13,
    "read": 13
+  },
+  {
+   "city": "nj/singac",
+   "group": "New Jersey",
+   "drive_min": 48.1,
+   "props": 2,
+   "read": 0
+  },
+  {
+   "city": "nj/totowa",
+   "group": "New Jersey",
+   "drive_min": 48.1,
+   "props": 4,
+   "read": 1
+  },
+  {
+   "city": "nj/ridgewood",
+   "group": "New Jersey",
+   "drive_min": 48.5,
+   "props": 6,
+   "read": 4
+  },
+  {
+   "city": "nj/midland-park",
+   "group": "New Jersey",
+   "drive_min": 48.6,
+   "props": 3,
+   "read": 1
+  },
+  {
+   "city": "nj/irvington",
+   "group": "New Jersey",
+   "drive_min": 48.7,
+   "props": 15,
+   "read": 15
+  },
+  {
+   "city": "nj/upper-montclair",
+   "group": "New Jersey",
+   "drive_min": 49.3,
+   "props": 3,
+   "read": 0
+  },
+  {
+   "city": "nj/northvale",
+   "group": "New Jersey",
+   "drive_min": 49.7,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "nj/east-orange",
+   "group": "New Jersey",
+   "drive_min": 49.8,
+   "props": 15,
+   "read": 13
+  },
+  {
+   "city": "nj/glen-ridge",
+   "group": "New Jersey",
+   "drive_min": 49.9,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "nj/old-tappan",
+   "group": "New Jersey",
+   "drive_min": 50.5,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "nj/orange",
+   "group": "New Jersey",
+   "drive_min": 51.1,
+   "props": 13,
+   "read": 10
+  },
+  {
+   "city": "nj/north-haledon",
+   "group": "New Jersey",
+   "drive_min": 51.6,
+   "props": 2,
+   "read": 1
+  },
+  {
+   "city": "nj/prospect-park",
+   "group": "New Jersey",
+   "drive_min": 51.6,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "nj/franklin-lakes",
+   "group": "New Jersey",
+   "drive_min": 52.1,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "nj/montclair",
+   "group": "New Jersey",
+   "drive_min": 52.1,
+   "props": 11,
+   "read": 5
+  },
+  {
+   "city": "nj/linden",
+   "group": "New Jersey",
+   "drive_min": 53.1,
+   "props": 5,
+   "read": 5
+  },
+  {
+   "city": "nj/montvale",
+   "group": "New Jersey",
+   "drive_min": 53.7,
+   "props": 3,
+   "read": 0
+  },
+  {
+   "city": "nj/oakland",
+   "group": "New Jersey",
+   "drive_min": 54.0,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "nj/south-orange",
+   "group": "New Jersey",
+   "drive_min": 55.1,
+   "props": 4,
+   "read": 3
   }
  ],
  "cities_unmatched_far": [
