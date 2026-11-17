@@ -43,3 +43,9 @@ RuntimeError: fetch failed after 1 tries: https://www.zumper.com/apartments-for-
 2026-11-17T18:34:19+00:00 trawl2 cities done 280 requests 55 last east-windsor-nj
 2026-11-17T18:35:54+00:00 trawl2 cities done 300 requests 85 last west-haven-ct
 2026-11-17T18:37:23+00:00 trawl2 cities done 320 requests 109 last wall-township-nj
+2026-11-17T18:38:50+00:00 trawl2 cities done 340 requests 138 last southbury-ct
+2026-11-17T18:40:02+00:00 trawl2 cities done 360 requests 162 last stockton-nj
+trawl2 details (priority): 307 pages to read
+2026-11-17T18:43:30+00:00 trawl2 details 50/307 requests 231
+2026-11-17T18:46:00+00:00 trawl2 details 100/307 requests 281
+2026-11-17T18:48:30+00:00 trawl2 details 150/307 requests 331

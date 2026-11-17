@@ -2,7 +2,6 @@
 
   site/concierge.html                       the template (never changed by this script)
   + site/concierge_data.json                the page's data (scripts/concierge_data.py); see --data
-  + site/illustrations.json                 the experience drawings
   + site/map_component.html, map_base.json  the map (the block between its MAP COMPONENT markers) and its outlines
   -> site/dist/concierge.html               the whole page in one file
   -> site/dist/concierge_artifact.html      the same without the outer shell, for publishing (build_artifact.to_artifact)
@@ -10,8 +9,9 @@
     python3 scripts/build_concierge.py
     python3 scripts/build_concierge.py --data site/_concierge_fixture.json     # the test stand-in
 
-Without --data the script uses site/concierge_data.json when it exists and otherwise the fixture
-(site/_concierge_fixture.json, written by scripts/concierge_fixture.py), and says which.
+Without --data the script uses site/concierge_data.json when it carries the version 3 recommender fields
+(recommender_samples, meta.recommender, buildings[].features) and otherwise the fixture (site/_concierge_fixture.json,
+written by scripts/concierge_fixture.py), and says which. Version 3 shows no experience drawings, so none are inlined.
 
 Two things are done to the map block on the way in, in memory only (site/map_component.html is not changed):
   - the part of its card that shows crime rates, and the helper that drew it, are taken out, because this page
@@ -33,7 +33,6 @@ ROOT = Path(__file__).resolve().parent.parent
 SITE = ROOT / "site"
 DIST = SITE / "dist"
 DATA_SLOT = "<!--CONCIERGE_DATA_SLOT-->"
-ILLUS_SLOT = "<!--CONCIERGE_ILLUS_SLOT-->"
 MAP_SLOT = "<!--CONCIERGE_MAP_SLOT-->"
 MAP_START, MAP_END = "<!-- MAP COMPONENT START -->", "<!-- MAP COMPONENT END -->"
 # the crime part of the map's card: from the opening "(cr?" to the end of its "not known yet" branch
@@ -70,11 +69,20 @@ def map_block() -> str:
     return block
 
 
+def has_v3(path: Path) -> bool:
+    try:
+        d = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return False
+    return bool(d.get("recommender_samples")) and bool((d.get("meta") or {}).get("recommender")) \
+        and all(isinstance(b.get("features"), dict) for b in d.get("buildings") or [{}])
+
+
 def pick_data(arg: str | None) -> Path:
     if arg:
         return Path(arg) if Path(arg).is_absolute() else (ROOT / arg if (ROOT / arg).exists() else Path(arg).resolve())
     real, fixture = SITE / "concierge_data.json", SITE / "_concierge_fixture.json"
-    return real if real.exists() else fixture
+    return real if real.exists() and (has_v3(real) or not fixture.exists()) else fixture
 
 
 def main(argv=None) -> int:
@@ -86,11 +94,10 @@ def main(argv=None) -> int:
     try:
         page = (SITE / "concierge.html").read_text(encoding="utf-8")
         data = json.loads(data_path.read_text(encoding="utf-8"))
-        for slot in (DATA_SLOT, ILLUS_SLOT, MAP_SLOT):
+        for slot in (DATA_SLOT, MAP_SLOT):
             if page.count(slot) != 1:
                 raise ValueError(f"{slot} must be in site/concierge.html exactly once")
-        illus_path, base_path = SITE / "illustrations.json", SITE / "map_base.json"
-        illus = json.loads(illus_path.read_text(encoding="utf-8")) if illus_path.exists() else {}
+        base_path = SITE / "map_base.json"
         if base_path.exists() and (SITE / "map_component.html").exists():
             map_html = script("HOUSE_HUNT_MAP_BASE", json.loads(base_path.read_text(encoding="utf-8"))) + "\n" + map_block()
         else:
@@ -100,7 +107,6 @@ def main(argv=None) -> int:
         print(f"build_concierge: {e}; nothing written")
         return 1
     page = (page.replace(DATA_SLOT, script("CONCIERGE_DATA", data))
-                .replace(ILLUS_SLOT, script("CONCIERGE_ILLUS", illus))
                 .replace(MAP_SLOT, map_html))
     DIST.mkdir(parents=True, exist_ok=True)
     full, art = DIST / "concierge.html", DIST / "concierge_artifact.html"
@@ -110,7 +116,8 @@ def main(argv=None) -> int:
     problems = check(text)
     counts = (data.get("meta") or {}).get("counts") or {}
     print(f"data: {data_path} ({counts.get('buildings')} buildings, {counts.get('apartments')} apartments)"
-          + ("  [TEST FIXTURE, not the reviewed data]" if (data.get("meta") or {}).get("fixture") else ""))
+          + ("  [TEST FIXTURE, not the reviewed data]" if (data.get("meta") or {}).get("fixture") else "")
+          + ("" if data.get("recommender_samples") else "  [no recommender fields: the page shows the list only]"))
     print(f"{full}: {len(page.encode('utf-8')):,} bytes")
     print(f"{art}: {len(text.encode('utf-8')):,} bytes")
     for p in problems:

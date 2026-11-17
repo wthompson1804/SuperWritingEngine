@@ -389,3 +389,402 @@
 18:37:38 [rest] pa/newtown-grant drive=117.9 props=0 read=0 rows=4915 gone=111 srp=1291
 18:37:46 [rest] pa/bristol drive=118.5 props=1 read=0 rows=4915 gone=111 srp=1294
 18:37:56 [rest] pa/newtown drive=118.9 props=2 read=1 rows=4915 gone=111 srp=1297
+18:38:16 [rest] pa/yardley drive=118.9 props=5 read=4 rows=4917 gone=111 srp=1301
+18:38:31 [rest] pa/fairless-hills drive=119.6 props=2 read=2 rows=4917 gone=111 srp=1305
+18:38:41 [rest] pa/levittown drive=119.6 props=1 read=1 rows=4917 gone=111 srp=1308
+18:38:41 [rest] sweep of held properties not reached by search: 80
+18:44:40 sitemap cities in ('ny', 'nj', 'ct', 'pa'): 743; in grid: 365; far: 351; unmatched by gazetteer: 27
+18:44:40 cities by group: {'New Jersey': 208, 'Brooklyn': 1, 'Connecticut': 26, 'Long Island': 95, 'Long Island City': 0, 'rest': 57}
+18:44:41 [New Jersey] nj/fort-lee drive=28.5 props=21 read=0 rows=4907 gone=121 srp=31
+18:44:41 [New Jersey] nj/leonia drive=29.2 props=4 read=0 rows=4907 gone=121 srp=34
+18:44:41 [New Jersey] nj/englewood-cliffs drive=29.9 props=0 read=0 rows=4907 gone=121 srp=36
+18:44:41 [New Jersey] nj/edgewater drive=31.4 props=5 read=0 rows=4907 gone=121 srp=40
+18:44:41 [New Jersey] nj/union-city drive=31.4 props=14 read=0 rows=4907 gone=121 srp=44
+18:44:42 [New Jersey] nj/palisades-park drive=31.6 props=5 read=0 rows=4907 gone=121 srp=48
+18:44:42 [New Jersey] nj/cliffside-park drive=32.3 props=7 read=0 rows=4907 gone=121 srp=52
+18:44:42 [New Jersey] nj/guttenberg drive=32.4 props=7 read=0 rows=4907 gone=121 srp=56
+18:44:42 [New Jersey] nj/west-new-york drive=32.4 props=20 read=0 rows=4907 gone=121 srp=61
+18:44:42 [New Jersey] nj/englewood drive=32.9 props=9 read=0 rows=4907 gone=121 srp=65
+18:44:43 [New Jersey] nj/ridgefield drive=33.1 props=1 read=0 rows=4907 gone=121 srp=68
+18:44:43 [New Jersey] nj/hoboken drive=33.4 props=38 read=0 rows=4907 gone=121 srp=74
+18:44:43 [New Jersey] nj/ridgefield-park drive=33.6 props=1 read=0 rows=4907 gone=121 srp=77
+18:44:43 [New Jersey] nj/bogota drive=34.2 props=4 read=0 rows=4907 gone=121 srp=80
+18:44:43 [New Jersey] nj/north-bergen drive=35.0 props=19 read=0 rows=4907 gone=121 srp=85
+18:44:44 [New Jersey] nj/fairview drive=35.7 props=5 read=0 rows=4907 gone=121 srp=89
+18:44:44 [New Jersey] nj/tenafly drive=36.1 props=4 read=0 rows=4907 gone=121 srp=92
+18:44:44 [New Jersey] nj/hackensack drive=36.9 props=24 read=0 rows=4907 gone=121 srp=97
+18:44:44 [New Jersey] nj/bergenfield drive=37.1 props=3 read=0 rows=4907 gone=121 srp=101
+18:44:44 [New Jersey] nj/east-rutherford drive=37.4 props=5 read=0 rows=4907 gone=121 srp=105
+18:44:45 [New Jersey] nj/little-ferry drive=37.5 props=2 read=0 rows=4907 gone=121 srp=108
+18:44:45 [New Jersey] nj/jersey-city drive=37.7 props=128 read=0 rows=4907 gone=121 srp=121
+18:44:45 [New Jersey] nj/secaucus drive=38.1 props=6 read=0 rows=4907 gone=121 srp=125
+18:44:45 [New Jersey] nj/cresskill drive=38.9 props=0 read=0 rows=4907 gone=121 srp=127
+18:44:45 [New Jersey] nj/rutherford drive=39.0 props=2 read=0 rows=4907 gone=121 srp=131
+18:44:46 [New Jersey] nj/lodi drive=39.7 props=7 read=0 rows=4907 gone=121 srp=134
+18:44:46 [New Jersey] nj/wood-ridge drive=40.3 props=3 read=0 rows=4907 gone=121 srp=138
+18:44:46 [New Jersey] nj/paramus drive=41.1 props=2 read=0 rows=4907 gone=121 srp=141
+18:44:46 [New Jersey] nj/fair-lawn drive=41.4 props=4 read=0 rows=4907 gone=121 srp=144
+18:44:46 [New Jersey] nj/kearny drive=41.4 props=4 read=0 rows=4907 gone=121 srp=148
+18:44:47 [New Jersey] nj/elmwood-park drive=42.0 props=3 read=0 rows=4907 gone=121 srp=151
+18:44:47 [New Jersey] nj/garfield drive=42.5 props=2 read=0 rows=4907 gone=121 srp=154
+18:44:47 [New Jersey] nj/passaic drive=43.0 props=9 read=0 rows=4907 gone=121 srp=158
+18:44:47 [New Jersey] nj/harrison drive=43.2 props=9 read=0 rows=4907 gone=121 srp=162
+18:44:47 [New Jersey] nj/wallington drive=43.4 props=2 read=0 rows=4907 gone=121 srp=165
+18:44:47 [New Jersey] nj/westwood drive=43.7 props=4 read=0 rows=4907 gone=121 srp=168
+18:44:48 [New Jersey] nj/closter drive=43.8 props=2 read=0 rows=4907 gone=121 srp=171
+18:44:48 [New Jersey] nj/newark drive=43.9 props=59 read=0 rows=4907 gone=121 srp=178
+18:44:48 [New Jersey] nj/paterson drive=44.1 props=34 read=0 rows=4907 gone=121 srp=183
+18:44:48 [New Jersey] nj/harrington-park drive=44.9 props=0 read=0 rows=4907 gone=121 srp=185
+18:44:49 [New Jersey] nj/bayonne drive=45.7 props=39 read=0 rows=4907 gone=121 srp=191
+18:44:49 [New Jersey] nj/clifton drive=45.8 props=16 read=0 rows=4907 gone=121 srp=195
+18:44:49 [New Jersey] nj/belleville drive=46.5 props=19 read=0 rows=4907 gone=121 srp=200
+18:44:49 [New Jersey] nj/elizabeth drive=46.9 props=16 read=0 rows=4907 gone=121 srp=204
+18:44:49 [New Jersey] nj/hawthorne drive=47.4 props=2 read=0 rows=4907 gone=121 srp=208
+18:44:50 [New Jersey] nj/woodland-park drive=47.6 props=2 read=0 rows=4907 gone=121 srp=211
+18:44:50 [New Jersey] nj/bloomfield drive=48.1 props=13 read=0 rows=4907 gone=121 srp=215
+18:44:50 [New Jersey] nj/singac drive=48.1 props=2 read=0 rows=4907 gone=121 srp=218
+18:44:50 [New Jersey] nj/totowa drive=48.1 props=4 read=0 rows=4907 gone=121 srp=221
+18:44:50 [New Jersey] nj/ridgewood drive=48.5 props=6 read=0 rows=4907 gone=121 srp=225
+18:44:51 [New Jersey] nj/midland-park drive=48.6 props=3 read=0 rows=4907 gone=121 srp=228
+18:44:51 [New Jersey] nj/irvington drive=48.7 props=15 read=0 rows=4907 gone=121 srp=232
+18:44:51 [New Jersey] nj/upper-montclair drive=49.3 props=3 read=0 rows=4907 gone=121 srp=236
+18:44:51 [New Jersey] nj/northvale drive=49.7 props=1 read=0 rows=4907 gone=121 srp=239
+18:44:51 [New Jersey] nj/east-orange drive=49.8 props=15 read=0 rows=4907 gone=121 srp=243
+18:44:51 [New Jersey] nj/glen-ridge drive=49.9 props=1 read=0 rows=4907 gone=121 srp=246
+18:44:52 [New Jersey] nj/old-tappan drive=50.5 props=0 read=0 rows=4907 gone=121 srp=248
+18:44:52 [New Jersey] nj/orange drive=51.1 props=13 read=0 rows=4907 gone=121 srp=252
+18:44:52 [New Jersey] nj/north-haledon drive=51.6 props=2 read=0 rows=4907 gone=121 srp=255
+18:44:52 [New Jersey] nj/prospect-park drive=51.6 props=0 read=0 rows=4907 gone=121 srp=257
+18:44:52 [New Jersey] nj/franklin-lakes drive=52.1 props=0 read=0 rows=4907 gone=121 srp=259
+18:44:52 [New Jersey] nj/montclair drive=52.1 props=11 read=0 rows=4907 gone=121 srp=263
+18:44:53 [New Jersey] nj/linden drive=53.1 props=5 read=0 rows=4907 gone=121 srp=267
+18:44:53 [New Jersey] nj/montvale drive=53.7 props=3 read=0 rows=4907 gone=121 srp=270
+18:44:53 [New Jersey] nj/oakland drive=54.0 props=0 read=0 rows=4907 gone=121 srp=272
+18:44:53 [New Jersey] nj/south-orange drive=55.1 props=4 read=0 rows=4907 gone=121 srp=276
+18:44:53 [New Jersey] nj/verona drive=55.4 props=9 read=0 rows=4907 gone=121 srp=280
+18:44:54 [New Jersey] nj/kenilworth drive=56.0 props=3 read=0 rows=4907 gone=121 srp=283
+18:44:54 [New Jersey] nj/roselle-park drive=56.5 props=2 read=0 rows=4907 gone=121 srp=286
+18:44:54 [New Jersey] nj/west-orange drive=56.5 props=3 read=0 rows=4907 gone=121 srp=289
+18:44:54 [New Jersey] nj/carteret drive=57.0 props=3 read=0 rows=4907 gone=121 srp=292
+18:44:54 [New Jersey] nj/roselle drive=57.3 props=4 read=0 rows=4907 gone=121 srp=295
+18:44:54 [New Jersey] nj/lincoln-park drive=57.7 props=1 read=0 rows=4907 gone=121 srp=299
+18:44:55 [New Jersey] nj/cranford drive=58.4 props=5 read=0 rows=4907 gone=121 srp=302
+18:44:55 [New Jersey] nj/pompton-lakes drive=58.4 props=3 read=0 rows=4907 gone=121 srp=305
+18:44:55 [New Jersey] nj/rahway drive=58.4 props=3 read=0 rows=4907 gone=121 srp=309
+18:44:55 [New Jersey] nj/caldwell drive=58.9 props=7 read=0 rows=4907 gone=121 srp=313
+18:44:55 [New Jersey] nj/summit drive=60.5 props=7 read=0 rows=4907 gone=121 srp=317
+18:44:56 [New Jersey] nj/avenel drive=60.7 props=1 read=0 rows=4907 gone=121 srp=320
+18:44:56 [New Jersey] nj/butler drive=60.8 props=0 read=0 rows=4907 gone=121 srp=322
+18:44:56 [New Jersey] nj/riverdale drive=60.8 props=3 read=0 rows=4907 gone=121 srp=325
+18:44:56 [New Jersey] nj/short-hills drive=60.9 props=2 read=0 rows=4907 gone=121 srp=328
+18:44:56 [New Jersey] nj/wanaque drive=61.2 props=2 read=0 rows=4907 gone=121 srp=331
+18:44:56 [New Jersey] nj/garwood drive=61.5 props=2 read=0 rows=4907 gone=121 srp=334
+18:44:57 [New Jersey] nj/parsippany-troy-hills drive=62.0 props=13 read=0 rows=4907 gone=121 srp=338
+18:44:57 [New Jersey] nj/perth-amboy drive=62.0 props=5 read=0 rows=4907 gone=121 srp=341
+18:44:57 [New Jersey] nj/livingston drive=63.3 props=2 read=0 rows=4907 gone=121 srp=344
+18:44:57 [New Jersey] nj/westfield drive=63.3 props=5 read=0 rows=4907 gone=121 srp=347
+18:44:57 [New Jersey] nj/colonia drive=63.6 props=1 read=0 rows=4907 gone=121 srp=350
+18:44:58 [New Jersey] nj/woodbridge drive=63.6 props=11 read=0 rows=4907 gone=121 srp=354
+18:44:58 [New Jersey] nj/bloomingdale drive=64.2 props=1 read=0 rows=4907 gone=121 srp=357
+18:44:58 [New Jersey] nj/new-providence drive=64.6 props=2 read=0 rows=4907 gone=121 srp=360
+18:44:58 [New Jersey] nj/iselin drive=64.8 props=3 read=0 rows=4907 gone=121 srp=363
+18:44:58 [New Jersey] nj/fords drive=65.7 props=3 read=0 rows=4907 gone=121 srp=366
+18:44:58 [New Jersey] nj/chatham drive=66.6 props=3 read=0 rows=4907 gone=121 srp=369
+18:44:59 [New Jersey] nj/madison drive=66.6 props=4 read=0 rows=4907 gone=121 srp=372
+18:44:59 [New Jersey] nj/watchung drive=67.6 props=2 read=0 rows=4907 gone=121 srp=375
+18:44:59 [New Jersey] nj/rockaway drive=68.3 props=1 read=0 rows=4907 gone=121 srp=378
+18:44:59 [New Jersey] nj/edison drive=68.4 props=5 read=0 rows=4907 gone=121 srp=382
+18:44:59 [New Jersey] nj/florham-park drive=68.5 props=5 read=0 rows=4907 gone=121 srp=385
+18:44:59 [New Jersey] nj/metuchen drive=68.9 props=7 read=0 rows=4907 gone=121 srp=388
+18:45:00 [New Jersey] nj/clark drive=69.5 props=2 read=0 rows=4907 gone=121 srp=391
+18:45:00 [New Jersey] nj/sayreville drive=70.4 props=3 read=0 rows=4907 gone=121 srp=395
+18:45:00 [New Jersey] nj/boonton drive=71.8 props=2 read=0 rows=4907 gone=121 srp=399
+18:45:00 [New Jersey] nj/south-amboy drive=71.9 props=2 read=0 rows=4907 gone=121 srp=403
+18:45:00 [New Jersey] nj/north-plainfield drive=72.0 props=2 read=0 rows=4907 gone=121 srp=406
+18:45:00 [New Jersey] nj/plainfield drive=72.0 props=5 read=0 rows=4907 gone=121 srp=409
+18:45:01 [New Jersey] nj/basking-ridge drive=74.0 props=1 read=0 rows=4907 gone=121 srp=412
+18:45:01 [New Jersey] nj/south-plainfield drive=74.0 props=1 read=0 rows=4907 gone=121 srp=415
+18:45:01 [New Jersey] nj/new-brunswick drive=74.1 props=11 read=0 rows=4907 gone=121 srp=419
+18:45:01 [New Jersey] nj/dover drive=74.2 props=1 read=0 rows=4907 gone=121 srp=422
+18:45:01 [New Jersey] nj/morris-plains drive=74.2 props=0 read=0 rows=4907 gone=121 srp=424
+18:45:01 [New Jersey] nj/wharton drive=74.2 props=2 read=0 rows=4907 gone=121 srp=428
+18:45:02 [New Jersey] nj/dunellen drive=74.5 props=1 read=0 rows=4907 gone=121 srp=431
+18:45:02 [New Jersey] nj/laurence-harbor drive=74.8 props=0 read=0 rows=4907 gone=121 srp=433
+18:45:02 [New Jersey] nj/highland-park drive=75.4 props=4 read=0 rows=4907 gone=121 srp=436
+18:45:02 [New Jersey] nj/morristown drive=76.7 props=12 read=0 rows=4907 gone=121 srp=440
+18:45:02 [New Jersey] nj/matawan drive=77.6 props=6 read=0 rows=4907 gone=121 srp=443
+18:45:03 [New Jersey] nj/mount-arlington drive=78.3 props=4 read=0 rows=4907 gone=121 srp=446
+18:45:03 [New Jersey] nj/south-river drive=78.4 props=2 read=0 rows=4907 gone=121 srp=449
+18:45:03 [New Jersey] nj/middlesex drive=79.5 props=4 read=0 rows=4907 gone=121 srp=452
+18:45:03 [New Jersey] nj/old-bridge drive=79.7 props=3 read=0 rows=4907 gone=121 srp=455
+18:45:03 [New Jersey] nj/piscataway drive=79.7 props=4 read=0 rows=4907 gone=121 srp=459
+18:45:03 [New Jersey] nj/keyport drive=79.8 props=4 read=0 rows=4907 gone=121 srp=462
+18:45:04 [New Jersey] nj/union-beach drive=79.8 props=0 read=0 rows=4907 gone=121 srp=464
+18:45:04 [New Jersey] nj/south-bound-brook drive=80.3 props=1 read=0 rows=4907 gone=121 srp=467
+18:45:04 [New Jersey] nj/kenvil drive=80.7 props=1 read=0 rows=4907 gone=121 srp=470
+18:45:04 [New Jersey] nj/bound-brook drive=81.7 props=4 read=0 rows=4907 gone=121 srp=474
+18:45:04 [New Jersey] nj/netcong drive=81.8 props=1 read=0 rows=4907 gone=121 srp=477
+18:45:05 [New Jersey] nj/somerville drive=81.8 props=6 read=0 rows=4907 gone=121 srp=481
+18:45:05 [New Jersey] nj/north-brunswick drive=83.1 props=1 read=0 rows=4907 gone=121 srp=484
+18:45:05 [New Jersey] nj/franklin drive=83.8 props=0 read=0 rows=4907 gone=121 srp=486
+18:45:05 [New Jersey] nj/bradley-gardens drive=84.2 props=0 read=0 rows=4907 gone=121 srp=488
+18:45:05 [New Jersey] nj/raritan drive=84.2 props=2 read=0 rows=4907 gone=121 srp=492
+18:45:05 [New Jersey] nj/hopatcong drive=84.7 props=0 read=0 rows=4907 gone=121 srp=494
+18:45:06 [New Jersey] nj/somerset drive=85.0 props=6 read=0 rows=4907 gone=121 srp=498
+18:45:06 [New Jersey] nj/keansburg drive=85.1 props=7 read=0 rows=4907 gone=121 srp=501
+18:45:06 [New Jersey] nj/finderne drive=85.6 props=1 read=0 rows=4907 gone=121 srp=504
+18:45:06 [New Jersey] nj/robertsville drive=85.7 props=0 read=0 rows=4907 gone=121 srp=506
+18:45:06 [New Jersey] nj/stanhope drive=86.5 props=3 read=0 rows=4907 gone=121 srp=509
+18:45:06 [New Jersey] nj/north-middletown drive=87.3 props=1 read=0 rows=4907 gone=121 srp=512
+18:45:07 [New Jersey] nj/manville drive=87.4 props=2 read=0 rows=4907 gone=121 srp=515
+18:45:07 [New Jersey] nj/budd-lake drive=87.5 props=1 read=0 rows=4907 gone=121 srp=518
+18:45:07 [New Jersey] nj/jamesburg drive=87.9 props=0 read=0 rows=4907 gone=121 srp=520
+18:45:07 [New Jersey] nj/lake-mohawk drive=87.9 props=2 read=0 rows=4907 gone=121 srp=523
+18:45:07 [New Jersey] nj/dayton drive=88.3 props=2 read=0 rows=4907 gone=121 srp=527
+18:45:08 [New Jersey] nj/heathcote drive=88.6 props=1 read=0 rows=4907 gone=121 srp=530
+18:45:08 [New Jersey] nj/franklin-park drive=88.7 props=1 read=0 rows=4907 gone=121 srp=533
+18:45:08 [New Jersey] nj/red-bank drive=89.0 props=14 read=0 rows=4907 gone=121 srp=537
+18:45:08 [New Jersey] nj/hamburg drive=89.4 props=1 read=0 rows=4907 gone=121 srp=540
+18:45:08 [New Jersey] nj/lincroft drive=91.5 props=0 read=0 rows=4907 gone=121 srp=542
+18:45:08 [New Jersey] nj/vernon-center drive=92.2 props=2 read=0 rows=4907 gone=121 srp=545
+18:45:09 [New Jersey] nj/atlantic-highlands drive=92.9 props=5 read=0 rows=4907 gone=121 srp=549
+18:45:09 [New Jersey] nj/little-silver drive=92.9 props=0 read=0 rows=4907 gone=121 srp=551
+18:45:09 [New Jersey] nj/highland-lakes drive=93.1 props=0 read=0 rows=4907 gone=121 srp=553
+18:45:09 [New Jersey] nj/plainsboro-center drive=95.1 props=3 read=0 rows=4907 gone=121 srp=557
+18:45:09 [New Jersey] nj/princeton-junction drive=95.1 props=0 read=0 rows=4907 gone=121 srp=559
+18:45:09 [New Jersey] nj/princeton-meadows drive=95.1 props=9 read=0 rows=4907 gone=121 srp=562
+18:45:10 [New Jersey] nj/hightstown drive=95.3 props=2 read=0 rows=4907 gone=121 srp=566
+18:45:10 [New Jersey] nj/eatontown drive=95.5 props=2 read=0 rows=4907 gone=121 srp=569
+18:45:10 [New Jersey] nj/tinton-falls drive=95.5 props=2 read=0 rows=4907 gone=121 srp=572
+18:45:10 [New Jersey] nj/oceanport drive=96.0 props=0 read=0 rows=4907 gone=121 srp=574
+18:45:10 [New Jersey] nj/west-long-branch drive=96.4 props=1 read=0 rows=4907 gone=121 srp=577
+18:45:11 [New Jersey] nj/freehold drive=97.1 props=4 read=0 rows=4907 gone=121 srp=580
+18:45:11 [New Jersey] nj/west-freehold drive=97.1 props=4 read=0 rows=4907 gone=121 srp=583
+18:45:11 [New Jersey] nj/hackettstown drive=97.2 props=3 read=0 rows=4907 gone=121 srp=587
+18:45:11 [New Jersey] nj/rumson drive=98.8 props=1 read=0 rows=4907 gone=121 srp=590
+18:45:11 [New Jersey] nj/oakhurst drive=99.8 props=0 read=0 rows=4907 gone=121 srp=592
+18:45:11 [New Jersey] nj/princeton drive=100.2 props=14 read=0 rows=4907 gone=121 srp=596
+18:45:12 [New Jersey] nj/long-branch drive=100.7 props=20 read=0 rows=4907 gone=121 srp=601
+18:45:12 [New Jersey] nj/monmouth-beach drive=101.0 props=5 read=0 rows=4907 gone=121 srp=604
+18:45:12 [New Jersey] nj/sea-bright drive=101.0 props=5 read=0 rows=4907 gone=121 srp=607
+18:45:12 [New Jersey] nj/allentown drive=102.2 props=0 read=0 rows=4907 gone=121 srp=609
+18:45:12 [New Jersey] nj/deal drive=102.3 props=1 read=0 rows=4907 gone=121 srp=612
+18:45:13 [New Jersey] nj/sussex drive=103.1 props=3 read=0 rows=4907 gone=121 srp=616
+18:45:13 [New Jersey] nj/bradley-beach drive=103.5 props=7 read=0 rows=4907 gone=121 srp=619
+18:45:13 [New Jersey] nj/neptune-city drive=103.5 props=4 read=0 rows=4907 gone=121 srp=622
+18:45:13 [New Jersey] nj/asbury-park drive=103.6 props=21 read=0 rows=4907 gone=121 srp=627
+18:45:13 [New Jersey] nj/ocean-grove drive=103.6 props=12 read=0 rows=4907 gone=121 srp=631
+18:45:14 [New Jersey] nj/highlands drive=103.8 props=6 read=0 rows=4907 gone=121 srp=634
+18:45:14 [New Jersey] nj/wanamassa drive=103.8 props=0 read=0 rows=4907 gone=121 srp=636
+18:45:14 [New Jersey] nj/hamilton-square drive=104.7 props=0 read=0 rows=4907 gone=121 srp=638
+18:45:14 [New Jersey] nj/lawrenceville drive=104.9 props=4 read=0 rows=4907 gone=121 srp=641
+18:45:14 [New Jersey] nj/avon-by-the-sea drive=105.4 props=0 read=0 rows=4907 gone=121 srp=643
+18:45:14 [New Jersey] nj/belmar drive=105.4 props=8 read=0 rows=4907 gone=121 srp=646
+18:45:15 [New Jersey] nj/flemington drive=105.4 props=3 read=0 rows=4907 gone=121 srp=650
+18:45:15 [New Jersey] nj/bordentown drive=107.1 props=4 read=0 rows=4907 gone=121 srp=653
+18:45:15 [New Jersey] nj/hamilton-township drive=107.2 props=3 read=0 rows=4907 gone=121 srp=657
+18:45:15 [New Jersey] nj/mercerville drive=107.2 props=2 read=0 rows=4907 gone=121 srp=660
+18:45:15 [New Jersey] nj/newton drive=107.3 props=9 read=0 rows=4907 gone=121 srp=664
+18:45:15 [New Jersey] nj/brielle drive=107.6 props=3 read=0 rows=4907 gone=121 srp=668
+18:45:16 [New Jersey] nj/white-horse drive=107.8 props=1 read=0 rows=4907 gone=121 srp=671
+18:45:16 [New Jersey] nj/manasquan drive=108.3 props=2 read=0 rows=4907 gone=121 srp=674
+18:45:16 [New Jersey] nj/sea-girt drive=108.9 props=0 read=0 rows=4907 gone=121 srp=676
+18:45:16 [New Jersey] nj/lake-como drive=109.0 props=0 read=0 rows=4907 gone=121 srp=678
+18:45:16 [New Jersey] nj/spring-lake drive=109.0 props=1 read=0 rows=4907 gone=121 srp=681
+18:45:16 [New Jersey] nj/spring-lake-heights drive=109.0 props=3 read=0 rows=4907 gone=121 srp=684
+18:45:17 [New Jersey] nj/west-belmar drive=109.0 props=0 read=0 rows=4907 gone=121 srp=686
+18:45:17 [New Jersey] nj/trenton drive=110.8 props=14 read=0 rows=4907 gone=121 srp=690
+18:45:17 [New Jersey] nj/phillipsburg drive=111.9 props=7 read=0 rows=4907 gone=121 srp=694
+18:45:17 [New Jersey] nj/bay-head drive=112.2 props=0 read=0 rows=4907 gone=121 srp=696
+18:45:17 [New Jersey] nj/mantoloking drive=112.2 props=0 read=0 rows=4907 gone=121 srp=698
+18:45:17 [New Jersey] nj/point-pleasant drive=112.2 props=2 read=0 rows=4907 gone=121 srp=701
+18:45:18 [New Jersey] nj/point-pleasant-beach drive=112.2 props=2 read=0 rows=4907 gone=121 srp=704
+18:45:18 [New Jersey] nj/washington drive=112.3 props=2 read=0 rows=4907 gone=121 srp=707
+18:45:18 [New Jersey] nj/florence drive=114.7 props=1 read=0 rows=4907 gone=121 srp=710
+18:45:18 [New Jersey] nj/dover-beaches-north drive=116.1 props=0 read=0 rows=4907 gone=121 srp=712
+18:45:18 [New Jersey] nj/burlington drive=119.4 props=8 read=0 rows=4907 gone=121 srp=716
+18:45:18 [New Jersey] sweep of held properties not reached by search: 6
+18:45:19 [Brooklyn] ny/brooklyn drive=22.7 props=361 read=0 rows=4901 gone=127 srp=742
+18:45:19 [Brooklyn] sweep of held properties not reached by search: 2
+18:45:19 [Connecticut] ct/byram drive=44.1 props=2 read=0 rows=4899 gone=129 srp=745
+18:45:20 [Connecticut] ct/greenwich drive=46.2 props=0 read=0 rows=4899 gone=129 srp=747
+18:45:20 [Connecticut] ct/cos-cob drive=51.7 props=2 read=0 rows=4899 gone=129 srp=750
+18:45:20 [Connecticut] ct/darien drive=55.9 props=6 read=0 rows=4899 gone=129 srp=754
+18:45:20 [Connecticut] ct/stamford drive=57.9 props=53 read=0 rows=4899 gone=129 srp=761
+18:45:21 [Connecticut] ct/norwalk drive=62.5 props=25 read=0 rows=4899 gone=129 srp=766
+18:45:21 [Connecticut] ct/westport drive=71.2 props=4 read=0 rows=4899 gone=129 srp=770
+18:45:21 [Connecticut] ct/ridgefield drive=78.0 props=1 read=0 rows=4899 gone=129 srp=773
+18:45:21 [Connecticut] ct/bridgeport drive=80.8 props=31 read=0 rows=4899 gone=129 srp=778
+18:45:21 [Connecticut] ct/danbury drive=88.4 props=11 read=0 rows=4899 gone=129 srp=782
+18:45:22 [Connecticut] ct/stratford drive=91.1 props=6 read=0 rows=4899 gone=129 srp=785
+18:45:22 [Connecticut] ct/trumbull drive=92.6 props=3 read=0 rows=4899 gone=129 srp=788
+18:45:22 [Connecticut] ct/milford-city drive=93.6 props=7 read=0 rows=4899 gone=129 srp=792
+18:45:22 [Connecticut] ct/shelton drive=96.6 props=6 read=0 rows=4899 gone=129 srp=796
+18:45:22 [Connecticut] ct/bethel drive=97.1 props=0 read=0 rows=4899 gone=129 srp=798
+18:45:22 [Connecticut] ct/derby drive=98.0 props=2 read=0 rows=4899 gone=129 srp=801
+18:45:23 [Connecticut] ct/orange drive=98.3 props=1 read=0 rows=4899 gone=129 srp=804
+18:45:23 [Connecticut] ct/ansonia drive=99.2 props=3 read=0 rows=4899 gone=129 srp=808
+18:45:23 [Connecticut] ct/west-haven drive=99.9 props=7 read=0 rows=4899 gone=129 srp=811
+18:45:23 [Connecticut] ct/new-haven drive=107.8 props=32 read=0 rows=4899 gone=129 srp=816
+18:45:23 [Connecticut] ct/branford-center drive=110.0 props=2 read=0 rows=4899 gone=129 srp=819
+18:45:24 [Connecticut] ct/east-haven drive=110.0 props=4 read=0 rows=4899 gone=129 srp=823
+18:45:24 [Connecticut] ct/naugatuck drive=110.2 props=3 read=0 rows=4899 gone=129 srp=827
+18:45:24 [Connecticut] ct/hamden drive=113.6 props=3 read=0 rows=4899 gone=129 srp=831
+18:45:24 [Connecticut] ct/oakville drive=117.5 props=1 read=0 rows=4899 gone=129 srp=834
+18:45:24 [Connecticut] ct/waterbury drive=118.0 props=13 read=0 rows=4899 gone=129 srp=838
+18:45:24 [Connecticut] sweep of held properties not reached by search: 4
+18:45:25 [Long Island] ny/floral-park drive=14.9 props=1 read=0 rows=4893 gone=135 srp=841
+18:45:25 [Long Island] ny/elmont drive=16.0 props=0 read=0 rows=4893 gone=135 srp=843
+18:45:25 [Long Island] ny/lynbrook drive=16.4 props=3 read=0 rows=4893 gone=135 srp=846
+18:45:25 [Long Island] ny/north-valley-stream drive=17.1 props=2 read=0 rows=4893 gone=135 srp=849
+18:45:25 [Long Island] ny/valley-stream drive=17.1 props=3 read=0 rows=4893 gone=135 srp=852
+18:45:26 [Long Island] ny/woodmere drive=18.3 props=1 read=0 rows=4893 gone=135 srp=855
+18:45:26 [Long Island] ny/great-neck-plaza drive=18.8 props=0 read=0 rows=4893 gone=135 srp=857
+18:45:26 [Long Island] ny/franklin-square drive=18.9 props=2 read=0 rows=4893 gone=135 srp=860
+18:45:26 [Long Island] ny/hewlett drive=19.3 props=1 read=0 rows=4893 gone=135 srp=863
+18:45:26 [Long Island] ny/mineola drive=20.0 props=7 read=0 rows=4893 gone=135 srp=867
+18:45:26 [Long Island] ny/rockville-centre drive=20.1 props=3 read=0 rows=4893 gone=135 srp=871
+18:45:27 [Long Island] ny/west-hempstead drive=20.7 props=1 read=0 rows=4893 gone=135 srp=874
+18:45:27 [Long Island] ny/atlantic-beach drive=21.0 props=0 read=0 rows=4893 gone=135 srp=876
+18:45:27 [Long Island] ny/east-atlantic-beach drive=21.0 props=0 read=0 rows=4893 gone=135 srp=878
+18:45:27 [Long Island] ny/williston-park drive=21.4 props=1 read=0 rows=4893 gone=135 srp=881
+18:45:27 [Long Island] ny/great-neck drive=22.0 props=1 read=0 rows=4893 gone=135 srp=884
+18:45:27 [Long Island] ny/oceanside drive=22.0 props=1 read=0 rows=4893 gone=135 srp=887
+18:45:28 [Long Island] ny/garden-city drive=22.8 props=1 read=0 rows=4893 gone=135 srp=890
+18:45:28 [Long Island] ny/hempstead drive=23.1 props=3 read=0 rows=4893 gone=135 srp=893
+18:45:28 [Long Island] ny/freeport drive=23.5 props=2 read=0 rows=4893 gone=135 srp=896
+18:45:28 [Long Island] ny/roslyn drive=25.2 props=2 read=0 rows=4893 gone=135 srp=899
+18:45:28 [Long Island] ny/merrick drive=25.9 props=1 read=0 rows=4893 gone=135 srp=902
+18:45:28 [Long Island] ny/island-park drive=26.0 props=1 read=0 rows=4893 gone=135 srp=905
+18:45:29 [Long Island] ny/uniondale drive=26.3 props=0 read=0 rows=4893 gone=135 srp=907
+18:45:29 [Long Island] ny/westbury drive=28.3 props=4 read=0 rows=4893 gone=135 srp=911
+18:45:29 [Long Island] ny/long-beach drive=28.7 props=32 read=0 rows=4893 gone=135 srp=916
+18:45:29 [Long Island] ny/east-meadow drive=29.9 props=0 read=0 rows=4893 gone=135 srp=918
+18:45:29 [Long Island] ny/jericho drive=30.0 props=1 read=0 rows=4893 gone=135 srp=921
+18:45:30 [Long Island] ny/hicksville drive=31.7 props=2 read=0 rows=4893 gone=135 srp=925
+18:45:30 [Long Island] ny/manorhaven drive=32.2 props=0 read=0 rows=4893 gone=135 srp=927
+18:45:30 [Long Island] ny/port-washington drive=32.2 props=1 read=0 rows=4893 gone=135 srp=930
+18:45:30 [Long Island] ny/sea-cliff drive=32.5 props=2 read=0 rows=4893 gone=135 srp=933
+18:45:30 [Long Island] ny/levittown drive=33.3 props=0 read=0 rows=4893 gone=135 srp=935
+18:45:30 [Long Island] ny/lido-beach drive=33.6 props=0 read=0 rows=4893 gone=135 srp=937
+18:45:31 [Long Island] ny/point-lookout drive=33.6 props=0 read=0 rows=4893 gone=135 srp=939
+18:45:31 [Long Island] ny/syosset drive=35.2 props=0 read=0 rows=4893 gone=135 srp=941
+18:45:31 [Long Island] ny/amityville drive=35.3 props=3 read=0 rows=4893 gone=135 srp=944
+18:45:31 [Long Island] ny/glen-cove drive=35.7 props=6 read=0 rows=4893 gone=135 srp=948
+18:45:31 [Long Island] ny/plainview drive=36.2 props=0 read=0 rows=4893 gone=135 srp=950
+18:45:32 [Long Island] ny/copiague drive=38.0 props=3 read=0 rows=4893 gone=135 srp=953
+18:45:32 [Long Island] ny/woodbury drive=38.3 props=2 read=0 rows=4893 gone=135 srp=956
+18:45:32 [Long Island] ny/lindenhurst drive=38.6 props=1 read=0 rows=4893 gone=135 srp=959
+18:45:32 [Long Island] ny/east-farmingdale drive=39.3 props=1 read=0 rows=4893 gone=135 srp=962
+18:45:32 [Long Island] ny/farmingdale drive=39.3 props=2 read=0 rows=4893 gone=135 srp=965
+18:45:32 [Long Island] ny/west-babylon drive=42.2 props=3 read=0 rows=4893 gone=135 srp=968
+18:45:33 [Long Island] ny/cold-spring-harbor drive=42.8 props=0 read=0 rows=4893 gone=135 srp=970
+18:45:33 [Long Island] ny/melville drive=42.9 props=3 read=0 rows=4893 gone=135 srp=974
+18:45:33 [Long Island] ny/north-babylon drive=43.9 props=1 read=0 rows=4893 gone=135 srp=977
+18:45:33 [Long Island] ny/dix-hills drive=45.3 props=1 read=0 rows=4893 gone=135 srp=980
+18:45:33 [Long Island] ny/deer-park drive=46.6 props=0 read=0 rows=4893 gone=135 srp=982
+18:45:33 [Long Island] ny/babylon drive=47.2 props=4 read=0 rows=4893 gone=135 srp=985
+18:45:34 [Long Island] ny/huntington drive=49.3 props=6 read=0 rows=4893 gone=135 srp=989
+18:45:34 [Long Island] ny/bay-shore drive=49.7 props=4 read=0 rows=4893 gone=135 srp=993
+18:45:34 [Long Island] ny/commack drive=51.8 props=1 read=0 rows=4893 gone=135 srp=996
+18:45:34 [Long Island] ny/islip drive=52.3 props=2 read=0 rows=4893 gone=135 srp=999
+18:45:34 [Long Island] ny/huntington-station drive=52.6 props=2 read=0 rows=4893 gone=135 srp=1002
+18:45:34 [Long Island] ny/north-bay-shore drive=52.6 props=1 read=0 rows=4893 gone=135 srp=1005
+18:45:35 [Long Island] ny/hauppauge drive=54.0 props=2 read=0 rows=4893 gone=135 srp=1008
+18:45:35 [Long Island] ny/east-northport drive=54.5 props=3 read=0 rows=4893 gone=135 srp=1012
+18:45:35 [Long Island] ny/central-islip drive=55.7 props=1 read=0 rows=4893 gone=135 srp=1015
+18:45:35 [Long Island] ny/northport drive=61.1 props=2 read=0 rows=4893 gone=135 srp=1018
+18:45:35 [Long Island] ny/sayville drive=62.6 props=1 read=0 rows=4893 gone=135 srp=1021
+18:45:36 [Long Island] ny/nesconset drive=63.3 props=2 read=0 rows=4893 gone=135 srp=1024
+18:45:36 [Long Island] ny/lake-ronkonkoma drive=64.6 props=1 read=0 rows=4893 gone=135 srp=1027
+18:45:36 [Long Island] ny/ronkonkoma drive=64.6 props=3 read=0 rows=4893 gone=135 srp=1031
+18:45:36 [Long Island] ny/patchogue drive=66.1 props=3 read=0 rows=4893 gone=135 srp=1034
+18:45:36 [Long Island] ny/holbrook drive=66.7 props=1 read=0 rows=4893 gone=135 srp=1037
+18:45:36 [Long Island] ny/fire-island drive=68.5 props=1 read=0 rows=4893 gone=135 srp=1040
+18:45:37 [Long Island] ny/ocean-beach drive=68.5 props=1 read=0 rows=4893 gone=135 srp=1043
+18:45:37 [Long Island] ny/farmingville drive=69.2 props=2 read=0 rows=4893 gone=135 srp=1046
+18:45:37 [Long Island] ny/centereach drive=70.4 props=2 read=0 rows=4893 gone=135 srp=1049
+18:45:37 [Long Island] ny/selden drive=72.0 props=1 read=0 rows=4893 gone=135 srp=1052
+18:45:37 [Long Island] ny/stony-brook drive=73.8 props=0 read=0 rows=4893 gone=135 srp=1054
+18:45:37 [Long Island] ny/yaphank drive=75.0 props=2 read=0 rows=4893 gone=135 srp=1057
+18:45:38 [Long Island] ny/coram drive=75.4 props=4 read=0 rows=4893 gone=135 srp=1060
+18:45:38 [Long Island] ny/rocky-point drive=83.4 props=3 read=0 rows=4893 gone=135 srp=1063
+18:45:38 [Long Island] ny/mastic-beach drive=84.5 props=1 read=0 rows=4893 gone=135 srp=1066
+18:45:38 [Long Island] ny/ridge drive=84.9 props=2 read=0 rows=4893 gone=135 srp=1069
+18:45:38 [Long Island] ny/middle-island drive=86.0 props=3 read=0 rows=4893 gone=135 srp=1072
+18:45:38 [Long Island] ny/east-moriches drive=87.8 props=2 read=0 rows=4893 gone=135 srp=1076
+18:45:39 [Long Island] ny/remsenburg-speonk drive=93.1 props=0 read=0 rows=4893 gone=135 srp=1078
+18:45:39 [Long Island] ny/west-hampton-dunes drive=93.1 props=0 read=0 rows=4893 gone=135 srp=1080
+18:45:39 [Long Island] ny/westhampton drive=94.2 props=1 read=0 rows=4893 gone=135 srp=1083
+18:45:39 [Long Island] ny/quiogue drive=98.0 props=0 read=0 rows=4893 gone=135 srp=1085
+18:45:39 [Long Island] ny/westhampton-beach drive=98.0 props=2 read=0 rows=4893 gone=135 srp=1088
+18:45:40 [Long Island] ny/riverhead drive=98.7 props=2 read=0 rows=4893 gone=135 srp=1092
+18:45:40 [Long Island] ny/quogue drive=100.8 props=0 read=0 rows=4893 gone=135 srp=1094
+18:45:40 [Long Island] ny/east-quogue drive=101.9 props=0 read=0 rows=4893 gone=135 srp=1096
+18:45:40 [Long Island] ny/hampton-bays drive=105.1 props=5 read=0 rows=4893 gone=135 srp=1099
+18:45:40 [Long Island] ny/jamesport drive=108.5 props=0 read=0 rows=4893 gone=135 srp=1101
+18:45:41 [Long Island] ny/north-sea drive=109.7 props=0 read=0 rows=4893 gone=135 srp=1103
+18:45:41 [Long Island] ny/shinnecock-hills drive=109.7 props=0 read=0 rows=4893 gone=135 srp=1105
+18:45:41 [Long Island] ny/southampton drive=109.7 props=0 read=0 rows=4893 gone=135 srp=1107
+18:45:41 [Long Island] ny/cutchogue drive=116.3 props=0 read=0 rows=4893 gone=135 srp=1109
+18:45:41 [Long Island] ny/mattituck drive=116.3 props=0 read=0 rows=4893 gone=135 srp=1111
+18:45:41 [Long Island] sweep of held properties not reached by search: 0
+18:45:41 [Long Island City] sweep of held properties not reached by search: 0
+18:45:42 [rest] ny/queens drive=4.5 props=148 read=0 rows=4893 gone=135 srp=1123
+18:45:42 [rest] ny/bronx drive=22.3 props=126 read=0 rows=4893 gone=135 srp=1134
+18:45:42 [rest] ny/mount-vernon drive=26.0 props=6 read=0 rows=4893 gone=135 srp=1138
+18:45:42 [rest] ny/pelham drive=26.0 props=1 read=0 rows=4893 gone=135 srp=1141
+18:45:43 [rest] ny/new-rochelle drive=28.1 props=18 read=0 rows=4893 gone=135 srp=1146
+18:47:55 [rest] ny/new-york drive=28.6 props=554 read=12 rows=4889 gone=142 srp=1187
+18:47:55 [rest] ny/eastchester drive=33.0 props=1 read=0 rows=4889 gone=142 srp=1190
+18:47:55 [rest] ny/mamaroneck drive=33.3 props=4 read=0 rows=4889 gone=142 srp=1194
+18:47:55 [rest] ny/tuckahoe drive=34.1 props=2 read=0 rows=4889 gone=142 srp=1197
+18:47:56 [rest] ny/yonkers drive=37.1 props=23 read=0 rows=4889 gone=142 srp=1202
+18:47:56 [rest] ny/rye drive=38.4 props=0 read=0 rows=4889 gone=142 srp=1204
+18:47:56 [rest] ny/harrison drive=42.9 props=6 read=0 rows=4889 gone=142 srp=1208
+18:47:56 [rest] ny/dobbs-ferry drive=43.1 props=1 read=0 rows=4889 gone=142 srp=1211
+18:47:56 [rest] ny/port-chester drive=44.1 props=2 read=0 rows=4889 gone=142 srp=1215
+18:47:57 [rest] ny/white-plains drive=44.5 props=22 read=0 rows=4889 gone=142 srp=1220
+18:47:57 [rest] ny/staten-island drive=47.8 props=37 read=0 rows=4889 gone=142 srp=1225
+18:47:57 [rest] ny/tarrytown drive=51.9 props=3 read=0 rows=4889 gone=142 srp=1228
+18:47:57 [rest] ny/nyack drive=54.1 props=7 read=0 rows=4889 gone=142 srp=1231
+18:47:57 [rest] ny/nanuet drive=55.6 props=0 read=0 rows=4889 gone=142 srp=1233
+18:47:58 [rest] ny/pearl-river drive=56.4 props=3 read=0 rows=4889 gone=142 srp=1237
+18:47:58 [rest] ny/ossining drive=57.5 props=3 read=0 rows=4889 gone=142 srp=1240
+18:47:58 [rest] ny/congers drive=59.9 props=3 read=0 rows=4889 gone=142 srp=1243
+18:47:58 [rest] ny/mount-kisco drive=60.9 props=2 read=0 rows=4889 gone=142 srp=1246
+18:47:58 [rest] ny/new-city drive=62.9 props=1 read=0 rows=4889 gone=142 srp=1249
+18:47:58 [rest] ny/sloatsburg drive=64.3 props=1 read=0 rows=4889 gone=142 srp=1252
+18:47:59 [rest] ny/suffern drive=65.4 props=7 read=0 rows=4889 gone=142 srp=1255
+18:47:59 [rest] ny/peekskill drive=75.8 props=3 read=0 rows=4889 gone=142 srp=1259
+18:47:59 [rest] ny/harriman drive=81.5 props=0 read=0 rows=4889 gone=142 srp=1261
+18:47:59 [rest] ny/highland-falls drive=86.5 props=3 read=0 rows=4889 gone=142 srp=1265
+18:47:59 [rest] ny/chester drive=89.9 props=1 read=0 rows=4889 gone=142 srp=1268
+18:48:00 [rest] ny/firthcliffe drive=94.1 props=1 read=0 rows=4889 gone=142 srp=1271
+18:48:00 [rest] ny/goshen drive=96.8 props=5 read=0 rows=4889 gone=142 srp=1274
+18:48:00 [rest] ny/newburgh drive=96.9 props=9 read=0 rows=4889 gone=142 srp=1277
+18:48:00 [rest] ny/orange-lake drive=96.9 props=1 read=0 rows=4889 gone=142 srp=1280
+18:48:00 [rest] ny/florida drive=97.0 props=2 read=0 rows=4889 gone=142 srp=1283
+18:48:00 [rest] ny/warwick drive=97.5 props=2 read=0 rows=4889 gone=142 srp=1286
+18:48:01 [rest] ny/pawling drive=98.4 props=3 read=0 rows=4889 gone=142 srp=1289
+18:48:01 [rest] ny/mechanicstown drive=104.9 props=0 read=0 rows=4889 gone=142 srp=1291
+18:48:01 [rest] ny/scotchtown drive=104.9 props=1 read=0 rows=4889 gone=142 srp=1294
+18:48:01 [rest] ny/walden drive=105.1 props=1 read=0 rows=4889 gone=142 srp=1297
+18:48:01 [rest] ny/mountain-lodge-park drive=105.5 props=2 read=0 rows=4889 gone=142 srp=1300
+18:48:01 [rest] ny/beacon drive=106.4 props=7 read=0 rows=4889 gone=142 srp=1303
+18:48:02 [rest] pa/morrisville drive=110.8 props=1 read=0 rows=4889 gone=142 srp=1306
+18:48:02 [rest] pa/easton drive=111.9 props=13 read=0 rows=4889 gone=142 srp=1310
+18:48:02 [rest] ny/middletown drive=112.3 props=5 read=0 rows=4889 gone=142 srp=1314
+18:48:02 [rest] ny/poughkeepsie drive=113.4 props=16 read=0 rows=4889 gone=142 srp=1318
+18:48:02 [rest] ny/port-jervis drive=113.6 props=2 read=0 rows=4889 gone=142 srp=1321
+18:48:03 [rest] pa/matamoras drive=113.6 props=0 read=0 rows=4889 gone=142 srp=1323
+18:48:03 [rest] pa/milford drive=115.4 props=0 read=0 rows=4889 gone=142 srp=1325
+18:48:03 [rest] pa/east-stroudsburg drive=116.0 props=0 read=0 rows=4889 gone=142 srp=1327
+18:48:03 [rest] pa/stroudsburg drive=116.0 props=4 read=0 rows=4889 gone=142 srp=1330
+18:48:03 [rest] pa/newtown-grant drive=117.9 props=0 read=0 rows=4889 gone=142 srp=1332
+18:48:03 [rest] pa/bristol drive=118.5 props=1 read=0 rows=4889 gone=142 srp=1335
+18:48:04 [rest] pa/newtown drive=118.9 props=2 read=0 rows=4889 gone=142 srp=1338
+18:48:04 [rest] pa/yardley drive=118.9 props=5 read=0 rows=4889 gone=142 srp=1342
+18:48:04 [rest] pa/fairless-hills drive=119.6 props=2 read=0 rows=4889 gone=142 srp=1346
+18:48:04 [rest] pa/levittown drive=119.6 props=1 read=0 rows=4889 gone=142 srp=1349
+18:48:04 [rest] sweep of held properties not reached by search: 4

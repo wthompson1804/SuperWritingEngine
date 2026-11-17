@@ -398,7 +398,7 @@ def missing_values_are_null():
 
 @test
 def contract_shape():
-    assert set(OUT) == {"meta", "experiences", "neighborhoods", "buildings", "either_or", "questions"}
+    assert set(OUT) == {"meta", "experiences", "neighborhoods", "buildings", "either_or", "questions", "recommender_samples"}
     assert set(OUT["meta"]) >= {"built_at", "rent_limit", "counts", "tour_start", "move_in_by", "anchor_label"}
     for e in EXPS:
         assert set(e) >= {"id", "label", "tagline", "illustration_id", "figures", "story", "neighborhood_ids"}
@@ -789,6 +789,235 @@ def floor_and_elevator_synthetic():
         assert not K.BANNED.search(t) and not K.CRIME.search(t), t
 
 
+# ---------------------------------------------------------------- version 3: the recommender (scripts/recommender.py)
+import random  # noqa: E402
+import statistics  # noqa: E402
+import recommender as R  # noqa: E402
+
+RP = OUT["meta"]["recommender"]
+RS = OUT["recommender_samples"]
+REX = OUT["meta"]["recommender_examples"]
+RSETS = R.sample_sets(RS, BLDS, RP)
+GROUPS = {g["id"]: g for g in RP["groups"]}
+REPORT = []
+
+
+def clusters(k=3):
+    """Average-linkage clusters of the neighborhood centroids (distance 1 - similarity), merged until k remain."""
+    ids = [g["id"] for g in RP["groups"]]
+    D = [[1 - x for x in r] for r in RP["group_similarity"]]
+    cl = [[i] for i in range(len(ids))]
+    while len(cl) > k:
+        best = None
+        for a in range(len(cl)):
+            for b in range(a + 1, len(cl)):
+                dd = sum(D[i][j] for i in cl[a] for j in cl[b]) / len(cl[a]) / len(cl[b])
+                if best is None or dd < best[0] - 1e-12:
+                    best = (dd, a, b)
+        _, a, b = best
+        cl[a] = cl[a] + cl[b]
+        del cl[b]
+    return {ids[i]: n for n, c in enumerate(cl) for i in c}
+
+
+CLUSTER_OF = clusters()
+
+
+def pearson(x, y):
+    mx, my = sum(x) / len(x), sum(y) / len(y)
+    a = sum((u - mx) * (v - my) for u, v in zip(x, y))
+    b = math.sqrt(sum((u - mx) ** 2 for u in x) * sum((v - my) ** 2 for v in y))
+    return a / b if b else 0.0
+
+
+def group_raw(gid, key):
+    return [B[i]["features_raw"][key] for i in GROUPS[gid]["building_ids"] if B[i]["features_raw"][key] is not None]
+
+
+@test
+def recommender_features_are_0_to_1_and_follow_their_curves():
+    meds = RP["medians_for_missing"]
+    for b in BLDS:
+        f, r = b["features"], b["features_raw"]
+        assert set(f) == set(R.FEATURES) | {"sure"} and all(0 <= x <= 1 for x in f.values()), (b["id"], f)
+        assert set(r) >= {"drive_min", "total", "sqft", "bedroom", "restaurants_10min", "park_walk_min", "parking_kind", "checked"}
+        assert r["drive_min"] == b["fit"]["drive_min"] and r["total"] == b["fit"]["min_total"] and r["sqft"] == b["fit"]["sqft_max"]
+        get = lambda k, feat: meds[k] if r[k] is None else r[k]  # noqa: E731
+        places = meds["places"] if r["restaurants_10min"] is None and r["bars_10min"] is None else (r["restaurants_10min"] or 0) + (r["bars_10min"] or 0)
+        want = {"family": R.f_family(get("drive_min", "")), "money": R.f_money(get("total", "")), "room": R.f_room(get("sqft", ""), r["bedroom"]),
+                "going_out": R.f_going(places), "green": R.f_green(get("park_walk_min", ""), r["dog_area"]), "parking": R.f_parking(r["parking_kind"])}
+        for k, v in want.items():
+            assert abs(f[k] - v) < 1e-6, (b["id"], k, f[k], v)
+        assert (r["sqft"] is None) == ("room" in b["features_imputed"]) and (r["drive_min"] is None) == ("family" in b["features_imputed"])
+        sures = [(1.0 if a["checked"]["status"] in ("confirmed_today", "price_changed_today") else 0.6) * (0.8 if a["star"] else 1.0) for a in b["apartments"]]
+        assert abs(f["sure"] - max(sures)) < 1e-6, b["id"]
+    grid = [x / 2 for x in range(0, 500)]
+    def mono(fn, xs, down):
+        ys = [fn(x) for x in xs]
+        assert all(0 <= y <= 1 for y in ys)
+        assert all((a >= b) if down else (a <= b) for a, b in zip(ys, ys[1:])), fn
+    mono(R.f_family, grid, True)
+    mono(R.f_money, [1500 + 5 * i for i in range(200)], True)
+    mono(lambda s: R.f_room(s, False), [200 + 5 * i for i in range(300)], False)
+    mono(lambda s: R.f_room(s, True), [200 + 5 * i for i in range(300)], False)
+    mono(R.f_going, list(range(120)), False)
+    mono(lambda m: R.f_green(m, False), grid[:100], True)
+    assert all(R.f_room(s, True) > R.f_room(s, False) for s in (300, 500, 700))
+    assert R.f_green(10, True) > R.f_green(10, False)
+    assert R.f_parking("garage") > R.f_parking("lot") > R.f_parking(None) > R.f_parking("street")
+    # the shapes the spec names
+    assert R.f_family(25) >= 0.9 and R.f_family(0) - R.f_family(25) < R.f_family(35) - R.f_family(60)
+    assert R.f_green(5, False) == 1 and abs(R.f_green(12, False) - 0.5) < 1e-9 and R.f_green(25, False) < 0.15
+    assert R.f_going(60) == R.f_going(100) == 1 and R.f_going(20) - R.f_going(0) > R.f_going(60) - R.f_going(20)
+    vf = RP["value_functions"]
+    assert set(vf) >= set(R.FEATURES) | {"sure"} and all("breakpoints" in vf[k] or "values" in vf[k] for k in R.FEATURES)
+
+
+@test
+def recommender_samples_similar_groups_and_tags():
+    assert len(RS) == RP["n_samples"] == 400 and all(len(w) == 6 and abs(sum(w) - 1) < 1e-5 and min(w) >= 0 for w in RS)
+    assert RS == R.draw_samples()[0], "the samples are the fixed-seed draw"
+    mean = [statistics.mean(w[j] for w in RS) for j in range(6)]
+    a = RP["prior"]["alpha"]
+    assert all(abs(m - x / sum(a)) < 0.02 for m, x in zip(mean, a)), mean
+    up = [R.FEATURES.index(k) for k in ("family", "going_out", "green", "room")]
+    assert min(a[j] for j in up) > max(a[R.FEATURES.index(k)] for k in ("money", "parking"))
+    mean_f, sd_f = R.standardisation(BLDS)
+    assert mean_f == RP["feature_mean"] and sd_f == RP["feature_sd"]
+    for b in BLDS:
+        z = R.zvec(b, mean_f, sd_f)
+        d = sorted((round(math.dist(z, R.zvec(o, mean_f, sd_f)), 9), o["id"]) for o in BLDS if o["id"] != b["id"])
+        assert b["similar"] == [i for _, i in d[:5]], b["id"]
+        assert b["group_id"] in GROUPS and b["id"] in GROUPS[b["group_id"]]["building_ids"]
+    assert sorted(i for g in RP["groups"] for i in g["building_ids"]) == sorted(B)
+    for h in HOODS:                                    # a parked neighborhood counts as its host's
+        if h["parked_under"]:
+            assert all(B[i]["group_id"] == h["parked_under"] for i in h["building_ids"])
+            assert h["id"] not in GROUPS
+        t = h["tags"]
+        assert isinstance(t, list) and len(t) == 2 and t[0][0].isupper() and t[1] == t[1].lower(), (h["id"], t)
+        assert all(len(x.split()) <= 2 for x in t) and not ({t[0].lower(), t[1]} >= {"lively", "quiet"})
+    sim = RP["group_similarity"]
+    n = len(sim)
+    assert all(abs(sim[i][i] - 1) < 1e-9 and sim[i][j] == sim[j][i] and 0 <= sim[i][j] <= 1 for i in range(n) for j in range(n))
+    assert all(len(set(b["similar"])) == 5 for b in BLDS)
+
+
+@test
+def recommender_reference_reproduces_its_examples():
+    names = [e["persona"] for e in REX]
+    assert len(REX) >= 5 and set(names) >= {"near family, studio fine", "space first", "budget first", "going out above all", "either to everything"}
+    by = {b["id"]: b for b in BLDS}
+    for e in REX:
+        hidden = [e["hidden_weights"][k] for k in R.FEATURES] if e["hidden_weights"] else None
+        ans = R.run_persona(RS, BLDS, RP, hidden, RSETS)
+        assert ans == e["answers"] and [[x["a"], x["b"]] for x in ans] == e["expected_pairs"], e["persona"]
+        assert 3 <= len(ans) <= 6 and len({(x["a"], x["b"]) for x in ans}) == len(ans)
+        for x in ans:
+            assert x["a"] < x["b"] and x["choice"] == R.persona_answer(x["a"], x["b"], hidden, by, RP["either_band"])
+        rec = R.recommend(RS, ans, BLDS, RP)
+        assert [[n["neighborhood_id"], [b["id"] for b in n["buildings"]]] for n in rec["neighborhoods"]] == e["expected_top"]
+        assert len({n for n, _ in e["expected_top"]}) == 3
+        for n, bs in e["expected_top"]:
+            assert 1 <= len(bs) <= 3 and all(B[i]["group_id"] == n for i in bs)
+            want = sorted(GROUPS[n]["building_ids"], key=lambda i: (-round(R.score(B[i], rec["weights"]), 9), i))[:3]
+            assert bs == want
+        shown = [i for _, bs in e["expected_top"] for i in bs]
+        thumbs = [i for v in e["expected_more_like_this"].values() for i in v]
+        assert not set(thumbs) & set(shown) and len(thumbs) == len(set(thumbs))
+        for n in rec["neighborhoods"]:
+            assert n["why"] == e["expected_why"][n["neighborhood_id"]] and len(n["why_features"]) == 2
+            assert n["gives_up"] == e["expected_gives_up"][n["neighborhood_id"]]
+            for s in (n["why"], n["gives_up"] or "", (n["what_would_change"] or {}).get("text") or ""):
+                assert not K.BANNED.search(s) and not K.CRIME.search(s), s
+        # the stop rule held: stopped at max, or the top set reached stop_prob and not before min_pairs
+        k, p = R.top_probability(RS, ans, BLDS, RP, RSETS)
+        assert abs(p - e["expected_top_set_probability"]) < 1e-6
+        assert len(ans) == RP["max_pairs"] or (p >= RP["stop_prob"] and len(ans) >= RP["min_pairs"])
+        for m in range(RP["min_pairs"], len(ans)):
+            assert R.top_probability(RS, ans[:m], BLDS, RP, RSETS)[1] < RP["stop_prob"], (e["persona"], m)
+    pi0 = R.posterior(RS, [], BLDS, RP)
+    assert all(abs(p - 1 / 400) < 1e-12 for p in pi0)
+
+
+@test
+def recommender_personas_get_what_they_asked_for():
+    ex = {e["persona"]: e for e in REX}
+    top = lambda name: [n for n, _ in ex[name]["expected_top"]]  # noqa: E731
+    med = lambda g, k: statistics.median(group_raw(g, k)) if group_raw(g, k) else None  # noqa: E731
+    near = [g for g in GROUPS if min(group_raw(g, "drive_min")) <= 30]
+    first = top("near family, studio fine")[0]
+    assert not near or min(group_raw(first, "drive_min")) <= 30 and med(first, "drive_min") <= 30, first
+    sq = {g: med(g, "sqft") for g in GROUPS}
+    space = top("space first")
+    assert sq[space[0]] == max(sq[g] for g in space) and sq[space[0]] >= sorted(x for x in sq.values() if x)[-2], (space, sq)
+    assert all(sq[g] >= statistics.median(x for x in sq.values() if x) for g in space)
+    tot = {g: min(group_raw(g, "total")) for g in GROUPS}
+    budget = top("budget first")
+    assert min(tot[g] for g in budget) == min(tot.values()) and statistics.mean(tot[g] for g in budget) < statistics.mean(tot.values())
+    places = {g: med(g, "restaurants_10min") for g in GROUPS}
+    assert places[top("going out above all")[0]] == max(places.values())
+    # the three are real alternatives: never three near-copies (some pair under 0.6 similar), and over simulated users
+    # rarely all inside one of three average-linkage clusters of neighborhood centroids (recommender_simulated_users)
+    ids = [g["id"] for g in RP["groups"]]
+    sim = RP["group_similarity"]
+    for e in REX:
+        t = [ids.index(n) for n, _ in e["expected_top"]]
+        s3 = [sim[a][b] for a in t for b in t if a < b]
+        cl = CLUSTER_OF[e["expected_top"][0][0]]
+        REPORT.append(f"'{e['persona']}': similarities within the three {s3}; "
+                      f"{'all in one cluster' if all(CLUSTER_OF[n] == cl for n, _ in e['expected_top']) else 'spans clusters'}")
+        assert min(s3) < 0.6, (e["persona"], s3)
+    for e in REX:
+        if not e["hidden_weights"]:
+            continue
+        h = [e["hidden_weights"][k] for k in R.FEATURES]
+        w = [e["expected_mean_weights"][k] for k in R.FEATURES]
+        r = pearson(w, h)
+        REPORT.append(f"weight recovery '{e['persona']}': r = {r:.2f} after {len(e['answers'])} pairs; true best "
+                      f"{R.true_top(h, BLDS, RP)}, recommended {[n for n, _ in e['expected_top']]}")
+        assert r > 0.6, (e["persona"], r)
+        assert R.true_top(h, BLDS, RP) in [n for n, _ in e["expected_top"]], e["persona"]
+
+
+@test
+def recommender_simulated_users():
+    fast = R.Fast(RS, BLDS, RP, RSETS)
+    by = {b["id"]: b for b in BLDS}
+    rng = random.Random(11)
+    users = []
+    for _ in range(200):
+        g = [rng.gammavariate(1.0, 1.0) for _ in R.FEATURES]
+        users.append([x / sum(g) for x in g])
+    for h in users[:15] + [None]:                     # the fast twin asks what the reference asks
+        assert R.run_persona(RS, BLDS, RP, h, RSETS) == R.run_persona(RS, BLDS, RP, h, RSETS, pair_fn=fast.next_pair)
+    hit = hit1 = one = 0
+    stops, rs = Counter(), []
+    for h in users:
+        ans = R.run_persona(RS, BLDS, RP, h, RSETS, pair_fn=fast.next_pair)
+        assert 3 <= len(ans) <= 6
+        stops[len(ans)] += 1
+        w = [float(x) for x in fast.pi(ans) @ fast.W]
+        top = R.mmr(R.group_scores(w, BLDS, RP), RP)
+        t = R.true_top(h, BLDS, RP)
+        hit += t in top
+        hit1 += t == top[0]
+        one += len({CLUSTER_OF[g] for g in top}) == 1
+        rs.append(pearson(w, h))
+    REPORT.append(f"200 simulated users (hidden weights flat Dirichlet, seed 11): true best neighborhood in the three "
+                  f"{hit / 2:.1f}%, first {hit1 / 2:.1f}%; pairs asked {dict(sorted(stops.items()))}; weight recovery r "
+                  f"median {statistics.median(rs):.2f}, share > 0.6 {sum(r > 0.6 for r in rs) / 2:.1f}%; "
+                  f"{len(RP['groups'])} neighborhoods to choose from; all three in one cluster {one / 2:.1f}%")
+    assert hit / 200 >= 0.8, hit
+    assert one / 200 <= 0.2, one
+    # more like this: excludes what is shown and the building itself, nearest first under her weights
+    w = R.mean_weights(RS, R.posterior(RS, [], BLDS, RP))
+    b0 = BLDS[0]
+    m = R.more_like_this(b0, w, {b0["similar"][0]}, BLDS, RP)
+    assert len(m) == 3 and b0["id"] not in m and b0["similar"][0] not in m
+    _ = by
+
+
 def main():
     failed = 0
     for f in TESTS:
@@ -798,6 +1027,8 @@ def main():
         except AssertionError as e:
             failed += 1
             print(f"FAIL {f.__name__}: {str(e)[:400]}")
+    for line in REPORT:
+        print("  " + line)
     print(f"{len(TESTS) - failed} of {len(TESTS)} tests pass; {len(APTS)} apartments, {len(BLDS)} buildings, {len(HOODS)} neighborhoods, {len(EXPS)} experiences")
     return 1 if failed else 0
 

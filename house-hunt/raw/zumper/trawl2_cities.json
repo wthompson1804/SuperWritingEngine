@@ -3093,6 +3093,1689 @@
 "cards": 50,
 "status": "done",
 "searched_at": "2026-11-17T18:38:08+00:00"
+},
+"beacon-falls-ct": {
+"area": "CT",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:38:11+00:00"
+},
+"naugatuck-ct": {
+"area": "CT",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 50,
+"status": "done",
+"searched_at": "2026-11-17T18:38:17+00:00"
+},
+"trenton-nj": {
+"area": "NJ",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 50,
+"status": "done",
+"searched_at": "2026-11-17T18:38:23+00:00"
+},
+"phillipsburg-nj": {
+"area": "NJ",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 35,
+"status": "done",
+"searched_at": "2026-11-17T18:38:30+00:00"
+},
+"jackson-nj": {
+"area": "NJ",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:38:32+00:00"
+},
+"bay-head-nj": {
+"area": "NJ",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:38:35+00:00"
+},
+"mantoloking-nj": {
+"area": "NJ",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 40,
+"status": "done",
+"searched_at": "2026-11-17T18:38:41+00:00"
+},
+"point-pleasant-beach-nj": {
+"area": "NJ",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:38:44+00:00"
+},
+"point-pleasant-nj": {
+"area": "NJ",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:38:47+00:00"
+},
+"southbury-ct": {
+"area": "CT",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:38:50+00:00"
+},
+"washington-nj": {
+"area": "NJ",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:38:53+00:00"
+},
+"new-milford-ct": {
+"area": "CT",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:38:56+00:00"
+},
+"stewartsville-nj": {
+"area": "NJ",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:38:59+00:00"
+},
+"ewing-township-nj": {
+"area": "NJ",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:39:02+00:00"
+},
+"hamden-ct": {
+"area": "CT",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 50,
+"status": "done",
+"searched_at": "2026-11-17T18:39:08+00:00"
+},
+"north-haven-ct": {
+"area": "CT",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 50,
+"status": "done",
+"searched_at": "2026-11-17T18:39:15+00:00"
+},
+"pennington-nj": {
+"area": "NJ",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:39:17+00:00"
+},
+"belvidere-nj": {
+"area": "NJ",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:39:20+00:00"
+},
+"woodbury-ct": {
+"area": "CT",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 50,
+"status": "done",
+"searched_at": "2026-11-17T18:39:26+00:00"
+},
+"wallingford-ct": {
+"area": "CT",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:39:29+00:00"
+},
+"brick-nj": {
+"area": "NJ",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:39:32+00:00"
+},
+"toms-river-nj": {
+"area": "NJ",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:39:35+00:00"
+},
+"wrightstown-nj": {
+"area": "NJ",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:39:38+00:00"
+},
+"new-suffolk-ny": {
+"area": "Long Island",
+"pages": {
+"1-beds": "done"
+},
+"cards": 0,
+"status": "done",
+"searched_at": "2026-11-17T18:39:41+00:00"
+},
+"frenchtown-nj": {
+"area": "NJ",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:39:44+00:00"
+},
+"oxford-ct": {
+"area": "CT",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:39:47+00:00"
+},
+"watertown-ct": {
+"area": "CT",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:39:51+00:00"
+},
+"waterbury-ct": {
+"area": "CT",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 50,
+"status": "done",
+"searched_at": "2026-11-17T18:39:56+00:00"
+},
+"wolcott-ct": {
+"area": "CT",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:39:59+00:00"
+},
+"stockton-nj": {
+"area": "NJ",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:40:02+00:00"
+},
+"eastampton-township-nj": {
+"area": "NJ",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 47,
+"status": "done",
+"searched_at": "2026-11-17T18:40:08+00:00"
+},
+"lumberton-nj": {
+"area": "NJ",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:40:11+00:00"
+},
+"mount-holly-nj": {
+"area": "NJ",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:40:14+00:00"
+},
+"beverly-nj": {
+"area": "NJ",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:40:17+00:00"
+},
+"burlington-nj": {
+"area": "NJ",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 50,
+"status": "done",
+"searched_at": "2026-11-17T18:40:23+00:00"
+},
+"cheshire-ct": {
+"area": "CT",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:40:26+00:00"
+},
+"bellerose-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"south-floral-park-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"stewart-manor-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"elmont-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"south-valley-stream-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"garden-city-park-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"manhasset-hills-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"north-new-hyde-park-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"lake-success-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"university-gardens-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"hewlett-neck-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"woodsburgh-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"great-neck-estates-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"great-neck-plaza-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"harbor-hills-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"russell-gardens-ny": {
+"area": "Long Island",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:40:29+00:00"
+},
+"thomaston-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"garden-city-south-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"hewlett-bay-park-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"hewlett-harbor-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"malverne-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"malverne-park-oaks-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"north-lynbrook-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"bay-park-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"east-rockaway-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"lakeview-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"south-hempstead-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"albertson-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"herricks-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"roslyn-heights-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"east-williston-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"great-neck-gardens-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"kensington-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"saddle-rock-estates-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"saddle-rock-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"flower-hill-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"manhasset-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"munsey-park-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"north-hills-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"plandome-heights-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"plandome-manor-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"plandome-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"garden-city-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"roslyn-estates-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"kings-point-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"north-merrick-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"roosevelt-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"barnum-island-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"island-park-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"greenvale-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"old-westbury-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"new-cassel-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"salisbury-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"roslyn-harbor-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"englewood-cliffs-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"massapequa-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"north-wantagh-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"brookville-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"old-brookville-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"bellmore-ny": {
+"area": "Long Island",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:40:32+00:00"
+},
+"wantagh-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"manorhaven-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"sands-point-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"north-massapequa-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"lido-beach-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"point-lookout-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"east-norwich-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"upper-brookville-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"syosset-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"south-hackensack-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"plainview-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"gilgo-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"west-hills-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"moonachie-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"cresskill-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"cove-neck-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"oyster-bay-cove-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"plainedge-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"alpine-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"old-bethpage-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"locust-valley-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"mill-neck-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"lattingtown-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"matinecock-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"new-milford-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"demarest-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"haworth-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"wheatley-heights-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"cold-spring-harbor-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"laurel-hollow-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"emerson-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"closter-nj": {
+"area": "NJ",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:40:35+00:00"
+},
+"harrington-park-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"haledon-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"glen-rock-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"baywood-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"deer-park-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"township-of-washington-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"oak-beach-captree-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"wyckoff-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"halesite-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"huntington-bay-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"lloyd-harbor-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"brightwaters-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"hillside-nj": {
+"area": "NJ",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:40:38+00:00"
+},
+"waldwick-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"brentwood-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"allendale-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"elwood-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"islip-terrace-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"centerport-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"eatons-neck-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"saddle-river-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"upper-saddle-river-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"montvale-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"lincoln-park-nj": {
+"area": "NJ",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:40:41+00:00"
+},
+"west-caldwell-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"oakland-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"fort-salonga-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"kings-park-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"islandia-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"wanaque-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"pequannock-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"springfield-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"village-of-the-branch-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"great-river-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"short-hills-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"asharoken-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"woodbridge-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"mountain-lakes-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"blue-point-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"chatham-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"bayport-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"kinnelon-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"new-canaan-ct": {
+"status": "skipped_no_inventory",
+"area": "CT",
+"basis": "fresh counts 0"
+},
+"hanover-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"saltaire-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"head-of-the-harbor-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"long-hill-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"nissequogue-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"st-james-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"medford-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"boonton-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"bernards-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"warren-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"bellport-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"north-bellport-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"stony-brook-university-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"green-brook-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"old-field-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"shirley-ny": {
+"area": "Long Island",
+"pages": {
+"1-beds": "done"
+},
+"cards": 19,
+"status": "done",
+"searched_at": "2026-11-17T18:40:44+00:00"
+},
+"southport-ct": {
+"status": "skipped_no_inventory",
+"area": "CT",
+"basis": "fresh counts 0"
+},
+"miller-place-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"mount-sinai-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"bridgeport-stamford-ct": {
+"status": "skipped_no_inventory",
+"area": "CT",
+"basis": "fresh counts 0"
+},
+"sayreville-nj": {
+"area": "NJ",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:40:47+00:00"
+},
+"mine-hill-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"brookhaven-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"belle-terre-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"poquott-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"port-jefferson-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"old-bridge-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"hazlet-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"union-beach-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"far-hills-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"jefferson-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"sound-beach-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"north-brunswick-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"bernardsville-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"randolph-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"hardyston-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"moriches-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"borough-of-raritan-5-cardinal-way-raritan-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"center-moriches-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"mastic-beach-ny": {
+"area": "Long Island",
+"pages": {
+"1-beds": "done"
+},
+"cards": 24,
+"status": "done",
+"searched_at": "2026-11-17T18:40:51+00:00"
+},
+"franklin-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"roxbury-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"gordon-heights-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"helmetta-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"easton-ct": {
+"status": "skipped_no_inventory",
+"area": "CT",
+"basis": "fresh counts 0"
+},
+"port-monmouth-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"bedminster-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"mount-olive-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"marlboro-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"ogdensburg-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"monroe-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"sparta-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"south-brunswick-township-nj": {
+"area": "NJ",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:40:53+00:00"
+},
+"east-shoreham-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"shoreham-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"lebanon-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"belford-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"cranbury-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"eastport-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"englishtown-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"manalapan-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"leonardo-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"shrewsbury-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"chester-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"vernon-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"little-silver-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"fair-haven-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"remsenburg-speonk-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"rocky-hill-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"somerset-county-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"byram-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"hillsborough-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"plainsboro-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"califon-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"oceanport-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"roosevelt-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"freehold-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"new-fairfield-ct": {
+"status": "skipped_no_inventory",
+"area": "CT",
+"basis": "fresh counts 0"
+},
+"lafayette-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"monroe-ct": {
+"status": "skipped_no_inventory",
+"area": "CT",
+"basis": "fresh counts 0"
+},
+"ocean-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"montgomery-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"farmingdale-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"independence-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"calverton-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"quogue-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"east-quogue-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"sherman-ct": {
+"status": "skipped_no_inventory",
+"area": "CT",
+"basis": "fresh counts 0"
+},
+"west-windsor-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"sussex-airport-fwn-53-county-road-639-sussex-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"wantage-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"interlaken-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"loch-arbour-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"wanamassa-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"hamilton-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"lawrence-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"lawrenceville-lawrence-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"bridgewater-ct": {
+"status": "skipped_no_inventory",
+"area": "CT",
+"basis": "fresh counts 0"
+},
+"flanders-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"avon-by-the-sea-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"allentown-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"bordentown-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"hampton-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"blairstown-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"millstone-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"sea-girt-nj": {
+"area": "NJ",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:40:56+00:00"
+},
+"west-belmar-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"columbia-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"southampton-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"water-mill-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"woodbridge-ct": {
+"status": "skipped_no_inventory",
+"area": "CT",
+"basis": "fresh counts 0"
+},
+"hopewell-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"lakewood-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"bethany-ct": {
+"status": "skipped_no_inventory",
+"area": "CT",
+"basis": "fresh counts 0"
+},
+"florence-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"laurel-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"milford-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"mansfield-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"middlebury-ct": {
+"status": "skipped_no_inventory",
+"area": "CT",
+"basis": "fresh counts 0"
+},
+"montague-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"east-amwell-township-nj": {
+"status": "skipped_no_inventory",
+"area": "NJ",
+"basis": "fresh counts 0"
+},
+"cutchogue-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"mattituck-ny": {
+"status": "skipped_no_inventory",
+"area": "Long Island",
+"basis": "fresh counts 0"
+},
+"washington-ct": {
+"status": "skipped_no_inventory",
+"area": "CT",
+"basis": "fresh counts 0"
+},
+"roxbury-ct": {
+"status": "skipped_no_inventory",
+"area": "CT",
+"basis": "fresh counts 0"
+},
+"lambertville-nj": {
+"area": "NJ",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T18:40:59+00:00"
 }
 },
 "counts": {
@@ -6545,6 +8228,476 @@ null,
 0,
 0,
 0
+],
+"watertown-ct": [
+0,
+2,
+7
+],
+"wolcott-ct": [
+0,
+5,
+10
+],
+"southington-ct": [
+2,
+3,
+13
+],
+"plymouth-ct": [
+0,
+0,
+2
+],
+"fairless-hills-pa": [
+0,
+0,
+7
+],
+"levittown-pa": [
+1,
+5,
+49
+],
+"newtown-pa": [
+0,
+5,
+32
+],
+"langhorne-pa": [
+0,
+3,
+13
+],
+"penndel-pa": [
+0,
+0,
+0
+],
+"bristol-pa": [
+2,
+1,
+13
+],
+"wilson-pa": [
+1,
+2,
+10
+],
+"old-orchard-pa": [
+0,
+0,
+0
+],
+"palmer-heights-pa": [
+0,
+1,
+2
+],
+"tatamy-pa": [
+0,
+0,
+0
+],
+"stockertown-pa": [
+0,
+0,
+0
+],
+"nazareth-pa": [
+0,
+3,
+11
+],
+"ackermanville-pa": [
+0,
+0,
+0
+],
+"bethlehem-pa": [
+2,
+29,
+135
+],
+"hellertown-pa": [
+0,
+2,
+11
+],
+"lakehurst-nj": [
+0,
+0,
+3
+],
+"plumsted-township-nj": [
+null,
+null,
+0
+],
+"manchester-township-nj": [
+0,
+0,
+1
+],
+"howell-nj": [
+0,
+1,
+17
+],
+"holiday-city-berkeley-nj": [
+0,
+0,
+11
+],
+"silver-ridge-nj": [
+0,
+0,
+2
+],
+"holiday-city-south-nj": [
+0,
+0,
+3
+],
+"holiday-heights-nj": [
+0,
+0,
+1
+],
+"toms-river-nj": [
+0,
+6,
+77
+],
+"beachwood-nj": [
+0,
+0,
+6
+],
+"wrightstown-nj": [
+0,
+3,
+10
+],
+"lavallette-nj": [
+0,
+2,
+78
+],
+"seaside-heights-nj": [
+1,
+9,
+99
+],
+"seaside-park-nj": [
+0,
+0,
+39
+],
+"ocean-gate-nj": [
+0,
+0,
+5
+],
+"pine-beach-nj": [
+0,
+0,
+3
+],
+"bethlehem-ct": [
+0,
+1,
+1
+],
+"mount-bethel-pa": [
+0,
+1,
+3
+],
+"columbia-nj": [
+0,
+0,
+1
+],
+"bangor-pa": [
+0,
+3,
+17
+],
+"kent-ct": [
+0,
+0,
+2
+],
+"dover-plains-ny": [
+0,
+1,
+0
+],
+"poughquag-ny": [
+0,
+0,
+3
+],
+"meriden-ct": [
+3,
+19,
+62
+],
+"roseto-pa": [
+0,
+0,
+0
+],
+"pen-argyl-pa": [
+0,
+3,
+11
+],
+"stroudsburg-pa": [
+4,
+8,
+27
+],
+"east-stroudsburg-pa": [
+0,
+6,
+58
+],
+"litchfield-ct": [
+0,
+0,
+6
+],
+"middletown-ct": [
+3,
+20,
+78
+],
+"berlin-ct": [
+4,
+23,
+36
+],
+"portland-ct": [
+1,
+2,
+6
+],
+"cromwell-ct": [
+0,
+1,
+10
+],
+"berkeley-township-nj": [
+0,
+0,
+0
+],
+"lacey-township-nj": [
+0,
+0,
+0
+],
+"eastampton-township-nj": [
+1,
+1,
+17
+],
+"westampton-nj": [
+0,
+0,
+6
+],
+"mount-holly-nj": [
+0,
+9,
+26
+],
+"lumberton-nj": [
+0,
+3,
+12
+],
+"burlington-nj": [
+1,
+9,
+27
+],
+"willingboro-nj": [
+0,
+0,
+26
+],
+"shelter-island-ny": [
+0,
+0,
+7
+],
+"shelter-island-heights-ny": [
+0,
+0,
+0
+],
+"sag-harbor-ny": [
+0,
+6,
+85
+],
+"greenport-ny": [
+0,
+3,
+19
+],
+"east-marion-ny": [
+0,
+0,
+5
+],
+"wainscott-ny": [
+0,
+1,
+7
+],
+"ottsville-pa": [
+0,
+0,
+4
+],
+"plumsteadville-pa": [
+0,
+0,
+0
+],
+"lahaska-pa": [
+null,
+null,
+0
+],
+"bristol-ct": [
+1,
+19,
+82
+],
+"torrington-ct": [
+1,
+7,
+36
+],
+"plainville-ct": [
+3,
+9,
+15
+],
+"new-britain-ct": [
+8,
+25,
+149
+],
+"farmington-ct": [
+0,
+2,
+12
+],
+"furlong-pa": [
+0,
+0,
+1
+],
+"doylestown-pa": [
+1,
+5,
+45
+],
+"new-britain-pa": [
+0,
+0,
+1
+],
+"warrington-pa": [
+0,
+0,
+8
+],
+"mount-laurel-nj": [
+0,
+4,
+72
+],
+"beverly-nj": [
+0,
+2,
+8
+],
+"croydon-pa": [
+0,
+0,
+1
+],
+"medford-nj": [
+0,
+1,
+9
+],
+"moorestown-nj": [
+0,
+1,
+8
+],
+"delran-nj": [
+0,
+1,
+3
+],
+"riverside-nj": [
+1,
+3,
+8
+],
+"delanco-nj": [
+1,
+0,
+3
+],
+"bensalem-pa": [
+0,
+5,
+38
+],
+"evesham-township-nj": [
+null,
+null,
+0
+],
+"maple-shade-township-nj": [
+0,
+0,
+0
+],
+"cinnaminson-nj": [
+0,
+1,
+4
+],
+"riverton-nj": [
+0,
+0,
+1
+],
+"feasterville-trevose-pa": [
+1,
+0,
+9
+],
+"palmyra-nj": [
+0,
+1,
+7
+],
+"ivyland-pa": [
+0,
+0,
+2
 ]
 }
 }

@@ -1,0 +1,25 @@
+rows now 4885 before 4944 gone ledger 146 seen today 2677 not re-read 2208
+not re-read by band Counter({'2201-3000': 2208})
+rows <=2200 1921 of which seen today 1921
+area | <=2000 new | <=2000 held | 2001-2200 new | 2001-2200 held | total
+New Jersey | 43 | 730 | 15 | 298 | 1086
+Brooklyn | 3 | 82 | 0 | 14 | 99
+Connecticut | 9 | 291 | 2 | 59 | 361
+Long Island | 1 | 24 | 0 | 16 | 41
+Long Island City | 1 | 7 | 0 | 0 | 8
+Bronx | 1 | 71 | 0 | 21 | 93
+Manhattan | 3 | 55 | 0 | 10 | 68
+New York (other) | 2 | 63 | 2 | 21 | 88
+Pennsylvania | 1 | 5 | 2 | 6 | 14
+Queens (other) | 1 | 29 | 0 | 10 | 40
+Staten Island | 1 | 19 | 0 | 3 | 23
+gone by reason {'unit no longer listed on its property page': 127, "property page says '404: This page could not be found' (served with HTTP 200)": 18, 'rent on the page is now above $3,000': 1}
+gone by area/band(old rent) {'Connecticut': {'<=2000': 12, '2001-2200': 3, '2201-3000': 13}, 'Queens (other)': {'2001-2200': 2, '<=2000': 5}, 'Staten Island': {'2001-2200': 1, '<=2000': 2}, 'New Jersey': {'2201-3000': 35, '<=2000': 34, '2001-2200': 10}, 'Bronx': {'<=2000': 3}, 'Brooklyn': {'<=2000': 5, '2201-3000': 3, '2001-2200': 2}, 'Manhattan': {'2201-3000': 7, '2001-2200': 2, '<=2000': 2}, 'New York (other)': {'<=2000': 4}, 'Long Island City': {'<=2000': 1}}
+price changes: up 58 down 125 moves between bands {('<=2000', '<=2000'): 38, ('2201-3000', '2201-3000'): 107, ('2201-3000', '2001-2200'): 5, ('2001-2200', '2001-2200'): 28, ('2001-2200', '<=2000'): 4, ('2001-2200', '2201-3000'): 1} available_date changed 40
+held units that dropped to <=2200: 5
+new rows above 2200 (should be 0): 0
+requests today (incl. 1 robots.txt by curl not in index): 2754 Counter({200: 2754})
+search pages 1326 property pages 1428
+pass1 skipped by low price 1133 reasons {'ok': 1264, 'no_unit_le_3000': 37, 'outside_grid': 42, 'no_listing_object': 17} pass2 {'gone_soft_404': 16, 'no_unit_le_3000': 7, 'ok': 5}
+unparsed left [] transient ['ny/new-york search: fetch failed after 1 tries: https://www.apartmentlist.com/ny/new-york/c/1-bedroom-apartments-for-rent: ChunkedEncodingEr'] []
+<=2200 available by Dec 15 1764

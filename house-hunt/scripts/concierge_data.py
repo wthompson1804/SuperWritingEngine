@@ -95,6 +95,10 @@ apartments). A building's value is the mean over its kept apartments, divided by
                bars within 1,600 m 20 (the fields of the "after work" and "Saturday night" moments).
 parts.safety is not exposed: nothing about crime is said on this page, and everything shown already passed the rule.
 
+VERSION 3 (docs/CONCIERGE_DESIGN.md "Version 3"): scripts/recommender.py, called last (add_version_three); it adds
+  buildings[].features / features_raw / features_imputed / similar / group_id, neighborhoods[].tags,
+  recommender_samples, meta.recommender and meta.recommender_examples. Its docstring is the reference.
+
 Run from the house-hunt folder:
     python3 scripts/concierge_data.py              build everything
     python3 scripts/concierge_data.py --no-text    reuse the _u2000 text tables on disk
@@ -121,6 +125,7 @@ import parsers  # noqa: E402                 unit_key(), live_row_learned(): the
 import build_page_data as BP  # noqa: E402   v(), shown_figures(): the page builder's own helpers
 import page_data_extras as X  # noqa: E402   the text blocks, is_private_line(), ranking()
 import realtor_lines as RL  # noqa: E402     parking_facts(), usd()
+import recommender as REC  # noqa: E402      version 3: features, similar, tags, samples, the reference recommender
 
 RENT_LIMIT = 2000                 # listed base rent; a rule for this page only (Will, 2026-11-16/17)
 NEARBY_KM = 10.0                  # a parked neighborhood is "Also nearby" only within this distance of its host
@@ -1901,7 +1906,7 @@ def main(argv=None):
     if bad:
         print(f"{bad} text step(s) failed: {OUT.name} not written")
         return 1
-    out = add_version_two(concierge(b, d), b)
+    out = REC.add_version_three(add_version_two(concierge(b, d), b))
     OUT.write_text(json.dumps(out, ensure_ascii=False, indent=1, allow_nan=False), encoding="utf-8")
     print(f"{OUT.relative_to(ROOT)}: {out['meta']['counts']}")
     for p in out["meta"]["parked"]:
@@ -1910,6 +1915,8 @@ def main(argv=None):
     for q in out["questions"]:
         print(f"  question {q['id']}: " + ", ".join(f"{a['id']} {a['fits_alone']}" for a in q["answers"]))
     print(f"  life here: {out['meta']['life_here_counts']}; facts file: {out['meta']['life_here_facts']}")
+    for e in out["meta"]["recommender_examples"]:
+        print(f"  recommender '{e['persona']}': {len(e['answers'])} pairs -> " + ", ".join(n for n, _ in e["expected_top"]))
     for q in out["meta"]["either_or_audit"]:
         print(f"  either/or {q['id']}: spearman {q['spearman']}, top-5 shared {q['top5_shared']} -> {'kept' if q['kept'] else 'trade-off, not among the three' if q['trade_off'] else 'no trade-off'}")
     return 0

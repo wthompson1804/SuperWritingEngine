@@ -3557,7 +3557,7 @@
 "/nj/guttenberg/6812-polk-street--1": {
 "at": "2026-11-17T17:47:59+00:00",
 "status": 200,
-"reason": "no_listing_object"
+"reason": "gone_soft_404"
 },
 "/nj/irvington/166-elmwood-ave": {
 "at": "2026-11-17T17:48:02+00:00",
@@ -3572,7 +3572,7 @@
 "/nj/jamesburg/37-hooker-st": {
 "at": "2026-11-17T17:48:07+00:00",
 "status": 200,
-"reason": "no_listing_object"
+"reason": "gone_soft_404"
 },
 "/nj/jersey-city/650-montgomery-st-apt-403": {
 "at": "2026-11-17T17:48:10+00:00",
@@ -3587,7 +3587,7 @@
 "/nj/metuchen/the-jax": {
 "at": "2026-11-17T17:48:15+00:00",
 "status": 200,
-"reason": "no_listing_object"
+"reason": "gone_soft_404"
 },
 "/nj/newark/21-huntington-ter": {
 "at": "2026-11-17T17:48:17+00:00",
@@ -3602,7 +3602,7 @@
 "/nj/north-bergen/8300-boulevard-e": {
 "at": "2026-11-17T17:48:22+00:00",
 "status": 200,
-"reason": "no_listing_object"
+"reason": "gone_soft_404"
 },
 "/nj/ocean-grove/84-main-avenue": {
 "at": "2026-11-17T17:48:25+00:00",
@@ -3612,12 +3612,12 @@
 "/nj/passaic/377-madison-street": {
 "at": "2026-11-17T17:48:27+00:00",
 "status": 200,
-"reason": "no_listing_object"
+"reason": "gone_soft_404"
 },
 "/nj/paterson/353-marshall-st": {
 "at": "2026-11-17T17:48:29+00:00",
 "status": 200,
-"reason": "no_listing_object"
+"reason": "gone_soft_404"
 },
 "/nj/rutherford/74-hastings-avenue": {
 "at": "2026-11-17T17:48:32+00:00",
@@ -4157,7 +4157,7 @@
 "/ny/brooklyn/2925-w-5th-st--1": {
 "at": "2026-11-17T17:54:05+00:00",
 "status": 200,
-"reason": "no_listing_object"
+"reason": "gone_soft_404"
 },
 "/ny/brooklyn/321-53rd-st": {
 "at": "2026-11-17T17:54:07+00:00",
@@ -4172,7 +4172,7 @@
 "/ny/brooklyn/77-eastern-pkwy-40": {
 "at": "2026-11-17T17:54:12+00:00",
 "status": 200,
-"reason": "no_listing_object"
+"reason": "gone_soft_404"
 },
 "/ct/stamford/1078-east-main-street": {
 "at": "2026-11-17T17:54:59+00:00",
@@ -4952,12 +4952,12 @@
 "/ct/ansonia/central-street-associates-llc": {
 "at": "2026-11-17T18:04:27+00:00",
 "status": 200,
-"reason": "no_listing_object"
+"reason": "gone_soft_404"
 },
 "/ct/new-haven/98-howe-st": {
 "at": "2026-11-17T18:04:30+00:00",
 "status": 200,
-"reason": "no_listing_object"
+"reason": "gone_soft_404"
 },
 "/ct/west-haven/358-blohm-street": {
 "at": "2026-11-17T18:04:32+00:00",
@@ -4967,12 +4967,12 @@
 "/ct/west-haven/campbell-ave-apartments": {
 "at": "2026-11-17T18:04:35+00:00",
 "status": 200,
-"reason": "no_listing_object"
+"reason": "gone_soft_404"
 },
 "/ct/west-haven/hilltop-terrace-apartments-1-and-2-bedrooms": {
 "at": "2026-11-17T18:04:37+00:00",
 "status": 200,
-"reason": "no_listing_object"
+"reason": "gone_soft_404"
 },
 "/ny/woodmere/874-w-broadway--1": {
 "at": "2026-11-17T18:05:22+00:00",
@@ -6643,5 +6643,500 @@
 "at": "2026-11-17T18:37:56+00:00",
 "status": 200,
 "reason": "outside_grid"
+},
+"/pa/yardley/1701-yardley-commons": {
+"at": "2026-11-17T18:38:08+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/pa/yardley/81-s-main-street": {
+"at": "2026-11-17T18:38:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/pa/yardley/the-edge-at-yardley--1": {
+"at": "2026-11-17T18:38:13+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/pa/yardley/yardley-crossing--1": {
+"at": "2026-11-17T18:38:16+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/pa/fairless-hills/110-trenton-road": {
+"at": "2026-11-17T18:38:28+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/pa/fairless-hills/lakeview-terrace": {
+"at": "2026-11-17T18:38:31+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/pa/levittown/914-trenton-road": {
+"at": "2026-11-17T18:38:41+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/246-echo-place": {
+"at": "2026-11-17T18:38:43+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/mount-vernon/122-n-7th-avenue-n": {
+"at": "2026-11-17T18:38:46+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ny/new-york/1-bond-st-apt-5a--1": {
+"at": "2026-11-17T18:38:48+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/10-cooper-st-apt-1a": {
+"at": "2026-11-17T18:38:51+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/105-west-136th-street": {
+"at": "2026-11-17T18:38:53+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/107-morton-st-apt-gb": {
+"at": "2026-11-17T18:38:56+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/11-5th-ave-10f": {
+"at": "2026-11-17T18:38:58+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/120-sherman-avenue": {
+"at": "2026-11-17T18:39:01+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/1200-5th-ave-9878": {
+"at": "2026-11-17T18:39:03+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/121-w-131st-st-apt-2": {
+"at": "2026-11-17T18:39:06+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/124-e-117th-st-apt-1a": {
+"at": "2026-11-17T18:39:08+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/124-sherman-avenue--1": {
+"at": "2026-11-17T18:39:11+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/128-sherman-avenue--1": {
+"at": "2026-11-17T18:39:13+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/13-cumming-st": {
+"at": "2026-11-17T18:39:16+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/13-maiden-ln-apt-5d": {
+"at": "2026-11-17T18:39:18+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/147-west-143rd-street": {
+"at": "2026-11-17T18:39:21+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/17-chittenden-ave-apt-4d": {
+"at": "2026-11-17T18:39:23+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/204-e-85th-st-apt-5f": {
+"at": "2026-11-17T18:39:26+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/206-e-81st-st-apt-2aa": {
+"at": "2026-11-17T18:39:28+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/216-east-90th-street--12": {
+"at": "2026-11-17T18:39:31+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/216-w-145th-st-apt-22d": {
+"at": "2026-11-17T18:39:33+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ny/new-york/220-e-57th-st-apt-14j": {
+"at": "2026-11-17T18:39:35+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/2220-frederick-douglass-blvd-apt-3n": {
+"at": "2026-11-17T18:39:38+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/228-w-17th-st-apt-2a": {
+"at": "2026-11-17T18:39:40+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/23-w-116th-st-9876": {
+"at": "2026-11-17T18:39:43+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/232-east-broadway": {
+"at": "2026-11-17T18:39:46+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/233-e-77th-st--3": {
+"at": "2026-11-17T18:39:48+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/234-thompson-st--2": {
+"at": "2026-11-17T18:39:51+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/235-e-73rd-st-apt-1a": {
+"at": "2026-11-17T18:39:53+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/236-w-15th-st": {
+"at": "2026-11-17T18:39:56+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/2371-2nd-ave-apt-8": {
+"at": "2026-11-17T18:39:58+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/24-e-7th-st-7777": {
+"at": "2026-11-17T18:40:01+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/246-e-48th-st-apt-5j": {
+"at": "2026-11-17T18:40:03+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/251-e-111th-st-apt-5a": {
+"at": "2026-11-17T18:40:06+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ny/new-york/260-w-135th-street--1": {
+"at": "2026-11-17T18:40:08+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/266-west-96th-street": {
+"at": "2026-11-17T18:40:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/29-5th-ave-apt-4h": {
+"at": "2026-11-17T18:40:13+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/300-albany-st-5987": {
+"at": "2026-11-17T18:40:16+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/300-e-54th-st": {
+"at": "2026-11-17T18:40:18+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/303-park-ave--1": {
+"at": "2026-11-17T18:40:21+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/309-w-54th-st-apt-3a": {
+"at": "2026-11-17T18:40:23+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/312-w-101st-st": {
+"at": "2026-11-17T18:40:26+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/315-east-108th-street--18": {
+"at": "2026-11-17T18:40:28+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/318-e-53rd-st": {
+"at": "2026-11-17T18:40:31+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ny/new-york/324-w-96th-st-apt-407": {
+"at": "2026-11-17T18:40:33+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/327-w-83rd-st": {
+"at": "2026-11-17T18:40:36+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/333-e-53rd-st-1109": {
+"at": "2026-11-17T18:40:38+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/353-e-72nd-st-apt-18c": {
+"at": "2026-11-17T18:40:41+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/357-w-55th-st-apt-6j--3": {
+"at": "2026-11-17T18:40:43+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/368-broome-st-apt-1": {
+"at": "2026-11-17T18:40:46+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/400-riverside-dr-5554": {
+"at": "2026-11-17T18:40:48+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/405-e-9th-st-apt-19": {
+"at": "2026-11-17T18:40:51+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/410-w-145th-st": {
+"at": "2026-11-17T18:40:53+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/412-w-148th-st-apt-2h": {
+"at": "2026-11-17T18:40:56+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/425-east-12th-street": {
+"at": "2026-11-17T18:40:58+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/434-e-115th-st-apt-3c": {
+"at": "2026-11-17T18:41:01+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/449-w-167th-st-apt-25b": {
+"at": "2026-11-17T18:41:03+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ny/new-york/45-e-82nd-st-apt-ilr32hj": {
+"at": "2026-11-17T18:41:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/46-rivington-st-6643": {
+"at": "2026-11-17T18:41:08+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/501-west-214th-street": {
+"at": "2026-11-17T18:41:11+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/524-w-152nd-st": {
+"at": "2026-11-17T18:41:13+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/56-pine-st-apt-15a": {
+"at": "2026-11-17T18:41:16+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/568-grand-st-apt-j602": {
+"at": "2026-11-17T18:41:18+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/59-cooper-street": {
+"at": "2026-11-17T18:41:20+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/608-west-190th-street": {
+"at": "2026-11-17T18:41:23+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/61-jane-st--2": {
+"at": "2026-11-17T18:41:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/71-park-ave-2d": {
+"at": "2026-11-17T18:41:28+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/745-saint-nicholas-ave-apt-2r": {
+"at": "2026-11-17T18:41:31+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/81-west-127th-street--2": {
+"at": "2026-11-17T18:41:33+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/845-riverside-dr-apt-31": {
+"at": "2026-11-17T18:41:36+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/95-cabrini-boulevard": {
+"at": "2026-11-17T18:41:38+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/147-14-84th-rd": {
+"at": "2026-11-17T18:41:41+00:00",
+"status": 200,
+"reason": "gone_soft_404"
+},
+"/ny/queens/155-15-81st-st": {
+"at": "2026-11-17T18:41:43+00:00",
+"status": 200,
+"reason": "gone_soft_404"
+},
+"/ny/queens/43-24-215th-street": {
+"at": "2026-11-17T18:41:46+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ny/queens/8709-34th-ave": {
+"at": "2026-11-17T18:41:48+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ny/queens/98-76-queens-blvd--1": {
+"at": "2026-11-17T18:41:50+00:00",
+"status": 200,
+"reason": "gone_soft_404"
+},
+"/ny/staten-island/111-fields-ave": {
+"at": "2026-11-17T18:41:53+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ny/staten-island/46-ludwig-lane": {
+"at": "2026-11-17T18:41:56+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ny/yonkers/160-willow-st--1": {
+"at": "2026-11-17T18:41:58+00:00",
+"status": 200,
+"reason": "gone_soft_404"
+},
+"/ny/yonkers/8-wainwright-avenue": {
+"at": "2026-11-17T18:42:01+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ny/new-york/1517-park-ave-apt-15a": {
+"at": "2026-11-17T18:47:26+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ny/new-york/200-w-54th-st-apt-ger38vsz": {
+"at": "2026-11-17T18:47:28+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ny/new-york/215-e-85th-st-apt-5f": {
+"at": "2026-11-17T18:47:31+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ny/new-york/236-e-47th-st": {
+"at": "2026-11-17T18:47:33+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/330-w-85th-st-apt-4a": {
+"at": "2026-11-17T18:47:36+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/445-e-77th-st-apt-2h": {
+"at": "2026-11-17T18:47:38+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/504-w-45th-st-apt-32a": {
+"at": "2026-11-17T18:47:41+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ny/new-york/606-w-112th-st-apt-16a": {
+"at": "2026-11-17T18:47:43+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ny/new-york/615-w-112th-st-apt-17g": {
+"at": "2026-11-17T18:47:46+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ny/new-york/696-1st-ave-apt-43f": {
+"at": "2026-11-17T18:47:48+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ny/new-york/river-place--1": {
+"at": "2026-11-17T18:47:54+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-york/silver-towers": {
+"at": "2026-11-17T18:47:55+00:00",
+"status": 200,
+"reason": "ok"
 }
 }
