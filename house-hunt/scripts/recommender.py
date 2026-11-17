@@ -21,7 +21,7 @@ DATA IT ADDS (nothing renamed)
 THE MODEL
   utility U_w(b)   = sum_k w_k * features[k]  over the six weighted features (sure excluded)
   score_w(b)       = U_w(b) * features.sure
-  group score      = mean of the group's two best building scores (the one, if it has one building)
+  group score      = mean of the group's two best building scores; one building: mean of it and the set's median score
   likelihood       gap g = U_w(a) - U_w(b);  P(a) = sig((g - band)/T), P(b) = sig((-g - band)/T), P(either) = 1 - P(a) - P(b)
   posterior        pi_s proportional to prod_j L_s(answer_j), from uniform; normalised once at the end
   mean weights     wbar = sum_s pi_s w_s; since U is linear in w, expected utility = U_wbar
@@ -343,10 +343,13 @@ def mean_weights(samples, pi):
 
 def group_scores(w, buildings, params):
     by = {b["id"]: b for b in buildings}
+    sc = {b["id"]: q(score(b, w)) for b in buildings}
+    med = statistics.median(sc.values())               # a one-building neighborhood is not a deep one
     out = {}
     for g in params["groups"]:
-        s = sorted((q(score(by[i], w)) for i in g["building_ids"]), reverse=True)[:2]
-        out[g["id"]] = sum(s) / len(s)
+        s = sorted((sc[i] for i in g["building_ids"]), reverse=True)[:2]
+        out[g["id"]] = (s[0] + s[1]) / 2 if len(s) == 2 else (s[0] + med) / 2
+    _ = by
     return out
 
 
@@ -707,7 +710,7 @@ def params_block(buildings, groups, sim, mean, sd, alpha, meds):
         "algorithm": {
             "utility": "U_w(b) = sum_k w_k x features[k] over `features` (sure excluded)",
             "score": "score_w(b) = U_w(b) x features.sure",
-            "group_score": "mean of the two best building scores of the group (rounded to round_decimals before sorting); one building: its score",
+            "group_score": "each building's score is rounded to round_decimals; a group with two or more buildings scores the mean of its two best; a group with one building scores the mean of that building and the median building score of the whole set under the same weights (the mean of the two middle values when the count is even), so one strong building is not treated as a deep neighborhood",
             "likelihood": "gap = U_w(a) - U_w(b); P(a) = sig((gap - either_band)/temperature); P(b) = sig((-gap - either_band)/temperature); P(either) = max(0, 1 - P(a) - P(b))",
             "posterior": "pi_s = prod over answers (in order) of the likelihood, divided by the sum over samples; uniform if the sum is 0",
             "mean_weights": "wbar_k = sum_s pi_s x w_s,k; expected utility = U_wbar",
