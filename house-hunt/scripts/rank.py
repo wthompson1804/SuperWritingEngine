@@ -399,6 +399,8 @@ def main():
     fb, fk = s("unit_floor_basis"), s("unit_floor_label_kind")
     floor_settled = fb.isin(["confirmed", "stated", SETTLED_BY_PHONE])
     walkup2 = fe_code.eq("floor_2")                 # floor 2 with no elevator established: the floor is what lets it pass
+    # ... read under the complex's reviewed numbering convention (or as a tower label) rather than from the plain label
+    rd_walkup2 = walkup2 & ~s("unit_floor_basis").isin(["confirmed", "stated", SETTLED_BY_PHONE, "inferred"]) & pd.to_numeric(s("unit_floor_reading"), errors="coerce").notna()
     floor_from_label_ok = (fb.eq("inferred") & fk.eq("simple") & (fl >= 3)) | (walkup2 & ~floor_settled)
     # not published: unknown, or only read from the unit number. Where the open fact floor_or_elevator already asks for
     # the floor, the floor is not listed a second time as a disclosure.
@@ -546,7 +548,7 @@ def main():
     CODE = {
         "elevator": sel([(base_e, "height_only"), (s("elevator_evidence_open").ne(""), "x"), (doubt_e, "complex")], "reviewer").where(lambda c: c != "x", e_code)
                     .where(~fe_combo, parsers.FLOOR_OR_ELEVATOR_CODE),
-        "floor": pd.Series(np.where(fb.eq("inferred"), "floor_read_from_number", "floor_not_published"), index=u.index),
+        "floor": pd.Series(np.where(fb.eq("inferred") | rd_walkup2, "floor_read_from_number", "floor_not_published"), index=u.index),
         "dogs": sel([(s("dogs_evidence_open").ne(""), "x"), (base_d | dog_conflict_open, "sources_disagree")], "reviewer").where(lambda c: c != "x", d_code),
         "lease": sel([(used12, "uses_12_month"), (sib12, "sibling_12"), (lm.notna() & (lm != 12), "term"), (s("price_lowest_of_terms").eq("yes"), "lowest_of_terms")], "reviewer"),
         "cost": pd.Series("could_pass", index=u.index),
@@ -568,7 +570,9 @@ def main():
                        "Which floor is the unit on?; ")
     fnum = s("unit_floor").str.replace(r"\.0$", "", regex=True)
     floor_why = np.where(inf_f & fb.eq("inferred"), "No page states the floor; " + fnum + " is only read from the unit number " + s("unit") + ".",
-                         "The listing does not give the floor, and the unit number does not show it.")
+                         np.where(inf_f & rd_walkup2, "No page states the floor; " + s("unit_floor_reading").str.replace(r"\.0$", "", regex=True) + " is only read from the unit number "
+                                  + s("unit") + " (" + s("unit_floor_reading_basis") + ").",
+                                  "The listing does not give the floor, and the unit number does not show it."))
     # the reviewer's own words per key: {key: (why, question)} for each unit
     v_text = [{KIND_KEY.get(r["kind"], ""): (r["why"], r["what_to_confirm"]) for r in VU[l]["rows"] if r["verdict"] in ("asterisk", "disclose")} if l in VU else {} for l in u.listing_id]
     what_l, why_l, q_l, keys_l, disc_l, code_l, rwhy_l, rq_l = [], [], [], [], [], [], [], []

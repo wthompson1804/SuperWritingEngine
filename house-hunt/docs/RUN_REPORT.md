@@ -1,4 +1,4 @@
-# Run report (2026-11-17T14:42:56+00:00)
+# Run report (2026-11-17T16:58:25+00:00)
 
 ## Steps
 
@@ -20,79 +20,78 @@
 | Stage | Now | Previous run | Change |
 |---|---|---|---|
 | listings harvested (after dedupe) | 20468 | 20468 | +0 |
-| pass every listing gate | 2505 | 2505 | +0 |
-|   pending: a gate fact is unstated | 14019 | 14019 | +0 |
-|   fail a gate | 3944 | 3944 | +0 |
+| pass every listing gate | 1026 | 1026 | +0 |
+|   pending: a gate fact is unstated | 7873 | 7873 | +0 |
+|   fail a gate | 11569 | 11569 | +0 |
 | costed in the master table | 2451 | 2451 | +0 |
 | within the $3,000 all-in cap | 1469 | 1469 | +0 |
-| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 657 | 657 | +0 |
-| shown (real apartments, at most one open item, up to 8 per building, after the thin-neighborhood rule) | 516 | 516 | +0 |
-|   neighborhoods shown | 76 | 76 | +0 |
-|   buildings shown | 200 | 200 | +0 |
-| not an apartment: floor plan, building price or co-living room (data/excluded_not_an_apartment.csv) | 76 | 76 | +0 |
-| thin neighborhoods cut (one apartment, not both well attested and promising) | 28 | 28 | +0 |
-| avoid cards | 35 | 35 | +0 |
-|   shown with an asterisk (one thing to confirm) | 218 | 218 | +0 |
-| removed by a reviewed verdict (data/evidence/review_verdicts.csv) | 87 | 87 | +0 |
-| held back for one confirmation | 14 | 14 | +0 |
-| neighborhoods with 3+ shown places | 49 | 49 | +0 |
+| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 119 | 119 | +0 |
+| shown (real apartments, at most one open item, up to 8 per building, after the thin-neighborhood rule) | 89 | 89 | +0 |
+|   neighborhoods shown | 25 | 25 | +0 |
+|   buildings shown | 48 | 48 | +0 |
+| not an apartment: floor plan, building price or co-living room (data/excluded_not_an_apartment.csv) | 30 | 30 | +0 |
+| thin neighborhoods cut (one apartment, not both well attested and promising) | 12 | 12 | +0 |
+| avoid cards | 14 | 14 | +0 |
+|   shown with an asterisk (one thing to confirm) | 26 | 26 | +0 |
+| removed by a reviewed verdict (data/evidence/review_verdicts.csv) | 11 | 11 | +0 |
+| held back for one confirmation | 6 | 6 | +0 |
+| neighborhoods with 3+ shown places | 15 | 15 | +0 |
 | buildings in the master table | 578 | 578 | +0 |
 
 ## Why units left
 
 **excluded_by_confirmed_facts.csv**
 
-- listing gone at live check: 45
-- income-restricted unit: 38
-- ground-floor unit: the unit number reads as floor 1 under this complex's numbering (numbering convention of this complex: building_floor_unit): 33
-- the page was read on 2026-11-15): more than six months unchanged: 29
-- dogs not allowed (confirmed): 14
-- ground-floor unit: the unit number reads as floor 1 under this complex's numbering (numbering convention of this complex: floor_first): 9
-- stale listing: the listing page was last changed on 2026-04-13, 223 days by the first tour day (2026-11-22: 7
-- ground-floor unit: 5
+- over_2200: listed base rent above $2,200 (owner, 2026-11-17): 888
+- income-restricted unit: 17
+- listing gone at live check: 13
+- the page was read on 2026-11-15): more than six months unchanged: 10
+- dogs not allowed (confirmed): 5
+- stale listing: the listing page was last changed on 2026-01-27, 299 days by the first tour day (2026-11-22: 2
+- stale listing: the listing page was last changed on 2025-12-08, 349 days by the first tour day (2026-11-22: 2
+- ground-floor unit: a bare apartment number in a building numbered in sequence, at most the average number of apartments per floor, reads as the first floor: 1
 
 **excluded_sketchy.csv**
 
-- two or more things unconfirmed: elevator: 54
-- listing: 30
-- eligibility: 26
-- listing 60+ days old: 23
-- dogs allowed: 10
-- two or more things unconfirmed: dogs allowed: 9
-- availability: 6
-- no unit or building named: 5
+- listing: 7
+- listing 60+ days old: 6
+- two or more things unconfirmed: dogs allowed: 5
+- no unit or building named: 3
+- two or more things unconfirmed: elevator: 3
+- live check judged the listing doubtful: 1
+- thin syndicated feed: 1
+- availability: 1
 
 ## Shown units by year
 
 | group_label               |   neighborhoods |   ranked |   shown |   avoid_cards |
 |:--------------------------|----------------:|---------:|--------:|--------------:|
-| The Fresh-Start Year      |               6 |       86 |      71 |             0 |
-| The Little-City Year      |              28 |      244 |     217 |             5 |
-| The Old-Neighborhood Year |              39 |      110 |      71 |            26 |
-| The Quiet-Street Year     |               7 |       10 |       6 |             0 |
-| The Room-to-Breathe Year  |              32 |      179 |     148 |             0 |
-| The Walk-Everywhere Year  |               6 |       28 |       3 |             4 |
+| The Fresh-Start Year      |               2 |        2 |       0 |             0 |
+| The Little-City Year      |              12 |       36 |      30 |             3 |
+| The Old-Neighborhood Year |              13 |       29 |      18 |             8 |
+| The Room-to-Breathe Year  |              17 |       48 |      41 |             0 |
+| The Walk-Everywhere Year  |               2 |        4 |       0 |             3 |
 
 ## Fill rate among shown units (percent with a value)
 
 | Field | % |
 |---|---|
 | sqft | 93 |
-| unit_floor | 57 |
+| unit_floor | 69 |
 | elevator_basis | 100 |
-| dog_weight_limit_lb | 21 |
-| parking_type | 90 |
-| parking_fee | 30 |
-| pet_rent | 60 |
-| pool | 48 |
-| doorman | 4 |
-| year_built | 50 |
+| dog_weight_limit_lb | 19 |
+| parking_type | 79 |
+| parking_fee | 35 |
+| pet_rent | 58 |
+| pool | 22 |
+| doorman | 2 |
+| year_built | 29 |
 | toll_rt_ezpass | 100 |
-| transit_sat_median | 95 |
-| near_violent_250m_24m | 10 |
-| live_status | 85 |
-| rent_first_full_payment_date | 55 |
-| ev_pause_notes | 26 |
+| transit_sat_median | 99 |
+| near_violent_250m_24m | 11 |
+| live_status | 78 |
+| rent_first_full_payment_date | 67 |
+| ev_pause_notes | 18 |
 
 ## Last lines of each step
 
@@ -103,7 +102,7 @@ test_parsers: 259 assertions passed
 
 **rule tests (every repaired defect and rule, pure)**
 ```
-test_rules (rules): 910 checks, 0 failed
+test_rules (rules): 1053 checks, 0 failed
 ```
 
 **building amenities (cached pages)**
@@ -151,20 +150,20 @@ needs_call: {'yes': 1587, 'no': 918}
 
 **ranking and selection**
 ```
-evidence: 36 units excluded, shown 516, avoid cards 35, of them with an asterisk 218 ({'elevator': 112, 'listing': 66, 'dogs allowed': 28, 'availability': 9, 'eligibility': 3}), held for a confirmation 14; shown and never re-read (information only, not an open item) 98
-stages: 2451 costed -> -982 over the all-in cap -> -330 Jamaica safety rule -> -185 failed a gate on confirmed facts -> -76 not an apartment (floor plan, building price, co-living room) -> -87 removed by a reviewed verdict -> -1 sibling floor rule -> -97 sketchy -> -36 evidence exclusions -> 657 ranked
-shown buildings 200; disclosures: {'floor not published': 471, 'special offer': 301, 'lease term': 129, 'could pass $3,000': 106, 'washer and dryer to confirm': 70, 'one-time costs': 59, 'dog weight limit not published': 29, 'no broker fee': 19, 'overnight street parking': 18, 'net-effective rent': 15, 'furnished apartment': 11, 'income requirement': 9, 'broker fee': 8, 'condo rented by its owner': 4, 'credit score requirement': 3, 'something else to know': 1}
-(kept 657 units; candidates 346; shown 371; pools: {'': 362, 'pool': 274, 'indoor': 21}
+evidence: 19 units excluded, shown 89, avoid cards 14, of them with an asterisk 26 ({'listing': 11, 'elevator': 9, 'eligibility': 3, 'availability': 2, 'dogs allowed': 1}), held for a confirmation 6; shown and never re-read (information only, not an open item) 21
+stages: 2451 costed -> -982 over the all-in cap -> -330 Jamaica safety rule -> -941 failed a gate on confirmed facts -> -30 not an apartment (floor plan, building price, co-living room) -> -11 removed by a reviewed verdict -> -0 sibling floor rule -> -19 sketchy -> -19 evidence exclusions -> 119 ranked
+shown buildings 48; disclosures: {'floor not published': 85, 'special offer': 51, 'one-time costs': 19, 'lease term': 11, 'washer and dryer to confirm': 11, 'overnight street parking': 6, 'broker fee': 4, 'income requirement': 2, 'dog weight limit not published': 1, 'net-effective rent': 1, 'something else to know': 1, 'condo rented by its owner': 1}
+(kept 119 units; candidates 97; shown 97; pools: {'': 94, 'pool': 22, 'indoor': 3}
 ```
 
 **rule tests on the output**
 ```
-test_rules (data): 517 checks, 0 failed
+test_rules (data): 427 checks, 0 failed
 ```
 
 **field registry, wiring check, shown-list assertions and the review rule**
 ```
-field registry: {'used': 563, 'display': 339, 'provenance': 210, 'not_used': 17}
+field registry: {'used': 570, 'display': 341, 'provenance': 212, 'not_used': 14}
 shown-list assertions: all pass
 ```
 

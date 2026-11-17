@@ -343,5 +343,400 @@
 "at": "2026-11-17T16:54:06+00:00",
 "status": 200,
 "reason": "ok"
+},
+"/nj/union-city/1200-central-ave": {
+"at": "2026-11-17T16:54:33+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/union-city/2407-west-st": {
+"at": "2026-11-17T16:54:35+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/union-city/4905-park-ave": {
+"at": "2026-11-17T16:54:38+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/union-city/500-central-ave--38": {
+"at": "2026-11-17T16:54:40+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/union-city/522-23rd-st": {
+"at": "2026-11-17T16:54:43+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/union-city/606-kennedy-blvd--1": {
+"at": "2026-11-17T16:54:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/palisades-park/48-grand-avenue": {
+"at": "2026-11-17T16:54:58+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/palisades-park/51-e-brinkerhoff-aveapartment-2--1": {
+"at": "2026-11-17T16:55:00+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/palisades-park/heath-court--1": {
+"at": "2026-11-17T16:55:03+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/palisades-park/maples-on-broad--1": {
+"at": "2026-11-17T16:55:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/palisades-park/poplar-place--1": {
+"at": "2026-11-17T16:55:08+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/cliffside-park/3-crescent-avenue": {
+"at": "2026-11-17T16:55:21+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/cliffside-park/464-gorge-road": {
+"at": "2026-11-17T16:55:23+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/cliffside-park/509-saint-pauls": {
+"at": "2026-11-17T16:55:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/cliffside-park/515-anderson--1": {
+"at": "2026-11-17T16:55:28+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/cliffside-park/9-manhattan-place": {
+"at": "2026-11-17T16:55:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/guttenberg/17-68th-st--1": {
+"at": "2026-11-17T16:55:43+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/guttenberg/301-71st-st": {
+"at": "2026-11-17T16:55:46+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/guttenberg/7100-blvd-e": {
+"at": "2026-11-17T16:55:48+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/west-new-york/331-59th-st": {
+"at": "2026-11-17T16:56:03+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/west-new-york/332-61st-st--2": {
+"at": "2026-11-17T16:56:06+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/west-new-york/5107-hudson-ave": {
+"at": "2026-11-17T16:56:08+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/west-new-york/5206-bergenline-ave": {
+"at": "2026-11-17T16:56:11+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/west-new-york/5304-palisade-ave--1": {
+"at": "2026-11-17T16:56:13+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/west-new-york/5608-hudson-aveapt-21--1": {
+"at": "2026-11-17T16:56:16+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/west-new-york/5902-madison-st": {
+"at": "2026-11-17T16:56:18+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/west-new-york/6040-blvd-e": {
+"at": "2026-11-17T16:56:21+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/west-new-york/6045-blvd-e": {
+"at": "2026-11-17T16:56:23+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/west-new-york/6120-monroe-pl--1": {
+"at": "2026-11-17T16:56:26+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/west-new-york/6208-palisade-ave--1": {
+"at": "2026-11-17T16:56:28+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/west-new-york/6215-jfk-boulevard-east--1": {
+"at": "2026-11-17T16:56:31+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/englewood/100-palisade-avenue": {
+"at": "2026-11-17T16:56:43+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/englewood/513-515-grand-ave": {
+"at": "2026-11-17T16:56:46+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/englewood/the-brownstones-at-englewood-south": {
+"at": "2026-11-17T16:56:48+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/ridgefield/855-broad-avenue--1": {
+"at": "2026-11-17T16:56:58+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/ridgefield-park/238-main-street": {
+"at": "2026-11-17T16:57:09+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bogota/320-elm-avenue": {
+"at": "2026-11-17T16:57:18+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bogota/65-e-main-street": {
+"at": "2026-11-17T16:57:21+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bogota/68-main-street--1": {
+"at": "2026-11-17T16:57:23+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/north-bergen/1100-83rd-street": {
+"at": "2026-11-17T16:57:36+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/north-bergen/1107-72nd-st": {
+"at": "2026-11-17T16:57:38+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/north-bergen/126-73rd-street": {
+"at": "2026-11-17T16:57:41+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/north-bergen/1931-john-f-kennedy-blvd": {
+"at": "2026-11-17T16:57:43+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/north-bergen/7021-durham-ave": {
+"at": "2026-11-17T16:57:46+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/north-bergen/7427-blvd-e": {
+"at": "2026-11-17T16:57:49+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/north-bergen/7505-palisade-avenue--1": {
+"at": "2026-11-17T16:57:51+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/north-bergen/8508-kennedy-blvd-apt-d3": {
+"at": "2026-11-17T16:57:53+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/north-bergen/8600-1st-avenue-c1": {
+"at": "2026-11-17T16:57:56+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/north-bergen/907-87th-st": {
+"at": "2026-11-17T16:57:58+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/north-bergen/plaza-53": {
+"at": "2026-11-17T16:58:01+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/north-bergen/the-rail-at-north-bergen": {
+"at": "2026-11-17T16:58:03+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/fairview/280-sedore-avenue": {
+"at": "2026-11-17T16:58:16+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/fairview/322-anderson-avenue": {
+"at": "2026-11-17T16:58:18+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/fairview/414-7th-st": {
+"at": "2026-11-17T16:58:21+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/fairview/47-bergen-blvd": {
+"at": "2026-11-17T16:58:23+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/fairview/685-prospect-ave": {
+"at": "2026-11-17T16:58:26+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/tenafly/15a-grove-street": {
+"at": "2026-11-17T16:58:36+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/tenafly/190-county-road": {
+"at": "2026-11-17T16:58:38+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/tenafly/274-county-road--1": {
+"at": "2026-11-17T16:58:41+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/hackensack/100-2nd-street": {
+"at": "2026-11-17T16:58:56+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/hackensack/112-pink-street": {
+"at": "2026-11-17T16:58:58+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/hackensack/119-1st-street--1": {
+"at": "2026-11-17T16:59:01+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/hackensack/12-plex-realty-llc": {
+"at": "2026-11-17T16:59:03+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/hackensack/125-lawrence-street": {
+"at": "2026-11-17T16:59:06+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/hackensack/160-overlook-avenue--2": {
+"at": "2026-11-17T16:59:08+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/hackensack/245-anderson-st-apt-1a": {
+"at": "2026-11-17T16:59:11+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/hackensack/377-park-st": {
+"at": "2026-11-17T16:59:13+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/hackensack/418-hudson-st": {
+"at": "2026-11-17T16:59:16+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/hackensack/briarwood-commons": {
+"at": "2026-11-17T16:59:18+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/hackensack/grand-imperial-apartments": {
+"at": "2026-11-17T16:59:21+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/hackensack/linden-house--1": {
+"at": "2026-11-17T16:59:24+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/hackensack/oak-terrace": {
+"at": "2026-11-17T16:59:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/hackensack/summit-manor-apartments": {
+"at": "2026-11-17T16:59:29+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/hackensack/the-walcott-hackensack": {
+"at": "2026-11-17T16:59:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bergenfield/96-lincoln-avenue": {
+"at": "2026-11-17T16:51:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/east-rutherford/295-grove-street": {
+"at": "2026-11-17T16:59:54+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/east-rutherford/meadowlands-east-rutherford": {
+"at": "2026-11-17T16:59:56+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/little-ferry/156-liberty-street--1": {
+"at": "2026-11-17T17:00:09+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/little-ferry/236-franklin-st": {
+"at": "2026-11-17T17:00:12+00:00",
+"status": 200,
+"reason": "ok"
 }
 }

@@ -754,10 +754,15 @@ def data_4(M, R, S):
     ok(set(DT.building_id) <= set(M.building_id) | set(), "step 3: every row of the doubt table names a building in the master")
     dm = M[M.building_id.isin(set(DT.building_id)) & (M.elevator == "yes") & (M.elevator_basis != "confirmed_by_phone")]
     ok((dm.elevator_doubt != "").all(), "step 3: every building of the doubt table has the elevator doubt set")
-    ds = S[S.elevator_doubt != ""]
-    ok((ds.confirm_what == "elevator").all() and (ds.confirm_asterisk == "yes").all(), "step 3: a shown unit under elevator doubt carries the elevator asterisk as its one open item")
+    # owner, 2026-11-17: an elevator in doubt (doubt table, garden-style rule) no longer matters on floor 2 (floor_2: settled);
+    # on floor 3+ or an unknown floor it is still the elevator asterisk
+    ds_all = S[S.elevator_doubt != ""]
+    ds = ds_all[ds_all.floor_elevator_code != "floor_2"]
+    ok((ds.confirm_what == "elevator").all() and (ds.confirm_asterisk == "yes").all(), "step 3: a shown unit under elevator doubt (not on floor 2) carries the elevator asterisk as its one open item")
     ok(ds[(ds.elevator_evidence_open == "")].to_confirm.str.contains("Confirm an elevator serves this apartment", regex=False).all(), "step 3: ... with the question 'confirm an elevator serves this apartment'")
     ok((pd.to_numeric(ds.open_gate_facts) == 1).all(), "step 3: a doubted unit is shown only when the elevator is its single open gate fact (a listing never re-read is not a second one)")
+    d2 = ds_all[ds_all.floor_elevator_code == "floor_2"]
+    ok(not d2.open_keys.str.split(";").map(lambda k: "elevator" in k).any(), "floor 2: a floor-2 apartment under elevator doubt carries no elevator item (owner, 2026-11-17)")
     # ---- step 4: pet rent estimated, all_in_likely, the new disclosure
     ok(not M.all_in_unknown_lines.str.contains("pet rent").any(), "step 4a: pet rent is never unknown-and-nothing")
     est = M[M.all_in_estimated_lines.str.contains("pet rent")]
@@ -1166,10 +1171,25 @@ def data_6(L_):
     ok(set(X.index) == set(G.index) and (X.boundary == (X.ratio >= 0.9)).all(), "groups: the distance file covers every neighborhood and flags the boundary cases")
     R = pd.read_csv(DATA / "ranked_units.csv", dtype=str, keep_default_na=False, low_memory=False)
     # step 1: the listing gate and the ranking agree on every ranked unit
+    # owner, 2026-11-17: the elevator is judged with the floor (parsers.floor_elevator_rule). A ranked unit is settled or
+    # carries ONE open fact (elevator, or floor_or_elevator); 'no' / 'unknown' elevators rank only where the floor allows
     st = R.elevator_rule_status
-    ok(st.isin(["established", "open"]).all(), "elevator rule: no ranked unit has an 'unknown' or 'no' elevator")
-    ok((R[R.shown == "True"].open_keys.str.split(";").map(lambda k: "elevator" in k) == (R[R.shown == "True"].elevator_rule_status == "open")).all(),
-       "elevator rule: a shown unit carries the elevator asterisk exactly when the rule says 'open'")
+    fst, fcode = R.floor_elevator_status, R.floor_elevator_code
+    ok(fst.isin(["settled", "open"]).all(), "floor/elevator rule: no ranked unit fails it or is unknown under it")
+    ok((st.isin(["established", "open"]) | fcode.isin(["floor_2", P.FLOOR_OR_ELEVATOR_CODE])).all(), "floor/elevator rule: an elevator 'no' or 'unknown' ranks only on floor 2 or as floor_or_elevator")
+    ok((fst[st == "established"] == "settled").all() and (fcode[st == "established"] == "").all(), "floor/elevator rule: an apartment with an established elevator is unaffected")
+    ok((R[R.shown == "True"].open_keys.str.split(";").map(lambda k: "elevator" in k) == (R[R.shown == "True"].floor_elevator_status == "open")).all(),
+       "floor/elevator rule: a shown unit carries the elevator item exactly when the rule says 'open'")
+    sh = R[R.shown == "True"]
+    ok((sh[sh.floor_elevator_code == P.FLOOR_OR_ELEVATOR_CODE].confirm_what == P.FLOOR_OR_ELEVATOR_LABEL).all(), "floor/elevator rule: floor_or_elevator is named 'floor and elevator' on the asterisk")
+    ok(sh[sh.floor_elevator_code == P.FLOOR_OR_ELEVATOR_CODE].to_confirm.str.contains(P.FLOOR_OR_ELEVATOR_Q, regex=False).all(), "floor/elevator rule: ... with the question 'Confirm the floor, and whether there is an elevator'")
+    w2 = sh[(sh.floor_elevator_code == "floor_2") & ~sh.unit_floor_basis.isin(["confirmed", "stated", "confirmed_by_phone"])]
+    ok(w2.disclosures.str.contains("floor_read_from_number", regex=False).all() and (w2.floor_basis_note == "read from the unit number").all(),
+       "floor/elevator rule: a walk-up on floor 2 read from the apartment number carries the 'read from the apartment number' disclosure")
+    cur_ = pd.to_numeric(R.live_price.where(R.live_status.isin(["live", "changed"]) & (R.live_price != ""), R.listed_rent), errors="coerce")
+    ok(not (cur_ > 2200).any(), "rent: no ranked unit has a listed base rent over $2,200 (owner, 2026-11-17)")
+    ok(not (pd.to_numeric(L_.listed_rent.str.replace(r"[$,]", "", regex=True), errors="coerce") > 2200)[L_.gate_status != "fail"].any(), "rent: every listing over $2,200 fails the listing gate")
+    ok(L_[pd.to_numeric(L_.listed_rent.str.replace(r"[$,]", "", regex=True), errors="coerce") > 2200].fail_reasons.str.contains("over_2200").all(), "rent: ... with the reason over_2200")
     g = L_.set_index("listing_id").elevator_rule_status
     ok(set(L_[L_.g_elevator == "pass"].elevator_rule_status) <= {"established", "open"} and set(L_[L_.g_elevator == "fail"].elevator_rule_status) == {"no"}
        and set(L_[L_.g_elevator == "unknown"].elevator_rule_status) == {"unknown"}, "elevator rule: gate result follows the rule's status")
@@ -1908,7 +1928,8 @@ def data_ic5(M, R, S):
     free = S[pd.to_numeric(S.parking_fee, errors="coerce") == 0]
     ok((free.parking_included_kind != "").all(), "N1: every free parking space says which kind is included (or 'unspecified')")
     lot_free = free[free.parking_included_kind.isin(["open_lot", "assigned_lot", "off_street", "assigned"])]
-    ok(len(lot_free) >= 20 and (pd.to_numeric(lot_free.parking_rank, errors="coerce") == 2).all(), "N1: a free lot space is scored as a lot (rank 2), never as a garage")
+    # (the count was >= 20 at $3,000; at the $2,200 limit of 2026-11-17 fewer apartments are shown)
+    ok(len(lot_free) >= 1 and (pd.to_numeric(lot_free.parking_rank, errors="coerce") == 2).all(), "N1: a free lot space is scored as a lot (rank 2), never as a garage")
     for name, kind in [("Spinnaker Wharf Apartments", "off_street"), ("TGM Anchor Point", "open_lot"), ("The Edge At Raritan Heights", "open_lot"), ("Kensington Place", "open_lot"), ("Woodmont West", "open_lot"),
                        ("Reserve at Riverdale", "open_lot"), ("J Centra Burlington", "open_lot")]:
         x = S[S.building_name == name]
@@ -2045,8 +2066,169 @@ def page_ic5(J, M, R, S):
     ok(not shown_crime, f"N13: a car-crime sentence sits on a SHOWN apartment (it belongs to avoid cards only): {shown_crime[:2]}")
     ok(not any(b.get("name") and re.search(r",\s*[A-Za-z .]+ (?:NY|NJ|CT)$", b["name"]) for b in J["buildings"]), "D25: a building is named by its address and town")
 
+def pure_floor_elevator():
+    """Owner, 2026-11-17 (second trawl): floor and elevator together (parsers.floor_elevator_rule), the $2,200 collection
+    limit, building heights (data/reference/building_stories.csv). Every combination of elevator x floor x storeys."""
+    import tempfile
+    import pandas as pd
+    import gates
+    import rank
+    import avoid
+    import build_master
+    R_ = P.floor_elevator_rule
+    FE = P.FLOOR_OR_ELEVATOR_CODE
+    # elevator x floor, no height on record. Floors: 1 (page), 2 (page), 3 and 7 (page), unknown, read from a label
+    want = {
+        "established": {("1", "page"): ("fail", "ground_floor"), ("2", "page"): ("settled", ""), ("3", "page"): ("settled", ""),
+                        ("7", "page"): ("settled", ""), (None, ""): ("settled", ""), ("2", "label"): ("settled", ""),
+                        ("1", "label"): ("fail", "ground_floor"), ("4", "label"): ("settled", ""), ("0", "label"): ("fail", "ground_floor")},
+        "open":        {("1", "page"): ("fail", "ground_floor"), ("2", "page"): ("settled", "floor_2"), ("3", "page"): ("open", "elevator"),
+                        ("7", "page"): ("open", "elevator"), (None, ""): ("open", "elevator"), ("2", "label"): ("settled", "floor_2"),
+                        ("1", "label"): ("fail", "ground_floor"), ("4", "label"): ("open", "elevator"), ("0", "label"): ("fail", "ground_floor")},
+        "no":          {("1", "page"): ("fail", "ground_floor"), ("2", "page"): ("settled", "floor_2"), ("3", "page"): ("fail", "no_elevator_above_floor_2"),
+                        ("7", "page"): ("fail", "no_elevator_above_floor_2"), (None, ""): ("open", FE), ("2", "label"): ("settled", "floor_2"),
+                        ("1", "label"): ("fail", "ground_floor"), ("4", "label"): ("fail", "no_elevator_above_floor_2"), ("0", "label"): ("fail", "ground_floor")},
+        "unknown":     {("1", "page"): ("fail", "ground_floor"), ("2", "page"): ("settled", "floor_2"), ("3", "page"): ("unknown", ""),
+                        ("7", "page"): ("unknown", ""), (None, ""): ("open", FE), ("2", "label"): ("settled", "floor_2"),
+                        ("1", "label"): ("fail", "ground_floor"), ("4", "label"): ("unknown", ""), ("0", "label"): ("fail", "ground_floor")},
+    }
+    for el, cases in want.items():
+        for (f, how), w in cases.items():
+            eq(R_(el, f, how), w, f"floor/elevator: elevator {el}, floor {f} ({how or 'unknown'})")
+    eq(R_("conflicting", "2", "page"), ("settled", "floor_2"), "floor/elevator: sources conflict on the elevator, floor 2 passes")
+    eq(R_("conflicting", "3", "page"), ("fail", "no_elevator_above_floor_2"), "floor/elevator: sources conflict on the elevator, floor 3 fails as before")
+    eq(R_("conflicting", None, ""), ("open", FE), "floor/elevator: sources conflict on the elevator, unknown floor is one open fact")
+    # a 'weak' reading (a complex label read with the building's floor count) only ever fails
+    eq(R_("unknown", "2", "weak"), ("open", FE), "floor/elevator: a weak label reading of floor 2 does not pass a walk-up")
+    eq(R_("unknown", "1", "weak"), ("fail", "ground_floor"), "floor/elevator: a weak label reading of floor 1 still fails")
+    eq(R_("established", "2", "weak"), ("settled", ""), "floor/elevator: a weak reading with an elevator is as before")
+    eq(R_("unknown", "2", "bogus"), ("open", FE), "floor/elevator: an unknown 'how' is no floor")
+    # building heights. Official record of one storey: every apartment is on the ground floor unless a page says otherwise
+    for el in ("established", "open", "no", "unknown"):
+        eq(R_(el, None, "", "1", "official_record"), ("fail", "one_storey_building"), f"storeys: one storey on an official record fails ({el})")
+        eq(R_(el, "2", "label", "1", "official_record"), ("fail", "one_storey_building"), f"storeys: a label reading 2 in a one-storey building is not a floor ({el})")
+        eq(R_(el, "2", "page", "1", "official_record")[0], "settled", f"storeys: a floor a page states outranks the record ({el})")
+        # OpenStreetMap is weak: one storey there does not fail a unit by itself
+        eq(R_(el, None, "", "1", "osm")[0], "settled" if el == "established" else "open", f"storeys: OSM one storey does not fail by itself ({el})")
+    # 1-2 storeys on a record: floor 2 needs no elevator; a label reading floor 3+ there is not a floor
+    for basis in ("official_record", "osm", "listing"):
+        eq(R_("unknown", "2", "label", "2", basis), ("settled", "floor_2"), f"storeys: floor 2 in a 2-storey building ({basis})")
+        eq(R_("no", "2", "page", "2", basis), ("settled", "floor_2"), f"storeys: walk-up, floor 2, 2 storeys ({basis})")
+        eq(R_("unknown", "3", "label", "2", basis), ("open", FE), f"storeys: a label reading 3 in a 2-storey building is not a floor ({basis})")
+        eq(R_("no", "3", "label", "2", basis), ("open", FE), f"storeys: no elevator, label 3 in 2 storeys: floor unknown, one open fact ({basis})")
+        eq(R_("open", None, "", "2", basis), ("open", FE), f"storeys: an elevator in doubt in a 2-storey building is asked as floor_or_elevator ({basis})")
+        eq(R_("established", None, "", "2", basis), ("settled", ""), f"storeys: an established elevator is unaffected by the height ({basis})")
+        eq(R_("unknown", "3", "page", "2", basis), ("unknown", ""), f"storeys: a floor a page states is kept ({basis})")
+    eq(R_("unknown", "4", "label", "6", "osm"), ("unknown", ""), "storeys: OSM 6 storeys never infers an elevator")
+    eq(R_("unknown", None, "", "6", "osm"), ("open", FE), "storeys: OSM 6 storeys, unknown floor: still floor_or_elevator")
+    eq(R_("unknown", None, "", "2", "guess"), ("open", FE), "storeys: an unknown basis is ignored")
+    eq(R_("unknown", None, "", "", "official_record"), ("open", FE), "storeys: a blank count is ignored")
+    # OSM is never passed to the elevator rule as a height: elevator_rule_master reads building_floors only
+    row = {"elevator": "", "elevator_basis": "", "building_floors": "", "building_floors_basis": "", "building_stories": "8", "building_stories_basis": "osm"}
+    eq(P.elevator_rule_master(lambda c: row.get(c, ""))[0], "unknown", "storeys: an OSM height of 8 does not infer an elevator")
+    row = {"elevator": "", "elevator_basis": "", "building_floors": "8", "building_floors_basis": "official_record"}
+    eq(P.elevator_rule_master(lambda c: row.get(c, "")), ("open", "inferred_6plus_floors"), "storeys: an official record of 8 floors infers an elevator (open), as PLUTO does")
+    # floor_how: what counts as the floor
+    eq(P.floor_how("stated"), "page", "floor_how: stated")
+    eq(P.floor_how("confirmed_by_phone"), "page", "floor_how: phone")
+    eq(P.floor_how("confirmed"), "page", "floor_how: confirmed")
+    eq(P.floor_how("inferred", "simple"), "label", "floor_how: a simple label ('2B')")
+    eq(P.floor_how("inferred", "ground_word"), "label", "floor_how: a ground word")
+    eq(P.floor_how("inferred", "complex"), "weak", "floor_how: a complex reading")
+    eq(P.floor_how("inferred", "complex", "2"), "label", "floor_how: a reviewed numbering convention reads the floor")
+    eq(P.floor_how("unknown", "", ""), "", "floor_how: unknown")
+    eq(P.floor_how("", "", "2"), "label", "floor_how: a tower or convention reading with no other floor")
+    # master rows: the label '2B' and the reviewed convention (data/reference/unit_numbering_conventions.csv)
+    mk = lambda **kw: (lambda c: str(kw.get(c, "")))
+    eq(P.floor_elevator_master(mk(unit_floor="2", unit_floor_basis="inferred", unit_floor_label_kind="simple"), "unknown"), ("settled", "floor_2"), "master: '2B' read as floor 2, walk-up passes")
+    eq(P.floor_elevator_master(mk(unit_floor="3", unit_floor_basis="inferred", unit_floor_label_kind="complex", unit_floor_reading="2"), "no"), ("settled", "floor_2"),
+       "master: the convention reading (2) outranks the plain label reading")
+    eq(P.floor_elevator_master(mk(unit_floor="", unit_floor_basis="unknown", unit_floor_reading="2"), "unknown"), ("settled", "floor_2"), "master: a convention reading alone counts")
+    eq(P.floor_elevator_master(mk(unit_floor="", unit_floor_basis="unknown", unit_floor_reading="1"), "established"), ("fail", "ground_floor"), "master: a convention reading of floor 1 fails as before")
+    eq(P.floor_elevator_master(mk(unit_floor="5", unit_floor_basis="stated", building_stories="2", building_stories_basis="official_record"), "established"), ("settled", ""), "master: elevator established, floor 5: unaffected")
+    eq(P.floor_elevator_master(mk(unit_floor="", unit_floor_basis="unknown"), "unknown"), ("open", FE), "master: nothing known: one open fact")
+    eq(P.floor_elevator_master(mk(unit_floor="", unit_floor_basis="unknown", building_stories="1", building_stories_basis="official_record"), "unknown"), ("fail", "one_storey_building"), "master: one-storey record")
+    # the listing gate
+    G_ = gates.floor_elevator_gate
+    eq(G_("established", "unknown", "", "", ""), ("pass", ""), "gate: elevator established, floor unknown: pass (disclosure)")
+    eq(G_("unknown", "pass", 2, "inferred", "simple"), ("pass", "floor_2"), "gate: '2B' with the elevator unknown passes")
+    eq(G_("no", "pass", 2, "stated", ""), ("pass", "floor_2"), "gate: no elevator, floor 2 stated: pass")
+    eq(G_("no", "pass", 3, "stated", ""), ("fail", "no_elevator_above_floor_2"), "gate: no elevator, floor 3: fail")
+    eq(G_("unknown", "pass", 5, "stated", ""), ("unknown", ""), "gate: elevator unknown, floor 5: pending")
+    eq(G_("unknown", "unknown", "", "", ""), ("pass", FE), "gate: neither stated: one open fact (pass, counted by rank.py)")
+    eq(G_("no", "unknown", "", "", ""), ("pass", FE), "gate: no elevator, floor unknown: one open fact")
+    eq(G_("open", "unknown", "", "", ""), ("pass", "elevator"), "gate: an elevator in doubt with the floor unknown: the elevator fact, as before")
+    eq(G_("established", "fail", 1, "stated", ""), ("fail", "ground_floor"), "gate: ground floor fails with an elevator")
+    eq(G_("unknown", "fail", 0, "inferred", "ground_word"), ("fail", "ground_floor"), "gate: 'G' fails")
+    eq(G_("unknown", "pass", 2, "inferred", "complex"), ("pass", FE), "gate: a complex reading of floor 2 does not pass a walk-up (open fact)")
+    eq(G_("unknown", "unknown", "", "", "", "1", "official_record"), ("fail", "one_storey_building"), "gate: one storey on an official record")
+    eq(G_("unknown", "pass", 3, "inferred", "simple", "2", "osm"), ("pass", FE), "gate: label 3 in a 2-storey building: floor unknown")
+    # the rent limit: $2,200 listed base rent; the $3,000 total test is unchanged
+    eq(gates.RENT_MAX, 2200, "rent: collection limit is $2,200 listed base rent")
+    eq(gates.RENT_FAIL_REASON, "over_2200", "rent: the fail reason is over_2200")
+    row_ = lambda v: type("R", (), {"listed_rent": v})()
+    eq(gates.gate_rent(row_("2200")), "pass", "rent: $2,200 passes")
+    eq(gates.gate_rent(row_("$2,200.00")), "pass", "rent: '$2,200.00' passes")
+    eq(gates.gate_rent(row_("2201")), "fail", "rent: $2,201 fails")
+    eq(gates.gate_rent(row_("2999")), "fail", "rent: $2,999 (passed before) fails now")
+    eq(gates.gate_rent(row_("")), "unknown", "rent: no rent is unknown")
+    eq(rank.RENT_MAX, 2200, "rent: rank.py removes units over $2,200 as well")
+    eq(rank.CAP, 3000, "rent: the $3,000 total cap is unchanged")
+    import check_registry
+    eq((check_registry.RENT_MAX, check_registry.CAP), (2200, 3000), "rent: check_registry asserts $2,200 base rent and the $3,000 total")
+    # the evidence exclusions that only say "no elevator" (avoid.py kind elevator) are not removals by themselves
+    ok(avoid.is_elevator_exclusion("elevator contradicted: no elevator (walk-up)"), "avoid: 'elevator contradicted' is an elevator exclusion")
+    ok(avoid.is_elevator_exclusion("elevator not stated anywhere and the checker's reading is that there is none: probably a walk-up"), "avoid: the checker's no-lift reading is an elevator exclusion")
+    ok(not avoid.is_elevator_exclusion("ground-floor unit: 1 (ground floor)"), "avoid: a ground-floor exclusion is not an elevator exclusion")
+    # rank.py: the rule on a frame, and an apartment shown before with an elevator is unaffected
+    U = pd.DataFrame({"unit_floor": ["2.0", "", "5", "", "1", "3"], "unit_floor_basis": ["inferred", "unknown", "stated", "unknown", "stated", "stated"],
+                      "unit_floor_label_kind": ["simple", "", "", "", "", ""], "unit_floor_reading": ["", "", "", "", "", ""],
+                      "building_stories": ["", "", "", "2", "", ""], "building_stories_basis": ["", "", "", "official_record", "", ""]})
+    st_, code_ = rank.floor_elevator_rows(U, "established")
+    eq(list(st_), ["settled", "settled", "settled", "settled", "fail", "settled"], "rank: elevator established: every floor but the ground floor as before")
+    eq(list(code_), ["", "", "", "", "ground_floor", ""], "rank: elevator established: no new code")
+    st_, code_ = rank.floor_elevator_rows(U, pd.Series(["unknown", "no", "open", "open", "no", "no"]))
+    eq(list(zip(st_, code_)), [("settled", "floor_2"), ("open", FE), ("open", "elevator"), ("open", FE), ("fail", "ground_floor"), ("fail", "no_elevator_above_floor_2")],
+       "rank: walk-up floor 2 from '2B'; no elevator + unknown floor; doubt + floor 5; doubt in a 2-storey building; ground; walk-up floor 3")
+    # garden-style / doubt table: an elevator in doubt no longer keeps a floor-2 apartment open (or out)
+    row = {"elevator": "yes", "elevator_basis": "stated", "elevator_doubt": "rule: garden-style", "unit_floor": "2", "unit_floor_basis": "stated"}
+    st_d = P.elevator_rule_master(lambda c: row.get(c, ""))[0]
+    eq(st_d, "open", "garden-style: the elevator stays in doubt")
+    eq(P.floor_elevator_master(lambda c: row.get(c, ""), st_d), ("settled", "floor_2"), "garden-style: a floor-2 apartment is settled, not open")
+    row["unit_floor"] = "3"
+    eq(P.floor_elevator_master(lambda c: row.get(c, ""), P.elevator_rule_master(lambda c: row.get(c, ""))[0]), ("open", "elevator"), "garden-style: floor 3 keeps the elevator open, as before")
+    # building_stories.csv: absent, partial, by addr_key, by the crosswalk, by coordinates within 30 m, basis order
+    with tempfile.TemporaryDirectory() as td:
+        td = Path(td)
+        xw = td / "xw.csv"
+        pd.DataFrame({"addr_key": ["1 main st|07001", "1-3 main st|07001"], "building_id": ["b_1", "b_1"], "street_key": ["", ""]}).to_csv(xw, index=False)
+        S0 = build_master.BuildingStories(td / "missing.csv", xw)
+        eq((len(S0), S0.lookup("1 main st|07001")), (0, None), "storeys: an absent file gives nothing")
+        f = td / "st.csv"
+        f.write_text("addr_key,lat,lon,stories,stories_basis,source_name,source_url,retrieved_at\n"
+                     "1-3 main st|07001,40.7,-74.0,2,osm,OSM,https://osm.example/w1,2026-11-17T00:00:00Z\n"
+                     "1-3 main st|07001,40.7,-74.0,3,official_record,MOD-IV,https://example.gov/1,2026-11-17T00:00:00Z\n"
+                     "9 elm st|07002,40.8,-74.1,,official_record,MOD-IV,,\n"
+                     "5 oak st|07003,40.9,-74.2,2,osm,OSM,https://osm.example/w2,2026-11-17T00:00:00Z\n"
+                     "7 ash st|07004,41.0,-74.3,4,guess,x,,\n")
+        S1 = build_master.BuildingStories(f, xw)
+        eq(len(S1), 3, "storeys: rows with no count or an unknown basis are dropped")
+        r1 = S1.lookup("1 main st|07001")
+        eq((r1["stories"], r1["basis"], r1["match"]), ("3", "official_record", "building_crosswalk"), "storeys: joined through the crosswalk; the official record outranks OSM")
+        eq(S1.lookup("9 elm st|07002"), None, "storeys: a blank count gives nothing")
+        r2 = S1.lookup("", "", 40.9001, -74.2)
+        ok(r2 is not None and r2["stories"] == "2" and r2["match"].startswith("coordinates"), f"storeys: matched by coordinates within 30 m: {r2}")
+        eq(S1.lookup("", "", 40.9005, -74.2), None, "storeys: 55 m away is not the same building")
+        eq(S1.lookup("5 oak st|07003")["match"], "addr_key", "storeys: addr_key first")
+        bad = td / "bad.csv"
+        bad.write_text("addr_key,stories\n")
+        eq(len(build_master.BuildingStories(bad, xw)), 0, "storeys: a header-only (partial) file gives nothing")
+        eq(len(build_master.BuildingStories(td / "empty.csv" if (td / "empty.csv").write_text("") == 0 else td / "empty.csv", xw)), 0, "storeys: an empty file gives nothing")
+
+
 if __name__ == "__main__":
     if "--data" not in sys.argv:
+        pure_floor_elevator()
         pure_ic4()
         pure_ic4_text()
         pure_cleanup()

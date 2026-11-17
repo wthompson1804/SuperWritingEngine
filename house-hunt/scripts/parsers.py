@@ -1408,10 +1408,9 @@ def characterises_residents_by_group(text) -> bool:
 #      counts only with a floor count of 6+ beside it, which is already a height)  -> open ("inferred from height")
 #   6  anything else                                                              -> unknown
 # NEVER used, to pass or to fail: a floor read from a unit label ("42M", "1804"); a neighbouring ("nearest") tax lot.
-# What the stages do with the result:
-#   listing gate (gates.py)   established, open -> pass;  no -> fail;  unknown -> pending
-#   ranking (rank.py)         established -> settled;  open -> ONE open gate fact (asterisk);  unknown -> not shown;
-#                             no -> removed
+# What the stages do with the result: since 2026-11-17 (owner, second trawl) the status goes into floor_elevator_rule
+# (below), which judges it together with the floor. Before: listing gate established, open -> pass; no -> fail;
+# unknown -> pending; ranking established -> settled, open -> one open gate fact, unknown -> not shown, no -> removed.
 ELEVATOR_MIN_FLOORS = 6          # owner, 2026-11-15: a building of 6+ floors is treated as having an elevator (asterisk)
 EXACT_LOT = "house_number+location"
 _LOT_MATCHES = (EXACT_LOT, "nearest_lot")

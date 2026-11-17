@@ -231,8 +231,8 @@ def load_buildings():
     pts = gpd.GeoDataFrame(B, geometry=gpd.points_from_xy(B.lonf, B.latf), crs=4326).to_crs(co.crs)
     j = gpd.sjoin(pts, co, how="left", predicate="within")
     j = j[~j.index.duplicated()]
-    B["county"] = j["NAME"].fillna("").values
-    B["county_state"] = j["STATEFP"].fillna("").values
+    B["county"] = j["NAME"].reindex(B.index).fillna("").values
+    B["county_state"] = j["STATEFP"].reindex(B.index).fillna("").values
 
     def area(r):
         if r.state == "NJ" or r.county_state == "34":
@@ -254,6 +254,562 @@ def load_buildings():
     B = B.sort_values(["prio", "area", "addr_key"]).reset_index(drop=True)
     _BUILDINGS = B
     return B
+
+
+# ---------------------------------------------------------------- addresses
+SUFFIX = {"STREET": "ST", "STR": "ST", "AVENUE": "AVE", "AV": "AVE", "AVE": "AVE", "BOULEVARD": "BLVD",
+          "BLVD": "BLVD", "ROAD": "RD", "DRIVE": "DR", "DRV": "DR", "PLACE": "PL", "COURT": "CT", "LANE": "LN",
+          "TERRACE": "TER", "TERR": "TER", "PARKWAY": "PKWY", "PKY": "PKWY", "HIGHWAY": "HWY", "CIRCLE": "CIR",
+          "SQUARE": "SQ", "TURNPIKE": "TPKE", "TPK": "TPKE", "PLAZA": "PLZ", "EXTENSION": "EXT", "HEIGHTS": "HTS",
+          "CRESCENT": "CRES", "ALLEY": "ALY", "EXPRESSWAY": "EXPY", "CENTER": "CTR", "TRAIL": "TRL", "WAY": "WAY",
+          "ROW": "ROW", "WALK": "WALK", "PATH": "PATH", "LOOP": "LOOP", "RUN": "RUN", "PIKE": "PIKE", "PARK": "PARK",
+          "CROSSING": "XING", "POINT": "PT", "GARDENS": "GDNS", "HILL": "HL", "BROADWAY": "BROADWAY"}
+DIRS = {"NORTH": "N", "SOUTH": "S", "EAST": "E", "WEST": "W", "N": "N", "S": "S", "E": "E", "W": "W",
+        "NORTHEAST": "NE", "NORTHWEST": "NW", "SOUTHEAST": "SE", "SOUTHWEST": "SW"}
+ORDINAL_WORDS = {"FIRST": "1", "SECOND": "2", "THIRD": "3", "FOURTH": "4", "FIFTH": "5", "SIXTH": "6",
+                 "SEVENTH": "7", "EIGHTH": "8", "NINTH": "9", "TENTH": "10", "ELEVENTH": "11", "TWELFTH": "12"}
+_UNIT_TAIL = re.compile(r"\s(?:#|APT|APARTMENT|UNIT|STE|SUITE|FL|FLOOR|BLDG|BUILDING|RM)\b.*$|\s#.*$")
+
+
+def split_address(addr: str):
+    """'243-247 Stewart Ave.' -> ('243', '247', 'STEWART AVE'); '142-38 37th Ave' -> ('142-38', None, '37 AVE').
+    Returns (number, range_end or None, street) with the street normalised; (None, None, '') when no number."""
+    s = str(addr or "").upper().split(",")[0]
+    s = s.split("/")[0]                               # MOD-IV 'A ST/AKA B ST': the first address
+    s = re.sub(r"[.']", "", s)
+    s = re.sub(r"(?<=[A-Z])(APT|APARTMENT|UNIT|SUITE)(?=[\s#\d]|$)", r" \1", s)   # 'AvenueApt 9'
+    s = re.sub(r"\s\d+(?:ST|ND|RD|TH)\s+(?:FL|FLR|FLOOR)\b.*$", "", s)            # '53 Budd St 2nd Fl'
+    s = _UNIT_TAIL.sub("", " " + s).strip()
+    s = re.sub(r"\b(?:US|NJ|NY|CT|STATE|COUNTY)?\s*(?:HIGHWAY|HWY|ROUTE|RTE|RT)\s*(\d+)", r" RT \1", s)
+    s = re.sub(r"\s+", " ", s).strip()
+    m = re.match(r"^(\d+[A-Z]?)(?:\s*-\s*(\d+[A-Z]?))?\s+(.*)$", s)
+    if not m:
+        return None, None, ""
+    a, b, street = m.group(1), m.group(2), m.group(3)
+    toks = []
+    for t in re.split(r"[\s\-]+", street):
+        if not t:
+            continue
+        t = ORDINAL_WORDS.get(t, t)
+        t = {"SAINT": "ST", "MOUNT": "MT", "FORT": "FT"}.get(t, t)
+        if t in SUFFIX:                   # type words inside a name ('BOULEVARD EAST') are spelled one way too
+            t = SUFFIX[t]
+        t = re.sub(r"^(\d+)(?:ST|ND|RD|TH)$", r"\1", t)
+        toks.append(t)
+    if toks and toks[0] in DIRS and len(toks) > 1:
+        toks[0] = DIRS[toks[0]]
+    if toks and toks[-1] in SUFFIX:
+        toks[-1] = SUFFIX[toks[-1]]
+    if len(toks) > 1 and toks[-1] in DIRS:
+        toks[-1] = DIRS[toks[-1]]
+    return a, b, " ".join(toks)
+
+
+def street_parts(street: str) -> tuple[str, str, str]:
+    """'W 19 ST' -> ('W', '19', 'ST'); 'KENNEDY BLVD' -> ('', 'KENNEDY', 'BLVD'); '37 AVE' -> ('', '37', 'AVE')."""
+    toks = street.split()
+    sfx = dr = ""
+    if len(toks) > 1 and toks[-1] in set(DIRS.values()):
+        dr = toks[-1]
+        toks = toks[:-1]
+    if len(toks) > 1 and toks[-1] in set(SUFFIX.values()):
+        sfx = toks[-1]
+        toks = toks[:-1]
+    if len(toks) > 1 and toks[0] in set(DIRS.values()):
+        dr = dr or toks[0]
+        toks = toks[1:]
+    return dr, " ".join(toks), sfx
+
+
+def street_core(street: str) -> str:
+    """The street name without its type and direction words (the join's first, fast test)."""
+    return street_parts(street)[1]
+
+
+def streets_match(s1: str, s2: str) -> bool:
+    """Same name; type and direction equal where both give one ('37 AVE' is not '37 ST'; 'E 2 ST' is not 'W 2 ST')."""
+    d1, n1, t1 = street_parts(s1)
+    d2, n2, t2 = street_parts(s2)
+    return bool(n1) and n1 == n2 and (not t1 or not t2 or t1 == t2) and (not d1 or not d2 or d1 == d2)
+
+
+def _int(x):
+    m = re.match(r"\d+", str(x or ""))
+    return int(m.group(0)) if m else None
+
+
+def numbers_match(a1, b1, a2, b2) -> bool:
+    """House numbers agree: equal, or one lies in the other's range ('243-247' holds 245)."""
+    if a1 is None or a2 is None:
+        return False
+    if a1 == a2:
+        return True
+    def rng(a, b):
+        lo, hi = _int(a), _int(b) if b else None
+        if lo is not None and hi is not None and hi > lo and hi - lo <= 400:
+            return lo, hi
+        return (lo, lo) if lo is not None else None
+    r1, r2 = rng(a1, b1), rng(a2, b2)
+    if not r1 or not r2:
+        return False
+    if (b1 is None and re.search(r"[A-Z]", a1)) or (b2 is None and re.search(r"[A-Z]", a2)):
+        return False                                   # '5B' is not '5'
+    return r1[0] <= r2[1] and r2[0] <= r1[1]
+
+
+def nyc_number(addr: str) -> str:
+    """Queens-style '142-38' and plain '58' as digits only (as scripts/enrich_nyc_pluto.py: housenum)."""
+    m = re.match(r"\s*(\d+(?:-\d+)?)", str(addr or ""))
+    return re.sub(r"[^0-9]", "", m.group(1)) if m else ""
+
+
+def _metres(lat1, lon1, lat2, lon2) -> float:
+    return math.hypot((lat2 - lat1) * 111320.0, (lon2 - lon1) * 111320.0 * math.cos(math.radians(lat1)))
+
+
+def fmt_num(v) -> str:
+    try:
+        f = float(v)
+    except (TypeError, ValueError):
+        return ""
+    if not math.isfinite(f) or f <= 0:
+        return ""
+    return str(int(f)) if f == int(f) else f"{f:g}"
+
+
+# ---------------------------------------------------------------- New Jersey MOD-IV
+_DESC_RANGE = re.compile(r"^(\d{1,2}(?:\.\d)?)\s?(?:&|AND|TO|/|-)\s?(\d{1,2}(?:\.\d)?)\s?S(?![A-Z]{3})")
+_DESC_S = re.compile(r"^(\d{1,3}(?:\.\d{1,2})?)\s?S(?:TY|TORY|TORIES|TRY)?(?=$|[-\s+/,.(&]|[A-Z])(?!TUDIO)")
+_DESC_MAT_FIRST = re.compile(r"^(?:F|B|BR|FR|M|AL|CB|ST)\s?(\d{1,2}(?:\.\d)?)\s?S(?=$|[-\s/])")   # 'F2S', 'B2S'
+_DESC_STR = re.compile(r"(?:^|[-\s/])(\d{1,2}(?:\.\d)?)\s?(?:STR|STY|STORY|STORIES|STORY'S)(?=$|[-\s/,])")  # '257APT/3STR/OFF'
+_DESC_INNER_S = re.compile(r"[-\s/](\d{1,2}(?:\.\d)?)S(?=$|[-\s/])")                       # '2A-F-2S'
+_DESC_MAT = re.compile(r"^(\d{1,2}(?:\.\d)?)\s?(?:F|B|FR|BR|BRK|CB|M|AL|ST)\s?-\s?\d+\s?U\b")
+
+
+def stories_from_desc(desc) -> tuple[str, str]:
+    """Storeys stated at the start of a MOD-IV building description, as (value, how) or ('', '').
+    '3S-B-D-6U-H' -> '3'; '2.5S-F-D-2U-H' -> '2.5'; '4&5S-470U-CONDO' -> '5' (4 and 5); '4B-8U-H' -> '4';
+    '1BR/1BA', 'CONDO', 'VACANT LAND' -> no reading."""
+    d = re.sub(r"\s+", " ", str(desc or "").upper().strip())
+    if not d or d in ("NAN", "NONE"):
+        return "", ""
+    m = _DESC_RANGE.match(d)
+    if m:
+        lo, hi = float(m.group(1)), float(m.group(2))
+        if 0 < lo < hi <= 120:
+            return fmt_num(hi), f"range {fmt_num(lo)} to {fmt_num(hi)} storeys; the higher is used"
+    m = _DESC_S.match(d)
+    if m and not re.match(r"^\d+\s?STUDIO", d):
+        v = float(m.group(1))
+        if 0 < v <= 120:
+            return fmt_num(v), "leading '<n>S'"
+    m = _DESC_MAT.match(d)
+    if m:
+        v = float(m.group(1))
+        if 0 < v <= 120:
+            return fmt_num(v), "leading '<n><material>-<units>U'"
+    m = _DESC_MAT_FIRST.match(d)
+    if m and 0 < float(m.group(1)) <= 120:
+        return fmt_num(m.group(1)), "material then '<n>S' ('F2S')"
+    found = {float(x) for x in _DESC_STR.findall(d)} or {float(x) for x in _DESC_INNER_S.findall(d)}
+    if len(found) == 1 and 0 < next(iter(found)) <= 120:
+        return fmt_num(next(iter(found))), "'<n>STR' / '-<n>S' inside the description"
+    return "", ""
+
+
+def nj_extract(county: str):
+    """Tax-list rows of one county with storeys parsed and a parcel centroid (lat/lon). Cached as csv.gz."""
+    import pandas as pd
+    cache = NJDIR / f"{county.replace(' ', '')}_taxlist.csv.gz"
+    zips = sorted(NJDIR.glob(f"parcels_gdb_{county.replace(' ', '')}*.zip"))
+    if not zips:
+        return None, None
+    zp = zips[0]
+    meta_p = zp.with_name(zp.name + ".meta.json")
+    meta = json.loads(meta_p.read_text()) if meta_p.exists() else {"url": "", "retrieved_at": ""}
+    if cache.exists() and cache.stat().st_mtime >= zp.stat().st_mtime:
+        return pd.read_csv(cache, dtype=str, keep_default_na=False), meta
+    import pyogrio
+    import geopandas as gpd
+    gdbs = [n for n in __import__("zipfile").ZipFile(zp).namelist() if n.lower().endswith(".gdb/")]
+    path = f"/vsizip/{zp}/{gdbs[0].rstrip('/')}" if gdbs else f"/vsizip/{zp}"
+    layers = [l[0] for l in pyogrio.list_layers(path)]
+    tl = next(l for l in layers if "tax" in l.lower())
+    pl = next(l for l in layers if "parcel" in l.lower())
+    t = pyogrio.read_dataframe(path, layer=tl, read_geometry=False,
+                               columns=["GIS_PIN", "PROP_CLASS", "PROP_LOC", "MUN_NAME", "BLDG_DESC", "YR_CONSTR",
+                                        "QUALIFIER"])
+    p = pyogrio.read_dataframe(path, layer=pl, columns=["PAMS_PIN"])
+    p = p[p.geometry.notna()]
+    p["area_m2"] = p.geometry.area * 0.092903 if "foot" in str(p.crs.axis_info[0].unit_name).lower() else p.geometry.area
+    c = p.geometry.representative_point()
+    c = gpd.GeoSeries(c, crs=p.crs).to_crs(4326)
+    p["plat"], p["plon"] = c.y.round(6), c.x.round(6)
+    p = p.drop(columns="geometry").drop_duplicates("PAMS_PIN")
+    t["base_pin"] = t.GIS_PIN.astype(str).str.replace(r"_[A-Z]+\d*$", "", regex=True)
+    t = t.merge(p.rename(columns={"PAMS_PIN": "GIS_PIN"}), on="GIS_PIN", how="left")
+    miss = t.plat.isna()
+    t2 = t.loc[miss, ["base_pin"]].merge(p.rename(columns={"PAMS_PIN": "base_pin"}), on="base_pin", how="left")
+    t.loc[miss, ["plat", "plon", "area_m2"]] = t2[["plat", "plon", "area_m2"]].values
+    t = t[t.plat.notna()].copy()
+    sv = [stories_from_desc(d) for d in t.BLDG_DESC]
+    t["stories"] = [x[0] for x in sv]
+    t["stories_how"] = [x[1] for x in sv]
+    t["area_m2"] = pd.to_numeric(t.area_m2, errors="coerce").round(0)
+    t = t.fillna("")
+    t.to_csv(cache, index=False, compression="gzip")
+    return pd.read_csv(cache, dtype=str, keep_default_na=False), meta
+
+
+def nj_lookup(B):
+    """{addr_key: result dict} for NJ buildings from the county MOD-IV files on disk."""
+    import numpy as np
+    from scipy.spatial import cKDTree
+    out = {}
+    for county in sorted(set(B.county[B.area == "New Jersey"])):
+        sub = B[(B.area == "New Jersey") & (B.county == county)]
+        t, meta = nj_extract(county)
+        if t is None:
+            for k in sub.addr_key:
+                out[k] = {"status": "no_file", "note": f"MOD-IV file for {county} County not on disk"}
+            continue
+        lat, lon = t.plat.astype(float).values, t.plon.astype(float).values
+        xy = np.c_[lat * 111.32, lon * 111.32 * math.cos(math.radians(40.5))]
+        tree = cKDTree(xy)
+        parts = [split_address(a) for a in t.PROP_LOC]
+        cores = [street_core(s) for _, _, s in parts]
+        for r in sub.itertuples():
+            if not (math.isfinite(r.latf) and math.isfinite(r.lonf)):
+                out[r.addr_key] = {"status": "no_point", "note": "no coordinates"}
+                continue
+            a, b, street = split_address(r.address)
+            core = street_core(street)
+            q = [r.latf * 111.32, r.lonf * 111.32 * math.cos(math.radians(40.5))]
+            near = tree.query_ball_point(q, 0.4)
+            hits = [i for i in near if core and cores[i] == core and streets_match(street, parts[i][2])
+                    and numbers_match(a, b, parts[i][0], parts[i][1])]
+            how = "address"
+            if not hits:
+                # the parcel nearest the point, on the same street (a complex filed under one address)
+                d, i = tree.query(q)
+                if d <= 0.06 and core and cores[i] == core and streets_match(street, parts[i][2]):
+                    hits, how = [i], "location"
+            if not hits:
+                out[r.addr_key] = {"status": "no_match", "county": county, "meta": meta,
+                                   "note": f"no MOD-IV tax record at '{r.address}' within 400 m in {county} County"}
+                continue
+            rows = t.iloc[hits]
+            vals = [v for v in rows.stories if v]
+            pins = sorted(set(rows.GIS_PIN))
+            desc = Counter(x for x in rows.BLDG_DESC if x).most_common(3)
+            base = {"county": county, "meta": meta, "pins": pins, "prop_loc": rows.PROP_LOC.iloc[0],
+                    "mun": rows.MUN_NAME.iloc[0], "classes": sorted(set(rows.PROP_CLASS)), "desc": desc, "how": how,
+                    "dist_m": round(_metres(r.latf, r.lonf, float(rows.plat.iloc[0]), float(rows.plon.iloc[0])))}
+            if not vals:
+                out[r.addr_key] = {**base, "status": "no_stories"}
+                continue
+            cnt = Counter(vals)
+            best = max(cnt, key=lambda v: (cnt[v], float(v)))
+            out[r.addr_key] = {**base, "status": "ok", "stories": best, "values": dict(cnt),
+                               "how_desc": rows.stories_how[rows.stories == best].iloc[0],
+                               "desc_used": rows.BLDG_DESC[rows.stories == best].iloc[0]}
+    return out
+
+
+# ---------------------------------------------------------------- NYC PLUTO (held copy only)
+def pluto_lookup(B):
+    import numpy as np
+    import pandas as pd
+    from scipy.spatial import cKDTree
+    nyc = B[B.county.isin(list(NYC_COUNTIES))]
+    out = {}
+    if not PLUTO_RAW.exists() or nyc.empty:
+        return out
+    retrieved = ""
+    if PLUTO_INDEX.exists():
+        for line in PLUTO_INDEX.read_text().splitlines():
+            try:
+                retrieved = max(retrieved, json.loads(line).get("retrieved_at", ""))
+            except ValueError:
+                pass
+    p = pd.read_csv(PLUTO_RAW, dtype=str, keep_default_na=False)
+    p = p[(p.latitude != "") & (p.longitude != "")].reset_index(drop=True)
+    plat, plon = p.latitude.astype(float).values, p.longitude.astype(float).values
+    tree = cKDTree(np.c_[plat * 111.32, plon * 111.32 * math.cos(math.radians(40.7))])
+    pnum = [nyc_number(a) for a in p.address]
+    pstreet = [split_address(a)[2] for a in p.address]
+    pcore = [street_core(x) for x in pstreet]
+    facts = {}
+    if NYC_FACTS.exists():
+        f = pd.read_csv(NYC_FACTS, dtype=str, keep_default_na=False)
+        facts = {r.addr_key: r for r in f.itertuples()}
+    for r in nyc.itertuples():
+        res = {"retrieved_at": retrieved}
+        if math.isfinite(r.latf) and math.isfinite(r.lonf):
+            street = split_address(r.address)[2]
+            num, core = nyc_number(r.address), street_core(street)
+            q = [r.latf * 111.32, r.lonf * 111.32 * math.cos(math.radians(40.7))]
+            cand = [i for i in tree.query_ball_point(q, 0.15) if num and pnum[i] == num and pcore[i] == core
+                    and streets_match(street, pstreet[i])]
+            if cand:
+                i = min(cand, key=lambda i: _metres(r.latf, r.lonf, plat[i], plon[i]))
+                res.update(status="ok", bbl=p.bbl[i].split(".")[0], address=p.address[i], floors=p.numfloors[i],
+                           cls=p.bldgclass[i], units=p.unitsres[i], year=p.yearbuilt[i],
+                           dist=round(_metres(r.latf, r.lonf, plat[i], plon[i])), how="house number + street")
+        fr = facts.get(r.addr_key)
+        if res.get("status") != "ok" and fr is not None and fr.match_basis == "house_number+location" and fr.pluto_floors:
+            res.update(status="ok", bbl=fr.pluto_bbl, address=fr.pluto_address, floors=fr.pluto_floors,
+                       cls=fr.pluto_class, units=fr.pluto_units, year=fr.pluto_year, dist=fr.match_m,
+                       how="house number + location (nyc_building_facts.csv; street spelled differently)")
+        if res.get("status") != "ok":
+            why = "no PLUTO lot (4+ residential units, the held copy) with this house number and street within 150 m"
+            if fr is not None and fr.match_basis == "nearest_lot":
+                why += f"; nyc_building_facts.csv has only a nearest-lot match ({fr.pluto_address}, {fr.match_m} m), not used"
+            res.update(status="no_match", note=why)
+        out[r.addr_key] = res
+    return out
+
+
+# ---------------------------------------------------------------- OpenStreetMap building:levels (held extract)
+def osm_lookup(B, keys):
+    import numpy as np
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("hh_places", Path(__file__).parent / "tools" / "places.py")
+    places = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(places)
+    idx = places._load()
+    meta = idx["meta"]
+    out = {}
+    sub = B[B.addr_key.isin(keys)]
+    for r in sub.itertuples():
+        if not (math.isfinite(r.latf) and math.isfinite(r.lonf)):
+            out[r.addr_key] = {"status": "no_point"}
+            continue
+        if not places._in_coverage(idx, r.latf, r.lonf):
+            out[r.addr_key] = {"status": "outside", "note": "outside the OSM extract's bounding box"}
+            continue
+        xy = np.array(idx["tr"].transform(r.lonf, r.latf))
+        b = places._building(idx, xy)
+        bl = b.get("building_levels") or {}
+        bu = b.get("building") or {}
+        res = {"retrieved_at": meta.get("retrieved_at", ""), "vintage": meta.get("osm_data_timestamp", ""),
+               "extract": meta.get("source_url", ""), "way": bu.get("value") or "", "dist": bu.get("metres_from_point"),
+               "btype": (b.get("building_type") or {}).get("value") or ""}
+        if not bu.get("value"):
+            res.update(status="no_outline", note="no OSM building outline within 40 m")
+        elif (res["dist"] or 0) > 20:
+            res.update(status="far", note=f"nearest OSM outline is {res['dist']} m from the point (over 20 m): not used")
+        elif bl.get("value") is None:
+            res.update(status="no_levels", note="the OSM outline has no building:levels tag")
+        else:
+            res.update(status="ok", levels=fmt_num(bl["value"]))
+        out[r.addr_key] = res
+    return out
+
+
+# ---------------------------------------------------------------- listing pages we hold
+def listing_lookup():
+    import pandas as pd
+    L = pd.read_csv(LISTINGS, dtype=str, keep_default_na=False)
+    L = L[L.detail_level.isin(["detail", "building_unit", "building_page", "listing_page"]) &
+          ~L.source_site.str.contains("trulia|zillow", case=False)]
+    L = L[L.building_floors.str.fullmatch(r"\d{1,3}")]
+    out = {}
+    for k, g in L.groupby("addr_key"):
+        cnt = Counter(g.building_floors)
+        v = cnt.most_common(1)[0][0]
+        row = g[g.building_floors == v].sort_values("last_seen").iloc[-1]
+        out[k] = {"stories": v, "url": row.url, "site": row.source_site, "seen": row.last_seen, "values": dict(cnt)}
+    return out
+
+
+# ---------------------------------------------------------------- building_stories.csv
+def build_stories():
+    B = load_buildings()
+    print(f"{len(B)} candidate buildings", flush=True)
+    nj = nj_lookup(B)
+    print("NJ MOD-IV:", Counter(v["status"] for v in nj.values()), flush=True)
+    pl = pluto_lookup(B)
+    print("PLUTO:", Counter(v["status"] for v in pl.values()), flush=True)
+    li = listing_lookup()
+    official = {k for k, v in {**nj, **pl}.items() if v.get("status") == "ok"}
+    osm = osm_lookup(B, set(B.addr_key))
+    print("OSM:", Counter(v["status"] for v in osm.values()), flush=True)
+    rows = []
+    for r in B.itertuples():
+        k = r.addr_key
+        base = {"addr_key": k, "address": r.address, "city": r.city, "state": r.state, "zip": r.zip,
+                "lat": r.lat, "lon": r.lon}
+        notes, rec = [f"area: {r.area}" + (f"; county: {r.county}" if r.county else "")], None
+        o, l_ = osm.get(k, {}), li.get(k)
+        if k in nj:
+            v = nj[k]
+            if v["status"] == "ok":
+                alt = "" if len(v["values"]) == 1 else "; other records at this address read " + \
+                    ", ".join(f"{s} ({n})" for s, n in v["values"].items() if s != v["stories"])
+                rec = {"stories": v["stories"], "stories_basis": "official_record",
+                       "source_name": f"NJ MOD-IV tax list ({v['county']} County Parcels & MOD-IV, NJ Office of GIS)",
+                       "source_url": v["meta"].get("url", ""), "retrieved_at": v["meta"].get("retrieved_at", "")}
+                notes.append(f"BLDG_DESC '{v['desc_used']}' ({v['how_desc']}); PIN {', '.join(v['pins'][:4])}"
+                             f"{' and %d more' % (len(v['pins']) - 4) if len(v['pins']) > 4 else ''}; "
+                             f"tax address '{v['prop_loc']}', {v['mun']}; class {'/'.join(v['classes'])}; joined by "
+                             + ("house number and street, parcel within 400 m" if v["how"] == "address" else
+                                f"location: the parcel nearest the point ({v['dist_m']} m) on the same street, house number differs")
+                             + alt)
+            elif v["status"] == "no_stories":
+                notes.append(f"NJ MOD-IV record found (PIN {', '.join(v['pins'][:3])}, '{v['prop_loc']}', descriptions "
+                             + "; ".join(f"'{d}'" for d, _ in v["desc"]) + ") but its BLDG_DESC states no storeys")
+            else:
+                notes.append("NJ MOD-IV: " + v.get("note", v["status"]))
+        if k in pl:
+            v = pl[k]
+            if v["status"] == "ok" and fmt_num(v["floors"]):
+                rec = {"stories": fmt_num(v["floors"]), "stories_basis": "official_record",
+                       "source_name": "NYC PLUTO numfloors (NYC Dept of City Planning; held copy, raw/big/pluto)",
+                       "source_url": PLUTO_SRC, "retrieved_at": v["retrieved_at"]}
+                notes.append(f"BBL {v['bbl']}, '{v['address']}', class {v['cls']}, {v['units']} residential units, "
+                             f"built {v['year']}; joined by {v['how']} ({v['dist']} m); no new request to "
+                             "data.cityofnewyork.us")
+            elif v["status"] == "ok":
+                notes.append(f"PLUTO lot {v['bbl']} found but numfloors is {v['floors']!r}")
+            else:
+                notes.append("PLUTO: " + v["note"])
+        if r.area in ("Connecticut", "Long Island") or (r.state == "NY" and r.county not in NYC_COUNTIES):
+            notes.append("no official storey record: the state/county parcel layers hold no storey field "
+                         "(see docs/harvest_notes/building_stories.md)")
+        if rec is None and l_:
+            rec = {"stories": l_["stories"], "stories_basis": "listing", "source_name": f"listing page ({l_['site']})",
+                   "source_url": l_["url"], "retrieved_at": l_["seen"]}
+            notes.append("building floor count stated on the listing page (data/listings.csv building_floors)")
+        elif l_ and rec and l_["stories"] != rec["stories"]:
+            notes.append(f"CONFLICT: a listing page states {l_['stories']} floors ({l_['url']})")
+        if rec is None and o.get("status") == "ok":
+            rec = {"stories": o["levels"], "stories_basis": "osm",
+                   "source_name": "OpenStreetMap building:levels (Geofabrik extract, data "
+                                  f"{o['vintage'][:10]}; ODbL)", "source_url": o["way"], "retrieved_at": o["retrieved_at"]}
+            notes.append(("point inside the outline" if not o["dist"] else f"nearest outline {o['dist']} m from the point")
+                         + f"; building={o['btype']}; building:levels counts storeys above ground, roof levels excluded;"
+                           f" extract {o['extract']}")
+        elif rec and o.get("status") == "ok" and o["levels"] != rec["stories"]:
+            notes.append(f"OSM building:levels says {o['levels']} ({o['way']})")
+        elif rec is None:
+            notes.append("OSM: " + o.get("note", o.get("status", "not looked up")))
+        if rec is None:
+            rec = {"stories": "", "stories_basis": "", "source_name": "", "source_url": "", "retrieved_at": ""}
+            notes.insert(0, "not_found")
+        rows.append({**base, **rec, "notes": "; ".join(notes)})
+    write_csv(OUT_STORIES, STORIES_COLS, rows)
+    return rows, B
+
+
+def write_csv(path: Path, cols: list[str], rows: list[dict]) -> None:
+    tmp = path.with_name(path.name + ".tmp")
+    with open(tmp, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=cols)
+        w.writeheader()
+        for r in rows:
+            w.writerow({c: r.get(c, "") for c in cols})
+    tmp.replace(path)
+    print(f"wrote {path.relative_to(ROOT)} ({len(rows)} rows)", flush=True)
+
+
+# ---------------------------------------------------------------- unit_floor_reads.csv
+GROUND_LABELS = {"GROUND", "GRD", "GRND", "GROUNDFLOOR", "GROUNDFL"}
+BAD_PREFIX = {"G", "GR", "GD", "PH", "TH", "L", "LL", "LB", "BSMT", "BS", "M", "MZ"}  # garden/ground, penthouse,
+# townhouse, lower level/lobby, basement, mezzanine: letters that can themselves name a level, so the digits are not read
+_PATTERNS = [
+    # (name, regex on the cleaned upper-case label, group holding the floor, description)
+    ("floor_then_letter", re.compile(r"^(\d{1,2})([A-Z]{1,2})$"), 1, "floor number, then a letter line ('2B', '14N')"),
+    ("floor_then_two_digits", re.compile(r"^([1-9])(\d{2})$"), 1, "three digits: floor, then a two-digit number ('205')"),
+    ("building_letters_then_floor_two_digits", re.compile(r"^([A-Z]{1,4})[-\s]?([1-9])(\d{2})$"), 2,
+     "building letters, then floor and a two-digit number ('JCE-205', 'A421')"),
+    ("building_number_then_floor_two_digits", re.compile(r"^([A-Z]?\d{1,3})[-\s]([1-9])(\d{2})$"), 2,
+     "building number, separator, then floor and a two-digit number ('09-326', 'B9-240')"),
+    ("building_letters_letter_floor_two_digits", re.compile(r"^([A-Z]{2,4})[-\s]([A-Z])([1-9])(\d{2})$"), 3,
+     "building code, then a letter, floor and a two-digit number ('BAY-B508')"),
+    ("house_number_then_floor_letter", re.compile(r"^(\d{1,5})[-\s](\d{1,2})([A-Z]{1,2})$"), 2,
+     "street number, separator, then floor and a letter ('158-2H')"),
+]
+
+
+def read_label(unit: str):
+    """(floor, convention, description) for a clear label, else None."""
+    u = parsers.clean_unit(unit).upper().strip()
+    u = re.sub(r"^(?:NO\.?|NUMBER)\s*", "", u).strip("#. ")
+    if not u or parsers.is_plan_label(unit):
+        return None
+    if re.sub(r"[^A-Z]", "", u) in GROUND_LABELS and not re.search(r"\d", u):
+        return 1, "ground_word", "the label says ground floor (ground counted as floor 1)"
+    for name, rx, grp, desc in _PATTERNS:
+        m = rx.match(u)
+        if not m:
+            continue
+        if name.startswith("building_letters") and m.group(1) in BAD_PREFIX:
+            return None
+        f = int(m.group(grp))
+        if f < 1:
+            return None
+        return f, name, desc
+    return None
+
+
+def build_floors(stories_rows):
+    import pandas as pd
+    L = pd.read_csv(LISTINGS, dtype=str, keep_default_na=False)
+    L["rent_num"] = pd.to_numeric(L.listed_rent, errors="coerce")
+    C = L[(L.rent_num <= RENT_MAX) & L.gate_status.isin(["pending", "pass"]) & (L.unit.str.strip() != "")]
+    conv = {}
+    if CONVENTIONS.exists() and CROSSWALK.exists():
+        cv = pd.read_csv(CONVENTIONS, dtype=str, keep_default_na=False)
+        cw = pd.read_csv(CROSSWALK, dtype=str, keep_default_na=False)
+        bid_conv = dict(zip(cv.building_id, zip(cv.convention, cv.name)))
+        conv = {a: bid_conv[b] for a, b in zip(cw.addr_key, cw.building_id) if b in bid_conv}
+    st = {r["addr_key"]: (r["stories"], r["stories_basis"]) for r in stories_rows if r["stories"]}
+    rows, skipped = [], Counter()
+    for r in C.itertuples():
+        unit = r.unit.strip()
+        notes = []
+        res = None
+        c = conv.get(r.addr_key)
+        if c:
+            f = parsers.floor_by_convention(unit, c[0])
+            if f is not None:
+                res = (f, c[0], f"reviewed numbering convention of {c[1]} (data/reference/unit_numbering_conventions.csv)")
+            elif re.fullmatch(r"\d{3}", parsers.clean_unit(unit)) and c[0] == "building_floor_unit":
+                skipped["three digits in a building-floor-unit complex"] += 1
+                continue
+        if res is None:
+            res = read_label(unit)
+        if res is None:
+            skipped["no clear pattern"] += 1
+            continue
+        f, name, desc = res
+        s = st.get(r.addr_key)
+        if s:
+            try:
+                top = float(s[0])
+            except ValueError:
+                top = None
+            if top is not None and f > math.ceil(top):
+                skipped["reading above the building's storeys"] += 1
+                continue
+            notes.append(f"building has {s[0]} storeys ({s[1]})")
+        notes.insert(0, desc)
+        stated = str(r.floor).strip()
+        if stated and re.fullmatch(r"-?\d+(?:\.0)?", stated) and int(float(stated)) != f:
+            notes.append(f"CONFLICT: the listing states floor {stated}")
+        elif stated and re.fullmatch(r"-?\d+(?:\.0)?", stated):
+            notes.append("agrees with the floor the listing states")
+        rows.append({"listing_id": r.listing_id, "unit": unit, "floor": f, "basis": FLOOR_BASIS, "convention": name,
+                     "notes": "; ".join(notes)})
+    write_csv(OUT_FLOORS, FLOOR_COLS, rows)
+    print("unit labels not read:", dict(skipped), flush=True)
+    return rows
+
+
+def build() -> None:
+    rows, _ = build_stories()
+    build_floors(rows)
 
 
 # ---------------------------------------------------------------- main

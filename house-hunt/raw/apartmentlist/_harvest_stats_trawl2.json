@@ -11,12 +11,12 @@
   "min_drive": 0,
   "minutes": 0
  },
- "srp_pages": 40,
- "props_considered": 30,
- "props_skipped_lowprice": 17,
- "props_read": 13,
+ "srp_pages": 108,
+ "props_considered": 192,
+ "props_skipped_lowprice": 100,
+ "props_read": 92,
  "reasons": {
-  "ok": 13
+  "ok": 92
  },
  "transient": [],
  "blocked": null,
@@ -49,6 +49,125 @@
    "drive_min": 31.4,
    "props": 5,
    "read": 0
+  },
+  {
+   "city": "nj/union-city",
+   "group": "New Jersey",
+   "drive_min": 31.4,
+   "props": 14,
+   "read": 6
+  },
+  {
+   "city": "nj/palisades-park",
+   "group": "New Jersey",
+   "drive_min": 31.6,
+   "props": 5,
+   "read": 5
+  },
+  {
+   "city": "nj/cliffside-park",
+   "group": "New Jersey",
+   "drive_min": 32.3,
+   "props": 7,
+   "read": 5
+  },
+  {
+   "city": "nj/guttenberg",
+   "group": "New Jersey",
+   "drive_min": 32.4,
+   "props": 7,
+   "read": 3
+  },
+  {
+   "city": "nj/west-new-york",
+   "group": "New Jersey",
+   "drive_min": 32.4,
+   "props": 20,
+   "read": 12
+  },
+  {
+   "city": "nj/englewood",
+   "group": "New Jersey",
+   "drive_min": 32.9,
+   "props": 9,
+   "read": 3
+  },
+  {
+   "city": "nj/ridgefield",
+   "group": "New Jersey",
+   "drive_min": 33.1,
+   "props": 1,
+   "read": 1
+  },
+  {
+   "city": "nj/hoboken",
+   "group": "New Jersey",
+   "drive_min": 33.4,
+   "props": 38,
+   "read": 0
+  },
+  {
+   "city": "nj/ridgefield-park",
+   "group": "New Jersey",
+   "drive_min": 33.6,
+   "props": 1,
+   "read": 1
+  },
+  {
+   "city": "nj/bogota",
+   "group": "New Jersey",
+   "drive_min": 34.2,
+   "props": 4,
+   "read": 3
+  },
+  {
+   "city": "nj/north-bergen",
+   "group": "New Jersey",
+   "drive_min": 35.0,
+   "props": 19,
+   "read": 12
+  },
+  {
+   "city": "nj/fairview",
+   "group": "New Jersey",
+   "drive_min": 35.7,
+   "props": 5,
+   "read": 5
+  },
+  {
+   "city": "nj/tenafly",
+   "group": "New Jersey",
+   "drive_min": 36.1,
+   "props": 4,
+   "read": 3
+  },
+  {
+   "city": "nj/hackensack",
+   "group": "New Jersey",
+   "drive_min": 36.9,
+   "props": 24,
+   "read": 15
+  },
+  {
+   "city": "nj/bergenfield",
+   "group": "New Jersey",
+   "drive_min": 37.1,
+   "props": 3,
+   "read": 1
+  },
+  {
+   "city": "nj/east-rutherford",
+   "group": "New Jersey",
+   "drive_min": 37.4,
+   "props": 5,
+   "read": 2
+  },
+  {
+   "city": "nj/little-ferry",
+   "group": "New Jersey",
+   "drive_min": 37.5,
+   "props": 2,
+   "read": 2
   }
  ],
  "cities_unmatched_far": [

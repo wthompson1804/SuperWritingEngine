@@ -70,7 +70,7 @@ Not scripts, but they live here: `ev_b3_live_notes.json`, `h_mgmt_sightmap_sites
 | `run_all.py` | Runs the pipeline in a fixed order and writes the stage report | driver | all of `data/` | `docs/RUN_REPORT.md`, `data/reference/run_history.csv` | is the driver | runs the tests first | active |
 | `lib.py` | Shared helpers: cached, throttled fetch with a provenance log; paths; `census_key()`; `redact()`; the refused-host guard (`HostRefused`: no request to a host in `raw/_host_kill_shared.json` or on `OFF_LIMITS`; a cache hit is still served; `HOUSE_HUNT_ALLOW_HOST=<host>` lets one host through) | all | network, `raw/_host_kill_shared.json` | `raw/<source>/` + `_index.jsonl` | imported | `test_lib_guard.py` | active |
 | `parsers.py` | Every text parser used by the rules (floors, dogs, fees, offers, staleness, tolls); pure functions | all rule stages | strings | values | imported | `test_parsers.py`, `test_rules.py` | active |
-| `gates.py` | Merge the harvest files, dedupe, apply the listing gates | 1 gates | `data/listings_raw/*.csv`, `data/reference/nyc_building_facts.csv`, `community_facts.csv`, `data/evidence/resolved_pending_batch_*.csv` | `data/listings.csv`, `data/gate_summary.md` | yes (full, twice) | `test_rules.py` | active |
+| `gates.py` | Merge the harvest files, dedupe, apply the listing gates (base rent at most $2,200; floor and elevator together) | 1 gates | `data/listings_raw/*.csv`, `data/reference/nyc_building_facts.csv`, `community_facts.csv`, `building_stories.csv` (optional), `data/evidence/resolved_pending_batch_*.csv` | `data/listings.csv`, `data/gate_summary.md` | yes (full, twice) | `test_rules.py` | active |
 | `enrich_nyc_pluto.py` | NYC lot facts (class, floors, units, year) matched to listings by location | 2 enrich | `data/listings.csv`, NYC Open Data PLUTO (cached) | `data/reference/nyc_building_facts.csv` | yes (full) | none | active |
 | `enrich_units.py` | Run every lookup tool per passing building; first all-in pass | 2 enrich | `data/listings.csv`, `scripts/tools/*` | `data/enriched/*.json`, `data/buildings_enriched.csv`, `data/units.csv` | yes (full) | none | active |
 | `build_neighborhoods.py` | Assign buildings to neighborhoods (incl. the Jersey City split), profile them, propose groupings | 3 neighborhoods | `data/units.csv`, `data/buildings_enriched.csv`, `data/reference/subcity_*` | `data/neighborhoods.csv`, hood columns on `data/units.csv`, `docs/CHECKPOINT_A.md` | yes (full) | none | active |
@@ -79,7 +79,7 @@ Not scripts, but they live here: `ev_b3_live_notes.json`, `h_mgmt_sightmap_sites
 | `crime_benchmarks.py` | Crime yardsticks (US, metro, county) and the per-neighborhood safety table | 3 neighborhoods | FBI CDE (cached), `data/reference/crime_agencies.csv` | `data/reference/crime_benchmarks.csv`, `data/neighborhood_safety.csv` | yes (full) | none | active |
 | `lifestyle_groups.py` | Assign each neighborhood to one of the six experiences from saved centres (`--refit` only on purpose) | 3 neighborhoods | `data/lifestyle_color.csv`, `data/neighborhood_safety.csv`, `data/reference/lifestyle_group_centres.csv` | `data/lifestyle_groups.csv` (on `--refit` also the saved centres, scale and fit reference under `data/reference/`) | yes (full) | none | active |
 | `building_amenities.py` | Amenities per building parsed from cached pages (run_all passes `--no-fetch`) | 4 master inputs | `data/units.csv`, cached pages under `raw/` | `data/reference/building_amenities.csv` | yes (always, offline) | none | active |
-| `build_master.py` | Build the two master tables with basis and source per merged fact; staleness, elevator doubt, overnight parking, phone answers | 5 master | `data/units.csv`, `data/enriched*/`, `data/reference/*`, `data/evidence/*` | `data/master_units.csv`, `data/master_buildings.csv`, `data/master_conflicts.csv`, `data/duplicate_units.csv`, `data/reference/building_crosswalk.csv` | yes | `test_rules.py` | active |
+| `build_master.py` | Build the two master tables with basis and source per merged fact; staleness, elevator doubt, building storeys (`building_stories.csv`), overnight parking, phone answers | 5 master | `data/units.csv`, `data/enriched*/`, `data/reference/*`, `data/evidence/*` | `data/master_units.csv`, `data/master_buildings.csv`, `data/master_conflicts.csv`, `data/duplicate_units.csv`, `data/reference/building_crosswalk.csv` | yes | `test_rules.py` | active |
 | `rent_terms.py` | Structured rent terms (offer, free months, gross and net, first full payment) for every passing unit | 6 rent terms | `data/units.csv`, cached pages, `data/evidence/*` | `data/rent_terms.csv`, `docs/harvest_notes/rent_terms.md` | yes | `test_rules.py` | active |
 | `all_in.py` | All-in monthly cost and the $3,000 cap; pet-rent estimate; `all_in_likely` | 7 all-in | `data/master_units.csv`, `data/rent_terms.csv` | adds columns to `data/master_units.csv`; `data/reference/cost_estimates.csv` | yes | `test_rules.py` | active |
 | `avoid.py` | Evidence rules: unit exclusions, avoid buildings, pause notes; co-ops out | 8 evidence rules | `data/evidence/{live_check,confirm,items,facts}_batch_*.csv`, `nyc_records_flags.csv`, `non_nyc_records.csv`, `rating_standard.csv` | `data/unit_exclusions.csv`, `data/avoid_buildings.csv`, `data/reference/ground_reading_unassigned.csv` | yes | `test_rules.py` | active |
@@ -418,3 +418,33 @@ Options and rules added to existing scripts on 2026-11-17:
   open item. The row stays in the evidence files and in the verdict fingerprint (`verdicts.py`), so a reviewer reads its note and writes
   anything it found as a verdict. Tests: `test_rules.py` `pure_b21`, `data_b21`.
 - `build_scene_text.py`: `{stationkind}` is missing (its tests fail, inside `[[ ]]`) for a neighborhood with nothing shown.
+
+Second trawl, 2026-11-17 (owner: floor and elevator; $2,200 collection limit; building heights):
+
+- `parsers.floor_elevator_rule(elevator, floor, how, stories, stories_basis)` and `parsers.floor_elevator_master(get, elevator_status)`:
+  the floor and the elevator are judged together (truth table in `parsers.py` and `docs/RANKING.md` section 2). Elevator established:
+  as before. Otherwise floor 2 passes (code `floor_2`), the ground floor fails, floor 3+ fails with no elevator and is not shown with the
+  elevator unknown, and an unknown floor is ONE open gate fact: `elevator` where an elevator is named but in doubt, else
+  `floor_or_elevator` ("Confirm the floor, and whether there is an elevator"; label "floor and elevator"; open key `elevator`).
+  `parsers.floor_how` says how a floor counts: `page` (stated, confirmed, phone), `label` (a simple label such as `2B`, a ground word,
+  a reviewed numbering convention or tower reading; carries the "read from the apartment number" disclosure), `weak` (a complex
+  reading: it can fail a unit, never pass one).
+- `gates.py`: `RENT_MAX = 2200` (fail reason `over_2200`; the $3,000 total test in `all_in.py` is unchanged); the gate that decides is
+  `g_floor_elevator` with `floor_elevator_code` and `floor_elevator_open` (`g_elevator`, `g_floor` stay as columns);
+  `gates.floor_elevator_gate`. `data/gate_summary.md` counts each result.
+- `build_master.BuildingStories`: reads `data/reference/building_stories.csv` (absent or partial is fine) by `addr_key`, then by
+  building through `data/reference/building_crosswalk.csv`, then by coordinates within 30 m; official record, then listing, then
+  OpenStreetMap. An official record or a listing enters `building_floors` (an official 6+ infers an elevator, like PLUTO); OpenStreetMap
+  does not (it never infers an elevator). The master carries `building_stories`, `building_stories_basis`, `building_stories_source`,
+  `building_stories_match`; `gates.py` carries the first two.
+- `avoid.py`: exclusions that only say "no elevator" (contradicted, or the checker's reading) get `kind = elevator` in
+  `data/unit_exclusions.csv`; `rank.py` reads them, and a reviewer's `remove | elevator`, as an elevator "no" (`elevator_said_no`), so they
+  remove floor 3+ and ground-floor units and keep a floor-2 apartment.
+- `rank.py`: removes listed base rent over $2,200 (the live check's price where it read one) with `over_2200`; writes
+  `floor_elevator_status`, `floor_elevator_code`, `elevator_said_no`; the floor disclosure on a floor-2 walk-up adds "it must be floor 2
+  (one flight up): no elevator is confirmed here"; with `floor_or_elevator` open the floor is not listed again as a disclosure.
+  `check_registry.py` asserts the same on the shown list (and base rent at most $2,200); `verdicts.py digest` prints the rule's result.
+- Tests: `test_rules.py` `pure_floor_elevator` (every elevator x floor x storeys combination, the gate, the rent limit, the stories file
+  loader, the doubt and garden-style cases, an established elevator unaffected) and the floor/elevator and rent checks in `--data`.
+- Pages (`build_page_data.py`, the concierge builders) are not changed by this: they need a reader sentence for the open code
+  `elevator:floor_or_elevator` before such an apartment is published.

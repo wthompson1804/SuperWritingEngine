@@ -10,9 +10,10 @@ only right when read from the bottom up. The change log at the end says where ea
 
 A listing goes through these steps in order. Counts of each step are in `docs/RUN_REPORT.md`.
 
-1. **Listing gate** (`gates.py`). Studio or one bedroom; listed rent at most $3,000; available now through
-   2026-12-15; dogs allowed (a stated limit under 25 lb fails; "small dogs" with no number passes); elevator (section 2);
-   not a ground-floor unit; within a 2-hour drive. A gate fails only on a stated fact; an unstated fact makes the listing
+1. **Listing gate** (`gates.py`). Studio or one bedroom; listed base rent at most **$2,200** (owner, 2026-11-17; rows
+   above stay in `data/listings.csv` and fail with the reason `over_2200`); available now through 2026-12-15; dogs allowed
+   (a stated limit under 25 lb fails; "small dogs" with no number passes); **floor and elevator** (section 2); within a
+   2-hour drive. A gate fails only on a stated fact; an unstated fact makes the listing
    `pending`, and it stays in `data/listings.csv`.
 2. **Cost** (`all_in.py`). All-in = rent + required fees + pet rent + parking + estimated utilities, at most $3,000
    (tested on the unrounded sum). Pet rent is always counted (the state's median where unpublished). Unpublished parking
@@ -23,7 +24,9 @@ A listing goes through these steps in order. Counts of each step are in `docs/RU
    price)". A 12-month price belongs to the unit it was read on: a building-level fact that names another unit, or no
    unit, is not applied to its neighbours. A price is net-effective only where the evidence says so.
 3. **Safety.** A neighborhood whose violent or property crime rate is above Jamaica's precinct is cut.
-4. **Confirmed facts** (`rank.py`). Removed: no elevator or conflicting elevator sources; dogs not allowed on the
+4. **Confirmed facts** (`rank.py`). Removed: listed base rent over $2,200 (the price the live check read, else the
+   listing's: `over_2200`); no elevator (stated, contradicted, a checker's reading, a reviewer's `remove | elevator`) or
+   conflicting elevator sources **on floor 3 or above** (section 2: a floor-2 apartment stays); dogs not allowed on the
    building's own page; a weight limit under 25 lb; floor 1 or ground; gone at the live check (where the check found the
    building's whole listing page gone, "page could not be found", every unit listed on that page is gone, not only the
    units the check asked about: `parsers.listing_page_gone`, The Mercer); a page unchanged more than six months; available after the window; income-restricted or senior housing; a harvester's BUILDING_FAILS note.
@@ -57,10 +60,47 @@ A listing goes through these steps in order. Counts of each step are in `docs/RU
 
 Phone answers (`data/evidence/call_answers.csv`, when present) outrank every other source and settle the fact they answer.
 
-## 2. The elevator: one rule for every stage
+## 2. Floor and elevator: one rule for every stage
 
-`parsers.elevator_rule` is called by the listing gate, the merge and the ranking (it used to be three slightly
-different rules). First matching row wins:
+**The rule as it stands (owner, 2026-11-17, second trawl; it replaces "elevator buildings only").** An apartment with an
+elevator established is judged as before: floor 1 or ground fails, any other floor passes, and an unpublished floor is a
+disclosure, not a strike. Without an established elevator (no elevator, an elevator unknown, or one in doubt: the doubt
+table, the garden-style rule, a contradicting row, a reviewer's asterisk, an inference from height) the apartment passes
+only on **floor 2** (one flight up), stated, confirmed or read from the apartment number; the ground floor fails; floor 3
+and above fail without an elevator (an elevator in doubt there stays the one open fact "Confirm an elevator serves this
+apartment"; an elevator never stated is not shown); an **unknown floor is ONE open gate fact**, `floor_or_elevator`,
+"Confirm the floor, and whether there is an elevator" (or the elevator fact where an elevator is named but in doubt).
+`parsers.floor_elevator_rule` decides, on top of `parsers.elevator_rule` (below), in the listing gate
+(`g_floor_elevator`), the ranking, the shown-list assertions and the verdict digest:
+
+| floor as the rule counts it | elevator established | open (in doubt, or from height) | no / conflicting | unknown |
+|---|---|---|---|---|
+| 1 or ground | fail | fail | fail | fail |
+| 2 | settled | settled (`floor_2`) | settled (`floor_2`) | settled (`floor_2`) |
+| 3 and above | settled | open: `elevator` | fail | not shown (gate: pending) |
+| not known | settled (disclosure) | open: `elevator` | open: `floor_or_elevator` | open: `floor_or_elevator` |
+
+- **What counts as the floor** (`parsers.floor_how`): stated or confirmed on a page or by phone; or read from the apartment
+  number: a simple label (`2B`, `305`), a ground word (`G`, `LOBBY`), the complex's reviewed numbering convention
+  (`data/reference/unit_numbering_conventions.csv`) or a tower label. A floor read from the number carries the disclosure
+  "read from the apartment number" (code `floor_read_from_number`), and on a walk-up its tour question adds "it must be
+  floor 2 (one flight up): no elevator is confirmed here". A reading that needed the building's floor count to choose
+  among several (`complex`) can fail a unit (floor 1) and never passes one.
+- **Building height** (`data/reference/building_stories.csv`, `build_master.BuildingStories`; joined by `addr_key`, then by
+  building through `building_crosswalk.csv`, then by coordinates within 30 m; the file may be absent or partial). An
+  official record outranks a listing, which outranks OpenStreetMap. An official record of **one storey** puts every
+  apartment on the ground floor (fail) unless a page states another floor. A building of **1–2 storeys** (any basis) has no
+  floor 3: a label reading above its height is not a floor, and an elevator in doubt there is asked as `floor_or_elevator`;
+  with floor 2 no elevator is needed. An official record or a listing enters `building_floors` (an official 6+ infers an
+  elevator, as PLUTO does); OpenStreetMap never infers an elevator.
+- **"No elevator" evidence** (`avoid.py` exclusions of kind `elevator`: contradicted, or the checker's reading; a reviewer's
+  `remove | elevator`) is read as elevator "no": it removes floor 3+ and ground-floor units and keeps a floor-2 apartment.
+  The doubt table and the garden-style rule no longer remove or hold back a floor-2 apartment.
+- A floor-2 walk-up and a `floor_or_elevator` apartment are new kinds of shown apartment: each needs a reviewed verdict as
+  every shown apartment does; with `floor_or_elevator` open the floor is not listed a second time as a disclosure.
+
+**The elevator by itself.** `parsers.elevator_rule` is called by the listing gate, the merge and the ranking (it used to
+be three slightly different rules). First matching row wins:
 
 | # | What is known | Result |
 |---|---|---|
@@ -80,8 +120,8 @@ read from a page's floor list or floor field, or "high-rise" on the building's o
 **Never used, to pass or to fail:** a floor read from a unit label (`42M`, `1804`); a neighbouring tax lot (the lot counts
 only when its address agrees with the listing's: `parsers.lot_is_exact`).
 
-Listing gate: established or open passes, no fails, unknown is pending. Ranking: established is settled, open is one
-open gate fact with the asterisk, unknown is not shown. An elevator named only on listing sites is marked
+What the stages do with the elevator's status is now the floor-and-elevator table above (before 2026-11-17: the gate
+passed established or open, failed no, and held unknown as pending; the ranking did not show unknown). An elevator named only on listing sites is marked
 `elevator_aggregator_only`. Garden-style rule: the elevator rests on listing sites only, the unit labels name several
 buildings, and no page or record gives four floors or more. A label that names its building (`K3-02`, `B9-309`, `09-426`,
 `A207`: `parsers.explicit_building_label`) counts whatever floor it reads as, because a floor read from a label is not a
@@ -93,11 +133,13 @@ Cove, Halstead Parsippany, The Confluence were added after independent check 4).
 ## 3. Floor, dogs, staleness, disclosures
 
 - **Floor.** Floor 1 or ground (confirmed, stated, or read from the unit number), or a checker's reading that the unit
-  is probably ground-level, excludes. An unpublished floor is a disclosure and tour question, never a strike.
+  is probably ground-level, excludes. With an elevator established, an unpublished floor is a disclosure and tour
+  question, never a strike; without one, the floor decides (section 2: floor 2 passes, an unknown floor is one open fact).
   **One numbering convention per complex** (`data/reference/unit_numbering_conventions.csv`, each row with how it was
   established): `floor_first` (`4186` is floor 4: The Grove Somerset, Steel Works, Cobalt Lofts, Piper, 3 Acres) or
   `building_floor_unit` (`3104` is building 3, floor 1: Kensington Place, J Centra Burlington and nine more). The master
-  carries the reading (`unit_floor_reading`); it removes a unit that reads as floor 1 and is used for nothing else. Where
+  carries the reading (`unit_floor_reading`); it removes a unit that reads as floor 1 and, since 2026-11-17, settles floor 2
+  for a building with no established elevator (section 2); it is used for nothing else. Where
   a convention is on file the "same shape as removed siblings" rule is not used. A tower label `01-16C` is floor 16.
 - **Availability on a second site.** A checker's finding that another listing site covers the address and does not show
   the apartment (`parsers.second_site_omits`), on a listing that could not be read again, is the open item
@@ -345,9 +387,10 @@ then rank score, then `listing_id`.
 | 2026-11-16 | After independent check 4: every building's point checked against its address (Harbor Pointe is in Bayonne, Parkway Lofts in Bloomfield) and `city` from geography; second-site rule for availability; garden-style rule no longer escaped by a label that reads as floor 4; plan letters are not apartments; a sequential apartment number that reads as floor 1; numbering conventions per complex (The Grove Somerset 2141, 3172, 4149, 4171 restored); income, credit and furnished disclosures; lease-term disclosure for any term that is not 12 months; doorman and concierge apart; `resident_review` basis; building floors from the largest stated count; "up to" kept on offers; avoid-only neighborhoods in their own array; `safety.status`; reader text from templates |
 | 2026-11-16 | Pipeline clean-up: laundry and dog amenities derived from every source's words (structured fields; the label beside a flag agrees with it); `buildings_with_own_dog_area` counts only a dog park or run; `shown_figures` over buildings, not apartments; `meta.notes` and `meta.moment_thresholds` as reader sentences; American spelling in our own rule summaries (quotes untouched) |
 | 2026-11-16 | After independent check 5: structured parking from every source's words, and the score, the night moment and the page read the space she would actually park in (a free open lot is not a garage; 16 shown buildings changed rank); the "train station" is the nearest rail station of any kind, with its kind and system; broker fee, one-time costs and "washer and dryer to confirm" disclosures; a dog weight limit only where a source's words state it; a utility with no estimate feeds `all_in_likely`; staleness counted to the first tour day (2026-11-22); record counts and car crime on avoid cards as sentences; toll range per neighborhood |
+| 2026-11-17 | Owner, second trawl: listed base rent at most $2,200 (gate and ranking; `over_2200`; the $3,000 total unchanged). Floor and elevator together (`parsers.floor_elevator_rule`): a walk-up is allowed on floor 2; the ground floor stays out; floor 3+ needs an elevator; no elevator stated and no floor stated is one open gate fact, `floor_or_elevator`; a floor read from the apartment number counts, with its disclosure; building heights from `data/reference/building_stories.csv` (official record over listing over OpenStreetMap; OSM never infers an elevator); "no elevator" exclusions and a reviewer's `remove | elevator` no longer remove a floor-2 apartment; the doubt table and garden-style rule no longer hold one back |
 | 2026-11-17 | Live-check batch 21 (the 45 apartments at or under $2,000 listed rent re-read): the status `not_read` means nothing was learned (`parsers.live_row_learned`): such a row never replaces an earlier live / changed / gone row, sets no live status, date, price or note, is not a re-read and is not an open item; it stays in the evidence files and in the verdict fingerprint, and anything its note found is written by the reviewer as a verdict (333 State St 604: `asterisk, not_available`; Regency on Hudson 606: its one open "listing" item now carries the own-site finding) |
 
-Superseded and no longer true anywhere: "staleness is counted to the day the page was read", "parking type is the best kind the sentence names", "train station = nearest commuter-rail station", "the lease-term disclosure starts above 13 months", "no label reads above floor 3" as a condition of the garden-style rule for labels that name their building, `doorman` as "doorman or concierge", "the 12-month price only for leases longer than 13 months", "at most 2 per building" for the shown list, "best 10 per neighborhood", "top 15
+Superseded and no longer true anywhere: "elevator buildings only", "no elevator removes the unit", "listed rent at most $3,000" (the $3,000 all-in cap stands), "staleness is counted to the day the page was read", "parking type is the best kind the sentence names", "train station = nearest commuter-rail station", "the lease-term disclosure starts above 13 months", "no label reads above floor 3" as a condition of the garden-style rule for labels that name their building, `doorman` as "doorman or concierge", "the 12-month price only for leases longer than 13 months", "at most 2 per building" for the shown list, "best 10 per neighborhood", "top 15
 candidates then the best 10", a floor-plan row shown with an availability asterisk, "weight limit stated ≥ 40 lb",
 conflicting dog policy as sketchy or as a drop, "a missing live check is its own open item", "units seen live first"
 among equal scores, the "waiting for a live check" list. `scripts/rank_v1_backup.py` keeps version 1.

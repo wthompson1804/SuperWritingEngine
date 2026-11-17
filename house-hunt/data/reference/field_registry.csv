@@ -118,8 +118,8 @@ master_units,motorway_m,used,rank.py;lifestyle_features.py;enrich_units.py,
 master_units,util_1br,used,enrich_units.py,
 master_units,util_1br_complete,used,enrich_units.py,
 master_units,util_studio,used,enrich_units.py,
-master_units,lat,used,build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;enrich_units.py,
-master_units,lon,used,build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;enrich_units.py,
+master_units,lat,used,gates.py;build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;enrich_units.py,
+master_units,lon,used,gates.py;build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;enrich_units.py,
 master_units,coord_basis,used,build_master.py;rank.py;enrich_units.py,
 master_units,coord_spread_m,used,build_master.py;enrich_units.py,
 master_units,coord_note,used,build_master.py;enrich_units.py,
@@ -310,6 +310,10 @@ master_units,credit_requirement,used,build_master.py;rank.py,
 master_units,credit_requirement_basis,provenance,,travels with credit_requirement
 master_units,credit_requirement_source,provenance,,travels with credit_requirement
 master_units,addr_keys,not_used,build_master.py,bookkeeping or already folded into a merged field
+master_units,building_stories,used,gates.py;build_master.py;rank.py,
+master_units,building_stories_basis,used,gates.py;build_master.py;rank.py,
+master_units,building_stories_source,provenance,build_master.py,travels with building_stories
+master_units,building_stories_match,display,build_master.py,"owner, 2026-11-17 (second trawl): the building's height in storeys (data/reference/building_stories.csv) and the floor-and-elevator rule's result (parsers.floor_elevator_rule), gate inputs asserted in this script"
 master_units,address_override_source,provenance,build_master.py,travels with address_override
 master_units,city_override_source,provenance,,travels with city_override
 master_units,n_listed_units,not_used,build_master.py,bookkeeping or already folded into a merged field
@@ -626,8 +630,8 @@ master_buildings,motorway_m,used,rank.py;lifestyle_features.py;enrich_units.py,
 master_buildings,util_1br,used,enrich_units.py,
 master_buildings,util_1br_complete,used,enrich_units.py,
 master_buildings,util_studio,used,enrich_units.py,
-master_buildings,lat,used,build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;enrich_units.py,
-master_buildings,lon,used,build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;enrich_units.py,
+master_buildings,lat,used,gates.py;build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;enrich_units.py,
+master_buildings,lon,used,gates.py;build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;enrich_units.py,
 master_buildings,coord_basis,used,build_master.py;rank.py;enrich_units.py,
 master_buildings,coord_spread_m,used,build_master.py;enrich_units.py,
 master_buildings,coord_note,used,build_master.py;enrich_units.py,
@@ -818,6 +822,10 @@ master_buildings,credit_requirement,used,build_master.py;rank.py,
 master_buildings,credit_requirement_basis,provenance,,travels with credit_requirement
 master_buildings,credit_requirement_source,provenance,,travels with credit_requirement
 master_buildings,addr_keys,not_used,build_master.py,bookkeeping or already folded into a merged field
+master_buildings,building_stories,used,gates.py;build_master.py;rank.py,
+master_buildings,building_stories_basis,used,gates.py;build_master.py;rank.py,
+master_buildings,building_stories_source,provenance,build_master.py,travels with building_stories
+master_buildings,building_stories_match,display,build_master.py,"owner, 2026-11-17 (second trawl): the building's height in storeys (data/reference/building_stories.csv) and the floor-and-elevator rule's result (parsers.floor_elevator_rule), gate inputs asserted in this script"
 master_buildings,address_override_source,provenance,build_master.py,travels with address_override
 master_buildings,city_override_source,provenance,,travels with city_override
 master_buildings,n_listed_units,not_used,build_master.py,bookkeeping or already folded into a merged field
@@ -1022,7 +1030,7 @@ evidence:items,excerpt,used,avoid.py,
 evidence:items,source_site,used,gates.py;build_master.py;avoid.py,
 evidence:items,source_url,used,gates.py;build_master.py;avoid.py;crime_benchmarks.py;rent_terms.py;rating_standard.py,
 evidence:items,about,used,avoid.py;rating_standard.py,
-evidence:items,retrieved_at,not_used,,bookkeeping or already folded into a merged field
+evidence:items,retrieved_at,used,build_master.py,
 evidence:facts,addr_key,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;rent_terms.py;rating_standard.py;enrich_units.py,
 evidence:facts,fact,used,gates.py;build_master.py;avoid.py;rent_terms.py,
 evidence:facts,value,used,gates.py;build_master.py;rank.py;avoid.py;lifestyle_color.py;rent_terms.py;enrich_units.py,
@@ -1057,7 +1065,7 @@ evidence:ratings,negative_last_6_months,used,rating_standard.py,
 evidence:ratings,negative_older,used,rating_standard.py,
 evidence:ratings,serious_issue_tags_last_6_months,used,rating_standard.py,
 evidence:ratings,source_url,used,gates.py;build_master.py;avoid.py;crime_benchmarks.py;rent_terms.py;rating_standard.py,
-evidence:ratings,retrieved_at,not_used,,bookkeeping or already folded into a merged field
+evidence:ratings,retrieved_at,used,build_master.py,
 evidence:ratings,notes,used,gates.py;build_master.py;rank.py;avoid.py;lifestyle_color.py;crime_benchmarks.py;rent_terms.py;enrich_units.py,
 evidence:nyc_records_flags,addr_key,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;rent_terms.py;rating_standard.py;enrich_units.py,
 evidence:nyc_records_flags,bbl,not_used,,NYC records detail behind the flags
@@ -1076,7 +1084,7 @@ evidence:nyc_records_flags,baseline_p95,not_used,,NYC records detail behind the 
 evidence:nyc_records_flags,above_p95,not_used,,NYC records detail behind the flags
 evidence:nyc_records_flags,detail,used,build_master.py;rent_terms.py,
 evidence:nyc_records_flags,query_url,used,avoid.py,
-evidence:nyc_records_flags,retrieved_at,not_used,,bookkeeping or already folded into a merged field
+evidence:nyc_records_flags,retrieved_at,used,build_master.py,
 evidence:rating_standard,addr_key,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;rent_terms.py;rating_standard.py;enrich_units.py,
 evidence:rating_standard,building_name,used,gates.py;build_master.py;rank.py;avoid.py;build_neighborhoods.py;rent_terms.py;rating_standard.py;enrich_units.py,
 evidence:rating_standard,city,used,gates.py;build_master.py;build_neighborhoods.py;rating_standard.py;enrich_units.py,

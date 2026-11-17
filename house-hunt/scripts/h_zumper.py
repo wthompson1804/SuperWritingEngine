@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Zumper harvest: studios and 1BRs with listed rent <= $3,000 inside data/reference/search_grid.csv.
+"""Zumper harvest: studios and 1BRs inside data/reference/search_grid.csv. Listed rent <= $2,200 since the second
+trawl (Will, 2026-11-17; MAX_RENT); rows held before it keep the earlier $3,000 limit (rent_cap, HELD_MAX_RENT).
 
 Stages (each idempotent and resumable; pages are cached under raw/zumper/ by lib.cached_get):
 
@@ -9,13 +10,19 @@ Stages (each idempotent and resumable; pages are cached under raw/zumper/ by lib
   python3 scripts/h_zumper.py all
   python3 scripts/h_zumper.py targets FILE.csv   # fetch only the pages in FILE.csv (column `url`, optional
                                                  # `building_url`; one request per building), then rebuild
+  python3 scripts/h_zumper.py trawl2 [--max-req N] [--phase priority|rest]   # second trawl: $2,200 searches per
+                                                 # city, priority areas first, then new detail pages; then build
+
+`build` also merges data/listings_pending/zumper_opened.csv (the card rows opened by scripts/zumper_open_pending.py),
+one row per listing id, and drops a card row whose opened page no longer shows the unit.
 
 Options: --max-min N (seconds budget for a fetching stage), --refresh (refetch cached pages; updates last_seen).
 
-robots.txt (group `*`, there is no Claude-specific group, no Crawl-delay; read 2026-11-15): only path-based
-URLs are used: /apartments-for-rent/<city>/<studios|1-beds>/under-3000 (+ ?page=N, which `*` does not
-disallow), /listings/<id>p/<slug>, /apartment-buildings/p<id>/<slug>. Nothing under /api, /json, /map, and no
-?box= / ?bedrooms= / ?listingId= parameters. 2.2 s between requests. Any 403 / 429 / CAPTCHA stops the run.
+robots.txt (group `*`, there is no Claude-specific group, no Crawl-delay; read 2026-11-15, unchanged 2026-11-17):
+only path-based URLs are used: /apartments-for-rent/<city>/<studios|1-beds>/under-<MAX_RENT> (+ ?page=N, which `*`
+does not disallow), /listings/<id>p/<slug>, /apartment-buildings/p<id>/<slug>. Nothing under /api, /json, /map, and
+no ?box= / ?bedrooms= / ?listingId= parameters. 2.2 s between requests (plus jitter in trawl2). Nothing is retried.
+Any 401 / 403 / 429 / CAPTCHA / bot wall stops the run and is written to raw/_host_kill_shared.json.
 """
 from __future__ import annotations
 
@@ -111,22 +118,55 @@ class Blocked(Exception):
 
 
 # ---------------------------------------------------------------- fetch
+BOT_WALL = re.compile(r"captcha|px-captcha|perimeterx|just a moment\.\.\.|cf-challenge|challenge-platform|access denied|"
+                      r"are you a robot|unusual traffic|incapsula|attention required|verify you are human", re.I)
+N_REQUESTS = 0          # network requests made by this process (cache hits are not counted)
+
+
+def record_refusal(status: str, url: str) -> None:
+    """One refusal ends zumper.com for good: BLOCKED.txt and the shared kill file (raw/_host_kill_shared.json)."""
+    BLOCK_F.write_text(f"{lib.now_iso()} {status} {url}\n")
+    try:
+        d = json.loads(KILL_F.read_text() or "{}") if KILL_F.exists() else {}
+        if not isinstance(d, dict):
+            d = {}
+    except (OSError, json.JSONDecodeError):
+        d = {}
+    d.setdefault("zumper.com", {"reason": status, "status": status, "url": url, "at": lib.now_iso(),
+                                "time": lib.now_iso(), "by": "scripts/h_zumper.py"})
+    tmp = KILL_F.with_suffix(".json.tmp%d" % __import__("os").getpid())
+    tmp.write_text(json.dumps(d, indent=1) + "\n")
+    __import__("os").replace(tmp, KILL_F)
+
+
 def fetch(path: str, refresh: bool = False):
-    """Return (state_dict | None, meta, html_text). Raises Blocked on 403/429/CAPTCHA."""
+    """Return (state_dict | None, meta, html_text). Raises Blocked on 401/403/429/CAPTCHA/bot wall, after recording
+    it in BLOCKED.txt and raw/_host_kill_shared.json. Nothing is retried (retries=1)."""
+    global N_REQUESTS
     if BLOCK_F.exists():
         raise Blocked(BLOCK_F.read_text())
     url = BASE + path
+    cached = cache_lookup(path)[0] is not None and not refresh
     try:
-        content, meta = lib.cached_get(url, SRC, ext="html", refresh=refresh, retries=2)
+        content, meta = lib.cached_get(url, SRC, ext="html", refresh=refresh, retries=1,
+                                       headers={"Accept": "text/html,application/xhtml+xml"})
+    except lib.HostRefused as e:
+        raise Blocked(str(e))
     except RuntimeError as e:
         if "429" in str(e):
-            BLOCK_F.write_text(f"{lib.now_iso()} 429 {url}\n")
+            record_refusal("HTTP 429", url)
             raise Blocked(str(e))
         raise
+    if not cached:
+        N_REQUESTS += 1
     text = content.decode("utf8", "replace")
-    if meta["status"] in (403, 429) or (meta["status"] == 200 and "__PRELOADED_STATE__" not in text
-                                        and re.search(r"captcha|are you a robot|access denied", text, re.I)):
-        BLOCK_F.write_text(f"{lib.now_iso()} {meta['status']} {url}\n")
+    if meta["status"] in (401, 403, 429) or (meta["status"] == 200 and "__PRELOADED_STATE__" not in text
+                                             and BOT_WALL.search(text[:20000])):
+        if meta["status"] == 200:          # never keep a wall page as content
+            p = lib.ROOT / meta["path"]
+            p.unlink(missing_ok=True)
+            p.with_name(p.stem + ".meta.json").unlink(missing_ok=True)
+        record_refusal(f"HTTP {meta['status']}" + (" bot wall / challenge page" if meta["status"] == 200 else ""), url)
         raise Blocked(f"HTTP {meta['status']} {url}")
     return parse_state(text), meta, text
 
@@ -302,6 +342,165 @@ def search(max_min: float, refresh: bool):
           "out_of_area", sum(1 for c in cities.values() if not c["in_area"]), "pages", n_pages, "cards", n_cards)
 
 
+# ---------------------------------------------------------------- second trawl (2026-11-17)
+def _polite(path: str, refresh: bool = False):
+    """fetch() with 0.5-1.5 s of jitter on top of lib's 2.2 s spacing; cache hits are free."""
+    import random
+    if refresh or cache_lookup(path)[0] is None:
+        time.sleep(random.uniform(0.5, 1.5))
+    return fetch(path, refresh)
+
+
+def trawl2(max_min: float, max_req: int, phases=("priority", "rest"), do_search=True, do_details=True):
+    """Second trawl: for every searched city of the grid, the $2,200 search pages for 1-beds and studios
+    (/apartments-for-rent/<city>/<1-beds|studios>/under-2200, + ?page=N), priority areas first (NJ, Brooklyn, CT,
+    Long Island, LIC; NYC through new-york-ny), then the rest; then the detail page of every new card at or under
+    $2,200 that no file holds as a detail row and no cache holds. Status per city: raw/zumper/trawl2_cities.json.
+    Stops at the first refusal (fetch records it), at --max-req network requests or at --max-min minutes."""
+    grid = load_grid()
+    gz = {z: dm for z, _, _, dm in grid}
+    cities = json.loads(CITIES_F.read_text())
+    t2 = json.loads(TRAWL2_CITIES_F.read_text()) if TRAWL2_CITIES_F.exists() else {"cities": {}, "counts": {}}
+    t0 = time.time()
+    cards_out = open(CARDS_F, "a")
+
+    def out_of_budget():
+        return (max_req and N_REQUESTS >= max_req) or (max_min and time.time() - t0 > max_min * 60)
+
+    def city_area(slug, c):
+        if slug == "new-york-ny":
+            return "NYC (Brooklyn, LIC)"
+        return area_of(c.get("grid_zcta") or "", c.get("state"))
+
+    def save():
+        TRAWL2_CITIES_F.write_text(json.dumps(t2, indent=0))
+
+    def run_search(slug, bed):
+        first, page, n = None, 1, 0
+        while True:
+            path = f"/apartments-for-rent/{slug}/{bed}/under-{MAX_RENT}" + (f"?page={page}" if page > 1 else "")
+            st, meta, _ = _polite(path)
+            if st is None:
+                return first, n, "no_state"
+            first = first or st
+            cs = st.get("currentSearch") or {}
+            L = cs.get("listables") or {}
+            q = L.get("query") or {}
+            if "bedrooms" not in q or q.get("neighborhood"):
+                return first, n, "filter_not_understood"
+            pmax = (q.get("price") or {}).get("max") if isinstance(q.get("price"), dict) else None
+            if pmax not in (None, MAX_RENT):
+                return first, n, f"price_filter_{pmax}"
+            items = [(x, "match") for x in (L.get("listables") or [])]
+            items += [(x, "nearby") for x in (((L.get("nearby") or {}).get("matches") or {}).get("listables") or [])]
+            for x, kind in items:
+                cards_out.write(json.dumps({"seen": meta["retrieved_at"], "search": path, "kind": kind,
+                                            "raw_path": meta["path"], "trawl": 2, "card": slim_card(x)}) + "\n")
+                n += 1
+            cards_out.flush()
+            for nc in ((st.get("geo") or {}).get("nearby_cities") or []):
+                s_, o_ = b01(nc)
+                if nc.get("url"):
+                    t2["counts"][nc["url"]] = [s_, o_, nc.get("listing_count")]
+            if not cs.get("hasMoreListables") or not L.get("listables") or page >= 40 or out_of_budget():
+                return first, n, "done"
+            page += 1
+
+    def searches(phase):
+        sel = []
+        for slug, c in cities.items():
+            if not c.get("in_area") or c["status"] not in ("done", "skipped_no_inventory"):
+                continue
+            pri = city_area(slug, c) in PRIORITY_AREAS + ("NYC (Brooklyn, LIC)",)
+            if (phase == "priority") != pri:
+                continue
+            sel.append((0 if c["status"] == "done" else 1, c.get("drive_min") if c.get("drive_min") is not None else 999, slug))
+        for skipped, _, slug in sorted(sel):
+            if out_of_budget():
+                print("budget reached during searches")
+                return False
+            rec = t2["cities"].get(slug) or {}
+            if rec.get("status") in ("done", "skipped_no_inventory"):
+                continue
+            c = cities[slug]
+            s_, o_, lc = t2["counts"].get(slug) or [c.get("studios"), c.get("onebeds"), c.get("listing_count")]
+            if skipped and (slug not in t2["counts"] or lc == 0 or (s_ == 0 and o_ == 0)):
+                t2["cities"][slug] = {"status": "skipped_no_inventory", "area": city_area(slug, c),
+                                      "basis": "no fresh nearby_cities counts" if slug not in t2["counts"] else "fresh counts 0"}
+                continue
+            rec = {"area": city_area(slug, c), "pages": {}, "cards": 0}
+            for bed in ("1-beds", "studios"):
+                if bed == "studios" and s_ == 0:
+                    continue
+                st, n, why = run_search(slug, bed)
+                rec["pages"][bed] = why
+                rec["cards"] += n
+            rec["status"] = "done"
+            rec["searched_at"] = lib.now_iso()
+            t2["cities"][slug] = rec
+            save()
+            if sum(1 for v in t2["cities"].values() if v.get("status") == "done") % 20 == 0:
+                print(f"{lib.now_iso()} trawl2 cities done {sum(1 for v in t2['cities'].values() if v.get('status') == 'done')}"
+                      f" requests {N_REQUESTS} last {slug}", flush=True)
+        return True
+
+    def details(phase):
+        cards, _ = load_cards()
+        have = {}
+        for f in (OUT, OPENED_F):
+            if f.exists():
+                for r in csv.DictReader(open(f)):
+                    if r["detail_level"] == "detail":
+                        have[r["listing_id"]] = r
+        todo = {}
+        for lid, c in cards.items():
+            card = c["card"]
+            if c["seen"] < TRAWL2_START or (card.get("min_price") or 10 ** 9) > MAX_RENT:
+                continue
+            z = (card.get("zipcode") or "").zfill(5)[:5]
+            pri = area_of(z, card.get("state")) in PRIORITY_AREAS
+            if (phase == "priority") != pri or f"zumper-{lid}" in have:
+                continue
+            u = to_path(card.get("url") or "")
+            if not u:
+                continue
+            if cache_lookup(u)[0] is not None:
+                continue
+            if (lib.RAW / "zumper_open_pending" / (hashlib_key(BASE + u) + ".html")).exists():
+                continue
+            todo[u] = min(todo.get(u, 999), gz.get(z, 999))
+        order = sorted(todo, key=lambda u: (todo[u], u))
+        print(f"trawl2 details ({phase}): {len(order)} pages to read", flush=True)
+        n = 0
+        for u in order:
+            if out_of_budget():
+                print("budget reached during details")
+                return False
+            _polite(u)
+            n += 1
+            if n % 50 == 0:
+                print(f"{lib.now_iso()} trawl2 details {n}/{len(order)} requests {N_REQUESTS}", flush=True)
+        return True
+
+    try:
+        for ph in phases:
+            if do_search and not searches(ph):
+                break
+            if do_details and not details(ph):
+                break
+    except Blocked as e:
+        print("BLOCKED:", e)
+    finally:
+        save()
+        cards_out.close()
+        print("trawl2: network requests this run", N_REQUESTS)
+
+
+def hashlib_key(url: str) -> str:
+    import hashlib
+    return hashlib.sha1(("GET " + url + " ").encode()).hexdigest()[:16]
+
+
 # ---------------------------------------------------------------- cards -> targets
 def load_cards():
     """Latest card per listing_id, restricted to grid ZIPs, beds <= 1, min_price <= cap."""
@@ -337,7 +536,7 @@ def load_cards():
         if (c.get("min_bedrooms") or 0) > 1:
             stats["beds_gt1"] += 1
             continue
-        if c.get("min_price") is None or c["min_price"] > MAX_RENT:
+        if c.get("min_price") is None or c["min_price"] > rent_cap(f"zumper-{lid}", r["seen"]):
             stats["over_cap"] += 1
             continue
         r["drive_min"] = grid[z]
@@ -660,8 +859,7 @@ FLOOR_TOP_OF = re.compile(r"\btop[- ]floor (?:of|in) (?:a |an |the |this )?(two|
 # a floor mention about something other than the apartment (laundry on the first floor, a duplex's other level ...)
 FLOOR_OTHER = re.compile(r"laundr|restroom|amenit|office|\bgym\b|fitness|lobby|storage|common|mailroom|lounge|garage|"
                          r"retail|storefront|store front|commercial|sq\.? ?f|square f|duplex|two[- ]level|2[- ]level|"
-                         r"bi-?level|tri-?level|main floor|other floor|game room|play ?room|business center|"
-                         r"hardwood|tile|vinyl|laminate|carpet", re.I)
+                         r"bi-?level|tri-?level|main floor|other floor|game room|play ?room|business center", re.I)
 
 
 def _plain(html_text: str) -> str:
@@ -678,13 +876,16 @@ def floor_from_text(own: str):
         n = ORD_N.get(w)
         if n is None and w[0].isdigit():
             n = int(re.match(r"\d+", w).group(0))
-        win = t[max(0, m.start() - 45):m.end() + 30]
+        # the clause around the mention (bounded by sentence or list punctuation), at most 45 / 30 characters
+        a = max([t.rfind(c, 0, m.start()) for c in ".;!?•|(\n"] + [m.start() - 45, -1]) + 1
+        bs = [k for k in (t.find(c, m.end()) for c in ".;!?•|)\n") if k >= 0]
+        win = t[a:min(bs + [m.end() + 30])]
         if not n or n > 60:
             continue
         if FLOOR_OTHER.search(win):
-            notes.append(f"floor text in description (not used, about something else): '{m.group(0)}'")
+            notes.append(f"floor text in description (not used, about something else): '{win.strip()[:80]}'")
             continue
-        found.append((n, m.group(0) + (" (ground)" if w == "ground" else "")))
+        found.append((n, win.strip()[:90] + (" (ground)" if w == "ground" else "")))
     for m in FLOOR_GROUND.finditer(t):
         found.append((1, m.group(0) + " (ground)"))
     for m in FLOOR_BASEMENT.finditer(t):
@@ -694,10 +895,12 @@ def floor_from_text(own: str):
     vals = {n for n, _ in found}
     if len(vals) == 1:
         n = vals.pop()
-        notes.append("floor from description text: " + " / ".join(f"'{q}'" for _, q in found[:3]))
+        qs = list(dict.fromkeys(q for _, q in found))
+        notes.append("floor from description text: " + " / ".join(f"'{q}'" for q in qs[:3]))
         return n, notes
     if len(vals) > 1:
-        notes.append("floor text in description disagrees (not used): " + " / ".join(f"'{q}'" for _, q in found[:4]))
+        qs = list(dict.fromkeys(q for _, q in found))
+        notes.append("floor text in description disagrees (not used): " + " / ".join(f"'{q}'" for q in qs[:4]))
     elif re.search(r"\btop[- ]floor\b", t, re.I):
         notes.append("description says top floor (no number; not used)")
     return None, notes
@@ -1142,7 +1345,7 @@ def build():
                     counts["dropped_detail_beds"] += 1
                     continue
                 p = L.get("min_price") if L.get("min_price") is not None else L.get("price")
-                if p is None or p > MAX_RENT:
+                if p is None or p > rent_cap(f"zumper-{L.get('listing_id')}", seen):
                     counts["dropped_detail_over_cap"] += 1
                     continue
                 fu = facts_from(L, vt, ent, "")
@@ -1175,7 +1378,7 @@ def build():
                 counts["dropped_detail_beds"] += 1
                 continue
             p = ent.get("min_price") if ent.get("min_price") is not None else ent.get("price")
-            if p is None or p > MAX_RENT:
+            if p is None or p > rent_cap(f"zumper-{ent.get('listing_id')}", seen):
                 counts["dropped_detail_over_cap"] += 1
                 continue
             f = facts_from(ent, vt, bld, bvt)
@@ -1183,6 +1386,44 @@ def build():
             rows[r["listing_id"]] = r
             counts["detail_rows"] += 1
 
+    # ---- second trawl: merge the card rows opened by scripts/zumper_open_pending.py
+    # (data/listings_pending/zumper_opened.csv, same columns first, read from raw/zumper_open_pending/). One row per
+    # listing id: an opened row replaces the card row of the same id (or of the earlier id its page now shows the
+    # unit under); where both files hold a detail row, the one read last wins. A card row whose opened page no longer
+    # shows the unit (summary status "gone") is dropped unless a later search card saw it again.
+    for k in ("opened_added", "opened_replaced_card", "opened_replaced_older_detail", "opened_older_than_here",
+              "card_dropped_same_unit_new_id", "card_dropped_gone_on_opened_page"):
+        counts[k] = 0
+    if OPENED_F.exists():
+        for o in csv.DictReader(open(OPENED_F)):
+            r = {c: o.get(c, "") for c in COLS}
+            lid_o, old_id = r["listing_id"], o.get("listings_csv_id", "")
+            if old_id and old_id != lid_o and old_id in rows and rows[old_id]["detail_level"] == "card":
+                r["first_seen"] = min(r["first_seen"], rows[old_id]["first_seen"])
+                del rows[old_id]
+                counts["card_dropped_same_unit_new_id"] += 1
+            cur = rows.get(lid_o)
+            if cur is None:
+                rows[lid_o] = r
+                counts["opened_added"] += 1
+            elif cur["detail_level"] == "card":
+                r["first_seen"] = min(r["first_seen"], cur["first_seen"])
+                rows[lid_o] = r
+                counts["opened_replaced_card"] += 1
+            elif cur["last_seen"] >= r["last_seen"]:
+                counts["opened_older_than_here"] += 1
+            else:
+                r["first_seen"] = min(r["first_seen"], cur["first_seen"])
+                rows[lid_o] = r
+                counts["opened_replaced_older_detail"] += 1
+    if OPENED_SUMMARY_F.exists():
+        for s in csv.DictReader(open(OPENED_SUMMARY_F)):
+            lid = s.get("listing_id", "")
+            if s.get("status") == "gone" and s.get("selected_card_row") == "yes" and lid in rows \
+                    and rows[lid]["detail_level"] == "card" and s.get("page_retrieved_at") \
+                    and rows[lid]["last_seen"] <= s["page_retrieved_at"]:
+                del rows[lid]
+                counts["card_dropped_gone_on_opened_page"] += 1
     # first_seen: earliest of previous CSV, card sighting, this fetch
     for lid_s, r in rows.items():
         cands = [r["first_seen"]]
@@ -1281,7 +1522,13 @@ def main():
         # --no-follow: exactly one fetch per row (do not also read the building page of a /listings/ row)
         targets(a[1], refresh, float(a[a.index("--max-age-h") + 1]) if "--max-age-h" in a else 12.0,
                 follow="--no-follow" not in a)
-    if stage in ("build", "all", "targets"):
+    if stage == "trawl2":
+        # python3 scripts/h_zumper.py trawl2 [--max-req N] [--max-min M] [--phase priority|rest] [--no-details]
+        #                                    [--no-search]
+        ph = (a[a.index("--phase") + 1],) if "--phase" in a else ("priority", "rest")
+        trawl2(max_min, int(a[a.index("--max-req") + 1]) if "--max-req" in a else 0, ph,
+               do_search="--no-search" not in a, do_details="--no-details" not in a)
+    if stage in ("build", "all", "targets", "trawl2"):
         build()
 
 
