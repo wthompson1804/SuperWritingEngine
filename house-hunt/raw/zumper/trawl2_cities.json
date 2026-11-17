@@ -5793,6 +5793,30 @@
 "cards": 25,
 "status": "done",
 "searched_at": "2026-11-17T19:03:01+00:00"
+},
+"pt-jervis-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"verbank-ny": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"kintnersville-pa": {
+"status": "skipped_no_inventory",
+"area": "other",
+"basis": "fresh counts 0"
+},
+"mount-bethel-pa": {
+"area": "other",
+"pages": {
+"1-beds": "done"
+},
+"cards": 25,
+"status": "done",
+"searched_at": "2026-11-17T19:03:04+00:00"
 }
 },
 "counts": {

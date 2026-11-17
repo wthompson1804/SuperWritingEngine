@@ -78,3 +78,4 @@ build: {'cards': 3735, 'detail_rows': 1724, 'card_rows': 2241, 'dropped_detail_o
 2026-11-17T19:00:01+00:00 trawl2 cities done 420 requests 65 last mahopac-ny
 2026-11-17T19:01:22+00:00 trawl2 cities done 440 requests 92 last newburgh-ny
 2026-11-17T19:02:43+00:00 trawl2 cities done 460 requests 119 last yardley-pa
+trawl2 details (rest): 68 pages to read
