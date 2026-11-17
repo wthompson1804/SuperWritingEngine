@@ -1061,7 +1061,7 @@ watch: Your parents are about {drive} minutes away, and each visit costs {tollco
 host_intro: [[In Trenton the Delaware and Raritan Canal State Park{!b_park==Delaware and Raritan Canal State Park} is about {parkwalk} minutes {door}{!parkwalk<=3}, and the water {water} miles{!water<=500}.]] The apartments cost about ${pg_mid} a month with utilities and fees, well under your limit{!pg_hi<=2000}. A visit to your parents takes the whole day{!drive>=110}.
 scene: Within a {w10} there are {fewrest} and no bars{!bars==0}. The supermarket is {super} miles away.
 good: A large state park is a very short walk away{!parkwalk<=3}{!parkha>=20}.
-watch: Only {fewrest} are within walking distance{!rest<=3}, so dinner out is usually a drive.
+watch: Dinner out is usually a drive, because {fewrest} are within walking distance{!rest<=3}.
 
 === hood: nj:west-new-york
 host_intro: West New York has about {rest} restaurants within a {w10}{!rest>=15}, and the supermarket is {super} miles away. A resident parking decal costs $15 a year and needs a New Jersey license and registration at your address. Residents say night parking is hard.

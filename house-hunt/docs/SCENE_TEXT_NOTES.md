@@ -407,3 +407,35 @@ name no other kind.
 6. A dryer where only a washer is named, and any machine named only on a listing site's appliance list.
 7. The toll range of an experience is the lowest and highest toll among its apartments; the text does not say how
    many apartments sit at each end.
+
+## After the second trawl (2026-11-17)
+
+The first page went to 387 apartments in 68 neighborhoods. What changed in the text system:
+
+- **28 new neighborhood blocks** (section "Neighborhoods added after the second trawl" in `scene_text_source.txt`):
+  East Haven, Naugatuck, Boonton, Elizabeth, Hamilton, Hillsborough, Jersey City – Greenville, Lawrence, Lopatcong,
+  Millburn, Morristown, Paterson, Piscataway, Plainsboro, Raritan, Trenton, West New York, West Orange, West Windsor,
+  Woodbridge, Brookhaven, Goshen, Islip, Jackson Heights, Maybrook, Ossining, Rego Park, Sunset Park (East). Danbury,
+  Elmhurst, Bergen-Lafayette, Journal Square and McGinley Square had blocks whose tests no longer held; they were
+  redrafted. Few of the new towns have resident quotes or found local rules, so most blocks are short and rest on
+  the door-distance facts; Elizabeth, West New York and Rego Park paraphrase residents (`voices:`), and West New York
+  and Greenville cite a rule (`rules:`).
+- **Experiences redrafted on the current data**: Quiet-Street and Walk-Everywhere are now `@small` notes about
+  Millburn and McGinley Square; Little-City no longer claims a garage at most buildings (37 percent list one); Fresh-
+  Start no longer claims newer buildings by the water with a gym (median year 1960, half the apartments within 800 m
+  of water, 7 percent with a gym); Room-to-Breathe compares its space with a typical Queens apartment instead of
+  "usually more space" (70 percent are 650 square feet or more); Old-Neighborhood says 19 of its 57 apartments are in
+  Queens, Brooklyn and Manhattan and the rest in Newark, instead of "most".
+- Drafts for neighborhoods with nothing on the page now drop a sentence the data no longer supports (`[[ ]]`) rather
+  than stop the build; those rows are not on the page.
+- **Hood texts never write "about N restaurants" for the 1-mile count**: `check_published_text.py` reads any "about N
+  restaurants" as the 10-minute-walk figure. Write "Within {mile} there are {rest1600} restaurants".
+- `check_scene_text.check_style` now ignores the dash inside the page's own neighborhood names
+  (`dashed_place_names()`, "Jersey City – McGinley Square"): an `@small` experience must name each neighborhood as the
+  page does, and the dash rule had made that impossible for a Jersey City neighborhood.
+- `realtor_lines.py`: the floor-and-elevator catch now applies to more than half of the apartments shown, so it has
+  10 wordings of the same fact (floor not given, elevator not stated, ask both, without an elevator only the floor just
+  above the ground floor works); none may say "no elevator", which the claims audit reads as a stated fact. The
+  "few details about the building" sentence has 8 wordings and the few-restaurants sentence 3, and the cost subhead
+  for unpublished fees has 9. The 8 percent share guards are unchanged; `test_realtor_lines.SameFactVariants` checks
+  that each new wording says the same thing.
