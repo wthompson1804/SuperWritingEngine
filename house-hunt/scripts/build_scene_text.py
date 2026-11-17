@@ -193,7 +193,9 @@ TOKEN = re.compile(r"\{(!?)(?:@([a-z]{2}:[a-z0-9\-]+)\s+)?([a-z_0-9]+)(?::([a-z0
 # Scope words (D16). A door-distance figure in a neighborhood with several shown buildings is the median building's,
 # so the text says whose door it is: {door} prints "from the door" where one building is shown and "from most
 # buildings here" where several are, and the first {w10} of a lead or a scene gains "of most buildings here".
-OWN_ALIASES = ("own_dog", "own_garage", "own_parking", "dog_any", "nb", "pet_spa")
+# "stationkind" is read the same way (2026-11-17, Beacon Falls after its five apartments went): with nothing shown there
+# is no building to take the kind of station from, so the token is missing and any test on it fails, as for a missing value
+OWN_ALIASES = ("own_dog", "own_garage", "own_parking", "dog_any", "nb", "pet_spa", "stationkind")
 # {owndog} and {owngarage}: what the shown buildings supply themselves (D6), in fixed words that follow the count of
 # buildings. They print nothing-and-fail (so sit inside [[ ]]) when no shown building has it.
 OWN_WORDS = {

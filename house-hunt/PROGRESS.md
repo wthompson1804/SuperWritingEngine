@@ -4,6 +4,54 @@ Read this first every session. Newest entries at the top of the log.
 
 ## Current state (2026-11-16, after the pipeline repairs to independent check 5; details in `docs/REPAIRS_AFTER_INDEPENDENT_CHECK_5.md`)
 
+**2026-11-17 note: live-check batch 21 applied (the 45 apartments at or under $2,000 listed rent, re-read that day; `docs/harvest_notes/live_check_batch_21.md`). The counts in this note replace the ones below.**
+
+- **First page: 516 apartments in 200 buildings, 76 neighborhoods** (was 523 / 202 / 77; 49 neighborhoods with three or more). By experience
+  (apartments / buildings / neighborhoods): Little-City 217 / 80 / 23, Room-to-Breathe 148 / 37 / 22 (was 154 / 38 / 23), Old-Neighborhood 71 / 54 / 21
+  (was 72 / 55 / 21), Fresh-Start 71 / 23 / 5, Quiet-Street 6 / 3 / 3, Walk-Everywhere 3 / 3 / 2. 657 ranked (was 664). **218 shown apartments carry
+  one open item** (was 224): elevator 112, listing 66, dogs allowed 28, availability 9, eligibility 3. Verdicts: 924 rows for 922 units (ok 525,
+  asterisk 167, disclose 32, remove 200). Tests: `test_parsers.py` 259, `test_rules.py` 910, `--data` 14,861, `check_registry.py` passes,
+  `check_scene_text.py` 0 failing, `check_published_text.py` text 0 / pipeline strings 0. `site/dist` rebuilt (`build_site.py`, `build_artifact.py`);
+  nothing was published.
+- **What the 45 rows did.** 7 `gone`, all removed: Beacon Mill Village PA-405, PA-202, PA-402, BM-322, PU-242 (Beacon Falls leaves the page with
+  them), The Royce at Trumbull 4211, 84-18 143rd St 3L. 5 `changed`, all lower, rent and total updated: Whitney Towers 306 $1,895, 409 $1,715, 607
+  $1,725; Soundview 855-1015 $1,900; 111 Prospect St 511 $1,675 (already applied on 2026-11-16, now dated today). 12 `live`, confirmed with today's
+  date. 21 `not_read`: nothing changed. No apartment entered.
+- **`not_read` means nothing was learned** (`parsers.live_row_learned`; `build_master.py`, `avoid.py`, `rent_terms.py` drop such rows): it never
+  replaces an earlier live / changed / gone row (955 Main St 606 and 511, 333 State St 604, Harclay House 3CW and 5CE and the New York single listings
+  keep their live status of 2026-11-15), sets no date, is not a re-read and is not an open item. The rows stay in the evidence files and in the verdict
+  fingerprint, so the reviewer reads the note. Two notes found something and were written as verdicts: **333 State St 604** now carries one open item
+  ("availability": the building's own page listed nothing on offer; still shown); **Regency on Hudson 606** keeps its one open "listing" item, which
+  now leads with the own-site finding (studios from $2,195, none available) beside the certificate-of-occupancy question; 318 and 417 (listed at
+  $2,050, under the site's lowest price) say the same. Tests: `test_rules.py` `pure_b21`, `data_b21`.
+- **Checked while applying.** Brookview Commons (both buildings): the mandatory $50 monthly fee was already in the required fees and the total.
+  LIA by Vermella 423: priced on a 15-month lease, no 12-month price on the page, so the lease-term disclosure stands and the price shown is kept.
+  The Arcade 302: "Small dogs allowed" passes with the tour question about the weight limit; its open "listing" item closed (seen available today on
+  the manager's board and on Apartment List). 36-25 Parsons Blvd 5H is `live` by a match on broker, street, size and price, not apartment number:
+  a disclosure says to confirm by phone.
+- **Verdicts written: 75** (one per shown unit of the 25 buildings, each from the building's evidence as it stands): ok 48, asterisk 16
+  (wrong building 6, listing 7, availability 2, dogs 1), disclose 4 (lease term 2, other 2), remove 7 (the gone apartments).
+- **Text.** Beacon Falls' draft no longer fails with nothing shown (`{stationkind}` is missing there; its station and price sentences sit in `[[ ]]`),
+  which had also pushed two subheads over their share. `site_walkthrough_test.js`: the star line on a building card is expected only for a thing
+  to confirm (an offer has its own line since page pass 9; the Arcade is the first building with an offer and nothing to confirm in that test's
+  neighborhood). `verify_all.py --with-browser`: 23 passed, 0 failed, 0 warnings, 0 skipped: publishable.
+- **Second page (the concierge draft, `site/concierge_data.json`): 38 apartments in 22 buildings, 14 neighborhoods, 3 experiences** (was 45 / 25 / 17 /
+  3): Room-to-Breathe 18 apartments, Little-City 12, Old-Neighborhood 8. **Confirmed on 2026-11-17: 17** (12 at the same rent, 5 at a lower rent);
+  **last seen earlier: 21** (all last seen listed on 2026-11-15; each note says it could not be read again on the 17th). New fields (added, none
+  renamed): `apartments[].checked` {status, date, note, rent_before}, `buildings[].checked_summary`, `neighborhoods[].parked_distance_km` and
+  `parked_label` ("Also nearby" within 10 km: Murray Hill, Belleville, City of Orange; "Also in this kind of life" for Bloomfield under Yonkers
+  28.6 km, Bath Beach under Newark 20.6 km, Sheepshead Bay under Flushing 21.0 km), `buildings[].why_topic`, `meta.checked_day`, `meta.checked_counts`,
+  `meta.nearby_km`. The rent shown and the $2,000 test use the rent as it now stands (`rent_now`), so the five lower rents show. `why` is chosen from
+  her priorities first (parking, the dog, greenery, going out, Mom and Dad, room to work from home, value); an amenity sentence only where a
+  building has nothing true and positive on those (one building: the Arcade, its train station). `test_concierge_data.py`: 17 of 17.
+  Text for this set: with Beacon Mill and The Royce gone, only 10 of the 18 Room-to-Breathe apartments are 650 square feet or more, so "bigger
+  apartments" is now said of Hamden and East Orange (`data/reference/scene_text_source_u2000.csv`); Murray Hill's lead opens on the park.
+- **Possible follow-ups (nothing harvested, no web request made in this pass):** Beacon Mill Village's own list has ten apartments we never collected
+  ($1,545 to $1,895 for the studio and one-bedrooms); The Royce has other apartments above $2,000; the manager's board has one unlabelled 955 Main St
+  one-bedroom at $1,675 that could not be matched to an apartment. `scripts/verify_concierge.py`'s step `check_published_text.py --data
+  site/concierge_data.json` stops with `KeyError: 'years'` (that file is not page-shaped; the text audit that works is the one `concierge_data.py`
+  runs on `site/_concierge_base.json`): for the coordinator. The "For the owner" line below about Beacon Falls' crime figure no longer applies.
+
 **Authorities, newest first:** `CLAUDE.md` → `docs/RANKING.md` (one current statement; change log at its end) → plan v4 → `docs/SAFETY_BASIS.md` → plan v3.
 
 **Run everything:** `python3 scripts/run_all.py` → `build_page_data.py` → `page_data_extras.py` → `build_scene_text.py`, `check_scene_text.py`,

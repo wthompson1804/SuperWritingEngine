@@ -872,7 +872,7 @@ def data_b21(M, R, S):
     lia = S[S.building_name.eq("LIA by Vermella") & S.unit.eq("423")]
     ok(len(lia) == 1 and '"what": "lease term"' in lia.disclosures.iloc[0] and str(lia.price_lease_months.iloc[0]).startswith("15"), "b21: LIA 423 is priced on a 15-month lease and says so (lease-term disclosure)")
     arc = S[S.building_name.str.contains("Arcade", regex=False) & S.unit.eq("302")]
-    ok(len(arc) == 1 and arc.dogs_allowed.iloc[0] == "yes" and arc.dog_size_only.iloc[0].startswith("yes") and "Confirm the dog weight limit in pounds" in (arc.tour_questions.iloc[0] if "tour_questions" in arc else arc.disclosures.iloc[0]),
+    ok(len(arc) == 1 and arc.dogs_allowed.iloc[0] == "yes" and arc.dog_size_only.iloc[0].startswith("yes") and "Confirm the dog weight limit in pounds" in arc.tour_confirm.iloc[0],
        "b21: The Arcade 302 passes the dog rule as 'small dogs' with the tour question about the weight limit")
 
 

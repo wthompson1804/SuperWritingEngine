@@ -1,6 +1,7 @@
 # scripts/
 
-Inventory of every script in this folder as of 2026-11-16 (268 Python and JavaScript files, plus this README;
+Inventory of every script in this folder as of 2026-11-16, with the concierge-page scripts and live-check batch 21 added on
+2026-11-17 (see "Added 2026-11-17" under the inventory heading) (268 Python and JavaScript files on 2026-11-16, plus this README;
 the hidden `.p5_*.js` files are scratch screenshot helpers of a page agent that was still working, and are not counted).
 How the stages fit together is in `docs/ARCHITECTURE.md`; the rules they enforce are in `docs/RANKING.md` and the plan documents.
 
@@ -34,6 +35,12 @@ python3 scripts/check_repo.py           # read-only hygiene report
 
 python3 scripts/verify_all.py           # before publishing: every test and check above plus cross-file checks, read-only
                                         #   --quick skips the slow suites; --with-browser adds the page walk-through
+
+# the second page ("the concierge draft", docs/CONCIERGE_DESIGN.md); site/data.json is only read
+python3 scripts/concierge_data.py       # site/_concierge_base.json, the *_u2000 text tables, site/concierge_data.json
+                                        #   --no-text reuses the *_u2000 tables on disk; --self-check tests the recomputation
+python3 scripts/test_concierge_data.py
+python3 scripts/verify_concierge.py     # the concierge page's own publishable check (--with-browser adds its walk-through)
 ```
 
 Page tests need Node Playwright; see the header of `site_walkthrough_test.js` and `map_component_test.js`.
@@ -385,3 +392,28 @@ Building-first passes for the five outer regions (`docs/REGION_AGENT_BRIEF.md`).
 | `h_region_westchester_rockland_trulia_zip.py` | list every Trulia rental BUILDING card (any price, studio/1BR filter) in the region's ZIPs, so buildings | region harvest (westchester_rockland) | building and listing-site pages; `data/reference/leads/westchester_rockland.csv` | `raw/region_westchester_rockland/` cache or stdout | no | none | one-off harvest (done); referenced by nothing |
 | `h_region_westchester_rockland_zb.py` | read Zumper building pages for named buildings (facts only: pets block, amenity tags, floors, units, des | region harvest (westchester_rockland) | building and listing-site pages; `data/reference/leads/westchester_rockland.csv` | `raw/region_westchester_rockland/` cache or stdout | no | none | one-off harvest (done); referenced by nothing |
 | `h_region_westchester_rockland_zumper.py` | building enumeration through Zumper town pages (discovery only) | region harvest (westchester_rockland) | building and listing-site pages; `data/reference/leads/westchester_rockland.csv` | `raw/region_westchester_rockland/` cache or stdout | no | none | one-off harvest (done); referenced by nothing |
+
+### Added 2026-11-17: the concierge page and live-check batch 21
+
+| Script | Purpose | Stage | Inputs | Outputs | Run by `run_all` | Tests | Status |
+|---|---|---|---|---|---|---|---|
+| `concierge_data.py` | Data of the second page: keeps apartments whose listed rent as it now stands is at or under $2,000, recomputes every figure over them, runs the text builders and guards over that set (`--data`, `--out-suffix _u2000`), and writes the data contract. Added 2026-11-17: `apartments[].checked` and `buildings[].checked_summary` from the live-check rows (a `not_read` row is not a re-read), `parked_distance_km` / `parked_label` ("Also nearby" within 10 km, otherwise "Also in this kind of life"), `why` chosen from her priorities before any amenity, with `why_topic`. Options: `--no-text` (reuse the `_u2000` tables), `--self-check` (the recomputation against `site/data.json` over all apartments) | concierge | `site/data.json`, `data/evidence/live_check_batch_*.csv`, `data/reference/building_crosswalk.csv`, `data/reference/scene_text_source.txt`, `scene_text_source_u2000.csv` | `site/_concierge_base.json`, `data/reference/*_u2000.csv`, `site/concierge_data.json` | no | `test_concierge_data.py` | active |
+| `test_concierge_data.py` | Tests for `concierge_data.py` and its output: rent limit, figures against a recomputation, parking of one-apartment neighborhoods and its distance label, `checked` against the live-check rows, `why` on her priorities, guarded sentences, banned words, contract shape | test | `site/data.json`, `site/_concierge_base.json`, `site/concierge_data.json`, `data/evidence/live_check_batch_*.csv` | exit code | no (run by `verify_all.py` and `verify_concierge.py`) | is a test | active |
+| `verify_concierge.py` | One command for the concierge page: data build, its tests, the text check, the pick-logic tests, the page build and (`--with-browser`) the phone walk-through. It rewrites the concierge outputs; it never touches the first page | concierge check | everything above | the concierge outputs, verdict on stdout | no | none | active |
+| `build_concierge.py` | Build `site/dist/concierge.html` and `concierge_artifact.html` from the template, the data, the drawings and the map (`--data` for a stand-in file) | concierge page | `site/concierge.html`, `site/concierge_data.json`, `site/illustrations.json`, map files | `site/dist/concierge.html`, `site/dist/concierge_artifact.html` | no | `test_concierge_pick.js`, `concierge_walkthrough_test.js` | active |
+| `concierge_fixture.py` | A stand-in for `site/concierge_data.json` used before the real file existed (made-up sentences; never published) | concierge page test | `site/data.json` | `site/_concierge_fixture.json` | no | none | active (test fixture) |
+| `test_concierge_pick.js` | Tests for the page's pick logic, read out of `site/concierge.html`; on made-up buildings and on the data file | test | `site/concierge.html`, `site/concierge_data.json` | exit code | no | is a test | active |
+| `concierge_walkthrough_test.js` | Phone walk-through of the built concierge page (Playwright, no network) with screenshots | test | `site/dist/concierge.html` | `site/screens/concierge-*.png` | no | is a test | active |
+| `live_check_batch_21.py` | Live-check batch 21 (2026-11-17): the 45 apartments at or under $2,000 re-read on each building's own, its manager's or an allowed listing site; `get` fetches (cached, robots-checked), `text` prints a cached page, `write` rebuilds the CSV with no network. Introduced the status `not_read` (the page could not be read: nothing learned; `parsers.live_row_learned`) | evidence batch 21 | the sites named in `docs/harvest_notes/live_check_batch_21.md`, `site/data.json` | `raw/live_check_b21/` (its `render/` folder is git-ignored), `data/evidence/live_check_batch_21.csv` | no | none | one-off harvest (done) |
+
+Options and rules added to existing scripts on 2026-11-17:
+
+- `realtor_lines.py --data <page data> --out <csv> --out-buildings <csv>`, `build_scene_text.py --data <page data> --out-suffix <suffix>`,
+  `check_scene_text.py --data ... --out-suffix ...`, `check_published_text.py --data ... --out-suffix ... --text-only`: run the same drafts
+  and guards over another page-shaped file (the concierge base) and write to suffixed tables; draft fields for that set are replaced from
+  `data/reference/scene_text_source<suffix>.csv` (kind, id, field, draft, why). Without the options the scripts behave as before.
+- `parsers.live_row_learned`, `live_rows_learned`, `latest_live_row`: a live-check row with status `not_read` learned nothing. `build_master.py`,
+  `avoid.py` and `rent_terms.py` drop such rows, so one never replaces an earlier `live` / `changed` / `gone` row, sets no date, and is not an
+  open item. The row stays in the evidence files and in the verdict fingerprint (`verdicts.py`), so a reviewer reads its note and writes
+  anything it found as a verdict. Tests: `test_rules.py` `pure_b21`, `data_b21`.
+- `build_scene_text.py`: `{stationkind}` is missing (its tests fail, inside `[[ ]]`) for a neighborhood with nothing shown.

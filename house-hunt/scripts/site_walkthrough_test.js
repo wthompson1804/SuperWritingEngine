@@ -616,7 +616,9 @@ const LIMITS = { experience: 2.9, neighborhood: 2.9, building: 2.6, 'building, m
         if (us.length > 1) assert(same ? /^The same for (both|all \d+) apartments here$/.test(c.pp.note) : c.pp.note === 'Both for ' + (fu.unit ? 'Apartment ' + fu.unit : '') + ', the lowest total of the ' + us.length + ' here', 'the card says both figures belong to one apartment: ' + c.pp.note); }
       if (us.length > 1) assert(c.sub.includes(us.length + ' apartments'), 'how many apartments made the list: ' + c.sub);
       const sig = u => (u.confirm.asterisk ? String(u.confirm.what) : '') + '|' + (rs(u) ? 'r' + offer[u.id] : ''), shared = us.every(u => sig(u) === sig(us[0])) && sig(us[0]) !== '|';
-      assert.strictEqual(c.star, shared ? 1 : 0, 'one asterisk line when every apartment shares it, none otherwise: ' + c.name); }); }
+      // (2026-11-17) since page pass 9 the star line (.confl) is only a thing to confirm; an offer has its own line (.offl). A building whose
+      // apartments share an offer and have nothing to confirm (the Arcade after the re-read closed its open item) shows no star line.
+      assert.strictEqual(c.star, shared && us[0].confirm.asterisk ? 1 : 0, 'one asterisk line when every apartment shares the thing to confirm, none otherwise: ' + c.name); }); }
   // the avoid cards, the phone-call list and the not-re-checked list sit in their own rows
   await go('#hood-' + slug(hAvoid.id)); assert((await headOf('sec-avoid')).startsWith(hAvoid.counts.avoid + (hAvoid.counts.avoid === 1 ? ' apartment ' : ' apartments ')));
   assert(await page.isHidden('.unit.avoid'), 'avoid cards start closed'); await openRow('sec-avoid');

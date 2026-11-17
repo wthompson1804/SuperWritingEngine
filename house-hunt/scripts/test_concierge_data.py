@@ -17,7 +17,7 @@ import concierge_data as K  # noqa: E402
 D = json.loads(K.DATA.read_text(encoding="utf-8"))
 BASE = json.loads(K.BASE.read_text(encoding="utf-8"))
 OUT = json.loads(K.OUT.read_text(encoding="utf-8"))
-KEPT = [u for u in D["units"] if u["rent"]["listed"] <= K.RENT_LIMIT]
+KEPT = [u for u in D["units"] if K.rent_now(u) <= K.RENT_LIMIT]
 EXPS, HOODS, BLDS = OUT["experiences"], OUT["neighborhoods"], OUT["buildings"]
 APTS = [(b, a) for b in BLDS for a in b["apartments"]]
 H = {h["id"]: h for h in HOODS}
@@ -44,7 +44,8 @@ def strings(o, path=""):
     if isinstance(o, dict):
         for k, x in o.items():
             if k in ("id", "illustration_id", "name", "address", "city", "source", "source_site", "kind", "icon", "level", "why_source", "give_up_source",
-                     "parked", "either_or_audit", "score_keys", "built_at", "source_built_at", "last_read") or k.endswith("_url") \
+                     "parked", "either_or_audit", "score_keys", "built_at", "source_built_at", "last_read", "status", "date", "checked_day",
+                     "checked_counts", "why_topic") or k.endswith("_url") \
                     or k.endswith("_id") or k.endswith("_ids") or k in ("site", "parked_under", "also_nearby"):
                 continue
             yield from strings(x, f"{path}.{k}")
@@ -62,8 +63,8 @@ def rent_limit_holds():
     assert {a["id"] for _, a in APTS} == set(U), "the page holds exactly the apartments at or under the limit"
     for _, a in APTS:
         u = U[a["id"]]
-        assert a["rent"] == u["rent"]["listed"] and a["total"] == u["all_in"], a["id"]
-    assert all(u["rent"]["listed"] <= K.RENT_LIMIT for u in BASE["units"]) and len(BASE["units"]) == len(KEPT)
+        assert a["rent"] == K.rent_now(u) and a["total"] == u["all_in"], a["id"]
+    assert all(K.rent_now(u) <= K.RENT_LIMIT for u in BASE["units"]) and len(BASE["units"]) == len(KEPT)
 
 
 @test
@@ -94,7 +95,7 @@ def experience_figures_equal_a_recomputation():
     for e in EXPS:
         us = [u for u in KEPT if u["year"] == e["id"]]
         f = e["figures"]
-        rents, totals = [u["rent"]["listed"] for u in us], [u["all_in"] for u in us]
+        rents, totals = [K.rent_now(u) for u in us], [u["all_in"] for u in us]
         drives = [u["moments"]["sun"]["drive_min"] for u in us if u["moments"]["sun"].get("drive_min") is not None]
         tolls = [u["moments"]["sun"]["toll_round_trip"] for u in us if u["moments"]["sun"].get("toll_complete")
                  and u["moments"]["sun"].get("toll_round_trip") is not None]
@@ -120,14 +121,14 @@ def neighborhood_and_building_figures_equal_a_recomputation():
         complete = all(u["moments"]["sun"].get("toll_complete") for u in us)
         want = K.median(u["moments"]["sun"].get("toll_round_trip") for u in us) if complete else None
         assert close(h["toll_round_trip"], want, 0.006), h["id"]
-        assert close(h["rent_range"], [min(u["rent"]["listed"] for u in us), max(u["rent"]["listed"] for u in us)])
+        assert close(h["rent_range"], [min(K.rent_now(u) for u in us), max(K.rent_now(u) for u in us)])
         assert close(h["total_range"], [min(u["all_in"] for u in us), max(u["all_in"] for u in us)])
         assert close(h["lat"], sum(u["lat"] for u in us) / len(us), 1e-4) and close(h["lon"], sum(u["lon"] for u in us) / len(us), 1e-4)
     for b in BLDS:
         us = [U[a["id"]] for a in b["apartments"]]
         f = b["facts"]
         assert all(u["building_id"] == b["id"] for u in us)
-        assert f["rent_from"] == min(u["rent"]["listed"] for u in us) and f["rent_to"] == max(u["rent"]["listed"] for u in us)
+        assert f["rent_from"] == min(K.rent_now(u) for u in us) and f["rent_to"] == max(K.rent_now(u) for u in us)
         assert f["total_from"] == min(u["all_in"] for u in us) and f["total_to"] == max(u["all_in"] for u in us)
         best = max(us, key=lambda u: (u["scores"]["rank"], ), default=None)
         assert b["rank_score"] == best["scores"]["rank"]
@@ -189,6 +190,123 @@ def parking_of_one_apartment_neighborhoods():
     for h in HOODS:
         assert all(H[i]["parked_under"] == h["id"] for i in h["also_nearby"])
     assert not any(H[i]["parked_under"] for i in hosts), "no parked neighborhood is a host"
+
+
+@test
+def parked_neighborhoods_say_how_far_and_are_called_nearby_only_when_they_are():
+    for h in HOODS:
+        assert {"parked_distance_km", "parked_label"} <= set(h), h["id"]
+        if not h["parked_under"]:
+            assert h["parked_distance_km"] is None and h["parked_label"] is None, h["id"]
+            continue
+        km = K.haversine_km(h, H[h["parked_under"]])
+        assert close(h["parked_distance_km"], km, 0.06), (h["id"], h["parked_distance_km"], km)
+        assert h["parked_label"] == ("Also nearby" if h["parked_distance_km"] <= K.NEARBY_KM else "Also in this kind of life"), h["id"]
+    # the three the owner named: 20 km and more from their host, never "nearby"
+    for i, host in (("nj:bloomfield", "ny:yonkers"), ("ny:bath-beach", "nj:newark"),
+                    ("ny:sheepshead-bay-manhattan-beach-gerritsen-beach", "ny:flushing-willets-point")):
+        if i in H and H[i]["parked_under"]:
+            assert H[i]["parked_under"] == host and H[i]["parked_distance_km"] >= 20 and H[i]["parked_label"] == "Also in this kind of life", i
+    assert OUT["meta"]["nearby_km"] == K.NEARBY_KM
+    for p in OUT["meta"]["parked"]:
+        assert p["label"] == H[p["neighborhood"]]["parked_label"] and p["km"] == H[p["neighborhood"]]["parked_distance_km"]
+
+
+@test
+def checked_says_what_the_live_check_rows_say():
+    rows, day = K.live_rows()
+    assert day == OUT["meta"]["checked_day"] and re.fullmatch(r"\d{4}-\d\d-\d\d", day)
+    n = Counter()
+    for b, a in APTS:
+        c, u = a["checked"], U[a["id"]]
+        assert set(c) >= {"status", "date", "note"} and c["status"] in ("confirmed_today", "price_changed_today", "last_seen"), a["id"]
+        assert c["note"] and (c["date"] is None or re.fullmatch(r"\d{4}-\d\d-\d\d", c["date"])), a["id"]
+        n[c["status"]] += 1
+        mine = rows.get((b["id"], K.parsers.unit_key(u["unit"])), [])
+        last = K.parsers.latest_live_row(mine)                       # the latest row that learned something: never a not_read row
+        assert last is None or last["status"] != "not_read"
+        today = last is not None and last["checked_at"][:10] == day
+        if c["status"] == "confirmed_today":
+            assert today and last["status"] == "live" and c["date"] == day, a["id"]
+            assert (u["live"] or {}).get("status") == "live" and u["live"]["checked_at"][:10] == day, "the page data says the same"
+        elif c["status"] == "price_changed_today":
+            assert today and last["status"] == "changed" and c["date"] == day, a["id"]
+            assert a["rent"] == float(last["price_now"]) == K.rent_now(u), (a["id"], a["rent"], last["price_now"])
+            assert c["rent_before"] in (None, u["rent"]["listed"]) and (c["rent_before"] is None) == (u["rent"]["listed"] == a["rent"])
+        else:
+            assert not (today and last["status"] in ("live", "changed")), a["id"]
+            seen = [str(u.get("price_seen_at") or "")[:10]] + ([last["checked_at"][:10]] if last and last["status"] in ("live", "changed") else [])
+            assert c["date"] == max(x for x in seen if x), (a["id"], c["date"], seen)
+            assert c["date"] < day, "last seen before the day of the re-read"
+            tried = [r for r in mine if r["status"] == "not_read"]
+            assert ("could not be read again" in c["note"]) == bool(tried and max(r["checked_at"][:10] for r in tried) > c["date"]), a["id"]
+    assert dict(n) == OUT["meta"]["checked_counts"] and sum(n.values()) == len(APTS)
+    for b in BLDS:
+        s, apts = b["checked_summary"], b["apartments"]
+        k = Counter(a["checked"]["status"] for a in apts)
+        assert (s["apartments"], s["confirmed_today"], s["price_changed_today"], s["last_seen"]) == (len(apts), k["confirmed_today"], k["price_changed_today"], k["last_seen"])
+        assert s["date"] == day and s["text"]
+        seen = k["confirmed_today"] + k["price_changed_today"]
+        assert s["text"].startswith(f"Confirmed {seen} of {len(apts)} on ") if seen else s["text"].startswith(("Last seen listed on ", "Not seen listed again")), b["id"]
+    # the rule on made-up rows: a not_read row after a live one changes nothing; alone, it leaves the harvest date
+    u = {"rent": {"listed": 1650, "basis": 1650.0, "basis_kind": "listed"}, "price_seen_at": "2026-11-15T21:49:59+00:00"}
+    live = {"status": "live", "checked_at": "2026-11-16T10:00:00+00:00", "notes": ""}
+    nr = {"status": "not_read", "checked_at": "2026-11-17T14:00:00+00:00", "notes": "Not re-read: no page names this apartment."}
+    c = K.checked(u, [live, nr], "2026-11-17")
+    assert (c["status"], c["date"]) == ("last_seen", "2026-11-16") and "could not be read again on November 17" in c["note"]
+    c = K.checked(u, [nr], "2026-11-17")
+    assert (c["status"], c["date"]) == ("last_seen", "2026-11-15") and "could not be read again" in c["note"]
+    c = K.checked(u, [], "2026-11-17")
+    assert (c["status"], c["date"], c["note"]) == ("last_seen", "2026-11-15", "Last seen listed on November 15.")
+    c = K.checked(u, [dict(live, checked_at="2026-11-17T13:00:00+00:00")], "2026-11-17")
+    assert (c["status"], c["date"]) == ("confirmed_today", "2026-11-17")
+    u2 = {"rent": {"listed": 1945, "basis": 1895.0, "basis_kind": "listed"}, "price_seen_at": "2026-11-15T21:49:59+00:00"}
+    c = K.checked(u2, [{"status": "changed", "checked_at": "2026-11-17T13:00:00+00:00", "price_now": "1895", "notes": ""}], "2026-11-17")
+    assert (c["status"], c["rent_before"]) == ("price_changed_today", 1945) and "$1,895, down from $1,945" in c["note"]
+
+
+@test
+def why_speaks_of_her_priorities_before_any_amenity():
+    """Parking, the dog, greenery, going out, Mom and Dad, room to work, value come first. A sentence about a pool, a
+    gym or another amenity is the `why` only where the building has nothing true and positive on any of those."""
+    bb = {b["id"]: b for b in BASE["buildings"]}
+    hb = {h["id"]: h for h in BASE["neighborhoods"]}
+    seen = Counter()
+    for b in BLDS:
+        us = sorted([u for u in BASE["units"] if u["building_id"] == b["id"]], key=lambda u: (-(K.num((u.get("scores") or {}).get("rank")) or 0), u["id"]))
+        have = K.priority_sentences(bb[b["id"]], us, hb[b["neighborhood_id"]])
+        topic = b["why_topic"]
+        seen[topic] += 1
+        assert topic in K.PRIORITY + ("amenity", "other"), b["id"]
+        if have:
+            assert topic in K.PRIORITY, f"{b['name']}: why is '{b['why']}' ({topic}) although it has {have[:2]}"
+            assert not K.AMENITY_ONLY.search(b["why"]), f"{b['name']}: an amenity sentence stands for a priority: {b['why']}"
+            assert b["why"] in {K.voice(s) for k, s, _ in have if k == topic}, (b["name"], b["why"])
+        else:
+            assert topic in ("amenity", "other"), b["id"]
+        if K.AMENITY_ONLY.search(b["why"]) or re.search(r"\bpools?\b|\bgym\b", b["why"], re.I):
+            assert not have, f"{b['name']}: '{b['why']}' is about an amenity although a priority sentence exists"
+    assert sum(seen[k] for k in K.PRIORITY) >= len(BLDS) * 0.75, f"most buildings have a priority why: {dict(seen)}"
+    # the order: highest standing first, ties in the order she raised them (parking before the dog before greenery ...)
+    assert K.priority_order({})[:3] == ["parking", "dog", "green"]
+    assert K.priority_order({"going_out": 90, "green": 80, "parking": 10})[:3] == ["going_out", "dog", "green"]
+    # a made-up building with a pool and a garage: the garage is the why; with only the pool, the pool
+    hood = {"counts": {"buildings": 1}}
+    unit = {"id": "u", "moments": {"sun": {"drive_min": 50}}, "parking": {}, "host": {}, "headlines": {}}
+    b1 = {"about_building": "There is a pool on the property. The building has its own garage.", "about_points": [], "amenities": {}}
+    f = K.building_facts(b1, [unit], hood)
+    if f["park_kind"] not in ("garage", "covered") and not f["park_included"]:
+        K_test = dict(K.GOOD)                                         # the parking test reads the apartment's parking facts
+        K.GOOD["parking"] = (K.GOOD["parking"][0], lambda f: True)
+    try:
+        why, _, _, _, topic = K.pick_why_give_up(b1, [unit], hood, {}, {"parking": 5, "home": 99})
+        assert (why, topic) == ("The building has its own garage.", "parking"), (why, topic)
+        b2 = dict(b1, about_building="There is a pool on the property.")
+        why, _, _, _, topic = K.pick_why_give_up(b2, [unit], hood, {}, {"parking": 5, "home": 99})
+        assert (why, topic) == ("There is a pool on the property.", "amenity"), (why, topic)
+    finally:
+        if "K_test" in dir():
+            K.GOOD.update(K_test)
 
 
 @test
@@ -289,12 +407,12 @@ def contract_shape():
         assert e["label"].endswith("Experience") and e["tagline"]
     for h in HOODS:
         assert set(h) >= {"id", "name", "state", "experience_id", "lat", "lon", "drive_min", "toll_round_trip", "about", "points",
-                          "parked_under", "also_nearby", "building_ids"}
+                          "parked_under", "also_nearby", "building_ids", "parked_distance_km", "parked_label"}
         assert h["about"] and h["points"] and all(set(p) == {"icon", "text"} for p in h["points"])
     for b in BLDS:
         assert set(b) >= {"id", "name", "address", "city", "state", "lat", "lon", "neighborhood_id", "experience_id", "rank_score", "why",
                           "give_up", "facts", "scores", "confirm", "tour_questions", "disclosures", "photos_url", "listing_url", "contact",
-                          "about", "points", "day", "apartments"}
+                          "about", "points", "day", "apartments", "checked_summary", "why_source", "why_topic"}
         assert b["name"] and set(b["scores"]) == set(K.SCORE_KEYS)
         assert set(b["facts"]) >= {"rent_from", "rent_to", "total_from", "total_to", "drive_min", "toll_round_trip", "parking", "dog"}
         assert set(b["facts"]["parking"]) >= {"summary", "kind", "fee"} and set(b["facts"]["dog"]) >= {"summary", "weight_limit_lb"}
@@ -306,7 +424,7 @@ def contract_shape():
         assert {c["question"] for c in b["confirm"]} == open_items, b["id"]
         for a in b["apartments"]:
             assert set(a) >= {"id", "label", "beds", "sqft", "floor_text", "rent", "total", "available_text", "offer", "star", "confirm_label",
-                              "listing_url", "source_site", "last_read"}
+                              "listing_url", "source_site", "last_read", "checked"}
             u = U[a["id"]]
             assert a["star"] == bool((u["confirm"] or {}).get("asterisk")) and (a["confirm_label"] is not None) == a["star"]
             assert a["offer"] == bool(u["rent"].get("asterisk")) and re.fullmatch(r"\d{4}-\d\d-\d\d", a["last_read"])
@@ -350,7 +468,13 @@ def helpers():
     assert K.median([3, 1, 2]) == 2 and K.median([1, 2, 3, 4]) == 2.5 and K.median([None]) is None
     assert K.usd10(2050.5) == "$2,050" and K.usd10(1805) == "$1,810"
     kept = K.base_page(D)
-    assert all(u["rent"]["listed"] <= K.RENT_LIMIT for u in kept["units"]) and len(D["units"]) > len(kept["units"]), "the source is not changed"
+    assert all(K.rent_now(u) <= K.RENT_LIMIT for u in kept["units"]) and len(D["units"]) > len(kept["units"]), "the source is not changed"
+    # the rent as it now stands: a re-read that changed the price moves rent.basis (kind "listed"), not rent.listed
+    assert K.rent_now({"rent": {"listed": 1945, "basis": 1895.0, "basis_kind": "listed"}}) == 1895
+    assert K.rent_now({"rent": {"listed": 2379, "basis": 2395.0, "basis_kind": "12_month"}}) == 2379, "a 12-month basis is not a listed price"
+    assert K.rent_now({"rent": {"listed": 1700, "basis": None}}) == 1700 and K.rent_now({}) is None
+    assert K.parked_label(0.8) == "Also nearby" and K.parked_label(10.0) == "Also nearby" and K.parked_label(10.1) == "Also in this kind of life"
+    assert K.day_words("2026-11-17") == "November 17" and K.day_words("2026-12-01T10:00:00+00:00") == "December 1"
 
 
 def main():

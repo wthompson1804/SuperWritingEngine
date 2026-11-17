@@ -645,7 +645,7 @@ watch: The nearest park is about {parkwalk} minutes on foot.
 voices: dogs_green, social_life
 
 === hood: ct:beacon-falls
-host_intro: Beacon Falls is a small town by the water with its own train station{!stationkind==train}, {station} miles {door}{!station<=800}. Residents enjoy the walking paths and say there is not much to do in town. The apartments cost about ${pg_mid} a month with utilities and fees{!pg_mid<=2400}.
+host_intro: [[Beacon Falls is a small town by the water with its own train station{!stationkind==train}, {station} miles {door}{!station<=800}.]] Residents enjoy the walking paths and say there is not much to do in town. [[The apartments cost about ${pg_mid} a month with utilities and fees{!pg_mid<=2400}.]]
 scene: Little is within a {w10}: {rest} restaurants and {bars} bars. The supermarket is {super} miles away.
 good: The price is low and {thetrain} is close.
 watch: [[Your parents are about {drive} minutes away, and groceries and the dog park are both a drive{!dog_any==0}.]][[Your parents are about {drive} minutes away, and groceries are a drive{!dog_any>0}{!super>=1600}.]]

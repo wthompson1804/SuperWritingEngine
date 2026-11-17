@@ -1,4 +1,4 @@
-# Run report (2026-11-17T14:15:12+00:00)
+# Run report (2026-11-17T14:42:56+00:00)
 
 ## Steps
 
@@ -12,8 +12,8 @@
 | all-in cost | `all_in.py` | ok |
 | evidence rules (avoid, exclusions) | `avoid.py` | ok |
 | ranking and selection | `rank.py` | ok |
-| rule tests on the output | `test_rules.py --data` | FAILED |
-| field registry, wiring check, shown-list assertions and the review rule | `check_registry.py` | FAILED |
+| rule tests on the output | `test_rules.py --data` | ok |
+| field registry, wiring check, shown-list assertions and the review rule | `check_registry.py` | ok |
 
 ## Stage counts
 
@@ -25,17 +25,17 @@
 |   fail a gate | 3944 | 3944 | +0 |
 | costed in the master table | 2451 | 2451 | +0 |
 | within the $3,000 all-in cap | 1469 | 1469 | +0 |
-| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 657 | 664 | -7 |
-| shown (real apartments, at most one open item, up to 8 per building, after the thin-neighborhood rule) | 516 | 523 | -7 |
-|   neighborhoods shown | 76 | 77 | -1 |
-|   buildings shown | 200 | 202 | -2 |
+| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 657 | 657 | +0 |
+| shown (real apartments, at most one open item, up to 8 per building, after the thin-neighborhood rule) | 516 | 516 | +0 |
+|   neighborhoods shown | 76 | 76 | +0 |
+|   buildings shown | 200 | 200 | +0 |
 | not an apartment: floor plan, building price or co-living room (data/excluded_not_an_apartment.csv) | 76 | 76 | +0 |
 | thin neighborhoods cut (one apartment, not both well attested and promising) | 28 | 28 | +0 |
 | avoid cards | 35 | 35 | +0 |
-|   shown with an asterisk (one thing to confirm) | 218 | 224 | -6 |
+|   shown with an asterisk (one thing to confirm) | 218 | 218 | +0 |
 | removed by a reviewed verdict (data/evidence/review_verdicts.csv) | 87 | 87 | +0 |
 | held back for one confirmation | 14 | 14 | +0 |
-| neighborhoods with 3+ shown places | 49 | 50 | -1 |
+| neighborhoods with 3+ shown places | 49 | 49 | +0 |
 | buildings in the master table | 578 | 578 | +0 |
 
 ## Why units left
@@ -151,25 +151,20 @@ needs_call: {'yes': 1587, 'no': 918}
 
 **ranking and selection**
 ```
-evidence: 36 units excluded, shown 516, avoid cards 35, of them with an asterisk 218 ({'elevator': 112, 'listing': 67, 'dogs allowed': 28, 'availability': 8, 'eligibility': 3}), held for a confirmation 14; shown and never re-read (information only, not an open item) 98
+evidence: 36 units excluded, shown 516, avoid cards 35, of them with an asterisk 218 ({'elevator': 112, 'listing': 66, 'dogs allowed': 28, 'availability': 9, 'eligibility': 3}), held for a confirmation 14; shown and never re-read (information only, not an open item) 98
 stages: 2451 costed -> -982 over the all-in cap -> -330 Jamaica safety rule -> -185 failed a gate on confirmed facts -> -76 not an apartment (floor plan, building price, co-living room) -> -87 removed by a reviewed verdict -> -1 sibling floor rule -> -97 sketchy -> -36 evidence exclusions -> 657 ranked
-shown buildings 200; disclosures: {'floor not published': 471, 'special offer': 301, 'lease term': 129, 'could pass $3,000': 106, 'washer and dryer to confirm': 70, 'one-time costs': 59, 'dog weight limit not published': 29, 'no broker fee': 19, 'overnight street parking': 18, 'net-effective rent': 15, 'furnished apartment': 11, 'income requirement': 9, 'broker fee': 8, 'condo rented by its owner': 4, 'credit score requirement': 3}
+shown buildings 200; disclosures: {'floor not published': 471, 'special offer': 301, 'lease term': 129, 'could pass $3,000': 106, 'washer and dryer to confirm': 70, 'one-time costs': 59, 'dog weight limit not published': 29, 'no broker fee': 19, 'overnight street parking': 18, 'net-effective rent': 15, 'furnished apartment': 11, 'income requirement': 9, 'broker fee': 8, 'condo rented by its owner': 4, 'credit score requirement': 3, 'something else to know': 1}
 (kept 657 units; candidates 346; shown 371; pools: {'': 362, 'pool': 274, 'indoor': 21}
 ```
 
 **rule tests on the output**
 ```
-test_rules (data): 516 checks, 1 failed
-  FAIL b21: The Arcade 302 passes the dog rule as 'small dogs' with the tour question about the weight limit
+test_rules (data): 517 checks, 0 failed
 ```
 
 **field registry, wiring check, shown-list assertions and the review rule**
 ```
-   trulia:466485024 ( F): the verdict was written against older evidence: the building's evidence rows have changed since the review
-   trulia:466185521 ( 5W): the verdict was written against older evidence: the building's evidence rows have changed since the review
-   zumper-65719910 ( 6G): the verdict was written against older evidence: the building's evidence rows have changed since the review
-   trulia:2084734385 ( 2D): the verdict was written against older evidence: the building's evidence rows have changed since the review
-   trulia:2100688723 ( 5H): the verdict was written against older evidence: the building's evidence rows have changed since the review
-   trulia:466617938 ( 6E): the verdict was written against older evidence: the building's evidence rows have changed since the review
+field registry: {'used': 563, 'display': 339, 'provenance': 210, 'not_used': 17}
+shown-list assertions: all pass
 ```
 

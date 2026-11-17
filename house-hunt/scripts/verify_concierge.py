@@ -15,7 +15,7 @@ def steps(with_browser: bool):
     s = [
         ("concierge data build", ["python3", "scripts/concierge_data.py"]),
         ("concierge data tests", ["python3", "scripts/test_concierge_data.py"]),
-        ("published text on concierge data", ["python3", "scripts/check_published_text.py", "--data", "site/concierge_data.json"]),
+        ("published text on concierge data", ["python3", "scripts/check_published_text.py", "--data", "site/_concierge_base.json", "--out-suffix", "_u2000"]),
         ("pick logic tests", ["node", "scripts/test_concierge_pick.js"]),
         ("page build", ["python3", "scripts/build_concierge.py"]),
     ]

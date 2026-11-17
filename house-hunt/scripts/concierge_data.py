@@ -4,8 +4,8 @@
 site/data.json is read and never written. No network.
 
 WHAT IT DOES, IN ORDER
-  1 KEEP      apartments with rent.listed <= RENT_LIMIT, and the buildings, neighborhoods and experiences they leave
-              non-empty.
+  1 KEEP      apartments whose listed base rent AS IT NOW STANDS (rent_now: the price of the latest re-read where
+              one changed it) is <= RENT_LIMIT, and the buildings, neighborhoods and experiences they leave non-empty.
   2 BASE      site/_concierge_base.json: a copy of the page data in the SAME SHAPE holding only what is kept, with
               every experience and neighborhood figure recomputed over the kept apartments (base_page). The
               recomputation is the one scripts/build_page_data.py does, here from the page data's own apartments
@@ -22,6 +22,21 @@ WHAT IT DOES, IN ORDER
               reuses the _u2000 tables on disk.
   4 CONCIERGE site/concierge_data.json in the shape of the data contract: story cards, why / give_up, facts, scores,
               parking of one-apartment neighborhoods, either/or questions.
+
+ADDED 2026-11-17 (fields are only ever added to the contract, never renamed)
+  apartments[].checked          {status, date, note}: "confirmed_today" (seen listed at the same rent on the day of the
+                                latest re-read), "price_changed_today" (seen that day at a new rent; rent_before is
+                                the old one) or "last_seen" (date = the last day the apartment was actually seen
+                                listed: its harvest date, or an earlier re-read). From data/evidence/
+                                live_check_batch_*.csv; a 'not_read' row is not a re-read (parsers.live_row_learned)
+                                and only adds "it could not be read again" to the note.
+  buildings[].checked_summary   {date, apartments, confirmed_today, price_changed_today, last_seen, text}
+  neighborhoods[].parked_distance_km / parked_label   for a parked one-apartment neighborhood: the distance to its
+                                host, and "Also nearby" within NEARBY_KM, otherwise "Also in this kind of life"
+  buildings[].why_topic         the topic `why` speaks of. `why` is chosen from HER priorities first (PRIORITY, in the
+                                order she raised them: parking, the dog, greenery, going out, Mom and Dad, room to
+                                work from home, value); a sentence about a pool, a gym or another amenity is used
+                                only when the building has nothing true and positive on any of those.
 
 BUILDING SCORES (0..1, for re-weighting on the page). They come from the apartment `scores.parts` of the page data
 (scripts/rank.py, docs/RANKING.md section 5: each part is 0-100, a blend of percentiles across all ranked
@@ -60,17 +75,20 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import parsers  # noqa: E402                 unit_key(), live_row_learned(): the live-check rows as the master reads them
 import build_page_data as BP  # noqa: E402   v(), shown_figures(): the page builder's own helpers
 import page_data_extras as X  # noqa: E402   the text blocks, is_private_line(), ranking()
 import realtor_lines as RL  # noqa: E402     parking_facts(), usd()
 
 RENT_LIMIT = 2000                 # listed base rent; a rule for this page only (Will, 2026-11-16/17)
+NEARBY_KM = 10.0                  # a parked neighborhood is "Also nearby" only within this distance of its host
 SUFFIX = "_u2000"
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "site" / "data.json"
 BASE = ROOT / "site" / "_concierge_base.json"
 OUT = ROOT / "site" / "concierge_data.json"
 REF = ROOT / "data" / "reference"
+EVID = ROOT / "data" / "evidence"
 TOUR_START, MOVE_IN_BY, ANCHOR_LABEL = "2026-11-22", "2026-12-15", "Mom and Dad"
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -110,6 +128,15 @@ def tidy(x, nd=1):
         return None
     x = round(float(x), nd)
     return int(x) if x == int(x) else x
+
+
+def rent_now(u):
+    """The listed base rent as it now stands: the price of the latest re-read where that changed it (the page data
+    keeps the harvested price in rent.listed and the current one in rent.basis, kind "listed"). A 12-month or an
+    after-free-months basis is not a listed price, so rent.listed stands there."""
+    r = u.get("rent") or {}
+    b = num(r.get("basis"))
+    return b if b is not None and r.get("basis_kind") == "listed" else num(r.get("listed"))
 
 
 def mo(u, a, b):
@@ -176,13 +203,12 @@ def _shown_frame(us, mb):
 
 
 def base_page(d, limit=RENT_LIMIT):
-    """-> the page data restricted to apartments with rent.listed <= limit (None: all), every figure of an
+    """-> the page data restricted to apartments with rent_now <= limit (None: all), every figure of an
     experience, a neighborhood and a building recomputed over those apartments. Written text is cleared: it is
     attached again from the tables built over this file. Fields that do not depend on which apartments are shown
     (traits, safety, local rules, quotes, descriptions, contacts, ratings, photos) are carried as they are."""
     d = copy.deepcopy(d)
-    keep = [u for u in d["units"] if limit is None or (num((u.get("rent") or {}).get("listed")) is not None
-                                                        and u["rent"]["listed"] <= limit)]
+    keep = [u for u in d["units"] if limit is None or (rent_now(u) is not None and rent_now(u) <= limit)]
     all_units = d["units"]
     hoods_all = {h["id"]: h for h in d["neighborhoods"]}
     by_b, by_h, by_y = defaultdict(list), defaultdict(list), defaultdict(list)
@@ -440,6 +466,12 @@ def haversine_km(a, b):
     return 2 * 6371.0088 * math.asin(math.sqrt(h))
 
 
+def parked_label(km):
+    """The heading a parked neighborhood is listed under at its host: "Also nearby" only where it IS near (within
+    NEARBY_KM, great-circle); otherwise it shares the experience, not the place (Bloomfield under Yonkers is 29 km)."""
+    return "Also nearby" if km <= NEARBY_KM else "Also in this kind of life"
+
+
 def park_neighborhoods(hoods, n_apts):
     """parked_under / also_nearby (the rule of docs/CONCIERGE_DESIGN.md): a neighborhood with exactly one apartment is
     parked under the nearest neighborhood (great-circle distance) of its experience that has two or more. Where an
@@ -449,6 +481,7 @@ def park_neighborhoods(hoods, n_apts):
     notes = []
     for h in hoods:
         h["parked_under"], h["also_nearby"] = None, []
+        h["parked_distance_km"], h["parked_label"] = None, None
     by = {h["id"]: h for h in hoods}
     for exp in sorted({h["experience_id"] for h in hoods}):
         mine = [h for h in hoods if h["experience_id"] == exp]
@@ -460,9 +493,11 @@ def park_neighborhoods(hoods, n_apts):
             if n_apts[h["id"]] != 1 or h in hosts or not hosts:
                 continue
             host = min(hosts, key=lambda o: (haversine_km(h, o), o["id"]))
+            km = round(haversine_km(h, host), 1)
             h["parked_under"] = host["id"]
+            h["parked_distance_km"], h["parked_label"] = km, parked_label(km)
             by[host["id"]]["also_nearby"].append(h["id"])
-            notes.append({"neighborhood": h["id"], "under": host["id"], "km": round(haversine_km(h, host), 1), "fallback": fallback})
+            notes.append({"neighborhood": h["id"], "under": host["id"], "km": km, "label": h["parked_label"], "fallback": fallback})
     return notes
 
 
@@ -470,25 +505,43 @@ def park_neighborhoods(hoods, n_apts):
 ASKS = re.compile(r"\bask\b|\bconfirm|\bnot published\b|\bnot stated\b|\bnot mention|\bcheck\b|\bfew details\b|\$3,000|"
                   r"\bspecial offer\b|\bnot say\b|\bin writing\b|\bto choose from\b|\bto compare\b", re.I)
 # topic -> (pattern of a sentence that states a strength, test on the building's own facts)
+# HER PRIORITIES, in the order she raised them most often (coordinator, 2026-11-17): easy parking (she drives), the
+# dog (under 25 lb: a dog area, a park close by), greenery, going out, closer to Mom and Dad, room to work from home,
+# value for the rent. `why` is chosen among THESE topics first: the one this building stands highest on among the kept
+# buildings that has a sentence stating that strength and true of this building (ties go to the earlier priority).
+PRIORITY = ("parking", "dog", "green", "going_out", "parents", "work", "value")
+TOPIC_SCORE = {"parking": "parking", "dog": "green", "green": "green", "going_out": "going_out", "parents": "parents",
+               "work": "home", "value": "value"}        # the building score each topic's standing is read from
 GOOD = {
-    "parents": (re.compile(r"parents are (?:about \d+ minutes|very close|close)|close to your parents|drive to your parents has no tolls", re.I),
-                lambda f: f["drive"] is not None and f["drive"] <= 30),
-    "going_out": (re.compile(r"restaurants (?:are )?within a 10-minute walk|walk to dinner|eating out|plenty to eat|choice of restaurants", re.I),
-                  lambda f: (f["rest"] or 0) >= 10),
-    "green": (re.compile(r"minutes (?:away )?on foot|minutes to [A-Z]|could walk to [A-Z][^.]* in about|walk to [A-Z][^.]* takes about|own dog (?:park|run|area)|dog (?:park|run) on the property|"
-                         r"waterfront|riverfront|take the dog out", re.I),
-              lambda f: (f["parkwalk"] is not None and f["parkwalk"] <= 5) or f["own_dog"]),
-    "value": (re.compile(r"well under your limit|room in your budget|price is low|prices are low|lower-priced|costs less|far below your limit|"
-                         r"leaves room", re.I), lambda f: True),
     "parking": (re.compile(r"included in the rent|rent includes a space|free off-street|park free|parking (?:in the open lot )?is free|not pay extra|"
                            r"garage (?:among|for your car)|own garage|only building[^.]*with a garage|covered parking", re.I),
                 lambda f: f["park_kind"] in ("garage", "covered") or f["park_included"]),
-    "home": (re.compile(r"large apartment|1-bedroom|washer and dryer|laundry in the apartment|\bpool\b", re.I),
-             lambda f: True),
+    "dog": (re.compile(r"own dog (?:park|run|area)|dog (?:park|run|area) on the property|take the dog out|dog (?:park|run) is (?:close|a short walk)|"
+                       r"dog (?:park|run) is 0\.[0-5] miles", re.I),
+            lambda f: f["own_dog"] or (f["dogpark_m"] is not None and f["dogpark_m"] <= 800)),
+    "green": (re.compile(r"minutes (?:away )?on foot|minutes to [A-Z]|could walk to [A-Z][^.]* in about|walk to [A-Z][^.]* takes about|"
+                         r"closest to a park|waterfront|riverfront", re.I),
+              lambda f: f["parkwalk"] is not None and f["parkwalk"] <= 5),
+    "going_out": (re.compile(r"restaurants (?:are )?within a 10-minute walk|walk to dinner|eating out|plenty to eat|choice of restaurants", re.I),
+                  lambda f: (f["rest"] or 0) >= 10),
+    "parents": (re.compile(r"parents are (?:about \d+ minutes|very close|close)|close to your parents|drive to your parents has no tolls", re.I),
+                lambda f: f["drive"] is not None and f["drive"] <= 30),
+    # room to work from home is about the apartment (a separate bedroom, a large apartment), or a sentence that says so
+    # itself; a bare "lounge or coworking room" is an amenity
+    "work": (re.compile(r"large apartment|1-bedroom|separate bedroom|work from home|room for a (?:proper )?desk|work can stay out", re.I), lambda f: True),
+    "value": (re.compile(r"well under your limit|room in your budget|price is low|prices are low|lower-priced|costs less|far below your limit|"
+                         r"leaves room", re.I), lambda f: True),
 }
-# a second pass, used only when no topic has a sentence above: smaller things the building text states as a plus
-GOOD_MINOR = re.compile(r"garage parking costs|coworking|\bgym\b|concierge|train station is 0\.[0-4] miles|subway station is 0\.[0-4] miles|"
-                        r"minutes (?:away )?on foot|supermarket[^.]* is 0\.[0-3] miles", re.I)
+# Not her priorities: an amenity the building text states as a plus. Used for `why` only when no priority topic has a
+# sentence that is true and positive for this building (test_concierge_data.py holds this).
+AMENITY = re.compile(r"\bpools?\b|\bgym\b|fitness|washer and dryer|laundry (?:is )?in the apartment|concierge|front desk|doorman|package room|roof ?(?:top|deck)|"
+                     r"\blounge\b|coworking|garage parking costs|(?:train|subway|PATH|light rail) station is 0\.[0-4] miles|supermarket[^.]* is 0\.[0-3] miles", re.I)
+GOOD_MINOR = AMENITY                                    # the name the first version used
+# A sentence that is ONLY about such an amenity never stands for a priority topic, whatever else it matches ("The
+# building has a pool, and laundry is in the apartment" is not about room to work). A coworking room is: she works from home.
+AMENITY_ONLY = re.compile(r"\bpools?\b|\bgym\b|fitness|washer and dryer|laundry (?:is )?in the apartment|concierge|front desk|doorman|package room|"
+                          r"roof ?(?:top|deck)", re.I)
+INITIAL_END = re.compile(r"\b[A-Z]\.$")                 # "... on foot to Margaret I." is half a sentence, cut at an initial
 # topic -> (pattern of a sentence that states the cost of choosing this building, test on its facts)
 BAD = {
     "parents": (re.compile(r"parents are about \d+ minutes away|drive to your parents is very long|visiting your parents costs|visits would be day trips|"
@@ -553,14 +606,16 @@ def candidates(b, us, hood):
     out += [("neighborhood scene", s) for s in sentences(prose.get("scene"))]
     out += [("building warning", p["text"]) for p in pts if p.get("icon") == "warning"]
     out += [("apartment catch", s) for s in sentences(host.get("catch"))]
-    return [(w, s) for w, s in out if s and len(sentences(s)) == 1]
+    return [(w, s) for w, s in out if s and len(sentences(s)) == 1 and not INITIAL_END.search(s.strip())]
 
 
 def pick_why_give_up(b, us, hood, scores, standing):
-    """-> (why, why_source, give_up, give_up_source). `standing`: {score key: this building's percentile among the
-    kept buildings}. why: the topics in descending standing, the first that has a sentence stating that strength and
-    true of this building. give_up: the topics in ascending standing, the first that has a sentence stating that
-    cost; else the neighborhood's catch, the building's warning, the apartment's catch."""
+    """-> (why, why_source, give_up, give_up_source, why_topic). `standing`: {score key: this building's percentile
+    among the kept buildings}. why: HER priority topics (PRIORITY) in descending standing, the first that has a
+    sentence stating that strength and true of this building; only when none has, an amenity sentence of the
+    building's own text (why_topic "amenity"), else its first plain statement ("other"). give_up: the scores in
+    ascending standing, the first that has a sentence stating that cost; else the neighborhood's catch, the
+    building's warning, the apartment's catch."""
     f = building_facts(b, us, hood)
     cands = candidates(b, us, hood)
 
@@ -580,12 +635,21 @@ def pick_why_give_up(b, us, hood, scores, standing):
             return s, where
         return None
     order = sorted(SCORE_KEYS, key=lambda k: (-(standing.get(k) or 0), k))
-    why = next((x for x in (find(GOOD, k) for k in order) if x), None)
-    if why is None:                                   # no topic has a sentence: a smaller plus the building text states
-        why = next(((s, w) for w, s in cands if GOOD_MINOR.search(s) and not ASKS.search(s)
-                    and w in ("building about", "building point")), None)
+    topic = None
+    for k in priority_order(standing):
+        why = find(GOOD, k)
+        if why and not AMENITY_ONLY.search(why[0]):                      # a priority sentence, not an amenity in passing
+            topic = k
+            break
+    else:
+        why = None
+    if why is None:                                   # nothing true and positive on her priorities: an amenity the building text states
+        why = next(((s, w) for w, s in cands if AMENITY.search(s) and not ASKS.search(s) and not NOT_A_PLUS.search(s)
+                    and w in ("building about", "building point", "apartment headline (building)")), None)
+        topic = "amenity" if why else None
     if why is None:                                   # else the building's first plain statement
         why = next(((s, w) for w, s in cands if not ASKS.search(s) and w in ("building about", "building point", "apartment line")), None)
+        topic = "other" if why else None
     give = next((x for x in (find(BAD, k) for k in reversed(order)) if x and (why is None or x[0] != why[0])), None)
     if give is None:
         for want in ("neighborhood watch_for", "building warning", "apartment catch"):
@@ -593,7 +657,33 @@ def pick_why_give_up(b, us, hood, scores, standing):
                          and (why is None or s != why[0])), None)
             if give:
                 break
-    return (voice(why[0]) if why else None, why[1] if why else None, voice(give[0]) if give else None, give[1] if give else None)
+    return (voice(why[0]) if why else None, why[1] if why else None, voice(give[0]) if give else None, give[1] if give else None, topic)
+
+
+def priority_order(standing):
+    """PRIORITY in the order `why` tries them: the highest standing among the kept buildings first, ties (and the two
+    topics that share the dog-and-green score) in the order she raised them."""
+    return sorted(PRIORITY, key=lambda k: (-(standing.get(TOPIC_SCORE[k]) or 0), PRIORITY.index(k)))
+
+
+def priority_sentences(b, us, hood):
+    """[(topic, sentence, where)]: every sentence about one of her priorities that states a strength and is true of
+    this building. Empty only where the building has nothing true and positive on any of them."""
+    f = building_facts(b, us, hood)
+    out = []
+    for k in PRIORITY:
+        rx, test = GOOD[k]
+        if not test(f):
+            continue
+        for where, s in candidates(b, us, hood):
+            if not rx.search(s) or ASKS.search(s) or NOT_A_PLUS.search(s) or where in ("building warning", "neighborhood watch_for", "apartment catch"):
+                continue
+            if where.startswith("neighborhood") and not holds_here(s, f):
+                continue
+            if AMENITY_ONLY.search(s):
+                continue
+            out.append((k, s, where))
+    return out
 
 
 # ---- facts, day, apartments ----------------------------------------------------------------------------------------
@@ -661,6 +751,73 @@ def last_read(u):
     return max(seen) if seen else None
 
 
+# ---- checked: what the live-check rows say about each apartment ------------------------------------------------------
+def day_words(iso):
+    """'2026-11-17' -> 'November 17'."""
+    d = datetime.strptime(str(iso)[:10], "%Y-%m-%d")
+    return f"{d.strftime('%B')} {d.day}"
+
+
+def live_rows():
+    """({(building id, unit key): [rows, oldest first]}, the day of the latest re-read) from data/evidence/
+    live_check_batch_*.csv, matched to apartments the way scripts/build_master.py matches them (building through
+    data/reference/building_crosswalk.csv, apartment through parsers.unit_key)."""
+    import glob
+    xw = pd.read_csv(REF / "building_crosswalk.csv", dtype=str, keep_default_na=False)
+    a2b = dict(zip(xw.addr_key, xw.building_id))
+    rows, day = defaultdict(list), ""
+    for f in sorted(glob.glob(str(EVID / "live_check_batch_*.csv"))):
+        for r in pd.read_csv(f, dtype=str, keep_default_na=False).to_dict("records"):
+            b = a2b.get(r.get("addr_key"))
+            day = max(day, str(r.get("checked_at") or "")[:10])
+            if b and parsers.unit_label_key(r.get("unit")):
+                rows[(b, parsers.unit_key(r["unit"]))].append(r)
+    for k in rows:
+        rows[k].sort(key=lambda r: str(r.get("checked_at") or ""))
+    return rows, day
+
+
+def checked(u, rows, day):
+    """{status, date, note, rent_before}. `rows`: this apartment's live-check rows, oldest first; `day`: the day of
+    the latest re-read ("today"). A 'not_read' row is not a re-read: it changes neither status nor date."""
+    learned = parsers.latest_live_row(rows)
+    st = str((learned or {}).get("status") or "")
+    at = str((learned or {}).get("checked_at") or "")[:10]
+    tried = max([str(r.get("checked_at") or "")[:10] for r in rows if not parsers.live_row_learned(r.get("status"))], default="")
+    rent, old = rent_now(u), num((u.get("rent") or {}).get("listed"))
+    by_label = "not by apartment number" in str((learned or {}).get("notes") or "")
+    if st == "live" and at == day:
+        note = f"Still listed at the same rent on {day_words(day)}."
+        if by_label:
+            note += " The broker's page gives the street, the size and the rent, not the apartment number."
+        return {"status": "confirmed_today", "date": day, "note": note, "rent_before": None}
+    if st == "changed" and at == day:
+        if rent is not None and old is not None and rent != old:
+            note = f"The rent is now {RL.usd(rent)}, {'down' if rent < old else 'up'} from {RL.usd(old)}, as read on {day_words(day)}."
+        else:
+            note = f"Listed at a new rent when it was read on {day_words(day)}."
+        return {"status": "price_changed_today", "date": day, "note": note, "rent_before": tidy(old) if old != rent else None}
+    seen = [str(u.get("price_seen_at") or "")[:10]] + ([at] if st in ("live", "changed") else [])
+    seen = max([x for x in seen if x], default=None)
+    note = f"Last seen listed on {day_words(seen)}." if seen else "The day it was last seen listed is not recorded."
+    if tried and (not seen or tried > seen):
+        note += f" It could not be read again on {day_words(tried)}."
+    return {"status": "last_seen", "date": seen, "note": note, "rent_before": None}
+
+
+def checked_summary(apts, day):
+    """A building's line: how many of its apartments were seen listed on the day of the latest re-read."""
+    n = Counter(a["checked"]["status"] for a in apts)
+    seen = n["confirmed_today"] + n["price_changed_today"]
+    if seen:
+        text = f"Confirmed {seen} of {len(apts)} on {day_words(day)}" + (f", {n['price_changed_today']} at a new rent" if n["price_changed_today"] else "")
+    else:
+        last = max([a["checked"]["date"] for a in apts if a["checked"]["date"]], default=None)
+        text = f"Last seen listed on {day_words(last)}" if last else "Not seen listed again since it was collected"
+    return {"date": day, "apartments": len(apts), "confirmed_today": n["confirmed_today"], "price_changed_today": n["price_changed_today"],
+            "last_seen": n["last_seen"], "text": text}
+
+
 def apartment(u):
     c = u.get("confirm") or {}
     star = bool(c.get("asterisk"))
@@ -670,7 +827,7 @@ def apartment(u):
         offer_text = None
     return {"id": u["id"], "label": f"Apartment {u['unit']}" if not miss(u.get("unit")) else "Apartment",
             "beds": u.get("beds"), "sqft": tidy(num(u.get("sqft"))), "floor_text": floor_text(u),
-            "rent": tidy(num((u.get("rent") or {}).get("listed"))), "total": tidy(num(u.get("all_in"))),
+            "rent": tidy(rent_now(u)), "total": tidy(num(u.get("all_in"))),
             "available_text": available_text(u), "offer": bool((u.get("rent") or {}).get("asterisk")), "offer_text": offer_text,
             "star": star, "confirm_label": (f"To confirm: {c['label']}" if star and c.get("label") else None),
             "confirm_question": c.get("question") if star else None,
@@ -760,7 +917,7 @@ def two(text):
 
 def figures(us):
     """An experience's figures over its kept apartments."""
-    rents = [num((u.get("rent") or {}).get("listed")) for u in us]
+    rents = [rent_now(u) for u in us]
     totals = [num(u.get("all_in")) for u in us]
     drives = [num(mo(u, "sun", "drive_min")) for u in us]
     tolls = [toll_known(u) for u in us]
@@ -790,6 +947,7 @@ def concierge(b, source):
     """The base page (text attached) -> the data contract of docs/CONCIERGE_DESIGN.md. `source`: site/data.json, for
     the going_out percentiles over every apartment of the first page."""
     going = going_out_scores(source["units"])
+    live, check_day = live_rows()
     hoods_b = {h["id"]: h for h in b["neighborhoods"]}
     by_b = defaultdict(list)
     for u in sorted(b["units"], key=lambda u: (-(num((u.get("scores") or {}).get("rank")) or 0), u["id"])):
@@ -809,7 +967,7 @@ def concierge(b, source):
                 confirm.append({"label": c.get("label"), "question": c["question"]})
         tq = [q for q, _ in Counter(q for u in us for q in u.get("tour_questions") or [] if q not in seen).most_common()]
         disc = [d for d, _ in Counter(x.get("label") for u in us for x in u.get("disclosures") or [] if x.get("label")).most_common()]
-        rents = [u["rent"]["listed"] for u in us]
+        rents = [rent_now(u) for u in us]
         totals = [u["all_in"] for u in us]
         blds.append({
             "id": bd["id"], "name": bd.get("name") or bd.get("address"), "address": bd.get("address"), "city": bd.get("city"),
@@ -826,7 +984,9 @@ def concierge(b, source):
             "photos_url": (bd.get("photos") or {}).get("url"), "listing_url": (best.get("links") or {}).get("listing"),
             "contact": contact(bd), "about": voice(bd.get("about_building")),
             "points": [{"icon": p.get("icon"), "text": voice(p.get("text"))} for p in bd.get("about_points") or []],
-            "day": day_moments(best), "apartments": [apartment(u) for u in us]})
+            "day": day_moments(best),
+            "apartments": [dict(apartment(u), checked=checked(u, live.get((bd["id"], parsers.unit_key(u.get("unit"))), []), check_day)) for u in us]})
+        blds[-1]["checked_summary"] = checked_summary(blds[-1]["apartments"], check_day)
     # standing of each building on each score among the kept buildings, then why / give_up
     for k in SCORE_KEYS:
         ranks = pct_rank([x["scores"][k] for x in blds])
@@ -834,8 +994,8 @@ def concierge(b, source):
             x.setdefault("_standing", {})[k] = None if x["scores"][k] is None else ranks[x["scores"][k]]
     src = {bd["id"]: bd for bd in b["buildings"]}
     for x in blds:
-        why, ws, give, gs = pick_why_give_up(src[x["id"]], by_b[x["id"]], hoods_b[x["neighborhood_id"]], x["scores"], x.pop("_standing"))
-        x.update({"why": why, "give_up": give, "why_source": ws, "give_up_source": gs})
+        why, ws, give, gs, topic = pick_why_give_up(src[x["id"]], by_b[x["id"]], hoods_b[x["neighborhood_id"]], x["scores"], x.pop("_standing"))
+        x.update({"why": why, "give_up": give, "why_source": ws, "give_up_source": gs, "why_topic": topic})
     blds.sort(key=lambda x: (-(x["rank_score"] or 0), x["id"]))
     # neighborhoods
     n_apts = Counter(u["hood_id"] for u in b["units"])
@@ -849,7 +1009,7 @@ def concierge(b, source):
                       "points": [{"icon": p.get("icon"), "text": voice(p.get("text"))} for p in h.get("about_points") or []],
                       "parked_under": None, "also_nearby": [], "building_ids": [x["id"] for x in mine],
                       "apartments": n_apts[h["id"]], "buildings": len(mine),
-                      "rent_range": [tidy(v_) for v_ in span(u["rent"]["listed"] for u in b["units"] if u["hood_id"] == h["id"])],
+                      "rent_range": [tidy(v_) for v_ in span(rent_now(u) for u in b["units"] if u["hood_id"] == h["id"])],
                       "total_range": [tidy(v_) for v_ in span(u["all_in"] for u in b["units"] if u["hood_id"] == h["id"])],
                       "good": voice((h.get("prose") or {}).get("good_for_her")), "watch": voice((h.get("prose") or {}).get("watch_for"))})
     parked = park_neighborhoods(hoods, n_apts)
@@ -869,6 +1029,8 @@ def concierge(b, source):
     return {"meta": {"built_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat(), "rent_limit": RENT_LIMIT,
                      "counts": {"apartments": len(b["units"]), "buildings": len(blds), "neighborhoods": len(hoods), "experiences": len(exps)},
                      "tour_start": TOUR_START, "move_in_by": MOVE_IN_BY, "anchor_label": ANCHOR_LABEL,
+                     "checked_day": check_day, "nearby_km": NEARBY_KM,
+                     "checked_counts": dict(Counter(a["checked"]["status"] for x in blds for a in x["apartments"])),
                      "anchor": {"lat": m["anchor"]["lat"], "lon": m["anchor"]["lon"]},
                      "source": "site/data.json", "source_built_at": (m.get("concierge") or {}).get("source_built_at"),
                      "score_keys": list(SCORE_KEYS), "parked": parked, "either_or_audit": audit,
@@ -902,7 +1064,8 @@ def main(argv=None):
     OUT.write_text(json.dumps(out, ensure_ascii=False, indent=1, allow_nan=False), encoding="utf-8")
     print(f"{OUT.relative_to(ROOT)}: {out['meta']['counts']}")
     for p in out["meta"]["parked"]:
-        print(f"  parked: {p['neighborhood']} under {p['under']} ({p['km']} km{', fallback' if p['fallback'] else ''})")
+        print(f"  parked: {p['neighborhood']} under {p['under']} ({p['km']} km, \"{p['label']}\"{', fallback' if p['fallback'] else ''})")
+    print(f"  checked on {out['meta']['checked_day']}: {out['meta']['checked_counts']}")
     for q in out["meta"]["either_or_audit"]:
         print(f"  either/or {q['id']}: spearman {q['spearman']}, top-5 shared {q['top5_shared']} -> {'kept' if q['kept'] else 'trade-off, not among the three' if q['trade_off'] else 'no trade-off'}")
     return 0
