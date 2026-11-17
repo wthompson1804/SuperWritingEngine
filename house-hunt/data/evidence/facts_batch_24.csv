@@ -1,0 +1,28 @@
+addr_key,fact,value,quote,source_url
+1 b country club dr|11949,pet_rent,$75/month per dog,Monthly dog rent: $75/mo,https://www.trulia.com/building/villas-at-pine-hills-1b-country-club-dr-manorville-ny-11949-2757039450
+1 b country club dr|11949,management,Heatherwood,"Heatherwood Villas at Pine Hills | 1B Country Club Drive | Manorville, NY 11949",https://www.heatherwood.com/our-properties/villas-at-pine-hills
+broadway a rocky point ny 11778 usa|11778,pet_rent,$50/month,$50/mo pet rent.,https://www.zumper.com/listings/65775266/1-bedroom-rocky-point-ny
+broadway a rocky point ny 11778 usa|11778,utilities,all utilities and WiFi included,Rent includes all utilities and WiFi.,https://www.zumper.com/listings/65775266/1-bedroom-rocky-point-ny
+broadway a rocky point ny 11778 usa|11778,broker_fee,broker fee at move-in,"Move-in requires first month rent, security and broker fee",https://www.zumper.com/listings/65775266/1-bedroom-rocky-point-ny
+40 derby ave 1 greenlawn ny 11740 usa|11740,required_fees,"$300/month utilities charge, required","available for $1,499 per month plus a required $300 monthly utilities charge ($1,799 total)",https://www.zumper.com/listings/29841704p/1-bedroom-greenlawn-ny
+40 derby ave 1 greenlawn ny 11740 usa|11740,pet_rent,$500/month for a dog,monthly pet rent is $250 for a cat or $500 for a dog,https://www.zumper.com/listings/29841704p/1-bedroom-greenlawn-ny
+40 derby ave 1 greenlawn ny 11740 usa|11740,utilities,"the $300 charge covers internet, electricity, heat, air conditioning, water, sewer","The required $300/month utilities charge covers internet, electricity, heating, air conditioning, water, sewer",https://www.zumper.com/listings/29841704p/1-bedroom-greenlawn-ny
+945 41st st 2d brooklyn ny 11219 usa|11219,building_floors,"2 (nearest PLUTO lot 941 41 Street, 5 m away; not an exact match)","PLUTO 941 41 STREET, class C2, numfloors 2, 6 units, built 1930 [data/reference/building_stories.csv and nyc_building_facts.csv (held PLUTO copy, raw/big/pluto; no new request)]",https://data.cityofnewyork.us/Housing-Development/Primary-Land-Use-Tax-Lot-Output-PLUTO-/64uk-42ks
+945 41st st 2d brooklyn ny 11219 usa|11219,utilities,"cable, gas, electric, sewage included","Enjoy included utilities (cable, gas, electric, sewage)",https://www.zumper.com/listings/65719977/1-bedroom-borough-park-new-york-ny
+6 putnam ave|10509,building_floors,3,"This well-maintained 24-unit, three-story building",https://www.zillow.com/apartments/brewster-ny/6-putnam-ave/CmYkfL/
+6 putnam ave|10509,utilities,heat and hot water included,Heat and hot water are included in the rent tenants are only responsible for electricity.,https://www.zillow.com/apartments/brewster-ny/6-putnam-ave/CmYkfL/
+63-44 saunders st 2e 63-44 saunders st flushing ny 11374 us|11374,building_floors,3 (official record),"PLUTO BBL 4030810119 '63-44 SAUNDERS STREET', class O8, 3 floors, 16 residential units, built 1986 [data/reference/building_stories.csv and nyc_building_facts.csv (held PLUTO copy, raw/big/pluto; no new request)]",https://data.cityofnewyork.us/Housing-Development/Primary-Land-Use-Tax-Lot-Output-PLUTO-/64uk-42ks
+6803 central ave b1 glendale ny 11385 usa|11385,furnished,yes,"Fully furnished, spacious one-bedroom apartment",https://www.zumper.com/listings/29903204p/1-bedroom-glendale-new-york-ny
+138-28 90th ave|11435,utilities,heat and hot water included,Heat & hot water included in rent,https://www.trulia.com/home/138-28-90th-ave-b4-jamaica-ny-11435-466532094
+228 route 376|12533,pet_rent,$50/month per dog; $500 pet deposit,Monthly pet fees are $35 for cats and $50 for dogs.,https://www.zillow.com/apartments/hopewell-junction-ny/hopewell-gardens-apartments/CmKD2x/
+251 s olds blvd|19030,pet_rent,$50/month; $300 deposit,general {rent: 50.0; deposit: 300.0; restrictions: Call for Breed Restrictions},https://www.apartmentlist.com/pa/fairless-hills/lakeview-terrace
+86 ridge st|10965,broker_fee,tenant pays the broker commission,Owner is asking perspective tenant to pay the broker commission.,https://www.trulia.com/home/86-ridge-st-4-pearl-river-ny-10965-2081545709
+48 n st|10940,special,listed price is after a rent concession,Prices listed are after rent concessions are applied.,https://www.zillow.com/apartments/middletown-ny/the-north-court-apartments/9VnZc7/
+48 n st|10940,own_site_price,"one bedroom from $2,265/month","One Bedroom | Starting at $2,265/Month | 750 Square Feet",https://www.northcourtapartments.com/blank
+48 n st|10940,pet_rent,$50/month per dog,$50 per month per dog 1 max,https://www.zillow.com/apartments/middletown-ny/the-north-court-apartments/9VnZc7/
+1 larchmont ave|10538,building_name,Larchmont Acres East,one bathroom apartment located in Larchmont Acres East,https://www.trulia.com/home/1-larchmont-ave-825d-larchmont-ny-10538-465518635
+233 shore rd|11561,building_floors,at least 3 (a third-floor balcony is named in 2016),one of the building's third floor balcony walls,"https://www.liherald.com/stories/it-sounded-like-an-airplane-crash,83084"
+233 shore rd|11561,year_built,1949,"the building, which was built in 1949","https://www.liherald.com/stories/it-sounded-like-an-airplane-crash,83084"
+887 montauk hwy|11772,pet_rent,$50/month per dog,Monthly dog rent: $50/mo,https://www.trulia.com/building/eagle-rock-apartments-at-patchogue-preserve-887-montauk-hwy-patchogue-ny-11772-2224618446
+26000 cornerstone dr|19067,lease_term_of_listed_price,9-month lease; 12-month price not shown,"unit 17205: price 2073, lease_length 9",https://www.apartmentlist.com/pa/yardley/the-edge-at-yardley--1
+1800 kathy dr|19067,lease_term_of_listed_price,6-month lease; 12-month price not shown,lease_length 6 on every listed unit,https://www.apartmentlist.com/pa/yardley/yardley-crossing--1
