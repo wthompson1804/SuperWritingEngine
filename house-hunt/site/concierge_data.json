@@ -1,0 +1,5362 @@
+{
+ "meta": {
+  "built_at": "2026-11-17T14:05:47+00:00",
+  "rent_limit": 2000,
+  "counts": {
+   "apartments": 45,
+   "buildings": 25,
+   "neighborhoods": 17,
+   "experiences": 3
+  },
+  "tour_start": "2026-11-22",
+  "move_in_by": "2026-12-15",
+  "anchor_label": "Mom and Dad",
+  "anchor": {
+   "lat": 40.699608,
+   "lon": -73.80853
+  },
+  "source": "site/data.json",
+  "source_built_at": "2026-11-16T08:00:16+00:00",
+  "score_keys": [
+   "parents",
+   "going_out",
+   "green",
+   "value",
+   "parking",
+   "home"
+  ],
+  "parked": [
+   {
+    "neighborhood": "nj:bloomfield",
+    "under": "ny:yonkers",
+    "km": 28.6,
+    "fallback": false
+   },
+   {
+    "neighborhood": "ny:bath-beach",
+    "under": "nj:newark",
+    "km": 20.6,
+    "fallback": false
+   },
+   {
+    "neighborhood": "ny:jamaica-hills-briarwood",
+    "under": "ny:flushing-willets-point",
+    "km": 5.4,
+    "fallback": false
+   },
+   {
+    "neighborhood": "ny:murray-hill-broadway-flushing",
+    "under": "ny:flushing-willets-point",
+    "km": 0.8,
+    "fallback": false
+   },
+   {
+    "neighborhood": "ny:sheepshead-bay-manhattan-beach-gerritsen-beach",
+    "under": "ny:flushing-willets-point",
+    "km": 21.0,
+    "fallback": false
+   },
+   {
+    "neighborhood": "ct:trumbull",
+    "under": "ct:bridgeport",
+    "km": 5.7,
+    "fallback": false
+   },
+   {
+    "neighborhood": "nj:belleville",
+    "under": "nj:east-orange",
+    "km": 8.7,
+    "fallback": false
+   },
+   {
+    "neighborhood": "nj:city-of-orange",
+    "under": "nj:east-orange",
+    "km": 1.5,
+    "fallback": false
+   }
+  ],
+  "either_or_audit": [
+   {
+    "id": "parents_or_out",
+    "a": "parents",
+    "b": "going_out",
+    "spearman": 0.62,
+    "top5_shared": 3,
+    "trade_off": false,
+    "kept": false
+   },
+   {
+    "id": "parking_or_rent",
+    "a": "parking",
+    "b": "value",
+    "spearman": -0.13,
+    "top5_shared": 2,
+    "trade_off": false,
+    "kept": false
+   },
+   {
+    "id": "green_or_lively",
+    "a": "green",
+    "b": "going_out",
+    "spearman": 0.38,
+    "top5_shared": 2,
+    "trade_off": false,
+    "kept": false
+   },
+   {
+    "id": "room_or_parents",
+    "a": "home",
+    "b": "parents",
+    "spearman": -0.76,
+    "top5_shared": 0,
+    "trade_off": true,
+    "kept": true
+   },
+   {
+    "id": "room_or_rent",
+    "a": "home",
+    "b": "value",
+    "spearman": -0.03,
+    "top5_shared": 1,
+    "trade_off": true,
+    "kept": false
+   },
+   {
+    "id": "room_or_out",
+    "a": "home",
+    "b": "going_out",
+    "spearman": -0.65,
+    "top5_shared": 0,
+    "trade_off": true,
+    "kept": true
+   },
+   {
+    "id": "parents_or_rent",
+    "a": "parents",
+    "b": "value",
+    "spearman": -0.29,
+    "top5_shared": 1,
+    "trade_off": true,
+    "kept": true
+   },
+   {
+    "id": "green_or_room",
+    "a": "green",
+    "b": "home",
+    "spearman": -0.3,
+    "top5_shared": 1,
+    "trade_off": true,
+    "kept": false
+   },
+   {
+    "id": "parking_or_room",
+    "a": "parking",
+    "b": "home",
+    "spearman": -0.2,
+    "top5_shared": 0,
+    "trade_off": true,
+    "kept": false
+   },
+   {
+    "id": "green_or_parking",
+    "a": "green",
+    "b": "parking",
+    "spearman": -0.03,
+    "top5_shared": 1,
+    "trade_off": true,
+    "kept": false
+   }
+  ],
+  "notes": [
+   "Drive times are estimates with no traffic.",
+   "Tolls are round trip at New York E-ZPass rates, weekend off-peak.",
+   "The total with utilities and fees is the rent plus required fees, pet rent, parking where its price is published, and estimated electricity, gas and internet."
+  ]
+ },
+ "experiences": [
+  {
+   "id": "space",
+   "label": "The Room-to-Breathe Experience",
+   "tagline": "Usually more space for you, the desk and the dog, in towns farther out.",
+   "illustration_id": "space",
+   "figures": {
+    "rent_median": 1805,
+    "rent_range": [
+     1400,
+     2000
+    ],
+    "total_median": 2044,
+    "total_range": [
+     1703,
+     2327
+    ],
+    "drive_min_median": 81.5,
+    "drive_min_range": [
+     44.1,
+     111.8
+    ],
+    "toll_round_trip_range": [
+     16.66,
+     43.05
+    ],
+    "apartments": 24,
+    "buildings": 10,
+    "neighborhoods": 7,
+    "sqft_median": 719
+   },
+   "story": [
+    {
+     "kind": "promise",
+     "title": "The Room-to-Breathe Experience",
+     "text": "Usually more room for you, your desk and the dog.",
+     "icon": "home"
+    },
+    {
+     "kind": "weekday",
+     "title": "A weekday",
+     "text": "Most of these apartments have room for a proper desk. From the typical apartment a park is about 5 minutes on foot, and the supermarket is about 0.9 miles away.",
+     "icon": "home"
+    },
+    {
+     "kind": "saturday",
+     "title": "Saturday night",
+     "text": "From the typical apartment about 17 restaurants are within 1 mile, and bars are usually scarce. With this much space, having friends over is an easy evening.",
+     "icon": "moon"
+    },
+    {
+     "kind": "sunday",
+     "title": "Sunday with Mom and Dad",
+     "text": "Seeing Mom and Dad is a long drive from most of these towns. Tolls run from about $17 to $43 round trip with a New York E-ZPass, and the train and bus take about 145 minutes.",
+     "icon": "car"
+    },
+    {
+     "kind": "cost",
+     "title": "What it costs",
+     "text": "Rent is typically about $1,810 a month. The total with utilities and fees is typically about $2,040.",
+     "icon": "money"
+    },
+    {
+     "kind": "catch",
+     "title": "The catch",
+     "text": "From most of these towns Mom and Dad are a long drive away. The typical apartment has only about 4 restaurants within a 10-minute walk.",
+     "icon": "warning"
+    }
+   ],
+   "neighborhood_ids": [
+    "ct:trumbull",
+    "nj:belleville",
+    "nj:east-orange",
+    "ct:bridgeport",
+    "ct:beacon-falls",
+    "ct:hamden",
+    "nj:city-of-orange"
+   ],
+   "about": "This suits you if the apartment itself matters most, because you work from home. The typical apartment here is about 720 square feet, with room for a desk that is separate from the dinner table. In exchange you usually live farther from Mom and Dad, and what you can walk to depends on the town.",
+   "points": [
+    {
+     "icon": "laundry",
+     "text": "17 percent list laundry in the apartment."
+    },
+    {
+     "icon": "parking",
+     "text": "58 percent list a garage or covered parking."
+    },
+    {
+     "icon": "dog",
+     "text": "38 percent are in a building with its own dog area."
+    },
+    {
+     "icon": "fork",
+     "text": "About 4 restaurants are within a 10-minute walk of the typical apartment."
+    },
+    {
+     "icon": "warning",
+     "text": "The typical drive to Mom and Dad is about 82 minutes, each way."
+    }
+   ]
+  },
+  {
+   "id": "middle",
+   "label": "The Little-City Experience",
+   "tagline": "Small cities with a walkable downtown, and a longer drive to Mom and Dad.",
+   "illustration_id": "middle",
+   "figures": {
+    "rent_median": 1830.5,
+    "rent_range": [
+     1615,
+     1995
+    ],
+    "total_median": 2050.5,
+    "total_range": [
+     1806,
+     2383
+    ],
+    "drive_min_median": 53.5,
+    "drive_min_range": [
+     35.2,
+     89.6
+    ],
+    "toll_round_trip_range": [
+     14.92,
+     38.71
+    ],
+    "apartments": 12,
+    "buildings": 8,
+    "neighborhoods": 4,
+    "sqft_median": 489
+   },
+   "story": [
+    {
+     "kind": "promise",
+     "title": "The Little-City Experience",
+     "text": "A downtown you can walk to, and usually a gym in the building.",
+     "icon": "home"
+    },
+    {
+     "kind": "weekday",
+     "title": "A weekday",
+     "text": "From the typical apartment a park is about 9 minutes on foot and the supermarket about 0.4 miles. A public dog park is about 1.2 miles from the typical apartment.",
+     "icon": "dog"
+    },
+    {
+     "kind": "saturday",
+     "title": "Saturday night",
+     "text": "You can usually walk to dinner: about 21 restaurants are within a 10-minute walk of the typical apartment.",
+     "icon": "fork"
+    },
+    {
+     "kind": "sunday",
+     "title": "Sunday with Mom and Dad",
+     "text": "Seeing Mom and Dad is a planned trip from most of these towns. Tolls run from about $15 to $39 round trip with a New York E-ZPass, and the train and bus take about 130 minutes.",
+     "icon": "car"
+    },
+    {
+     "kind": "cost",
+     "title": "What it costs",
+     "text": "Rent is typically about $1,830 a month. The total with utilities and fees is typically about $2,050.",
+     "icon": "money"
+    },
+    {
+     "kind": "catch",
+     "title": "The catch",
+     "text": "From here you usually cannot drop in on Mom and Dad. The typical apartment is also modest in size, about 490 square feet.",
+     "icon": "warning"
+    }
+   ],
+   "neighborhood_ids": [
+    "ct:stamford",
+    "nj:bloomfield",
+    "ct:danbury",
+    "ny:yonkers"
+   ],
+   "about": "This suits you if you want a small city with a downtown to walk to, which most of these towns have. The buildings usually come with a gym, and some have a dog area of their own. What you give up is being near Mom and Dad: visits are usually planned trips.",
+   "points": [
+    {
+     "icon": "parking",
+     "text": "33 percent of the apartments list a garage or covered parking."
+    },
+    {
+     "icon": "laundry",
+     "text": "17 percent list laundry in the apartment."
+    },
+    {
+     "icon": "heart",
+     "text": "A gym is in most of these buildings."
+    },
+    {
+     "icon": "dog",
+     "text": "42 percent are in a building with its own dog area."
+    },
+    {
+     "icon": "train",
+     "text": "The nearest rail station is typically about 0.7 miles away."
+    },
+    {
+     "icon": "warning",
+     "text": "The typical drive to Mom and Dad is about 54 minutes, so visits take planning."
+    }
+   ]
+  },
+  {
+   "id": "settled",
+   "label": "The Old-Neighborhood Experience",
+   "tagline": "An older city neighborhood: close to Mom and Dad, except in Newark.",
+   "illustration_id": "settled",
+   "figures": {
+    "rent_median": 1900,
+    "rent_range": [
+     1700,
+     1950
+    ],
+    "total_median": 2163,
+    "total_range": [
+     1905,
+     2342
+    ],
+    "drive_min_median": 25,
+    "drive_min_range": [
+     3.5,
+     47.6
+    ],
+    "toll_round_trip_range": [
+     0,
+     23.79
+    ],
+    "apartments": 9,
+    "buildings": 7,
+    "neighborhoods": 6,
+    "sqft_median": 488
+   },
+   "story": [
+    {
+     "kind": "promise",
+     "title": "The Old-Neighborhood Experience",
+     "text": "Errands on foot in a long-established city neighborhood.",
+     "icon": "home"
+    },
+    {
+     "kind": "weekday",
+     "title": "A weekday",
+     "text": "A dog run is about 1.2 miles from the typical apartment. About 2 cafés are close for a break from the desk, and the supermarket is about 0.3 miles away.",
+     "icon": "coffee"
+    },
+    {
+     "kind": "saturday",
+     "title": "Saturday night",
+     "text": "Dinner is easy, with about 67 restaurants within 1 mile of the typical apartment. Bars are usually few, so a late night often means going to another neighborhood.",
+     "icon": "fork"
+    },
+    {
+     "kind": "sunday",
+     "title": "Sunday with Mom and Dad",
+     "text": "From Queens and Brooklyn Mom and Dad are close enough for a weeknight visit. From Newark the drive is about 48 minutes each way.",
+     "icon": "heart"
+    },
+    {
+     "kind": "cost",
+     "title": "What it costs",
+     "text": "Rent is typically about $1,900 a month. The total with utilities and fees is typically about $2,160.",
+     "icon": "money"
+    },
+    {
+     "kind": "catch",
+     "title": "The catch",
+     "text": "Nightlife and easy parking are usually what you give up. Bars are usually few, and many of these buildings do not list a garage.",
+     "icon": "warning"
+    }
+   ],
+   "neighborhood_ids": [
+    "ny:flushing-willets-point",
+    "ny:sheepshead-bay-manhattan-beach-gerritsen-beach",
+    "ny:jamaica-hills-briarwood",
+    "ny:murray-hill-broadway-flushing",
+    "ny:bath-beach",
+    "nj:newark"
+   ],
+   "about": "This suits you if you want your own apartment in an older city neighborhood, with errands on foot. Most of these apartments are in Queens and Brooklyn, within about 30 minutes of Mom and Dad; the Newark ones are about 48 minutes away, with a toll. What you usually give up is nightlife and easy parking.",
+   "points": [
+    {
+     "icon": "clock",
+     "text": "From Queens and Brooklyn the drive to Mom and Dad has no tolls."
+    },
+    {
+     "icon": "car",
+     "text": "From Newark each visit costs about $24 round trip with a New York E-ZPass."
+    },
+    {
+     "icon": "park",
+     "text": "From the typical apartment a park is about 3 minutes on foot."
+    },
+    {
+     "icon": "fork",
+     "text": "About 14 restaurants are within a 10-minute walk of the typical apartment."
+    },
+    {
+     "icon": "warning",
+     "text": "Only 56 percent of the apartments list a garage or covered parking, so ask."
+    }
+   ]
+  }
+ ],
+ "neighborhoods": [
+  {
+   "id": "ct:beacon-falls",
+   "name": "Beacon Falls",
+   "state": "CT",
+   "experience_id": "space",
+   "lat": 41.44305,
+   "lon": -73.06152,
+   "drive_min": 108.8,
+   "toll_round_trip": 16.66,
+   "about": "Beacon Falls is a small town by the water with its own train station, 0.2 miles from the door. Residents enjoy the walking paths and say there is not much to do in town. The apartments cost about $2,040 a month with utilities and fees.",
+   "points": [
+    {
+     "icon": "dog",
+     "text": "The building has its own dog area."
+    },
+    {
+     "icon": "water",
+     "text": "The waterfront is 0.1 miles from the door."
+    },
+    {
+     "icon": "ruler",
+     "text": "The typical apartment here is about 730 square feet."
+    },
+    {
+     "icon": "fork",
+     "text": "2 restaurants are within a 10-minute walk."
+    },
+    {
+     "icon": "park",
+     "text": "The nearest park is about 11 minutes away on foot."
+    },
+    {
+     "icon": "warning",
+     "text": "Mom and Dad are about 109 minutes away each way, so visits are day trips."
+    }
+   ],
+   "parked_under": null,
+   "also_nearby": [],
+   "building_ids": [
+    "b_8cb8bf6346"
+   ],
+   "apartments": 5,
+   "buildings": 1,
+   "rent_range": [
+    1805,
+    1805
+   ],
+   "total_range": [
+    2044,
+    2044
+   ],
+   "good": "The price is low and the train is close.",
+   "watch": "Mom and Dad are about 109 minutes away, and groceries are a drive."
+  },
+  {
+   "id": "ct:bridgeport",
+   "name": "Bridgeport",
+   "state": "CT",
+   "experience_id": "space",
+   "lat": 41.17717,
+   "lon": -73.18983,
+   "drive_min": 81.5,
+   "toll_round_trip": 16.66,
+   "about": "Every apartment listed in Bridgeport costs well under your limit, and there are 11 apartments to choose from. Residents like the beach and the parks, though some say there is nothing to do. The city restricts all-night parking on some streets.",
+   "points": [
+    {
+     "icon": "dog",
+     "text": "Some buildings here have their own dog area."
+    },
+    {
+     "icon": "train",
+     "text": "A train station is 0.2 miles from most buildings here."
+    },
+    {
+     "icon": "park",
+     "text": "A park is about 3 minutes away on foot."
+    },
+    {
+     "icon": "water",
+     "text": "The waterfront is 0.2 miles from most buildings here."
+    },
+    {
+     "icon": "fork",
+     "text": "4 restaurants are within a 10-minute walk."
+    },
+    {
+     "icon": "warning",
+     "text": "Mom and Dad are about 82 minutes away, so visits take planning."
+    }
+   ],
+   "parked_under": null,
+   "also_nearby": [
+    "ct:trumbull"
+   ],
+   "building_ids": [
+    "b_917f6a1ed1",
+    "b_5f84c933a2",
+    "b_b29a9ae0e3",
+    "b_0e634d994b"
+   ],
+   "apartments": 11,
+   "buildings": 4,
+   "rent_range": [
+    1400,
+    1950
+   ],
+   "total_range": [
+    1703,
+    2167
+   ],
+   "good": "Prices are low and there are many apartments to compare.",
+   "watch": "The supermarket is 0.9 miles away, so groceries are a drive."
+  },
+  {
+   "id": "ct:danbury",
+   "name": "Danbury",
+   "state": "CT",
+   "experience_id": "middle",
+   "lat": 41.39812,
+   "lon": -73.4536,
+   "drive_min": 88.7,
+   "toll_round_trip": 14.92,
+   "about": "Mom and Dad are about 89 minutes away by car. By train and bus the trip takes about 265 minutes, so visits would be by car.",
+   "points": [
+    {
+     "icon": "dog",
+     "text": "Every building here has its own dog area."
+    },
+    {
+     "icon": "train",
+     "text": "A train station is 0.3 miles away."
+    },
+    {
+     "icon": "home",
+     "text": "The supermarket is 0.8 miles away."
+    },
+    {
+     "icon": "home",
+     "text": "Many of the buildings in this area are new."
+    },
+    {
+     "icon": "park",
+     "text": "The nearest park is about 11 minutes away on foot."
+    },
+    {
+     "icon": "warning",
+     "text": "Visiting Mom and Dad costs about $15 round trip with a New York E-ZPass."
+    }
+   ],
+   "parked_under": null,
+   "also_nearby": [],
+   "building_ids": [
+    "b_5204934871",
+    "b_e2378bf884"
+   ],
+   "apartments": 3,
+   "buildings": 2,
+   "rent_range": [
+    1925,
+    1975
+   ],
+   "total_range": [
+    2204,
+    2241
+   ],
+   "good": "Every building here has its own dog area.",
+   "watch": "The nearest park is about 11 minutes on foot."
+  },
+  {
+   "id": "ct:hamden",
+   "name": "Hamden",
+   "state": "CT",
+   "experience_id": "space",
+   "lat": 41.38486,
+   "lon": -72.90067,
+   "drive_min": 111.8,
+   "toll_round_trip": 16.66,
+   "about": "Hamden is about 112 minutes from Mom and Dad, so visits would be day trips. Residents like the parks and trails. The apartments cost about $2,090 a month with utilities and fees.",
+   "points": [
+    {
+     "icon": "fork",
+     "text": "About 11 restaurants are within a 10-minute walk."
+    },
+    {
+     "icon": "water",
+     "text": "The waterfront is 0.2 miles from the door."
+    },
+    {
+     "icon": "ruler",
+     "text": "The typical apartment here is about 730 square feet."
+    },
+    {
+     "icon": "home",
+     "text": "The supermarket is 0.9 miles away."
+    },
+    {
+     "icon": "dog",
+     "text": "The nearest dog park is 2.2 miles away."
+    },
+    {
+     "icon": "warning",
+     "text": "Mom and Dad are about 112 minutes away each way, so visits are day trips."
+    }
+   ],
+   "parked_under": null,
+   "also_nearby": [],
+   "building_ids": [
+    "b_0ba5cc966d"
+   ],
+   "apartments": 3,
+   "buildings": 1,
+   "rent_range": [
+    1865,
+    1945
+   ],
+   "total_range": [
+    2082,
+    2162
+   ],
+   "good": "The price leaves room in your budget.",
+   "watch": "The drive to Mom and Dad is very long, and most errands need the car."
+  },
+  {
+   "id": "ct:stamford",
+   "name": "Stamford",
+   "state": "CT",
+   "experience_id": "middle",
+   "lat": 41.05883,
+   "lon": -73.53808,
+   "drive_min": 53.5,
+   "toll_round_trip": 16.66,
+   "about": "About 27 restaurants and 6 bars are within a 10-minute walk of most buildings here. Residents like living here and say you still need a car.",
+   "points": [
+    {
+     "icon": "dog",
+     "text": "Some buildings here have their own dog area."
+    },
+    {
+     "icon": "park",
+     "text": "A park is about 7 minutes away on foot."
+    },
+    {
+     "icon": "home",
+     "text": "The supermarket is 0.3 miles away."
+    },
+    {
+     "icon": "coffee",
+     "text": "3 cafés are within a 10-minute walk."
+    },
+    {
+     "icon": "clock",
+     "text": "Mom and Dad are about 54 minutes away by car."
+    },
+    {
+     "icon": "warning",
+     "text": "Visiting Mom and Dad costs about $17 round trip with a New York E-ZPass."
+    }
+   ],
+   "parked_under": null,
+   "also_nearby": [],
+   "building_ids": [
+    "b_893edb6df8",
+    "b_f95c86db48",
+    "b_377a717d0d"
+   ],
+   "apartments": 6,
+   "buildings": 3,
+   "rent_range": [
+    1615,
+    1935
+   ],
+   "total_range": [
+    1806,
+    2126
+   ],
+   "good": "You can walk to dinner and a drink.",
+   "watch": "The typical apartment is small, about 450 square feet."
+  },
+  {
+   "id": "ct:trumbull",
+   "name": "Trumbull",
+   "state": "CT",
+   "experience_id": "space",
+   "lat": 41.2285,
+   "lon": -73.18843,
+   "drive_min": 87.8,
+   "toll_round_trip": 16.66,
+   "about": "Trumbull is a quiet town of houses. Residents say there is no nightlife at all, and nothing to eat or drink is within a 10-minute walk.",
+   "points": [
+    {
+     "icon": "heart",
+     "text": "Among the safest places on the list."
+    },
+    {
+     "icon": "dog",
+     "text": "The building has its own dog area."
+    },
+    {
+     "icon": "ruler",
+     "text": "The apartment here is about 710 square feet."
+    },
+    {
+     "icon": "park",
+     "text": "The nearest park is about 9 minutes away on foot."
+    },
+    {
+     "icon": "car",
+     "text": "Nearly every household around here has a car."
+    },
+    {
+     "icon": "warning",
+     "text": "Only 1 apartment is listed here, and it needs a call to confirm."
+    }
+   ],
+   "parked_under": "ct:bridgeport",
+   "also_nearby": [],
+   "building_ids": [
+    "b_8f7ec4f0f6"
+   ],
+   "apartments": 1,
+   "buildings": 1,
+   "rent_range": [
+    2000,
+    2000
+   ],
+   "total_range": [
+    2327,
+    2327
+   ],
+   "good": "You get a large apartment in a very quiet town.",
+   "watch": "You would drive for every meal out and every errand."
+  },
+  {
+   "id": "nj:belleville",
+   "name": "Belleville",
+   "state": "NJ",
+   "experience_id": "space",
+   "lat": 40.80566,
+   "lon": -74.14557,
+   "drive_min": 44.1,
+   "toll_round_trip": 38.71,
+   "about": "Belleville is quiet: residents report no nightlife to speak of and some problems with parking. The supermarket is 0.1 miles from the door, and a park is about 7 minutes on foot.",
+   "points": [
+    {
+     "icon": "dog",
+     "text": "The building has its own dog area."
+    },
+    {
+     "icon": "parking",
+     "text": "The building has its own garage."
+    },
+    {
+     "icon": "fork",
+     "text": "5 restaurants are within a 10-minute walk."
+    },
+    {
+     "icon": "clock",
+     "text": "Mom and Dad are about 44 minutes away by car."
+    },
+    {
+     "icon": "warning",
+     "text": "Visiting Mom and Dad costs about $39 round trip with a New York E-ZPass."
+    }
+   ],
+   "parked_under": "nj:east-orange",
+   "also_nearby": [],
+   "building_ids": [
+    "b_66dc364565"
+   ],
+   "apartments": 1,
+   "buildings": 1,
+   "rent_range": [
+    1950,
+    1950
+   ],
+   "total_range": [
+    2157,
+    2157
+   ],
+   "good": "Groceries and a park are a short walk.",
+   "watch": "Visiting Mom and Dad costs about $39 round trip with a New York E-ZPass, and evenings are quiet."
+  },
+  {
+   "id": "nj:bloomfield",
+   "name": "Bloomfield",
+   "state": "NJ",
+   "experience_id": "middle",
+   "lat": 40.7986,
+   "lon": -74.19999,
+   "drive_min": 50.7,
+   "toll_round_trip": 38.71,
+   "about": "In Bloomfield the daily things are close: a dog park, the supermarket and the train are all within 0.6 miles. Residents wish there were more nightlife. The town has an overnight permit-parking rule, so ask the leasing office for the hours.",
+   "points": [
+    {
+     "icon": "fork",
+     "text": "About 18 restaurants are within a 10-minute walk."
+    },
+    {
+     "icon": "train",
+     "text": "A train station is 0.3 miles away."
+    },
+    {
+     "icon": "park",
+     "text": "A park is about 3 minutes away on foot."
+    },
+    {
+     "icon": "home",
+     "text": "The supermarket is 0.4 miles away."
+    },
+    {
+     "icon": "coffee",
+     "text": "3 cafés are within a 10-minute walk."
+    },
+    {
+     "icon": "warning",
+     "text": "Visiting Mom and Dad costs about $39 round trip with a New York E-ZPass."
+    }
+   ],
+   "parked_under": "ny:yonkers",
+   "also_nearby": [],
+   "building_ids": [
+    "b_e39cde86f4"
+   ],
+   "apartments": 1,
+   "buildings": 1,
+   "rent_range": [
+    1910,
+    1910
+   ],
+   "total_range": [
+    2112,
+    2112
+   ],
+   "good": "A dog park, groceries and the train are all a short walk.",
+   "watch": "Mom and Dad are about 51 minutes away, and each visit costs about $39 round trip with a New York E-ZPass."
+  },
+  {
+   "id": "nj:city-of-orange",
+   "name": "City of Orange",
+   "state": "NJ",
+   "experience_id": "space",
+   "lat": 40.77228,
+   "lon": -74.23415,
+   "drive_min": 53.2,
+   "toll_round_trip": 43.05,
+   "about": "In Orange, overnight street parking needs a residents' permit, and a municipal lot permit costs $40 a month. Ask the building where you would park. The train station is 0.1 miles from the door.",
+   "points": [
+    {
+     "icon": "dog",
+     "text": "The building has its own dog area."
+    },
+    {
+     "icon": "home",
+     "text": "The supermarket is 0.9 miles away."
+    },
+    {
+     "icon": "clock",
+     "text": "Mom and Dad are about 53 minutes away by car."
+    },
+    {
+     "icon": "warning",
+     "text": "The nearest park is about 16 minutes away on foot."
+    }
+   ],
+   "parked_under": "nj:east-orange",
+   "also_nearby": [],
+   "building_ids": [
+    "b_022934bcb2"
+   ],
+   "apartments": 1,
+   "buildings": 1,
+   "rent_range": [
+    1984,
+    1984
+   ],
+   "total_range": [
+    2176,
+    2176
+   ],
+   "good": "You are close to the train.",
+   "watch": "The nearest park is about 16 minutes on foot."
+  },
+  {
+   "id": "nj:east-orange",
+   "name": "East Orange",
+   "state": "NJ",
+   "experience_id": "space",
+   "lat": 40.7598,
+   "lon": -74.22892,
+   "drive_min": 52,
+   "toll_round_trip": 43.05,
+   "about": "In East Orange every car parked on the street overnight, from 2 to 6 AM, needs a permit that costs $150 a year. So ask the building for a space off the street. The nearest dog run is 2.3 miles away, and a park is about 2 minutes on foot.",
+   "points": [
+    {
+     "icon": "train",
+     "text": "A train station is 0.6 miles away."
+    },
+    {
+     "icon": "home",
+     "text": "The supermarket is 0.7 miles away."
+    },
+    {
+     "icon": "clock",
+     "text": "Mom and Dad are about 52 minutes away by car."
+    },
+    {
+     "icon": "warning",
+     "text": "Overnight street parking is restricted, so get a parking space in writing."
+    }
+   ],
+   "parked_under": null,
+   "also_nearby": [
+    "nj:belleville",
+    "nj:city-of-orange"
+   ],
+   "building_ids": [
+    "b_296b3095f3"
+   ],
+   "apartments": 2,
+   "buildings": 1,
+   "rent_range": [
+    1895,
+    1929
+   ],
+   "total_range": [
+    2097,
+    2131
+   ],
+   "good": "A park and the train are a short walk.",
+   "watch": "Visiting Mom and Dad costs about $43 round trip with a New York E-ZPass."
+  },
+  {
+   "id": "nj:newark",
+   "name": "Newark",
+   "state": "NJ",
+   "experience_id": "settled",
+   "lat": 40.72872,
+   "lon": -74.17639,
+   "drive_min": 47.6,
+   "toll_round_trip": 23.79,
+   "about": "Residents call parking frustrating, and the building has its own garage. The building is downtown, with about 14 restaurants within a 10-minute walk.",
+   "points": [
+    {
+     "icon": "park",
+     "text": "A park is about 3 minutes away on foot."
+    },
+    {
+     "icon": "train",
+     "text": "A light rail stop is 0.7 miles from the door."
+    },
+    {
+     "icon": "home",
+     "text": "The supermarket is 0.3 miles away."
+    },
+    {
+     "icon": "dog",
+     "text": "The nearest dog park is 1.2 miles away."
+    },
+    {
+     "icon": "clock",
+     "text": "Mom and Dad are about 48 minutes away by car."
+    },
+    {
+     "icon": "warning",
+     "text": "Visiting Mom and Dad costs about $24 round trip with a New York E-ZPass."
+    }
+   ],
+   "parked_under": null,
+   "also_nearby": [
+    "ny:bath-beach"
+   ],
+   "building_ids": [
+    "b_fec325fa9f"
+   ],
+   "apartments": 3,
+   "buildings": 1,
+   "rent_range": [
+    1900,
+    1950
+   ],
+   "total_range": [
+    2292,
+    2342
+   ],
+   "good": "Dinner and the light rail are close.",
+   "watch": "Mom and Dad are about 48 minutes away, and each visit costs about $24 round trip with a New York E-ZPass."
+  },
+  {
+   "id": "ny:bath-beach",
+   "name": "Bath Beach",
+   "state": "NY",
+   "experience_id": "settled",
+   "lat": 40.59758,
+   "lon": -74.00333,
+   "drive_min": 28.7,
+   "toll_round_trip": 0,
+   "about": "In Bath Beach the waterfront is 0.1 miles from the door, with a big park beside it. Residents say almost nothing stays open late. They also say parking spaces are hard to find.",
+   "points": [
+    {
+     "icon": "parking",
+     "text": "The building has its own garage."
+    },
+    {
+     "icon": "park",
+     "text": "A park is about 1 minute away on foot."
+    },
+    {
+     "icon": "fork",
+     "text": "8 restaurants are within a 10-minute walk."
+    },
+    {
+     "icon": "home",
+     "text": "The supermarket is 0.5 miles away."
+    },
+    {
+     "icon": "dog",
+     "text": "The nearest dog park is 1.7 miles away."
+    },
+    {
+     "icon": "warning",
+     "text": "Only 1 apartment is listed here, and it needs a call to confirm."
+    }
+   ],
+   "parked_under": "nj:newark",
+   "also_nearby": [],
+   "building_ids": [
+    "b_674db3118a"
+   ],
+   "apartments": 1,
+   "buildings": 1,
+   "rent_range": [
+    1825,
+    1825
+   ],
+   "total_range": [
+    2254,
+    2254
+   ],
+   "good": "The waterfront park makes daily dog walks easy.",
+   "watch": "The nearest dog run is 1.7 miles away, and evenings are quiet."
+  },
+  {
+   "id": "ny:flushing-willets-point",
+   "name": "Flushing-Willets Point",
+   "state": "NY",
+   "experience_id": "settled",
+   "lat": 40.75757,
+   "lon": -73.82699,
+   "drive_min": 11.2,
+   "toll_round_trip": 0,
+   "about": "Flushing is a neighborhood for eating out: about 90 restaurants and 22 cafés are within a 10-minute walk of most buildings here. Residents say parking is almost nonexistent, so look for a building with a garage.",
+   "points": [
+    {
+     "icon": "train",
+     "text": "A train station is 0.2 miles away."
+    },
+    {
+     "icon": "park",
+     "text": "A park is about 4 minutes away on foot."
+    },
+    {
+     "icon": "home",
+     "text": "The supermarket is 0.1 miles away."
+    },
+    {
+     "icon": "dog",
+     "text": "The nearest dog park is 1.9 miles away."
+    },
+    {
+     "icon": "clock",
+     "text": "Mom and Dad are about 11 minutes away by car."
+    },
+    {
+     "icon": "warning",
+     "text": "Residents say parking is hard, so ask for a reserved space."
+    }
+   ],
+   "parked_under": null,
+   "also_nearby": [
+    "ny:jamaica-hills-briarwood",
+    "ny:murray-hill-broadway-flushing",
+    "ny:sheepshead-bay-manhattan-beach-gerritsen-beach"
+   ],
+   "building_ids": [
+    "b_d007846fe9",
+    "b_0f0fcfc79c"
+   ],
+   "apartments": 2,
+   "buildings": 2,
+   "rent_range": [
+    1850,
+    1925
+   ],
+   "total_range": [
+    2079,
+    2163
+   ],
+   "good": "You would have a huge choice of restaurants within a short walk.",
+   "watch": "The nearest dog run is 1.9 miles away, and street parking is very hard."
+  },
+  {
+   "id": "ny:jamaica-hills-briarwood",
+   "name": "Jamaica Hills-Briarwood",
+   "state": "NY",
+   "experience_id": "settled",
+   "lat": 40.71029,
+   "lon": -73.81369,
+   "drive_min": 3.5,
+   "toll_round_trip": 0,
+   "about": "Briarwood is about 4 minutes from Mom and Dad. Residents say it has everything except nightlife and parking. Ask the building about a reserved parking space.",
+   "points": [
+    {
+     "icon": "fork",
+     "text": "About 12 restaurants are within a 10-minute walk."
+    },
+    {
+     "icon": "park",
+     "text": "A park is about 3 minutes away on foot."
+    },
+    {
+     "icon": "train",
+     "text": "A subway station is 0.4 miles from the door."
+    },
+    {
+     "icon": "home",
+     "text": "The supermarket is 0.3 miles away."
+    },
+    {
+     "icon": "dog",
+     "text": "The nearest dog park is 1.2 miles away."
+    },
+    {
+     "icon": "warning",
+     "text": "Residents say parking is hard, so ask for a reserved space."
+    }
+   ],
+   "parked_under": "ny:flushing-willets-point",
+   "also_nearby": [],
+   "building_ids": [
+    "b_0c3a7051d4"
+   ],
+   "apartments": 1,
+   "buildings": 1,
+   "rent_range": [
+    1895,
+    1895
+   ],
+   "total_range": [
+    2139,
+    2139
+   ],
+   "good": "Mom and Dad are very close, and prices are moderate.",
+   "watch": "Street parking is hard, and the nearest dog run is 1.2 miles away."
+  },
+  {
+   "id": "ny:murray-hill-broadway-flushing",
+   "name": "Murray Hill-Broadway Flushing",
+   "state": "NY",
+   "experience_id": "settled",
+   "lat": 40.7639,
+   "lon": -73.82265,
+   "drive_min": 11.9,
+   "toll_round_trip": 0,
+   "about": "Murray Hill puts daily needs close: a park is about 2 minutes from the door, and about 45 restaurants are within a 10-minute walk. Residents say parking is almost nonexistent.",
+   "points": [
+    {
+     "icon": "train",
+     "text": "A train station is 0.4 miles from the door."
+    },
+    {
+     "icon": "home",
+     "text": "The supermarket is 0.1 miles away."
+    },
+    {
+     "icon": "dog",
+     "text": "The nearest dog park is 2.3 miles away."
+    },
+    {
+     "icon": "coffee",
+     "text": "11 cafés are within a 10-minute walk."
+    },
+    {
+     "icon": "clock",
+     "text": "Mom and Dad are about 12 minutes away by car."
+    },
+    {
+     "icon": "warning",
+     "text": "Residents say parking is hard, so ask for a reserved space."
+    }
+   ],
+   "parked_under": "ny:flushing-willets-point",
+   "also_nearby": [],
+   "building_ids": [
+    "b_1d1be12629"
+   ],
+   "apartments": 1,
+   "buildings": 1,
+   "rent_range": [
+    1930,
+    1930
+   ],
+   "total_range": [
+    2135,
+    2135
+   ],
+   "good": "The price is low, about $2,140 a month with utilities and fees.",
+   "watch": "The nearest dog run is 2.3 miles away, and you would need a parking space from the building."
+  },
+  {
+   "id": "ny:sheepshead-bay-manhattan-beach-gerritsen-beach",
+   "name": "Sheepshead Bay-Manhattan Beach-Gerritsen Beach",
+   "state": "NY",
+   "experience_id": "settled",
+   "lat": 40.5934,
+   "lon": -73.95005,
+   "drive_min": 25,
+   "toll_round_trip": 0,
+   "about": "The apartment in Sheepshead Bay costs about $1,910 a month with utilities and fees, far below your limit. Residents like the cafés and restaurants and the easy trip to the beach. The apartment is small, about 520 square feet.",
+   "points": [
+    {
+     "icon": "fork",
+     "text": "About 21 restaurants are within a 10-minute walk."
+    },
+    {
+     "icon": "train",
+     "text": "A subway station is 0.3 miles from the door."
+    },
+    {
+     "icon": "park",
+     "text": "A park is about 5 minutes away on foot."
+    },
+    {
+     "icon": "home",
+     "text": "The supermarket is 0.3 miles away."
+    },
+    {
+     "icon": "dog",
+     "text": "The nearest dog park is 1.2 miles away."
+    },
+    {
+     "icon": "warning",
+     "text": "Many households here have no car, so ask the building about parking."
+    }
+   ],
+   "parked_under": "ny:flushing-willets-point",
+   "also_nearby": [],
+   "building_ids": [
+    "b_84bbe8d99e"
+   ],
+   "apartments": 1,
+   "buildings": 1,
+   "rent_range": [
+    1700,
+    1700
+   ],
+   "total_range": [
+    1905,
+    1905
+   ],
+   "good": "The price is low and there is plenty to eat nearby.",
+   "watch": "The nearest dog run is 1.2 miles away."
+  },
+  {
+   "id": "ny:yonkers",
+   "name": "Yonkers",
+   "state": "NY",
+   "experience_id": "middle",
+   "lat": 40.92321,
+   "lon": -73.90246,
+   "drive_min": 36,
+   "toll_round_trip": 14.92,
+   "about": "The apartments in Yonkers are by the river, 0.3 miles from the water. Residents praise the trails, parks and views along it. Only 4 restaurants are within a 10-minute walk of most buildings here.",
+   "points": [
+    {
+     "icon": "park",
+     "text": "A park is about 4 minutes away on foot."
+    },
+    {
+     "icon": "train",
+     "text": "A train station is 0.4 miles away."
+    },
+    {
+     "icon": "home",
+     "text": "The supermarket is 0.2 miles away."
+    },
+    {
+     "icon": "dog",
+     "text": "The nearest dog park is 1.2 miles away."
+    },
+    {
+     "icon": "clock",
+     "text": "Mom and Dad are about 36 minutes away by car."
+    },
+    {
+     "icon": "warning",
+     "text": "Many households here have no car, so ask each building about parking."
+    }
+   ],
+   "parked_under": null,
+   "also_nearby": [
+    "nj:bloomfield"
+   ],
+   "building_ids": [
+    "b_ee2549a834",
+    "b_c4831201c1"
+   ],
+   "apartments": 2,
+   "buildings": 2,
+   "rent_range": [
+    1751,
+    1995
+   ],
+   "total_range": [
+    1989,
+    2383
+   ],
+   "good": "The riverfront makes an easy daily walk.",
+   "watch": "For dinner out or a drink, you would usually drive."
+  }
+ ],
+ "buildings": [
+  {
+   "id": "b_d007846fe9",
+   "name": "4110 Bowne St",
+   "address": "4110 Bowne St",
+   "city": "Flushing",
+   "state": "NY",
+   "lat": 40.75933,
+   "lon": -73.82429,
+   "neighborhood_id": "ny:flushing-willets-point",
+   "experience_id": "settled",
+   "rank_score": 60.0,
+   "why": "About 91 restaurants are within a 10-minute walk.",
+   "give_up": "The nearest dog run is 1.9 miles away, and street parking is very hard.",
+   "facts": {
+    "rent_from": 1925,
+    "rent_to": 1925,
+    "total_from": 2163,
+    "total_to": 2163,
+    "drive_min": 11.9,
+    "toll_round_trip": 0,
+    "parking": {
+     "summary": "Garage parking, with the fee not published.",
+     "kind": "garage",
+     "fee": null,
+     "included": false
+    },
+    "dog": {
+     "summary": "Small dogs are allowed, and the weight limit is not published.",
+     "weight_limit_lb": null,
+     "no_weight_limit": false,
+     "allowed": "yes"
+    }
+   },
+   "scores": {
+    "parents": 0.951,
+    "going_out": 0.907,
+    "green": 0.465,
+    "value": 0.823,
+    "parking": 0.502,
+    "home": 0.102
+   },
+   "confirm": [],
+   "tour_questions": [
+    "Floor not published: confirm it is above the ground floor",
+    "Confirm the dog weight limit in pounds (the page says small dogs and gives no number)",
+    "What required monthly fees are added to the rent (amenity, trash, technology)?",
+    "What does a parking spot cost per month, and is one guaranteed in the lease?",
+    "What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)"
+   ],
+   "disclosures": [
+    "floor not published"
+   ],
+   "photos_url": "https://www.trulia.com/home/4110-bowne-st-5w-flushing-ny-11355-466185521",
+   "listing_url": "https://www.trulia.com/home/4110-bowne-st-5w-flushing-ny-11355-466185521",
+   "contact": {
+    "office_phone": null,
+    "site": "https://www.trulia.com/home/4110-bowne-st-5w-flushing-ny-11355-466185521",
+    "hours": null,
+    "kind": "management company",
+    "private": false,
+    "note": null
+   },
+   "about": "There is a garage for your car. Bowne Playground is about 2 minutes away on foot.",
+   "points": [
+    {
+     "icon": "dog",
+     "text": "Small dogs are allowed, and the weight limit is not published."
+    },
+    {
+     "icon": "fork",
+     "text": "About 91 restaurants are within a 10-minute walk."
+    },
+    {
+     "icon": "train",
+     "text": "The Flushing–Main Street train station is 0.3 miles away."
+    },
+    {
+     "icon": "home",
+     "text": "Built in 1960."
+    },
+    {
+     "icon": "warning",
+     "text": "The garage fee is not published, so ask what it costs each month."
+    }
+   ],
+   "day": [
+    {
+     "title": "Morning walk",
+     "text": "Bowne Playground is about 2 minutes on foot.",
+     "level": "strong"
+    },
+    {
+     "title": "Working from home",
+     "text": "A studio, about 525 square feet.",
+     "level": "weak"
+    },
+    {
+     "title": "After work",
+     "text": "91 restaurants and 3 bars within a 10-minute walk.",
+     "level": "strong"
+    },
+    {
+     "title": "Coming home at night",
+     "text": "Garage parking, with the fee not published.",
+     "level": "mixed"
+    },
+    {
+     "title": "Saturday night",
+     "text": "139 restaurants and 5 bars within 1 mile.",
+     "level": "strong"
+    },
+    {
+     "title": "Sunday with Mom and Dad",
+     "text": "About 12 minutes by car, with no tolls.",
+     "level": "strong"
+    }
+   ],
+   "apartments": [
+    {
+     "id": "trulia:466185521",
+     "label": "Apartment 5W",
+     "beds": 0,
+     "sqft": 525,
+     "floor_text": "Floor 5 (read from the apartment number)",
+     "rent": 1925,
+     "total": 2163,
+     "available_text": "Available now",
+     "offer": false,
+     "offer_text": null,
+     "star": false,
+     "confirm_label": null,
+     "confirm_question": null,
+     "listing_url": "https://www.trulia.com/home/4110-bowne-st-5w-flushing-ny-11355-466185521",
+     "source_site": "trulia",
+     "last_read": "2026-11-15"
+    }
+   ],
+   "why_source": "building point",
+   "give_up_source": "neighborhood watch_for"
+  },
+  {
+   "id": "b_84bbe8d99e",
+   "name": "2781 Ocean Ave",
+   "address": "2781 Ocean Ave",
+   "city": "Brooklyn",
+   "state": "NY",
+   "lat": 40.5934,
+   "lon": -73.95005,
+   "neighborhood_id": "ny:sheepshead-bay-manhattan-beach-gerritsen-beach",
+   "experience_id": "settled",
+   "rank_score": 59.4,
+   "why": "The price is low and there is plenty to eat nearby.",
+   "give_up": "The apartment is small, about 520 square feet.",
+   "facts": {
+    "rent_from": 1700,
+    "rent_to": 1700,
+    "total_from": 1905,
+    "total_to": 1905,
+    "drive_min": 25,
+    "toll_round_trip": 0,
+    "parking": {
+     "summary": null,
+     "kind": null,
+     "fee": null,
+     "included": false
+    },
+    "dog": {
+     "summary": "Small dogs are allowed, and the weight limit is not published.",
+     "weight_limit_lb": null,
+     "no_weight_limit": false,
+     "allowed": "yes"
+    }
+   },
+   "scores": {
+    "parents": 0.878,
+    "going_out": 0.732,
+    "green": 0.48,
+    "value": 0.944,
+    "parking": 0.339,
+    "home": 0.097
+   },
+   "confirm": [],
+   "tour_questions": [
+    "What are the condominium's rules for renting this apartment (application, fees, pets)?",
+    "Confirm the dog weight limit in pounds (the page says small dogs and gives no number)",
+    "What does a parking spot cost per month, and is one guaranteed in the lease?",
+    "What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)"
+   ],
+   "disclosures": [
+    "condo rented by its owner"
+   ],
+   "photos_url": "https://www.trulia.com/home/2781-ocean-ave-6e-brooklyn-ny-11229-466617938",
+   "listing_url": "https://www.trulia.com/home/2781-ocean-ave-6e-brooklyn-ny-11229-466617938",
+   "contact": {
+    "office_phone": null,
+    "site": "https://www.trulia.com/home/2781-ocean-ave-6e-brooklyn-ny-11229-466617938",
+    "hours": null,
+    "kind": "individual owner",
+    "private": true,
+    "note": "Listed by a broker or the owner: get in touch through the listing page."
+   },
+   "about": "The listing gives few details about the building itself. You could walk to dinner, with about 21 restaurants within a 10-minute walk.",
+   "points": [
+    {
+     "icon": "dog",
+     "text": "Small dogs are allowed, and the weight limit is not published."
+    },
+    {
+     "icon": "park",
+     "text": "Bill Brown Playground is about 5 minutes away on foot."
+    },
+    {
+     "icon": "train",
+     "text": "The Neck Rd subway station is 0.3 miles away."
+    },
+    {
+     "icon": "warning",
+     "text": "The listing does not mention parking, so ask where you would park."
+    }
+   ],
+   "day": [
+    {
+     "title": "Morning walk",
+     "text": "Bill Brown Playground is about 5 minutes on foot.",
+     "level": "mixed"
+    },
+    {
+     "title": "Working from home",
+     "text": "A studio, about 519 square feet.",
+     "level": "weak"
+    },
+    {
+     "title": "After work",
+     "text": "21 restaurants and 1 bar within a 10-minute walk.",
+     "level": "strong"
+    },
+    {
+     "title": "Coming home at night",
+     "text": "The listing does not mention parking.",
+     "level": "mixed"
+    },
+    {
+     "title": "Saturday night",
+     "text": "73 restaurants and 3 bars within 1 mile.",
+     "level": "mixed"
+    },
+    {
+     "title": "Sunday with Mom and Dad",
+     "text": "About 25 minutes by car, with no tolls.",
+     "level": "strong"
+    }
+   ],
+   "apartments": [
+    {
+     "id": "trulia:466617938",
+     "label": "Apartment 6E",
+     "beds": 0,
+     "sqft": 519,
+     "floor_text": "Floor 6",
+     "rent": 1700,
+     "total": 1905,
+     "available_text": "Available November 16",
+     "offer": false,
+     "offer_text": null,
+     "star": false,
+     "confirm_label": null,
+     "confirm_question": null,
+     "listing_url": "https://www.trulia.com/home/2781-ocean-ave-6e-brooklyn-ny-11229-466617938",
+     "source_site": "trulia",
+     "last_read": "2026-11-15"
+    }
+   ],
+   "why_source": "neighborhood good_for_her",
+   "give_up_source": "neighborhood about"
+  },
+  {
+   "id": "b_8f7ec4f0f6",
+   "name": "The Royce at Trumbull",
+   "address": "100 Avalon Gates",
+   "city": "Trumbull",
+   "state": "CT",
+   "lat": 41.2285,
+   "lon": -73.18843,
+   "neighborhood_id": "ct:trumbull",
+   "experience_id": "space",
+   "rank_score": 59.2,
+   "why": "You get a large apartment in a very quiet town.",
+   "give_up": "You would drive for every meal out and every errand.",
+   "facts": {
+    "rent_from": 2000,
+    "rent_to": 2000,
+    "total_from": 2327,
+    "total_to": 2327,
+    "drive_min": 87.8,
+    "toll_round_trip": 16.66,
+    "parking": {
+     "summary": "Free off-street parking; covered spaces are extra (fee not published).",
+     "kind": "off_street",
+     "fee": 0,
+     "included": true
+    },
+    "dog": {
+     "summary": "Dogs are allowed, with no weight limit.",
+     "weight_limit_lb": null,
+     "no_weight_limit": true,
+     "allowed": "yes"
+    }
+   },
+   "scores": {
+    "parents": 0.218,
+    "going_out": 0.086,
+    "green": 0.482,
+    "value": 0.915,
+    "parking": 0.34,
+    "home": 0.74
+   },
+   "confirm": [
+    {
+     "label": "the elevator",
+     "question": "Is there an elevator in this apartment's building, and does it reach this floor?"
+    }
+   ],
+   "tour_questions": [
+    "Floor not published: confirm it is above the ground floor",
+    "Special offer: ask what a normal month costs",
+    "Is the advertised rent the full monthly rent, or the average after free months? What is the first full payment and when is it due?"
+   ],
+   "disclosures": [
+    "floor not published",
+    "special offer"
+   ],
+   "photos_url": "https://www.royceattrumbull.com/",
+   "listing_url": "https://www.apartmentlist.com/ct/trumbull/the-royce-at-trumbull",
+   "contact": {
+    "office_phone": "(475) 255-2334",
+    "site": "https://www.royceattrumbull.com/",
+    "hours": "Mon-Fri 10:00-18:00; Sat 10:00-17:00",
+    "kind": "leasing office",
+    "private": false,
+    "note": null
+   },
+   "about": "Free off-street parking comes with the apartment; covered spaces cost extra. Unity Park is about 9 minutes away on foot.",
+   "points": [
+    {
+     "icon": "dog",
+     "text": "The building has its own dog park."
+    },
+    {
+     "icon": "dog",
+     "text": "Dogs are allowed, with no weight limit."
+    },
+    {
+     "icon": "coffee",
+     "text": "The building has a lounge or coworking room."
+    },
+    {
+     "icon": "home",
+     "text": "Built in 1997."
+    },
+    {
+     "icon": "warning",
+     "text": "An elevator is not confirmed for every apartment here, so ask before you tour."
+    }
+   ],
+   "day": [
+    {
+     "title": "Morning walk",
+     "text": "Unity Park is about 9 minutes on foot.",
+     "level": "mixed"
+    },
+    {
+     "title": "Working from home",
+     "text": "A separate bedroom, about 713 square feet.",
+     "level": "strong"
+    },
+    {
+     "title": "After work",
+     "text": "0 restaurants and 0 bars within a 10-minute walk.",
+     "level": "weak"
+    },
+    {
+     "title": "Coming home at night",
+     "text": "Free off-street parking; covered spaces are extra (fee not published).",
+     "level": "mixed"
+    },
+    {
+     "title": "Saturday night",
+     "text": "0 restaurants and 0 bars within 1 mile.",
+     "level": "weak"
+    },
+    {
+     "title": "Sunday with Mom and Dad",
+     "text": "About 88 minutes by car, about $17 round trip in tolls.",
+     "level": "weak"
+    }
+   ],
+   "apartments": [
+    {
+     "id": "apartmentlist:p10015-15572326",
+     "label": "Apartment 4211",
+     "beds": 1,
+     "sqft": 713,
+     "floor_text": null,
+     "rent": 2000,
+     "total": 2327,
+     "available_text": "Available November 28",
+     "offer": true,
+     "offer_text": "The listing advertises 1 month of free rent. The page does not say the price shown already includes it, so the price is treated as the normal monthly rent.",
+     "star": true,
+     "confirm_label": "To confirm: the elevator",
+     "confirm_question": "Is there an elevator in this apartment's building, and does it reach this floor?",
+     "listing_url": "https://www.apartmentlist.com/ct/trumbull/the-royce-at-trumbull",
+     "source_site": "apartmentlist.com",
+     "last_read": "2026-11-16"
+    }
+   ],
+   "why_source": "neighborhood good_for_her",
+   "give_up_source": "neighborhood watch_for"
+  },
+  {
+   "id": "b_66dc364565",
+   "name": "Ethos Kelsey",
+   "address": "740-748 Washington Ave",
+   "city": "Belleville",
+   "state": "NJ",
+   "lat": 40.80566,
+   "lon": -74.14557,
+   "neighborhood_id": "nj:belleville",
+   "experience_id": "space",
+   "rank_score": 58.6,
+   "why": "There is a pool on the property.",
+   "give_up": "Visiting Mom and Dad costs about $39 round trip with a New York E-ZPass, and evenings are quiet.",
+   "facts": {
+    "rent_from": 1950,
+    "rent_to": 1950,
+    "total_from": 2157,
+    "total_to": 2157,
+    "drive_min": 44.1,
+    "toll_round_trip": 38.71,
+    "parking": {
+     "summary": "Garage parking, with the fee not published.",
+     "kind": "garage",
+     "fee": null,
+     "included": false
+    },
+    "dog": {
+     "summary": "Small dogs are allowed, and the weight limit is not published.",
+     "weight_limit_lb": null,
+     "no_weight_limit": false,
+     "allowed": "yes"
+    }
+   },
+   "scores": {
+    "parents": 0.444,
+    "going_out": 0.462,
+    "green": 0.559,
+    "value": 0.871,
+    "parking": 0.449,
+    "home": 0.537
+   },
+   "confirm": [],
+   "tour_questions": [
+    "Floor not published: confirm it is above the ground floor",
+    "Special offer: ask what a normal month costs",
+    "Confirm the dog weight limit in pounds (the page says small dogs and gives no number)",
+    "Is the advertised rent the full monthly rent, or the average after free months? What is the first full payment and when is it due?",
+    "What required monthly fees are added to the rent (amenity, trash, technology)?",
+    "What does a parking spot cost per month, and is one guaranteed in the lease?"
+   ],
+   "disclosures": [
+    "floor not published",
+    "special offer"
+   ],
+   "photos_url": "https://ethoskelsey.com/",
+   "listing_url": "https://www.trulia.com/building/ethos-kelsey-740-748-washington-ave-belleville-nj-07109-2746633852",
+   "contact": {
+    "office_phone": "(973) 477-6806",
+    "site": "https://ethoskelsey.com/",
+    "hours": null,
+    "kind": "leasing office",
+    "private": false,
+    "note": null
+   },
+   "about": "There is a pool on the property. The nearest supermarket, ShopRite, is 0.1 miles away.",
+   "points": [
+    {
+     "icon": "dog",
+     "text": "The building has its own dog run."
+    },
+    {
+     "icon": "dog",
+     "text": "Small dogs are allowed, and the weight limit is not published."
+    },
+    {
+     "icon": "heart",
+     "text": "The building has a gym."
+    },
+    {
+     "icon": "coffee",
+     "text": "The building has a lounge or coworking room."
+    },
+    {
+     "icon": "warning",
+     "text": "The garage fee is not published, so ask what it costs each month."
+    }
+   ],
+   "day": [
+    {
+     "title": "Morning walk",
+     "text": "Monsignor Owens Park is about 7 minutes on foot.",
+     "level": "mixed"
+    },
+    {
+     "title": "Working from home",
+     "text": "A studio, about 636 square feet.",
+     "level": "mixed"
+    },
+    {
+     "title": "After work",
+     "text": "5 restaurants and 1 bar within a 10-minute walk.",
+     "level": "mixed"
+    },
+    {
+     "title": "Coming home at night",
+     "text": "Garage parking, with the fee not published.",
+     "level": "strong"
+    },
+    {
+     "title": "Saturday night",
+     "text": "13 restaurants and 4 bars within 1 mile.",
+     "level": "mixed"
+    },
+    {
+     "title": "Sunday with Mom and Dad",
+     "text": "About 44 minutes by car, about $39 round trip in tolls.",
+     "level": "mixed"
+    }
+   ],
+   "apartments": [
+    {
+     "id": "trulia:b2746633852:Unit_301:465944071",
+     "label": "Apartment 301",
+     "beds": 0,
+     "sqft": 636,
+     "floor_text": "Floor 3 (read from the apartment number)",
+     "rent": 1950,
+     "total": 2157,
+     "available_text": "Available now",
+     "offer": true,
+     "offer_text": "The listing advertises 1 month of free rent on an 18-month lease. The page does not say the price shown already includes it, so the price is treated as the normal monthly rent.",
+     "star": false,
+     "confirm_label": null,
+     "confirm_question": null,
+     "listing_url": "https://www.trulia.com/building/ethos-kelsey-740-748-washington-ave-belleville-nj-07109-2746633852",
+     "source_site": "trulia",
+     "last_read": "2026-11-15"
+    }
+   ],
+   "why_source": "building about",
+   "give_up_source": "neighborhood watch_for"
+  },
+  {
+   "id": "b_296b3095f3",
+   "name": "Harclay House",
+   "address": "299 S Harrison St",
+   "city": "East Orange",
+   "state": "NJ",
+   "lat": 40.7598,
+   "lon": -74.22892,
+   "neighborhood_id": "nj:east-orange",
+   "experience_id": "space",
+   "rank_score": 58.4,
+   "why": "The walk to Orange Park takes about 2 minutes.",
+   "give_up": "No restaurants are within a 10-minute walk, and about 3 within 1 mile.",
+   "facts": {
+    "rent_from": 1895,
+    "rent_to": 1929,
+    "total_from": 2097,
+    "total_to": 2131,
+    "drive_min": 52,
+    "toll_round_trip": 43.05,
+    "parking": {
+     "summary": "An open lot, with the fee not published.",
+     "kind": "lot",
+     "fee": null,
+     "included": false
+    },
+    "dog": {
+     "summary": "Dogs are allowed.",
+     "weight_limit_lb": null,
+     "no_weight_limit": false,
+     "allowed": "yes"
+    }
+   },
+   "scores": {
+    "parents": 0.354,
+    "going_out": 0.143,
+    "green": 0.533,
+    "value": 0.835,
+    "parking": 0.148,
+    "home": 0.655
+   },
+   "confirm": [],
+   "tour_questions": [
+    "Floor not published: confirm it is above the ground floor",
+    "Special offer: ask what a normal month costs",
+    "Is the advertised rent the full monthly rent, or the average after free months? What is the first full payment and when is it due?",
+    "What required monthly fees are added to the rent (amenity, trash, technology)?",
+    "What does a parking spot cost per month, and is one guaranteed in the lease?",
+    "What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)"
+   ],
+   "disclosures": [
+    "floor not published",
+    "special offer"
+   ],
+   "photos_url": "https://shamcomanagement.com/uncategorized/a-look-at-the-harclay-house/",
+   "listing_url": "https://www.trulia.com/building/harclay-house-299-s-harrison-st-east-orange-nj-07018-1001476365",
+   "contact": {
+    "office_phone": "(718) 856-4900",
+    "site": "https://shamcomanagement.com/uncategorized/a-look-at-the-harclay-house/",
+    "hours": "Mon-Fri 9:00am-6:00pm",
+    "kind": "leasing office",
+    "private": false,
+    "note": null
+   },
+   "about": "The building has its own parking lot. The walk to Orange Park takes about 2 minutes.",
+   "points": [
+    {
+     "icon": "dog",
+     "text": "Dogs are allowed."
+    },
+    {
+     "icon": "coffee",
+     "text": "The building has a lounge or coworking room."
+    },
+    {
+     "icon": "train",
+     "text": "The Brick Church train station is 0.6 miles away."
+    },
+    {
+     "icon": "heart",
+     "text": "The building has a gym."
+    },
+    {
+     "icon": "warning",
+     "text": "The parking lot fee is not published, so ask what it costs each month."
+    }
+   ],
+   "day": [
+    {
+     "title": "Morning walk",
+     "text": "Orange Park is about 2 minutes on foot.",
+     "level": "strong"
+    },
+    {
+     "title": "Working from home",
+     "text": "A separate bedroom, about 912 square feet.",
+     "level": "strong"
+    },
+    {
+     "title": "After work",
+     "text": "0 restaurants and 0 bars within a 10-minute walk.",
+     "level": "weak"
+    },
+    {
+     "title": "Coming home at night",
+     "text": "An open lot, with the fee not published.",
+     "level": "mixed"
+    },
+    {
+     "title": "Saturday night",
+     "text": "3 restaurants and 1 bar within 1 mile.",
+     "level": "weak"
+    },
+    {
+     "title": "Sunday with Mom and Dad",
+     "text": "About 52 minutes by car, about $43 round trip in tolls.",
+     "level": "mixed"
+    }
+   ],
+   "apartments": [
+    {
+     "id": "trulia:b1001476365:Unit_3CW:2058333005",
+     "label": "Apartment 3CW",
+     "beds": 1,
+     "sqft": 912,
+     "floor_text": "Floor 3 (read from the apartment number)",
+     "rent": 1895,
+     "total": 2097,
+     "available_text": "Available now",
+     "offer": true,
+     "offer_text": "The listing advertises 1 month of free rent. It applies to selected apartments only. The page does not say the price shown already includes it, so the price is treated as the normal monthly rent.",
+     "star": false,
+     "confirm_label": null,
+     "confirm_question": null,
+     "listing_url": "https://www.trulia.com/building/harclay-house-299-s-harrison-st-east-orange-nj-07018-1001476365",
+     "source_site": "trulia",
+     "last_read": "2026-11-15"
+    },
+    {
+     "id": "trulia:b1001476365:Unit_5CE:466157390",
+     "label": "Apartment 5CE",
+     "beds": 1,
+     "sqft": 912,
+     "floor_text": "Floor 5 (read from the apartment number)",
+     "rent": 1929,
+     "total": 2131,
+     "available_text": "Available now",
+     "offer": true,
+     "offer_text": "The listing advertises 1 month of free rent. It applies to selected apartments only. The page does not say the price shown already includes it, so the price is treated as the normal monthly rent.",
+     "star": false,
+     "confirm_label": null,
+     "confirm_question": null,
+     "listing_url": "https://www.trulia.com/building/harclay-house-299-s-harrison-st-east-orange-nj-07018-1001476365",
+     "source_site": "trulia",
+     "last_read": "2026-11-15"
+    }
+   ],
+   "why_source": "building about",
+   "give_up_source": "neighborhood scene"
+  },
+  {
+   "id": "b_0c3a7051d4",
+   "name": "84-18 143rd St",
+   "address": "84-18 143rd St",
+   "city": "Jamaica",
+   "state": "NY",
+   "lat": 40.71029,
+   "lon": -73.81369,
+   "neighborhood_id": "ny:jamaica-hills-briarwood",
+   "experience_id": "settled",
+   "rank_score": 58.0,
+   "why": "Mom and Dad are very close, and prices are moderate.",
+   "give_up": "Street parking is hard, and the nearest dog run is 1.2 miles away.",
+   "facts": {
+    "rent_from": 1895,
+    "rent_to": 1895,
+    "total_from": 2139,
+    "total_to": 2139,
+    "drive_min": 3.5,
+    "toll_round_trip": 0,
+    "parking": {
+     "summary": null,
+     "kind": null,
+     "fee": null,
+     "included": false
+    },
+    "dog": {
+     "summary": "Small dogs are allowed, and the weight limit is not published.",
+     "weight_limit_lb": null,
+     "no_weight_limit": false,
+     "allowed": "yes"
+    }
+   },
+   "scores": {
+    "parents": 0.974,
+    "going_out": 0.774,
+    "green": 0.501,
+    "value": 0.828,
+    "parking": 0.304,
+    "home": 0.251
+   },
+   "confirm": [],
+   "tour_questions": [
+    "Floor not published: confirm it is above the ground floor",
+    "Confirm the dog weight limit in pounds (the page says small dogs and gives no number)",
+    "What required monthly fees are added to the rent (amenity, trash, technology)?",
+    "What does a parking spot cost per month, and is one guaranteed in the lease?",
+    "What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)"
+   ],
+   "disclosures": [
+    "floor not published"
+   ],
+   "photos_url": "https://www.trulia.com/home/84-18-143rd-st-3l-jamaica-ny-11435-466618948",
+   "listing_url": "https://www.trulia.com/home/84-18-143rd-st-3l-jamaica-ny-11435-466618948",
+   "contact": {
+    "office_phone": null,
+    "site": "https://www.trulia.com/home/84-18-143rd-st-3l-jamaica-ny-11435-466618948",
+    "hours": null,
+    "kind": "broker",
+    "private": true,
+    "note": "Listed by a broker or the owner: get in touch through the listing page."
+   },
+   "about": "The listing gives few details about the building itself. The walk to Briarwood Playground takes about 3 minutes.",
+   "points": [
+    {
+     "icon": "dog",
+     "text": "Small dogs are allowed, and the weight limit is not published."
+    },
+    {
+     "icon": "train",
+     "text": "The Sutphin Blvd subway station is 0.4 miles away."
+    },
+    {
+     "icon": "fork",
+     "text": "About 12 restaurants are within a 10-minute walk."
+    },
+    {
+     "icon": "warning",
+     "text": "The listing does not mention parking, so ask where you would park."
+    }
+   ],
+   "day": [
+    {
+     "title": "Morning walk",
+     "text": "Briarwood Playground is about 3 minutes on foot.",
+     "level": "strong"
+    },
+    {
+     "title": "Working from home",
+     "text": "A separate bedroom; the size is not published.",
+     "level": null
+    },
+    {
+     "title": "After work",
+     "text": "12 restaurants and 2 bars within a 10-minute walk.",
+     "level": "mixed"
+    },
+    {
+     "title": "Coming home at night",
+     "text": "The listing does not mention parking.",
+     "level": "mixed"
+    },
+    {
+     "title": "Saturday night",
+     "text": "67 restaurants and 11 bars within 1 mile.",
+     "level": "strong"
+    },
+    {
+     "title": "Sunday with Mom and Dad",
+     "text": "About 4 minutes by car, with no tolls.",
+     "level": "strong"
+    }
+   ],
+   "apartments": [
+    {
+     "id": "trulia:466618948",
+     "label": "Apartment 3L",
+     "beds": 1,
+     "sqft": null,
+     "floor_text": "Floor 3 (read from the apartment number)",
+     "rent": 1895,
+     "total": 2139,
+     "available_text": "Available now",
+     "offer": false,
+     "offer_text": null,
+     "star": false,
+     "confirm_label": null,
+     "confirm_question": null,
+     "listing_url": "https://www.trulia.com/home/84-18-143rd-st-3l-jamaica-ny-11435-466618948",
+     "source_site": "trulia",
+     "last_read": "2026-11-15"
+    }
+   ],
+   "why_source": "neighborhood good_for_her",
+   "give_up_source": "neighborhood watch_for"
+  },
+  {
+   "id": "b_917f6a1ed1",
+   "name": "City Trust Apartments",
+   "address": "955 Main St",
+   "city": "Bridgeport",
+   "state": "CT",
+   "lat": 41.17735,
+   "lon": -73.18974,
+   "neighborhood_id": "ct:bridgeport",
+   "experience_id": "space",
+   "rank_score": 57.5,
+   "why": "A park is about 3 minutes away on foot.",
+   "give_up": "Mom and Dad are about 82 minutes away, so visits take planning.",
+   "facts": {
+    "rent_from": 1400,
+    "rent_to": 1850,
+    "total_from": 1703,
+    "total_to": 2167,
+    "drive_min": 81.5,
+    "toll_round_trip": 16.66,
+    "parking": {
+     "summary": "Garage parking, $100 a month.",
+     "kind": "garage",
+     "fee": 100,
+     "included": false
+    },
+    "dog": {
+     "summary": "Small dogs are allowed, and the weight limit is not published.",
+     "weight_limit_lb": null,
+     "no_weight_limit": false,
+     "allowed": "yes"
+    }
+   },
+   "scores": {
+    "parents": 0.25,
+    "going_out": 0.339,
+    "green": 0.415,
+    "value": 0.942,
+    "parking": 0.521,
+    "home": 0.423
+   },
+   "confirm": [
+    {
+     "label": "whether this listing is current",
+     "question": "Is this apartment 302 at 955 Main Street (City Trust), and is it the one advertised at $1,650?"
+    }
+   ],
+   "tour_questions": [
+    "Floor not published: confirm it is above the ground floor",
+    "Special offer: ask what a normal month costs",
+    "Confirm the dog weight limit in pounds (the page says small dogs and gives no number)",
+    "Is the advertised rent the full monthly rent, or the average after free months? What is the first full payment and when is it due?",
+    "What required monthly fees are added to the rent (amenity, trash, technology)?",
+    "Who pays for heat and cooking gas?"
+   ],
+   "disclosures": [
+    "floor not published",
+    "special offer"
+   ],
+   "photos_url": "https://www.trulia.com/building/city-trust-apartments-955-main-st-bridgeport-ct-06604-1002416819",
+   "listing_url": "https://www.trulia.com/building/city-trust-apartments-955-main-st-bridgeport-ct-06604-1002416819",
+   "contact": {
+    "office_phone": "(475) 265-7089",
+    "site": "https://www.trulia.com/building/city-trust-apartments-955-main-st-bridgeport-ct-06604-1002416819",
+    "hours": "Mon-Thu 9:00am-7:00pm; Fri 9:00am-4:00pm",
+    "kind": "leasing office",
+    "private": false,
+    "note": null
+   },
+   "about": "Garage parking costs $100 a month. It is 0.2 miles to the Bridgeport train station.",
+   "points": [
+    {
+     "icon": "dog",
+     "text": "Small dogs are allowed, and the weight limit is not published."
+    },
+    {
+     "icon": "heart",
+     "text": "The building has a gym."
+    },
+    {
+     "icon": "coffee",
+     "text": "The building has a lounge or coworking room."
+    },
+    {
+     "icon": "fork",
+     "text": "4 restaurants are within a 10-minute walk."
+    },
+    {
+     "icon": "warning",
+     "text": "Building fees are not published, so ask what is added to the rent."
+    }
+   ],
+   "day": [
+    {
+     "title": "Morning walk",
+     "text": null,
+     "level": "strong"
+    },
+    {
+     "title": "Working from home",
+     "text": "A separate bedroom, about 751 square feet.",
+     "level": "strong"
+    },
+    {
+     "title": "After work",
+     "text": "4 restaurants and 0 bars within a 10-minute walk.",
+     "level": "mixed"
+    },
+    {
+     "title": "Coming home at night",
+     "text": "Garage parking, $100 a month.",
+     "level": "strong"
+    },
+    {
+     "title": "Saturday night",
+     "text": "23 restaurants and 1 bar within 1 mile.",
+     "level": "mixed"
+    },
+    {
+     "title": "Sunday with Mom and Dad",
+     "text": "About 82 minutes by car, about $17 round trip in tolls.",
+     "level": "weak"
+    }
+   ],
+   "apartments": [
+    {
+     "id": "rc:trulia:b1002416819:Unit_606:466360822",
+     "label": "Apartment 606",
+     "beds": 1,
+     "sqft": 751,
+     "floor_text": "Floor 6 (read from the apartment number)",
+     "rent": 1650,
+     "total": 1967,
+     "available_text": "Available now",
+     "offer": true,
+     "offer_text": "The listing advertises 1 month of free rent. The page does not say the price shown already includes it, so the price is treated as the normal monthly rent.",
+     "star": false,
+     "confirm_label": null,
+     "confirm_question": null,
+     "listing_url": "https://www.trulia.com/building/city-trust-apartments-955-main-st-bridgeport-ct-06604-1002416819",
+     "source_site": "trulia",
+     "last_read": "2026-11-15"
+    },
+    {
+     "id": "rc:trulia:b1002416819:Unit_Duplex701:466361894",
+     "label": "Apartment Duplex701",
+     "beds": 1,
+     "sqft": 712,
+     "floor_text": null,
+     "rent": 1850,
+     "total": 2167,
+     "available_text": "Available now",
+     "offer": true,
+     "offer_text": "The listing advertises 1 month of free rent. The page does not say the price shown already includes it, so the price is treated as the normal monthly rent.",
+     "star": false,
+     "confirm_label": null,
+     "confirm_question": null,
+     "listing_url": "https://www.trulia.com/building/city-trust-apartments-955-main-st-bridgeport-ct-06604-1002416819",
+     "source_site": "trulia",
+     "last_read": "2026-11-15"
+    },
+    {
+     "id": "rc:trulia:b1002416819:Unit_302:466360840",
+     "label": "Apartment 302",
+     "beds": 1,
+     "sqft": 745,
+     "floor_text": "Floor 3 (read from the apartment number)",
+     "rent": 1650,
+     "total": 1967,
+     "available_text": "Available now",
+     "offer": true,
+     "offer_text": "The listing advertises 1 month of free rent. The page does not say the price shown already includes it, so the price is treated as the normal monthly rent.",
+     "star": true,
+     "confirm_label": "To confirm: whether this listing is current",
+     "confirm_question": "Is this apartment 302 at 955 Main Street (City Trust), and is it the one advertised at $1,650?",
+     "listing_url": "https://www.trulia.com/building/city-trust-apartments-955-main-st-bridgeport-ct-06604-1002416819",
+     "source_site": "trulia",
+     "last_read": "2026-11-15"
+    },
+    {
+     "id": "rc:trulia:b1002416819:Unit_402:466360839",
+     "label": "Apartment 402",
+     "beds": 1,
+     "sqft": 614,
+     "floor_text": "Floor 4 (read from the apartment number)",
+     "rent": 1650,
+     "total": 1967,
+     "available_text": "Available now",
+     "offer": true,
+     "offer_text": "The listing advertises 1 month of free rent. The page does not say the price shown already includes it, so the price is treated as the normal monthly rent.",
+     "star": false,
+     "confirm_label": null,
+     "confirm_question": null,
+     "listing_url": "https://www.trulia.com/building/city-trust-apartments-955-main-st-bridgeport-ct-06604-1002416819",
+     "source_site": "trulia",
+     "last_read": "2026-11-15"
+    },
+    {
+     "id": "rc:trulia:b1002416819:Unit_702:466360798",
+     "label": "Apartment 702",
+     "beds": 1,
+     "sqft": 614,
+     "floor_text": "Floor 7 (read from the apartment number)",
+     "rent": 1650,
+     "total": 1967,
+     "available_text": "Available now",
+     "offer": true,
+     "offer_text": "The listing advertises 1 month of free rent. The page does not say the price shown already includes it, so the price is treated as the normal monthly rent.",
+     "star": false,
+     "confirm_label": null,
+     "confirm_question": null,
+     "listing_url": "https://www.trulia.com/building/city-trust-apartments-955-main-st-bridgeport-ct-06604-1002416819",
+     "source_site": "trulia",
+     "last_read": "2026-11-15"
+    },
+    {
+     "id": "rc:trulia:b1002416819:Unit_511:466361113",
+     "label": "Apartment 511",
+     "beds": 0,
+     "sqft": 491,
+     "floor_text": "Floor 5 (read from the apartment number)",
+     "rent": 1400,
+     "total": 1703,
+     "available_text": "Available now",
+     "offer": true,
+     "offer_text": "The listing advertises 1 month of free rent. The page does not say the price shown already includes it, so the price is treated as the normal monthly rent.",
+     "star": false,
+     "confirm_label": null,
+     "confirm_question": null,
+     "listing_url": "https://www.trulia.com/building/city-trust-apartments-955-main-st-bridgeport-ct-06604-1002416819",
+     "source_site": "trulia",
+     "last_read": "2026-11-15"
+    },
+    {
+     "id": "rc:trulia:b1002416819:Unit_611:466361127",
+     "label": "Apartment 611",
+     "beds": 0,
+     "sqft": 491,
+     "floor_text": "Floor 6 (read from the apartment number)",
+     "rent": 1400,
+     "total": 1703,
+     "available_text": "Available now",
+     "offer": true,
+     "offer_text": "The listing advertises 1 month of free rent. The page does not say the price shown already includes it, so the price is treated as the normal monthly rent.",
+     "star": false,
+     "confirm_label": null,
+     "confirm_question": null,
+     "listing_url": "https://www.trulia.com/building/city-trust-apartments-955-main-st-bridgeport-ct-06604-1002416819",
+     "source_site": "trulia",
+     "last_read": "2026-11-15"
+    },
+    {
+     "id": "rc:trulia:b1002416819:Unit_711:466361130",
+     "label": "Apartment 711",
+     "beds": 0,
+     "sqft": 491,
+     "floor_text": "Floor 7 (read from the apartment number)",
+     "rent": 1400,
+     "total": 1703,
+     "available_text": "Available now",
+     "offer": true,
+     "offer_text": "The listing advertises 1 month of free rent. The page does not say the price shown already includes it, so the price is treated as the normal monthly rent.",
+     "star": false,
+     "confirm_label": null,
+     "confirm_question": null,
+     "listing_url": "https://www.trulia.com/building/city-trust-apartments-955-main-st-bridgeport-ct-06604-1002416819",
+     "source_site": "trulia",
+     "last_read": "2026-11-15"
+    }
+   ],
+   "why_source": "neighborhood point",
+   "give_up_source": "neighborhood point"
+  },
+  {
+   "id": "b_1d1be12629",
+   "name": "3625 Parsons Blvd",
+   "address": "3625 Parsons Blvd",
+   "city": "Flushing",
+   "state": "NY",
+   "lat": 40.7639,
+   "lon": -73.82265,
+   "neighborhood_id": "ny:murray-hill-broadway-flushing",
+   "experience_id": "settled",
+   "rank_score": 56.2,
+   "why": "About 45 restaurants are within a 10-minute walk.",
+   "give_up": "Residents say parking is almost nonexistent.",
+   "facts": {
+    "rent_from": 1930,
+    "rent_to": 1930,
+    "total_from": 2135,
+    "total_to": 2135,
+    "drive_min": 11.9,
+    "toll_round_trip": 0,
+    "parking": {
+     "summary": null,
+     "kind": null,
+     "fee": null,
+     "included": false
+    },
+    "dog": {
+     "summary": "Small dogs are allowed, and the weight limit is not published.",
+     "weight_limit_lb": null,
+     "no_weight_limit": false,
+     "allowed": "yes"
+    }
+   },
+   "scores": {
+    "parents": 0.947,
+    "going_out": 0.886,
+    "green": 0.479,
+    "value": 0.875,
+    "parking": 0.298,
+    "home": 0.128
+   },
+   "confirm": [],
+   "tour_questions": [
+    "Floor not published: confirm it is above the ground floor",
+    "What is due at signing, in total?",
+    "Confirm the dog weight limit in pounds (the page says small dogs and gives no number)",
+    "What required monthly fees are added to the rent (amenity, trash, technology)?",
+    "What does a parking spot cost per month, and is one guaranteed in the lease?",
+    "What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)"
+   ],
+   "disclosures": [
+    "floor not published",
+    "one-time costs"
+   ],
+   "photos_url": "https://www.trulia.com/home/3625-parsons-blvd-5h-flushing-ny-11354-2100688723",
+   "listing_url": "https://www.trulia.com/home/3625-parsons-blvd-5h-flushing-ny-11354-2100688723",
+   "contact": {
+    "office_phone": null,
+    "site": "https://www.trulia.com/home/3625-parsons-blvd-5h-flushing-ny-11354-2100688723",
+    "hours": null,
+    "kind": "broker",
+    "private": true,
+    "note": "Listed by a broker or the owner: get in touch through the listing page."
+   },
+   "about": "The building was built in 1963. It is about 2 minutes on foot to Margaret I. Carman Green - Weeping Beech.",
+   "points": [
+    {
+     "icon": "dog",
+     "text": "Small dogs are allowed, and the weight limit is not published."
+    },
+    {
+     "icon": "fork",
+     "text": "About 45 restaurants are within a 10-minute walk."
+    },
+    {
+     "icon": "train",
+     "text": "The Murray Hill train station is 0.4 miles away."
+    },
+    {
+     "icon": "warning",
+     "text": "The listing does not mention parking, so ask where you would park."
+    }
+   ],
+   "day": [
+    {
+     "title": "Morning walk",
+     "text": "Margaret I. Carman Green - Weeping Beech is about 2 minutes on foot.",
+     "level": "strong"
+    },
+    {
+     "title": "Working from home",
+     "text": "A studio; the size is not published.",
+     "level": null
+    },
+    {
+     "title": "After work",
+     "text": "45 restaurants and 3 bars within a 10-minute walk.",
+     "level": "strong"
+    },
+    {
+     "title": "Coming home at night",
+     "text": "The listing does not mention parking.",
+     "level": "mixed"
+    },
+    {
+     "title": "Saturday night",
+     "text": "137 restaurants and 4 bars within 1 mile.",
+     "level": "mixed"
+    },
+    {
+     "title": "Sunday with Mom and Dad",
+     "text": "About 12 minutes by car, with no tolls.",
+     "level": "strong"
+    }
+   ],
+   "apartments": [
+    {
+     "id": "trulia:2100688723",
+     "label": "Apartment 5H",
+     "beds": 0,
+     "sqft": null,
+     "floor_text": "Floor 5 (read from the apartment number)",
+     "rent": 1930,
+     "total": 2135,
+     "available_text": "Available now",
+     "offer": false,
+     "offer_text": null,
+     "star": false,
+     "confirm_label": null,
+     "confirm_question": null,
+     "listing_url": "https://www.trulia.com/home/3625-parsons-blvd-5h-flushing-ny-11354-2100688723",
+     "source_site": "trulia",
+     "last_read": "2026-11-15"
+    }
+   ],
+   "why_source": "building point",
+   "give_up_source": "neighborhood about"
+  },
+  {
+   "id": "b_0f0fcfc79c",
+   "name": "13324 Sanford Ave",
+   "address": "13324 Sanford Ave",
+   "city": "Flushing",
+   "state": "NY",
+   "lat": 40.75581,
+   "lon": -73.8297,
+   "neighborhood_id": "ny:flushing-willets-point",
+   "experience_id": "settled",
+   "rank_score": 55.9,
+   "why": "There are about 89 restaurants within a 10-minute walk.",
+   "give_up": "The only parking named is on the street.",
+   "facts": {
+    "rent_from": 1850,
+    "rent_to": 1850,
+    "total_from": 2079,
+    "total_to": 2079,
+    "drive_min": 10.4,
+    "toll_round_trip": 0,
+    "parking": {
+     "summary": "Street parking only.",
+     "kind": "street",
+     "fee": null,
+     "included": false
+    },
+    "dog": {
+     "summary": "It is not confirmed that dogs are allowed, so get a yes in writing.",
+     "weight_limit_lb": null,
+     "no_weight_limit": false,
+     "allowed": "yes"
+    }
+   },
+   "scores": {
+    "parents": 0.94,
+    "going_out": 0.947,
+    "green": 0.482,
+    "value": 0.885,
+    "parking": 0.206,
+    "home": 0.197
+   },
+   "confirm": [
+    {
+     "label": "whether dogs are allowed",
+     "question": "Are dogs allowed, and up to what weight? Ask for the pet policy in writing."
+    }
+   ],
+   "tour_questions": [
+    "Floor not published: confirm it is above the ground floor",
+    "What required monthly fees are added to the rent (amenity, trash, technology)?",
+    "What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)"
+   ],
+   "disclosures": [
+    "floor not published"
+   ],
+   "photos_url": "https://www.zumper.com/listings/65719910/1-bedroom-flushing-new-york-ny",
+   "listing_url": "https://www.trulia.com/home/13324-sanford-ave-2d-flushing-ny-11355-2084734385",
+   "contact": {
+    "office_phone": null,
+    "site": "https://www.zumper.com/listings/65719910/1-bedroom-flushing-new-york-ny",
+    "hours": null,
+    "kind": "management company",
+    "private": false,
+    "note": null
+   },
+   "about": "This is the only building of the 2 listed in this neighborhood with laundry in the apartment. There are about 89 restaurants within a 10-minute walk.",
+   "points": [
+    {
+     "icon": "parking",
+     "text": "The only parking named is on the street."
+    },
+    {
+     "icon": "park",
+     "text": "Flushing Meadows-Corona Park is about 7 minutes away on foot."
+    },
+    {
+     "icon": "train",
+     "text": "The Flushing–Main Street train station is 0.2 miles away."
+    },
+    {
+     "icon": "home",
+     "text": "Built in 1963."
+    },
+    {
+     "icon": "warning",
+     "text": "It is not confirmed that dogs are allowed, so get a yes in writing."
+    }
+   ],
+   "day": [
+    {
+     "title": "Morning walk",
+     "text": "Flushing Meadows-Corona Park is about 7 minutes on foot.",
+     "level": "mixed"
+    },
+    {
+     "title": "Working from home",
+     "text": "A studio, about 600 square feet.",
+     "level": "mixed"
+    },
+    {
+     "title": "After work",
+     "text": "89 restaurants and 3 bars within a 10-minute walk.",
+     "level": "strong"
+    },
+    {
+     "title": "Coming home at night",
+     "text": "Street parking only.",
+     "level": "weak"
+    },
+    {
+     "title": "Saturday night",
+     "text": "133 restaurants and 11 bars within 1 mile.",
+     "level": "strong"
+    },
+    {
+     "title": "Sunday with Mom and Dad",
+     "text": "About 10 minutes by car, with no tolls.",
+     "level": "strong"
+    }
+   ],
+   "apartments": [
+    {
+     "id": "trulia:2084734385",
+     "label": "Apartment 2D",
+     "beds": 0,
+     "sqft": 600,
+     "floor_text": "Floor 2 (read from the apartment number)",
+     "rent": 1850,
+     "total": 2079,
+     "available_text": "Available now",
+     "offer": false,
+     "offer_text": null,
+     "star": true,
+     "confirm_label": "To confirm: whether dogs are allowed",
+     "confirm_question": "Are dogs allowed, and up to what weight? Ask for the pet policy in writing.",
+     "listing_url": "https://www.trulia.com/home/13324-sanford-ave-2d-flushing-ny-11355-2084734385",
+     "source_site": "trulia",
+     "last_read": "2026-11-15"
+    }
+   ],
+   "why_source": "building about",
+   "give_up_source": "building point"
+  },
+  {
+   "id": "b_e39cde86f4",
+   "name": "64 Park Avenue",
+   "address": "64 Park Ave",
+   "city": "Bloomfield",
+   "state": "NJ",
+   "lat": 40.7986,
+   "lon": -74.19999,
+   "neighborhood_id": "nj:bloomfield",
+   "experience_id": "middle",
+   "rank_score": 54.9,
+   "why": "It is about 3 minutes on foot to The Glen.",
+   "give_up": "Mom and Dad are about 51 minutes away, and each visit costs about $39 round trip with a New York E-ZPass.",
+   "facts": {
+    "rent_from": 1910,
+    "rent_to": 1910,
+    "total_from": 2112,
+    "total_to": 2112,
+    "drive_min": 50.7,
+    "toll_round_trip": 38.71,
+    "parking": {
+     "summary": null,
+     "kind": null,
+     "fee": null,
+     "included": false
+    },
+    "dog": {
+     "summary": "Dogs are allowed up to 75 pounds.",
+     "weight_limit_lb": 75,
+     "no_weight_limit": false,
+     "allowed": "yes"
+    }
+   },
+   "scores": {
+    "parents": 0.356,
+    "going_out": 0.686,
+    "green": 0.717,
+    "value": 0.88,
+    "parking": 0.3,
+    "home": 0.347
+   },
+   "confirm": [],
+   "tour_questions": [
+    "Floor not published: confirm it is above the ground floor",
+    "Special offer: ask what a normal month costs",
+    "Overnight street parking is restricted here: confirm the building has a space, and its cost",
+    "Is the advertised rent the full monthly rent, or the average after free months? What is the first full payment and when is it due?",
+    "What required monthly fees are added to the rent (amenity, trash, technology)?",
+    "What does a parking spot cost per month, and is one guaranteed in the lease?"
+   ],
+   "disclosures": [
+    "floor not published",
+    "special offer",
+    "overnight street parking"
+   ],
+   "photos_url": "https://www.goldberg-realty.com/nj/bloomfield/64-park-avenue/index.aspx",
+   "listing_url": "https://www.apartmentlist.com/nj/bloomfield/64-park-avenue--1",
+   "contact": {
+    "office_phone": "(855) 336-2796",
+    "site": "https://www.goldberg-realty.com/nj/bloomfield/64-park-avenue/index.aspx",
+    "hours": null,
+    "kind": "leasing office",
+    "private": false,
+    "note": null
+   },
+   "about": "The building has a lounge or coworking room, which is useful when you work from home. It is about 3 minutes on foot to The Glen.",
+   "points": [
+    {
+     "icon": "dog",
+     "text": "Dogs are allowed up to 75 pounds."
+    },
+    {
+     "icon": "fork",
+     "text": "About 18 restaurants are within a 10-minute walk."
+    },
+    {
+     "icon": "train",
+     "text": "The Glen Ridge train station is 0.3 miles away."
+    },
+    {
+     "icon": "home",
+     "text": "Built in 1927."
+    },
+    {
+     "icon": "warning",
+     "text": "The listing does not mention parking, so ask where you would park."
+    }
+   ],
+   "day": [
+    {
+     "title": "Morning walk",
+     "text": "The Glen is about 3 minutes on foot.",
+     "level": "strong"
+    },
+    {
+     "title": "Working from home",
+     "text": "A separate bedroom, about 564 square feet.",
+     "level": "mixed"
+    },
+    {
+     "title": "After work",
+     "text": "18 restaurants and 1 bar within a 10-minute walk.",
+     "level": "strong"
+    },
+    {
+     "title": "Coming home at night",
+     "text": "The listing does not mention parking.",
+     "level": "weak"
+    },
+    {
+     "title": "Saturday night",
+     "text": "36 restaurants and 3 bars within 1 mile.",
+     "level": "mixed"
+    },
+    {
+     "title": "Sunday with Mom and Dad",
+     "text": "About 51 minutes by car, about $39 round trip in tolls.",
+     "level": "mixed"
+    }
+   ],
+   "apartments": [
+    {
+     "id": "apartmentlist:p1263838-1BJR156-D10",
+     "label": "Apartment D10",
+     "beds": 1,
+     "sqft": 564,
+     "floor_text": null,
+     "rent": 1910,
+     "total": 2112,
+     "available_text": "Available now",
+     "offer": true,
+     "offer_text": "The listing advertises up to 1 month of free rent. The page does not say the price shown already includes it, so the price is treated as the normal monthly rent.",
+     "star": false,
+     "confirm_label": null,
+     "confirm_question": null,
+     "listing_url": "https://www.apartmentlist.com/nj/bloomfield/64-park-avenue--1",
+     "source_site": "apartmentlist.com",
+     "last_read": "2026-11-15"
+    }
+   ],
+   "why_source": "building about",
+   "give_up_source": "neighborhood watch_for"
+  },
+  {
+   "id": "b_8cb8bf6346",
+   "name": "Beacon Mill Village",
+   "address": "2 N Main St",
+   "city": "Beacon Falls",
+   "state": "CT",
+   "lat": 41.44305,
+   "lon": -73.06152,
+   "neighborhood_id": "ct:beacon-falls",
+   "experience_id": "space",
+   "rank_score": 54.1,
+   "why": "A pool is on the property.",
+   "give_up": "Mom and Dad are about 109 minutes away, and groceries are a drive.",
+   "facts": {
+    "rent_from": 1805,
+    "rent_to": 1805,
+    "total_from": 2044,
+    "total_to": 2044,
+    "drive_min": 108.8,
+    "toll_round_trip": 16.66,
+    "parking": {
+     "summary": "A free open lot; other open-lot spaces are $50 a month.",
+     "kind": "lot",
+     "fee": 0,
+     "included": true
+    },
+    "dog": {
+     "summary": "Dogs are allowed.",
+     "weight_limit_lb": null,
+     "no_weight_limit": false,
+     "allowed": "yes"
+    }
+   },
+   "scores": {
+    "parents": 0.146,
+    "going_out": 0.267,
+    "green": 0.371,
+    "value": 0.931,
+    "parking": 0.23,
+    "home": 0.531
+   },
+   "confirm": [
+    {
+     "label": "the elevator",
+     "question": "Is there an elevator in this apartment's building, and does it reach this floor?"
+    }
+   ],
+   "tour_questions": [
+    "Floor not published: confirm it is above the ground floor",
+    "What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)"
+   ],
+   "disclosures": [
+    "floor not published"
+   ],
+   "photos_url": "https://www.trulia.com/building/beacon-mill-village-2-n-main-st-beacon-falls-ct-06403-2750917674",
+   "listing_url": "https://www.trulia.com/building/beacon-mill-village-2-n-main-st-beacon-falls-ct-06403-2750917674",
+   "contact": {
+    "office_phone": "(203) 408-1510",
+    "site": "https://www.trulia.com/building/beacon-mill-village-2-n-main-st-beacon-falls-ct-06403-2750917674",
+    "hours": "Mon-Fri 9:00am-5:30pm",
+    "kind": "leasing office",
+    "private": false,
+    "note": null
+   },
+   "about": "The rent includes a space in the open lot; other spaces are $50 a month. It is 0.2 miles to the Beacon Falls train station.",
+   "points": [
+    {
+     "icon": "dog",
+     "text": "The building has its own dog park."
+    },
+    {
+     "icon": "dog",
+     "text": "Dogs are allowed."
+    },
+    {
+     "icon": "heart",
+     "text": "The building has a gym."
+    },
+    {
+     "icon": "coffee",
+     "text": "The building has a lounge or coworking room."
+    },
+    {
+     "icon": "warning",
+     "text": "An elevator is not confirmed for every apartment here, so ask before you tour."
+    }
+   ],
+   "day": [
+    {
+     "title": "Morning walk",
+     "text": "Naugatuck State Forest is about 11 minutes on foot.",
+     "level": "weak"
+    },
+    {
+     "title": "Working from home",
+     "text": "A separate bedroom, about 740 square feet.",
+     "level": "strong"
+    },
+    {
+     "title": "After work",
+     "text": "2 restaurants and 1 bar within a 10-minute walk.",
+     "level": "weak"
+    },
+    {
+     "title": "Coming home at night",
+     "text": "A free open lot; other open-lot spaces are $50 a month.",
+     "level": "mixed"
+    },
+    {
+     "title": "Saturday night",
+     "text": "2 restaurants and 1 bar within 1 mile.",
+     "level": "weak"
+    },
+    {
+     "title": "Sunday with Mom and Dad",
+     "text": "About 109 minutes by car, about $17 round trip in tolls.",
+     "level": "weak"
+    }
+   ],
+   "apartments": [
+    {
+     "id": "rc:trulia:b2750917674:Unit_PA-405:457833233",
+     "label": "Apartment PA-405",
+     "beds": 1,
+     "sqft": 740,
+     "floor_text": null,
+     "rent": 1805,
+     "total": 2044,
+     "available_text": "Available now",
+     "offer": true,
+     "offer_text": null,
+     "star": true,
+     "confirm_label": "To confirm: the elevator",
+     "confirm_question": "Is there an elevator in this apartment's building, and does it reach this floor?",
+     "listing_url": "https://www.trulia.com/building/beacon-mill-village-2-n-main-st-beacon-falls-ct-06403-2750917674",
+     "source_site": "trulia",
+     "last_read": "2026-11-15"
+    },
+    {
+     "id": "rc:trulia:b2750917674:Unit_PA-202:455134598",
+     "label": "Apartment PA-202",
+     "beds": 1,
+     "sqft": 725,
+     "floor_text": null,
+     "rent": 1805,
+     "total": 2044,
+     "available_text": "Available now",
+     "offer": true,
+     "offer_text": null,
+     "star": true,
+     "confirm_label": "To confirm: the elevator",
+     "confirm_question": "Is there an elevator in this apartment's building, and does it reach this floor?",
+     "listing_url": "https://www.trulia.com/building/beacon-mill-village-2-n-main-st-beacon-falls-ct-06403-2750917674",
+     "source_site": "trulia",
+     "last_read": "2026-11-15"
+    },
+    {
+     "id": "rc:trulia:b2750917674:Unit_PA-402:458856974",
+     "label": "Apartment PA-402",
+     "beds": 1,
+     "sqft": 725,
+     "floor_text": null,
+     "rent": 1805,
+     "total": 2044,
+     "available_text": "Available now",
+     "offer": true,
+     "offer_text": null,
+     "star": true,
+     "confirm_label": "To confirm: the elevator",
+     "confirm_question": "Is there an elevator in this apartment's building, and does it reach this floor?",
+     "listing_url": "https://www.trulia.com/building/beacon-mill-village-2-n-main-st-beacon-falls-ct-06403-2750917674",
+     "source_site": "trulia",
+     "last_read": "2026-11-15"
+    },
+    {
+     "id": "rc:trulia:b2750917674:Unit_BM-322:462172447",
+     "label": "Apartment BM-322",
+     "beds": 1,
+     "sqft": 650,
+     "floor_text": null,
+     "rent": 1805,
+     "total": 2044,
+     "available_text": "Available now",
+     "offer": true,
+     "offer_text": null,
+     "star": true,
+     "confirm_label": "To confirm: the elevator",
+     "confirm_question": "Is there an elevator in this apartment's building, and does it reach this floor?",
+     "listing_url": "https://www.trulia.com/building/beacon-mill-village-2-n-main-st-beacon-falls-ct-06403-2750917674",
+     "source_site": "trulia",
+     "last_read": "2026-11-15"
+    },
+    {
+     "id": "rc:trulia:b2750917674:Unit_PU-242:459453525",
+     "label": "Apartment PU-242",
+     "beds": 1,
+     "sqft": 600,
+     "floor_text": null,
+     "rent": 1805,
+     "total": 2044,
+     "available_text": "Available now",
+     "offer": true,
+     "offer_text": null,
+     "star": true,
+     "confirm_label": "To confirm: the elevator",
+     "confirm_question": "Is there an elevator in this apartment's building, and does it reach this floor?",
+     "listing_url": "https://www.trulia.com/building/beacon-mill-village-2-n-main-st-beacon-falls-ct-06403-2750917674",
+     "source_site": "trulia",
+     "last_read": "2026-11-15"
+    }
+   ],
+   "why_source": "apartment headline (building)",
+   "give_up_source": "neighborhood watch_for"
+  },
+  {
+   "id": "b_674db3118a",
+   "name": "1483 Shore Pkwy",
+   "address": "1483 Shore Pkwy",
+   "city": "Brooklyn",
+   "state": "NY",
+   "lat": 40.59758,
+   "lon": -74.00333,
+   "neighborhood_id": "ny:bath-beach",
+   "experience_id": "settled",
+   "rank_score": 53.0,
+   "why": "The building has its own garage.",
+   "give_up": "This is a studio, so you would work and sleep in the same room.",
+   "facts": {
+    "rent_from": 1825,
+    "rent_to": 1825,
+    "total_from": 2254,
+    "total_to": 2254,
+    "drive_min": 28.7,
+    "toll_round_trip": 0,
+    "parking": {
+     "summary": "Garage parking, $200 a month.",
+     "kind": "garage",
+     "fee": 200,
+     "included": false
+    },
+    "dog": {
+     "summary": "Small dogs are allowed, and the weight limit is not published.",
+     "weight_limit_lb": null,
+     "no_weight_limit": false,
+     "allowed": "yes"
+    }
+   },
+   "scores": {
+    "parents": 0.818,
+    "going_out": 0.44,
+    "green": 0.594,
+    "value": 0.846,
+    "parking": 0.619,
+    "home": 0.111
+   },
+   "confirm": [
+    {
+     "label": "whether this apartment is still available",
+     "question": "Which apartment is available at this price, on which floor, and from when?"
+    }
+   ],
+   "tour_questions": [
+    "Floor not published: confirm it is above the ground floor",
+    "Confirm the dog weight limit in pounds (the page says small dogs and gives no number)",
+    "What required monthly fees are added to the rent (amenity, trash, technology)?",
+    "What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)"
+   ],
+   "disclosures": [
+    "floor not published"
+   ],
+   "photos_url": "https://www.trulia.com/home/1483-shore-pkwy-f-brooklyn-ny-11214-466485024",
+   "listing_url": "https://www.trulia.com/home/1483-shore-pkwy-f-brooklyn-ny-11214-466485024",
+   "contact": {
+    "office_phone": null,
+    "site": "https://www.trulia.com/home/1483-shore-pkwy-f-brooklyn-ny-11214-466485024",
+    "hours": null,
+    "kind": "management company",
+    "private": false,
+    "note": null
+   },
+   "about": "Garage parking costs $200 a month. The nearest supermarket, Key Food, is 0.5 miles away.",
+   "points": [
+    {
+     "icon": "dog",
+     "text": "Small dogs are allowed, and the weight limit is not published."
+    },
+    {
+     "icon": "train",
+     "text": "The 20 Av subway station is 0.6 miles away."
+    },
+    {
+     "icon": "home",
+     "text": "Built in 1949."
+    },
+    {
+     "icon": "fork",
+     "text": "8 restaurants are within a 10-minute walk."
+    },
+    {
+     "icon": "warning",
+     "text": "Pet rent is not published, so ask what a dog adds each month."
+    }
+   ],
+   "day": [
+    {
+     "title": "Morning walk",
+     "text": null,
+     "level": "strong"
+    },
+    {
+     "title": "Working from home",
+     "text": "A studio; the size is not published.",
+     "level": null
+    },
+    {
+     "title": "After work",
+     "text": "8 restaurants and 0 bars within a 10-minute walk.",
+     "level": "mixed"
+    },
+    {
+     "title": "Coming home at night",
+     "text": "Garage parking, $200 a month.",
+     "level": "mixed"
+    },
+    {
+     "title": "Saturday night",
+     "text": "55 restaurants and 0 bars within 1 mile.",
+     "level": "mixed"
+    },
+    {
+     "title": "Sunday with Mom and Dad",
+     "text": "About 29 minutes by car, with no tolls.",
+     "level": "strong"
+    }
+   ],
+   "apartments": [
+    {
+     "id": "trulia:466485024",
+     "label": "Apartment F",
+     "beds": 0,
+     "sqft": null,
+     "floor_text": null,
+     "rent": 1825,
+     "total": 2254,
+     "available_text": "Available now",
+     "offer": false,
+     "offer_text": null,
+     "star": true,
+     "confirm_label": "To confirm: whether this apartment is still available",
+     "confirm_question": "Which apartment is available at this price, on which floor, and from when?",
+     "listing_url": "https://www.trulia.com/home/1483-shore-pkwy-f-brooklyn-ny-11214-466485024",
+     "source_site": "trulia",
+     "last_read": "2026-11-15"
+    }
+   ],
+   "why_source": "neighborhood point",
+   "give_up_source": "apartment line"
+  },
+  {
+   "id": "b_893edb6df8",
+   "name": "Summer Street",
+   "address": "800 Summer St",
+   "city": "Stamford",
+   "state": "CT",
+   "lat": 41.05891,
+   "lon": -73.54047,
+   "neighborhood_id": "ct:stamford",
+   "experience_id": "middle",
+   "rank_score": 52.0,
+   "why": "This leaves room in your budget each month.",
+   "give_up": "This is a studio, with the bed, the desk and the sofa in the same room.",
+   "facts": {
+    "rent_from": 1615,
+    "rent_to": 1615,
+    "total_from": 1806,
+    "total_to": 1806,
+    "drive_min": 52.8,
+    "toll_round_trip": 16.66,
+    "parking": {
+     "summary": "Free off-street parking.",
+     "kind": "off_street",
+     "fee": 0,
+     "included": true
+    },
+    "dog": {
+     "summary": "Dogs are allowed up to 50 pounds.",
+     "weight_limit_lb": 50,
+     "no_weight_limit": false,
+     "allowed": "yes"
+    }
+   },
+   "scores": {
+    "parents": 0.394,
+    "going_out": 0.829,
+    "green": 0.626,
+    "value": 0.982,
+    "parking": 0.341,
+    "home": 0.184
+   },
+   "confirm": [],
+   "tour_questions": [
+    "Floor not published: confirm it is above the ground floor",
+    "What is due at signing, in total?"
+   ],
+   "disclosures": [
+    "floor not published",
+    "one-time costs"
+   ],
+   "photos_url": "https://gardenhomesmanagement.com/apartments/",
+   "listing_url": "https://www.trulia.com/building/summer-street-800-summer-st-stamford-ct-06901-1001672063",
+   "contact": {
+    "office_phone": "(203) 653-2474",
+    "site": "https://gardenhomesmanagement.com/apartments/",
+    "hours": null,
+    "kind": "management company",
+    "private": false,
+    "note": null
+   },
+   "about": "Free off-street parking comes with the apartment. There are about 27 restaurants within a 10-minute walk.",
+   "points": [
+    {
+     "icon": "dog",
+     "text": "The building has its own dog park."
+    },
+    {
+     "icon": "dog",
+     "text": "Dogs are allowed up to 50 pounds."
+    },
+    {
+     "icon": "park",
+     "text": "Mill River Park is about 7 minutes away on foot."
+    },
+    {
+     "icon": "heart",
+     "text": "The building has a gym."
+    },
+    {
+     "icon": "warning",
+     "text": "On the tour, look at the hallways, the elevator and the mail room."
+    }
+   ],
+   "day": [
+    {
+     "title": "Morning walk",
+     "text": "Mill River Park is about 7 minutes on foot.",
+     "level": "mixed"
+    },
+    {
+     "title": "Working from home",
+     "text": "A studio, about 350 square feet.",
+     "level": "weak"
+    },
+    {
+     "title": "After work",
+     "text": "27 restaurants and 6 bars within a 10-minute walk.",
+     "level": "strong"
+    },
+    {
+     "title": "Coming home at night",
+     "text": "Free off-street parking.",
+     "level": "mixed"
+    },
+    {
+     "title": "Saturday night",
+     "text": "36 restaurants and 7 bars within 1 mile.",
+     "level": "strong"
+    },
+    {
+     "title": "Sunday with Mom and Dad",
+     "text": "About 53 minutes by car, about $17 round trip in tolls.",
+     "level": "mixed"
+    }
+   ],
+   "apartments": [
+    {
+     "id": "rc:trulia:b1001672063:Unit_320:2061605020",
+     "label": "Apartment 320",
+     "beds": 0,
+     "sqft": 350,
+     "floor_text": "Floor 3 (read from the apartment number)",
+     "rent": 1615,
+     "total": 1806,
+     "available_text": "Available now",
+     "offer": false,
+     "offer_text": null,
+     "star": false,
+     "confirm_label": null,
+     "confirm_question": null,
+     "listing_url": "https://www.trulia.com/building/summer-street-800-summer-st-stamford-ct-06901-1001672063",
+     "source_site": "trulia",
+     "last_read": "2026-11-16"
+    },
+    {
+     "id": "rc:trulia:b1001672063:Unit_417:466511090",
+     "label": "Apartment 417",
+     "beds": 0,
+     "sqft": 350,
+     "floor_text": "Floor 4 (read from the apartment number)",
+     "rent": 1615,
+     "total": 1806,
+     "available_text": "Available now",
+     "offer": false,
+     "offer_text": null,
+     "star": false,
+     "confirm_label": null,
+     "confirm_question": null,
+     "listing_url": "https://www.trulia.com/building/summer-street-800-summer-st-stamford-ct-06901-1001672063",
+     "source_site": "trulia",
+     "last_read": "2026-11-16"
+    }
+   ],
+   "why_source": "apartment headline (cost)",
+   "give_up_source": "apartment line"
+  },
+  {
+   "id": "b_f95c86db48",
+   "name": "The Stanley",
+   "address": "1315 Washington Blvd",
+   "city": "Stamford",
+   "state": "CT",
+   "lat": 41.05753,
+   "lon": -73.54286,
+   "neighborhood_id": "ct:stamford",
+   "experience_id": "middle",
+   "rank_score": 52.0,
+   "why": "Of the 3 buildings listed in this neighborhood, this is the closest to a park, about 4 minutes to Mill River Park.",
+   "give_up": "This is a studio, with the bed, the desk and the sofa in the same room.",
+   "facts": {
+    "rent_from": 1935,
+    "rent_to": 1935,
+    "total_from": 2126,
+    "total_to": 2126,
+    "drive_min": 53.4,
+    "toll_round_trip": 16.66,
+    "parking": {
+     "summary": "An open lot, with the fee not published.",
+     "kind": "lot",
+     "fee": null,
+     "included": false
+    },
+    "dog": {
+     "summary": "Dogs are allowed up to 50 pounds.",
+     "weight_limit_lb": 50,
+     "no_weight_limit": false,
+     "allowed": "yes"
+    }
+   },
+   "scores": {
+    "parents": 0.391,
+    "going_out": 0.843,
+    "green": 0.629,
+    "value": 0.92,
+    "parking": 0.273,
+    "home": 0.258
+   },
+   "confirm": [
+    {
+     "label": "the elevator",
+     "question": "Does the building have an elevator?"
+    }
+   ],
+   "tour_questions": [
+    "Floor not published: confirm it is above the ground floor",
+    "What is due at signing, in total?",
+    "What does a parking spot cost per month, and is one guaranteed in the lease?"
+   ],
+   "disclosures": [
+    "floor not published",
+    "one-time costs"
+   ],
+   "photos_url": "https://gardenhomesmanagement.com/apartments/",
+   "listing_url": "https://www.trulia.com/building/the-stanley-1315-washington-blvd-stamford-ct-06902-2737477812",
+   "contact": {
+    "office_phone": "(203) 653-2474",
+    "site": "https://gardenhomesmanagement.com/apartments/",
+    "hours": null,
+    "kind": "management company",
+    "private": false,
+    "note": null
+   },
+   "about": "You would park in the building's lot, and the fee is not published. Of the 3 buildings listed in this neighborhood, this is the closest to a park, about 4 minutes to Mill River Park.",
+   "points": [
+    {
+     "icon": "dog",
+     "text": "Dogs are allowed up to 50 pounds."
+    },
+    {
+     "icon": "fork",
+     "text": "About 27 restaurants are within a 10-minute walk."
+    },
+    {
+     "icon": "train",
+     "text": "The Stamford train station is 0.7 miles away."
+    },
+    {
+     "icon": "heart",
+     "text": "The building has a gym."
+    },
+    {
+     "icon": "warning",
+     "text": "An elevator is not confirmed for every apartment here, so ask before you tour."
+    }
+   ],
+   "day": [
+    {
+     "title": "Morning walk",
+     "text": "Mill River Park is about 4 minutes on foot.",
+     "level": "mixed"
+    },
+    {
+     "title": "Working from home",
+     "text": "A studio, about 455 square feet.",
+     "level": "weak"
+    },
+    {
+     "title": "After work",
+     "text": "27 restaurants and 7 bars within a 10-minute walk.",
+     "level": "strong"
+    },
+    {
+     "title": "Coming home at night",
+     "text": "An open lot, with the fee not published.",
+     "level": "mixed"
+    },
+    {
+     "title": "Saturday night",
+     "text": "38 restaurants and 7 bars within 1 mile.",
+     "level": "strong"
+    },
+    {
+     "title": "Sunday with Mom and Dad",
+     "text": "About 53 minutes by car, about $17 round trip in tolls.",
+     "level": "mixed"
+    }
+   ],
+   "apartments": [
+    {
+     "id": "rc:trulia:b2737477812:Unit_504:2061978889",
+     "label": "Apartment 504",
+     "beds": 0,
+     "sqft": 455,
+     "floor_text": "Floor 5 (read from the apartment number)",
+     "rent": 1935,
+     "total": 2126,
+     "available_text": "Available now",
+     "offer": false,
+     "offer_text": null,
+     "star": true,
+     "confirm_label": "To confirm: the elevator",
+     "confirm_question": "Does the building have an elevator?",
+     "listing_url": "https://www.trulia.com/building/the-stanley-1315-washington-blvd-stamford-ct-06902-2737477812",
+     "source_site": "trulia",
+     "last_read": "2026-11-16"
+    }
+   ],
+   "why_source": "building about",
+   "give_up_source": "apartment line"
+  },
+  {
+   "id": "b_0ba5cc966d",
+   "name": "Whitney Towers",
+   "address": "2405 Whitney Ave",
+   "city": "Hamden",
+   "state": "CT",
+   "lat": 41.38486,
+   "lon": -72.90067,
+   "neighborhood_id": "ct:hamden",
+   "experience_id": "space",
+   "rank_score": 50.7,
+   "why": "The price leaves room in your budget.",
+   "give_up": "The drive to Mom and Dad is very long, and most errands need the car.",
+   "facts": {
+    "rent_from": 1865,
+    "rent_to": 1945,
+    "total_from": 2082,
+    "total_to": 2162,
+    "drive_min": 111.8,
+    "toll_round_trip": 16.66,
+    "parking": {
+     "summary": "Covered parking, with the fee not published.",
+     "kind": "covered",
+     "fee": null,
+     "included": false
+    },
+    "dog": {
+     "summary": "Dogs are allowed.",
+     "weight_limit_lb": null,
+     "no_weight_limit": false,
+     "allowed": "yes"
+    }
+   },
+   "scores": {
+    "parents": 0.117,
+    "going_out": 0.411,
+    "green": 0.344,
+    "value": 0.919,
+    "parking": 0.261,
+    "home": 0.498
+   },
+   "confirm": [],
+   "tour_questions": [
+    "Floor not published: confirm it is above the ground floor",
+    "What does a parking spot cost per month, and is one guaranteed in the lease?",
+    "Who pays for heat and cooking gas?"
+   ],
+   "disclosures": [
+    "floor not published"
+   ],
+   "photos_url": "https://www.liveatfranklin.com/our-communities/whitney-towers/",
+   "listing_url": "https://www.trulia.com/building/whitney-towers-2405-whitney-ave-hamden-ct-06518-1004491524",
+   "contact": {
+    "office_phone": "(203) 288-5327",
+    "site": "https://www.liveatfranklin.com/our-communities/whitney-towers/",
+    "hours": "Mon-Sat 9:00am-5:00pm",
+    "kind": "leasing office",
+    "private": false,
+    "note": null
+   },
+   "about": "The building has covered parking. It is about 9 minutes on foot to Town Center Park.",
+   "points": [
+    {
+     "icon": "dog",
+     "text": "Dogs are allowed."
+    },
+    {
+     "icon": "fork",
+     "text": "About 11 restaurants are within a 10-minute walk."
+    },
+    {
+     "icon": "warning",
+     "text": "The covered parking fee is not published, so ask what it costs each month."
+    }
+   ],
+   "day": [
+    {
+     "title": "Morning walk",
+     "text": "Town Center Park is about 9 minutes on foot.",
+     "level": "mixed"
+    },
+    {
+     "title": "Working from home",
+     "text": "A separate bedroom, about 860 square feet.",
+     "level": "strong"
+    },
+    {
+     "title": "After work",
+     "text": "11 restaurants and 0 bars within a 10-minute walk.",
+     "level": "mixed"
+    },
+    {
+     "title": "Coming home at night",
+     "text": "Covered parking, with the fee not published.",
+     "level": "mixed"
+    },
+    {
+     "title": "Saturday night",
+     "text": "17 restaurants and 0 bars within 1 mile.",
+     "level": "mixed"
+    },
+    {
+     "title": "Sunday with Mom and Dad",
+     "text": "About 112 minutes by car, about $17 round trip in tolls.",
+     "level": "weak"
+    }
+   ],
+   "apartments": [
+    {
+     "id": "rc:trulia:b1004491524:Unit_306:348550124",
+     "label": "Apartment 306",
+     "beds": 1,
+     "sqft": 860,
+     "floor_text": "Floor 3 (read from the apartment number)",
+     "rent": 1945,
+     "total": 2162,
+     "available_text": "Available December 15",
+     "offer": false,
+     "offer_text": null,
+     "star": false,
+     "confirm_label": null,
+     "confirm_question": null,
+     "listing_url": "https://www.trulia.com/building/whitney-towers-2405-whitney-ave-hamden-ct-06518-1004491524",
+     "source_site": "trulia",
+     "last_read": "2026-11-15"
+    },
+    {
+     "id": "rc:trulia:b1004491524:Unit_409:2088707444",
+     "label": "Apartment 409",
+     "beds": 1,
+     "sqft": 730,
+     "floor_text": "Floor 4 (read from the apartment number)",
+     "rent": 1865,
+     "total": 2082,
+     "available_text": "Available December 1",
+     "offer": false,
+     "offer_text": null,
+     "star": false,
+     "confirm_label": null,
+     "confirm_question": null,
+     "listing_url": "https://www.trulia.com/building/whitney-towers-2405-whitney-ave-hamden-ct-06518-1004491524",
+     "source_site": "trulia",
+     "last_read": "2026-11-15"
+    },
+    {
+     "id": "rc:trulia:b1004491524:Unit_607:465559876",
+     "label": "Apartment 607",
+     "beds": 1,
+     "sqft": 730,
+     "floor_text": "Floor 6 (read from the apartment number)",
+     "rent": 1875,
+     "total": 2092,
+     "available_text": "Available December 15",
+     "offer": false,
+     "offer_text": null,
+     "star": false,
+     "confirm_label": null,
+     "confirm_question": null,
+     "listing_url": "https://www.trulia.com/building/whitney-towers-2405-whitney-ave-hamden-ct-06518-1004491524",
+     "source_site": "trulia",
+     "last_read": "2026-11-15"
+    }
+   ],
+   "why_source": "neighborhood good_for_her",
+   "give_up_source": "neighborhood watch_for"
+  },
+  {
+   "id": "b_377a717d0d",
+   "name": "111 Prospect St",
+   "address": "111 Prospect St",
+   "city": "Stamford",
+   "state": "CT",
+   "lat": 41.0592,
+   "lon": -73.53489,
+   "neighborhood_id": "ct:stamford",
+   "experience_id": "middle",
+   "rank_score": 49.7,
+   "why": "The only garage among the 3 buildings listed in this neighborhood is here.",
+   "give_up": "This is a studio, so plan where the desk would go.",
+   "facts": {
+    "rent_from": 1675,
+    "rent_to": 1715,
+    "total_from": 1866,
+    "total_to": 1866,
+    "drive_min": 53.6,
+    "toll_round_trip": 16.66,
+    "parking": {
+     "summary": "Garage parking, with the fee not published.",
+     "kind": "garage",
+     "fee": null,
+     "included": false
+    },
+    "dog": {
+     "summary": "Dogs are allowed up to 50 pounds.",
+     "weight_limit_lb": 50,
+     "no_weight_limit": false,
+     "allowed": "yes"
+    }
+   },
+   "scores": {
+    "parents": 0.373,
+    "going_out": 0.806,
+    "green": 0.43,
+    "value": 0.949,
+    "parking": 0.548,
+    "home": 0.195
+   },
+   "confirm": [
+    {
+     "label": "who can rent this apartment",
+     "question": "Is this apartment open to any renter, or is there an income limit?"
+    }
+   ],
+   "tour_questions": [
+    "Floor not published: confirm it is above the ground floor",
+    "What is due at signing, in total?",
+    "What does a parking spot cost per month, and is one guaranteed in the lease?"
+   ],
+   "disclosures": [
+    "floor not published",
+    "one-time costs"
+   ],
+   "photos_url": "https://gardenhomesmanagement.com/apartments/",
+   "listing_url": "https://www.trulia.com/building/111-prospect-st-111-prospect-st-stamford-ct-06901-1004237339",
+   "contact": {
+    "office_phone": "(203) 653-2474",
+    "site": "https://gardenhomesmanagement.com/apartments/",
+    "hours": null,
+    "kind": "management company",
+    "private": false,
+    "note": null
+   },
+   "about": "The only garage among the 3 buildings listed in this neighborhood is here. You could walk to dinner, with about 24 restaurants within a 10-minute walk.",
+   "points": [
+    {
+     "icon": "dog",
+     "text": "Dogs are allowed up to 50 pounds."
+    },
+    {
+     "icon": "heart",
+     "text": "The building has a gym."
+    },
+    {
+     "icon": "park",
+     "text": "Veterans Memorial Park is about 11 minutes away on foot."
+    },
+    {
+     "icon": "warning",
+     "text": "The garage fee is not published, so ask what it costs each month."
+    }
+   ],
+   "day": [
+    {
+     "title": "Morning walk",
+     "text": "Veterans Memorial Park is about 11 minutes on foot.",
+     "level": "weak"
+    },
+    {
+     "title": "Working from home",
+     "text": "A studio, about 489 square feet.",
+     "level": "weak"
+    },
+    {
+     "title": "After work",
+     "text": "24 restaurants and 4 bars within a 10-minute walk.",
+     "level": "strong"
+    },
+    {
+     "title": "Coming home at night",
+     "text": "Garage parking, with the fee not published.",
+     "level": "strong"
+    },
+    {
+     "title": "Saturday night",
+     "text": "37 restaurants and 7 bars within 1 mile.",
+     "level": "strong"
+    },
+    {
+     "title": "Sunday with Mom and Dad",
+     "text": "About 54 minutes by car, about $17 round trip in tolls.",
+     "level": "mixed"
+    }
+   ],
+   "apartments": [
+    {
+     "id": "rc:trulia:b1004237339:Unit_206:466511034",
+     "label": "Apartment 206",
+     "beds": 0,
+     "sqft": 489,
+     "floor_text": "Floor 2 (read from the apartment number)",
+     "rent": 1675,
+     "total": 1866,
+     "available_text": "Available now",
+     "offer": false,
+     "offer_text": null,
+     "star": true,
+     "confirm_label": "To confirm: who can rent this apartment",
+     "confirm_question": "Is this apartment open to any renter, or is there an income limit?",
+     "listing_url": "https://www.trulia.com/building/111-prospect-st-111-prospect-st-stamford-ct-06901-1004237339",
+     "source_site": "trulia",
+     "last_read": "2026-11-16"
+    },
+    {
+     "id": "rc:trulia:b1004237339:Unit_306:455273113",
+     "label": "Apartment 306",
+     "beds": 0,
+     "sqft": 489,
+     "floor_text": "Floor 3 (read from the apartment number)",
+     "rent": 1675,
+     "total": 1866,
+     "available_text": "Available now",
+     "offer": false,
+     "offer_text": null,
+     "star": true,
+     "confirm_label": "To confirm: who can rent this apartment",
+     "confirm_question": "Is this apartment open to any renter, or is there an income limit?",
+     "listing_url": "https://www.trulia.com/building/111-prospect-st-111-prospect-st-stamford-ct-06901-1004237339",
+     "source_site": "trulia",
+     "last_read": "2026-11-16"
+    },
+    {
+     "id": "rc:trulia:b1004237339:Unit_511:454189746",
+     "label": "Apartment 511",
+     "beds": 0,
+     "sqft": 447,
+     "floor_text": "Floor 5 (read from the apartment number)",
+     "rent": 1715,
+     "total": 1866,
+     "available_text": "Available now",
+     "offer": false,
+     "offer_text": null,
+     "star": true,
+     "confirm_label": "To confirm: who can rent this apartment",
+     "confirm_question": "Is this apartment open to any renter, or is there an income limit?",
+     "listing_url": "https://www.trulia.com/building/111-prospect-st-111-prospect-st-stamford-ct-06901-1004237339",
+     "source_site": "trulia",
+     "last_read": "2026-11-16"
+    }
+   ],
+   "why_source": "building about",
+   "give_up_source": "apartment line"
+  },
+  {
+   "id": "b_5f84c933a2",
+   "name": "333 State St",
+   "address": "333 State St",
+   "city": "Bridgeport",
+   "state": "CT",
+   "lat": 41.17568,
+   "lon": -73.19175,
+   "neighborhood_id": "ct:bridgeport",
+   "experience_id": "space",
+   "rank_score": 47.2,
+   "why": "The building has a lounge or coworking room, which is useful when you work from home.",
+   "give_up": "Mom and Dad are about 82 minutes away, so visits take planning.",
+   "facts": {
+    "rent_from": 1850,
+    "rent_to": 1850,
+    "total_from": 2067,
+    "total_to": 2067,
+    "drive_min": 81.4,
+    "toll_round_trip": 16.66,
+    "parking": {
+     "summary": null,
+     "kind": null,
+     "fee": null,
+     "included": false
+    },
+    "dog": {
+     "summary": "Dogs are allowed.",
+     "weight_limit_lb": null,
+     "no_weight_limit": false,
+     "allowed": "yes"
+    }
+   },
+   "scores": {
+    "parents": 0.245,
+    "going_out": 0.35,
+    "green": 0.332,
+    "value": 0.843,
+    "parking": 0.298,
+    "home": 0.409
+   },
+   "confirm": [],
+   "tour_questions": [
+    "Floor not published: confirm it is above the ground floor",
+    "Overnight street parking is restricted here: confirm the building has a space, and its cost",
+    "What required monthly fees are added to the rent (amenity, trash, technology)?",
+    "What does a parking spot cost per month, and is one guaranteed in the lease?",
+    "Who pays for heat and cooking gas?",
+    "What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)"
+   ],
+   "disclosures": [
+    "floor not published",
+    "overnight street parking"
+   ],
+   "photos_url": "https://www.333statestreet.com/",
+   "listing_url": "https://www.trulia.com/building/333-state-st-333-state-st-bridgeport-ct-06604-1002139313",
+   "contact": {
+    "office_phone": "(203) 872-2015",
+    "site": "https://www.333statestreet.com/",
+    "hours": null,
+    "kind": "leasing office",
+    "private": false,
+    "note": null
+   },
+   "about": "The building has a lounge or coworking room, which is useful when you work from home. The nearest supermarket, Save-A-Lot, is 0.8 miles away.",
+   "points": [
+    {
+     "icon": "dog",
+     "text": "Dogs are allowed."
+    },
+    {
+     "icon": "home",
+     "text": "Built in 1968."
+    },
+    {
+     "icon": "heart",
+     "text": "The building has a gym."
+    },
+    {
+     "icon": "fork",
+     "text": "5 restaurants are within a 10-minute walk."
+    },
+    {
+     "icon": "warning",
+     "text": "The listing does not mention parking, so ask where you would park."
+    }
+   ],
+   "day": [
+    {
+     "title": "Morning walk",
+     "text": null,
+     "level": "mixed"
+    },
+    {
+     "title": "Working from home",
+     "text": "A separate bedroom, about 745 square feet.",
+     "level": "strong"
+    },
+    {
+     "title": "After work",
+     "text": "5 restaurants and 0 bars within a 10-minute walk.",
+     "level": "mixed"
+    },
+    {
+     "title": "Coming home at night",
+     "text": "The listing does not mention parking.",
+     "level": "weak"
+    },
+    {
+     "title": "Saturday night",
+     "text": "19 restaurants and 1 bar within 1 mile.",
+     "level": "mixed"
+    },
+    {
+     "title": "Sunday with Mom and Dad",
+     "text": "About 81 minutes by car, about $17 round trip in tolls.",
+     "level": "weak"
+    }
+   ],
+   "apartments": [
+    {
+     "id": "rc:trulia:b1002139313:Unit_604:466457247",
+     "label": "Apartment 604",
+     "beds": 1,
+     "sqft": 745,
+     "floor_text": "Floor 6 (read from the apartment number)",
+     "rent": 1850,
+     "total": 2067,
+     "available_text": "Available now",
+     "offer": false,
+     "offer_text": null,
+     "star": false,
+     "confirm_label": null,
+     "confirm_question": null,
+     "listing_url": "https://www.trulia.com/building/333-state-st-333-state-st-bridgeport-ct-06604-1002139313",
+     "source_site": "trulia",
+     "last_read": "2026-11-15"
+    }
+   ],
+   "why_source": "building about",
+   "give_up_source": "neighborhood point"
+  },
+  {
+   "id": "b_b29a9ae0e3",
+   "name": "City Trust Collection: Arcade Apartments.",
+   "address": "991 Main Street",
+   "city": "Bridgeport",
+   "state": "CT",
+   "lat": 41.1781,
+   "lon": -73.18963,
+   "neighborhood_id": "ct:bridgeport",
+   "experience_id": "space",
+   "rank_score": 46.6,
+   "why": "The Bridgeport train station is 0.2 miles away.",
+   "give_up": "Mom and Dad are about 82 minutes away, so visits take planning.",
+   "facts": {
+    "rent_from": 1675,
+    "rent_to": 1675,
+    "total_from": 1892,
+    "total_to": 1892,
+    "drive_min": 81.4,
+    "toll_round_trip": 16.66,
+    "parking": {
+     "summary": null,
+     "kind": null,
+     "fee": null,
+     "included": false
+    },
+    "dog": {
+     "summary": "Small dogs are allowed, and the weight limit is not published.",
+     "weight_limit_lb": null,
+     "no_weight_limit": false,
+     "allowed": "yes"
+    }
+   },
+   "scores": {
+    "parents": 0.254,
+    "going_out": 0.317,
+    "green": 0.423,
+    "value": 0.86,
+    "parking": 0.297,
+    "home": 0.395
+   },
+   "confirm": [
+    {
+     "label": "whether this listing is current",
+     "question": "Is apartment 302 still available at $1,675?"
+    }
+   ],
+   "tour_questions": [
+    "Floor not published: confirm it is above the ground floor",
+    "Special offer: ask what a normal month costs",
+    "Overnight street parking is restricted here: confirm the building has a space, and its cost",
+    "Confirm the dog weight limit in pounds (the page says small dogs and gives no number)",
+    "Is the advertised rent the full monthly rent, or the average after free months? What is the first full payment and when is it due?",
+    "What required monthly fees are added to the rent (amenity, trash, technology)?",
+    "What does a parking spot cost per month, and is one guaranteed in the lease?",
+    "Who pays for heat and cooking gas?",
+    "What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)"
+   ],
+   "disclosures": [
+    "floor not published",
+    "special offer",
+    "overnight street parking"
+   ],
+   "photos_url": "https://www.apartmentlist.com/ct/bridgeport/city-trust-collection-arcade-apartments",
+   "listing_url": "https://www.apartmentlist.com/ct/bridgeport/city-trust-collection-arcade-apartments",
+   "contact": {
+    "office_phone": "(475) 231-3355 ext. 4",
+    "site": "https://www.apartmentlist.com/ct/bridgeport/city-trust-collection-arcade-apartments",
+    "hours": null,
+    "kind": "leasing office",
+    "private": false,
+    "note": null
+   },
+   "about": "Few details about the building itself are published. The Bridgeport train station is 0.2 miles away.",
+   "points": [
+    {
+     "icon": "dog",
+     "text": "Small dogs are allowed, and the weight limit is not published."
+    },
+    {
+     "icon": "home",
+     "text": "1 apartment is listed in this building."
+    },
+    {
+     "icon": "warning",
+     "text": "The listing does not mention parking, so ask where you would park."
+    }
+   ],
+   "day": [
+    {
+     "title": "Morning walk",
+     "text": null,
+     "level": "strong"
+    },
+    {
+     "title": "Working from home",
+     "text": "A separate bedroom, about 751 square feet.",
+     "level": "strong"
+    },
+    {
+     "title": "After work",
+     "text": "3 restaurants and 0 bars within a 10-minute walk.",
+     "level": "weak"
+    },
+    {
+     "title": "Coming home at night",
+     "text": "The listing does not mention parking.",
+     "level": "weak"
+    },
+    {
+     "title": "Saturday night",
+     "text": "22 restaurants and 1 bar within 1 mile.",
+     "level": "mixed"
+    },
+    {
+     "title": "Sunday with Mom and Dad",
+     "text": "About 81 minutes by car, about $17 round trip in tolls.",
+     "level": "weak"
+    }
+   ],
+   "apartments": [
+    {
+     "id": "apartmentlist:p7630984-4bec8063-f064-11ee-8ab6-12de4bf481cd",
+     "label": "Apartment 302",
+     "beds": 1,
+     "sqft": 751,
+     "floor_text": "Floor 3 (read from the apartment number)",
+     "rent": 1675,
+     "total": 1892,
+     "available_text": "Available now",
+     "offer": true,
+     "offer_text": "The listing advertises 1 month of free rent on a 13-month lease. The page does not say the price shown already includes it, so the price is treated as the normal monthly rent.",
+     "star": true,
+     "confirm_label": "To confirm: whether this listing is current",
+     "confirm_question": "Is apartment 302 still available at $1,675?",
+     "listing_url": "https://www.apartmentlist.com/ct/bridgeport/city-trust-collection-arcade-apartments",
+     "source_site": "apartmentlist.com",
+     "last_read": "2026-11-15"
+    }
+   ],
+   "why_source": "building about",
+   "give_up_source": "neighborhood point"
+  },
+  {
+   "id": "b_5204934871",
+   "name": "Brookview Commons II",
+   "address": "333 Main Street",
+   "city": "Danbury",
+   "state": "CT",
+   "lat": 41.39834,
+   "lon": -73.45431,
+   "neighborhood_id": "ct:danbury",
+   "experience_id": "middle",
+   "rank_score": 44.3,
+   "why": "The building has a pool, and laundry is in the apartment.",
+   "give_up": "The nearest park is about 11 minutes on foot.",
+   "facts": {
+    "rent_from": 1975,
+    "rent_to": 1975,
+    "total_from": 2241,
+    "total_to": 2241,
+    "drive_min": 89.6,
+    "toll_round_trip": 14.92,
+    "parking": {
+     "summary": null,
+     "kind": null,
+     "fee": null,
+     "included": false
+    },
+    "dog": {
+     "summary": "Small dogs are allowed, and the weight limit is not published.",
+     "weight_limit_lb": null,
+     "no_weight_limit": false,
+     "allowed": "yes"
+    }
+   },
+   "scores": {
+    "parents": 0.196,
+    "going_out": 0.355,
+    "green": 0.32,
+    "value": 0.849,
+    "parking": 0.412,
+    "home": 0.428
+   },
+   "confirm": [],
+   "tour_questions": [
+    "Floor not published: confirm it is above the ground floor",
+    "Overnight street parking is restricted here: confirm the building has a space, and its cost",
+    "Confirm the dog weight limit in pounds (the page says small dogs and gives no number)",
+    "What does a parking spot cost per month, and is one guaranteed in the lease?",
+    "What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)"
+   ],
+   "disclosures": [
+    "floor not published",
+    "overnight street parking"
+   ],
+   "photos_url": "https://www.brt.com/brookview-west",
+   "listing_url": "https://www.apartmentlist.com/ct/danbury/brookview-commons-ii",
+   "contact": {
+    "office_phone": "(203) 748-5100",
+    "site": "https://www.brt.com/brookview-west",
+    "hours": null,
+    "kind": "management company",
+    "private": false,
+    "note": null
+   },
+   "about": "Residents have a dog park on the property. The Danbury train station is 0.3 miles away.",
+   "points": [
+    {
+     "icon": "dog",
+     "text": "Small dogs are allowed, and the weight limit is not published."
+    },
+    {
+     "icon": "coffee",
+     "text": "The building has a lounge or coworking room."
+    },
+    {
+     "icon": "park",
+     "text": "Rowan Avenue Playground is about 10 minutes away on foot."
+    },
+    {
+     "icon": "home",
+     "text": "Built in 2023."
+    },
+    {
+     "icon": "warning",
+     "text": "The listing does not mention parking, so ask where you would park."
+    }
+   ],
+   "day": [
+    {
+     "title": "Morning walk",
+     "text": "Rowan Avenue Playground is about 10 minutes on foot.",
+     "level": "weak"
+    },
+    {
+     "title": "Working from home",
+     "text": "A studio, about 600 square feet.",
+     "level": "mixed"
+    },
+    {
+     "title": "After work",
+     "text": "1 restaurant and 3 bars within a 10-minute walk.",
+     "level": "weak"
+    },
+    {
+     "title": "Coming home at night",
+     "text": "The listing does not mention parking.",
+     "level": "weak"
+    },
+    {
+     "title": "Saturday night",
+     "text": "4 restaurants and 3 bars within 1 mile.",
+     "level": "mixed"
+    },
+    {
+     "title": "Sunday with Mom and Dad",
+     "text": "About 90 minutes by car, about $15 round trip in tolls.",
+     "level": "weak"
+    }
+   ],
+   "apartments": [
+    {
+     "id": "apartmentlist:p37450420-fa898e8a-934f-11ec-abca-12388c7ae387",
+     "label": "Apartment BC-519W",
+     "beds": 0,
+     "sqft": 600,
+     "floor_text": null,
+     "rent": 1975,
+     "total": 2241,
+     "available_text": "Available now",
+     "offer": true,
+     "offer_text": null,
+     "star": false,
+     "confirm_label": null,
+     "confirm_question": null,
+     "listing_url": "https://www.apartmentlist.com/ct/danbury/brookview-commons-ii",
+     "source_site": "apartmentlist.com",
+     "last_read": "2026-11-15"
+    }
+   ],
+   "why_source": "apartment headline (building)",
+   "give_up_source": "neighborhood watch_for"
+  },
+  {
+   "id": "b_ee2549a834",
+   "name": "Regency on Hudson",
+   "address": "56 Prospect St",
+   "city": "Yonkers",
+   "state": "NY",
+   "lat": 40.93238,
+   "lon": -73.90264,
+   "neighborhood_id": "ny:yonkers",
+   "experience_id": "middle",
+   "rank_score": 44.3,
+   "why": "This is the only building of the 2 listed in this neighborhood with a garage, at $150 a month.",
+   "give_up": "The nearest dog park is 1.2 miles away.",
+   "facts": {
+    "rent_from": 1995,
+    "rent_to": 1995,
+    "total_from": 2383,
+    "total_to": 2383,
+    "drive_min": 36.7,
+    "toll_round_trip": 14.92,
+    "parking": {
+     "summary": "Garage parking, $150 a month.",
+     "kind": "garage",
+     "fee": 150,
+     "included": false
+    },
+    "dog": {
+     "summary": "Dogs are allowed.",
+     "weight_limit_lb": null,
+     "no_weight_limit": false,
+     "allowed": "yes"
+    }
+   },
+   "scores": {
+    "parents": 0.677,
+    "going_out": 0.358,
+    "green": 0.433,
+    "value": 0.81,
+    "parking": 0.481,
+    "home": 0.308
+   },
+   "confirm": [
+    {
+     "label": "whether this listing is current",
+     "question": "Does the building have its certificate of occupancy, and is this apartment really available now?"
+    }
+   ],
+   "tour_questions": [
+    "Floor not published: confirm it is above the ground floor",
+    "How much is the broker fee, and who pays it?",
+    "Is there a washer and a dryer inside the apartment?",
+    "What required monthly fees are added to the rent (amenity, trash, technology)?",
+    "What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)"
+   ],
+   "disclosures": [
+    "floor not published",
+    "broker fee",
+    "washer and dryer to confirm"
+   ],
+   "photos_url": "https://regencyhudson.com/contact/",
+   "listing_url": "https://www.trulia.com/building/regency-on-hudson-56-prospect-st-yonkers-ny-10701-2774413543",
+   "contact": {
+    "office_phone": "(914) 598-8699",
+    "site": "https://regencyhudson.com/contact/",
+    "hours": "Mon-Sun 10:00am-6:00pm",
+    "kind": "leasing office",
+    "private": false,
+    "note": null
+   },
+   "about": "This is the only building of the 2 listed in this neighborhood with a garage, at $150 a month. It is 0.1 miles to the nearest supermarket, ShopRite.",
+   "points": [
+    {
+     "icon": "dog",
+     "text": "Dogs are allowed."
+    },
+    {
+     "icon": "train",
+     "text": "The Yonkers train station is 0.2 miles away."
+    },
+    {
+     "icon": "laundry",
+     "text": "The listing shows a washer and dryer in the apartment."
+    },
+    {
+     "icon": "heart",
+     "text": "The building has a gym."
+    },
+    {
+     "icon": "warning",
+     "text": "Pet rent is not published, so ask what a dog adds each month."
+    }
+   ],
+   "day": [
+    {
+     "title": "Morning walk",
+     "text": "Washington Park is about 5 minutes on foot.",
+     "level": "mixed"
+    },
+    {
+     "title": "Working from home",
+     "text": "A studio, about 480 square feet.",
+     "level": "weak"
+    },
+    {
+     "title": "After work",
+     "text": "3 restaurants and 1 bar within a 10-minute walk.",
+     "level": "weak"
+    },
+    {
+     "title": "Coming home at night",
+     "text": "Garage parking, $150 a month.",
+     "level": "strong"
+    },
+    {
+     "title": "Saturday night",
+     "text": "7 restaurants and 2 bars within 1 mile.",
+     "level": "mixed"
+    },
+    {
+     "title": "Sunday with Mom and Dad",
+     "text": "About 37 minutes by car, about $15 round trip in tolls.",
+     "level": "mixed"
+    }
+   ],
+   "apartments": [
+    {
+     "id": "trulia:b2774413543:Unit_606:459272983",
+     "label": "Apartment 606",
+     "beds": 0,
+     "sqft": 480,
+     "floor_text": "Floor 6 (read from the apartment number)",
+     "rent": 1995,
+     "total": 2383,
+     "available_text": "Available now",
+     "offer": false,
+     "offer_text": null,
+     "star": true,
+     "confirm_label": "To confirm: whether this listing is current",
+     "confirm_question": "Does the building have its certificate of occupancy, and is this apartment really available now?",
+     "listing_url": "https://www.trulia.com/building/regency-on-hudson-56-prospect-st-yonkers-ny-10701-2774413543",
+     "source_site": "trulia",
+     "last_read": "2026-11-15"
+    }
+   ],
+   "why_source": "building about",
+   "give_up_source": "neighborhood point"
+  },
+  {
+   "id": "b_fec325fa9f",
+   "name": "Symphony",
+   "address": "1009 Broad St",
+   "city": "Newark",
+   "state": "NJ",
+   "lat": 40.72872,
+   "lon": -74.17639,
+   "neighborhood_id": "nj:newark",
+   "experience_id": "settled",
+   "rank_score": 43.4,
+   "why": "Residents call parking frustrating, and the building has its own garage.",
+   "give_up": "The nearest dog park is 1.2 miles away.",
+   "facts": {
+    "rent_from": 1900,
+    "rent_to": 1950,
+    "total_from": 2292,
+    "total_to": 2342,
+    "drive_min": 47.6,
+    "toll_round_trip": 23.79,
+    "parking": {
+     "summary": "Garage parking, $200 a month.",
+     "kind": "garage",
+     "fee": 200,
+     "included": false
+    },
+    "dog": {
+     "summary": "Small dogs are allowed, and the weight limit is not published.",
+     "weight_limit_lb": null,
+     "no_weight_limit": false,
+     "allowed": "yes"
+    }
+   },
+   "scores": {
+    "parents": 0.494,
+    "going_out": 0.713,
+    "green": 0.476,
+    "value": 0.837,
+    "parking": 0.451,
+    "home": 0.246
+   },
+   "confirm": [
+    {
+     "label": "whether this listing is current",
+     "question": "Is this apartment in Symphony or in ENCORE, and which address is that?"
+    }
+   ],
+   "tour_questions": [
+    "Floor not published: confirm it is above the ground floor",
+    "Special offer: ask what a normal month costs",
+    "Confirm the dog weight limit in pounds (the page says small dogs and gives no number)",
+    "Is the advertised rent the full monthly rent, or the average after free months? What is the first full payment and when is it due?",
+    "What required monthly fees are added to the rent (amenity, trash, technology)?",
+    "What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)"
+   ],
+   "disclosures": [
+    "floor not published",
+    "special offer"
+   ],
+   "photos_url": "https://www.trulia.com/building/symphony-1009-broad-st-newark-nj-07102-2594867367",
+   "listing_url": "https://www.trulia.com/building/symphony-1009-broad-st-newark-nj-07102-2594867367",
+   "contact": {
+    "office_phone": "(551) 368-8976",
+    "site": "https://www.trulia.com/building/symphony-1009-broad-st-newark-nj-07102-2594867367",
+    "hours": null,
+    "kind": "leasing office",
+    "private": false,
+    "note": null
+   },
+   "about": "Garage parking costs $200 a month. You could walk to Lincoln Park in about 3 minutes.",
+   "points": [
+    {
+     "icon": "dog",
+     "text": "Small dogs are allowed, and the weight limit is not published."
+    },
+    {
+     "icon": "laundry",
+     "text": "Washer and dryer in the apartment."
+    },
+    {
+     "icon": "heart",
+     "text": "The building has a gym."
+    },
+    {
+     "icon": "fork",
+     "text": "About 14 restaurants are within a 10-minute walk."
+    },
+    {
+     "icon": "warning",
+     "text": "Pet rent is not published, so ask what a dog adds each month."
+    }
+   ],
+   "day": [
+    {
+     "title": "Morning walk",
+     "text": "Lincoln Park is about 3 minutes on foot.",
+     "level": "mixed"
+    },
+    {
+     "title": "Working from home",
+     "text": "A studio, about 457 square feet.",
+     "level": "weak"
+    },
+    {
+     "title": "After work",
+     "text": "14 restaurants and 1 bar within a 10-minute walk.",
+     "level": "mixed"
+    },
+    {
+     "title": "Coming home at night",
+     "text": "Garage parking, $200 a month.",
+     "level": "strong"
+    },
+    {
+     "title": "Saturday night",
+     "text": "65 restaurants and 6 bars within 1 mile.",
+     "level": "strong"
+    },
+    {
+     "title": "Sunday with Mom and Dad",
+     "text": "About 48 minutes by car, about $24 round trip in tolls.",
+     "level": "mixed"
+    }
+   ],
+   "apartments": [
+    {
+     "id": "trulia:b2594867367:Unit_202E:466065268",
+     "label": "Apartment 202E",
+     "beds": 0,
+     "sqft": 457,
+     "floor_text": null,
+     "rent": 1900,
+     "total": 2292,
+     "available_text": "Available now",
+     "offer": true,
+     "offer_text": "The listing advertises 2 months of free rent on an 18-month lease. The page does not say the price shown already includes it, so the price is treated as the normal monthly rent.",
+     "star": true,
+     "confirm_label": "To confirm: whether this listing is current",
+     "confirm_question": "Is this apartment in Symphony or in ENCORE, and which address is that?",
+     "listing_url": "https://www.trulia.com/building/symphony-1009-broad-st-newark-nj-07102-2594867367",
+     "source_site": "trulia",
+     "last_read": "2026-11-15"
+    },
+    {
+     "id": "trulia:b2594867367:Unit_211E:466065291",
+     "label": "Apartment 211E",
+     "beds": 0,
+     "sqft": 454,
+     "floor_text": null,
+     "rent": 1900,
+     "total": 2292,
+     "available_text": "Available now",
+     "offer": true,
+     "offer_text": "The listing advertises 2 months of free rent on an 18-month lease. The page does not say the price shown already includes it, so the price is treated as the normal monthly rent.",
+     "star": true,
+     "confirm_label": "To confirm: whether this listing is current",
+     "confirm_question": "Is this apartment in Symphony or in ENCORE, and which address is that?",
+     "listing_url": "https://www.trulia.com/building/symphony-1009-broad-st-newark-nj-07102-2594867367",
+     "source_site": "trulia",
+     "last_read": "2026-11-15"
+    },
+    {
+     "id": "trulia:b2594867367:Unit_208E:466065265",
+     "label": "Apartment 208E",
+     "beds": 0,
+     "sqft": 450,
+     "floor_text": null,
+     "rent": 1950,
+     "total": 2342,
+     "available_text": "Available now",
+     "offer": true,
+     "offer_text": "The listing advertises 2 months of free rent on an 18-month lease. The page does not say the price shown already includes it, so the price is treated as the normal monthly rent.",
+     "star": true,
+     "confirm_label": "To confirm: whether this listing is current",
+     "confirm_question": "Is this apartment in Symphony or in ENCORE, and which address is that?",
+     "listing_url": "https://www.trulia.com/building/symphony-1009-broad-st-newark-nj-07102-2594867367",
+     "source_site": "trulia",
+     "last_read": "2026-11-15"
+    }
+   ],
+   "why_source": "neighborhood about",
+   "give_up_source": "neighborhood point"
+  },
+  {
+   "id": "b_0e634d994b",
+   "name": "Soundview Apartments",
+   "address": "855 Main St",
+   "city": "Bridgeport",
+   "state": "CT",
+   "lat": 41.17623,
+   "lon": -73.18879,
+   "neighborhood_id": "ct:bridgeport",
+   "experience_id": "space",
+   "rank_score": 42.8,
+   "why": "This is the only building of the 4 listed in this neighborhood with a washer and dryer in the apartment.",
+   "give_up": "Mom and Dad are about 82 minutes away, so visits take planning.",
+   "facts": {
+    "rent_from": 1950,
+    "rent_to": 1950,
+    "total_from": 2167,
+    "total_to": 2167,
+    "drive_min": 81.1,
+    "toll_round_trip": 16.66,
+    "parking": {
+     "summary": "Garage parking, with the fee not published.",
+     "kind": "garage",
+     "fee": null,
+     "included": false
+    },
+    "dog": {
+     "summary": "Small dogs are allowed, and the weight limit is not published.",
+     "weight_limit_lb": null,
+     "no_weight_limit": false,
+     "allowed": "yes"
+    }
+   },
+   "scores": {
+    "parents": 0.256,
+    "going_out": 0.274,
+    "green": 0.413,
+    "value": 0.821,
+    "parking": 0.49,
+    "home": 0.466
+   },
+   "confirm": [],
+   "tour_questions": [
+    "Floor not published: confirm it is above the ground floor",
+    "Special offer: ask what a normal month costs",
+    "Confirm the dog weight limit in pounds (the page says small dogs and gives no number)",
+    "Is the advertised rent the full monthly rent, or the average after free months? What is the first full payment and when is it due?",
+    "What required monthly fees are added to the rent (amenity, trash, technology)?",
+    "What does a parking spot cost per month, and is one guaranteed in the lease?",
+    "Who pays for heat and cooking gas?",
+    "What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)"
+   ],
+   "disclosures": [
+    "floor not published",
+    "special offer"
+   ],
+   "photos_url": "https://www.trulia.com/building/soundview-apartments-855-main-st-bridgeport-ct-06604-2734499849",
+   "listing_url": "https://www.trulia.com/building/soundview-apartments-855-main-st-bridgeport-ct-06604-2734499849",
+   "contact": {
+    "office_phone": "(475) 231-6637",
+    "site": "https://www.apartmentlist.com/ct/bridgeport/soundview",
+    "hours": null,
+    "kind": "leasing office",
+    "private": false,
+    "note": null
+   },
+   "about": "This is the only building of the 4 listed in this neighborhood with a washer and dryer in the apartment. 4 restaurants are within a 10-minute walk.",
+   "points": [
+    {
+     "icon": "dog",
+     "text": "The building has its own dog park."
+    },
+    {
+     "icon": "dog",
+     "text": "Small dogs are allowed, and the weight limit is not published."
+    },
+    {
+     "icon": "train",
+     "text": "The Bridgeport train station is 0.2 miles away."
+    },
+    {
+     "icon": "key",
+     "text": "The building has a concierge desk."
+    },
+    {
+     "icon": "warning",
+     "text": "The garage fee is not published, so ask what it costs each month."
+    }
+   ],
+   "day": [
+    {
+     "title": "Morning walk",
+     "text": null,
+     "level": "mixed"
+    },
+    {
+     "title": "Working from home",
+     "text": "A separate bedroom, about 330 square feet.",
+     "level": "weak"
+    },
+    {
+     "title": "After work",
+     "text": "4 restaurants and 0 bars within a 10-minute walk.",
+     "level": "mixed"
+    },
+    {
+     "title": "Coming home at night",
+     "text": "Garage parking, with the fee not published.",
+     "level": "strong"
+    },
+    {
+     "title": "Saturday night",
+     "text": "15 restaurants and 0 bars within 1 mile.",
+     "level": "mixed"
+    },
+    {
+     "title": "Sunday with Mom and Dad",
+     "text": "About 81 minutes by car, about $17 round trip in tolls.",
+     "level": "weak"
+    }
+   ],
+   "apartments": [
+    {
+     "id": "rc:trulia:b2734499849:Unit_855-1015:363866647",
+     "label": "Apartment 855-1015",
+     "beds": 1,
+     "sqft": 330,
+     "floor_text": null,
+     "rent": 1950,
+     "total": 2167,
+     "available_text": "Available now",
+     "offer": true,
+     "offer_text": "The listing advertises 1 month of free rent. It applies to selected apartments only. The page does not say the price shown already includes it, so the price is treated as the normal monthly rent.",
+     "star": false,
+     "confirm_label": null,
+     "confirm_question": null,
+     "listing_url": "https://www.trulia.com/building/soundview-apartments-855-main-st-bridgeport-ct-06604-2734499849",
+     "source_site": "trulia",
+     "last_read": "2026-11-15"
+    }
+   ],
+   "why_source": "building about",
+   "give_up_source": "neighborhood point"
+  },
+  {
+   "id": "b_e2378bf884",
+   "name": "Brookview Commons East - Great Downtown Living",
+   "address": "30 Crosby Street",
+   "city": "Danbury",
+   "state": "CT",
+   "lat": 41.39801,
+   "lon": -73.45324,
+   "neighborhood_id": "ct:danbury",
+   "experience_id": "middle",
+   "rank_score": 41.0,
+   "why": "Well under your limit, so an added fee would still fit.",
+   "give_up": "The nearest park is about 11 minutes on foot.",
+   "facts": {
+    "rent_from": 1925,
+    "rent_to": 1925,
+    "total_from": 2204,
+    "total_to": 2204,
+    "drive_min": 88.7,
+    "toll_round_trip": 14.92,
+    "parking": {
+     "summary": "A free assigned space in an open lot.",
+     "kind": "lot",
+     "fee": 0,
+     "included": true
+    },
+    "dog": {
+     "summary": "Small dogs are allowed, and the weight limit is not published.",
+     "weight_limit_lb": null,
+     "no_weight_limit": false,
+     "allowed": "yes"
+    }
+   },
+   "scores": {
+    "parents": 0.201,
+    "going_out": 0.355,
+    "green": 0.308,
+    "value": 0.899,
+    "parking": 0.397,
+    "home": 0.37
+   },
+   "confirm": [],
+   "tour_questions": [
+    "Floor not published: confirm it is above the ground floor",
+    "Confirm the dog weight limit in pounds (the page says small dogs and gives no number)",
+    "What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)"
+   ],
+   "disclosures": [
+    "floor not published"
+   ],
+   "photos_url": "https://www.brt.com/brookview-commons",
+   "listing_url": "https://www.apartmentlist.com/ct/danbury/brookview-commons-east-great-downtown-living",
+   "contact": {
+    "office_phone": "(203) 748-5100",
+    "site": "https://www.brt.com/brookview-commons",
+    "hours": null,
+    "kind": "management company",
+    "private": false,
+    "note": null
+   },
+   "about": "An assigned space in an open lot is included in the rent. The walk to Rowan Avenue Playground takes about 11 minutes.",
+   "points": [
+    {
+     "icon": "dog",
+     "text": "The building has its own dog park."
+    },
+    {
+     "icon": "dog",
+     "text": "Small dogs are allowed, and the weight limit is not published."
+    },
+    {
+     "icon": "coffee",
+     "text": "The building has a lounge or coworking room."
+    },
+    {
+     "icon": "train",
+     "text": "The Danbury train station is 0.3 miles away."
+    },
+    {
+     "icon": "warning",
+     "text": "Pet rent is not published, so ask what a dog adds each month."
+    }
+   ],
+   "day": [
+    {
+     "title": "Morning walk",
+     "text": "Rowan Avenue Playground is about 11 minutes on foot.",
+     "level": "weak"
+    },
+    {
+     "title": "Working from home",
+     "text": "A separate bedroom, about 675 square feet.",
+     "level": "mixed"
+    },
+    {
+     "title": "After work",
+     "text": "1 restaurant and 3 bars within a 10-minute walk.",
+     "level": "weak"
+    },
+    {
+     "title": "Coming home at night",
+     "text": "A free assigned space in an open lot.",
+     "level": "mixed"
+    },
+    {
+     "title": "Saturday night",
+     "text": "4 restaurants and 3 bars within 1 mile.",
+     "level": "mixed"
+    },
+    {
+     "title": "Sunday with Mom and Dad",
+     "text": "About 89 minutes by car, about $15 round trip in tolls.",
+     "level": "weak"
+    }
+   ],
+   "apartments": [
+    {
+     "id": "apartmentlist:p1741731-0f416994-f487-11e9-b4ae-b083fecfc2de",
+     "label": "Apartment BC-524",
+     "beds": 1,
+     "sqft": 675,
+     "floor_text": null,
+     "rent": 1925,
+     "total": 2204,
+     "available_text": "Available November 26",
+     "offer": true,
+     "offer_text": null,
+     "star": false,
+     "confirm_label": null,
+     "confirm_question": null,
+     "listing_url": "https://www.apartmentlist.com/ct/danbury/brookview-commons-east-great-downtown-living",
+     "source_site": "apartmentlist.com",
+     "last_read": "2026-11-15"
+    },
+    {
+     "id": "apartmentlist:p1741731-0f436cdd-f487-11e9-b4ae-b083fecfc2de",
+     "label": "Apartment BC-406",
+     "beds": 1,
+     "sqft": 675,
+     "floor_text": null,
+     "rent": 1925,
+     "total": 2204,
+     "available_text": "Available December 15",
+     "offer": true,
+     "offer_text": null,
+     "star": false,
+     "confirm_label": null,
+     "confirm_question": null,
+     "listing_url": "https://www.apartmentlist.com/ct/danbury/brookview-commons-east-great-downtown-living",
+     "source_site": "apartmentlist.com",
+     "last_read": "2026-11-15"
+    }
+   ],
+   "why_source": "apartment headline (cost)",
+   "give_up_source": "neighborhood watch_for"
+  },
+  {
+   "id": "b_022934bcb2",
+   "name": "LIA by Vermella",
+   "address": "51 Lincoln Avenue",
+   "city": "City of Orange",
+   "state": "NJ",
+   "lat": 40.77228,
+   "lon": -74.23415,
+   "neighborhood_id": "nj:city-of-orange",
+   "experience_id": "space",
+   "rank_score": 36.3,
+   "why": "The building has a pool.",
+   "give_up": "No restaurants are within a 10-minute walk, and the supermarket is 0.9 miles away.",
+   "facts": {
+    "rent_from": 1984,
+    "rent_to": 1984,
+    "total_from": 2176,
+    "total_to": 2176,
+    "drive_min": 53.2,
+    "toll_round_trip": 43.05,
+    "parking": {
+     "summary": "Covered parking, with the fee not published.",
+     "kind": "covered",
+     "fee": null,
+     "included": false
+    },
+    "dog": {
+     "summary": "Dogs are allowed.",
+     "weight_limit_lb": null,
+     "no_weight_limit": false,
+     "allowed": "yes"
+    }
+   },
+   "scores": {
+    "parents": 0.407,
+    "going_out": 0.208,
+    "green": 0.351,
+    "value": 0.862,
+    "parking": 0.184,
+    "home": 0.251
+   },
+   "confirm": [],
+   "tour_questions": [
+    "Floor not published: confirm it is above the ground floor",
+    "What is the rent on a 12-month lease?",
+    "What required monthly fees are added to the rent (amenity, trash, technology)?",
+    "What does a parking spot cost per month, and is one guaranteed in the lease?"
+   ],
+   "disclosures": [
+    "floor not published",
+    "lease length"
+   ],
+   "photos_url": "https://tours.liabyvermella.com/",
+   "listing_url": "https://www.apartmentlist.com/nj/orange/lia-by-vermella",
+   "contact": {
+    "office_phone": "(855) 914-6525",
+    "site": "https://tours.liabyvermella.com/",
+    "hours": "Mon 9am-5pm; Tue 1pm-5pm; Wed-Sat 9am-5pm",
+    "kind": "leasing office",
+    "private": false,
+    "note": null
+   },
+   "about": "There is a dog park on the property. It is 0.1 miles to the Orange train station.",
+   "points": [
+    {
+     "icon": "dog",
+     "text": "Dogs are allowed."
+    },
+    {
+     "icon": "pool",
+     "text": "The building has a pool."
+    },
+    {
+     "icon": "heart",
+     "text": "The building has a gym."
+    },
+    {
+     "icon": "coffee",
+     "text": "The building has a lounge or coworking room."
+    },
+    {
+     "icon": "warning",
+     "text": "The covered parking fee is not published, so ask what it costs each month."
+    }
+   ],
+   "day": [
+    {
+     "title": "Morning walk",
+     "text": "Orange Park is about 16 minutes on foot.",
+     "level": "weak"
+    },
+    {
+     "title": "Working from home",
+     "text": "A studio, about 500 square feet.",
+     "level": "weak"
+    },
+    {
+     "title": "After work",
+     "text": "0 restaurants and 1 bar within a 10-minute walk.",
+     "level": "weak"
+    },
+    {
+     "title": "Coming home at night",
+     "text": "Covered parking, with the fee not published.",
+     "level": "mixed"
+    },
+    {
+     "title": "Saturday night",
+     "text": "2 restaurants and 1 bar within 1 mile.",
+     "level": "weak"
+    },
+    {
+     "title": "Sunday with Mom and Dad",
+     "text": "About 53 minutes by car, about $43 round trip in tolls.",
+     "level": "mixed"
+    }
+   ],
+   "apartments": [
+    {
+     "id": "apartmentlist:p113205989-lia-s1-423",
+     "label": "Apartment 423",
+     "beds": 0,
+     "sqft": 500,
+     "floor_text": "Floor 4 (read from the apartment number)",
+     "rent": 1984,
+     "total": 2176,
+     "available_text": "Available now",
+     "offer": false,
+     "offer_text": null,
+     "star": false,
+     "confirm_label": null,
+     "confirm_question": null,
+     "listing_url": "https://www.apartmentlist.com/nj/orange/lia-by-vermella",
+     "source_site": "apartmentlist.com",
+     "last_read": "2026-11-15"
+    }
+   ],
+   "why_source": "building point",
+   "give_up_source": "neighborhood scene"
+  },
+  {
+   "id": "b_c4831201c1",
+   "name": "525 Riverdale Ave",
+   "address": "525 Riverdale Ave",
+   "city": "Yonkers",
+   "state": "NY",
+   "lat": 40.91405,
+   "lon": -73.90229,
+   "neighborhood_id": "ny:yonkers",
+   "experience_id": "middle",
+   "rank_score": 35.6,
+   "why": "You could walk to Fay Park in about 2 minutes.",
+   "give_up": "For dinner out or a drink, you would usually drive.",
+   "facts": {
+    "rent_from": 1751,
+    "rent_to": 1751,
+    "total_from": 1989,
+    "total_to": 1989,
+    "drive_min": 35.2,
+    "toll_round_trip": 14.92,
+    "parking": {
+     "summary": null,
+     "kind": null,
+     "fee": null,
+     "included": false
+    },
+    "dog": {
+     "summary": "Small dogs are allowed, and the weight limit is not published.",
+     "weight_limit_lb": null,
+     "no_weight_limit": false,
+     "allowed": "yes"
+    }
+   },
+   "scores": {
+    "parents": 0.688,
+    "going_out": 0.325,
+    "green": 0.545,
+    "value": 0.853,
+    "parking": 0.273,
+    "home": 0.126
+   },
+   "confirm": [
+    {
+     "label": "whether this apartment is still available",
+     "question": "Is this apartment still available, and at this price?"
+    }
+   ],
+   "tour_questions": [
+    "Floor not published: confirm it is above the ground floor",
+    "How much is the broker fee, and who pays it?",
+    "Confirm the dog weight limit in pounds (the page says small dogs and gives no number)",
+    "What required monthly fees are added to the rent (amenity, trash, technology)?",
+    "What does a parking spot cost per month, and is one guaranteed in the lease?",
+    "What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)"
+   ],
+   "disclosures": [
+    "floor not published",
+    "broker fee"
+   ],
+   "photos_url": "https://www.trulia.com/home/525-riverdale-ave-5u-yonkers-ny-10705-466334272",
+   "listing_url": "https://www.trulia.com/home/525-riverdale-ave-5u-yonkers-ny-10705-466334272",
+   "contact": {
+    "office_phone": null,
+    "site": "https://www.trulia.com/home/525-riverdale-ave-5u-yonkers-ny-10705-466334272",
+    "hours": null,
+    "kind": "management company",
+    "private": false,
+    "note": null
+   },
+   "about": "Few details about the building itself are published. You could walk to Fay Park in about 2 minutes.",
+   "points": [
+    {
+     "icon": "dog",
+     "text": "Small dogs are allowed, and the weight limit is not published."
+    },
+    {
+     "icon": "fork",
+     "text": "4 restaurants are within a 10-minute walk."
+    },
+    {
+     "icon": "train",
+     "text": "The Ludlow train station is 0.6 miles away."
+    },
+    {
+     "icon": "warning",
+     "text": "The listing does not mention parking, so ask where you would park."
+    }
+   ],
+   "day": [
+    {
+     "title": "Morning walk",
+     "text": "Fay Park is about 2 minutes on foot.",
+     "level": "strong"
+    },
+    {
+     "title": "Working from home",
+     "text": "A studio; the size is not published.",
+     "level": null
+    },
+    {
+     "title": "After work",
+     "text": "4 restaurants and 0 bars within a 10-minute walk.",
+     "level": "mixed"
+    },
+    {
+     "title": "Coming home at night",
+     "text": "The listing does not mention parking.",
+     "level": "mixed"
+    },
+    {
+     "title": "Saturday night",
+     "text": "11 restaurants and 2 bars within 1 mile.",
+     "level": "mixed"
+    },
+    {
+     "title": "Sunday with Mom and Dad",
+     "text": "About 35 minutes by car, about $15 round trip in tolls.",
+     "level": "mixed"
+    }
+   ],
+   "apartments": [
+    {
+     "id": "trulia:466334272",
+     "label": "Apartment 5U",
+     "beds": 0,
+     "sqft": null,
+     "floor_text": "Floor 5 (read from the apartment number)",
+     "rent": 1751,
+     "total": 1989,
+     "available_text": "Available now",
+     "offer": false,
+     "offer_text": null,
+     "star": true,
+     "confirm_label": "To confirm: whether this apartment is still available",
+     "confirm_question": "Is this apartment still available, and at this price?",
+     "listing_url": "https://www.trulia.com/home/525-riverdale-ave-5u-yonkers-ny-10705-466334272",
+     "source_site": "trulia",
+     "last_read": "2026-11-16"
+    }
+   ],
+   "why_source": "building about",
+   "give_up_source": "neighborhood watch_for"
+  }
+ ],
+ "either_or": [
+  {
+   "id": "room_or_parents",
+   "question": "More room at home, or closer to Mom and Dad?",
+   "a": {
+    "label": "More room and a better building",
+    "weight": {
+     "home": 30
+    }
+   },
+   "b": {
+    "label": "A shorter drive to Mom and Dad",
+    "weight": {
+     "parents": 30
+    }
+   },
+   "basis": {
+    "spearman": -0.76,
+    "top5_shared": 0,
+    "buildings": 25
+   }
+  },
+  {
+   "id": "room_or_out",
+   "question": "More room at home, or more to do nearby?",
+   "a": {
+    "label": "More room and a better building",
+    "weight": {
+     "home": 30
+    }
+   },
+   "b": {
+    "label": "Restaurants and bars close by",
+    "weight": {
+     "going_out": 30
+    }
+   },
+   "basis": {
+    "spearman": -0.65,
+    "top5_shared": 0,
+    "buildings": 25
+   }
+  },
+  {
+   "id": "parents_or_rent",
+   "question": "Closer to Mom and Dad, or a lower total each month?",
+   "a": {
+    "label": "A shorter drive to Mom and Dad",
+    "weight": {
+     "parents": 30
+    }
+   },
+   "b": {
+    "label": "The lowest total with utilities and fees",
+    "weight": {
+     "value": 30
+    }
+   },
+   "basis": {
+    "spearman": -0.29,
+    "top5_shared": 1,
+    "buildings": 25
+   }
+  }
+ ]
+}

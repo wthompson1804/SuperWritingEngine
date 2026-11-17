@@ -847,12 +847,19 @@ def audit(d, template=False, lines_csv=None, about_csv=None):
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--data", default=str(DATA))
+    ap.add_argument("--out-suffix", default="", help="read scene_text_*<suffix>.csv, realtor_lines<suffix>.csv and "
+                    "building_about<suffix>.csv (for a filtered copy of the page data, for example _u2000)")
     ap.add_argument("--text-only", action="store_true", help="exit code from the written text only")
     ap.add_argument("--template", action="store_true", help="also scan site/index.html (informational)")
     ap.add_argument("--max", type=int, default=400, help="print at most this many failures per owner")
     a = ap.parse_args(argv)
     d = json.loads(Path(a.data).read_text(encoding="utf-8"))
-    fails = audit(d, template=a.template)
+    lines_csv = about_csv = None
+    if a.out_suffix:
+        G.use_files(a.data, a.out_suffix)
+        lines_csv = R.OUT.with_name(R.OUT.stem + a.out_suffix + R.OUT.suffix)
+        about_csv = R.OUT_BUILDINGS.with_name(R.OUT_BUILDINGS.stem + a.out_suffix + R.OUT_BUILDINGS.suffix)
+    fails = audit(d, template=a.template, lines_csv=lines_csv, about_csv=about_csv)
     by = defaultdict(list)
     for f in fails:
         by[f.owner].append(f)

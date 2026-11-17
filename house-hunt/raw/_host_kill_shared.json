@@ -62,5 +62,17 @@
   "time": "2026-11-16T03:06:03+00:00",
   "url": "https://www.trulia.com/",
   "by": "scripts/lib.py harvest guard (hygiene task)"
+ },
+ "www.goldberg-realty.com": {
+  "reason": "HTTP 403",
+  "url": "https://www.goldberg-realty.com/nj/bloomfield/64-park-avenue/index.aspx",
+  "at": "2026-11-17T13:55:25+00:00",
+  "by": "live_check_batch_21"
+ },
+ "tours.liabyvermella.com": {
+  "reason": "HTTP 403",
+  "url": "https://tours.liabyvermella.com/",
+  "at": "2026-11-17T13:55:41+00:00",
+  "by": "live_check_batch_21"
  }
 }

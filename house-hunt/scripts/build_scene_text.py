@@ -836,10 +836,41 @@ YEAR_COLS = {"display": "display_label", "tagline": "tagline", "subhead": "subhe
 HOOD_COLS = {"scene": "scene", "good": "good_for_her", "watch": "watch_for", "host_intro": "host_intro"}
 
 
-def main():
+def pd_num(s):
+    import pandas as pd
+    return pd.to_numeric(s, errors="coerce").fillna(0)
+
+
+def main(argv=None):
+    # --data <path> / --out-suffix <text> (C.use_files): the same drafts over another page-data file, written to
+    # scene_text_*<suffix>.csv. With --data a draft whose experience or neighborhood has no apartment in that file
+    # is passed over. With no options the run is exactly as before.
+    C._options(argv, "Fill the scene drafts with numbers from the data.")
     lg = C.table(LG).set_index("hood_id")
     years, hoods, errors, stale = [], [], [], []
     blocks = parse(SOURCE)
+    absent = []
+    # With --out-suffix, data/reference/scene_text_source<suffix>.csv (columns kind, id, field, draft) replaces single
+    # fields of a draft where the sentence written for the whole page is not true of the subset. The replacement is a
+    # draft like any other: tokens, hidden tests, every guard.
+    over = SOURCE.with_name(SOURCE.stem + C.OUT_SUFFIX + ".csv") if C.OUT_SUFFIX else None
+    if over is not None and over.exists():
+        with open(over, newline="", encoding="utf-8") as fh:
+            rows = list(csv.DictReader(fh))
+        for r in rows:
+            hit = [b for b in blocks if b["kind"] == r["kind"] and b["id"] == r["id"]]
+            if not hit:
+                raise SystemExit(f"{over.name}: no draft for {r['kind']} {r['id']}")
+            for b in hit:
+                b["f"][r["field"]] = r["draft"]
+        print(f"{len(rows)} draft fields replaced from {over.name}")
+    if C.SUBSET:
+        yt = C.table(PAGE_Y)
+        on_page = set(yt[pd_num(yt["shown"]) > 0]["year_label"].astype(str))
+        keep = lambda b: (b["kind"] not in ("year", "hood") or (b["id"] in C.shown_hoods() if b["kind"] == "hood"
+                                                                 else C.year_key(b["id"]) in on_page))
+        absent = sorted({b["id"] for b in blocks if not keep(b)})
+        blocks = [b for b in blocks if keep(b)]
     subs = {b["id"]: b["rules"] for b in blocks if b["kind"] == "sub"}
     point_rules = next((b["rules"] for b in blocks if b["kind"] == "points"), [])
     for topic, icon, conds, variants in point_rules:
@@ -934,8 +965,9 @@ def main():
                           "evidence_json": ej})
     for col, rows, key in (("host_intro", years, "year_label"), ("host_intro", hoods, "hood_id")):
         errors += C.check_repetition(col, {r[key]: r[col] for r in rows})
-    errors += C.check_closings("host_intro", {r["hood_id"]: r["host_intro"] for r in hoods})
-    errors += C.check_sub_shares("hood", hoods)
+    if not C.SUBSET:                                     # the two page-wide spreads are not tested on a subset
+        errors += C.check_closings("host_intro", {r["hood_id"]: r["host_intro"] for r in hoods})
+        errors += C.check_sub_shares("hood", hoods)
     errors += C.check_leads([{**r, "evidence": json.loads(r["evidence_json"])} for r in hoods])
     from collections import Counter
     kinds = Counter(closes.values())
@@ -960,6 +992,8 @@ def main():
               f"(rewrite them in the drafts when the unit list settles):")
         for d in DROPPED:
             print("   ", d)
+    if absent:
+        print(f"passed over {len(absent)} drafts with no apartment in {C.PAGE_FILE.name}")
     if stale:
         print(f"skipped {len(stale)} drafts whose neighborhood is no longer in {LG}: {stale}")
     return 1 if errors else 0

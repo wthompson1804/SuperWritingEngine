@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lamia's Short Version</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yellowtail&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500..800&family=Figtree:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+/* One phone-width column, one thing on screen at a time: a quiet line on top, the thing itself, and the
+   one or two actions fixed at the bottom where the thumb is. Same pink daytime-TV set as the long page. */
+:root{
+  --paper:#FFF4F7; --card:#FFFFFF; --ink:#3A1630; --muted:#7A5670;
+  --berry:#E0457B; --berry-deep:#C12C62; --on-berry:#FFFFFF;
+  --rose:#FFD3E1; --blush:#FFE7EF; --butter:#FFD86B; --on-butter:#3A1630;
+  --mint-ink:#1B6F50; --line:#F3CADA; --track:#EBC3D4;
+  --ok-bg:#D9F2E6; --ok-ink:#1B6F50; --mid-bg:#FFF0BF; --mid-ink:#6B4E00; --low-bg:#FFE0DC; --low-ink:#A5342B;
+  --shade:rgba(58,22,48,.55);
+  --script:"Yellowtail","Brush Script MT",cursive;
+  --display:"Bricolage Grotesque","Arial Narrow",system-ui,sans-serif;
+  --body:"Figtree","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#1E0F1A; --card:#2C1827; --ink:#FCEBF2; --muted:#D6B8CB;
+  --berry:#FF8DB3; --berry-deep:#C12C62; --on-berry:#FFFFFF;
+  --rose:#4C2542; --blush:#371B30; --butter:#FFD86B; --on-butter:#3A1630;
+  --mint-ink:#8FE0BD; --line:#5B3551; --track:#5B3551;
+  --ok-bg:#153F30; --ok-ink:#9BE6C6; --mid-bg:#4A3A0A; --mid-ink:#FFDF85; --low-bg:#4A1F1B; --low-ink:#FFB1A8;
+  --shade:rgba(0,0,0,.6); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#1E0F1A; --card:#2C1827; --ink:#FCEBF2; --muted:#D6B8CB;
+  --berry:#FF8DB3; --berry-deep:#C12C62; --on-berry:#FFFFFF;
+  --rose:#4C2542; --blush:#371B30; --butter:#FFD86B; --on-butter:#3A1630;
+  --mint-ink:#8FE0BD; --line:#5B3551; --track:#5B3551;
+  --ok-bg:#153F30; --ok-ink:#9BE6C6; --mid-bg:#4A3A0A; --mid-ink:#FFDF85; --low-bg:#4A1F1B; --low-ink:#FFB1A8;
+  --shade:rgba(0,0,0,.6); color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.45;-webkit-text-size-adjust:100%;overflow-wrap:break-word}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+p,ul,ol{margin:0}
+h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;line-height:1.08}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px;border-radius:10px}
+[tabindex="-1"]:focus{outline:0}
+.wrap{max-width:520px;margin:0 auto;padding-block:0;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+#app{display:grid;gap:18px;padding-block:6px 28px;min-width:0}
+#app>*{min-width:0}
+#app.has-bar{padding-bottom:calc(var(--bar-h,120px) + 24px)}
+
+/* top line */
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px}
+.brand{font-family:var(--script);font-size:25px;line-height:1;color:var(--berry);white-space:nowrap}
+.quiet{background:none;border:0;padding:10px 0;min-height:44px;font-weight:800;font-size:15px;text-decoration:underline;text-decoration-color:var(--berry);text-decoration-thickness:2px;text-underline-offset:4px;display:inline-flex;align-items:center;gap:6px}
+.quiet.center{justify-content:center;width:100%}
+.topbtns{display:flex;gap:16px;align-items:center}
+
+/* buttons */
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:56px;font-family:var(--display);font-weight:800;font-size:19px;line-height:1.15;text-align:center;text-decoration:none;border-radius:999px;padding:10px 22px;border:2px solid var(--ink);background:var(--card);color:var(--ink)}
+.btn.main{background:var(--berry-deep);border-color:var(--berry-deep);color:var(--on-berry)}
+.btn.sm{min-height:48px;font-size:17px}
+.btn:disabled{opacity:.45;cursor:default}
+.choice{text-wrap:balance;display:block;width:100%;min-height:76px;text-align:left;font-family:var(--display);font-weight:800;font-size:22px;line-height:1.15;border-radius:22px;padding:16px 20px;border:2px solid var(--ink);background:var(--card);color:var(--ink)}
+.choice small{display:block;font-family:var(--body);font-weight:600;font-size:15px;color:var(--muted);margin-top:4px}
+.choice:active,.btn:active{transform:translateY(1px)}
+.stack{display:grid;gap:12px}
+.stack>*{min-width:0}
+
+.kicker{font-family:var(--script);font-size:30px;line-height:1;color:var(--berry)}
+.h-big{font-weight:800;font-stretch:82%;font-size:clamp(32px,9vw,42px)}
+.lead{font-size:20px;line-height:1.4}
+.muted{color:var(--muted)}
+.small{font-size:15px}
+
+/* welcome */
+.hello{text-align:center;display:grid;gap:16px;padding-top:10px}
+.hello .name{font-family:var(--script);font-size:clamp(58px,17vw,84px);line-height:.95;color:var(--berry);transform:rotate(-4deg);display:block}
+.hello .tagbox{justify-self:center;font-family:var(--display);font-weight:800;font-stretch:80%;font-size:26px;line-height:1;background:var(--ink);color:var(--paper);padding:6px 16px 9px;border-radius:12px;transform:rotate(1.5deg)}
+.steps{list-style:none;padding:0;display:grid;gap:10px;text-align:left}
+.steps li{display:flex;gap:14px;align-items:center;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:12px 16px;font-weight:600}
+.steps b{flex:0 0 auto;width:36px;height:36px;border-radius:50%;background:var(--butter);color:var(--on-butter);display:grid;place-items:center;font-family:var(--display);font-weight:800}
+
+/* story */
+.segs{display:flex;gap:5px}
+.segs i{flex:1;height:5px;border-radius:3px;background:var(--track)}
+.segs i.on{background:var(--berry)}
+.story-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-weight:800;font-size:15px}
+.story-head span:last-child{color:var(--muted);text-align:right}
+.story-card{display:grid;gap:16px;align-content:start;min-height:56vh;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+.art{border:2px solid var(--ink);border-radius:22px;overflow:hidden;background:var(--blush)}
+.art svg{display:block;width:100%;height:auto}
+.story-card h1{font-weight:800;font-stretch:82%;font-size:clamp(30px,8.6vw,40px)}
+.story-card .txt{font-size:21px;line-height:1.42}
+.taphint{font-size:14px;font-weight:700;color:var(--muted);text-align:center}
+.enter{animation:rise .22s ease-out}
+@keyframes rise{from{opacity:.2;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* bottom bar */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--paper);border-top:2px solid var(--line);padding-top:10px;padding-bottom:calc(10px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.bar-in{max-width:520px;margin:0 auto;display:grid;gap:4px}
+.bar-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.bar-row.one{grid-template-columns:1fr}
+.bar .quiet{padding:6px 0}
+
+/* building card */
+.count{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.count .n{font-family:var(--display);font-weight:800;font-size:19px}
+.count .n small{display:block;font-family:var(--body);font-size:14px;font-weight:700;color:var(--muted)}
+.pips{display:flex;gap:6px;justify-content:center;margin-top:6px}
+.pips i{width:22px;height:6px;border-radius:3px;background:var(--track)}
+.pips i.cur{background:var(--ink)}
+.pips i.kept{background:var(--mint-ink)}
+.pips i.cur.kept{box-shadow:0 0 0 2px var(--paper),0 0 0 4px var(--ink)}
+.round{width:48px;height:48px;border-radius:50%;border:2px solid var(--ink);background:var(--card);font-size:22px;font-weight:800;line-height:1;display:grid;place-items:center;flex:0 0 auto}
+.round:disabled{opacity:.3}
+.bcard{background:var(--card);border:2px solid var(--ink);border-radius:26px;padding:20px 18px;display:grid;gap:16px}
+.bcard>*{min-width:0}
+.where{display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px;line-height:1.25}
+.mark{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:#FFFFFF;border:1.5px solid var(--line);display:grid;place-items:center}
+.mark svg{width:18px;height:18px;display:block}
+.bcard h2{font-weight:800;font-stretch:82%;font-size:clamp(29px,8.2vw,36px)}
+.keptflag{justify-self:start;background:var(--ok-bg);color:var(--ok-ink);font-weight:800;font-size:15px;border-radius:999px;padding:4px 12px}
+.passflag{justify-self:start;background:var(--blush);color:var(--muted);font-weight:800;font-size:15px;border-radius:999px;padding:4px 12px}
+.say{display:grid;gap:10px}
+.say p{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;font-size:19px;line-height:1.35}
+.say p b{display:block;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:800;margin-bottom:1px}
+.say .ic{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:16px;margin-top:2px}
+.say .yes .ic{background:var(--ok-bg);color:var(--ok-ink)}
+.say .but .ic{background:var(--mid-bg);color:var(--mid-ink)}
+.facts{list-style:none;padding:0;border-top:2px solid var(--line)}
+.facts li{padding:10px 0;border-bottom:2px solid var(--line);display:grid;gap:6px}
+.frow{display:flex;justify-content:space-between;align-items:baseline;gap:14px}
+.frow .l{font-weight:800;font-size:15px;color:var(--muted);flex:1 1 0;min-width:0}
+.frow .v{flex:0 0 auto;max-width:62%;white-space:nowrap}
+.frow .v small:not(.in){white-space:normal}
+@media (max-width:360px){.brand{font-size:21px}.top .quiet{font-size:14px}.frow .v{font-size:20px}}
+.frow .v{font-family:var(--display);font-weight:800;font-size:22px;text-align:right;font-variant-numeric:tabular-nums;line-height:1.1}
+.frow .v small.in{display:inline;margin:0 0 0 6px}
+.frow .v small{display:block;font-family:var(--body);font-size:14px;font-weight:700;color:var(--muted);margin-top:3px}
+.ftext{font-size:17px;font-weight:600;line-height:1.35}
+.pos{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:700;color:var(--muted)}
+.pos .track{position:relative;flex:1 1 auto;height:6px;border-radius:3px;background:var(--track)}
+.pos .track i{position:absolute;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:var(--berry-deep);border:3px solid var(--card)}
+.pos .word{flex:0 0 auto;min-width:9.2em;text-align:right}
+.link{font-weight:800;font-size:17px;text-decoration:underline;text-decoration-color:var(--berry);text-decoration-thickness:2px;text-underline-offset:4px;display:inline-flex;align-items:center;min-height:44px}
+details.more{border-top:2px solid var(--line)}
+details.more:last-of-type{border-bottom:2px solid var(--line)}
+details.more summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:52px;font-family:var(--display);font-weight:800;font-size:18px;cursor:pointer}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::after{content:"+";font-size:26px;line-height:1;font-weight:500}
+details.more[open] summary::after{content:"\2212"}
+details.moreqs{margin-top:10px;border-bottom:0!important}
+details.more .in{padding:2px 0 16px;display:grid;gap:12px;font-size:17px}
+.moregroup{display:grid}
+.points{list-style:none;padding:0;display:grid;gap:10px}
+.points li{display:grid;grid-template-columns:26px 1fr;gap:10px;align-items:start}
+.points svg{width:24px;height:24px;margin-top:1px}
+.day{list-style:none;padding:0;display:grid;gap:12px}
+.day li{display:grid;gap:3px}
+.day .t{display:flex;justify-content:space-between;gap:10px;align-items:center;font-weight:800}
+.chip{flex:0 0 auto;font-size:13px;font-weight:800;border-radius:999px;padding:3px 10px}
+.chip.strong{background:var(--ok-bg);color:var(--ok-ink)}
+.chip.mixed{background:var(--mid-bg);color:var(--mid-ink)}
+.chip.weak{background:var(--low-bg);color:var(--low-ink)}
+.apts{list-style:none;padding:0;display:grid;gap:12px}
+.apts li{border:2px solid var(--line);border-radius:16px;padding:12px 14px;display:grid;gap:6px}
+.apts .a-h{font-weight:800}
+.apts .a-s{font-size:15px;color:var(--muted);font-weight:600}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pair div{display:grid;gap:1px}
+.pair span{font-size:13px;font-weight:800;color:var(--muted);line-height:1.2}
+.pair b{font-family:var(--display);font-size:20px;font-variant-numeric:tabular-nums}
+.star{color:var(--mid-ink);background:var(--mid-bg);border-radius:10px;padding:5px 10px;font-size:15px;font-weight:700;justify-self:start}
+.qs{padding-left:1.15em;display:grid;gap:8px}
+
+/* plan */
+.area{display:grid;gap:12px}
+.area-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;border-bottom:2px solid var(--ink);padding-bottom:6px}
+.area-h h2{font-weight:800;font-stretch:85%;font-size:24px}
+.area-h span{font-weight:800;font-size:15px;color:var(--muted);white-space:nowrap}
+.stop{background:var(--card);border:2px solid var(--line);border-radius:20px;padding:16px;display:grid;gap:10px}
+.stop h3{font-weight:800;font-size:22px}
+.stop .lab{font-size:13px;letter-spacing:.06em;text-transform:uppercase;font-weight:800;color:var(--muted)}
+.stop .phone{font-weight:800;user-select:all;-webkit-user-select:all}
+.confirmrow{background:var(--blush);border-radius:16px;padding:14px;display:grid;gap:10px}
+
+/* everything */
+.filter{background:var(--butter);color:var(--on-butter);border:2px solid var(--ink);border-radius:22px;padding:16px;display:grid;gap:14px}
+.filter h2{font-weight:800;font-size:22px}
+.filter label,.filter .lab{font-weight:800;font-size:16px;display:block}
+.filter output{font-family:var(--display);font-size:20px}
+.filter input[type=range]{width:100%;height:44px;margin:0;accent-color:#C12C62}
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:6px;margin-top:6px}
+.seg button{min-height:46px;border:2px solid #3A1630;border-radius:999px;background:#FFFFFF;color:#3A1630;font-weight:800;font-size:15px;line-height:1.1;padding:4px 6px}
+.seg button[aria-pressed="true"]{background:#3A1630;color:#FFFFFF}
+.filter :focus-visible{outline-color:#3A1630}
+.check{display:flex!important;align-items:center;gap:12px;min-height:44px}
+.check input{width:26px;height:26px;accent-color:#C12C62;flex:0 0 auto}
+.fcount{font-weight:800;font-size:16px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;border:2px solid var(--ink);border-radius:999px;padding:3px;background:var(--card)}
+.tabs button{min-height:44px;border:0;border-radius:999px;background:none;font-weight:800;font-size:16px}
+.tabs button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.exp-h{display:flex;align-items:center;gap:10px;margin-top:8px}
+.exp-h h2{font-weight:800;font-stretch:82%;font-size:26px}
+.grp{display:grid;gap:8px}
+.grp-h{font-weight:800;font-size:19px;display:flex;justify-content:space-between;gap:10px;align-items:baseline;scroll-margin-top:12px}
+.grp-h small{font-family:var(--body);font-size:14px;font-weight:700;color:var(--muted);white-space:nowrap}
+.nearby{font-size:13px;letter-spacing:.06em;text-transform:uppercase;font-weight:800;color:var(--muted);margin-top:4px}
+.row{display:grid;gap:4px;width:100%;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:12px 14px;min-height:64px}
+.row .r1{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.row .r1 b{font-family:var(--display);font-size:19px;line-height:1.15}
+.row .r1 span{font-size:14px;font-weight:800;color:var(--muted);white-space:nowrap}
+.row .r2{font-size:15px;font-weight:600;color:var(--muted);display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:baseline}
+.row .r2 b{color:var(--ink);font-size:17px;text-align:right;font-variant-numeric:tabular-nums}
+.row .tag{font-size:13px;font-weight:800}
+.row .tag.k{color:var(--ok-ink)}
+.row .tag.at{color:var(--muted)}
+.empty{background:var(--card);border:2px dashed var(--line);border-radius:18px;padding:18px;text-align:center;font-weight:700}
+.mapwrap .hhm-chips{grid-template-columns:1fr}
+.mapwrap{--ink:#3A1630;--muted:#7A5670;--line:#F3CADA;--paper:#FFF4F7;--white:#FFFFFF;background:#FFF4F7;color:#3A1630;border:2px solid var(--line);border-radius:20px;padding:10px}
+
+/* sheets */
+.sheet{position:fixed;inset:0;z-index:40;background:var(--paper);overflow-y:auto;-webkit-overflow-scrolling:touch;padding-top:env(safe-area-inset-top,0px)}
+.sheet .wrap{display:grid;gap:16px;padding-block:8px calc(var(--bar-h,120px) + 28px)}
+.sheet .bar{z-index:41}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--bar-h,0px) + 18px + env(safe-area-inset-bottom,0px));z-index:60;background:var(--ink);color:var(--paper);font-weight:800;font-size:16px;border-radius:999px;padding:10px 18px;max-width:calc(100% - 32px);text-align:center;pointer-events:none}
+.asksheet{position:fixed;inset:0;z-index:50;background:var(--shade);display:grid;align-items:end}
+.askbox{background:var(--paper);border-radius:24px 24px 0 0;max-height:88%;overflow-y:auto;padding-top:18px;padding-bottom:calc(18px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.askin{max-width:520px;margin:0 auto;display:grid;gap:14px}
+.askin h2{font-weight:800;font-size:26px}
+.sugg{display:grid;gap:8px}
+.sugg button{min-height:48px;text-align:left;border:2px solid var(--line);background:var(--card);border-radius:16px;padding:10px 14px;font-weight:700;font-size:16px}
+.askform{display:grid;grid-template-columns:1fr auto;gap:8px}
+.askform input{min-width:0;min-height:52px;border:2px solid var(--ink);border-radius:16px;background:var(--card);color:var(--ink);font:inherit;padding:8px 14px}
+.askform .btn{width:auto}
+.answer{background:var(--card);border:2px solid var(--ink);border-radius:18px;padding:14px 16px;font-size:18px;white-space:pre-wrap}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="wrap"><main id="app" tabindex="-1"><p>Loading…</p></main></div>
+<div id="layer"></div>
+<div id="live" class="sr" aria-live="polite"></div>
+
+<!--CONCIERGE_DATA_SLOT-->
+<!--CONCIERGE_ILLUS_SLOT-->
+<!--CONCIERGE_MAP_SLOT-->
+
+<script id="pick-logic">
+/* ===================================================================================================================
+   PICK LOGIC. Pure functions, no page access. Also loaded by Node (scripts/test_concierge_pick.js).
+
+   prepare(data)            -> the buildings, each with area_id (its neighborhood, or the larger neighborhood it is
+                               parked under) so that variety is counted per area.
+   score(b, answers, eo)    -> rank_score x the answer for the building's experience
+                               (That's me 1.0, Maybe 0.6, Not me 0.25, no answer 0.6)
+                               + for every either/or answer: weight delta x the building's 0..1 score for that key.
+   pickFive(buildings, answers, eitherOr, vetoed, kept[, n])
+                            -> up to n (5) buildings. Kept ones stay, in the order given. A vetoed one is never
+                               returned. At most two per area, at least one from each "That's me" experience when one
+                               is left, the rest by score; ties go to the lower id. If the two-per-area rule leaves
+                               seats empty they are filled by score alone.
+   allNotMe(experienceIds, answers) -> true when every experience was answered "Not me".
+   eitherOr is a list of the chosen sides ({label, weight:{key: delta}}) or of bare weight objects.
+   =================================================================================================================== */
+var ConciergePick = (function () {
+  "use strict";
+  var MULT = { me: 1.0, maybe: 0.6, no: 0.25 }, UNANSWERED = 0.6, PER_AREA = 2;
+  function num(x) { x = Number(x); return isFinite(x) ? x : 0; }
+  function cmpId(a, b) { a = String(a); b = String(b); return a < b ? -1 : a > b ? 1 : 0; }
+  function toSet(list) { var s = {}; (list || []).forEach(function (id) { s[id] = true; }); return s; }
+  function areaOf(b) { return b.area_id || b.neighborhood_id || ("building:" + b.id); }
+
+  function prepare(data) {
+    var parked = {};
+    ((data && data.neighborhoods) || []).forEach(function (h) { if (h && h.parked_under) parked[h.id] = h.parked_under; });
+    return ((data && data.buildings) || []).map(function (b) {
+      var c = {}; for (var k in b) c[k] = b[k];
+      c.area_id = parked[b.neighborhood_id] || b.neighborhood_id || null;
+      return c;
+    });
+  }
+
+  function score(b, answers, eitherOr) {
+    var a = answers ? answers[b.experience_id] : null;
+    var s = num(b.rank_score) * (MULT.hasOwnProperty(a) ? MULT[a] : UNANSWERED);
+    (eitherOr || []).forEach(function (side) {
+      var w = side && (side.weight || side);
+      if (!w || typeof w !== "object") return;
+      for (var k in w) if (typeof w[k] === "number") s += w[k] * num(b.scores && b.scores[k]);
+    });
+    return s;
+  }
+
+  function rankAll(buildings, answers, eitherOr) {
+    return (buildings || []).map(function (b) { return { b: b, s: score(b, answers, eitherOr) }; })
+      .sort(function (x, y) { return y.s - x.s || cmpId(x.b.id, y.b.id); });
+  }
+
+  function pickFive(buildings, answers, eitherOr, vetoed, kept, n) {
+    n = n || 5; answers = answers || {};
+    var V = toSet(vetoed), byId = {}, out = [], used = {}, perArea = {}, perExp = {};
+    (buildings || []).forEach(function (b) { byId[b.id] = b; });
+    function add(b) { out.push(b); used[b.id] = true; perArea[areaOf(b)] = (perArea[areaOf(b)] || 0) + 1; perExp[b.experience_id] = true; }
+    function roomIn(b) { return (perArea[areaOf(b)] || 0) < PER_AREA; }
+    (kept || []).forEach(function (id) { var b = byId[id]; if (b && !V[id] && !used[id]) add(b); });
+    var nKept = out.length;
+    var cand = rankAll((buildings || []).filter(function (b) { return !V[b.id] && !used[b.id]; }), answers, eitherOr);
+
+    var seenExp = {}, meExps = [];
+    cand.forEach(function (c) { var e = c.b.experience_id; if (answers[e] === "me" && !seenExp[e]) { seenExp[e] = true; meExps.push(e); } });
+    meExps.forEach(function (e) {
+      if (out.length >= n || perExp[e]) return;
+      var mine = cand.filter(function (c) { return c.b.experience_id === e && !used[c.b.id]; });
+      var pick = mine.filter(function (c) { return roomIn(c.b); })[0] || mine[0];
+      if (pick) add(pick.b);
+    });
+    cand.forEach(function (c) { if (out.length < n && !used[c.b.id] && roomIn(c.b)) add(c.b); });
+    cand.forEach(function (c) { if (out.length < n && !used[c.b.id]) add(c.b); });
+
+    var S = {}; cand.forEach(function (c) { S[c.b.id] = c.s; });
+    var rest = out.slice(nKept).sort(function (x, y) { return S[y.id] - S[x.id] || cmpId(x.id, y.id); });
+    return out.slice(0, nKept).concat(rest);
+  }
+
+  function allNotMe(experienceIds, answers) {
+    return !!(experienceIds && experienceIds.length) && experienceIds.every(function (e) { return answers && answers[e] === "no"; });
+  }
+
+  return { prepare: prepare, score: score, rankAll: rankAll, pickFive: pickFive, allNotMe: allNotMe, MULT: MULT, PER_AREA: PER_AREA };
+})();
+if (typeof module !== "undefined") module.exports = ConciergePick;
+</script>
+
+<script>
+(function () {
+"use strict";
+var D = window.CONCIERGE_DATA, IL = window.CONCIERGE_ILLUS || {}, MAPBASE = window.HOUSE_HUNT_MAP_BASE || null;
+var app = document.getElementById("app"), layer = document.getElementById("layer"), live = document.getElementById("live");
+if (!D || !D.buildings) { app.innerHTML = "<p>This page has not been built yet. Run scripts/build_concierge.py.</p>"; return; }
+
+/* ---------- data ---------- */
+var META = D.meta || {}, ANCHOR = META.anchor_label || "Mom and Dad";
+var EXPS = D.experiences || [], HOODS = D.neighborhoods || [], EO = (D.either_or || []).slice(0, 3);
+var B = ConciergePick.prepare(D), BY = {}, HBY = {}, EBY = {};
+B.forEach(function (b) { BY[b.id] = b; });
+HOODS.forEach(function (h) { HBY[h.id] = h; });
+EXPS.forEach(function (e) { EBY[e.id] = e; });
+/* the map's six marks, by experience id, so a mark means the same thing here as on the long page */
+var MARKS = { enclave: ["#4192C8", "diamond"], middle: ["#AA0E0E", "square"], new_water: ["#F04288", "down"], pre_car: ["#AA42F0", "plus"], settled: ["#324BAE", "circle"], space: ["#AA8B0E", "up"] };
+var MARK_ORDER = ["#4192C8,diamond", "#AA0E0E,square", "#F04288,down", "#AA42F0,plus", "#324BAE,circle", "#AA8B0E,up"];
+EXPS.forEach(function (e, i) { if (!MARKS[e.id]) MARKS[e.id] = MARK_ORDER[i % 6].split(","); });
+
+/* ---------- small helpers ---------- */
+function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+function isNum(x) { return typeof x === "number" && isFinite(x); }
+function money(v) { return isNum(v) ? "$" + Math.round(v).toLocaleString("en-US") : null; }
+function cents(v) { return isNum(v) ? "$" + (Math.round(v * 100) % 100 === 0 ? Math.round(v).toString() : v.toFixed(2)) : null; }
+function httpUrl(u) { return typeof u === "string" && /^https?:\/\//i.test(u) ? u : null; }
+function ext(u, label, cls) { u = httpUrl(u); return u ? '<a class="' + (cls || "link") + '" href="' + esc(u) + '" target="_blank" rel="noopener noreferrer">' + esc(label) + ' <span aria-hidden="true">&#8599;</span><span class="sr"> (opens in a new tab)</span></a>' : ""; }
+function niceDate(iso) { var m = /^(\d{4})-(\d\d)-(\d\d)/.exec(iso || ""); if (!m) return null; return ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][+m[2] - 1] + " " + (+m[3]); }
+function illus(key) { var e = IL[key]; if (typeof e === "string") e = IL[e]; return e || null; }
+function expArt(e, size) { var a = e && (illus(e.illustration_id) || illus(e.id) || illus(e.label)); return a && a[size] ? '<div class="art">' + a[size] + '</div>' : ""; }
+function markSvg(expId) {
+  var m = MARKS[expId]; if (!m) return "";
+  var d = { diamond: "M0 -7.7L7.7 0L0 7.7L-7.7 0z", square: "M-5.3 -5.3H5.3V5.3H-5.3z", down: "M0 8.3L7.2 -5H-7.2z", up: "M0 -8.3L7.2 5H-7.2z",
+    plus: "M-2.6 -7.1H2.6V-2.6H7.1V2.6H2.6V7.1H-2.6V2.6H-7.1V-2.6H-2.6z", circle: "M-6 0a6 6 0 1 0 12 0a6 6 0 1 0 -12 0z" }[m[1]];
+  return '<span class="mark" aria-hidden="true"><svg viewBox="-9 -9 18 18"><path d="' + d + '" fill="' + m[0] + '"/></svg></span>';
+}
+var ICON = {
+  dog: "M5 11l-2-4 4-1 2 2h5l3-3 2 1-1 4v8h-3v-4H9v4H6v-6z", warning: "M12 4l9 16H3zM12 10v5M12 17.5v.5", train: "M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zM5 11h14M8 20l2-3M16 20l-2-3M9 14h.5M14.5 14h.5",
+  home: "M4 11l8-7 8 7v9h-5v-6H9v6H4z", fork: "M7 3v7a2 2 0 0 0 4 0V3M9 12v9M16 3c-2 2-2 7 0 9v9", park: "M12 3l5 7h-3l4 6H6l4-6H7zM12 16v5",
+  coffee: "M5 9h11v5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5zM16 10h2a2 2 0 0 1 0 5h-2M8 3v3M12 3v3", heart: "M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.500-7 10-7 10z",
+  ruler: "M3 16L16 3l5 5L8 21zM7 14l2 2M10 11l2 2M13 8l2 2", clock: "M12 3a9 9 0 1 0 0 18a9 9 0 0 0 0-18zM12 7v5l3 2", parking: "M5 3h14v18H5zM10 17V8h3a2.500 2.500 0 0 1 0 5h-3",
+  car: "M4 16v-4l2-5h12l2 5v4M4 16h16M6 16v2M18 16v2M7.500 13h.5M16 13h.5", coin: "M12 3a9 9 0 1 0 0 18a9 9 0 0 0 0-18zM14.500 9.500c-.5-1-1.500-1.500-2.500-1.500-1.500 0-2.500.8-2.500 2s1 1.700 2.500 2 2.500.8 2.500 2-1 2-2.500 2c-1 0-2-.5-2.500-1.500M12 6.500V8M12 16v1.500",
+  water: "M3 9c2-2 4-2 6 0s4 2 6 0 4-2 6 0M3 15c2-2 4-2 6 0s4 2 6 0 4-2 6 0", laundry: "M5 3h14v18H5zM12 9a4 4 0 1 0 0 8a4 4 0 0 0 0-8zM8 6h.5", moon: "M19 14A8 8 0 1 1 10 5a6 6 0 0 0 9 9z",
+  key: "M14 4a5 5 0 1 0 0 10a5 5 0 0 0 0-10zM10.500 12.500L4 19v2h3v-2h2v-2h2", dot: "M12 9a3 3 0 1 0 0 6a3 3 0 0 0 0-6z"
+};
+ICON.money = ICON.coin;
+function icon(name) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="' + (ICON[name] || ICON.dot) + '"/></svg>'; }
+function offerText(a) { return typeof a.offer_text === "string" && a.offer_text ? a.offer_text : typeof a.offer === "string" && a.offer ? a.offer : null; }
+function bedsText(n) { return n === 0 ? "Studio" : n === 1 ? "1 bedroom" : isNum(n) ? n + " bedrooms" : null; }
+function hoodName(b) { var h = HBY[b.neighborhood_id]; return h ? h.name + (h.state ? ", " + h.state : "") : [b.city, b.state].filter(Boolean).join(", "); }
+
+/* where a figure sits among every building on this page */
+var RANGE = {};
+["rent_from", "total_from", "drive_min"].forEach(function (k) {
+  var xs = B.map(function (b) { return b.facts && b.facts[k]; }).filter(isNum).sort(function (a, b) { return a - b; });
+  RANGE[k] = xs;
+});
+function position(key, v, lowWord, highWord) {
+  var xs = RANGE[key];
+  if (!isNum(v) || !xs || xs.length < 3) return "";
+  var lo = xs[0], hi = xs[xs.length - 1];
+  if (hi === lo) return "";
+  var below = xs.filter(function (x) { return x < v; }).length, same = xs.filter(function (x) { return x === v; }).length;
+  var pct = (below + (same - 1) / 2) / (xs.length - 1);
+  var word = pct <= 0.34 ? lowWord : pct >= 0.66 ? highWord : "about in the middle";
+  var left = Math.max(0, Math.min(100, (v - lo) / (hi - lo) * 100));
+  return '<div class="pos"><span class="track" aria-hidden="true"><i style="left:' + left.toFixed(1) + '%"></i></span><span class="word">' + word + '</span></div>';
+}
+
+/* ---------- her answers, kept on this phone only ---------- */
+var KEY = "lamia-concierge-v1";
+var S = { step: "welcome", si: 0, ci: 0, qi: 0, answers: {}, eo: {}, slots: [], pi: 0, kept: [], vetoed: [] };
+(function load() {
+  try {
+    var raw = window.localStorage.getItem(KEY); if (!raw) return;
+    var o = JSON.parse(raw); if (!o || typeof o !== "object") return;
+    ["step", "si", "ci", "qi", "pi"].forEach(function (k) { if (o[k] != null) S[k] = o[k]; });
+    if (o.answers && typeof o.answers === "object") S.answers = o.answers;
+    if (o.eo && typeof o.eo === "object") S.eo = o.eo;
+    ["slots", "kept", "vetoed"].forEach(function (k) { if (Array.isArray(o[k])) S[k] = o[k].filter(function (id) { return BY[id]; }); });
+  } catch (e) { /* storage is a convenience; the page works without it */ }
+  if (["welcome", "story", "eo", "picks", "plan"].indexOf(S.step) < 0) S.step = "welcome";
+  S.si = Math.max(0, Math.min(EXPS.length - 1, S.si | 0)); S.ci = Math.max(0, S.ci | 0); S.qi = Math.max(0, Math.min(Math.max(EO.length - 1, 0), S.qi | 0));
+  if (S.step === "story" && !EXPS.length) S.step = "picks";
+  if (S.step === "eo" && !EO.length) S.step = "picks";
+})();
+function save() { try { window.localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* ignore */ } }
+var VIEW = { all: false, tab: "list", sheet: null, confirmReset: false, f: { rent: null, beds: "any", garage: false } };
+var mapApi = null, askApi = null;
+
+function chosenSides() { return EO.map(function (q) { var c = S.eo[q.id]; return c === "a" || c === "b" ? q[c] : null; }).filter(Boolean); }
+function isKept(id) { return S.kept.indexOf(id) >= 0; }
+function isVetoed(id) { return S.vetoed.indexOf(id) >= 0; }
+function without(list, id) { return list.filter(function (x) { return x !== id; }); }
+function pick(held) { return ConciergePick.pickFive(B, S.answers, chosenSides(), S.vetoed, held, Math.max(5, held.length)); }
+function syncSlots() {
+  var slots = S.slots.filter(function (id) { return BY[id] && !isVetoed(id); });
+  S.kept.forEach(function (id) {
+    if (slots.indexOf(id) >= 0) return;
+    var free = -1; for (var i = slots.length - 1; i >= 0; i--) if (!isKept(slots[i])) { free = i; break; }
+    if (free >= 0 && slots.length >= 5) slots[free] = id; else slots.push(id);
+  });
+  if (slots.length < 5) pick(slots).forEach(function (b) { if (slots.indexOf(b.id) < 0) slots.push(b.id); });
+  S.slots = slots; S.pi = Math.max(0, Math.min(slots.length - 1, S.pi | 0));
+}
+function freshSlots() { S.slots = pick(S.kept.slice()).map(function (b) { return b.id; }); S.pi = 0; }
+
+/* ---------- screens ---------- */
+function top(extra, noBrand) {
+  return '<header class="top">' + (noBrand ? '<span></span>' : '<span class="brand">Lamia&#39;s House Hunt</span>') + '<span class="topbtns" id="topbtns">' + (extra || "") +
+    '<button type="button" class="quiet" data-act="all">See everything</button></span></header>';
+}
+function bar(html) { return '<div class="bar" id="bar"><div class="bar-in">' + html + '</div></div>'; }
+
+function welcome() {
+  var c = (META.counts || {}), n = EXPS.length;
+  var words = ["No", "One", "Two", "Three", "Four", "Five", "Six"];
+  return top("", true) +
+    '<section class="hello"><h1 tabindex="-1"><span class="name">Lamia&#39;s<br>House Hunt</span><span class="sr">: </span></h1><span class="tagbox">the short version</span>' +
+    '<p class="lead">What kind of life do you want next year? Tell me, and I will pick five places for you to tour.</p>' +
+    '<ol class="steps"><li><b>1</b><span>' + (words[n] || n) + ' short ' + (n === 1 ? 'story' : 'stories') + '. Tap through and say which feels like you.</span></li>' +
+    (EO.length ? '<li><b>2</b><span>A couple of quick this-or-that questions.</span></li>' : '') +
+    '<li><b>' + (EO.length ? 3 : 2) + '</b><span>Five places to tour. Keep the ones you like.</span></li></ol>' +
+    '<button type="button" class="btn main" data-act="start">Start</button>' +
+    (isNum(c.buildings) && isNum(META.rent_limit) ? '<p class="small muted">' + c.buildings + ' buildings, every one with rent of ' + money(META.rent_limit) + ' or less.</p>' : '') +
+    '</section>';
+}
+
+function story() {
+  var e = EXPS[S.si], cards = (e.story || []), n = cards.length, i = Math.min(S.ci, n);
+  var segs = ""; for (var k = 0; k <= n; k++) segs += '<i class="' + (k <= i ? "on" : "") + '"></i>';
+  var head = '<div class="stack" style="gap:8px"><div class="segs" aria-hidden="true">' + segs + '</div>' +
+    '<p class="story-head"><span>Story ' + (S.si + 1) + ' of ' + EXPS.length + '</span><span>' + (i < n ? 'Part ' + (i + 1) + ' of ' + n : 'Your answer') + '</span></p></div>';
+  if (i >= n) {
+    return top() + head +
+      '<section class="stack enter" style="gap:16px">' + expArt(e, "banner") + '<p class="where">' + markSvg(e.id) + esc(e.label) + '</p>' +
+      '<h1 class="h-big" tabindex="-1">Is this you?</h1>' + (e.tagline ? '<p class="lead">' + esc(e.tagline) + '</p>' : '') +
+      '<div class="stack"><button type="button" class="choice" data-act="answer" data-v="me">That&#39;s me</button>' +
+      '<button type="button" class="choice" data-act="answer" data-v="maybe">Maybe</button>' +
+      '<button type="button" class="choice" data-act="answer" data-v="no">Not me<small>It stays on the list. It just moves down.</small></button></div>' +
+      '<button type="button" class="quiet center" data-act="story-prev">Read it again</button></section>';
+  }
+  var c = cards[i] || {}, first = i === 0;
+  return top() + head +
+    '<section class="story-card enter" id="story-card" aria-label="' + esc(e.label) + '">' + expArt(e, "tall") +
+    (first ? '<p class="where">' + markSvg(e.id) + esc(e.label) + '</p>' : '<p class="kicker">' + esc(c.title || "") + '</p>') +
+    (first ? '<h1 tabindex="-1">' + esc(c.text || e.tagline || c.title || "") + '</h1><p class="taphint">Tap Next, or tap the picture side to side.</p>'
+           : '<h1 class="sr" tabindex="-1">' + esc(c.title || "") + '</h1><p class="txt">' + esc(c.text || "") + '</p>') +
+    '</section>' +
+    bar('<div class="bar-row"><button type="button" class="btn" data-act="story-prev">Back</button><button type="button" class="btn main" data-act="story-next">Next</button></div>');
+}
+
+function eitherOr() {
+  var q = EO[S.qi];
+  return top() +
+    '<section class="stack enter" style="gap:18px"><p class="story-head"><span>Question ' + (S.qi + 1) + ' of ' + EO.length + '</span><span>Pick one</span></p>' +
+    '<h1 class="h-big" tabindex="-1">' + esc(q.question || "Which one?") + '</h1>' +
+    '<div class="stack"><button type="button" class="choice" data-act="eo" data-v="a">' + esc(q.a && q.a.label) + '</button>' +
+    '<button type="button" class="choice" data-act="eo" data-v="b">' + esc(q.b && q.b.label) + '</button></div>' +
+    '<button type="button" class="quiet center" data-act="eo" data-v="skip">Skip</button>' +
+    '<button type="button" class="quiet center muted" data-act="eo-back">Back</button></section>';
+}
+
+function factsList(b) {
+  var f = b.facts || {}, park = f.parking || {}, dog = f.dog || {};
+  function range(a, z, fmt) { if (!isNum(a)) return null; return isNum(z) && z !== a ? "from " + fmt(a) : fmt(a); }
+  var rent = range(f.rent_from, f.rent_to, money), total = range(f.total_from, f.total_to, money);
+  var toll = !isNum(f.toll_round_trip) ? "tolls not fully known" : f.toll_round_trip === 0 ? "no tolls" : "tolls " + cents(f.toll_round_trip) + " round trip";
+  function row(label, value, sub, marker, attr, inline) {
+    return '<li><div class="frow"><span class="l">' + label + '</span><span class="v"' + (attr || "") + '>' + (value || '<span class="muted">Not known</span>') + (sub ? '<small' + (inline ? ' class="in"' : '') + '>' + sub + '</small>' : '') + '</span></div>' + (marker || "") + '</li>';
+  }
+  function textRow(label, text) { return '<li><div class="frow"><span class="l">' + label + '</span></div><p class="ftext">' + (text ? esc(text) : '<span class="muted">Not known yet. Ask on the tour.</span>') + '</p></li>'; }
+  return '<ul class="facts">' +
+    row("Rent", rent, rent ? "a month" : "", position("rent_from", f.rent_from, "lower than most", "higher than most"), isNum(f.rent_from) ? ' data-rent="' + f.rent_from + '"' : "", true) +
+    row("Total with utilities and fees", total, total ? "a month" : "", position("total_from", f.total_from, "lower than most", "higher than most"), "", true) +
+    row("Drive to " + esc(ANCHOR), isNum(f.drive_min) ? Math.round(f.drive_min) + " min" : null, toll, position("drive_min", f.drive_min, "shorter than most", "longer than most")) +
+    textRow("Parking", park.summary) + textRow("Dog", dog.summary) + '</ul>';
+}
+
+function detailsBlocks(b) {
+  var out = "";
+  var pts = (b.points || []).filter(function (p) { return p && p.text; });
+  if (b.about || pts.length) out += '<details class="more"><summary>About the building</summary><div class="in">' + (b.about ? '<p>' + esc(b.about) + '</p>' : '') +
+    (pts.length ? '<ul class="points">' + pts.map(function (p) { return '<li>' + icon(p.icon) + '<span>' + esc(p.text) + '</span></li>'; }).join("") + '</ul>' : '') + '</div></details>';
+  var day = (b.day || []).filter(function (m) { return m && m.title; });
+  if (day.length) out += '<details class="more"><summary>A day here</summary><div class="in"><ul class="day">' + day.map(function (m) {
+    var lv = ["strong", "mixed", "weak"].indexOf(m.level) >= 0 ? m.level : null;
+    return '<li><div class="t"><span>' + esc(m.title) + '</span>' + (lv ? '<span class="chip ' + lv + '">' + lv + '</span>' : '') + '</div>' + (m.text ? '<p>' + esc(m.text) + '</p>' : '') + '</li>';
+  }).join("") + '</ul></div></details>';
+  var ap = b.apartments || [];
+  if (ap.length) out += '<details class="more"><summary>' + (ap.length === 1 ? "The apartment" : "The " + ap.length + " apartments") + '</summary><div class="in"><ul class="apts">' + ap.map(function (a) {
+    var bits = [bedsText(a.beds), isNum(a.sqft) ? Math.round(a.sqft) + " sq ft" : null, a.floor_text, a.available_text].filter(Boolean).join(" · ");
+    return '<li><p class="a-h">' + esc(a.label || "Apartment") + '</p>' + (bits ? '<p class="a-s">' + esc(bits) + '</p>' : '') +
+      '<div class="pair"><div><span>Rent</span><b' + (isNum(a.rent) ? ' data-rent="' + a.rent + '"' : '') + '>' + (money(a.rent) || "Not known") + '</b></div><div><span>Total with utilities and fees</span><b>' + (money(a.total) || "Not known") + '</b></div></div>' +
+      (offerText(a) ? '<p class="a-s">' + esc(offerText(a)) + '</p>' : '') +
+      (a.star ? '<p class="star"><span aria-hidden="true">&#9733;</span> ' + esc(a.confirm_label || "One thing to confirm") + '</p>' : '') +
+      ext(a.listing_url, "See the listing") + '</li>';
+  }).join("") + '</ul>' + (ap.some(function (a) { return a.star; }) ? '<p class="small muted"><span aria-hidden="true">&#9733;</span> A star means one thing to confirm.</p>' : '') + '</div></details>';
+  var conf = (b.confirm || []).filter(function (c) { return c && (c.question || c.label); }), dis = (b.disclosures || []).filter(Boolean);
+  if (conf.length || dis.length) out += '<details class="more"><summary>Things to confirm</summary><div class="in"><ul class="qs">' +
+    conf.map(function (c) { return '<li>' + esc(c.question || c.label) + '</li>'; }).join("") +
+    dis.map(function (t) { return '<li>' + esc(cap(typeof t === "string" ? t : (t.label || t.question || ""))) + '</li>'; }).join("") + '</ul></div></details>';
+  return out ? '<div class="moregroup">' + out + '</div>' : "";
+}
+
+function card(b, hid) {
+  var e = EBY[b.experience_id];
+  return '<article class="bcard enter" data-building="' + esc(b.id) + '">' +
+    '<p class="where">' + markSvg(b.experience_id) + '<span>' + esc(hoodName(b)) + (e ? ' · ' + esc(e.label) : '') + '</span></p>' +
+    '<h2 tabindex="-1" id="' + hid + '">' + esc(b.name || b.address || "This building") + '</h2>' +
+    (isKept(b.id) ? '<p class="keptflag">&#10003; On your tour list</p>' : isVetoed(b.id) ? '<p class="passflag">You passed on this one</p>' : '') +
+    ((b.why || b.give_up) ? '<div class="say">' +
+      (b.why ? '<p class="yes"><span class="ic" aria-hidden="true">&#10003;</span><span><b>Why this one</b>' + esc(b.why) + '</span></p>' : '') +
+      (b.give_up ? '<p class="but"><span class="ic" aria-hidden="true">&#8722;</span><span><b>What you give up</b>' + esc(b.give_up) + '</span></p>' : '') + '</div>' : '') +
+    factsList(b) + ext(b.photos_url || b.listing_url, "See photos") + detailsBlocks(b) + '</article>';
+}
+
+function picks() {
+  syncSlots();
+  var n = S.slots.length;
+  if (!n) return top() + '<section class="stack"><h1 class="h-big" tabindex="-1">Nothing is left to suggest</h1><p class="lead">You have passed on every building. Start over, or look through everything.</p><button type="button" class="btn main" data-act="all">See everything</button><button type="button" class="btn" data-act="reset-ask">Start over</button></section>';
+  var b = BY[S.slots[S.pi]], kept = isKept(b.id), nk = S.kept.length;
+  var pips = S.slots.map(function (id, i) { return '<i class="' + (i === S.pi ? "cur " : "") + (isKept(id) ? "kept" : "") + '"></i>'; }).join("");
+  var notMe = ConciergePick.allNotMe(EXPS.map(function (e) { return e.id; }), S.answers);
+  var intro = S.pi === 0 ? '<div class="stack" style="gap:6px"><p class="kicker">Here is what I would do</p><p>' +
+    (notMe ? 'None of the stories felt like you, so I picked the five best places overall.' : 'Keep the ones you like. I will swap the rest.') + '</p></div>' : '';
+  return top() + intro +
+    '<div><div class="count"><button type="button" class="round" data-act="pick-prev" aria-label="Previous place"' + (S.pi === 0 ? " disabled" : "") + '>&#8249;</button>' +
+    '<p class="n" style="text-align:center" id="pick-count">' + (S.pi + 1) + ' of ' + n + '<small>' + (nk ? nk + ' kept' : 'none kept yet') + '</small></p>' +
+    '<button type="button" class="round" data-act="pick-next" aria-label="Next place"' + (S.pi >= n - 1 ? " disabled" : "") + '>&#8250;</button></div><div class="pips" aria-hidden="true">' + pips + '</div></div>' +
+    card(b, "pick-h") +
+    '<div class="stack" style="gap:0">' + resetBlock() + '<button type="button" class="quiet center muted" data-act="redo">Change my answers</button></div>' +
+    bar('<div class="bar-row">' + (kept
+      ? '<button type="button" class="btn sm" data-act="unkeep" data-id="' + esc(b.id) + '">Take it off</button><button type="button" class="btn sm main" data-act="' + (nextOpen() >= 0 ? "pick-open" : "plan") + '">' + (nextOpen() >= 0 ? "Next place" : "See my tour plan") + '</button>'
+      : '<button type="button" class="btn sm" data-act="veto" data-id="' + esc(b.id) + '">Not this one</button><button type="button" class="btn sm main" data-act="keep" data-id="' + esc(b.id) + '">Keep</button>') + '</div>' +
+      (nk && !(kept && nextOpen() < 0) ? '<button type="button" class="quiet center" data-act="plan">That&#39;s enough. Show my tour plan</button>' : ''));
+}
+function nextOpen() { var n = S.slots.length; for (var k = 1; k <= n; k++) { var i = (S.pi + k) % n; if (!isKept(S.slots[i])) return i; } return -1; }
+function resetBlock() {
+  return VIEW.confirmReset
+    ? '<div class="confirmrow" id="reset-box"><p><b>Start over?</b> This clears your answers and your kept places.</p><div class="bar-row"><button type="button" class="btn sm" data-act="reset-no">No, go back</button><button type="button" class="btn sm main" data-act="reset-yes">Yes, start over</button></div></div>'
+    : '<button type="button" class="quiet center" data-act="reset-ask">Start over</button>';
+}
+
+function li(q) { return '<li>' + esc(q) + '</li>'; }
+function cap(s) { s = String(s || ""); return s.charAt(0).toUpperCase() + s.slice(1); }
+function areaOfBuilding(b) { return HBY[b.area_id] || HBY[b.neighborhood_id] || null; }
+function plan() {
+  var kept = S.kept.map(function (id) { return BY[id]; }).filter(Boolean);
+  if (!kept.length) return top() + '<section class="stack"><h1 class="h-big" tabindex="-1">Your tour plan is empty</h1><p class="lead">Keep a place or two and they will show up here.</p><button type="button" class="btn main" data-act="picks">See my five</button></section>';
+  var groups = {}, order = [];
+  kept.forEach(function (b) {
+    var a = areaOfBuilding(b), k = a ? a.id : "other:" + (b.state || "");
+    if (!groups[k]) { groups[k] = { a: a, name: a ? a.name + (a.state ? ", " + a.state : "") : (b.state || "Other places"), drive: a && isNum(a.drive_min) ? a.drive_min : (b.facts || {}).drive_min, list: [] }; order.push(k); }
+    groups[k].list.push(b);
+  });
+  order.sort(function (x, y) { var a = groups[x].drive, b = groups[y].drive; return (isNum(a) ? a : 1e9) - (isNum(b) ? b : 1e9) || (x < y ? -1 : 1); });
+  var ts = niceDate(META.tour_start), mv = niceDate(META.move_in_by);
+  var html = top() + '<section class="stack" style="gap:8px"><p class="kicker">All set</p><h1 class="h-big" tabindex="-1">Your tour plan</h1>' +
+    '<p class="lead">' + kept.length + (kept.length === 1 ? ' place' : ' places') + ', closest to ' + esc(ANCHOR) + ' first.' + (ts ? ' Tours can start ' + ts + '.' : '') + (mv ? ' Move in by ' + mv + '.' : '') + '</p></section>';
+  order.forEach(function (k) {
+    var g = groups[k];
+    html += '<section class="area"><div class="area-h"><h2>' + esc(g.name) + '</h2>' + (isNum(g.drive) ? '<span>' + Math.round(g.drive) + ' min drive</span>' : '') + '</div>';
+    g.list.sort(function (x, y) { return ((x.facts || {}).drive_min || 0) - ((y.facts || {}).drive_min || 0) || (x.id < y.id ? -1 : 1); }).forEach(function (b) {
+      var addr = [b.address, b.city, b.state].filter(Boolean).join(", "), ct = b.contact || {}, f = b.facts || {};
+      var own = HBY[b.neighborhood_id], parked = own && own.parked_under;
+      var qs = [], seen = {};
+      (b.confirm || []).forEach(function (c) { var q = c && (c.question || c.label); if (q && !seen[q]) { seen[q] = 1; qs.push(q); } });
+      (b.tour_questions || []).forEach(function (q) { if (q && !seen[q]) { seen[q] = 1; qs.push(q); } });
+      html += '<div class="stop"><h3>' + esc(b.name || b.address) + '</h3>' + (parked ? '<p class="small muted">In ' + esc(own.name) + ', nearby</p>' : '') +
+        (addr ? '<p><a class="link" href="https://www.google.com/maps/search/?api=1&amp;query=' + encodeURIComponent(addr) + '" target="_blank" rel="noopener noreferrer">' + esc(addr) + ' <span aria-hidden="true">&#8599;</span><span class="sr"> (opens a map in a new tab)</span></a></p>' : '') +
+        '<div class="pair"><div><span>Rent</span><b' + (isNum(f.rent_from) ? ' data-rent="' + f.rent_from + '"' : '') + '>' + (isNum(f.rent_from) ? (isNum(f.rent_to) && f.rent_to !== f.rent_from ? "from " : "") + money(f.rent_from) : "Not known") + '</b></div><div><span>Total with utilities and fees</span><b>' + (isNum(f.total_from) ? (isNum(f.total_to) && f.total_to !== f.total_from ? "from " : "") + money(f.total_from) : "Not known") + '</b></div></div>' +
+        (((ct.office_phone && !ct.private) || httpUrl(ct.site)) ? '<div><p class="lab">Leasing office</p>' + (ct.office_phone && !ct.private ? '<p class="phone">' + esc(ct.office_phone) + '</p>' : '') + ext(ct.site, "Building website") + '</div>' : '') +
+        (qs.length ? '<div><p class="lab">Ask on the tour</p><ol class="qs" style="margin-top:6px">' + qs.slice(0, 3).map(li).join("") + '</ol>' +
+          (qs.length > 3 ? '<details class="more moreqs"><summary>' + (qs.length - 3) + ' more to ask</summary><div class="in"><ol class="qs" start="4">' + qs.slice(3).map(li).join("") + '</ol></div></details>' : '') + '</div>' : '') +
+        '<button type="button" class="quiet" data-act="open" data-id="' + esc(b.id) + '">See this place again</button></div>';
+    });
+    html += '</section>';
+  });
+  html += '<div class="stack"><button type="button" class="btn" data-act="picks">Change my picks</button>' + resetBlock() + '</div>';
+  return html;
+}
+
+/* ---------- see everything ---------- */
+function rentBounds() {
+  var rents = []; B.forEach(function (b) { (b.apartments || []).forEach(function (a) { if (isNum(a.rent)) rents.push(a.rent); }); if (isNum((b.facts || {}).rent_from)) rents.push(b.facts.rent_from); });
+  var hi = isNum(META.rent_limit) ? META.rent_limit : (rents.length ? Math.ceil(Math.max.apply(null, rents) / 50) * 50 : 2000);
+  var lo = rents.length ? Math.floor(Math.min.apply(null, rents) / 50) * 50 : 0;
+  if (lo >= hi) lo = Math.max(0, hi - 50);
+  return [lo, hi];
+}
+function matchApts(b) {
+  var f = VIEW.f, ap = b.apartments || [];
+  if (f.garage && ((b.facts || {}).parking || {}).kind !== "garage") return null;
+  if (!ap.length) { var r = (b.facts || {}).rent_from; return (f.beds === "any" && (f.rent == null || !isNum(r) || r <= f.rent)) ? [] : null; }
+  var m = ap.filter(function (a) { return (f.rent == null || !isNum(a.rent) || a.rent <= f.rent) && (f.beds === "any" || String(a.beds) === f.beds); });
+  return m.length ? m : null;
+}
+function listHtml() {
+  var shown = 0, html = "";
+  EXPS.forEach(function (e) {
+    var hosts = HOODS.filter(function (h) { return h.experience_id === e.id && !(h.parked_under && HBY[h.parked_under]); })
+      .sort(function (x, y) { return (isNum(x.drive_min) ? x.drive_min : 1e9) - (isNum(y.drive_min) ? y.drive_min : 1e9) || (x.id < y.id ? -1 : 1); });
+    var part = "";
+    hosts.forEach(function (h) {
+      function rows(hid, tagName) {
+        return B.filter(function (b) { return b.neighborhood_id === hid; }).sort(function (x, y) { return (y.rank_score || 0) - (x.rank_score || 0) || (x.id < y.id ? -1 : 1); }).map(function (b) {
+          var m = matchApts(b); if (!m) return "";
+          shown++;
+          var f = b.facts || {}, rs = m.map(function (a) { return a.rent; }).filter(isNum), ts = m.map(function (a) { return a.total; }).filter(isNum);
+          var r = rs.length ? Math.min.apply(null, rs) : f.rent_from, t = ts.length ? Math.min.apply(null, ts) : f.total_from, many = rs.length > 1 && Math.max.apply(null, rs) !== r;
+          return '<button type="button" class="row" data-act="open" data-id="' + esc(b.id) + '"><span class="r1"><b>' + esc(b.name || b.address) + '</b><span>' + (isNum(f.drive_min) ? Math.round(f.drive_min) + ' min' : '') + '</span></span>' +
+            '<span class="r2"><span>Rent ' + (many ? 'from ' : '') + '</span><b' + (isNum(r) ? ' data-rent="' + r + '"' : '') + '>' + (money(r) || 'not known') + '</b><span>Total with utilities and fees ' + (many ? 'from ' : '') + '</span><b>' + (money(t) || 'not known') + '</b></span>' +
+            (tagName ? '<span class="tag at">In ' + esc(tagName) + '</span>' : '') +
+            (isKept(b.id) ? '<span class="tag k">&#10003; On your tour list</span>' : isVetoed(b.id) ? '<span class="tag at">You passed on this one</span>' : '') + '</button>';
+        }).join("");
+      }
+      var own = rows(h.id, null), near = "";
+      HOODS.filter(function (p) { return p.parked_under === h.id; }).sort(function (x, y) { return x.id < y.id ? -1 : 1; }).forEach(function (p) { near += rows(p.id, p.name); });
+      if (!own && !near) return;
+      part += '<div class="grp"><h3 class="grp-h" tabindex="-1" id="grp-' + esc(h.id) + '" data-hood="' + esc(h.id) + '">' + esc(h.name) + (h.state ? ', ' + esc(h.state) : '') + (isNum(h.drive_min) ? '<small>' + Math.round(h.drive_min) + ' min to ' + esc(ANCHOR) + '</small>' : '') + '</h3>' + own +
+        (near ? '<p class="nearby">Also nearby</p>' + near : '') + '</div>';
+    });
+    if (part) html += '<div class="exp-h">' + markSvg(e.id) + '<h2>' + esc(e.label) + '</h2></div>' + part;
+  });
+  /* buildings whose neighborhood or experience is missing from the data still show */
+  var loose = B.filter(function (b) { return !(HBY[b.neighborhood_id] && EBY[b.experience_id] && EBY[HBY[b.neighborhood_id].experience_id]); });
+  var lp = loose.map(function (b) { var m = matchApts(b); if (!m) return ""; shown++; var f = b.facts || {};
+    return '<button type="button" class="row" data-act="open" data-id="' + esc(b.id) + '"><span class="r1"><b>' + esc(b.name || b.address) + '</b></span><span class="r2"><span>Rent</span><b' + (isNum(f.rent_from) ? ' data-rent="' + f.rent_from + '"' : '') + '>' + (money(f.rent_from) || 'not known') + '</b><span>Total with utilities and fees</span><b>' + (money(f.total_from) || 'not known') + '</b></span></button>'; }).join("");
+  if (lp) html += '<div class="exp-h"><h2>More places</h2></div><div class="grp">' + lp + '</div>';
+  if (!shown) html = '<p class="empty">Nothing fits that filter. Raise the rent or clear a choice.</p>';
+  return { html: html, shown: shown };
+}
+function everything() {
+  var rb = rentBounds(), f = VIEW.f; if (f.rent == null) f.rent = rb[1];
+  var L = listHtml();
+  function seg(v, label) { return '<button type="button" data-act="f-beds" data-v="' + v + '" aria-pressed="' + (f.beds === v) + '">' + label + '</button>'; }
+  return '<header class="top"><button type="button" class="quiet" data-act="all-close"><span aria-hidden="true">&#8249;</span> Back</button><span class="topbtns" id="topbtns"></span></header>' +
+    '<section class="stack" style="gap:6px"><h1 class="h-big" tabindex="-1">Everything</h1><p>Every building, nothing left out. Tap one to see it.</p></section>' +
+    '<section class="filter" aria-label="Filter"><h2>Filter</h2>' +
+    '<div><label for="f-rent">Rent up to <output id="f-rent-out" for="f-rent">' + money(f.rent) + '</output></label><input type="range" id="f-rent" min="' + rb[0] + '" max="' + rb[1] + '" step="50" value="' + f.rent + '"></div>' +
+    '<div><span class="lab" id="f-beds-l">Bedrooms</span><div class="seg" role="group" aria-labelledby="f-beds-l">' + seg("any", "Any") + seg("0", "Studio") + seg("1", "1 bedroom") + '</div></div>' +
+    '<label class="check" for="f-garage"><input type="checkbox" id="f-garage"' + (f.garage ? " checked" : "") + '> Garage parking only</label>' +
+    '<p class="fcount" id="f-count" aria-live="polite">Showing ' + L.shown + ' of ' + B.length + ' buildings</p></section>' +
+    (MAPBASE && typeof window.initHouseHuntMap === "function" ? '<div class="tabs" role="group" aria-label="Show as"><button type="button" data-act="tab" data-v="list" aria-pressed="' + (VIEW.tab === "list") + '">List</button><button type="button" data-act="tab" data-v="map" aria-pressed="' + (VIEW.tab === "map") + '">Map</button></div>' : '') +
+    '<div id="all-list" class="stack"' + (VIEW.tab === "map" ? " hidden" : "") + '>' + L.html + '</div>' +
+    '<div id="all-map" class="mapwrap"' + (VIEW.tab === "map" ? "" : " hidden") + '><div id="map-slot"></div></div>';
+}
+function refreshList() {
+  var L = listHtml(), box = document.getElementById("all-list"), cnt = document.getElementById("f-count");
+  if (box) box.innerHTML = L.html;
+  if (cnt) cnt.textContent = "Showing " + L.shown + " of " + B.length + " buildings";
+  if (VIEW.tab === "map") drawMap();
+}
+function drawMap() {
+  var slot = document.getElementById("map-slot");
+  if (!slot || !MAPBASE || typeof window.initHouseHuntMap !== "function") return;
+  if (mapApi) { try { mapApi.destroy(); } catch (e) { /* ignore */ } mapApi = null; }
+  var counts = {}; B.forEach(function (b) { if (matchApts(b)) counts[b.neighborhood_id] = (counts[b.neighborhood_id] || 0) + 1; });
+  var style = {}; EXPS.forEach(function (e) { style[e.id] = { color: MARKS[e.id][0], shape: MARKS[e.id][1] }; });
+  var data = { meta: META.anchor ? { anchor: META.anchor } : {}, years: EXPS.map(function (e) { return { id: e.id, label: e.label }; }),
+    neighborhoods: HOODS.filter(function (h) { return isNum(h.lat) && isNum(h.lon); }).map(function (h) {
+      return { id: h.id, name: h.name, state: h.state, year: h.experience_id, lat: h.lat, lon: h.lon, counts: { shown: counts[h.id] || 0 }, drive_min: h.drive_min, toll_round_trip: h.toll_round_trip }; }) };
+  try {
+    mapApi = window.initHouseHuntMap(slot, data, MAPBASE, { anchorLabel: ANCHOR, yearStyle: style, onSelectHood: function (id) {
+      var h = HBY[id], host = h && h.parked_under && HBY[h.parked_under] ? h.parked_under : id;
+      VIEW.tab = "list"; render(); var t = document.getElementById("grp-" + host); if (t) { t.scrollIntoView({ block: "start" }); t.focus({ preventScroll: true }); }
+    } });
+  } catch (e) { slot.textContent = "The map could not be drawn."; }
+}
+
+function sheet() {
+  var b = BY[VIEW.sheet]; if (!b) return "";
+  var kept = isKept(b.id);
+  return '<div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-h" id="sheet"><div class="wrap">' +
+    '<header class="top"><button type="button" class="quiet" data-act="sheet-close"><span aria-hidden="true">&#8249;</span> Back</button></header>' + card(b, "sheet-h") + '</div>' +
+    bar('<div class="bar-row"><button type="button" class="btn sm" data-act="sheet-close">Back</button>' + (kept
+      ? '<button type="button" class="btn sm" data-act="unkeep" data-id="' + esc(b.id) + '">Take it off my list</button>'
+      : '<button type="button" class="btn sm main" data-act="keep" data-id="' + esc(b.id) + '">Keep</button>') + '</div>') + '</div>';
+}
+
+/* ---------- render ---------- */
+var lastFocusKey = null;
+function render(opts) {
+  opts = opts || {};
+  if (mapApi) { try { mapApi.destroy(); } catch (e) { /* ignore */ } mapApi = null; }
+  var html = VIEW.all ? everything() : S.step === "story" ? story() : S.step === "eo" ? eitherOr() : S.step === "picks" ? picks() : S.step === "plan" ? plan() : welcome();
+  app.innerHTML = html;
+  layer.innerHTML = VIEW.sheet ? sheet() : "";
+  var theBar = (VIEW.sheet ? layer : app).querySelector(".bar");
+  app.classList.toggle("has-bar", !!app.querySelector(".bar"));
+  document.documentElement.style.setProperty("--bar-h", theBar ? theBar.offsetHeight + "px" : "0px");
+  document.body.style.overflow = VIEW.sheet ? "hidden" : "";
+  if (VIEW.all && VIEW.tab === "map" && !VIEW.sheet) drawMap();
+  if (askApi) askApi.mount();
+  save();
+  var key = (VIEW.sheet ? "sheet:" + VIEW.sheet : VIEW.all ? "all" : S.step + ":" + S.si + ":" + S.ci + ":" + S.qi + ":" + (S.step === "picks" ? S.slots[S.pi] : ""));
+  if (!opts.stay && key !== lastFocusKey) {
+    lastFocusKey = key;
+    var h = (VIEW.sheet ? layer : app).querySelector("h1[tabindex],h2[tabindex]");
+    if (VIEW.sheet) { var sh = document.getElementById("sheet"); if (sh) sh.scrollTop = 0; } else window.scrollTo(0, 0);
+    if (h && opts.focus !== false) h.focus({ preventScroll: true });
+  }
+}
+var toastT = null;
+function toast(msg) {
+  live.textContent = msg;
+  var old = document.getElementById("toast"); if (old) old.remove();
+  var t = document.createElement("div"); t.id = "toast"; t.className = "toast"; t.textContent = msg; document.body.appendChild(t);
+  clearTimeout(toastT); toastT = setTimeout(function () { t.remove(); }, 2200);
+}
+
+/* ---------- actions ---------- */
+function storyNext() { var n = (EXPS[S.si].story || []).length; if (S.ci < n) { S.ci++; render(); } }
+function storyPrev() {
+  if (S.ci > 0) S.ci--; else if (S.si > 0) { S.si--; S.ci = (EXPS[S.si].story || []).length; } else S.step = "welcome";
+  render();
+}
+function toPicks() { S.step = "picks"; S.slots = []; freshSlots(); render(); }
+function act(a, el) {
+  var id = el.getAttribute("data-id"), v = el.getAttribute("data-v");
+  switch (a) {
+    case "start": if (EXPS.length) { S.step = "story"; S.si = 0; S.ci = 0; render(); } else if (EO.length) { S.step = "eo"; S.qi = 0; render(); } else toPicks(); break;
+    case "story-next": storyNext(); break;
+    case "story-prev": storyPrev(); break;
+    case "answer":
+      S.answers[EXPS[S.si].id] = v;
+      if (S.si < EXPS.length - 1) { S.si++; S.ci = 0; render(); } else if (EO.length) { S.step = "eo"; S.qi = 0; render(); } else toPicks();
+      break;
+    case "eo":
+      S.eo[EO[S.qi].id] = v;
+      if (S.qi < EO.length - 1) { S.qi++; render(); } else toPicks();
+      break;
+    case "eo-back":
+      if (S.qi > 0) S.qi--; else if (EXPS.length) { S.step = "story"; S.si = EXPS.length - 1; S.ci = (EXPS[S.si].story || []).length; } else S.step = "welcome";
+      render(); break;
+    case "pick-prev": if (S.pi > 0) { S.pi--; render(); } break;
+    case "pick-next": if (S.pi < S.slots.length - 1) { S.pi++; render(); } break;
+    case "pick-open": var o = nextOpen(); if (o >= 0) { S.pi = o; render(); } break;
+    case "keep":
+      if (!isKept(id)) S.kept.push(id);
+      S.vetoed = without(S.vetoed, id);
+      if (VIEW.sheet) { toast("Kept. It is on your tour list."); render({ stay: true }); break; }
+      var open = nextOpen();
+      if (S.kept.length >= 5 && S.slots.every(isKept)) { S.step = "plan"; render(); toast("Five kept. Here is your tour plan."); }
+      else if (open >= 0) { S.pi = open; render(); toast("Kept. Here is the next one."); }
+      else { S.step = "plan"; render(); }
+      break;
+    case "unkeep": S.kept = without(S.kept, id); toast("Taken off your tour list."); render({ stay: true }); break;
+    case "veto":
+      var i = S.slots.indexOf(id);
+      S.vetoed.push(id); S.kept = without(S.kept, id);
+      var others = S.slots.filter(function (x) { return x !== id; });
+      var next = pick(others).filter(function (b) { return others.indexOf(b.id) < 0; })[0];
+      if (next) { S.slots[i] = next.id; toast("Swapped. Here is the next best."); }
+      else { S.slots = others; S.pi = Math.min(S.pi, Math.max(0, others.length - 1)); toast("That was the last one to suggest."); }
+      render(); break;
+    case "plan": S.step = "plan"; VIEW.all = false; render(); break;
+    case "picks": S.step = "picks"; VIEW.all = false; if (!S.slots.length) freshSlots(); render(); break;
+    case "redo": S.step = EXPS.length ? "story" : EO.length ? "eo" : "picks"; S.si = 0; S.ci = 0; S.qi = 0; render(); break;
+    case "reset-ask": VIEW.confirmReset = true; render({ stay: true }); var rb = document.getElementById("reset-box"); if (rb) { rb.scrollIntoView({ block: "center" }); rb.querySelector("button").focus(); } break;
+    case "reset-no": VIEW.confirmReset = false; render({ stay: true }); break;
+    case "reset-yes":
+      S = { step: "welcome", si: 0, ci: 0, qi: 0, answers: {}, eo: {}, slots: [], pi: 0, kept: [], vetoed: [] };
+      VIEW.confirmReset = false; VIEW.all = false; VIEW.sheet = null; render(); break;
+    case "all": VIEW.all = true; VIEW.tab = "list"; VIEW.confirmReset = false; render(); break;
+    case "all-close": VIEW.all = false; render(); break;
+    case "tab": VIEW.tab = v; render({ stay: true }); var tb = app.querySelector('.tabs [data-v="' + v + '"]'); if (tb) tb.focus(); break;
+    case "f-beds": VIEW.f.beds = v; app.querySelectorAll('[data-act="f-beds"]').forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-v") === v)); }); refreshList(); break;
+    case "open": VIEW.sheet = id; VIEW.back = el.getAttribute("data-act") === "open" ? id : null; render(); break;
+    case "sheet-close":
+      var was = VIEW.sheet; VIEW.sheet = null; render({ stay: true }); lastFocusKey = null;
+      var back = app.querySelector('[data-act="open"][data-id="' + (window.CSS && CSS.escape ? CSS.escape(was) : was) + '"]'); if (back) back.focus();
+      break;
+  }
+}
+document.addEventListener("click", function (ev) {
+  var el = ev.target.closest ? ev.target.closest("[data-act]") : null;
+  if (el && !el.disabled) { act(el.getAttribute("data-act"), el); return; }
+  var sc = ev.target.closest ? ev.target.closest("#story-card") : null;
+  if (sc && !ev.target.closest("a,button")) { var r = sc.getBoundingClientRect(); if (ev.clientX - r.left < r.width * 0.3) storyPrev(); else storyNext(); }
+});
+document.addEventListener("input", function (ev) {
+  if (ev.target.id === "f-rent") { VIEW.f.rent = Number(ev.target.value); var o = document.getElementById("f-rent-out"); if (o) o.textContent = money(VIEW.f.rent); refreshList(); }
+  else if (ev.target.id === "f-garage") { VIEW.f.garage = !!ev.target.checked; refreshList(); }
+});
+document.addEventListener("keydown", function (ev) {
+  if (ev.key === "Escape") { if (document.getElementById("ask-sheet")) { if (askApi) askApi.close(); } else if (VIEW.sheet) act("sheet-close", document.body); return; }
+  if (VIEW.sheet || VIEW.all || /^(INPUT|TEXTAREA|SELECT)$/.test((ev.target.tagName || ""))) return;
+  if (S.step === "story" && S.ci < (EXPS[S.si].story || []).length) { if (ev.key === "ArrowRight") storyNext(); else if (ev.key === "ArrowLeft") storyPrev(); }
+  else if (S.step === "picks") { if (ev.key === "ArrowRight") act("pick-next", document.body); else if (ev.key === "ArrowLeft") act("pick-prev", document.body); }
+});
+/* swipe on a story card or a pick: an extra, every move also has a button */
+(function () {
+  var x0 = null, y0 = null;
+  document.addEventListener("touchstart", function (e) { var t = e.touches[0]; if (e.touches.length === 1 && !VIEW.sheet && !VIEW.all && e.target.closest && e.target.closest("#story-card,.bcard")) { x0 = t.clientX; y0 = t.clientY; } else x0 = null; }, { passive: true });
+  document.addEventListener("touchend", function (e) {
+    if (x0 == null) return; var t = e.changedTouches[0], dx = t.clientX - x0, dy = t.clientY - y0; x0 = null;
+    if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.8) return;
+    if (S.step === "story") { if (dx < 0) storyNext(); else storyPrev(); } else if (S.step === "picks") act(dx < 0 ? "pick-next" : "pick-prev", document.body);
+  }, { passive: true });
+})();
+
+render({ focus: false });
+
+/* ===================================================================================================================
+   ASK THE CONCIERGE (optional). Nothing of it exists on the page unless the viewer's Claude can be reached.
+   Answers come only from the three lookups below, which read this page's own data.
+   =================================================================================================================== */
+function brief(b) {
+  var f = b.facts || {}, h = HBY[b.neighborhood_id], e = EBY[b.experience_id];
+  return { id: b.id, name: b.name, neighborhood: h ? h.name : null, state: b.state || (h && h.state) || null, experience: e ? e.label : null,
+    rent_from: f.rent_from, total_with_utilities_and_fees_from: f.total_from, drive_min_to_mom_and_dad: isNum(f.drive_min) ? Math.round(f.drive_min) : null,
+    tolls_round_trip: f.toll_round_trip, parking: (f.parking || {}).summary || null, parking_kind: (f.parking || {}).kind || null, dog: (f.dog || {}).summary || null,
+    on_her_tour_list: isKept(b.id) };
+}
+function findBuilding(x) {
+  x = String(x == null ? "" : x).trim(); if (BY[x]) return BY[x];
+  var low = x.toLowerCase(); return B.filter(function (b) { return (b.name || "").toLowerCase() === low; })[0] || B.filter(function (b) { return low && (b.name || "").toLowerCase().indexOf(low) >= 0; })[0] || null;
+}
+var LOOKUPS = {
+  list_buildings: function (q) {
+    q = q || {};
+    var rows = B.filter(function (b) {
+      var f = b.facts || {}, h = HBY[b.neighborhood_id] || {}, e = EBY[b.experience_id] || {};
+      if (q.max_rent != null && isNum(Number(q.max_rent)) && isNum(f.rent_from) && f.rent_from > Number(q.max_rent)) return false;
+      if (q.bedrooms != null && q.bedrooms !== "" && !(b.apartments || []).some(function (a) { return Number(a.beds) === Number(q.bedrooms); })) return false;
+      if (q.garage === true && (f.parking || {}).kind !== "garage") return false;
+      if (q.kept_only === true && !isKept(b.id)) return false;
+      if (q.experience && (e.label || "").toLowerCase().indexOf(String(q.experience).toLowerCase()) < 0 && e.id !== q.experience) return false;
+      if (q.neighborhood && (h.name || "").toLowerCase().indexOf(String(q.neighborhood).toLowerCase()) < 0) return false;
+      return true;
+    }).map(brief);
+    return { count: rows.length, buildings: rows };
+  },
+  get_building: function (q) {
+    var b = findBuilding(q && q.id); if (!b) throw new Error("No building with that id or name.");
+    var o = brief(b);
+    o.address = [b.address, b.city, b.state].filter(Boolean).join(", "); o.why = b.why || null; o.give_up = b.give_up || null; o.about = b.about || null;
+    o.points = (b.points || []).map(function (p) { return p.text; }); o.a_day_here = (b.day || []).map(function (m) { return { moment: m.title, text: m.text, level: m.level }; });
+    o.to_confirm = (b.confirm || []).map(function (c) { return c.question || c.label; }); o.tour_questions = b.tour_questions || [];
+    o.apartments = (b.apartments || []).map(function (a) { return { label: a.label, bedrooms: a.beds, sqft: a.sqft, floor: a.floor_text, rent: a.rent, total_with_utilities_and_fees: a.total, available: a.available_text, offer: offerText(a), one_thing_to_confirm: a.star ? (a.confirm_label || true) : null }; });
+    return o;
+  },
+  compare: function (q) {
+    var ids = (q && Array.isArray(q.ids)) ? q.ids : [];
+    return { buildings: ids.map(findBuilding).filter(Boolean).slice(0, 6).map(brief) };
+  }
+};
+function initAsk(sample, canTools) {
+  var hidden = false, busy = null, lastQ = "";
+  var RULES = "You are answering a question from Lamia, who is choosing an apartment building to tour. " +
+    "Answer ONLY from the building data given to you here" + (canTools ? " through the tools (call them to look things up)" : "") + ". " +
+    "Answer in two or three plain sentences. Name buildings by their name, never by an id. Give rent and the total with utilities and fees together when you mention a price. " +
+    "If the data does not say, reply exactly: That isn't in what I have. Do not guess, and do not use outside knowledge.";
+  var TOOLS = [
+    { name: "list_buildings", description: "Lists the buildings on this page with rent, total with utilities and fees, drive minutes to Mom and Dad, tolls, parking and dog policy. Every filter is optional. Use it to find or rank buildings.",
+      inputSchema: { type: "object", properties: { max_rent: { type: "number" }, bedrooms: { type: "number", description: "0 for a studio, 1 for one bedroom" }, garage: { type: "boolean" }, kept_only: { type: "boolean", description: "only the buildings on her tour list" }, experience: { type: "string" }, neighborhood: { type: "string" } } },
+      execute: function (i) { return LOOKUPS.list_buildings(i); } },
+    { name: "get_building", description: "Returns everything known about one building: address, why it was suggested, what she gives up, a day there, its apartments and what to confirm. Takes the building id or its name.",
+      inputSchema: { type: "object", properties: { id: { type: "string" } }, required: ["id"] }, execute: function (i) { return LOOKUPS.get_building(i); } },
+    { name: "compare", description: "Returns the same key facts side by side for up to six buildings, by id or name.",
+      inputSchema: { type: "object", properties: { ids: { type: "array", items: { type: "string" } } }, required: ["ids"] }, execute: function (i) { return LOOKUPS.compare(i); } }
+  ];
+  function table() {
+    return "name | neighborhood | experience | rent from | total with utilities and fees from | drive min | tolls round trip | parking | dog | on her tour list\n" +
+      B.map(brief).map(function (r) { return [r.name, r.neighborhood, r.experience, r.rent_from, r.total_with_utilities_and_fees_from, r.drive_min_to_mom_and_dad, r.tolls_round_trip, r.parking, r.dog, r.on_her_tour_list ? "yes" : "no"].map(function (x) { return x == null ? "not known" : String(x).replace(/\|/g, "/"); }).join(" | "); }).join("\n");
+  }
+  function remove() { hidden = true; close(); var b = document.getElementById("ask-btn"); if (b) b.remove(); }
+  function mount() {
+    if (hidden || document.getElementById("ask-btn")) return;
+    var slot = document.getElementById("topbtns"); if (!slot) return;
+    var b = document.createElement("button"); b.type = "button"; b.id = "ask-btn"; b.className = "quiet"; b.textContent = "Ask";
+    b.setAttribute("aria-label", "Ask the concierge"); b.addEventListener("click", open); slot.insertBefore(b, slot.firstChild);
+  }
+  function close() { if (busy) { busy.abort(); busy = null; } var s = document.getElementById("ask-sheet"); if (s) s.remove(); var b = document.getElementById("ask-btn"); if (b) b.focus(); }
+  function open() {
+    if (document.getElementById("ask-sheet")) return;
+    var sugg = ["Which is closest to " + ANCHOR + "?", "Which has the lowest total each month?", "Which ones have a garage?", "Which is best for a small dog?"];
+    if (S.kept.length >= 2) sugg.unshift("Compare the places on my tour list.");
+    var w = document.createElement("div"); w.id = "ask-sheet"; w.className = "asksheet"; w.setAttribute("role", "dialog"); w.setAttribute("aria-modal", "true"); w.setAttribute("aria-labelledby", "ask-h");
+    w.innerHTML = '<div class="askbox"><div class="askin"><div class="top"><h2 id="ask-h" tabindex="-1">Ask the concierge</h2><button type="button" class="quiet" id="ask-close">Close</button></div>' +
+      '<p class="small muted">Answers come only from the buildings on this page.</p><div class="sugg" id="ask-sugg"></div>' +
+      '<form class="askform" id="ask-form"><label class="sr" for="ask-q">Your question</label><input id="ask-q" type="text" autocomplete="off" maxlength="300" placeholder="Type a question"><button type="submit" class="btn sm main" id="ask-send">Ask</button></form>' +
+      '<p class="answer" id="ask-a" hidden></p><p class="small muted" id="ask-note" role="status"></p><button type="button" class="btn sm" id="ask-stop" hidden>Stop</button></div></div>';
+    document.body.appendChild(w);
+    var box = w.querySelector("#ask-sugg");
+    sugg.slice(0, 5).forEach(function (q) { var b = document.createElement("button"); b.type = "button"; b.textContent = q; b.addEventListener("click", function () { ask(q); }); box.appendChild(b); });
+    w.querySelector("#ask-close").addEventListener("click", close);
+    w.querySelector("#ask-stop").addEventListener("click", function () { if (busy) busy.abort(); });
+    w.addEventListener("click", function (e) { if (e.target === w) close(); });
+    w.querySelector("#ask-form").addEventListener("submit", function (e) { e.preventDefault(); var q = w.querySelector("#ask-q").value.trim(); if (q) ask(q); });
+    w.querySelector("#ask-h").focus();
+  }
+  function ask(q) {
+    var out = document.getElementById("ask-a"), note = document.getElementById("ask-note"), stop = document.getElementById("ask-stop"), send = document.getElementById("ask-send");
+    if (!out || busy) return;
+    lastQ = q; var ctl = new AbortController(); busy = ctl;
+    out.hidden = false; out.textContent = "Thinking…"; note.textContent = ""; stop.hidden = false; send.disabled = true;
+    var input = RULES + (canTools ? "" : "\n\nThe buildings on this page:\n" + table()) + "\n\nLamia's question: " + q;
+    var options = { signal: ctl.signal, modelTier: "quick", onText: function (u) { if (busy === ctl) out.textContent = u.text; } };
+    if (canTools) options.tools = TOOLS; else options.cache = false;
+    sample(input, options).then(function (r) {
+      if (busy !== ctl) return;
+      out.textContent = r.text; if (r.truncated) note.textContent = "That answer was cut short. Try a narrower question.";
+    }, function (e) {
+      if (busy !== ctl) return;
+      var code = e && e.code;
+      if (["not_granted", "sampling_disabled", "not_declared", "capability_disabled", "capability_removed"].indexOf(code) >= 0) { busy = null; remove(); return; }
+      if (code === "tools_unavailable") { canTools = false; }
+      out.textContent = code === "refused" ? "" : (e && e.text) || ""; out.hidden = !out.textContent;
+      note.textContent = code === "cancelled" ? "Stopped." : code === "rate_limited" ? "Too many questions for now. Try again in a little while." : code === "session_expired" ? "Sign in to Claude again, then ask once more."
+        : code === "refused" ? "That question could not be answered. Try asking it another way." : "That did not go through. Tap a question to try again.";
+    }).then(function () { if (busy === ctl) busy = null; var s = document.getElementById("ask-stop"), b = document.getElementById("ask-send"); if (s) s.hidden = true; if (b) b.disabled = false; });
+  }
+  askApi = { mount: mount, close: close };
+  mount();
+}
+(function () {
+  if (!window.claude || typeof window.claude.use !== "function") return;
+  var p; try { p = window.claude.use("sample"); } catch (e) { return; }
+  Promise.resolve(p).then(function (sample) {
+    if (typeof sample !== "function") return;
+    var lim; try { lim = typeof sample.limits === "function" ? sample.limits() : null; } catch (e) { lim = null; }
+    Promise.resolve(lim).catch(function () { return null; }).then(function (l) { initAsk(sample, !!(l && l.tools)); });
+  }, function () { /* no Claude here: the feature stays absent */ });
+})();
+window.__conciergeLookups = LOOKUPS;
+})();
+</script>
+</body>
+</html>

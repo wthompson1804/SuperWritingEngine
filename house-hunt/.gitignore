@@ -29,3 +29,7 @@ raw/census_areawater/*.zip
 .pytest_cache/
 node_modules/
 site/dist/
+
+# rendered-page network captures can carry third-party site tokens: never committed
+raw/live_check_b21/render/
+raw/**/*.xhr.json

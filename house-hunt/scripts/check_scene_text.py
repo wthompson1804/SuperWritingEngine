@@ -227,9 +227,45 @@ def year_key(label):
     return re.sub(r"\bExperience$", "Year", str(label).strip())
 
 
+PAGE_FILE = ROOT / PAGE                             # the file behind the virtual page tables (see use_files)
+SUBSET = False                                     # True while a --data file is checked (see use_files)
+OUT_SUFFIX = ""                                    # the --out-suffix in use
+
+
+def use_files(data=None, out_suffix=""):
+    """Options --data and --out-suffix (added for the concierge page, docs/CONCIERGE_DESIGN.md): run the same drafts
+    and guards over another page-data file (a filtered copy of site/data.json in the same shape) and read or write
+    data/reference/scene_text_years<suffix>.csv and scene_text_neighborhoods<suffix>.csv. In evidence items the
+    virtual tables keep their names ("site/data.json#units" ...): with --data they are the tables of that file.
+    With no options nothing changes. With --data the texts describe a SUBSET of the page: the guards on each text
+    all run, and the two guards that only spread wordings across the whole page (a section subhead on at most
+    SUB_SHARE of the neighborhoods; the drive-and-toll close on at most a third) are skipped."""
+    global PAGE_FILE, YEARS, HOODS, SUBSET, OUT_SUFFIX
+    if data:
+        PAGE_FILE = Path(data) if Path(data).is_absolute() else Path.cwd() / data
+        SUBSET = True
+    if out_suffix:
+        OUT_SUFFIX = out_suffix
+        YEARS = YEARS.with_name(YEARS.stem + out_suffix + YEARS.suffix)
+        HOODS = HOODS.with_name(HOODS.stem + out_suffix + HOODS.suffix)
+    for f in (_page, table, shown_hoods, _units_with_hood):
+        f.cache_clear()
+
+
+def _options(argv, description):
+    import argparse
+    ap = argparse.ArgumentParser(description=description)
+    ap.add_argument("--data", default=None, help="page data to read instead of site/data.json (same shape)")
+    ap.add_argument("--out-suffix", default="", help="suffix of the two scene-text CSVs, for example _u2000")
+    a = ap.parse_args(argv)
+    if a.data or a.out_suffix:
+        use_files(a.data, a.out_suffix)
+    return a
+
+
 @lru_cache(maxsize=None)
 def _page():
-    return json.loads((ROOT / PAGE).read_text(encoding="utf-8"))
+    return json.loads(PAGE_FILE.read_text(encoding="utf-8"))
 
 
 def _page_table(part):
@@ -1804,7 +1840,8 @@ def check_sub_shares(kind, rows):
     return out
 
 
-def main():
+def main(argv=None):
+    _options(argv, "Re-test the scene text against the current data.")
     fails = drifts = rows = 0
     for kind, path, key in (("year", YEARS, "year_label"), ("hood", HOODS, "hood_id")):
         cols = COLUMNS[kind]
@@ -1850,9 +1887,9 @@ def main():
                 host[r[key]] = r["host_intro"]
                 seen.append(r)
                 r["evidence"] = evidence
-        across = check_repetition("host_intro", host) + check_sub_shares(kind, seen)
+        across = check_repetition("host_intro", host) + ([] if SUBSET else check_sub_shares(kind, seen))
         if kind == "hood":
-            across += check_closings("host_intro", host) + check_leads(seen)
+            across += ([] if SUBSET else check_closings("host_intro", host)) + check_leads(seen)
             n_drive = sum(ends_on_drive(t) for t in host.values())
             print(f"host_intro closes: {n_drive} of {len(host)} end on the drive, the toll or transit")
         for p in across:

@@ -1,0 +1,4 @@
+# RealtyMX Default
+User-agent: *
+Disallow: /images/
+Disallow: /admin*/
