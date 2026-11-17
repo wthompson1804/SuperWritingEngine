@@ -1,0 +1,269 @@
+User-agent: *
+Disallow: /cgi-bin/
+Crawl-delay: 10
+
+# =====================================================
+# TRADITIONAL SEARCH ENGINES (Allow, Gentle Delay)
+# =====================================================
+User-agent: Googlebot
+Crawl-delay: 5
+Disallow:
+
+User-agent: Googlebot-Image
+Crawl-delay: 5
+Disallow:
+
+User-agent: GoogleOther
+Crawl-delay: 5
+Disallow:
+
+User-agent: Bingbot
+Crawl-delay: 5
+Disallow:
+
+User-agent: Slurp
+Crawl-delay: 5
+Disallow:
+
+User-agent: DuckDuckBot
+Crawl-delay: 5
+Disallow:
+
+User-agent: Applebot
+Crawl-delay: 5
+Disallow:
+
+User-agent: Baiduspider
+Disallow: /
+
+# =====================================================
+# AI SEARCH / RETRIEVAL / LIVE-FETCH BOTS
+# These drive real-time citations in AI answers.
+# Latency-sensitive — kept at the gentlest delay.
+# =====================================================
+
+# --- Google Gemini / AI Overviews ---
+User-agent: Google-Agent
+Crawl-delay: 5
+Disallow:
+
+User-agent: Google-CloudVertexBot
+Crawl-delay: 5
+Disallow:
+
+User-agent: Google-NotebookLM
+Crawl-delay: 5
+Disallow:
+
+# --- OpenAI / ChatGPT ---
+User-agent: OAI-SearchBot
+Crawl-delay: 5
+Disallow:
+
+User-agent: ChatGPT-User
+Crawl-delay: 5
+Disallow:
+
+# --- Anthropic / Claude ---
+User-agent: Claude-SearchBot
+Crawl-delay: 5
+Disallow:
+
+User-agent: Claude-User
+Crawl-delay: 5
+Disallow:
+
+# --- Perplexity ---
+User-agent: PerplexityBot
+Crawl-delay: 5
+Disallow:
+
+User-agent: Perplexity-User
+Crawl-delay: 5
+Disallow:
+
+# --- Amazon (Alexa / Alexa for Shopping) ---
+User-agent: Amazonbot
+Crawl-delay: 5
+Disallow:
+
+# --- DuckDuckGo AI (DuckAssist) ---
+User-agent: DuckAssistBot
+Crawl-delay: 5
+Disallow:
+
+# --- Mistral ---
+User-agent: MistralAI-User
+Crawl-delay: 5
+Disallow:
+
+# =====================================================
+# AI TRAINING / BULK CORPUS BOTS
+# Feed future model versions, not live citations.
+# Slightly longer delay — not latency-sensitive.
+# =====================================================
+
+# --- Google (Gemini/Vertex training opt-in token) ---
+User-agent: Google-Extended
+Crawl-delay: 10
+Disallow:
+
+# --- OpenAI ---
+User-agent: GPTBot
+Crawl-delay: 10
+Disallow:
+
+# --- Anthropic ---
+User-agent: ClaudeBot
+Crawl-delay: 10
+Disallow:
+
+User-agent: anthropic-ai
+Crawl-delay: 10
+Disallow:
+
+# --- Apple Intelligence training opt-in token ---
+User-agent: Applebot-Extended
+Crawl-delay: 10
+Disallow:
+
+# --- Meta AI / Llama ---
+User-agent: Meta-ExternalAgent
+Crawl-delay: 10
+Disallow:
+
+User-agent: FacebookBot
+Crawl-delay: 10
+Disallow:
+
+# --- Common Crawl (upstream dataset for most LLMs, open + commercial) ---
+User-agent: CCBot
+Crawl-delay: 10
+Disallow:
+
+# =====================================================
+# ANALYTICS, SEO, SCRAPERS & AGGRESSIVE/NON-COMPLIANT BOTS
+# Blocked — no visibility value, high server load risk.
+# =====================================================
+User-agent: AhrefsBot
+Disallow: /
+Crawl-delay: 20
+
+User-agent: SemrushBot
+Disallow: /
+Crawl-delay: 20
+
+User-agent: DotBot
+Disallow: /
+Crawl-delay: 20
+
+User-agent: MJ12bot
+Disallow: /
+Crawl-delay: 20
+
+User-agent: BLEXBot
+Disallow: /
+Crawl-delay: 20
+
+User-agent: Yandex
+Disallow: /
+Crawl-delay: 20
+
+User-agent: PetalBot
+Disallow: /
+Crawl-delay: 20
+
+User-agent: MauiBot
+Disallow: /
+
+User-agent: SeznamBot
+Disallow: /
+Crawl-delay: 20
+
+User-agent: Exabot
+Disallow: /
+Crawl-delay: 20
+
+User-agent: GrapeshotCrawler
+Disallow: /
+
+User-agent: Wget
+Disallow: /
+
+User-agent: curl
+Disallow: /
+
+User-agent: python-requests
+Disallow: /
+
+User-agent: python
+Disallow: /
+
+User-agent: libwww-perl
+Disallow: /
+
+User-agent: HTTrack
+Disallow: /
+
+User-agent: archive.org_bot
+Disallow: /
+
+User-agent: proximic
+Disallow: /
+
+User-agent: Screaming Frog SEO Spider
+Disallow: /
+
+User-agent: Sogou
+Disallow: /
+
+User-agent: MegaIndex
+Disallow: /
+
+User-agent: AspiegelBot
+Disallow: /
+
+User-agent: SiteAuditBot
+Disallow: /
+
+User-agent: linkdexbot
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+User-agent: CensysInspect
+Disallow: /
+
+User-agent: ZoominfoBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: omgili
+Disallow: /
+
+# =====================================================
+# SOCIAL & PREVIEW BOTS (Allow, Gentle Delay)
+# =====================================================
+User-agent: Twitterbot
+Crawl-delay: 5
+Disallow:
+
+User-agent: facebookexternalhit
+Crawl-delay: 5
+Disallow:
+
+User-agent: LinkedInBot
+Crawl-delay: 5
+Disallow:
+
+User-agent: Pinterest
+Crawl-delay: 5
+Disallow:
+
+Sitemap: https://www.flushingtownhall.org/sitemap.xml

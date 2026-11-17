@@ -1,0 +1,68 @@
+# anthropic-ai
+User-agent: anthropic-ai
+Disallow: /
+
+# ClaudeBot
+User-agent: ClaudeBot
+Disallow: /
+
+# Claude-Web
+User-agent: Claude-Web
+Disallow: /
+
+# CCBot
+User-agent: CCBot
+Disallow: /
+
+# Google-Extended
+User-agent: Google-Extended
+Disallow: /
+
+# GPTBot
+User-agent: GPTBot
+Disallow: /
+
+# Baiduspider
+User-agent: Baiduspider
+Disallow: /
+
+# YandexBot
+User-agent: YandexBot
+Disallow: /
+
+# *
+User-agent: *
+Disallow: /preview/*
+
+# *
+User-agent: *
+Disallow: /login
+
+# *
+User-agent: *
+Disallow: /signup
+
+# *
+User-agent: *
+Disallow: /forgot-password
+
+# *
+User-agent: *
+Disallow: /reset-password
+
+# *
+User-agent: *
+Disallow: /profile*
+
+# *
+User-agent: *
+Disallow: /*?source*
+
+# Host
+Host: https://www.theinfatuation.com
+
+# Sitemaps
+Sitemap: https://www.theinfatuation.com/sitemap.xml
+Sitemap: https://www.theinfatuation.com/sitemap-1.xml
+Sitemap: https://www.theinfatuation.com/sitemap-latest.xml
+Sitemap: https://www.theinfatuation.com/sitemap-news.xml
