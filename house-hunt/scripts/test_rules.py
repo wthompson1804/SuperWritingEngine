@@ -550,8 +550,16 @@ def data():
     import verdicts as VD
     V = VD.load_verdicts()
     ok(not set(V[V.verdict == "remove"].listing_id) & set(R.index), "verdicts: a unit with verdict remove is still ranked")
+    import parsers as PZ_
     for r in V[V.verdict == "asterisk"].itertuples():
         if r.listing_id in S.index:
+            if r.kind == "elevator":
+                # 'asterisk | elevator' keeps the elevator in doubt (verdicts.py docstring; owner, 2026-11-17): an open fact on
+                # floor 3+ or an unknown floor, and nothing on floor 2, where parsers.floor_elevator_rule needs no elevator
+                row = S.loc[r.listing_id]
+                get = lambda c, row=row: str(row.get(c, "")).removesuffix(".0") if c == "unit_floor" else str(row.get(c, ""))
+                if PZ_.floor_elevator_master(get, "open") == ("settled", "floor_2"):
+                    continue
             ok(S.at[r.listing_id, "confirm_asterisk"] == "yes", f"verdicts: {r.listing_id} has an asterisk verdict (an open gate fact) but is shown without an asterisk")
     for r in V[V.verdict == "disclose"].itertuples():
         if r.listing_id in S.index:
@@ -1557,7 +1565,9 @@ def data_ic4(M, R, S):
     if "b_5c4193202c" in B.index:
         eq((B.at["b_5c4193202c", "hood_id"], B.at["b_5c4193202c", "coord_check"]), ("nj:bayonne", "regeocoded"), "IC4 D1: Harbor Pointe is in Bayonne, at its address's point")
         ok(-74.11 < float(B.at["b_5c4193202c", "lon"]) < -74.08, "IC4 D1: Harbor Pointe's longitude is Bayonne's")
-    ok("nj:elizabeth" not in set(S.hood_id), "IC4 D1: no 'Elizabeth' neighborhood made of a Bayonne building")
+    # trawl 2 (2026-11-17) found real Elizabeth buildings, so the neighborhood may exist; none of it may be a Bayonne building
+    ez = S[S.hood_id == "nj:elizabeth"]
+    ok("b_5c4193202c" not in set(ez.building_id) and not ez.city.str.contains("Bayonne", case=False).any(), "IC4 D1: no 'Elizabeth' neighborhood made of a Bayonne building")
     for b, city, hood in [("b_cbc9a7d36b", "Bloomfield", "nj:bloomfield"), ("b_5d1b685d2d", "Maplewood", "nj:maplewood"), ("b_2eb70a1398", "South Orange", "nj:south-orange"),
                           ("b_88f39b8818", "Wayne", "nj:wayne"), ("b_14c8cec640", "Weehawken", "nj:weehawken"), ("b_a30d1faa4d", "Weehawken", "nj:weehawken"), ("b_63439f0a5f", "Bloomfield", "nj:bloomfield")]:
         if b in B.index:

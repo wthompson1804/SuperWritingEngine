@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /.well-known
+Disallow: /ajax
+Disallow: /images
+Disallow: /offline
+Disallow: /themes
+Disallow: /_G8LsyR9MP3JqJiyic
+Crawl-delay: 10
+Host: www.maxspann.com
+Sitemap: https://www.maxspann.com/sitemap/feed

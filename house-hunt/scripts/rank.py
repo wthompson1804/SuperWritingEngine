@@ -598,6 +598,7 @@ def main():
     # owner, 2026-11-17: a walk-up apartment passes on floor 2 only, so its floor question says so
     floor_disc_q = np.where(walkup2.values, FLOOR_DISCLOSURE + "; " + parsers.FLOOR_2_WALKUP_Q, FLOOR_DISCLOSURE)
     used12_v, sib12_v, sib_listing_why_v = used12.values, sib_open.values, np.asarray(sib_listing_why)
+    fe_combo_v = fe_combo.values
     for i in range(len(u)):
         whats, whys, qs, keys, disc, codes, rwhys, rqs = [], [], [], [], [], [], [], []
         for k, f, lab, w, q in cols_:
@@ -607,6 +608,10 @@ def main():
                     rv = None                # the 12-month price read at the live check outranks a reviewer's older sentence about the lease term
                 why_ = rv[0] if rv and rv[0] else str(w[i])
                 q_ = rv[1] if rv and rv[1] else (fq[i] if k == "floor" else (q if isinstance(q, str) else str(q[i])))
+                if k == "elevator" and fe_combo_v[i] and parsers.FLOOR_OR_ELEVATOR_Q not in q_:
+                    # one open fact, floor and elevator together: the rule's question always leads, so a reviewer's question
+                    # about one half (the elevator only, or the floor only) never stands in for both; theirs follows it
+                    q_ = parsers.FLOOR_OR_ELEVATOR_Q + ("; " + q_.rstrip("; ") if rv and rv[1] else "")
                 if k == "listing" and sib12_v[i] and rv and parsers.SIBLING_12_MONTH_TEXT.split(":")[0] not in why_:
                     why_ = why_.rstrip() + " Also: " + str(sib_listing_why_v[i])
                     q_ = (q_ + "; " if q_ else "") + "What is the rent on a 12-month lease?"

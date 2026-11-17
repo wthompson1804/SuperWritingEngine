@@ -182,5 +182,29 @@
   "url": "https://www.propertyshark.com/robots.txt",
   "at": "2026-11-17T19:51:20+00:00",
   "by": "evidence_batch_24"
+ },
+ "www.newhavenct.gov": {
+  "reason": "HTTP 403 on robots.txt",
+  "url": "https://www.newhavenct.gov/robots.txt",
+  "at": "2026-11-17T20:06:14Z",
+  "by": "life_here_ctny"
+ },
+ "www.passaiccountynj.org": {
+  "reason": "HTTP 403 on robots.txt",
+  "url": "https://www.passaiccountynj.org/robots.txt",
+  "at": "2026-11-17T20:07:12Z",
+  "by": "life_here_nj"
+ },
+ "ctvisit.com": {
+  "reason": "HTTP 403",
+  "url": "https://ctvisit.com/events/sono-saturday-market-3",
+  "at": "2026-11-17T20:12:12Z",
+  "by": "life_here_ctny"
+ },
+ "www.nj.gov": {
+  "reason": "bot challenge page",
+  "url": "https://www.nj.gov/dep/parksandforests/parks/libertystatepark.html",
+  "at": "2026-11-17T20:14:03Z",
+  "by": "life_here_nj"
  }
 }

@@ -1,4 +1,4 @@
-# Run report (2026-11-17T20:02:42+00:00)
+# Run report (2026-11-17T20:08:02+00:00)
 
 ## Steps
 
@@ -21,8 +21,8 @@
 | all-in cost | `all_in.py` | ok |
 | evidence rules (avoid, exclusions) | `avoid.py` | ok |
 | ranking and selection | `rank.py` | ok |
-| rule tests on the output | `test_rules.py --data` | FAILED |
-| field registry, wiring check, shown-list assertions and the review rule | `check_registry.py` | FAILED |
+| rule tests on the output | `test_rules.py --data` | ok |
+| field registry, wiring check, shown-list assertions and the review rule | `check_registry.py` | ok |
 
 ## Stage counts
 
@@ -34,17 +34,17 @@
 |   fail a gate | 12404 | 12404 | +0 |
 | costed in the master table | 1097 | 1097 | +0 |
 | within the $3,000 all-in cap | 1097 | 1097 | +0 |
-| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 457 | 571 | -114 |
-| shown (real apartments, at most one open item, up to 8 per building, after the thin-neighborhood rule) | 389 | 141 | +248 |
-|   neighborhoods shown | 69 | 36 | +33 |
-|   buildings shown | 220 | 72 | +148 |
+| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 456 | 457 | -1 |
+| shown (real apartments, at most one open item, up to 8 per building, after the thin-neighborhood rule) | 387 | 389 | -2 |
+|   neighborhoods shown | 68 | 69 | -1 |
+|   buildings shown | 218 | 220 | -2 |
 | not an apartment: floor plan, building price or co-living room (data/excluded_not_an_apartment.csv) | 84 | 84 | +0 |
-| thin neighborhoods cut (one apartment, not both well attested and promising) | 36 | 17 | +19 |
+| thin neighborhoods cut (one apartment, not both well attested and promising) | 37 | 36 | +1 |
 | avoid cards | 17 | 17 | +0 |
-|   shown with an asterisk (one thing to confirm) | 268 | 60 | +208 |
-| removed by a reviewed verdict (data/evidence/review_verdicts.csv) | 37 | 7 | +30 |
-| held back for one confirmation | 32 | 239 | -207 |
-| neighborhoods with 3+ shown places | 43 | 19 | +24 |
+|   shown with an asterisk (one thing to confirm) | 266 | 268 | -2 |
+| removed by a reviewed verdict (data/evidence/review_verdicts.csv) | 38 | 37 | +1 |
+| held back for one confirmation | 33 | 32 | +1 |
+| neighborhoods with 3+ shown places | 43 | 43 | +0 |
 | buildings in the master table | 617 | 617 | +0 |
 
 ## Why units left
@@ -79,7 +79,7 @@
 | The Little-City Year      |              25 |      105 |      84 |             4 |
 | The Old-Neighborhood Year |              17 |       69 |      57 |            10 |
 | The Quiet-Street Year     |               7 |        9 |       3 |             0 |
-| The Room-to-Breathe Year  |              54 |      237 |     213 |             0 |
+| The Room-to-Breathe Year  |              54 |      236 |     211 |             0 |
 | The Walk-Everywhere Year  |               2 |        6 |       2 |             3 |
 
 ## Fill rate among shown units (percent with a value)
@@ -95,9 +95,9 @@
 | pet_rent | 46 |
 | pool | 10 |
 | doorman | 1 |
-| year_built | 35 |
+| year_built | 36 |
 | toll_rt_ezpass | 100 |
-| transit_sat_median | 90 |
+| transit_sat_median | 91 |
 | near_violent_250m_24m | 5 |
 | live_status | 95 |
 | rent_first_full_payment_date | 80 |
@@ -234,27 +234,20 @@ needs_call: {'yes': 404, 'no': 775}
 
 **ranking and selection**
 ```
-evidence: 20 units excluded, shown 389, avoid cards 17, of them with an asterisk 268 ({'floor and elevator': 230, 'listing': 15, 'elevator': 11, 'availability': 6, 'dogs allowed': 3, 'eligibility': 3}), held for a confirmation 32; shown and never re-read (information only, not an open item) 51
-stages: 1097 costed -> -0 over the all-in cap -> -235 Jamaica safety rule -> -128 failed a gate on confirmed facts -> -84 not an apartment (floor plan, building price, co-living room) -> -37 removed by a reviewed verdict -> -1 sibling floor rule -> -135 sketchy -> -20 evidence exclusions -> 457 ranked
-shown buildings 220; disclosures: {'special offer': 148, 'floor not published': 140, 'lease term': 56, 'one-time costs': 53, 'no broker fee': 50, 'something else to know': 36, 'washer and dryer to confirm': 32, 'overnight street parking': 31, 'dog weight limit not published': 12, 'broker fee': 7, 'condo rented by its owner': 6, 'income requirement': 2, 'net-effective rent': 2}
-(kept 457 units; candidates 326; shown 345; pools: {'': 411, 'pool': 43, 'indoor': 3}
+evidence: 20 units excluded, shown 387, avoid cards 17, of them with an asterisk 266 ({'floor and elevator': 229, 'listing': 15, 'elevator': 11, 'availability': 5, 'dogs allowed': 3, 'eligibility': 3}), held for a confirmation 33; shown and never re-read (information only, not an open item) 49
+stages: 1097 costed -> -0 over the all-in cap -> -235 Jamaica safety rule -> -128 failed a gate on confirmed facts -> -84 not an apartment (floor plan, building price, co-living room) -> -38 removed by a reviewed verdict -> -1 sibling floor rule -> -135 sketchy -> -20 evidence exclusions -> 456 ranked
+shown buildings 218; disclosures: {'special offer': 148, 'floor not published': 139, 'lease term': 57, 'one-time costs': 53, 'no broker fee': 50, 'something else to know': 36, 'washer and dryer to confirm': 32, 'overnight street parking': 30, 'dog weight limit not published': 12, 'broker fee': 7, 'condo rented by its owner': 6, 'income requirement': 2, 'net-effective rent': 1}
+(kept 456 units; candidates 325; shown 344; pools: {'': 410, 'pool': 43, 'indoor': 3}
 ```
 
 **rule tests on the output**
 ```
-  FAIL verdicts: apartmentlist:p16107-s1-510m-B218 has an asterisk verdict (an open gate fact) but is shown without an asterisk
-  FAIL verdicts: apartmentlist:p16107-s1-510m-C230 has an asterisk verdict (an open gate fact) but is shown without an asterisk
-  FAIL verdicts: apartmentlist:p16107-s1-510m-C237 has an asterisk verdict (an open gate fact) but is shown without an asterisk
-  FAIL verdicts: a shown unit has no ok / asterisk / disclose verdict
-  FAIL floor/elevator rule: ... with the question 'Confirm the floor, and whether there is an elevator'
-  FAIL IC4 D1: no 'Elizabeth' neighborhood made of a Bayonne building
+test_rules (data): 729 checks, 0 failed
 ```
 
 **field registry, wiring check, shown-list assertions and the review rule**
 ```
 field registry: {'used': 570, 'display': 341, 'provenance': 212, 'not_used': 14}
-SHOWN-LIST ASSERTIONS FAILED: 2 violation(s)
-   apartmentlist:p846761-1BOK152-310 (55 Monroe Place Apartments 310): the verdict was written against older evidence: the building's evidence rows have changed since the review
-   region_mid_hudson:z:6129ff295a41 (The North Court Apartments 206): no reviewed verdict: nobody has read this unit's evidence
+shown-list assertions: all pass
 ```
 

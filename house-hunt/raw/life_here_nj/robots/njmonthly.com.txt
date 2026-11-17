@@ -1,0 +1,88 @@
+User-agent: *
+Allow: /wp-json/njm/v1/
+Disallow: /*?display_custom_css=
+Disallow: /calendar/action~posterboard/
+Disallow: /calendar/action~agenda/
+Disallow: /calendar/action~oneday/
+Disallow: /calendar/action~month/
+Disallow: /calendar/action~week/
+Disallow: /calendar/action~stream/
+Disallow: /restaurants/
+Disallow: /nj-restaurants/
+Disallow: /find-a-restaurant/
+Disallow: /downloads/
+Disallow: /wp-json/wordpress-popular-posts/
+Disallow: /la_dolce_jersey/
+Disallow: /locations/
+Disallow: /arts-events/
+Disallow: /restaurant_reviews_tags/
+Disallow: /location_types/
+Disallow: /cuisine_types/
+Disallow: /bone_specialty_types/
+Disallow: /?s=
+Disallow: /page/*/?s=
+Disallow: /search/
+Disallow: /?rest_route=
+Disallow: /wp-json/
+
+# Kept exactly as it is today. Googlebot follows only this group, so it ignores the * rules above.
+User-agent: Googlebot
+Disallow: /*?display_custom_css=
+
+Crawl-delay: 30
+
+# --- AI training crawlers: block ---
+# Answer/retrieval bots (ChatGPT-User, OAI-SearchBot, Claude-User, Claude-SearchBot,
+# PerplexityBot, Applebot) stay allowed: they cite sources and send traffic.
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+# Gemini training only, no effect on Search or AI Overviews
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: meta-externalagent
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: Omgilibot
+Disallow: /
+
+# Webzio is the current name for Omgilibot (data collection and resale)
+User-agent: Webzio
+Disallow: /
+
+# Meta user-initiated fetcher, also used to improve Meta AI agents
+User-agent: Meta-ExternalFetcher
+Disallow: /
+
+User-agent: img2dataset
+Disallow: /
+
+# PetalBot (Huawei search) is left allowed, per the Twenty First Digital crawler reference, Sept 2026.
+# Amazonbot: AI training and extraction crawler, blocked on Twenty First Digital's recommendation.
+User-agent: Amazonbot
+Disallow: /
+
+Sitemap: https://njmonthly.com/sitemap_index.xml
