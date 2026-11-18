@@ -102,3 +102,24 @@ allowed." All 489 cached pages were read by script and 20 by eye. It is a real s
   pet-friendly"), and a few rows carry page pet codes that include dogs.
 Treatment: the rows stay "no dogs"; the contradictory ones (8 apartments in the rows used) are set to unknown inside
 this script only. `scripts/gates.py` is untouched.
+
+## Revision, same day: template prices, "know this", ratings, confidence
+
+- **"Pay months up front" template prices (independent check 6, sweep 10).** One Paterson lister advertises a reduced
+  payment (8/11, 9/11 or 10/11 of the rent: $1,718 for $2,100, $1,636 for $2,000) while the page says "Monthly Rent".
+  165 listings are flagged, all in Paterson: 39 confirmed (the reviewers' verdicts, the corrected rents in
+  `live_check_batch_22.csv`, pages that state "Monthly Rent"), 30 in the same buildings at the same prices, 96 at an
+  odd price that is one of those fractions of a round rent. The real rent is known for 38 (12 of them at $2,000 or
+  less) and used for the cost measure and the $2,000 test; the other 127 are left out of every measure. A building
+  whose only prices are template figures is listed with `rent_is_template` and the first question "What is the real
+  monthly rent?"; no building with a template listing can be in the top three. Paterson: 264 apartments at $2,000 or
+  less became 112, median rent $1,718 became $1,750, rank 5 became 9. Still ambiguous: 12 other Paterson buildings
+  list at exactly $1,800 (which is also 9/11 of $2,200); a round price cannot be told apart, so they stay.
+  Scan of every neighborhood for a price not ending in 0 or 5 shared by 6+ listings at 4+ addresses: only Paterson,
+  plus Trenton at $1,099 (6 listings, 4 addresses), which no page or reviewer ties to a template and is left as is.
+- **Know this** is now only a real drawback: a measure in the bottom 40% of the list whose own figure is worse than the
+  list's median, worded as the drawback. 6 neighborhoods have none.
+- **Ratings** are shown only with 5 or more reviews (`rating_held` keeps what is on file); fewer earn no points.
+- **`supply_note`** where fewer than three top buildings exist (3 neighborhoods).
+- **`confidence`**: high when the rank range is 12 or narrower with 30+ listings; low when wider than 40 or under 15
+  listings; otherwise medium (4 high, 57 medium, 55 low).

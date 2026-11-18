@@ -56,6 +56,7 @@ SUBS = {
     "parking": [("offstreet_share", 0.6, True, ""), ("overnight_value", 0.4, True, "")],
     "records": [("records_index", 1.0, False, "")],
 }
+MIN_REVIEWS_SHOWN = 5                       # a rating from fewer reviews is not shown and earns no points
 MIN_SQFT_N, MIN_PARKING_N = 5, 5            # fewer stated values than this: the figure is treated as missing
 OVERNIGHT_VALUE = {"ban": 0.0, "permit": 0.5, "seasonal": 0.75}
 WINSOR = (0.05, 0.95)
@@ -166,6 +167,69 @@ def parking_kind(v):
     if re.fullmatch(r"\s*none\s*", s):
         return "none"
     return ""
+
+
+# ---------------------------------------------------------------- "pay months up front" template prices
+TEMPLATE_ASK = "What is the real monthly rent? The price shown assumes extra months paid up front."
+
+
+def apply_templates(U):
+    """Independent check 6, sweep 10: one lister's listings advertise a reduced payment for months paid up front while the
+    page states the real "Monthly Rent". Sets U.template ('' / confirmed / same_building / same_price) and replaces
+    listed_rent by the real stated rent (NaN where it is not known, which takes the row out of every measure);
+    the advertised figure stays in advertised_rent. Returns counts for meta."""
+    U["advertised_rent"], U["template"], real = U.listed_rent, "", {}
+    V = read(DATA / "evidence" / "review_verdicts.csv")
+    v = V[(V.why.fillna("") + " " + V.what_to_confirm.fillna("")).str.contains("up front", case=False)]
+    for r in v.itertuples():
+        m = re.search(r"The rent is \$([\d,]+) a month", str(r.why))
+        real.setdefault(r.listing_id, None)
+        if m:
+            real[r.listing_id] = float(m.group(1).replace(",", ""))
+    F = read(DATA / "reference" / "listing_page_facts.csv")
+    t = F.description.fillna("") + " " + F.extra_text.fillna("")
+    for lid, txt in zip(F.listing_id, t):
+        m = re.search(r"Monthly Rent:\s*\$\s*([\d,]+)", txt)
+        if m and re.search(r"reduced monthly rent|up ?front", txt, re.I):
+            real[lid] = real.get(lid) or float(m.group(1).replace(",", ""))
+    B = read(DATA / "evidence" / "live_check_batch_22.csv")
+    b = B[(B.status == "changed") & B.notes.fillna("").str.contains("up front", case=False) & B.price_now.notna()]
+    by_unit = {(r.addr_key, str(r.unit).split(".")[0]): float(r.price_now) for r in b.itertuples()}
+    for r in U[U.addr_key.isin(set(b.addr_key))].itertuples():
+        k = (r.addr_key, str(r.unit).split(".")[0])
+        if k in by_unit:
+            real[r.listing_id] = real.get(r.listing_id) or by_unit[k]
+    conf = U.listing_id.isin(real)
+    U.loc[conf, "template"] = "confirmed"
+    prices = set(U.loc[conf, "advertised_rent"])
+    keys = set(U.loc[conf, "addr_key"])
+    hoods = set(U.loc[conf, "hood_id"].dropna())
+    same_b = ~conf & U.addr_key.isin(keys) & U.advertised_rent.isin(prices)
+    U.loc[same_b, "template"] = "same_building"
+    # the same odd figure (not ending in 0 or 5) elsewhere in a neighborhood where the template is confirmed, plus any
+    # odd figure there that is 8/11, 9/11 or 10/11 of a round rent (the template's "months up front" steps)
+    odd = {p for p in prices if p % 5}
+    rep_ = U[U.hood_id.isin(hoods)].groupby("advertised_rent").addr_key.nunique()
+    for p_, n in rep_.items():
+        if p_ % 5 and any(abs(p_ * 11 / k - round(p_ * 11 / k / 50) * 50) < 1.5 for k in (8, 9, 10)):
+            odd.add(p_)
+    same_p = (U.template == "") & U.hood_id.isin(hoods) & U.advertised_rent.isin(odd)
+    U.loc[same_p, "template"] = "same_price"
+    U["listed_rent"] = [real.get(i) if tpl == "confirmed" else (float("nan") if tpl else r)
+                        for i, tpl, r in zip(U.listing_id, U.template, U.advertised_rent)]
+    U["listed_rent"] = pd.to_numeric(U.listed_rent, errors="coerce")
+    T = U[U.template != ""]
+    scan = U[U.hood_id.notna() & (U.advertised_rent <= RENT_POOL) & (U.advertised_rent % 5 != 0)]
+    g = scan.groupby(["hood_id", "advertised_rent"]).agg(n=("listing_id", "size"), addresses=("addr_key", "nunique")).reset_index()
+    g = g[(g.n >= 6) & (g.addresses >= 4)].sort_values(["n", "hood_id"], ascending=[False, True])
+    return {"listings_flagged": int(len(T)), "by_basis": {k: int(v) for k, v in T.template.value_counts().sort_index().items()},
+            "real_rent_known": int(T.listed_rent.notna().sum()), "real_rent_unknown_left_out": int(T.listed_rent.isna().sum()),
+            "real_rent_at_2000_or_less": int((T.listed_rent <= RENT_SHOW).sum()),
+            "by_neighborhood": {k: int(v) for k, v in T.hood_id.value_counts().items()},
+            "advertised_prices": sorted(int(x) for x in set(T.advertised_rent)),
+            "odd_price_scan": [{"neighborhood": r.hood_id, "advertised_rent": int(r.advertised_rent), "listings": int(r.n), "addresses": int(r.addresses)}
+                               for r in g.itertuples()],
+            "scan_rule": "a price not ending in 0 or 5 shared by 6+ listings at 4+ addresses in one neighborhood"}
 
 
 # ---------------------------------------------------------------- neighborhood assignment
@@ -433,7 +497,42 @@ def sentence(meas, m):
 ICONS = {"near": "car", "cost": "tag", "going_out": "fork", "green": "park", "supply": "key", "space": "ruler", "parking": "parking"}
 
 
-def why_and_know(h, S, M, eligible):
+DRAWBACK = {"near": ("drive_min", False), "going_out": ("places_10min", True), "space": ("median_sqft", True),
+            "supply": ("dogs_yes_share", True), "green": ("park_walk_min", False)}
+
+
+def drawback(meas, m, med):
+    """(sentence, figures) when the neighborhood's own figure is worse than the middle of the ranked list, else None."""
+    def worse(key, higher_better):
+        v, c = m.get(key), med.get(key)
+        return v is not None and c is not None and (v < c if higher_better else v > c)
+    f = display_figures(meas, m) if meas != "parking" else {}
+    t = {k: figure_text(k, v) for k, v in f.items()}
+    if meas == "near" and worse("drive_min", False):
+        return sentence("near", m)[0].replace("Mom and Dad are about", "It is far from Mom and Dad: about", 1).replace(" minutes away by car;", " minutes by car;", 1), f
+    if meas == "going_out" and worse("places_10min", True):
+        return (f"There are few places to eat and drink nearby: about {t['places_10min']} restaurants, bars and cafés within a 10-minute walk."), f
+    if meas == "space" and worse("median_sqft", True):
+        return f"Apartments run small here: about {t['median_sqft']} square feet where a size is stated (the middle of {t['sqft_stated']} listings).", f
+    if meas == "supply" and worse("dogs_yes_share", True):
+        f = {k: f[k] for k in ("listings", "dogs_yes")}
+        return f"Few listings here say they take dogs: {t['dogs_yes']} of {t['listings']}.", f
+    if meas == "green" and worse("park_walk_min", False):
+        f = {"park_walk_min": f["park_walk_min"]}
+        return f"The nearest park is a long walk: about {t['park_walk_min']} minutes on foot.", f
+    if meas == "cost":
+        pricey, thin = worse("median_rent", False), worse("apartments_2000", True)
+        if pricey and (not thin or m["median_rent"] / med["median_rent"] - 1 >= 1 - m["apartments_2000"] / med["apartments_2000"]):
+            return f"It is pricey for this list: half of the studios and one-bedrooms listed here ask {t['median_rent']} or more in rent.", {"median_rent": f["median_rent"]}
+        if thin:
+            n = f["apartments_2000"]
+            return f"There is little to choose from: {t['apartments_2000']} {'apartment is' if n == 1 else 'apartments are'} listed at $2,000 or less.", {"apartments_2000": n}
+    if meas == "parking" and (m.get("overnight_rule") or (m.get("offstreet_share") is not None and m["offstreet_share"] < 0.5)):
+        return sentence("parking", m)
+    return None
+
+
+def why_and_know(h, S, M, eligible, med):
     """Three best measures and one or two worst, by the neighborhood's standing on each among the eligible list."""
     pct = {}
     for meas in WEIGHTS:
@@ -449,11 +548,13 @@ def why_and_know(h, S, M, eligible):
             made[meas] = {"measure": meas, "icon": ICONS[meas], "text": s, "figures": f, "standing": round(pct[meas], 3)}
     usable = [k for k in order if k in made]
     why = [made[k] for k in usable[:3]]
-    def worth_knowing(k):                       # a low standing on parking is only said when the figure itself is a caution
-        m = M[h]
-        return k != "parking" or m.get("overnight_rule") or (m.get("offstreet_share") is not None and m["offstreet_share"] < 0.5)
-    rest = [k for k in reversed(usable) if k not in usable[:3] and worth_knowing(k)]
-    know = [made[k] for k in rest if pct[k] < 0.35][:2] or [made[k] for k in rest[:1]]
+    know = []
+    for k in reversed(order):                    # worst standing first; only real drawbacks, and none when nothing is clearly low
+        if k in usable[:3] or pct[k] >= 0.4 or len(know) == 2:
+            continue
+        d = drawback(k, M[h], med)
+        if d and d[0] and text_ok(d[0]):
+            know.append({"measure": k, "icon": ICONS[k], "text": d[0], "figures": d[1], "standing": round(pct[k], 3)})
     return why, know, pct
 
 
@@ -566,12 +667,20 @@ def avoid_reason_from_list(reasons):
 
 def build_buildings(U, src, hood_median):
     """{hood_id: [building dict]} for every building with a studio or one-bedroom listed at $2,000 or less."""
-    P = U[(U.listed_rent <= RENT_SHOW) & U.hood_id.notna() & U.has_street]
+    tpl_unknown = U[(U.template != "") & U.listed_rent.isna() & (U.advertised_rent <= RENT_SHOW) & U.hood_id.notna() & U.has_street]
+    P = pd.concat([U[(U.listed_rent <= RENT_SHOW) & U.hood_id.notna() & U.has_street], tpl_unknown])
     allrows = {k: g for k, g in U.groupby("bkey")}
     out = defaultdict(list)
     for (h, bk), g in P.groupby(["hood_id", "bkey"]):
         g = g.sort_values(["listed_rent", "listing_id"]).drop_duplicates("dedupe_key")
         every = allrows[bk]
+        real_rows = g[g.listed_rent.notna()]
+        template_only = not len(real_rows)          # every price here is a template figure with no real rent on record
+        has_template = bool((every.template != "").any())
+        if template_only:
+            g = g.assign(listed_rent=g.advertised_rent)
+        else:
+            g = real_rows
         use = g[~g.stated_fail]
         shown = use if len(use) else g
         names = [n for n in every.building_name.dropna().astype(str)          # an owner's company name is not a building name
@@ -652,6 +761,12 @@ def build_buildings(U, src, hood_median):
             known.append(f"{lo:,} sq ft" if lo == hi else f"{lo:,} to {hi:,} sq ft")
         else:
             ask.append("How big is it?")
+        if template_only:
+            ask.insert(0, TEMPLATE_ASK)
+            b["rent_text"] = f"Advertised at {money(b['rent_range'][0])} with months paid up front; the real rent is not stated"
+        elif has_template:
+            ask.insert(0, "Does this apartment exist, and what is its number?")
+        b["rent_is_template"], b["has_template_listing"] = template_only, has_template
         b["known"], b["to_ask"] = known, ask
         # rating
         keys = list(dict.fromkeys(every.addr_key))
@@ -665,6 +780,8 @@ def build_buildings(U, src, hood_median):
             if rt is None and r is not None and num(r.rating) is not None and num(r.review_count):
                 rt = {"value": round(float(r.rating), 1), "count": int(r.review_count), "site": SITE_NAMES.get(r.best_source, str(r.best_source).replace("_", " ")),
                       "source_url": r.source_url if isinstance(r.source_url, str) else None}
+        b["rating_held"] = rt
+        rt = rt if rt and rt["count"] >= MIN_REVIEWS_SHOWN else None
         b["rating"] = rt
         # contact (public offices only)
         ct, o = src["contacts"].get(bk), src["own"].get(bk)
@@ -721,7 +838,7 @@ def build_buildings(U, src, hood_median):
                   "reason": "A reviewer who read this listing could not confirm it is a real apartment that is available.",
                   "source": {"name": "Listing review of this search", "file": "data/evidence/review_verdicts.csv",
                              "url": b["listing_url"], "key": sorted(set(g.listing_id) & src["unverified"])[0]}}
-        if av is None and not vids:
+        if av is None and not vids and not has_template:
             med = hood_median.get((h, int(first.beds)))
             if med and med[1] >= 10 and b["rent_range"][1] < 0.55 * med[0]:
                 kind = "studios" if int(first.beds) == 0 else "one-bedrooms"
@@ -754,9 +871,9 @@ def build_buildings(U, src, hood_median):
 
 
 def pick_buildings(bs):
-    cand = [b for b in bs if b["usable"] and b["avoid"] is None and not b["held_back"]]
+    cand = [b for b in bs if b["usable"] and b["avoid"] is None and not b["held_back"] and not b["has_template_listing"]]
     top = sorted(cand, key=lambda b: (-b["evidence_score"], b["rent_range"][0], b["id"]))[:3]
-    bad = sorted([b for b in bs if b["avoid"]], key=lambda b: (b["avoid"]["priority"], -b["apartments_listed"], b["id"]))[:2]
+    bad = sorted([b for b in bs if b["avoid"] and not b["rent_is_template"]], key=lambda b: (b["avoid"]["priority"], -b["apartments_listed"], b["id"]))[:2]
     return top, bad
 
 
@@ -796,6 +913,15 @@ def overnight_rules():
     return out
 
 
+def confidence(width, listings):
+    """How firmly the rank holds: from the width of the stable rank range and the number of listings behind it."""
+    if width <= 12 and listings >= 30:
+        return "high"
+    if width > 40 or listings < 15:
+        return "low"
+    return "medium"
+
+
 def clean_name(n):
     return re.sub(r"\s+city \(balance\)$", "", str(n))
 
@@ -817,6 +943,7 @@ def build():
     U["hood_id"] = U.addr_key.map(lambda k: assign.get(k, (None, "no_coordinates"))[0])
     U["hood_method"] = U.addr_key.map(lambda k: assign.get(k, (None, "no_coordinates"))[1])
     U["bkey"] = U.addr_key.map(lambda k: bkey_of(k, src["cross"]))
+    tstats = apply_templates(U)
     ids = set(H.hood_id)
     P20 = U[U.listed_rent <= RENT_SHOW]
     method_counts = {k: int(v) for k, v in U.hood_method.value_counts().sort_index().items()}
@@ -860,10 +987,14 @@ def build():
     for ft in json.loads((DATA / "reference" / "subcity_neighborhoods.geojson").read_text())["features"]:
         parent[ft["properties"]["hood_id"]] = ft["properties"]["parent_hood_id"]
 
+    med_fig = {}
+    for k in ("drive_min", "places_10min", "median_sqft", "dogs_yes_share", "park_walk_min", "median_rent", "apartments_2000"):
+        vals = [M[h][k] for h in eligible if M[h].get(k) is not None]
+        med_fig[k] = statistics.median(vals) if vals else None
     hoods = []
     for h in sorted(eligible, key=lambda x: base_rank[x]):
         m = M[h]
-        why, know, pct = why_and_know(h, S, M, eligible)
+        why, know, pct = why_and_know(h, S, M, eligible, med_fig)
         tags, tags_true = tags_for(m, pct)
         top, bad = pick_buildings(B.get(h, []))
         role = {b["id"]: "top" for b in top}
@@ -896,7 +1027,8 @@ def build():
             "typical_rent": int(round(m["typical_rent_shown"])), "typical_rent_note": "middle listed rent of the studios and one-bedrooms at $2,000 or less",
             "drive_min": int(round(m["drive_min"])), "toll_round_trip": m["toll_round_trip"],
             "counts": {"buildings": m["buildings_2000"], "apartments": m["apartments_2000"],
-                       "buildings_usable": sum(1 for b in B.get(h, []) if b["usable"]), "listings_in_pool": m["listings"]},
+                       "buildings_usable": sum(1 for b in B.get(h, []) if b["usable"] and not b["rent_is_template"]),
+                       "buildings_template_price_only": sum(1 for b in B.get(h, []) if b["rent_is_template"]), "listings_in_pool": m["listings"]},
             "measures": measures, "measures_known": sum(1 for v in measures.values() if v["known"]),
             "why": why, "know_this": know,
             "overnight_parking": ({"rule": o["severity"], "text": sentence("parking", dict(m, offstreet_share=None))[0], "source_url": o["source_url"]} if o else None),
@@ -905,9 +1037,15 @@ def build():
             "avoid_buildings": [card(b, "avoid") for b in bad],
             "all_buildings": [{"id": b["id"], "name": b["name"], "rent_range": b["rent_range"], "apartments": b["apartments_listed"],
                                "known": b["known"], "to_ask": b["to_ask"], "role": role.get(b["id"], "listed"),
+                               "rent_text": b["rent_text"], "rent_is_template": b["rent_is_template"],
                                "verified": b["verified"]["on_page"], "listing_url": b["listing_url"]}
                               for b in sorted(B.get(h, []), key=lambda b: (-b["evidence_score"], b["rent_range"][0], b["id"]))],
             "sensitivity": {n: ranks[n][h] for n in sc_all},
+            "supply_note": (None if len(top) >= 3 else
+                            f"Only {len(top)} {'building here has' if len(top) == 1 else 'buildings here have'} an apartment at $2,000 or less "
+                            "with nothing stated against it." if top else "No building here has an apartment at $2,000 or less with nothing stated against it."),
+            "confidence": confidence(max(rr) - min(rr), m["listings"]),
+            "confidence_basis": {"rank_range_width": max(rr) - min(rr), "listings": m["listings"]},
         })
 
     n_el = len(eligible)
@@ -947,10 +1085,15 @@ def build():
             "buildings_held_back_without_text": sum(1 for h in eligible for b in B.get(h, []) if b["held_back"]),
         }),
         "neighborhood_assignment": cov,
+        "template_prices": tstats,
         "zumper_no_pets_block": dict(zstats, finding="a real statement by the lister, not a site default"),
         "sensitivity": {"scenarios": {n: w for n, w in sc_all.items()},
                         "note": "rank under each weight x1.5 and x0.5 and under equal weights; rank_range is the lowest and highest of these"},
         "tag_floors": TAG_FLOORS,
+        "list_medians": med_fig,
+        "know_this_rule": "a measure in the bottom 40% of the ranked list whose own figure is worse than the list's median; none when nothing qualifies",
+        "confidence_rule": "high: rank range 12 or narrower and 30+ listings; low: range wider than 40 or under 15 listings; otherwise medium",
+        "min_reviews_for_rating": MIN_REVIEWS_SHOWN,
         "top_building_points": {"verified on the page": 100, "dogs stated allowed": 20, "pets stated allowed": 12, "elevator or second floor stated": 15,
                                 "rating (10+ reviews)": "(rating - 3.5) x 8, between -12 and 12", "record held and clean": 4,
                                 "apartments listed (each, up to 10)": 1, "own-site contact": 5},

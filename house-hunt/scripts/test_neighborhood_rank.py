@@ -43,12 +43,15 @@ def test_figures_in_sentences():
     for h in HOODS:
         m = flat(h)
         assert len(h["why"]) == 3, (h["id"], len(h["why"]))
-        assert 1 <= len(h["know_this"]) <= 2, h["id"]
+        assert len(h["know_this"]) <= 2, h["id"]
         assert not {w["measure"] for w in h["why"]} & {w["measure"] for w in h["know_this"]}, h["id"]
         for w in h["why"] + h["know_this"]:
             assert w["measure"] != "records", h["id"]
-            expect = nr.display_figures(w["measure"], m)
-            assert w["figures"] == expect, (h["id"], w["measure"], w["figures"], expect)
+            full = nr.display_figures(w["measure"], m)
+            expect = {k: full[k] for k in w["figures"]}
+            assert w["figures"] == expect, (h["id"], w["measure"], w["figures"], full)
+            if w in h["why"]:
+                assert expect == full, (h["id"], w["measure"])
             want = {nr.figure_text(k, v).lstrip("$") for k, v in expect.items()}
             found = set(re.findall(r"\d[\d,]*(?:\.\d+)?", w["text"]))
             assert want <= found | {"0"}, (h["id"], w["text"], want)
@@ -63,6 +66,8 @@ def test_measures_from_listings():
     H = nr.read(nr.DATA / "neighborhoods.csv")
     a = nr.assign_hoods(U, H)
     U["hood_id"] = U.addr_key.map(lambda k: a.get(k, (None, ""))[0])
+    nr.apply_templates(U)
+    assert not ((U.template != "") & (U.listed_rent == U.advertised_rent)).any(), "a template price used as rent"
     for h in HOODS:
         g = U[(U.hood_id == h["id"]) & (U.listed_rent <= 2200)]
         s = g[g.listed_rent <= 2000]
@@ -95,7 +100,8 @@ def test_eligibility():
         assert H.drive_min[i] < 120, i
         assert not (S.violent[i] > jam.violent) and not (S.property[i] > jam.property), i
         assert h["counts"]["buildings"] >= 5, i
-        assert len({b["id"] for b in h["all_buildings"]}) == len(h["all_buildings"]) == h["counts"]["buildings"], i
+        assert len({b["id"] for b in h["all_buildings"]}) == len(h["all_buildings"]), i
+        assert sum(1 for b in h["all_buildings"] if not b["rent_is_template"]) == h["counts"]["buildings"], i
         assert all(b["rent_range"][0] <= 2000 for b in h["all_buildings"]), i
         assert h["illustration_key"], i
         assert len(h["tags"]) <= 2 and set(h["tags"]) <= set(h["tags_true"]) <= set(META["tag_floors"]), i
@@ -108,6 +114,22 @@ def test_eligibility():
             assert S.violent[r["hood_id"]] > jam.violent or S.property[r["hood_id"]] > jam.property
         if r["status"] == "too_little_supply":
             assert int(r["buildings_2000"]) < 5
+
+
+def test_know_this_is_a_drawback():
+    med = META["list_medians"]
+    for h in HOODS:
+        m = flat(h)
+        for w in h["know_this"]:
+            assert w["standing"] < 0.4, (h["id"], w["measure"])
+            k = w["measure"]
+            if k in nr.DRAWBACK:
+                key, hb = nr.DRAWBACK[k]
+                assert (m[key] < med[key]) if hb else (m[key] > med[key]), (h["id"], k, m[key], med[key])
+            elif k == "cost":
+                assert m["median_rent"] > med["median_rent"] or m["apartments_2000"] < med["apartments_2000"], h["id"]
+            else:
+                assert k == "parking" and (m["overnight_rule"] or m["offstreet_share"] < 0.5), h["id"]
 
 
 def test_tags_true():
@@ -135,6 +157,15 @@ def test_buildings():
                 assert 0 < b["rating"]["value"] <= 5 and b["rating"]["count"] >= 1 and b["rating"]["site"], b["id"]
             if b["verified"]["on_page"]:
                 assert b["verified"]["apartment_ids"], b["id"]
+        assert (h["supply_note"] is None) == (len(top) == 3), h["id"]
+        assert h["confidence"] in ("high", "medium", "low"), h["id"]
+        tpl = {b["id"] for b in h["all_buildings"] if b["rent_is_template"]}
+        for b in h["all_buildings"]:
+            if b["rent_is_template"]:
+                assert b["role"] == "listed" and b["to_ask"][0] == nr.TEMPLATE_ASK, b["id"]
+        for b in top:
+            assert b["id"] not in tpl and not any("exist" in q for q in b["to_ask"]), b["id"]
+            assert b["rating"] is None or b["rating"]["count"] >= 5, b["id"]
         for b in top:
             assert roles[b["id"]] == "top" and "No dogs" not in b["known"] and "Ground floor only" not in b["known"], b["id"]
         assert [b["evidence_score"] for b in top] == sorted((b["evidence_score"] for b in top), reverse=True), h["id"]
@@ -242,3 +273,4 @@ if __name__ == "__main__":
             out = fn()
             print(f"ok  {name}" + (f" ({out})" if out is not None else ""))
     print("all checks passed")
+
