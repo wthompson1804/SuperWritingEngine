@@ -275,3 +275,8 @@ Decisions by Will that changed or replaced an earlier one. Dates are UTC days of
   described by a few attributes (price, drive to Mom and Dad, space, going out, parking, a park for the dog), the way
   pricing studies do it, not between real places; and the results page reads in one order: what she cares about, three
   neighborhoods, three places in each, then browse everything. Spec: "Version 4" in `docs/CONCIERGE_DESIGN.md`.
+
+- **The short version, version 5 (Will, 2026-11-18):** no questions. The data recommends the same few places for
+  almost anyone at this price, so the page says how the list was narrowed (real counts), then shows the three
+  neighborhoods and their three best buildings at a glance, with browse, search, filter, My list, Compare and the tour
+  plan kept. Spec: "Version 5" in `docs/CONCIERGE_DESIGN.md`.

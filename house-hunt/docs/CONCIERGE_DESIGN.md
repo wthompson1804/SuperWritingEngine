@@ -255,3 +255,21 @@ three, weight recovery, and how results move with each answer. Five personas as 
   neighborhoods, the three best buildings in each, and everything else browsable, searchable and filterable.
 - The promise is enforced: only neighborhoods with at least three buildings on the page can be recommended (smaller
   ones stay in Browse everything); Browse everything gets a search box.
+
+---
+
+## Version 5 (Will, 2026-11-18): no questions — the short list, shown as clearly as possible
+
+The baseline check (`scripts/recommender_baseline.py`) showed that the same three neighborhoods (Bloomfield, Stamford,
+Flushing) are the best fit for about nine in ten preference mixes at this price. Will: "if the data does not support
+making it more complicated, then why should we?" So the short version asks nothing. It opens with a two-sentence
+account of how the list was narrowed (real counts: listings read, area covered, rules applied, how many passed), then
+shows the three neighborhoods and the three best buildings in each, at a glance, and keeps Browse everything (search,
+filter, map), My list, Compare and the tour plan. A small, collapsed "If one thing matters most to you" list names the
+neighborhood that wins when she leans hard one way (from `scripts/recommender_frontier.py`).
+
+Data contract additions: `meta.funnel` {listings_read, sources, states, towns, area_text, rules (plain list),
+passed_apartments, shown_apartments, buildings, neighborhoods, eligible_neighborhoods}; `meta.default_recommendation`
+(same shape as a recommendation: neighborhoods with why, gives_up, tags and three buildings each), computed with the
+prior mean weights; `meta.leanings` [{priority_key, priority_label, neighborhood_id, neighborhood_name, line}].
+The conjoint data may stay in the file but the page no longer uses it.
