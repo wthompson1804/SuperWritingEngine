@@ -908,6 +908,7 @@ def add_version_three(out):
     out["meta"]["recommender_examples"] = conjoint_examples(samples, blds, params)
 
     out["meta"]["data_version"] = data_version(params, samples)
+    add_version_five(out, samples, blds, params)
     out["meta"]["recommender"]["validation"] = validation(out["meta"]["recommender_examples"], blds, params)
     return out
 
@@ -1360,3 +1361,45 @@ class FastCJ:
             if i is None:
                 return answers
             answers.append({"task_index": i, "task": self.pool[i], "choice": answer_fn(self.pool[i])})
+
+
+# ================================================================ VERSION 5: no questions; the default list and leanings
+
+LEAN_WORDS = {"family": "being near Mom and Dad", "money": "the monthly cost", "room": "space", "going_out": "going out",
+              "green": "a park for the dog", "parking": "parking"}
+
+
+def default_recommendation(samples, buildings, params, hoods):
+    """recommend_from_weights at the prior mean weights (the mean of the samples), with each neighborhood's tags and
+    building names."""
+    w = mean_weights(samples, [1 / len(samples)] * len(samples))
+    rec = recommend_from_weights(w, buildings, params)
+    hn = {h["id"]: h for h in hoods}
+    by = {b["id"]: b for b in buildings}
+    for n in rec["neighborhoods"]:
+        n["tags"] = hn[n["neighborhood_id"]]["tags"]
+        for b in n["buildings"]:
+            b["name"] = by[b["id"]]["name"]
+            b["neighborhood_name"] = by[b["id"]]["neighborhood_name"]
+    return rec
+
+
+def leanings(buildings, params, hoods, default_ids):
+    """For each priority alone (its weight 1, the rest 0): the recommendable neighborhood with the highest score
+    (scripts/recommender_frontier.py's rule), with a plain line. in_default_three marks a winner already among the
+    default three (kept, so nothing is hidden; the page may leave those out)."""
+    names = {h["id"]: h["name"] for h in hoods}
+    out = []
+    for i, k in enumerate(FEATURES):
+        w = [0.0] * len(FEATURES)
+        w[i] = 1.0
+        g = best_group(w, buildings, params)
+        out.append({"priority_key": k, "priority_label": LEAN_WORDS[k], "neighborhood_id": g, "neighborhood_name": names[g],
+                    "line": f"If {LEAN_WORDS[k]} matters most: {names[g]}", "in_default_three": g in default_ids})
+    return out
+
+
+def add_version_five(out, samples, buildings, params):
+    rec = default_recommendation(samples, buildings, params, out["neighborhoods"])
+    out["meta"]["default_recommendation"] = rec
+    out["meta"]["leanings"] = leanings(buildings, params, out["neighborhoods"], {n["neighborhood_id"] for n in rec["neighborhoods"]})

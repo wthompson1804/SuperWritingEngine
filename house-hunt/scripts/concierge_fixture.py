@@ -529,6 +529,63 @@ def add_v3(out):
     return out
 
 
+# ======================================================================================================================
+# Version 5 (docs/CONCIERGE_DESIGN.md, "Version 5"): no questions. FIXTURE ONLY until scripts/concierge_data.py writes
+# them: meta.funnel (the counts are read from data/gate_summary.md and the page's own data), meta.default_recommendation
+# (the reference's recommend_from_weights with the prior mean weights) and meta.leanings (the best neighborhood when one
+# thing is all that matters, as scripts/recommender_frontier.py finds it).
+# ======================================================================================================================
+def add_v5(out):
+    m = out["meta"]
+    if m.get("funnel") and m.get("default_recommendation") and not (m.get("funnel") or {}).get("fixture"):
+        return out
+    import re
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import recommender as R  # noqa: E402
+    gs = (ROOT / "data" / "gate_summary.md").read_text(encoding="utf-8") if (ROOT / "data" / "gate_summary.md").exists() else ""
+    mm = re.search(r"After dedupe: (\d+)", gs)
+    src = gs.split("## By source")[1].split("\n## ")[0] if "## By source" in gs else ""
+    sources = len([ln for ln in src.splitlines() if ln.startswith("| ") and not ln.startswith("| source_site")])
+    B, P = out["buildings"], m["recommender"]
+    groups = P.get("groups") or []
+    m["funnel"] = {"fixture": True, "listings_read": int(mm.group(1)) if mm else None, "sources": sources or None,
+                   "states": sorted({b.get("state") for b in B if b.get("state")}),
+                   "towns": len({(b.get("city"), b.get("state")) for b in B if b.get("city")}),
+                   "area_text": "within a 2-hour drive of Mom and Dad's",
+                   "rules": ["Rent $2,000 a month or less, and $3,000 or less with utilities and fees",
+                             "Dogs allowed, 25 lb or more",
+                             "Move in by December 15",
+                             "A studio or one bedroom, not on the ground floor; an elevator above the second floor",
+                             "In a neighborhood no less safe than Jamaica, Queens",
+                             "A real apartment, seen listed, with at most one thing left to confirm"],
+                   "passed_apartments": m["counts"].get("apartments"), "shown_apartments": m["counts"].get("apartments"),
+                   "buildings": len(B), "neighborhoods": m["counts"].get("neighborhoods"),
+                   "eligible_neighborhoods": sum(1 for g in groups if len(g["building_ids"]) >= P.get("min_buildings", 0))}
+    S = out["recommender_samples"]
+    w = [sum(s[j] for s in S) / len(S) for j in range(len(R.FEATURES))]
+    rec = R.recommend_from_weights(w, B, P)
+    hood = {h["id"]: h for h in out["neighborhoods"]}
+    for n in rec["neighborhoods"]:
+        n["tags"] = (hood.get(n["neighborhood_id"]) or {}).get("tags")
+    rec["fixture"] = True
+    m["default_recommendation"] = rec
+    names = {g["id"]: g["name"] for g in groups}
+    lean = []
+    for i, k in enumerate(R.FEATURES):
+        wk = [0.0] * len(R.FEATURES)
+        wk[i] = 1.0
+        g = R.group_scores(wk, B, P)
+        best = sorted(g, key=lambda x: (-R.q(g[x]), x))[0]
+        label = R.PRIORITY_WORDS[k]
+        lean.append({"priority_key": k, "priority_label": label, "neighborhood_id": best, "neighborhood_name": names.get(best, best),
+                     "line": f"If {label} matters most: {names.get(best, best)}"})
+    m["leanings"] = lean
+    m["fixture_v5"] = "meta.funnel, meta.default_recommendation and meta.leanings are fixture stand-ins (scripts/concierge_fixture.py)"
+    m["fixture"] = True
+    return out
+
+
 def main():
     d = json.loads(SRC.read_text(encoding="utf-8"))
     real = ROOT / "site" / "concierge_data.json"
@@ -541,10 +598,13 @@ def main():
     if not out.get("questions"):
         out = add_v2(out, d)
     out = add_v3(out)
+    out = add_v5(out)
     OUT.write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"{OUT}: {out['meta']['counts']}, samples: {len(out['recommender_samples'])}")
-    for ex in out["meta"]["recommender_examples"]:
-        print(f"  {ex['persona']}: {len(ex.get('expected_tasks') or [])} choices, priorities {ex.get('expected_priorities')}, top {[t[0] for t in ex['expected_top']]}")
+    dr = out["meta"].get("default_recommendation") or {}
+    print("  default three:", [(n["neighborhood_id"], [b["id"] for b in n["buildings"]]) for n in dr.get("neighborhoods", [])])
+    print("  leanings:", [(x["priority_key"], x["neighborhood_id"]) for x in out["meta"].get("leanings", [])])
+    print("  funnel:", {k: v for k, v in out["meta"].get("funnel", {}).items() if k != "rules"})
 
 
 if __name__ == "__main__":

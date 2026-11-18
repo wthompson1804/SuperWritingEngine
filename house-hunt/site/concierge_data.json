@@ -1,6 +1,6 @@
 {
  "meta": {
-  "built_at": "2026-11-17T23:52:42+00:00",
+  "built_at": "2026-11-18T00:19:55+00:00",
   "rent_limit": 2000,
   "counts": {
    "apartments": 230,
@@ -9730,7 +9730,293 @@
     }
    }
   ],
-  "data_version": "v4-808bbb2871"
+  "data_version": "v4-808bbb2871",
+  "default_recommendation": {
+   "weights": [
+    0.173548,
+    0.143383,
+    0.181668,
+    0.17835,
+    0.179637,
+    0.143412
+   ],
+   "neighborhoods": [
+    {
+     "neighborhood_id": "nj:bloomfield",
+     "name": "Bloomfield",
+     "score": 0.575336,
+     "buildings": [
+      {
+       "id": "b_63439f0a5f",
+       "score": 0.615193,
+       "more_like_this": [
+        "b_7e7f8992f2",
+        "b_39bce8e231",
+        "b_bbae18b262"
+       ],
+       "name": "55 Monroe Place Apartments",
+       "neighborhood_name": "Bloomfield"
+      },
+      {
+       "id": "b_e39cde86f4",
+       "score": 0.60645,
+       "more_like_this": [
+        "b_21c3c3e483",
+        "b_8f314b2e2f",
+        "b_4ebdf3eefb"
+       ],
+       "name": "64 Park Avenue",
+       "neighborhood_name": "Bloomfield"
+      },
+      {
+       "id": "b_00b6de3f80",
+       "score": 0.468882,
+       "more_like_this": [
+        "b_bdba3ce8ce",
+        "b_72747f630d",
+        "b_581c159c1f"
+       ],
+       "name": "263 Bloomfield Avenue Apartments",
+       "neighborhood_name": "Bloomfield"
+      }
+     ],
+     "why_features": [
+      "going_out",
+      "family"
+     ],
+     "why": "18 places to eat and drink within a 10-minute walk. About 51 minutes by car to Mom and Dad.",
+     "gives_up_feature": "money",
+     "gives_up": "Costs more: monthly totals from $2,097 (the other two: $1,806 and $1,879).",
+     "gives_up_unknown": false,
+     "what_would_change": {
+      "feature": "money",
+      "direction": "more",
+      "factor": 1.5,
+      "neighborhood_id": "ct:stamford",
+      "text": "If money left over mattered more, Stamford would come first."
+     },
+     "tags": []
+    },
+    {
+     "neighborhood_id": "ct:stamford",
+     "name": "Stamford",
+     "score": 0.563264,
+     "buildings": [
+      {
+       "id": "b_893edb6df8",
+       "score": 0.628439,
+       "more_like_this": [
+        "b_4278658026",
+        "b_84bbe8d99e",
+        "b_cffdb3842e"
+       ],
+       "name": "Summer Street",
+       "neighborhood_name": "Stamford"
+      },
+      {
+       "id": "b_377a717d0d",
+       "score": 0.49809,
+       "more_like_this": [
+        "b_846f44689f",
+        "b_a70d51cf28",
+        "b_66685241d8"
+       ],
+       "name": "111 Prospect St",
+       "neighborhood_name": "Stamford"
+      },
+      {
+       "id": "b_f95c86db48",
+       "score": 0.474299,
+       "more_like_this": [
+        "b_fec325fa9f",
+        "b_d007846fe9",
+        "b_6b0a5d8f58"
+       ],
+       "name": "The Stanley",
+       "neighborhood_name": "Stamford"
+      }
+     ],
+     "why_features": [
+      "going_out",
+      "parking"
+     ],
+     "why": "33 places to eat and drink within a 10-minute walk. Off-street parking.",
+     "gives_up_feature": "room",
+     "gives_up": "Smaller: up to 489 sq ft (the other two: 623 sq ft and 600 sq ft).",
+     "gives_up_unknown": false,
+     "what_would_change": {
+      "feature": "money",
+      "direction": "more",
+      "factor": 1.5,
+      "neighborhood_id": "ct:stamford",
+      "text": "If money left over mattered more, Stamford would come first."
+     },
+     "tags": [
+      "Lively",
+      "easy parking"
+     ]
+    },
+    {
+     "neighborhood_id": "ny:flushing-willets-point",
+     "name": "Flushing-Willets Point",
+     "score": 0.524996,
+     "buildings": [
+      {
+       "id": "b_1d1be12629",
+       "score": 0.675854,
+       "more_like_this": [
+        "b_0f0fcfc79c",
+        "b_92f883f46d",
+        "b_31d135b158"
+       ],
+       "name": "3625 Parsons Blvd",
+       "neighborhood_name": "Murray Hill-Broadway Flushing"
+      },
+      {
+       "id": "b_91121ba2c7",
+       "score": 0.589728,
+       "more_like_this": [
+        "b_c4831201c1",
+        "b_879c33564e",
+        "b_d03c93be22"
+       ],
+       "name": "63-44 Saunders Street",
+       "neighborhood_name": "Rego Park"
+      },
+      {
+       "id": "b_73eecaf004",
+       "score": 0.580845,
+       "more_like_this": [
+        "b_a564f7a7f5",
+        "b_e4066e3234",
+        "b_afec34bc3d"
+       ],
+       "name": "7617 47th Ave",
+       "neighborhood_name": "Elmhurst"
+      }
+     ],
+     "why_features": [
+      "going_out",
+      "family"
+     ],
+     "why": "48 places to eat and drink within a 10-minute walk. About 12 minutes by car to Mom and Dad.",
+     "gives_up_feature": "parking",
+     "gives_up": "Parking isn't stated yet; ask on the tour.",
+     "gives_up_unknown": true,
+     "what_would_change": {
+      "feature": "family",
+      "direction": "more",
+      "factor": 3.0,
+      "neighborhood_id": "ny:flushing-willets-point",
+      "text": "If being near Mom and Dad mattered more, Flushing-Willets Point would come first."
+     },
+     "tags": [
+      "Lively",
+      "near family"
+     ]
+    }
+   ]
+  },
+  "leanings": [
+   {
+    "priority_key": "family",
+    "priority_label": "being near Mom and Dad",
+    "neighborhood_id": "ny:flushing-willets-point",
+    "neighborhood_name": "Flushing-Willets Point",
+    "line": "If being near Mom and Dad matters most: Flushing-Willets Point",
+    "in_default_three": true
+   },
+   {
+    "priority_key": "money",
+    "priority_label": "the monthly cost",
+    "neighborhood_id": "ct:stamford",
+    "neighborhood_name": "Stamford",
+    "line": "If the monthly cost matters most: Stamford",
+    "in_default_three": true
+   },
+   {
+    "priority_key": "room",
+    "priority_label": "space",
+    "neighborhood_id": "nj:woodbridge",
+    "neighborhood_name": "Woodbridge",
+    "line": "If space matters most: Woodbridge",
+    "in_default_three": false
+   },
+   {
+    "priority_key": "going_out",
+    "priority_label": "going out",
+    "neighborhood_id": "ny:flushing-willets-point",
+    "neighborhood_name": "Flushing-Willets Point",
+    "line": "If going out matters most: Flushing-Willets Point",
+    "in_default_three": true
+   },
+   {
+    "priority_key": "green",
+    "priority_label": "a park for the dog",
+    "neighborhood_id": "nj:bloomfield",
+    "neighborhood_name": "Bloomfield",
+    "line": "If a park for the dog matters most: Bloomfield",
+    "in_default_three": true
+   },
+   {
+    "priority_key": "parking",
+    "priority_label": "parking",
+    "neighborhood_id": "nj:city-of-orange",
+    "neighborhood_name": "City of Orange",
+    "line": "If parking matters most: City of Orange",
+    "in_default_three": false
+   }
+  ],
+  "funnel": {
+   "listings_read": 21095,
+   "listings_read_apartments": 16927,
+   "sources": {
+    "listing_sites": 5,
+    "listing_site_names": [
+     "apartmentlist",
+     "openigloo",
+     "trulia",
+     "zillow",
+     "zumper"
+    ],
+    "building_or_manager_sites": 55
+   },
+   "states": [
+    "NY",
+    "NJ",
+    "CT",
+    "PA"
+   ],
+   "towns": 744,
+   "search_areas": 98,
+   "area_text": "within a 2-hour drive of Mom and Dad's, across New York, New Jersey, Connecticut and Pennsylvania",
+   "rules": [
+    "Rent of $2,000 a month or less",
+    "A total with utilities and fees of $3,000 or less",
+    "Dogs allowed",
+    "Move in by December 15",
+    "An elevator, or the second floor",
+    "Never the ground floor",
+    "Official neighborhood records no worse than Jamaica's",
+    "A real apartment, checked against its listing"
+   ],
+   "passed_apartments": {
+    "first_page": 359,
+    "at_or_under_2000": 230
+   },
+   "shown_apartments": 230,
+   "buildings": 132,
+   "neighborhoods": 52,
+   "eligible_neighborhoods": 16,
+   "eligible_buildings": 95,
+   "how": {
+    "listings_read": "rows in data/listings.csv (every listing ever collected; listings_read_apartments: rows that are a single apartment, not a floor plan or building offer)",
+    "sources": "distinct source_site values in data/listings.csv, www. and .com removed; the listing sites are apartmentlist, openigloo, trulia, zillow, zumper",
+    "states_towns": "distinct state, and distinct (city, state), in data/listings.csv; search_areas: rows of seeds/areas_seed.csv",
+    "passed_apartments": "first_page: apartments shown on the first page (the apartment list of site/data.json); at_or_under_2000: of those, listed rent as it now stands at or under $2,000 (this page)",
+    "eligible_neighborhoods": "recommender groups with at least 3 buildings (meta.recommender.min_buildings)"
+   }
+  }
  },
  "experiences": [
   {

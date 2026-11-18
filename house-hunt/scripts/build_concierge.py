@@ -9,8 +9,8 @@
     python3 scripts/build_concierge.py
     python3 scripts/build_concierge.py --data site/_concierge_fixture.json     # the test stand-in
 
-Without --data the script uses site/concierge_data.json when it carries the recommender fields the page needs
-(recommender_samples, meta.recommender with its version 4 `conjoint`, buildings[].features) and otherwise the fixture (site/_concierge_fixture.json,
+Without --data the script uses site/concierge_data.json when it carries what the version 5 page shows
+(meta.funnel and meta.default_recommendation) and otherwise the fixture (site/_concierge_fixture.json,
 written by scripts/concierge_fixture.py), and says which. Version 3 shows no experience drawings, so none are inlined.
 
 Two things are done to the map block on the way in, in memory only (site/map_component.html is not changed):
@@ -70,13 +70,13 @@ def map_block() -> str:
 
 
 def has_v3(path: Path) -> bool:
+    """The real file is used once it carries what the page shows (version 5: meta.funnel and meta.default_recommendation)."""
     try:
         d = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, ValueError):
         return False
-    rec = (d.get("meta") or {}).get("recommender") or {}
-    return bool(d.get("recommender_samples")) and bool(rec) and bool(rec.get("conjoint")) \
-        and all(isinstance(b.get("features"), dict) for b in d.get("buildings") or [{}])
+    m = d.get("meta") or {}
+    return bool(m.get("funnel")) and bool((m.get("default_recommendation") or {}).get("neighborhoods"))
 
 
 def pick_data(arg: str | None) -> Path:
@@ -118,7 +118,7 @@ def main(argv=None) -> int:
     counts = (data.get("meta") or {}).get("counts") or {}
     print(f"data: {data_path} ({counts.get('buildings')} buildings, {counts.get('apartments')} apartments)"
           + ("  [TEST FIXTURE, not the reviewed data]" if (data.get("meta") or {}).get("fixture") else "")
-          + ("" if data.get("recommender_samples") else "  [no recommender fields: the page shows the list only]"))
+          + ("" if (data.get("meta") or {}).get("default_recommendation") else "  [no default_recommendation: the page shows the list only]"))
     print(f"{full}: {len(page.encode('utf-8')):,} bytes")
     print(f"{art}: {len(text.encode('utf-8')):,} bytes")
     for p in problems:

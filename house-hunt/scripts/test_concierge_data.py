@@ -1229,6 +1229,40 @@ def recommender_simulated_users():
     assert len(m) == 3 and b0["id"] not in m and b0["similar"][0] not in m
 
 
+@test
+def version_five_funnel_default_and_leanings():
+    import pandas as pd
+    f = OUT["meta"]["funnel"]
+    t = pd.read_csv(K.LISTINGS, dtype=str, keep_default_na=False, low_memory=False)
+    assert f["listings_read"] == len(t) >= f["listings_read_apartments"] > 0
+    assert f["shown_apartments"] == len(APTS) == f["passed_apartments"]["at_or_under_2000"] <= f["passed_apartments"]["first_page"] == len(D["units"])
+    assert f["buildings"] == len(BLDS) and f["neighborhoods"] == len(HOODS)
+    elig = [g for g in RP["groups"] if len(g["building_ids"]) >= 3]
+    assert f["eligible_neighborhoods"] == len(elig) and f["eligible_buildings"] == sum(len(g["building_ids"]) for g in elig) <= len(BLDS)
+    assert set(f["states"]) == set(t["state"]) - {""} and all(K.STATE_NAMES[x] in f["area_text"] for x in f["states"])
+    assert f["sources"]["listing_sites"] == len(f["sources"]["listing_site_names"]) and f["sources"]["building_or_manager_sites"] > 0
+    assert all(max(K.rent_now(u) for u in D["units"] if u["id"] == a["id"]) <= 2000 for _, a in APTS[:5])
+    for x in f["rules"] + [f["area_text"]]:
+        assert not K.BANNED.search(x) and not K.CRIME.search(x), x
+    # the default: the prior mean weights, three neighborhoods with three buildings each
+    dr = OUT["meta"]["default_recommendation"]
+    w = R.mean_weights(RS, [1 / len(RS)] * len(RS))
+    want = R.recommend_from_weights(w, BLDS, RP)
+    assert [n["neighborhood_id"] for n in dr["neighborhoods"]] == [n["neighborhood_id"] for n in want["neighborhoods"]]
+    assert len(dr["neighborhoods"]) == 3
+    for n in dr["neighborhoods"]:
+        assert len(n["buildings"]) == 3 and n["why"] and n["tags"] == H[n["neighborhood_id"]]["tags"]
+        assert all(b["name"] == B[b["id"]]["name"] and B[b["id"]]["group_id"] == n["neighborhood_id"] for b in n["buildings"])
+    # leanings: one per priority, the winner when only that one matters
+    lean = OUT["meta"]["leanings"]
+    assert [x["priority_key"] for x in lean] == list(R.FEATURES)
+    for i, x in enumerate(lean):
+        w1 = [0.0] * 6
+        w1[i] = 1.0
+        assert x["neighborhood_id"] == R.best_group(w1, BLDS, RP) and x["line"].endswith(x["neighborhood_name"])
+        assert x["in_default_three"] == (x["neighborhood_id"] in {n["neighborhood_id"] for n in dr["neighborhoods"]})
+
+
 def main():
     failed = 0
     for f in TESTS:

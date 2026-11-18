@@ -2004,6 +2004,53 @@ def add_version_two(out, b_base):
     return out
 
 
+LISTINGS = ROOT / "data" / "listings.csv"
+AREAS_SEED = ROOT / "seeds" / "areas_seed.csv"
+LISTING_SITES = {"trulia", "apartmentlist", "zumper", "zillow", "openigloo"}     # aggregators; the rest are building or manager sites
+STATE_NAMES = {"NY": "New York", "NJ": "New Jersey", "CT": "Connecticut", "PA": "Pennsylvania"}
+FUNNEL_RULES = ["Rent of $2,000 a month or less", "A total with utilities and fees of $3,000 or less", "Dogs allowed",
+                "Move in by December 15", "An elevator, or the second floor", "Never the ground floor",
+                "Official neighborhood records no worse than Jamaica's", "A real apartment, checked against its listing"]
+
+
+def site_key(s_):
+    s_ = re.sub(r"\s*\(.*?\)", "", str(s_ or "").strip().lower())
+    s_ = re.sub(r"^www\.", "", s_)
+    return re.sub(r"\.com$", "", s_)
+
+
+def funnel(d, out, recommendable):
+    """meta.funnel: real counts, each with where it comes from (VERSION 5)."""
+    t = pd.read_csv(LISTINGS, dtype=str, keep_default_na=False, low_memory=False)
+    sites = {site_key(x) for x in t["source_site"] if site_key(x) not in ("", "none")}
+    agg = sorted(x for x in sites if x in LISTING_SITES)
+    states = [s_ for s_ in ("NY", "NJ", "CT", "PA") if (t["state"] == s_).any()]
+    towns = {(c.strip().lower(), st) for c, st in zip(t["city"], t["state"]) if c.strip()}
+    names = [STATE_NAMES[s_] for s_ in states]
+    area = ", ".join(names[:-1]) + " and " + names[-1] if len(names) > 1 else names[0]
+    import csv as _csv
+    seeds = None
+    if AREAS_SEED.exists():
+        with open(AREAS_SEED, newline="", encoding="utf-8") as fh:
+            seeds = [r for r in _csv.reader(fh)][1:]
+    m = out["meta"]["counts"]
+    return {
+        "listings_read": int(len(t)), "listings_read_apartments": int((t["listing_kind"] == "unit").sum()),
+        "sources": {"listing_sites": len(agg), "listing_site_names": agg, "building_or_manager_sites": len(sites) - len(agg)},
+        "states": states, "towns": len(towns), "search_areas": int(len(seeds)) if seeds is not None else None,
+        "area_text": f"within a 2-hour drive of Mom and Dad's, across {area}",
+        "rules": FUNNEL_RULES,
+        "passed_apartments": {"first_page": len(d["units"]), "at_or_under_2000": m["apartments"]},
+        "shown_apartments": m["apartments"], "buildings": m["buildings"], "neighborhoods": m["neighborhoods"],
+        "eligible_neighborhoods": len(recommendable), "eligible_buildings": sum(len(g["building_ids"]) for g in recommendable),
+        "how": {"listings_read": "rows in data/listings.csv (every listing ever collected; listings_read_apartments: rows that are a single apartment, not a floor plan or building offer)",
+                "sources": "distinct source_site values in data/listings.csv, www. and .com removed; the listing sites are " + ", ".join(sorted(LISTING_SITES)),
+                "states_towns": "distinct state, and distinct (city, state), in data/listings.csv; search_areas: rows of seeds/areas_seed.csv",
+                "passed_apartments": "first_page: apartments shown on the first page (the apartment list of site/data.json); at_or_under_2000: of those, listed rent as it now stands at or under $2,000 (this page)",
+                "eligible_neighborhoods": "recommender groups with at least 3 buildings (meta.recommender.min_buildings)"},
+    }
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--no-text", action="store_true", help="reuse the _u2000 text tables on disk (the guards still run)")
@@ -2024,6 +2071,8 @@ def main(argv=None):
         print(f"{bad} text step(s) failed: {OUT.name} not written")
         return 1
     out = REC.add_version_three(add_version_two(concierge(b, d), b))
+    rp = out["meta"]["recommender"]
+    out["meta"]["funnel"] = funnel(d, out, [g for g in rp["groups"] if len(g["building_ids"]) >= rp["min_buildings"]])
     OUT.write_text(json.dumps(out, ensure_ascii=False, indent=1, allow_nan=False), encoding="utf-8")
     print(f"{OUT.relative_to(ROOT)}: {out['meta']['counts']}")
     for p in out["meta"]["parked"]:

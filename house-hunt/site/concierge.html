@@ -140,6 +140,17 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;line-height:1.
 .mv:disabled{opacity:.3;cursor:default}
 
 /* the three places */
+.intro .fun{font-size:16px;line-height:1.4}
+details.rules summary{min-height:40px}
+details.rules{margin-top:-4px}
+.rlist{list-style:disc;padding-left:1.2em;display:grid;gap:4px;font-size:15px;line-height:1.35}
+.tapnote{margin-top:-4px}
+details.lean{border-top:2px solid var(--line);border-bottom:2px solid var(--line)}
+.llist{list-style:none;padding:0;display:grid;gap:6px}
+.lrow{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;width:100%;min-height:48px;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:14px;padding:6px 12px;font:inherit;color:var(--ink)}
+.lrow .ll{font-size:15px;font-weight:600;color:var(--muted)}
+.lrow b{font-family:var(--display);font-weight:800;font-size:17px;text-align:right}
+.lrow .go{font-size:22px;color:var(--berry-deep)}
 .pchips{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:5px}
 .mine{display:grid;gap:4px}
 .pc{display:inline-flex;align-items:center;gap:5px;background:var(--card);border:2px solid var(--line);border-radius:999px;padding:2px 10px 2px 3px;font-weight:700;font-size:14px}
@@ -404,481 +415,6 @@ details.filter .fbody{display:grid;gap:14px;padding:0 16px 16px}
 <!--CONCIERGE_DATA_SLOT-->
 <!--CONCIERGE_MAP_SLOT-->
 
-<script id="recommender-logic">
-/* ===================================================================================================================
-   RECOMMENDER. Pure functions, no page access. The JS twin of scripts/recommender.py (the reference): the same
-   model on the same shipped numbers (buildings[].features, recommender_samples, meta.recommender). Loaded by Node in
-   scripts/test_concierge_pick.js, which checks it against every meta.recommender_examples entry: the pairs asked, in
-   order, the mean weights, the top three with their buildings, more like this, why, gives up and what would change.
-   To get the same doubles as Python: sums that Python does with sum() use the same compensated (Neumaier) sum as
-   CPython 3.12+, plain += where Python uses +=, and every compared value is rounded to round_decimals (q) first;
-   ties go to the smaller id. Python's round() to a whole number rounds halves to even (pyRound).
-
-   The selection rule follows meta.recommender.algorithm: group score (one building: mean with the set's median),
-   eligibility (relevance_floor, relevance_top_share), then MMR among the eligible only (fill by score otherwise).
-   model(data)                          the model's numbers; null when the data has no recommender fields
-   posterior(M, answers)                pi over samples after her answers [{a, b, choice: "a"|"b"|"either"}]
-   nextPair(M, answers, opts)           [a id, b id] (a < b by id), or null when the stop rule says stop.
-                                        opts {removed: [ids], extraFrom: n}: with extraFrom, the stop rule gives way to
-                                        "up to extra_pairs more after n answers" (the "make a few more choices" link)
-   holds(M, answers, opts)              {n, p, stop}: p = the stop probability, the posterior probability that each
-                                        sample's best neighborhood (sample_bests) is among the current three
-   recommend(M, answers, opts)          {weights, top: [[area, [ids]]], neighborhoods: [{neighborhood_id, name, score,
-                                        buildings: [{id, more_like_this}], why_features, why, gives_up_feature,
-                                        gives_up, what_would_change}]}; opts {removed, nudge: {feature, direction, factor}}
-   play(M, example)                     replays an example's answers: {pairs, rec}
-   Version 4 (meta.recommender.conjoint; choices between made-up apartments):
-   cj(M)                                the conjoint data, or null
-   cjNext(M, answers)                   the next task index into conjoint.pool [answers: {task_index, choice}], or null
-                                        after n_tasks
-   cjPosterior / cjWeights(M, answers, moves)   pi, and her mean weights with her moves ([feature, "up"|"down"]) applied
-   priorities(M, w)                     {order, words, sentence}: her priorities, most important first
-   nudge(M, w, feature, direction)      one move
-   recommend(M, [], {w: weights})       the three places with those weights
-   Not in the reference (the page's own, used only when she sets buildings aside): opts.removed drops buildings from
-   every group, pool and list. With nothing removed the result is the reference's.
-   =================================================================================================================== */
-var ConciergeRec = (function () {
-  "use strict";
-  var LABEL = { family: "being near Mom and Dad", money: "money left over", room: "room at home", going_out: "going out", green: "a park nearby", parking: "parking" };
-  var PARKING_WORDS = { "1": "garage or covered parking", "0.7": "off-street parking", "0.4": "parking not stated", "0.2": "street parking" };
-  function nsum(xs) {   /* CPython 3.12+ sum() of floats: Neumaier */
-    var f = 0, c = 0;
-    for (var i = 0; i < xs.length; i++) { var x = xs[i], t = f + x; if (Math.abs(f) >= Math.abs(x)) c += (f - t) + x; else c += (x - t) + f; f = t; }
-    return c && isFinite(c) ? f + c : f;
-  }
-  function pyRound(x) { var r = Math.round(x); if (Math.abs(x - Math.trunc(x)) === 0.5) r = 2 * Math.round(x / 2); return r === 0 ? 0 : r; }
-  function cmpId(a, b) { return a < b ? -1 : a > b ? 1 : 0; }
-  function sig(x) { if (x >= 0) return 1 / (1 + Math.exp(-x)); var e = Math.exp(x); return e / (1 + e); }
-  function setOf(list) { var o = {}; (list || []).forEach(function (x) { o[x] = 1; }); return o; }
-  function median(xs) { var s = xs.slice().sort(function (a, b) { return a - b; }), n = s.length, h = Math.floor(n / 2); return n % 2 ? s[h] : (s[h - 1] + s[h]) / 2; }
-  function medianLow(xs) { var s = xs.slice().sort(function (a, b) { return a - b; }); return s[Math.floor((s.length - 1) / 2)]; }
-  function fmt(n) { return Number(n).toLocaleString("en-US", { maximumFractionDigits: 20 }); }
-  function mins(n) { return n + " minute" + (n === 1 ? "" : "s"); }
-  function placesN(n) { return n + " place" + (n === 1 ? "" : "s"); }
-  var UNKNOWN_TEXT = { room: "The size isn't published yet; ask on the tour", parking: "Parking isn't stated yet; ask on the tour",
-    family: "The drive to Mom and Dad isn't known yet", money: "The monthly total isn't known yet; ask on the tour",
-    going_out: "Places to eat and drink nearby aren't mapped yet", green: "The nearest park isn't mapped yet" };
-  function capFirst(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
-
-  function usable(data) {
-    var m = data && data.meta && data.meta.recommender;
-    return !!(m && Array.isArray(m.features) && Array.isArray(data.recommender_samples) && data.recommender_samples.length &&
-      (data.buildings || []).length && (data.buildings || []).every(function (b) { return b && b.features; }));
-  }
-  function model(data) {
-    if (!usable(data)) return null;
-    var cfg = data.meta.recommender, feats = cfg.features, K = feats.length, R = cfg.round_decimals == null ? 9 : cfg.round_decimals;
-    var B = data.buildings, byId = {}, F = {}, sure = {};
-    B.forEach(function (b) { byId[b.id] = b; F[b.id] = feats.map(function (k) { return Number(b.features[k]); }); sure[b.id] = Number(b.features[cfg.sure_feature || "sure"]); });
-    var groups = cfg.groups, sim = cfg.group_similarity;
-    if (!Array.isArray(groups) || !groups.length) {   /* not shipped: a parked neighborhood counts as its host's */
-      var host = {}, name = {}, mem = {};
-      (data.neighborhoods || []).forEach(function (h) { host[h.id] = h.parked_under || h.id; name[h.id] = h.name; });
-      B.slice().sort(function (a, b) { return cmpId(a.id, b.id); }).forEach(function (b) { var g = b.group_id || host[b.neighborhood_id] || b.neighborhood_id; (mem[g] = mem[g] || []).push(b.id); });
-      groups = Object.keys(mem).sort(cmpId).map(function (g) { return { id: g, name: name[g] || g, building_ids: mem[g] }; });
-      sim = null;
-    }
-    var gidx = {}; groups.forEach(function (g, i) { gidx[g.id] = i; });
-    var W = data.recommender_samples, ids = B.map(function (b) { return b.id; });
-    var U = {}; ids.forEach(function (id) { U[id] = W.map(function (w) { var t = []; for (var k = 0; k < K; k++) t.push(w[k] * F[id][k]); return nsum(t); }); });
-    var M = { cfg: cfg, feats: feats, K: K, R: R, B: B, byId: byId, ids: ids, F: F, sure: sure, W: W, U: U, groups: groups, gidx: gidx, sim: sim,
-      mean: cfg.feature_mean || null, sd: cfg.feature_sd || null, sets: {}, Z: null };
-    if (!M.mean || !M.sd) {
-      M.mean = {}; M.sd = {};
-      feats.forEach(function (k) { var xs = B.map(function (b) { return b.features[k]; }), m = nsum(xs) / xs.length, v = nsum(xs.map(function (x) { return (x - m) * (x - m); })) / xs.length, s = Math.sqrt(v);
-        M.mean[k] = Number(m.toFixed(6)); M.sd[k] = Number((s > 1e-9 ? s : 1).toFixed(6)); });
-    }
-    if (!sim) {
-      var cent = groups.map(function (g) { var zs = g.building_ids.map(function (id) { return zvec(M, id); }); return feats.map(function (k, j) { return nsum(zs.map(function (z) { return z[j]; })) / zs.length; }); });
-      var d = cent.map(function (a) { return cent.map(function (c) { return Math.sqrt(nsum(a.map(function (x, j) { return (x - c[j]) * (x - c[j]); }))); }); });
-      var dmax = 0; d.forEach(function (r) { r.forEach(function (x) { if (x > dmax) dmax = x; }); }); dmax = dmax || 1;
-      M.sim = d.map(function (r) { return r.map(function (x) { return Number((1 - x / dmax).toFixed(6)); }); });
-    }
-    M.Z = {};
-    return M;
-  }
-  function q(M, x) { return Number(x.toFixed(M.R)); }
-  function zvec(M, id) {
-    if (M.Z && M.Z[id]) return M.Z[id];
-    var b = M.byId[id], z = M.feats.map(function (k) { return (b.features[k] - M.mean[k]) / M.sd[k]; });
-    if (M.Z) M.Z[id] = z;
-    return z;
-  }
-  function utility(M, id, w) { var f = M.F[id], t = []; for (var k = 0; k < M.K; k++) t.push(w[k] * f[k]); return nsum(t); }
-  function score(M, id, w) { return utility(M, id, w) * M.sure[id]; }
-  function lik(M, g, c) {
-    var T = M.cfg.temperature, band = M.cfg.either_band, pa = sig((g - band) / T), pb = sig((-g - band) / T);
-    return c === "a" ? pa : c === "b" ? pb : Math.max(0, 1 - pa - pb);
-  }
-  function choiceOf(x) { var c = x.choice; return c === "a" || c === "b" ? c : c === x.a ? "a" : c === x.b ? "b" : "either"; }
-  function posterior(M, answers) {
-    var n = M.W.length, raw = [];
-    for (var s = 0; s < n; s++) {
-      var p = 1;
-      (answers || []).forEach(function (x) { if (M.U[x.a] && M.U[x.b]) p *= lik(M, M.U[x.a][s] - M.U[x.b][s], choiceOf(x)); });
-      raw.push(p);
-    }
-    var tot = nsum(raw);
-    if (tot <= 0) return raw.map(function () { return 1 / n; });
-    return raw.map(function (p) { return p / tot; });
-  }
-  function meanW(M, pi) { var out = []; for (var k = 0; k < M.K; k++) { var t = []; for (var s = 0; s < pi.length; s++) t.push(pi[s] * M.W[s][k]); out.push(nsum(t)); } return out; }
-  function liveGroups(M, removed) {
-    return M.groups.map(function (g) { return { id: g.id, name: g.name, i: M.gidx[g.id], building_ids: g.building_ids.filter(function (id) { return !removed[id] && M.byId[id]; }) }; })
-      .filter(function (g) { return g.building_ids.length; });
-  }
-  /* a neighborhood scores the exact expected mean of the two best of a random 3-building subset of its buildings
-     (so depth alone does not win); fewer than three are filled with the median building score of the whole set */
-  function comb(n, k) { if (k < 0 || k > n) return 0; var c = 1; for (var i = 1; i <= k; i++) c = c * (n - k + i) / i; return Math.round(c); }
-  function top2of3(s, med) {
-    s = s.slice();
-    if (s.length < 3) { while (s.length < 3) s.push(med); s.sort(function (a, b) { return b - a; }); return (s[0] + s[1]) / 2; }
-    var n = s.length, total = comb(n, 3), t = [];
-    for (var i = 0; i < n; i++) t.push(s[i] * comb(i, 2));
-    var eMin = nsum(t) / total;
-    return (3 * nsum(s) / n - eMin) / 2;
-  }
-  function groupScores(M, w, G) {
-    var sc = {}, all = [], out = {};
-    G.forEach(function (g) { g.building_ids.forEach(function (id) { sc[id] = q(M, score(M, id, w)); all.push(sc[id]); }); });
-    var med = median(all), need = M.cfg.min_buildings || 0;   /* only neighborhoods with min_buildings can be recommended */
-    G.forEach(function (g) { if (g.building_ids.length >= need) out[g.id] = top2of3(g.building_ids.map(function (id) { return sc[id]; }).sort(function (a, b) { return b - a; }), med); });
-    return out;
-  }
-  /* the groups good enough to recommend: the best, and those ranked in the top relevance_top_share (ceil) with
-     score >= relevance_floor x the best's; in score order */
-  function eligible(M, gs, G) {
-    var order = G.map(function (g) { return g.id; }).sort(function (a, b) { var x = q(M, gs[a]), y = q(M, gs[b]); return x !== y ? y - x : cmpId(a, b); });
-    var share = M.cfg.relevance_top_share, fl = M.cfg.relevance_floor;
-    if (share === undefined || fl === undefined) return { ok: order.slice(), order: order };
-    var cut = Math.ceil(order.length * share), floor = q(M, fl * gs[order[0]]);
-    return { ok: order.filter(function (g, i) { return i === 0 || (i < cut && q(M, gs[g]) >= floor); }), order: order };
-  }
-  function mmr(M, gs, G) {
-    G = G.filter(function (g) { return gs[g.id] !== undefined; });
-    if (!G.length) return [];
-    var lam = M.cfg.mmr_lambda, lo = Infinity, hi = -Infinity, picked = [];
-    G.forEach(function (g) { lo = Math.min(lo, gs[g.id]); hi = Math.max(hi, gs[g.id]); });
-    var norm = {}; G.forEach(function (g) { norm[g.id] = hi - lo > 1e-12 ? (gs[g.id] - lo) / (hi - lo) : 0; });
-    var E = eligible(M, gs, G), k = Math.min(3, G.length);
-    if (E.ok.length < k) return E.ok.concat(E.order.filter(function (g) { return E.ok.indexOf(g) < 0; }).slice(0, k - E.ok.length));
-    var okSet = setOf(E.ok), pool = G.filter(function (g) { return okSet[g.id]; }).sort(function (a, b) { return cmpId(a.id, b.id); });
-    while (picked.length < k) {
-      var best = null;
-      pool.forEach(function (g) {
-        if (picked.some(function (p) { return p.id === g.id; })) return;
-        var red = 0, any = false;
-        picked.forEach(function (p) { var v = M.sim[g.i][p.i]; if (!any || v > red) { red = v; any = true; } });
-        var v = q(M, lam * norm[g.id] - (1 - lam) * red);
-        if (best === null || v > best[0] || (v === best[0] && g.id < best[1].id)) best = [v, g];
-      });
-      picked.push(best[1]);
-    }
-    return picked.map(function (g) { return g.id; });
-  }
-  function firstOf(M, gs) { return Object.keys(gs).sort(function (a, b) { var x = q(M, gs[a]), y = q(M, gs[b]); return x !== y ? y - x : cmpId(a, b); })[0]; }
-  function sampleSets(M, removed) {
-    var key = Object.keys(removed).sort().join("|");
-    if (M.sets[key]) return M.sets[key];
-    var G = liveGroups(M, removed);
-    return (M.sets[key] = M.W.map(function (w) { return mmr(M, groupScores(M, w, G), G).slice().sort(cmpId).join("|"); }));
-  }
-  function distribution(pi, sets) { var d = {}, order = []; for (var s = 0; s < pi.length; s++) { if (!(sets[s] in d)) { d[sets[s]] = 0; order.push(sets[s]); } d[sets[s]] += pi[s]; } return { d: d, order: order }; }
-  function entropy(ps) { var t = []; ps.forEach(function (p) { if (p > 0) t.push(p * Math.log(p)); }); return -nsum(t); }
-  /* each sample's best neighborhood (highest group score, ties by id), computed once */
-  function sampleBests(M, removed) {
-    var key = "b:" + Object.keys(removed).sort().join("|");
-    if (M.sets[key]) return M.sets[key];
-    var G = liveGroups(M, removed);
-    return (M.sets[key] = M.W.map(function (w) { return firstOf(M, groupScores(M, w, G)); }));
-  }
-  /* the posterior probability that a sample's best neighborhood is among the current three (MMR on wbar) */
-  function stopProbability(M, pi, removed) {
-    var G = liveGroups(M, removed); if (!G.length) return 1;
-    var three = setOf(mmr(M, groupScores(M, meanW(M, pi), G), G)), bests = sampleBests(M, removed), t = [];
-    for (var s = 0; s < pi.length; s++) if (three[bests[s]]) t.push(pi[s]);
-    return nsum(t);
-  }
-  function holds(M, answers, opts) {
-    opts = opts || {};
-    var removed = setOf(opts.removed), pi = posterior(M, answers), n = (answers || []).length, c = M.cfg, stop, p = null;
-    if (opts.extraFrom !== null && opts.extraFrom !== undefined) stop = n >= opts.extraFrom + (c.extra_pairs || 3);
-    else if (n >= c.max_pairs) stop = true;
-    else if (n < c.min_pairs) stop = false;
-    else { p = stopProbability(M, pi, removed); stop = q(M, p) >= c.stop_prob; }
-    var out = { n: n, stop: stop, pi: pi, removed: removed };
-    if (opts.withP !== false) out.p = p === null ? stopProbability(M, pi, removed) : p;
-    return out;
-  }
-  function nextPair(M, answers, opts) {
-    var h = holds(M, answers, { removed: opts && opts.removed, extraFrom: opts && opts.extraFrom, withP: false }); if (h.stop) return null;
-    var removed = h.removed, pi = h.pi, w = meanW(M, pi), sets = sampleSets(M, removed);
-    var pool = M.ids.filter(function (id) { return !removed[id]; }).map(function (id) { return [q(M, score(M, id, w)), id]; })
-      .sort(function (x, y) { return x[0] !== y[0] ? y[0] - x[0] : cmpId(x[1], y[1]); }).slice(0, M.cfg.pair_pool).map(function (x) { return x[1]; });
-    var order = pool.slice().sort(cmpId), asked = {};
-    (answers || []).forEach(function (x) { asked[[x.a, x.b].sort(cmpId).join("|")] = 1; });
-    var Dd = distribution(pi, sets), keys = Dd.order, kidx = {}; keys.forEach(function (k, j) { kidx[k] = j; });
-    var sidx = sets.map(function (s) { return kidx[s]; }), h0 = entropy(keys.map(function (k) { return Dd.d[k]; }));
-    var T = M.cfg.temperature, band = M.cfg.either_band, best = null, nk = keys.length, S = pi.length;
-    for (var ii = 0; ii < order.length; ii++) for (var jj = ii + 1; jj < order.length; jj++) {
-      var a = order[ii], b = order[jj]; if (asked[a + "|" + b]) continue;
-      var Ua = M.U[a], Ub = M.U[b], m0 = new Array(nk).fill(0), m1 = new Array(nk).fill(0), m2 = new Array(nk).fill(0);
-      for (var s = 0; s < S; s++) {
-        if (pi[s] === 0) continue;
-        var g = Ua[s] - Ub[s], pa = sig((g - band) / T), pb = sig((-g - band) / T), pe = Math.max(0, 1 - pa - pb), k = sidx[s];
-        m0[k] += pi[s] * pa; m1[k] += pi[s] * pb; m2[k] += pi[s] * pe;
-      }
-      var eh = 0;
-      [m0, m1, m2].forEach(function (m) { var P = nsum(m); if (P > 0) eh += P * entropy(m.map(function (x) { return x / P; })); });
-      var gain = q(M, h0 - eh);
-      if (best === null || gain > best[0]) best = [gain, a, b];
-    }
-    return best ? [best[1], best[2]] : null;
-  }
-  function figures(M, ids) {
-    var rs = ids.map(function (id) { return M.byId[id].features_raw || {}; }), nn = function (x) { return x !== null && x !== undefined; };
-    var drives = rs.map(function (r) { return r.drive_min; }).filter(nn), totals = rs.map(function (r) { return r.total; }).filter(nn), sq = rs.map(function (r) { return r.sqft; }).filter(nn);
-    var places = rs.filter(function (r) { return nn(r.restaurants_10min) || nn(r.bars_10min); }).map(function (r) { return (r.restaurants_10min || 0) + (r.bars_10min || 0); });
-    var walks = rs.map(function (r) { return r.park_walk_min; }).filter(nn);
-    return { drive: drives.length ? pyRound(median(drives)) : null, total: totals.length ? Math.min.apply(null, totals) : null,
-      sqft: sq.length ? Math.max.apply(null, sq) : null, bedroom: rs.some(function (r) { return !!r.bedroom; }),
-      places: places.length ? pyRound(median(places)) : null, walk: walks.length ? Math.max(1, pyRound(Math.min.apply(null, walks))) : null,
-      parking: medianLow(ids.map(function (id) { return M.byId[id].features.parking; })) };
-  }
-  function betterFig(k, f) {
-    if (k === "family") return f.drive === null ? null : -f.drive;
-    if (k === "money") return f.total === null ? null : -f.total;
-    if (k === "room") return !f.sqft ? null : f.sqft + (f.bedroom ? 10000 : 0);
-    if (k === "going_out") return f.places;
-    if (k === "green") return f.walk === null ? null : -f.walk;
-    return f.parking === 0.4 ? null : f.parking;
-  }
-  /* f is worse than o on k by a margin worth naming (meta.recommender.gives_up_margin); both known */
-  function clearMargin(k, f, o) {
-    if (k === "family") return f.drive - o.drive >= 10 && f.drive >= 1.2 * o.drive;
-    if (k === "money") return f.total - o.total >= 75;
-    if (k === "room") return o.sqft - f.sqft >= 75;
-    if (k === "going_out") return o.places - f.places >= 10 && f.places <= 0.7 * o.places;
-    if (k === "green") return f.walk - o.walk >= 4;
-    return f.parking < o.parking;
-  }
-  function pw(v) { return PARKING_WORDS[String(v)] || "parking not stated"; }
-  function good(k, f) {
-    if (k === "family") return f.drive !== null ? "About " + mins(f.drive) + " by car to Mom and Dad" : "Close to Mom and Dad";
-    if (k === "money") return f.total !== null ? "Monthly totals from $" + fmt(f.total) + " with utilities and fees" : "Lower monthly totals";
-    if (k === "room") { var size = f.sqft ? "up to " + fmt(f.sqft) + " sq ft" : "more room"; return f.bedroom ? "A separate bedroom, " + size : capFirst(size); }
-    if (k === "going_out") return f.places !== null ? placesN(f.places) + " to eat and drink within a 10-minute walk" : "Places to eat and drink close by";
-    if (k === "green") return f.walk !== null ? "A park about " + mins(f.walk) + " on foot" : "A park close by";
-    return capFirst(pw(f.parking));
-  }
-  function figText(k, f) {
-    if (k === "family") return f.drive !== null ? mins(f.drive) : "not known";
-    if (k === "money") return f.total !== null ? "$" + fmt(f.total) : "not known";
-    if (k === "room") return f.sqft ? fmt(f.sqft) + " sq ft" : "size not published";
-    if (k === "going_out") return f.places !== null ? placesN(f.places) : "not known";
-    if (k === "green") return f.walk !== null ? mins(f.walk) : "not known";
-    return pw(f.parking);
-  }
-  function bad(k, f, others) {
-    var o = others.map(function (x) { return figText(k, x); }).join(" and ");
-    if (k === "family") return "Farther from Mom and Dad: about " + figText(k, f) + " by car (the other two: " + o + ")";
-    if (k === "money") return "Costs more: monthly totals from " + figText(k, f) + " (the other two: " + o + ")";
-    if (k === "room") return "Smaller: up to " + figText(k, f) + " (the other two: " + o + ")";
-    if (k === "going_out") return "Quieter: " + figText(k, f) + " to eat and drink within a 10-minute walk (the other two: " + o + ")";
-    if (k === "green") return "The nearest park is farther: about " + figText(k, f) + " on foot (the other two: " + o + ")";
-    return capFirst(figText(k, f)) + " (the other two: " + o + ")";
-  }
-  function nudged(w, j, factor) { var w2 = w.slice(); w2[j] *= factor; var s = nsum(w2); return w2.map(function (x) { return x / s; }); }
-  function whatWouldChange(M, w, G, gid, pos, first) {
-    var names = {}; G.forEach(function (g) { names[g.id] = g.name; });
-    var levels = M.cfg.nudges || [1.5, 2, 3, 5, 10];
-    for (var l = 0; l < levels.length; l++) for (var j = 0; j < M.K; j++) {
-      var dirs = [["more", levels[l]], ["less", 1 / levels[l]]];
-      for (var d = 0; d < 2; d++) {
-        var f = firstOf(M, groupScores(M, nudged(w, j, dirs[d][1]), G));
-        if (pos === 0 ? f !== first : f === gid) {
-          var k = M.feats[j];
-          return { feature: k, direction: dirs[d][0], factor: levels[l], neighborhood_id: f, text: "If " + (LABEL[k] || k) + " mattered " + dirs[d][0] + ", " + names[f] + " would come first." };
-        }
-      }
-    }
-    return null;
-  }
-  function moreLike(M, id, w, shown, removed, n) {
-    var zb = zvec(M, id), cand = [];
-    M.ids.forEach(function (o) {
-      if (o === id || shown[o] || removed[o]) return;
-      var zo = zvec(M, o), t = []; for (var j = 0; j < M.K; j++) t.push(w[j] * (zb[j] - zo[j]) * (zb[j] - zo[j]));
-      cand.push([q(M, Math.sqrt(nsum(t))), o]);
-    });
-    cand.sort(function (x, y) { return x[0] !== y[0] ? x[0] - y[0] : cmpId(x[1], y[1]); });
-    return cand.slice(0, n).map(function (x) { return x[1]; });
-  }
-  function recommend(M, answers, opts) {
-    opts = opts || {};
-    var removed = setOf(opts.removed), G = liveGroups(M, removed), w = opts.w ? opts.w.slice() : meanW(M, posterior(M, answers));
-    if (opts.nudge) { var j = M.feats.indexOf(opts.nudge.feature); if (j >= 0) w = nudged(w, j, opts.nudge.direction === "less" ? 1 / opts.nudge.factor : opts.nudge.factor); }
-    if (!G.length) return { weights: w, w: w, top: [], neighborhoods: [], scores: {} };
-    var gs = groupScores(M, w, G), picked = mmr(M, gs, G), first = firstOf(M, gs), gmap = {};
-    G.forEach(function (g) { gmap[g.id] = g; });
-    var tops = {}, figs = {};
-    picked.forEach(function (g) {
-      tops[g] = gmap[g].building_ids.map(function (id) { return [q(M, score(M, id, w)), id]; }).sort(function (x, y) { return x[0] !== y[0] ? y[0] - x[0] : cmpId(x[1], y[1]); }).slice(0, 3).map(function (x) { return x[1]; });
-      figs[g] = figures(M, tops[g]);
-    });
-    var live = M.ids.filter(function (id) { return !removed[id]; });
-    var allMean = M.feats.map(function (k) { return nsum(live.map(function (id) { return M.byId[id].features[k]; })) / live.length; });
-    var cent = {}; picked.forEach(function (g) { cent[g] = M.feats.map(function (k) { return nsum(tops[g].map(function (id) { return M.byId[id].features[k]; })) / tops[g].length; }); });
-    var taken = {}; picked.forEach(function (g) { tops[g].forEach(function (id) { taken[id] = 1; }); });
-    var out = picked.map(function (g, pos) {
-      var c = cent[g];
-      var lift = M.feats.map(function (k, j) { return [q(M, w[j] * (c[j] - allMean[j])), k]; }).sort(function (x, y) { return x[0] !== y[0] ? y[0] - x[0] : cmpId(x[1], y[1]); });
-      var whyK = lift.slice(0, 2).map(function (x) { return x[1]; });
-      var others = picked.filter(function (o) { return o !== g; }), oc = others.map(function (o) { return cent[o]; });
-      var diffs = oc.length ? M.feats.map(function (k, j) { var om = nsum(oc.map(function (x) { return x[j]; })) / oc.length; return [q(M, w[j] * (c[j] - om)), q(M, c[j] - om), k]; }) : [];
-      var raw = {}; diffs.forEach(function (t) { raw[t[2]] = t[1]; });
-      var give = null, giveUnknown = false, sorted = diffs.slice().sort(function (x, y) { return x[0] !== y[0] ? x[0] - y[0] : cmpId(x[2], y[2]); });
-      for (var i = 0; i < sorted.length; i++) {
-        var k = sorted[i][2]; if (raw[k] >= 0 || whyK.indexOf(k) >= 0) continue;   /* never give up what `why` praises */
-        var mine = betterFig(k, figs[g]), theirs = others.map(function (o) { return betterFig(k, figs[o]); });
-        if (mine === null) { give = k; giveUnknown = true; break; }               /* an unknown: said plainly */
-        if (theirs.every(function (x) { return x !== null; }) && others.every(function (o) { return clearMargin(k, figs[g], figs[o]); })) { give = k; break; }
-      }
-      var bl = tops[g].map(function (id) { var more = moreLike(M, id, w, taken, removed, M.cfg.n_more_like_this || 3); more.forEach(function (x) { taken[x] = 1; }); return { id: id, score: Number(score(M, id, w).toFixed(6)), more_like_this: more }; });
-      return { neighborhood_id: g, name: gmap[g].name, score: Number(gs[g].toFixed(6)), buildings: bl, why_features: whyK,
-        why: whyK.map(function (k) { return good(k, figs[g]); }).join(". ") + ".", gives_up_feature: give,
-        gives_up: give ? (giveUnknown ? UNKNOWN_TEXT[give] : bad(give, figs[g], others.map(function (o) { return figs[o]; }))) + "." : null,
-        gives_up_unknown: giveUnknown,
-        what_would_change: whatWouldChange(M, w, G, g, pos, first) };
-    });
-    var scores = {}; live.forEach(function (id) { scores[id] = score(M, id, w); });
-    return { weights: w.map(function (x) { return Number(x.toFixed(6)); }), w: w, neighborhoods: out, scores: scores,
-      top: out.map(function (n) { return [n.neighborhood_id, n.buildings.map(function (b) { return b.id; })]; }) };
-  }
-  function play(M, ex) {
-    var asked = [], pairs = [], A = (ex && ex.answers) || [];
-    for (var i = 0; i <= A.length; i++) {
-      var p = nextPair(M, asked); if (!p) break;
-      pairs.push(p); if (i >= A.length) break;
-      asked.push({ a: p[0], b: p[1], choice: choiceOf(A[i]) });
-    }
-    return { pairs: pairs, rec: recommend(M, asked), asked: asked };
-  }
-  /* ---------- version 4: choices between made-up apartments (meta.recommender.conjoint) ---------- */
-  function cj(M) {
-    var c = M.cfg.conjoint; if (!c || !Array.isArray(c.attributes) || !Array.isArray(c.pool) || !c.pool.length) return null;
-    if (!M.cj) {
-      var lv = {}, byId = {}; c.attributes.forEach(function (a) { byId[a.id] = a; lv[a.id] = a.levels.map(function (x) { return x.value; }); });
-      M.cj = { c: c, pool: c.pool, lv: lv, attr: byId, n: c.n_tasks || 8, words: c.priority_words || LABEL };
-    }
-    return M.cj;
-  }
-  /* U(A) - U(B) for weights w: only the attributes that differ count, summed in the task's own order */
-  function taskGap(M, w, task) {
-    var C = cj(M), t = [];
-    task.forEach(function (x) { t.push(w[M.feats.indexOf(x[0])] * (C.lv[x[0]][x[1]] - C.lv[x[0]][x[2]])); });
-    return nsum(t);
-  }
-  function choiceOfTask(x) { return x.choice === "a" || x.choice === "b" ? x.choice : "either"; }
-  function taskOf(M, x) { var C = cj(M); return x.task || C.pool[x.task_index]; }
-  function cjPosterior(M, answers) {
-    var n = M.W.length, raw = [];
-    for (var s = 0; s < n; s++) {
-      var p = 1;
-      (answers || []).forEach(function (x) { var t = taskOf(M, x); if (t) p *= lik(M, taskGap(M, M.W[s], t), choiceOfTask(x)); });
-      raw.push(p);
-    }
-    var tot = nsum(raw);
-    return tot <= 0 ? raw.map(function () { return 1 / n; }) : raw.map(function (p) { return p / tot; });
-  }
-  function keyOf(task) { return JSON.stringify(task); }
-  function attrSet(task) { return task.map(function (x) { return x[0]; }).sort().join("|"); }
-  /* the next task (an index into the pool), or null after n_tasks (meta.recommender.conjoint.selection): never an
-     attribute pair already asked, balanced coverage, the most utility-balanced, then the largest expected reduction in
-     the trace of the posterior covariance of the weights; ties to the lower index */
-  function cjNext(M, answers) {
-    var C = cj(M); answers = answers || [];
-    if (!C || answers.length >= C.n) return null;
-    /* not on an attribute pair already asked; then only the tasks whose two attributes have appeared least (coverage:
-       lowest sum of their counts, then lowest larger count); then the `prefilter` most utility-balanced */
-    var pi = cjPosterior(M, answers), w = meanW(M, pi), askedPairs = {}, counts = {};
-    answers.forEach(function (x) { var t = taskOf(M, x); askedPairs[attrSet(t)] = 1; t.forEach(function (y) { counts[y[0]] = (counts[y[0]] || 0) + 1; }); });
-    function cover(t) { var c = t.map(function (y) { return counts[y[0]] || 0; }); return [c.reduce(function (a, b) { return a + b; }, 0), Math.max.apply(null, c)]; }
-    var cand = [];
-    C.pool.forEach(function (t, i) { if (!askedPairs[attrSet(t)]) cand.push(i); });
-    if (!cand.length) return null;
-    var least = null;
-    cand.forEach(function (i) { var c = cover(C.pool[i]); if (least === null || c[0] < least[0] || (c[0] === least[0] && c[1] < least[1])) least = c; });
-    cand = cand.filter(function (i) { var c = cover(C.pool[i]); return c[0] === least[0] && c[1] === least[1]; })
-      .map(function (i) { return [q(M, Math.abs(taskGap(M, w, C.pool[i]))), i]; });
-    cand.sort(function (x, y) { return x[0] !== y[0] ? x[0] - y[0] : x[1] - y[1]; });
-    cand = cand.slice(0, C.c.prefilter || 60).map(function (x) { return x[1]; }).sort(function (x, y) { return x - y; });
-    var T = M.cfg.temperature, band = M.cfg.either_band, nf = M.K, best = null;
-    cand.forEach(function (i) {
-      var t = C.pool[i], P = [0, 0, 0], Mx = [[], [], []], a, k;
-      for (a = 0; a < 3; a++) for (k = 0; k < nf; k++) Mx[a].push(0);
-      for (var s = 0; s < pi.length; s++) {
-        if (pi[s] === 0) continue;
-        var ws = M.W[s], g = taskGap(M, ws, t), pa = sig((g - band) / T), pb = sig((-g - band) / T), L = [pa, pb, Math.max(0, 1 - pa - pb)];
-        for (a = 0; a < 3; a++) { var m = pi[s] * L[a]; P[a] += m; var row = Mx[a]; for (k = 0; k < nf; k++) row[k] += m * ws[k]; }
-      }
-      var parts = [];
-      for (a = 0; a < 3; a++) if (P[a] > 0) parts.push(nsum(Mx[a].map(function (x) { return x * x; })) / P[a]);
-      var gain = q(M, nsum(parts));
-      if (best === null || gain > best[0]) best = [gain, i];
-    });
-    return best ? best[1] : null;
-  }
-  /* per side, the gain and the cost in a few plain words ("More room, but quieter"): the first attribute where this
-     apartment is better, then the first where it is worse (meta.recommender.conjoint.headline_rule) */
-  function taskHeadlines(M, task) {
-    var C = cj(M), G = C.c.gain_words, K = C.c.cost_words, out = {};
-    if (!G || !K) return null;
-    ["a", "b"].forEach(function (side) {
-      var me = side === "a" ? 1 : 2, other = side === "a" ? 2 : 1, gain = null, cost = null;
-      task.forEach(function (x) { var v = C.lv[x[0]]; if (gain === null && v[x[me]] > v[x[other]]) gain = x[0]; });
-      task.forEach(function (x) { var v = C.lv[x[0]]; if (cost === null && v[x[me]] < v[x[other]]) cost = x[0]; });
-      out[side] = gain && cost ? G[gain] + ", but " + K[cost] : "";
-    });
-    return out;
-  }
-  /* her weights in plain-word order (highest first; ties in feature order) and the one-sentence summary; when the
-     spread of her weights (max - min) is below conjoint.flat_below, nothing stood out (flat), with "if anything, X a
-     little more" when the top weight leads the next by conjoint.lean_step */
-  function priorities(M, w) {
-    var C = cj(M), W = (C && C.words) || LABEL;
-    var order = M.feats.map(function (k, j) { return [q(M, w[j]), j, k]; }).sort(function (x, y) { return x[0] !== y[0] ? y[0] - x[0] : x[1] - y[1]; }).map(function (x) { return x[2]; });
-    var words = order.map(function (k) { return W[k] || k; }), ws = w.slice().sort(function (a, b) { return b - a; });
-    var fb = C && C.c.flat_below, lean = C && C.c.lean_step != null ? C.c.lean_step : 0.02;
-    var flat = fb !== undefined && fb !== null && q(M, ws[0] - ws[ws.length - 1]) < fb, sent;
-    if (flat) sent = q(M, ws[0] - ws[1]) >= lean ? "Nothing stood out strongly; you seem fairly open on all of these, if anything " + words[0] + " a little more."
-                                                : "Nothing stood out strongly; you seem fairly open on all of these.";
-    else sent = capFirst(words[0]) + " matters most to you, then " + words[1] + "; " + words[words.length - 1] + " matters least.";
-    return { order: order, words: words, flat: flat, sentence: sent };
-  }
-  /* move one priority up or down one place (meta.recommender.conjoint.nudge_rule) */
-  function nudge(M, w, feature, direction) {
-    var order = priorities(M, w).order, i = order.indexOf(feature), j = direction === "up" ? i - 1 : i + 1;
-    if (i < 0 || j < 0 || j >= order.length) return w.slice();
-    var a = M.feats.indexOf(feature), b = M.feats.indexOf(order[j]), w2 = w.slice();
-    if (q(M, w2[a]) !== q(M, w2[b])) { var t = w2[a]; w2[a] = w2[b]; w2[b] = t; return w2; }
-    w2[a] = Math.max(0, w2[b] + (direction === "up" ? 0.01 : -0.01));
-    var s = nsum(w2); return w2.map(function (x) { return x / s; });
-  }
-  function cjWeights(M, answers, moves) {
-    var w = meanW(M, cjPosterior(M, answers));
-    (moves || []).forEach(function (mv) { w = nudge(M, w, mv[0], mv[1]); });
-    return w;
-  }
-  function similarTo(M, id, w, n) { return M.byId[id] ? moreLike(M, id, w, {}, {}, n || 3) : []; }
-  return { taskHeadlines: taskHeadlines, similarTo: similarTo, cj: cj, taskGap: taskGap, cjPosterior: cjPosterior, cjNext: cjNext, priorities: priorities, nudge: nudge, cjWeights: cjWeights,
-    usable: usable, model: model, posterior: posterior, meanW: meanW, nextPair: nextPair, holds: holds, recommend: recommend,
-    play: play, choiceOf: choiceOf, nsum: nsum, pyRound: pyRound, label: LABEL };
-})();
-if (typeof module !== "undefined") module.exports = ConciergeRec;
-</script>
-
 <script>
 (function () {
 "use strict";
@@ -887,10 +423,9 @@ var app = document.getElementById("app"), layer = document.getElementById("layer
 if (!D || !D.buildings) { app.innerHTML = "<p>This page has not been built yet. Run scripts/build_concierge.py.</p>"; return; }
 
 /* ---------- data ---------- */
-var R = ConciergeRec;
 var META = D.meta || {}, ANCHOR = META.anchor_label || "Mom and Dad";
 var HOODS = D.neighborhoods || [], B = D.buildings || [], BY = {}, HBY = {};
-var MODEL = R.model(D), CAN = !!(MODEL && R.cj(MODEL));
+var CAN = !!(D.meta && D.meta.default_recommendation && Array.isArray(D.meta.default_recommendation.neighborhoods) && D.meta.default_recommendation.neighborhoods.length);
 B.forEach(function (b) { BY[b.id] = b; });
 HOODS.forEach(function (h) { HBY[h.id] = h; });
 B.forEach(function (b) { var h = HBY[b.neighborhood_id]; b.area_id = (typeof b.group_id === "string" && b.group_id) || ((h && h.parked_under && HBY[h.parked_under]) ? h.parked_under : b.neighborhood_id); });
@@ -971,26 +506,14 @@ function position(key, v, lowWord, highWord) {
   return '<div class="pos"><span class="track" aria-hidden="true"><i style="left:' + left.toFixed(1) + '%"></i></span><span class="word">' + word + '</span></div>';
 }
 
-/* ---------- her choices and her list, kept on this phone only ---------- */
-/* Her answers are indexes into this data's task pool, so they are kept only for the same data: the key carries
-   meta.data_version (else a fingerprint of the pool), and saved answers from any other version are dropped (her list
-   and tour plan are kept, by building id). Older keys are read once for the list and plan, then removed. */
-var CJ = CAN ? R.cj(MODEL) : null;
-var DATA_VERSION = String(META.data_version || (CJ ? "p" + CJ.pool.length + "n" + CJ.n + "t" + (CJ.pool[0] || []).join("|") + (CJ.pool[CJ.pool.length - 1] || []).join("|") : "list"));
+/* ---------- her list and tour plan, kept on this phone only ---------- */
+/* Version 5 asks nothing: only her list, her ticks for Compare and her tour plan are kept. Answers saved by earlier
+   versions (under this key or older ones) are ignored; their list and plan are kept by building id. */
 var KEY = "lamia-concierge";
 var OLD_KEYS = ["lamia-concierge-v4", "lamia-concierge-v3", "lamia-concierge-v2"];
-function fresh() { return { v: 42, data_version: DATA_VERSION, step: "welcome", cj: [], moves: [], saved: [], ticked: [], tour: [] }; }
+function fresh() { return { v: 5, step: "home", saved: [], ticked: [], tour: [] }; }
 var S = fresh();
 function keepList(o) { ["saved", "ticked", "tour"].forEach(function (k) { if (Array.isArray(o[k])) S[k] = o[k].filter(function (id, i, a) { return BY[id] && a.indexOf(id) === i; }); }); }
-/* answers as they should be: known tasks, no task twice, at most n_tasks */
-function cleanAnswers(list) {
-  var seen = {}, out = [];
-  (list || []).forEach(function (x) {
-    if (!x || !isNum(x.task_index) || !CJ.pool[x.task_index] || !/^(a|b|either)$/.test(x.choice) || seen[x.task_index]) return;
-    seen[x.task_index] = 1; out.push({ task_index: x.task_index, choice: x.choice });
-  });
-  return out.slice(0, CJ.n);
-}
 (function load() {
   try {
     OLD_KEYS.forEach(function (k) {
@@ -1001,14 +524,8 @@ function cleanAnswers(list) {
     var raw = window.localStorage.getItem(KEY); if (!raw) return;
     var o = JSON.parse(raw); if (!o || typeof o !== "object") return;
     keepList(o);
-    if (o.data_version !== DATA_VERSION) return;          /* answers from other data: start the choices fresh */
-    if (typeof o.step === "string") S.step = o.step;
-    if (Array.isArray(o.cj) && CJ) S.cj = cleanAnswers(o.cj);
-    if (Array.isArray(o.moves) && MODEL) S.moves = o.moves.filter(function (m) { return Array.isArray(m) && MODEL.feats.indexOf(m[0]) >= 0 && (m[1] === "up" || m[1] === "down"); }).slice(0, 20);
+    if (o.step === "plan") S.step = "plan";
   } catch (e) { /* storage is a convenience; the page works without it */ }
-  if (["welcome", "choose", "confirm", "results", "plan"].indexOf(S.step) < 0) S.step = "welcome";
-  if (!CAN && S.step !== "plan") S.step = "welcome";
-  if (CAN && (S.step === "confirm" || S.step === "results") && S.cj.length < CJ.n) S.step = "choose";
   S.ticked = S.ticked.filter(function (id) { return S.saved.indexOf(id) >= 0; }).slice(0, 3);
 })();
 function save() { try { window.localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* ignore */ } }
@@ -1028,20 +545,15 @@ function compareIds() {
 }
 
 
-/* ---------- the model, cached on her answers ---------- */
-var CACHE = {};
-function cacheKey() { return JSON.stringify([S.cj, S.moves]); }
-function rec() {
-  var k = cacheKey(); if (CACHE.k === k) return CACHE.v;
-  var w = R.cjWeights(MODEL, S.cj, S.moves), r = R.recommend(MODEL, [], { w: w });
-  var pr = R.priorities(MODEL, w);
-  CACHE = { k: k, v: { r: r, w: w, order: pr.order, flat: pr.flat, sentence: pr.sentence, next: null, nextDone: false } };
-  return CACHE.v;
-}
-function nextNow() { var c = rec(); if (!c.nextDone) { c.next = R.cjNext(MODEL, S.cj); c.nextDone = true; } return c.next; }
-function areaRankOf(id) { var b = BY[id]; if (!b || !CAN || S.cj.length < CJ.n) return null; var top = rec().r.top; for (var i = 0; i < top.length; i++) if (top[i][0] === b.area_id) return i + 1; return null; }
-/* her priorities in plain words */
-function plain(k) { return (CJ && CJ.words && CJ.words[k]) || k; }
+
+/* ---------- the short list, as the data gives it (meta.default_recommendation) ---------- */
+var DEF = META.default_recommendation || null, FUNNEL = META.funnel || null, LEAN = Array.isArray(META.leanings) ? META.leanings : [];
+var GROUPS = (META.recommender && META.recommender.groups) || [];
+function areaRankOf(id) { var b = BY[id]; if (!b || !CAN) return null; for (var i = 0; i < DEF.neighborhoods.length; i++) if (DEF.neighborhoods[i].neighborhood_id === b.area_id) return i + 1; return null; }
+function topIds() { return CAN ? DEF.neighborhoods.map(function (n) { return [n.neighborhood_id, n.buildings.map(function (x) { return x.id; })]; }) : []; }
+/* the order of facts on a row: closer to Mom and Dad is better, so the drive comes first */
+var ORDER = ["family", "room", "going_out", "green", "parking", "money"];
+
 
 /* ---------- the facts, in plain words ---------- */
 function raw(b) {
@@ -1078,28 +590,13 @@ function shortFact(b, k) {
   if (k === "parking") return PK[x.pk] ? PK[x.pk].replace(" parking", "").replace("A parking lot", "Parking lot") : "";
   return "";
 }
-/* which of two is better on a fact (for the tick on "this or that"): 1 = a, -1 = b, 0 = same or unknown */
-function better(a, b, k) {
-  var x = raw(a), y = raw(b);
-  function lo(p, q) { return isNum(p) && isNum(q) && Math.round(p) !== Math.round(q) ? (p < q ? 1 : -1) : 0; }
-  if (k === "family") return lo(x.drive, y.drive);
-  if (k === "going_out") return lo(-x.rest, -y.rest);
-  if (k === "green") return lo(x.park, y.park);
-  if (k === "room") { if (x.bedroom !== y.bedroom) return x.bedroom ? 1 : -1; return lo(-x.sqft, -y.sqft); }
-  if (k === "parking") { var v = { garage: 3, covered: 3, carport: 3, off_street: 2, lot: 2, driveway: 2, surface: 2, street: 1 }, p = v[x.pk], q = v[y.pk]; return !p || !q || p === q ? 0 : p > q ? 1 : -1; }
-  return 0;
-}
 var FACT_ORDER = ["family", "room", "going_out", "green", "parking"], FACT_ICON = { family: "car", room: "ruler", going_out: "fork", green: "park", parking: "parking" };
 function lifeLine(b) {
   var L = b.life_here || [], m = L.filter(function (x) { return x && x.moment === "weekday" && x.text; })[0] || L.filter(function (x) { return x && x.text; })[0];
   return m ? firstSentence(m.text) : "";
 }
-/* the three chips on a building card: the facts she weighs most, money aside (the pair shows it) */
-function chipKeys() {
-  var m = CAN ? rec().w : [], f = (MODEL && MODEL.feats) || [];
-  return f.map(function (k, i) { return [m[i], k]; }).filter(function (x) { return x[1] !== "money" && FACT_ICON[x[1]]; })
-    .sort(function (a, b) { return b[0] - a[0] || (a[1] < b[1] ? -1 : 1); }).slice(0, 3).map(function (x) { return x[1]; });
-}
+/* the three facts the place sheet and thumbnails lead with */
+function chipKeys() { return ["family", "room", "going_out"]; }
 
 /* ---------- shared pieces ---------- */
 function top(extra, noBrand) {
@@ -1116,100 +613,13 @@ function tagList(h) { var t = (h && Array.isArray(h.tags) ? h.tags : []).filter(
 function hoodNameOf(b) { var h = HBY[b.neighborhood_id]; return (typeof b.neighborhood_name === "string" && b.neighborhood_name) || (h && h.name) || ""; }
 /* a group's heading: its name, or "X and nearby" when the buildings listed under it come from joined neighborhoods */
 function areaName(id, ids) {
-  var h = HBY[id], g = MODEL && MODEL.groups.filter(function (x) { return x.id === id; })[0];
+  var h = HBY[id], g = GROUPS.filter(function (x) { return x.id === id; })[0];
   var name = (g && g.name) || (h && h.name) || id, st = h && h.state ? ", " + h.state : "";
   var joined = (ids || []).some(function (bid) { return BY[bid] && BY[bid].neighborhood_id !== id; });
   return joined ? name + " and nearby" + st : name + st;
 }
 function inHood(b) { if (b.neighborhood_id === b.area_id) return ''; var h = HBY[b.neighborhood_id], n = hoodNameOf(b); return n ? '<p class="inhood">In ' + esc(n) + (h && h.state ? ", " + esc(h.state) : "") + '</p>' : ''; }
 
-
-/* ---------- welcome ---------- */
-function welcome() {
-  var c = META.counts || {}, done = CAN && S.cj.length >= CJ.n;
-  return top("", true) +
-    '<section class="hello"><h1 tabindex="-1"><span class="name">Lamia&#39;s<br>House Hunt</span><span class="sr">: </span></h1><span class="tagbox">the short version</span>' +
-    (CAN ? '<ol class="how">' +
-        '<li><span><b>' + cap(WORDS[CJ.n] || String(CJ.n)) + ' quick choices</b> between two imaginary apartments. Each one is a trade-off: more of one thing, less of another.</span></li>' +
-        '<li><span><b>Your answers teach the page</b> what matters to you.</span></li>' +
-        '<li><span><b>Then three neighborhoods</b> that fit you best, with the three best buildings in each.</span></li>' +
-        '<li><span><b>Everything stays open.</b> You can still browse, search and filter every place gathered here.</span></li></ol>' +
-      (done ? '<button type="button" class="btn main" data-act="results">See my three places</button><button type="button" class="btn" data-act="restart">Change my answers</button>'
-            : '<button type="button" class="btn main" data-act="start">' + (S.cj.length ? 'Carry on' : 'Start') + '</button>')
-      : '<p class="lead">Every place, nearest to ' + esc(ANCHOR) + ' first. Save the ones you like.</p><button type="button" class="btn main" data-act="all">See every place</button>') +
-    (isNum(c.buildings) && isNum(META.rent_limit) ? '<p class="small muted">' + c.buildings + ' buildings, every one with rent of ' + money(META.rent_limit) + ' or less.</p>' : '') +
-    '</section>';
-}
-
-/* ---------- this or that, between made-up apartments ---------- */
-/* the headline for one side of a two-attribute trade-off: the data's when it has one, else made here */
-var BETTER = { money: "Costs less", family: "Closer to " + ANCHOR, room: "More room", going_out: "Livelier", parking: "Easier parking", green: "A park closer by" };
-var WORSE = { money: "costs more", family: "farther from " + ANCHOR, room: "less room", going_out: "quieter", parking: "harder parking", green: "the park is farther" };
-function sideOf(task, side) {   /* [{attr, level, better}] for one apartment, in the task's order */
-  return task.map(function (x) { var a = CJ.attr[x[0]], mine = side === "a" ? x[1] : x[2], other = side === "a" ? x[2] : x[1];
-    return { a: a, level: a.levels[mine], better: a.levels[mine].value > a.levels[other].value }; });
-}
-function headline(id, task, side) {
-  var H = R.taskHeadlines(MODEL, task); if (H && H[side]) return H[side];
-  var rows = sideOf(task, side), up = rows.filter(function (r) { return r.better; }), dn = rows.filter(function (r) { return !r.better; });
-  if (!up.length || !dn.length) return "";
-  return BETTER[up[0].a.id] + ", but " + WORSE[dn[0].a.id];
-}
-function mark(better) { return '<span class="mk ' + (better ? "up" : "dn") + '" aria-hidden="true">' + (better ? "&#10003;" : "&#10005;") + '</span><span class="sr">' + (better ? "Better: " : "Worse: ") + '</span>'; }
-function aptCard(id, task, side) {
-  var rows = sideOf(task, side).map(function (r) {
-    return '<span class="ap-row' + (r.better ? ' up' : ' dn') + '" data-attr="' + esc(r.a.id) + '">' + mark(r.better) + '<span class="ap-t"><span class="ap-l">' + esc(r.a.label) + '</span><b>' + esc(r.level.text) + '</b></span></span>';
-  }).join("");
-  var h = headline(id, task, side);
-  return '<button type="button" class="apt" data-act="cj" data-v="' + side + '"><span class="ap-h"><span class="ap-n">Apartment ' + side.toUpperCase() + '</span><span class="ap-go" aria-hidden="true">This one</span></span>' +
-    (h ? '<span class="ap-hl">' + esc(h) + '</span>' : '') + '<span class="ap-rows">' + rows + '</span></button>';
-}
-/* the other layout: one two-column comparison, a row per attribute */
-function duelTable(id, task) {
-  var A = sideOf(task, "a"), Bs = sideOf(task, "b");
-  function head(side) { var h = headline(id, task, side); return '<button type="button" class="ct-pick" data-act="cj" data-v="' + side + '"><span class="ap-n">Apartment ' + side.toUpperCase() + '</span>' + (h ? '<span class="ap-hl">' + esc(h) + '</span>' : '') + '<span class="ap-go">This one</span></button>'; }
-  return '<div class="ctab"><div class="ct-heads">' + head("a") + head("b") + '</div>' + A.map(function (r, i) {
-    var o = Bs[i];
-    function cell(x, side) { return '<button type="button" tabindex="-1" class="ct-c ' + (x.better ? "up" : "dn") + '" data-act="cj" data-v="' + side + '" data-level="' + esc(x.level.text) + '">' + mark(x.better) + '<span>' + esc(x.level.text) + '</span></button>'; }
-    return '<div class="ct-row" data-attr="' + esc(r.a.id) + '" data-label="' + esc(r.a.label) + '"><p class="ct-l">' + esc(r.a.label) + '</p><div class="ct-cells">' + cell(r, "a") + cell(o, "b") + '</div></div>';
-  }).join("") + '</div>';
-}
-/* "table" (one two-column comparison) or "cards" (two stacked cards). Tried both at 390 and 360: the table puts the
-   two levels of each attribute side by side, so the eye compares straight across, and the whole choice with "No real
-   difference" and Back fits one phone screen; the cards need a scroll and an up-and-down comparison. */
-var CHOICE_LAYOUT = "table";
-function chooseScreen() {
-  var id = nextNow(); if (id === null) { S.step = "confirm"; return confirmScreen(); }
-  if (S.cj.some(function (x) { return x.task_index === id; })) throw new Error("a task already answered came up again");
-  VIEW.cjShownAt = Date.now();
-  var task = CJ.pool[id], n = S.cj.length, inTask = task.map(function (x) { return x[0]; });
-  var same = CJ.c.attributes.filter(function (a) { return inTask.indexOf(a.id) < 0; }).map(function (a) { return a.label.charAt(0).toLowerCase() + a.label.slice(1); });
-  return top() +
-    '<div class="qhead"><p class="qtop"><span id="cj-step">' + (n + 1) + ' of ' + CJ.n + '</span><span class="muted">Tap the one you would rather live in</span></p>' +
-    '<div class="prog" role="progressbar" aria-label="Choices" aria-valuemin="0" aria-valuemax="' + CJ.n + '" aria-valuenow="' + n + '"><i style="width:' + Math.round((n + 1) / CJ.n * 100) + '%"></i></div></div>' +
-    '<section class="stack enter" style="gap:10px" data-cand="' + esc(id) + '"><h1 class="h-pick" tabindex="-1" id="q-h">Which would you rather have?</h1>' +
-    (CHOICE_LAYOUT === "table" ? duelTable(id, task) : '<div class="duel">' + aptCard(id, task, "a") + '<p class="or" aria-hidden="true">or</p>' + aptCard(id, task, "b") + '</div>') +
-    (same.length ? '<p class="same">Same for both: ' + esc(same.join(", ")) + '.</p>' : '') +
-    '<button type="button" class="btn" data-act="cj" data-v="either">No real difference to me</button>' +
-    '<div class="qnav"><button type="button" class="quiet" data-act="undo"><span aria-hidden="true">&#8249;</span> Back</button></div></section>';
-}
-
-/* ---------- here's what you told me ---------- */
-function confirmScreen() {
-  var c = rec(), order = c.order, fixing = !!VIEW.fixing;
-  return top() +
-    '<section class="stack" style="gap:12px"><p class="kicker">Here&#39;s what you told me</p><h1 class="h-say" tabindex="-1" id="cf-h">' + esc(c.sentence) + '</h1>' +
-    '<ol class="prio' + (fixing ? ' fixing' : '') + '" id="prio">' + order.map(function (k, i) {
-      return '<li data-feature="' + esc(k) + '"><span class="pn" aria-hidden="true">' + (i + 1) + '</span><span class="pt">' + esc(cap(plain(k))) + '</span>' +
-        (fixing ? '<span class="pm"><button type="button" class="mv" data-act="move" data-id="' + esc(k) + '" data-v="up" aria-label="Move ' + esc(plain(k)) + ' up"' + (i === 0 ? ' disabled' : '') + '>&#8593;</button>' +
-          '<button type="button" class="mv" data-act="move" data-id="' + esc(k) + '" data-v="down" aria-label="Move ' + esc(plain(k)) + ' down"' + (i === order.length - 1 ? ' disabled' : '') + '>&#8595;</button></span>' : '') + '</li>';
-    }).join("") + '</ol>' +
-    (fixing ? '<p class="small muted">Move what you need to, then carry on.</p><button type="button" class="btn main" data-act="confirm-yes">Carry on</button>'
-            : '<div class="two"><button type="button" class="btn main" data-act="confirm-yes">That&#39;s right</button><button type="button" class="btn" data-act="confirm-fix">Not quite</button></div>') +
-    '<div class="qnav"><button type="button" class="quiet" data-act="undo"><span aria-hidden="true">&#8249;</span> Back</button>' + (S.moves.length ? '<button type="button" class="quiet" data-act="unmove">Undo my changes</button>' : '') + '</div></section>';
-}
-
-/* ---------- your three places, at a glance ---------- */
 var SHORT = { family: "Near " + ANCHOR, money: "Lower cost", room: "Space", going_out: "Going out", green: "A park for the dog", parking: "Parking" };
 function medianOf(xs) { xs = xs.filter(isNum).sort(function (a, b) { return a - b; }); if (!xs.length) return null; var h = Math.floor(xs.length / 2); return xs.length % 2 ? xs[h] : (xs[h - 1] + xs[h]) / 2; }
 /* the figures of a neighborhood, over the buildings shown (as the recommender's own figures) */
@@ -1284,37 +694,66 @@ function glance(r, figs) {
         }).join("") + '</tr>';
     }).join("") + '</tbody></table></section>';
 }
-function results() {
-  var c = rec(), r = c.r, order = c.order;
+
+/* ---------- the first screen: the short list ---------- */
+function fmtN(n) { return isNum(n) ? Math.round(n).toLocaleString("en-US") : null; }
+/* how the list was narrowed, in two plain sentences, from meta.funnel (its own sentences when it has them) */
+function funnelText() {
+  var f = FUNNEL || {};
+  if (Array.isArray(f.sentences) && f.sentences.length) return f.sentences.slice(0, 2);
+  /* sources and passed counts come as numbers or as objects ({listing_sites, building_or_manager_sites}, {at_or_under_2000}) */
+  var src = isNum(f.sources) ? f.sources : f.sources && typeof f.sources === "object" ? (f.sources.listing_sites || 0) + (f.sources.building_or_manager_sites || 0) : null;
+  var area = String(f.area_text || "within a 2-hour drive of " + ANCHOR + "'s").split(", across")[0];
+  var a = [], one = "I read " + (fmtN(f.listings_read) ? fmtN(f.listings_read) + " listings" : "the listings") +
+    (src ? " from " + fmtN(src) + " sites" : "") + (isNum(f.towns) ? " across " + fmtN(f.towns) + " towns" : "") + " " + area + ".";
+  a.push(one);
+  var pa = f.passed_apartments, n = isNum(pa) ? pa : pa && typeof pa === "object" && isNum(pa.at_or_under_2000) ? pa.at_or_under_2000 : (META.counts || {}).apartments;
+  a.push((isNum(n) ? fmtN(n) + " apartments" : "The apartments here") + " passed every rule, and these three neighborhoods came out best for almost any mix of what matters.");
+  return a;
+}
+function rulesBlock() {
+  var r = (FUNNEL && Array.isArray(FUNNEL.rules)) ? FUNNEL.rules.filter(function (x) { return typeof x === "string" && x; }) : [];
+  return r.length ? '<details class="src rules" id="rules"><summary>The rules</summary><ul class="rlist">' + r.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></details>' : '';
+}
+function leaningsBlock() {
+  var L2 = LEAN.filter(function (x) { return x && x.neighborhood_id && (x.line || x.neighborhood_name); });
+  if (!L2.length) return '';
+  return '<details class="more lean" id="leanings"><summary>If one thing matters most to you</summary><div class="in"><ul class="llist">' + L2.map(function (x) {
+    var label = x.priority_label ? cap(x.priority_label) : "";
+    return '<li><button type="button" class="lrow" data-act="lean" data-id="' + esc(x.neighborhood_id) + '"><span class="ll">' + esc(label) + '</span><b>' + esc(x.neighborhood_name || x.neighborhood_id) + '</b><span class="go" aria-hidden="true">&#8250;</span></button></li>';
+  }).join("") + '</ul><p class="small muted">Each opens that neighborhood in Browse everything.</p></div></details>';
+}
+function home() {
+  if (!CAN) return top("", true) + '<section class="hello"><h1 tabindex="-1"><span class="name">Lamia&#39;s<br>House Hunt</span></h1><p class="lead">Every place, nearest to ' + esc(ANCHOR) + ' first. Save the ones you like.</p><button type="button" class="btn main" data-act="all">See every place</button></section>';
+  var r = DEF;
   if (VIEW.areaOpen === undefined) VIEW.areaOpen = { 0: true };
   var figs = r.neighborhoods.map(function (nb) { return areaFigs(nb.buildings.map(function (x) { return x.id; })); });
-  var chips = c.flat ? '<p class="pchips"><span class="pc">Open on everything</span></p>'
-    : '<ol class="pchips" aria-hidden="true">' + order.slice(0, 3).map(function (k, i) { return '<li class="pc" data-k="' + k + '"><b>' + (i + 1) + '</b> ' + esc(SHORT[k] || k) + '</li>'; }).join("") + '</ol>';
-  var html = top() + '<section class="stack" style="gap:6px"><h1 class="h-say" tabindex="-1" id="res-h">Your three places to look<span class="sr">. ' + esc(c.sentence) + '</span></h1>' +
-    '<div class="mine"><span class="lab">You care about</span>' + chips + '</div></section>' + glance(r, figs) + '<ol class="hlist">';
+  var ft = funnelText();
+  var html = top() + '<section class="stack intro" style="gap:6px"><h1 class="h-say" tabindex="-1" id="res-h">Your three neighborhoods</h1>' +
+    '<p class="fun">' + ft.map(esc).join(" ") + '</p>' + rulesBlock() + '</section>' + glance(r, figs) + '<ol class="hlist">';
   r.neighborhoods.forEach(function (nb, i) {
     var A = nb.neighborhood_id, open = !!VIEW.areaOpen[i], ids = nb.buildings.map(function (x) { return x.id; }), f = figs[i];
     var why = (nb.why_features || []).map(function (k) { return goodBit(k, f); }).join(" · ");
     var give = nb.gives_up_feature ? badBit(nb.gives_up_feature, f, nb.gives_up_unknown) : null;
+    var tags = Array.isArray(nb.tags) ? { tags: nb.tags } : HBY[A];
     html += '<li class="hcard' + (open ? ' open' : '') + '" data-area="' + esc(A) + '" id="area-' + i + '">' +
       '<h2><button type="button" class="hhead" data-act="area" data-v="' + i + '" aria-expanded="' + open + '" aria-controls="hb-' + i + '"><span class="num" aria-hidden="true">' + (i + 1) + '</span>' +
-      '<span class="hn"><span class="hname">' + esc(areaName(A, ids)) + '</span>' + tagSpan(HBY[A]) + '</span><span class="tw" aria-hidden="true">&#8250;</span></button></h2>' +
+      '<span class="hn"><span class="hname">' + esc(areaName(A, ids)) + '</span>' + tagSpan(tags) + '</span><span class="tw" aria-hidden="true">&#8250;</span></button></h2>' +
       '<div class="hbody" id="hb-' + i + '"' + (open ? '' : ' hidden') + '>' +
       (why ? '<p class="because" data-full="' + esc(nb.why || "") + '"><span class="mk up" aria-hidden="true">&#10003;</span><span><span class="sr">Why: </span>' + esc(cap(why)) + '</span></p>' : '') +
       (give ? '<p class="gives" data-full="' + esc(nb.gives_up || "") + '"><span class="mk dn" aria-hidden="true">&#8211;</span><span><span class="sr">Gives up: </span>' + esc(cap(give)) + '</span></p>' : '') +
-      '<ol class="plist">' + ids.map(function (id) { return placeRow(id, order); }).join("") + '</ol></div></li>';
+      '<ol class="plist">' + ids.map(function (id) { return placeRow(id, ORDER); }).join("") + '</ol></div></li>';
   });
-  html += '</ol><div class="endblock"><button type="button" class="btn main" data-act="all">Browse everything</button>' +
-    '<div class="links"><button type="button" class="quiet" data-act="restart">Change my answers</button>' + (S.tour.length ? '<button type="button" class="quiet" data-act="plan">My tour plan &middot; ' + S.tour.length + '</button>' : '') +
-    (VIEW.confirmReset ? '' : '<button type="button" class="quiet" data-act="reset-ask">Start over</button>') + '</div>' + (VIEW.confirmReset ? resetBlock() : '') + '</div>';
+  html += '</ol>' + leaningsBlock() + '<div class="endblock"><button type="button" class="btn main" data-act="all">Browse everything</button>' +
+    '<div class="links">' + (S.tour.length ? '<button type="button" class="quiet" data-act="plan">My tour plan &middot; ' + S.tour.length + '</button>' : '') +
+    (VIEW.confirmReset ? '' : '<button type="button" class="quiet" data-act="reset-ask">Clear my list</button>') + '</div>' + (VIEW.confirmReset ? resetBlock() : '') + '</div>';
   return html;
 }
 function tagSpan(h) { var t = (h && Array.isArray(h.tags) ? h.tags : []).filter(function (x) { return typeof x === "string" && x.trim(); }).slice(0, 2); return t.length ? '<span class="htags">' + t.map(function (x) { return '<span>' + esc(cap(x.trim())) + '</span>'; }).join("") + '</span>' : ''; }
-function chkSpan(c) { return c ? '<span class="chk ' + c.kind + '"><span aria-hidden="true">' + (c.kind === "ok" ? "&#10003;" : "&#9719;") + '</span> ' + esc(c.text) + '</span>' : ""; }
 function resetBlock() {
   return VIEW.confirmReset
-    ? '<div class="confirmrow" id="reset-box"><p><b>Start over?</b> This clears your answers, My list and your tour plan.</p><div class="two"><button type="button" class="btn sm" data-act="reset-no">No, go back</button><button type="button" class="btn sm main" data-act="reset-yes">Yes, start over</button></div></div>'
-    : '<button type="button" class="quiet center" data-act="reset-ask">Start over</button>';
+    ? '<div class="confirmrow" id="reset-box"><p><b>Clear My list?</b> This clears My list and your tour plan.</p><div class="two"><button type="button" class="btn sm" data-act="reset-no">No, go back</button><button type="button" class="btn sm main" data-act="reset-yes">Yes, clear them</button></div></div>'
+    : '<button type="button" class="quiet center" data-act="reset-ask">Clear my list</button>';
 }
 
 /* ---------- a place ---------- */
@@ -1382,10 +821,9 @@ function detailsBlocks(b) {
   }).join("") + '</ul></div></details>';
   return out ? '<div class="moregroup">' + out + '</div>' : "";
 }
-/* "More like this", at the bottom of a place: the nearest others under her weights */
+/* "More like this", at the bottom of a place: the data's nearest others (buildings[].similar) */
 function moreLikePlace(b) {
-  if (!CAN) return "";
-  var c = rec(), ids = R.similarTo(MODEL, b.id, c.w, 3), ks = chipKeys();
+  var ids = (Array.isArray(b.similar) ? b.similar : []).filter(function (x) { return BY[x] && x !== b.id; }).slice(0, 3), ks = chipKeys();
   if (!ids.length) return "";
   return '<section class="stack" style="gap:8px" id="more-like"><h2 class="sec-h">More like this</h2><ul class="thumbs">' + ids.map(function (sid) {
     var s = BY[sid], f = s.facts || {};
@@ -1579,10 +1017,10 @@ function listHtml() {
       (tagName ? '<span class="tag at">In ' + esc(tagName) + '</span>' : '') +
       (isSaved(b.id) ? '<span class="tag k">&#9829; On My list</span>' : '') + '</button>';
   }
-  /* her three places first (when she has made choices), then the rest nearest to Mom and Dad first; within one, best first */
-  var score = {}, rank = {};
-  if (CAN) { var c = rec(); B.forEach(function (b) { score[b.id] = isNum(c.r.scores[b.id]) ? c.r.scores[b.id] : -1; }); if (S.cj.length >= CJ.n) c.r.top.forEach(function (t, i) { rank[t[0]] = i + 1; }); }
-  else B.forEach(function (b) { score[b.id] = b.rank_score || 0; });
+  /* her three neighborhoods first, then the rest nearest to Mom and Dad first; within one, the short list's order, then rank */
+  var score = {}, rank = {}, pos = {};
+  topIds().forEach(function (t, i) { rank[t[0]] = i + 1; t[1].forEach(function (id, j) { pos[id] = 3 - j; }); });
+  B.forEach(function (b) { score[b.id] = (pos[b.id] || 0) * 1000 + (b.rank_score || 0); });
   var areas = AREAS.ids.slice().sort(function (x, y) {
     var a = rank[x] || 9, z = rank[y] || 9; if (a !== z) return a - z;
     var dx = (HBY[x] || {}).drive_min, dy = (HBY[y] || {}).drive_min;
@@ -1643,7 +1081,7 @@ function drawMap() {
   if (!slot || !MAPBASE || typeof window.initHouseHuntMap !== "function") return;
   if (mapApi) { try { mapApi.destroy(); } catch (e) { /* ignore */ } mapApi = null; }
   var counts = {}; B.forEach(function (b) { if (matchApts(b)) counts[b.neighborhood_id] = (counts[b.neighborhood_id] || 0) + 1; });
-  var rank = {}; if (CAN && S.cj.length >= CJ.n) rec().r.top.forEach(function (t) { rank[t[0]] = 1; });
+  var rank = {}; topIds().forEach(function (t) { rank[t[0]] = 1; });
   var any = Object.keys(rank).length;
   var years = any ? [{ id: "top", label: "Your three places" }, { id: "rest", label: "Every other place" }] : [{ id: "rest", label: "Every place" }];
   var style = { top: { color: "#C12C62", shape: "diamond" }, rest: { color: "#324BAE", shape: "circle" } };
@@ -1675,19 +1113,18 @@ function oops(err) {
   try { if (window.console) console.warn("concierge:", err && err.message || err); } catch (e) { /* ignore */ }
   var o = document.getElementById("oops"); if (o) o.remove();
   o = document.createElement("div"); o.id = "oops"; o.className = "oops"; o.setAttribute("role", "alert");
-  var done = !!(CAN && S && S.cj && S.cj.length >= CJ.n);
+  var done = CAN;
   o.innerHTML = '<div class="in"><p><b>Something went wrong.</b> Try one of these:</p><div class="oops-b">' +
-    (done ? '<button type="button" class="btn sm main" data-oops="results">See my results</button>' : '') +
-    '<button type="button" class="btn sm" data-oops="restart">Start over</button><button type="button" class="btn sm" data-oops="all">See everything</button></div></div>';
+    (done ? '<button type="button" class="btn sm main" data-oops="results">See my three neighborhoods</button>' : '') +
+    '<button type="button" class="btn sm" data-oops="all">See everything</button></div></div>';
   document.body.appendChild(o);
   var f = o.querySelector("button"); if (f) f.focus();
 }
 function recover(how) {
   var o = document.getElementById("oops"); if (o) o.remove();
-  VIEW.stack = []; VIEW.fixing = false; VIEW.confirmReset = false; CACHE = {};
+  VIEW.stack = []; VIEW.confirmReset = false;
   if (how === "all") { VIEW.all = true; VIEW.tab = "list"; }
-  else if (how === "results") { VIEW.all = false; S.step = "results"; VIEW.areaOpen = { 0: true }; }
-  else { var keep = { saved: S.saved, ticked: S.ticked, tour: S.tour }; S = fresh(); S.saved = keep.saved; S.ticked = keep.ticked; S.tour = keep.tour; VIEW.all = false; }
+  else { VIEW.all = false; S.step = "home"; VIEW.areaOpen = { 0: true }; }
   lastFocusKey = null;
   try { render(); } catch (e) { S = fresh(); VIEW.all = true; try { render(); } catch (e2) { /* nothing more to try */ } }
 }
@@ -1703,7 +1140,7 @@ function renderNow(opts) {
   if (mapApi) { try { mapApi.destroy(); } catch (e) { /* ignore */ } mapApi = null; }
   var v = topView(), sheetScroll = null, old = document.getElementById("sheet");
   if (opts.stay && old) sheetScroll = old.scrollTop;
-  app.innerHTML = VIEW.all ? everything() : CAN && S.step === "choose" ? chooseScreen() : CAN && S.step === "confirm" ? confirmScreen() : CAN && S.step === "results" ? results() : S.step === "plan" ? plan() : welcome();
+  app.innerHTML = VIEW.all ? everything() : S.step === "plan" ? plan() : home();
   var inner = !v ? "" : v.t === "place" && BY[v.id] ? place(BY[v.id]) : v.t === "list" ? myList() : v.t === "compare" ? compare(v.ids) : "";
   layer.innerHTML = inner ? '<div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-h" id="sheet"><div class="wrap">' + inner + '</div></div>' : "";
   barSlot.innerHTML = saveBar();
@@ -1715,7 +1152,7 @@ function renderNow(opts) {
   save();
   var sh = document.getElementById("sheet");
   if (sh && sheetScroll != null) sh.scrollTop = sheetScroll;
-  var key = v ? v.t + ":" + (v.id || (v.ids || []).join(",")) : VIEW.all ? "all" : S.step + ":" + S.cj.length + ":" + (VIEW.fixing ? "f" : "");
+  var key = v ? v.t + ":" + (v.id || (v.ids || []).join(",")) : VIEW.all ? "all" : S.step;
   if (!opts.stay && key !== lastFocusKey) {
     lastFocusKey = key;
     var ot = document.getElementById("toast"); if (ot && !opts.keepToast) ot.remove();
@@ -1736,8 +1173,6 @@ function toast(msg) {
 }
 
 /* ---------- actions ---------- */
-/* after an answer or an undo: the next pair, or her three places when the model is sure */
-function afterChoice() { CACHE = {}; VIEW.fixing = false; S.step = nextNow() !== null ? "choose" : "confirm"; render(); }
 function back() {
   var was = VIEW.stack.pop(); render({ stay: true }); lastFocusKey = null;
   var under = topView();
@@ -1747,27 +1182,9 @@ function back() {
 function act(a, el) {
   var id = el.getAttribute("data-id"), v = el.getAttribute("data-v");
   switch (a) {
-    case "start": S.step = "choose"; CACHE = {}; if (S.cj.length >= CJ.n) S.step = "confirm"; render(); break;
-    case "restart": S.cj = []; S.moves = []; VIEW.stack = []; VIEW.all = false; VIEW.fixing = false; VIEW.areaOpen = undefined; S.step = "choose"; CACHE = {}; render(); break;
-    case "results": VIEW.stack = []; VIEW.all = false; S.step = CAN && S.cj.length >= CJ.n ? "results" : CAN ? "choose" : "welcome"; render(); break;
-    case "cj": {
-      var cid = nextNow(); if (cid === null) { afterChoice(); break; }
-      /* a quick second tap lands on the next choice before she has seen it: ignore taps in the first moment */
-      if (VIEW.cjShownAt && Date.now() - VIEW.cjShownAt < 300) break;
-      if (S.cj.some(function (x) { return x.task_index === cid; })) { afterChoice(); break; }
-      S.cj.push({ task_index: cid, choice: v === "a" || v === "b" ? v : "either" });
-      live.textContent = v === "either" ? "No real difference." : "Apartment " + v.toUpperCase() + ".";
-      afterChoice(); break; }
-    case "undo":
-      if (S.step === "confirm" || S.step === "results") { if (S.cj.length) S.cj.pop(); S.moves = []; VIEW.fixing = false; CACHE = {}; S.step = S.cj.length ? "choose" : "welcome"; render(); break; }
-      if (!S.cj.length) { S.step = "welcome"; render(); break; }
-      S.cj.pop(); CACHE = {}; S.step = "choose"; render(); break;
-    case "confirm-yes": VIEW.fixing = false; VIEW.areaOpen = { 0: true }; S.step = "results"; render(); break;
-    case "confirm-fix": VIEW.fixing = true; render({ stay: true }); { var f0 = app.querySelector(".mv:not([disabled])"); if (f0) f0.focus(); } break;
-    case "move": S.moves.push([id, v]); CACHE = {}; render({ stay: true });
-      { var mb = app.querySelector('.mv[data-id="' + id + '"][data-v="' + v + '"]:not([disabled])') || app.querySelector('.mv[data-id="' + id + '"]:not([disabled])'); if (mb) mb.focus(); }
-      live.textContent = cap(plain(id)) + " moved " + v + "."; break;
-    case "unmove": S.moves = []; CACHE = {}; render({ stay: true }); break;
+    case "results": VIEW.stack = []; VIEW.all = false; S.step = "home"; render(); break;
+    case "lean": { VIEW.stack = []; VIEW.all = true; VIEW.tab = "list"; VIEW.f.q = ""; render(); var A = HOOD_AREA[id] || id, g = document.getElementById("grp-" + A);
+      if (g) { try { g.scrollIntoView({ block: "start" }); } catch (e) { /* ignore */ } g.focus({ preventScroll: true }); } break; }
     case "goto": { var gi = Number(v); VIEW.areaOpen = {}; VIEW.areaOpen[gi] = true; render({ stay: true }); var tgt = document.getElementById("area-" + gi);
       if (tgt) { try { tgt.scrollIntoView({ block: "start", behavior: "smooth" }); } catch (e) { tgt.scrollIntoView(); } var hh = tgt.querySelector(".hhead"); if (hh) hh.focus({ preventScroll: true }); } break; }
     case "area": { var i = Number(v); VIEW.areaOpen[i] = !VIEW.areaOpen[i]; var hb = document.getElementById("hb-" + i); if (hb) hb.hidden = !VIEW.areaOpen[i];
@@ -1789,7 +1206,7 @@ function act(a, el) {
     case "plan": VIEW.stack = []; VIEW.all = false; S.step = "plan"; render(); break;
     case "reset-ask": VIEW.confirmReset = true; render({ stay: true }); var rb = document.getElementById("reset-box"); if (rb) { rb.scrollIntoView({ block: "center" }); rb.querySelector("button").focus(); } break;
     case "reset-no": VIEW.confirmReset = false; render({ stay: true }); break;
-    case "reset-yes": S = fresh(); CACHE = {}; VIEW.confirmReset = false; VIEW.all = false; VIEW.stack = []; VIEW.open = {}; render(); break;
+    case "reset-yes": S = fresh(); VIEW.confirmReset = false; VIEW.all = false; VIEW.stack = []; VIEW.open = {}; render(); toast("My list and tour plan cleared."); break;
     case "all": VIEW.all = true; VIEW.stack = []; VIEW.tab = "list"; VIEW.confirmReset = false; render(); break;
     case "all-close": VIEW.all = false; render(); break;
     case "tab": VIEW.tab = v; render({ stay: true }); var tb = app.querySelector('.tabs [data-v="' + v + '"]'); if (tb) tb.focus(); break;
@@ -1835,11 +1252,11 @@ render({ focus: false });
    =================================================================================================================== */
 function placesNow() {
   var o = {}; if (!CAN) return o;
-  var c = rec(); c.r.top.forEach(function (t, i) { t[1].forEach(function (id, j) { o[id] = { place: i + 1, area: areaName(t[0]), order_in_place: j + 1 }; }); });
+  topIds().forEach(function (t, i) { t[1].forEach(function (id, j) { o[id] = { place: i + 1, area: areaName(t[0]), order_in_place: j + 1 }; }); });
   return o;
 }
 function areaWords(i) {
-  var nb = rec().r.neighborhoods[i]; if (!nb) return null;
+  var nb = CAN ? DEF.neighborhoods[i] : null; if (!nb) return null;
   return { place: i + 1, neighborhood: areaName(nb.neighborhood_id), tags: ((HBY[nb.neighborhood_id] || {}).tags || []).slice(0, 2), why: nb.why, gives_up: nb.gives_up,
     buildings: nb.buildings.map(function (x) { return BY[x.id] ? BY[x.id].name : x.id; }), what_would_change: nb.what_would_change ? nb.what_would_change.text : null };
 }
@@ -1888,16 +1305,15 @@ var LOOKUPS = {
   },
   recommend: function () {
     if (!CAN) return { places: [], note: "No suggestion on this page." };
-    return { choices_made: S.cj.length, her_priorities_most_first: rec().order.map(plain), places: rec().r.top.map(function (t, i) { return areaWords(i); }) };
+    return { how_the_list_was_narrowed: funnelText().join(" "), rules: (FUNNEL && FUNNEL.rules) || [], places: DEF.neighborhoods.map(function (t, i) { return areaWords(i); }),
+      if_one_thing_matters_most: LEAN.map(function (x) { return x.line || (x.priority_label + ": " + x.neighborhood_name); }) };
   },
   why: function (q) {
     var b = findBuilding(q && q.id); if (!b) throw new Error("No building with that id or name.");
     var P = placesNow(), px = P[b.id], o = { name: b.name, recommended: !!px };
     if (CAN) {
-      var top = rec().r.top, i = -1; top.forEach(function (t, k) { if (t[0] === b.area_id) i = k; });
+      var i = -1; topIds().forEach(function (t, k) { if (t[0] === b.area_id) i = k; });
       o.its_neighborhood = i >= 0 ? areaWords(i) : { neighborhood: areaName(b.area_id), in_her_three_places: false };
-      var sc = rec().r.scores, order = Object.keys(sc).sort(function (x, y) { return sc[y] - sc[x] || (x < y ? -1 : 1); });
-      o.rank_among_all_buildings = order.indexOf(b.id) + 1 || null; o.of = order.length;
     }
     o.facts = FACT_ORDER.map(function (k) { return factText(b, k); });
     return o;
@@ -1987,8 +1403,7 @@ function initAsk(sample, canTools) {
   }, function () { /* no Claude here: the feature stays absent */ });
 })();
 window.__conciergeLookups = LOOKUPS;
-window.__conciergeDataVersion = DATA_VERSION;
-window.__conciergeRec = function () { return CAN ? { top: rec().r.top, order: rec().order, next: S.step === "choose" ? nextNow() : null, answers: S.cj.slice() } : null; };
+window.__conciergeRec = function () { return CAN ? { top: topIds() } : null; };
 })();
 </script>
 </body>
