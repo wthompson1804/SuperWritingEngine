@@ -11,7 +11,8 @@
 
 Without --data the script uses site/concierge_data.json when it carries what the version 5 page shows
 (meta.funnel and meta.default_recommendation) and otherwise the fixture (site/_concierge_fixture.json,
-written by scripts/concierge_fixture.py), and says which. Version 3 shows no experience drawings, so none are inlined.
+written by scripts/concierge_fixture.py), and says which. Version 6 shows the six experience scenes from
+site/illustrations.json (one per neighborhood card), inlined as window.CONCIERGE_ILLUS.
 
 Two things are done to the map block on the way in, in memory only (site/map_component.html is not changed):
   - the part of its card that shows crime rates, and the helper that drew it, are taken out, because this page
@@ -34,6 +35,8 @@ SITE = ROOT / "site"
 DIST = SITE / "dist"
 DATA_SLOT = "<!--CONCIERGE_DATA_SLOT-->"
 MAP_SLOT = "<!--CONCIERGE_MAP_SLOT-->"
+ILLUS_SLOT = "<!--CONCIERGE_ILLUS_SLOT-->"
+SCENE_IDS = ("enclave", "middle", "new_water", "pre_car", "settled", "space")   # the six experience scenes, by experience id
 MAP_START, MAP_END = "<!-- MAP COMPONENT START -->", "<!-- MAP COMPONENT END -->"
 # the crime part of the map's card: from the opening "(cr?" to the end of its "not known yet" branch
 CRIME_FN_FROM, CRIME_FN_TO = "function crime(label,v,ref){", 'card.className="hhm-card";'   # the helper that drew the bars
@@ -69,6 +72,21 @@ def map_block() -> str:
     return block
 
 
+def illustrations() -> dict:
+    """The six experience scenes from site/illustrations.json, keyed by experience id ({alt, banner, tall} each)."""
+    path = SITE / "illustrations.json"
+    if not path.exists():
+        return {}
+    d = json.loads(path.read_text(encoding="utf-8"))
+    out = {}
+    for k in SCENE_IDS:
+        v = d.get(k)
+        v = d.get(v) if isinstance(v, str) else v
+        if isinstance(v, dict) and isinstance(v.get("banner"), str):
+            out[k] = {"alt": v.get("alt"), "banner": v["banner"], "tall": v.get("tall") or v["banner"]}
+    return out
+
+
 def has_v3(path: Path) -> bool:
     """The real file is used once it carries what the page shows (version 5: meta.funnel and meta.default_recommendation)."""
     try:
@@ -95,7 +113,7 @@ def main(argv=None) -> int:
     try:
         page = (SITE / "concierge.html").read_text(encoding="utf-8")
         data = json.loads(data_path.read_text(encoding="utf-8"))
-        for slot in (DATA_SLOT, MAP_SLOT):
+        for slot in (DATA_SLOT, MAP_SLOT, ILLUS_SLOT):
             if page.count(slot) != 1:
                 raise ValueError(f"{slot} must be in site/concierge.html exactly once")
         base_path = SITE / "map_base.json"
@@ -108,6 +126,7 @@ def main(argv=None) -> int:
         print(f"build_concierge: {e}; nothing written")
         return 1
     page = (page.replace(DATA_SLOT, script("CONCIERGE_DATA", data))
+                .replace(ILLUS_SLOT, script("CONCIERGE_ILLUS", illustrations()))
                 .replace(MAP_SLOT, map_html))
     DIST.mkdir(parents=True, exist_ok=True)
     full, art = DIST / "concierge.html", DIST / "concierge_artifact.html"

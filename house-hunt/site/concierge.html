@@ -53,180 +53,142 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;line-height:1.
 /* top line */
 .top{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px}
 .brand{font-family:var(--script);font-size:25px;line-height:1;color:var(--berry);white-space:nowrap}
-.quiet{background:none;border:0;padding:10px 0;min-height:44px;min-width:44px;justify-content:center;font-weight:800;font-size:15px;text-decoration:underline;text-decoration-color:var(--berry);text-decoration-thickness:2px;text-underline-offset:4px;display:inline-flex;align-items:center;gap:6px}
+.quiet{background:none;border:0;padding:10px 0;min-height:44px;min-width:44px;justify-content:center;font-weight:800;font-size:16px;text-decoration:underline;text-decoration-color:var(--berry);text-decoration-thickness:2px;text-underline-offset:4px;display:inline-flex;align-items:center;gap:6px}
 .quiet.center{justify-content:center;width:100%}
 .topbtns{display:flex;gap:16px;align-items:center}
 
 /* buttons */
 .btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:56px;font-family:var(--display);font-weight:800;font-size:19px;line-height:1.15;text-align:center;text-decoration:none;border-radius:999px;padding:10px 22px;border:2px solid var(--ink);background:var(--card);color:var(--ink)}
 .btn.main{background:var(--berry-deep);border-color:var(--berry-deep);color:var(--on-berry)}
+.btn.soft{background:var(--rose);border-color:var(--ink);box-shadow:0 3px 0 var(--ink)}
 .btn.sm{min-height:48px;font-size:17px;padding:8px 16px}
 .btn:disabled{opacity:.45;cursor:default}
-.btn:active,.choice:active{transform:translateY(1px)}
+.btn:active{transform:translateY(1px)}
+.btn .go{font-size:24px;line-height:1}
 .stack{display:grid;gap:12px}
 .stack>*{min-width:0}
 .kicker{font-family:var(--script);font-size:30px;line-height:1;color:var(--berry)}
 .h-big{font-weight:800;font-stretch:82%;font-size:clamp(30px,8.6vw,40px)}
-.h-mid{font-weight:800;font-stretch:82%;font-size:clamp(28px,7.6vw,34px)}
 .lead{font-size:20px;line-height:1.4}
-.h-pick{font-weight:800;font-stretch:82%;font-size:clamp(25px,7vw,30px)}
-.h-say{font-weight:800;font-stretch:86%;font-size:clamp(21px,5.8vw,25px);line-height:1.2}
 .muted{color:var(--muted)}
 .small{font-size:15px}
-.links{display:flex;flex-wrap:wrap;gap:4px 20px}
+.links{display:flex;flex-wrap:wrap;gap:0 20px}
 
-/* welcome */
-.hello{text-align:center;display:grid;gap:16px;padding-top:10px}
-.hello .name{font-family:var(--script);font-size:clamp(58px,17vw,84px);line-height:.95;color:var(--berry);transform:rotate(-4deg);display:block}
-.hello .tagbox{justify-self:center;font-family:var(--display);font-weight:800;font-stretch:80%;font-size:26px;line-height:1;background:var(--ink);color:var(--paper);padding:6px 16px 9px;border-radius:12px;transform:rotate(1.5deg)}
-.how{list-style:none;padding:0;display:grid;gap:10px;text-align:left;counter-reset:how}
-.how li{counter-increment:how;display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:12px 14px;font-size:17px;line-height:1.4}
-.how li::before{content:counter(how);width:30px;height:30px;border-radius:50%;background:var(--butter);color:var(--on-butter);display:grid;place-items:center;font-family:var(--display);font-weight:800}
-.how b{font-weight:800}
-.steps{list-style:none;padding:0;display:grid;gap:10px;text-align:left}
-.steps li{display:flex;gap:14px;align-items:center;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:12px 16px;font-weight:600}
-.steps b{flex:0 0 auto;width:36px;height:36px;border-radius:50%;background:var(--butter);color:var(--on-butter);display:grid;place-items:center;font-family:var(--display);font-weight:800}
+/* the logo: the long page's roof and heart, version 1's big pink name and its "the short version" tag */
+.hello{text-align:center;display:grid;gap:6px;justify-items:center}
+.logo{margin:0;display:grid;justify-items:center;width:100%}
+.logo svg{display:block;width:min(180px,48%);height:auto;margin:0 auto -14px}
+.logo .name{font-family:var(--script);font-weight:400;font-size:clamp(46px,13.4vw,66px);line-height:.98;color:var(--berry);display:block;transform:rotate(-4deg);text-shadow:2px 2px 0 var(--card),4px 4px 0 var(--ink)}
+.logo .tagbox{display:inline-block;margin-top:12px;font-family:var(--display);font-weight:800;font-stretch:80%;font-size:24px;line-height:1;background:var(--ink);color:var(--paper);padding:6px 16px 9px;border-radius:12px;transform:rotate(1.5deg)}
+.hello .say{font-family:var(--display);font-weight:800;font-stretch:86%;font-size:clamp(21px,5.9vw,25px);line-height:1.2;margin-top:4px}
+details.how{width:100%}
+details.how summary{list-style:none;display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 4px;font-weight:800;font-size:16px;cursor:pointer;text-decoration:underline;text-decoration-color:var(--berry);text-decoration-thickness:2px;text-underline-offset:4px}
+details.how summary::-webkit-details-marker{display:none}
+details.how summary::after{content:"+";font-size:20px;line-height:1;text-decoration:none}
+details.how[open] summary::after{content:"\2212"}
+.howbox{text-align:left;background:var(--card);border:2px solid var(--line);border-radius:20px;padding:14px 16px;display:grid;gap:10px;font-size:17px;line-height:1.45;margin-top:6px}
+.howbox ul{list-style:none;padding:0;display:grid;gap:6px}
+.howbox li{display:grid;grid-template-columns:22px 1fr;gap:8px;font-size:16px;font-weight:600}
+.howbox li::before{content:"\2713";color:var(--ok-ink);font-weight:900}
 
-/* this or that, between made-up apartments */
-.qhead{display:grid;gap:8px}
-.qtop{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-weight:800;font-size:16px}
-.qtop .muted{font-size:14px;font-weight:700;text-align:right}
-.prog{height:8px;border-radius:4px;background:var(--track);overflow:hidden}
-.prog i{display:block;height:100%;background:var(--berry);border-radius:4px}
-.qnav{display:flex;justify-content:space-between;gap:12px}
-.h-pick{font-weight:800;font-stretch:82%;font-size:clamp(25px,7vw,30px)}
-.duel{display:grid;gap:0;align-items:stretch}
-.apt{display:grid;gap:8px;width:100%;min-height:150px;align-content:start;text-align:left;background:var(--card);border:2px solid var(--ink);border-radius:22px;padding:14px 16px 16px;color:var(--ink);font:inherit;box-shadow:0 3px 0 var(--berry-deep)}
-.apt:active{transform:translateY(2px);box-shadow:0 1px 0 var(--berry-deep)}
-.ap-h{display:flex;justify-content:space-between;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-stretch:84%;font-size:24px;line-height:1.1}
-.ap-go{flex:0 0 auto;background:var(--berry-deep);color:var(--on-berry);font-size:15px;border-radius:999px;padding:5px 12px;font-stretch:100%}
-.ap-n{font-size:15px;font-family:var(--body);font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-stretch:100%}
-.ap-hl{display:block;font-family:var(--display);font-weight:800;font-stretch:84%;font-size:clamp(23px,6.6vw,27px);line-height:1.1;text-wrap:balance}
-.ap-rows{display:grid;gap:8px;border-top:2px dotted var(--line);padding-top:10px}
-.ap-row{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start}
-.ap-t{display:grid;gap:0}
-.ap-l{font-size:13px;font-weight:800;color:var(--muted);letter-spacing:.02em}
-.ap-row b{font-weight:700;font-size:17px;line-height:1.25}
-.ap-row.dn b{color:var(--muted)}
-.mk{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:15px;font-weight:900;line-height:1}
-.mk.up{background:var(--ok-bg);color:var(--ok-ink)}
-.mk.dn{background:var(--track);color:var(--muted)}
-.ctab{display:grid;gap:0;border:2px solid var(--ink);border-radius:20px;overflow:hidden;background:var(--card)}
-.ct-heads{display:grid;grid-template-columns:1fr 1fr}
-.ct-pick{display:grid;gap:6px;align-content:start;text-align:left;min-height:120px;padding:12px;background:var(--card);border:0;border-bottom:2px solid var(--ink);font:inherit;color:var(--ink)}
-.ct-pick+.ct-pick{border-left:2px solid var(--ink)}
-.ct-pick .ap-hl{font-size:19px}
-.ct-pick .ap-go{justify-self:start;background:var(--berry-deep);color:var(--on-berry);font-weight:800;font-size:14px;border-radius:999px;padding:4px 10px}
-.ct-row{padding:8px 12px 4px;border-top:2px solid var(--line)}
-.ct-row:first-of-type{border-top:0}
-.ct-l{font-size:13px;font-weight:800;color:var(--muted)}
-.ct-cells{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.ct-c{display:grid;grid-template-columns:24px 1fr;gap:6px;align-items:start;text-align:left;font:inherit;font-size:15px;font-weight:700;line-height:1.25;background:none;border:0;padding:2px 0;color:var(--ink);min-height:44px}
-.ct-c.dn{color:var(--muted)}
-.ct-cells .mk{width:22px;height:22px;font-size:13px}
-.or{justify-self:center;font-family:var(--script);font-size:28px;line-height:1;color:var(--berry);padding:2px 0 6px;margin:0}
-.same{font-size:15px;font-weight:600;color:var(--muted);line-height:1.35}
-@media (min-width:640px){.duel{grid-template-columns:1fr auto 1fr;gap:12px}.or{align-self:center}}
-
-/* here's what you told me */
-.prio{list-style:none;padding:0;display:grid;gap:8px}
-.prio li{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;background:var(--card);border:2px solid var(--line);border-radius:16px;padding:8px 12px;min-height:52px}
-.prio li:first-child{border-color:var(--ink)}
-.prio .pn{width:30px;height:30px;border-radius:50%;background:var(--blush);color:var(--berry-deep);display:grid;place-items:center;font-family:var(--display);font-weight:800}
-.prio li:first-child .pn{background:var(--ink);color:var(--paper)}
-.prio .pt{font-weight:700;font-size:17px;line-height:1.25}
-.prio .pm{display:flex;gap:6px}
-.mv{min-width:44px;min-height:44px;border:2px solid var(--ink);border-radius:12px;background:var(--card);font-size:20px;font-weight:800;line-height:1}
-.mv:disabled{opacity:.3;cursor:default}
-
-/* the three places */
-.intro .fun{font-size:16px;line-height:1.4}
-details.rules summary{min-height:40px}
-details.rules{margin-top:-4px}
-details.src.rules ul.rlist{list-style:disc;padding-left:1.2em;display:grid;gap:4px;margin-top:0;font-size:15px;line-height:1.35}
-.tapnote{margin-top:-4px}
-details.lean{border-top:2px solid var(--line);border-bottom:2px solid var(--line)}
-.llist{list-style:none;padding:0;display:grid;gap:6px}
-.lrow{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;width:100%;min-height:48px;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:14px;padding:6px 12px;font:inherit;color:var(--ink)}
-.lrow .ll{font-size:15px;font-weight:600;color:var(--muted)}
-.lrow b{font-family:var(--display);font-weight:800;font-size:17px;text-align:right}
-.lrow .go{font-size:22px;color:var(--berry-deep)}
-.pchips{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:5px}
-.mine{display:grid;gap:4px}
-.pc{display:inline-flex;align-items:center;gap:5px;background:var(--card);border:2px solid var(--line);border-radius:999px;padding:2px 10px 2px 3px;font-weight:700;font-size:14px}
-.pc b{display:inline-grid;place-items:center;width:21px;height:21px;border-radius:50%;background:var(--ink);color:var(--paper);font-size:13px}
-.glance{display:grid;gap:2px}
-.gl-h{font-family:var(--body);font-size:13px;letter-spacing:.06em;text-transform:uppercase;font-weight:800;color:var(--muted)}
-.glance table{width:100%;border-collapse:collapse;table-layout:fixed;font-variant-numeric:tabular-nums}
-.glance thead th{font-size:12px;font-weight:800;color:var(--muted);text-align:left;padding:0 4px 4px;vertical-align:bottom;line-height:1.15}
-.glance thead th:first-child{width:0;padding:0}
-.glance tbody th{text-align:left;padding:4px 0 0;border-top:2px solid var(--line)}
-.glance tbody tr:first-child th{border-top:2px solid var(--ink)}
-.gl-name{display:flex;align-items:center;gap:8px;width:100%;min-height:44px;background:none;border:0;padding:0;font:inherit;font-family:var(--display);font-weight:800;font-size:18px;line-height:1.15;color:var(--ink);text-align:left}
-.gl-name .gn{flex:1 1 auto;min-width:0}
-.gl-name .go{flex:0 0 auto;font-size:24px;line-height:1;color:var(--berry-deep);padding-right:2px}
-.gl-name .num{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-size:14px}
-.gl-vals{cursor:pointer}
-.gl-vals td{padding:0 4px 8px;font-weight:800;font-size:16px;line-height:1.2;vertical-align:top;white-space:nowrap}
-.gl-vals td:first-child{width:0;padding:0}
-.gl-vals td small{display:block;font-size:12px;font-weight:600;color:var(--muted)}
-.gl-vals td.best{color:var(--ok-ink)}
-.gl-vals td .bm{margin-right:2px}
-.hlist{list-style:none;padding:0;display:grid;gap:8px}
-.hcard{background:var(--card);border:2px solid var(--line);border-radius:22px;overflow:hidden}
-.hcard.open{border-color:var(--ink)}
-.hcard h2{margin:0;font-size:inherit}
-.hhead{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;width:100%;min-height:56px;text-align:left;background:none;border:0;padding:8px 12px;font:inherit;color:inherit}
-.hhead .num{width:32px;height:32px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:20px}
-.hn{display:grid;gap:5px;min-width:0}
-.hname{font-family:var(--display);font-weight:800;font-stretch:84%;font-size:clamp(19px,5.4vw,22px);line-height:1.1}
-.htags{display:flex;flex-wrap:wrap;gap:6px}
-.htags span{background:var(--butter);color:var(--on-butter);font-weight:800;font-size:13px;border-radius:999px;padding:2px 10px}
-.hhead .tw{font-size:28px;line-height:1;color:var(--berry-deep);transition:transform .15s}
-.hhead[aria-expanded="true"] .tw{transform:rotate(90deg)}
-.hbody{display:grid;gap:8px;padding:0 12px 12px}
-.because,.gives{display:grid;grid-template-columns:24px 1fr;gap:8px;align-items:start;font-size:16px;line-height:1.35;font-weight:600}
-.because .mk,.gives .mk{width:22px;height:22px;font-size:13px}
-.because b,.gives b{font-weight:800}
-.gives{color:var(--muted)}
-.plist{list-style:none;padding:0;display:grid;gap:8px}
-.prow{display:grid;gap:2px;width:100%;text-align:left;background:var(--paper);border:2px solid var(--line);border-radius:14px;padding:8px 12px;font:inherit;color:var(--ink);min-height:44px}
-.prow .pr1{display:flex;align-items:center;gap:8px}
-.prow .pr1 b{font-family:var(--display);font-weight:800;font-size:18px;line-height:1.15;min-width:0}
-.prow .go{font-size:24px;line-height:1;color:var(--berry-deep)}
-.prow .pin{font-size:13px;font-weight:700;color:var(--muted)}
-.prow .pr2{font-size:14.5px;font-weight:600;color:var(--muted);line-height:1.35}
-.prow .pr2 b{color:var(--ink);font-variant-numeric:tabular-nums}
-.prow .ck{flex:0 0 auto;font-size:14px;font-weight:900;margin-left:auto}
-.prow .ck.ok{color:var(--ok-ink)}
-.prow .ck.old{color:var(--muted)}
-.prow .pmn b{color:var(--ink);font-variant-numeric:tabular-nums}
-.prow .pf1{font-size:15px;font-weight:700}
-.prow .chk{font-size:13px}
-.thumbs{list-style:none;padding:0;display:grid;gap:6px}
-.thumb{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1px 10px;align-items:baseline;width:100%;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:14px;padding:8px 12px;min-height:44px;font:inherit;color:var(--ink)}
-.thumb b{font-family:var(--display);font-size:16px;line-height:1.15;font-weight:800;min-width:0}
-.thumb .f{font-size:13px;font-weight:700;color:var(--muted);text-align:right;white-space:nowrap}
-.thumb .m{grid-column:1/-1;font-size:13.5px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
-.thumb .m b{font-family:var(--body);font-size:13.5px;color:var(--ink)}
-.mname{background:none;border:0;padding:0;text-align:left;font:inherit;color:inherit;min-height:44px;display:flex;align-items:center}
-.inhood{font-size:14px;font-weight:700;color:var(--muted);margin-top:-8px}
-.tags{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:6px}
-.tags li{background:var(--butter);color:var(--on-butter);font-weight:800;font-size:14px;border-radius:999px;padding:3px 11px}
+/* the three neighborhood cards */
+.ncards{list-style:none;padding:0;display:grid;gap:20px}
+.ncard{background:var(--card);border:2px solid var(--ink);border-radius:26px;overflow:hidden;box-shadow:0 5px 0 var(--berry)}
+.illus{display:block;border-bottom:2px solid var(--ink);background:var(--blush);line-height:0}
+.illus svg{display:block;width:100%;height:84px}
+.ncard .nb{display:grid;gap:9px;padding:10px 14px 14px}
+.ncard h2 small{font-family:var(--body);font-size:16px;font-weight:800;color:var(--muted);font-stretch:100%;margin-left:6px;white-space:nowrap}
+.ncard .btn{min-height:50px}
+.ncard h2{font-weight:800;font-stretch:84%;font-size:clamp(26px,7.4vw,31px);line-height:1.05}
+.ncard h2{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px;align-items:start}
+.ncard h2 .num{display:inline-grid;place-items:center;width:30px;height:30px;margin-top:2px;border-radius:50%;background:var(--berry-deep);color:var(--on-berry);font-size:18px;font-stretch:100%}
 .chips{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:6px}
-.chips li{background:var(--blush);color:var(--ink);font-weight:700;font-size:14px;line-height:1.25;border-radius:10px;padding:4px 9px}
-.mact{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
-.heart{min-height:48px;min-width:48px;border:2px solid var(--berry-deep);border-radius:999px;background:var(--card);color:var(--berry-deep);font-weight:800;font-size:16px;padding:6px 16px;display:inline-flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap}
+.chips li{background:var(--blush);border:2px solid var(--line);color:var(--ink);font-weight:800;font-size:14px;line-height:1.2;border-radius:999px;padding:3px 11px}
+.chips li.y{background:var(--butter);border-color:var(--butter);color:var(--on-butter)}
+.money{position:relative;display:grid;gap:0;background:var(--paper);border-radius:16px;padding:6px 12px}
+.money div{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.money span{font-size:15px;font-weight:700;line-height:1.25;min-width:0}
+.money span small{display:block;font-size:13px;font-weight:700;color:var(--muted)}
+.money b{flex:0 0 auto;font-family:var(--display);font-weight:800;font-size:24px;line-height:1.15;font-variant-numeric:tabular-nums}
+.tiles{list-style:none;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.tile{position:relative;display:grid;justify-items:center;align-content:start;text-align:center;gap:2px;background:var(--paper);border-radius:16px;padding:10px 4px 7px}
+.tile .v{display:grid;justify-items:center;gap:2px}
+.tile .ic{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:var(--rose);color:var(--berry-deep);display:grid;place-items:center}
+.tile .ic svg{width:17px;height:17px}
+.tile b{font-family:var(--display);font-weight:800;font-size:24px;line-height:1.05;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tile b small{font-size:15px;font-weight:800}
+.tile span.l{font-size:14px;font-weight:700;line-height:1.2}
+.best{outline:2px solid var(--ok-ink);outline-offset:-2px;background:var(--ok-bg)}
+.sticker{position:absolute;top:-9px;right:-4px;z-index:1;background:var(--butter);color:var(--on-butter);font-weight:900;font-size:12px;line-height:1;letter-spacing:.02em;border-radius:999px;padding:4px 8px 5px;transform:rotate(6deg);box-shadow:0 2px 0 var(--ink);white-space:nowrap}
+.money .sticker{top:-11px;left:12px;right:auto;transform:rotate(-4deg)}
+.money.best{padding-top:12px}
+.lean{background:var(--card);border:2px dashed var(--berry);border-radius:22px;padding:12px 14px;display:grid;gap:8px}
+.lean h2{font-weight:800;font-stretch:84%;font-size:19px}
+.llist{list-style:none;padding:0;display:grid;gap:6px}
+.lrow{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;width:100%;min-height:48px;text-align:left;background:var(--paper);border:2px solid var(--line);border-radius:14px;padding:6px 12px;font:inherit;color:var(--ink)}
+.lrow .ll{font-size:16px;font-weight:700}
+.lrow b{font-family:var(--display);font-weight:800;font-size:18px;text-align:right}
+.lrow .go{font-size:24px;color:var(--berry-deep)}
+.endblock{display:grid;gap:10px;padding-top:6px}
+
+/* a neighborhood */
+.hero{display:grid;gap:10px}
+.hero .illus{border:2px solid var(--ink);border-radius:24px;overflow:hidden;box-shadow:0 5px 0 var(--berry)}
+.hero .illus svg{height:auto;aspect-ratio:360/170}
+.hero h1{font-weight:800;font-stretch:82%;font-size:clamp(34px,9.6vw,44px);line-height:1}
+.hero .line{font-size:20px;line-height:1.4;font-weight:600}
+.sec-h{font-weight:800;font-stretch:84%;font-size:26px}
+.sec-h .kick{font-family:var(--script);font-weight:400;color:var(--berry);font-size:30px;margin-right:6px}
+.acards{list-style:none;padding:0;display:grid;gap:16px}
+.acard{background:var(--card);border:2px solid var(--ink);border-radius:22px;padding:14px 14px 12px;display:grid;gap:10px;box-shadow:0 4px 0 var(--berry)}
+.ahead{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:start}
+.aname{display:grid;gap:2px;text-align:left;background:none;border:0;padding:0;font:inherit;color:var(--ink);min-height:44px}
+.aname b{font-family:var(--display);font-weight:800;font-size:22px;line-height:1.12}
+.aname b .go{color:var(--berry-deep);margin-left:4px}
+.aname small{font-size:15px;font-weight:700;color:var(--muted)}
+.heart{min-height:48px;min-width:48px;border:2px solid var(--berry-deep);border-radius:999px;background:var(--card);color:var(--berry-deep);font-weight:800;font-size:16px;padding:6px 14px;display:inline-flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap}
 .heart .h{font-size:20px;line-height:1}
 .heart[aria-pressed="true"]{background:var(--berry-deep);color:var(--on-berry)}
-.links{display:flex;flex-wrap:wrap;gap:0 20px}
-.endblock{display:grid;gap:10px;padding-top:6px}
-.none-box{background:var(--low-bg);color:var(--low-ink);border-radius:18px;padding:14px 16px;font-weight:700}
+.minis{list-style:none;padding:0;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.25fr) minmax(0,.95fr);gap:6px}
+.minis li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:6px;align-items:center;font-size:15px;font-weight:700;line-height:1.2}
+.minis .ic{width:26px;height:26px;border-radius:50%;background:var(--blush);color:var(--berry-deep);display:grid;place-items:center}
+.minis .ic svg{width:16px;height:16px}
+.amark{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center}
+.seeit{min-height:48px}
+.moms{display:grid;gap:10px}
+.caption{font-size:15px;font-weight:700;color:var(--muted);margin-top:-6px}
+details.mom{background:var(--card);border:2px solid var(--line);border-radius:18px}
+details.mom[open]{border-color:var(--ink)}
+details.mom summary{list-style:none;display:grid;grid-template-columns:40px minmax(0,1fr) 20px;gap:10px;align-items:center;min-height:64px;padding:10px 12px;cursor:pointer}
+details.mom summary::-webkit-details-marker{display:none}
+details.mom summary::after{content:"+";font-size:24px;line-height:1;color:var(--berry-deep);font-weight:600}
+details.mom[open] summary::after{content:"\2212"}
+details.mom .ic{width:40px;height:40px;border-radius:50%;background:var(--rose);color:var(--berry-deep);display:grid;place-items:center}
+details.mom .ic svg{width:22px;height:22px}
+details.mom .mt{display:grid;gap:1px;min-width:0}
+details.mom .mt b{font-family:var(--display);font-weight:800;font-size:19px;line-height:1.15}
+details.mom .mt span{font-size:15px;font-weight:600;color:var(--muted);line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+details.mom[open] .mt span{display:none}
+details.mom .mb{padding:0 14px 12px;display:grid;gap:4px;font-size:17px;line-height:1.45}
+.hoodnav{display:grid;gap:4px;padding-top:4px}
 .pline{font-size:14px;font-weight:600;color:var(--muted);line-height:1.35}
 .pline b{color:var(--ink);font-variant-numeric:tabular-nums}
+.inhood{font-size:15px;font-weight:700;color:var(--muted)}
+.tags{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.tags li{background:var(--butter);color:var(--on-butter);font-weight:800;font-size:14px;border-radius:999px;padding:3px 11px}
+.thumbs{list-style:none;padding:0;display:grid;gap:6px}
+.thumb{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1px 10px;align-items:baseline;width:100%;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:14px;padding:8px 12px;min-height:44px;font:inherit;color:var(--ink)}
+.thumb b{font-family:var(--display);font-size:17px;line-height:1.15;font-weight:800;min-width:0}
+.thumb .f{font-size:14px;font-weight:700;color:var(--muted);text-align:right;white-space:nowrap}
+.thumb .m{grid-column:1/-1;font-size:14px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
+.thumb .m b{font-family:var(--body);font-size:14px;color:var(--ink)}
+.none-box{background:var(--low-bg);color:var(--low-ink);border-radius:18px;padding:14px 16px;font-weight:700}
 
 /* a place */
 .place h1{font-weight:800;font-stretch:82%;font-size:clamp(30px,8.4vw,38px)}
+.place .kicker{font-size:26px}
+.place .facts{background:var(--card);border:2px solid var(--ink);border-radius:20px;padding:0 16px;box-shadow:0 4px 0 var(--berry)}
+.place .facts li:last-child{border-bottom:0}
 .life{display:grid;gap:12px}
 .life h2,.sec-h{font-weight:800;font-stretch:84%;font-size:26px}
 .moment{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:14px 16px;display:grid;gap:6px}
@@ -366,7 +328,7 @@ details.filter .fbody{display:grid;gap:14px;padding:0 16px 16px}
 .grp-h .rk{flex:0 0 auto;display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--ink);color:var(--paper);font-size:15px;margin-right:4px}
 .grp-h small{font-family:var(--body);font-size:14px;font-weight:700;color:var(--muted);white-space:nowrap}
 .nearby{font-size:13px;letter-spacing:.06em;text-transform:uppercase;font-weight:800;color:var(--muted);margin-top:4px}
-.row{display:grid;gap:4px;width:100%;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:12px 14px;min-height:64px}
+.row{display:grid;gap:4px;width:100%;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:12px 14px;min-height:64px;box-shadow:0 3px 0 var(--rose)}
 .row .r1{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
 .row .r1 b{font-family:var(--display);font-size:19px;line-height:1.15}
 .row .r1 span{font-size:14px;font-weight:800;color:var(--muted);white-space:nowrap}
@@ -380,11 +342,25 @@ details.filter .fbody{display:grid;gap:14px;padding:0 16px 16px}
 .mapwrap{--ink:#3A1630;--muted:#7A5670;--line:#F3CADA;--paper:#FFF4F7;--white:#FFFFFF;background:#FFF4F7;color:#3A1630;border:2px solid var(--line);border-radius:20px;padding:10px}
 
 /* the bar, the sheets, the toast */
-.savebar{position:fixed;left:0;right:0;bottom:0;z-index:45;background:var(--paper);border-top:2px solid var(--ink);padding-top:8px;padding-bottom:calc(8px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.savebar .in{max-width:520px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.savebar .btn{min-height:50px;font-size:17px;padding:6px 12px}
-.savebar .btn .h{color:var(--berry-deep);font-size:20px;line-height:1}
-.savebar .btn.main .h{color:var(--on-berry)}
+.navbar{position:fixed;left:0;right:0;bottom:0;z-index:45;background:var(--card);border-top:2px solid var(--ink);box-shadow:0 -3px 0 var(--rose);padding-top:6px;padding-bottom:calc(6px + env(safe-area-inset-bottom,0px));padding-left:max(10px,env(safe-area-inset-left,0px));padding-right:max(10px,env(safe-area-inset-right,0px))}
+.navbar .in{max-width:520px;margin:0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.tab{display:grid;justify-items:center;align-content:center;gap:1px;min-height:54px;border:0;border-radius:16px;background:none;font:inherit;font-weight:800;font-size:14px;line-height:1.1;color:var(--ink);padding:4px 2px}
+.tab svg{width:24px;height:24px}
+.tab .h{font-size:22px;line-height:24px;color:var(--berry-deep)}
+.tab[aria-current="page"]{background:var(--rose)}
+.tab .n{display:inline-grid;place-items:center;min-width:20px;height:20px;border-radius:999px;background:var(--berry-deep);color:var(--on-berry);font-size:12px;padding:0 5px;margin-left:3px;vertical-align:1px}
+.photos{display:flex;align-items:center;justify-content:center;gap:8px;min-height:52px;border:2px solid var(--ink);border-radius:999px;background:var(--rose);font-family:var(--display);font-weight:800;font-size:18px;text-decoration:none;color:var(--ink);box-shadow:0 3px 0 var(--ink)}
+.bigpair{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:12px;background:var(--card);border:2px solid var(--ink);border-radius:20px;padding:12px 16px}
+.bigpair div{display:grid;align-content:start}
+.bigpair span{font-size:15px;font-weight:800;color:var(--muted);line-height:1.2}
+.bigpair b{font-family:var(--display);font-weight:800;font-size:30px;line-height:1.1;font-variant-numeric:tabular-nums}
+.confirmbox{background:var(--mid-bg);color:var(--mid-ink);border-radius:18px;padding:12px 16px;display:grid;gap:6px}
+.confirmbox h2{font-size:19px;font-weight:800}
+.confirmbox ul{padding-left:1.1em;display:grid;gap:4px;font-weight:600}
+.contact{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:12px 16px;display:grid;gap:2px}
+.contact h2{font-size:19px;font-weight:800}
+.contact .tel{font-family:var(--display);font-weight:800;font-size:22px}
+.listtools{display:grid;gap:10px}
 .sheet{position:fixed;inset:0;z-index:40;background:var(--paper);overflow-y:auto;-webkit-overflow-scrolling:touch;padding-top:env(safe-area-inset-top,0px)}
 .sheet .wrap{display:grid;gap:16px;padding-top:8px;padding-bottom:calc(var(--bar-h,0px) + 28px)}
 .sheet .wrap>*{min-width:0}
@@ -415,6 +391,7 @@ details.filter .fbody{display:grid;gap:14px;padding:0 16px 16px}
 <div id="live" class="sr" aria-live="polite"></div>
 
 <!--CONCIERGE_DATA_SLOT-->
+<!--CONCIERGE_ILLUS_SLOT-->
 <!--CONCIERGE_MAP_SLOT-->
 
 <script>
@@ -447,7 +424,7 @@ function nm(b) { return String((b && (b.name || b.address)) || "This place").rep
 function cap(s) { s = String(s || ""); return s.charAt(0).toUpperCase() + s.slice(1); }
 function li(q) { return '<li>' + esc(q) + '</li>'; }
 var ICON = {
-  dog: "M5 11l-2-4 4-1 2 2h5l3-3 2 1-1 4v8h-3v-4H9v4H6v-6z", warning: "M12 4l9 16H3zM12 10v5M12 17.5v.5", train: "M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zM5 11h14M8 20l2-3M16 20l-2-3M9 14h.5M14.5 14h.5",
+  search: "M10 4a6 6 0 1 0 0 12a6 6 0 0 0 0-12zM14.5 14.5L20 20", dog: "M5 11l-2-4 4-1 2 2h5l3-3 2 1-1 4v8h-3v-4H9v4H6v-6z", warning: "M12 4l9 16H3zM12 10v5M12 17.5v.5", train: "M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zM5 11h14M8 20l2-3M16 20l-2-3M9 14h.5M14.5 14h.5",
   home: "M4 11l8-7 8 7v9h-5v-6H9v6H4z", fork: "M7 3v7a2 2 0 0 0 4 0V3M9 12v9M16 3c-2 2-2 7 0 9v9", park: "M12 3l5 7h-3l4 6H6l4-6H7zM12 16v5",
   coffee: "M5 9h11v5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5zM16 10h2a2 2 0 0 1 0 5h-2M8 3v3M12 3v3", heart: "M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.500-7 10-7 10z",
   ruler: "M3 16L16 3l5 5L8 21zM7 14l2 2M10 11l2 2M13 8l2 2", clock: "M12 3a9 9 0 1 0 0 18a9 9 0 0 0 0-18zM12 7v5l3 2", parking: "M5 3h14v18H5zM10 17V8h3a2.500 2.500 0 0 1 0 5h-3",
@@ -509,11 +486,11 @@ function position(key, v, lowWord, highWord) {
 }
 
 /* ---------- her list and tour plan, kept on this phone only ---------- */
-/* Version 5 asks nothing: only her list, her ticks for Compare and her tour plan are kept. Answers saved by earlier
+/* Versions 5 and 6 ask nothing: only her list, her ticks for Compare and her tour plan are kept. Answers saved by earlier
    versions (under this key or older ones) are ignored; their list and plan are kept by building id. */
 var KEY = "lamia-concierge";
 var OLD_KEYS = ["lamia-concierge-v4", "lamia-concierge-v3", "lamia-concierge-v2"];
-function fresh() { return { v: 5, step: "home", saved: [], ticked: [], tour: [] }; }
+function fresh() { return { v: 6, step: "home", saved: [], ticked: [], tour: [] }; }
 var S = fresh();
 /* adds a saved list, ticks and tour plan to hers (several old keys may each hold some) */
 function keepList(o) { ["saved", "ticked", "tour"].forEach(function (k) { if (Array.isArray(o[k])) o[k].forEach(function (id) { if (BY[id] && S[k].indexOf(id) < 0) S[k].push(id); }); }); }
@@ -533,7 +510,7 @@ function keepList(o) { ["saved", "ticked", "tour"].forEach(function (k) { if (Ar
 })();
 function save() { try { window.localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* ignore */ } }
 /* the overlays: a place, My list, Compare. The top one is on screen; Back pops it. */
-var VIEW = { all: false, tab: "list", stack: [], confirmReset: false, open: {}, grp: {}, f: { rent: null, beds: "any", garage: false, state: "any", q: "" } };
+var VIEW = { hood: 0, all: false, tab: "list", stack: [], confirmReset: false, open: {}, grp: {}, f: { rent: null, beds: "any", garage: false, state: "any", q: "" } };
 var mapApi = null, askApi = null;
 function isSaved(id) { return S.saved.indexOf(id) >= 0; }
 function onTour(id) { return S.tour.indexOf(id) >= 0; }
@@ -602,10 +579,8 @@ function lifeLine(b) {
 function chipKeys() { return ["family", "room", "going_out"]; }
 
 /* ---------- shared pieces ---------- */
-function top(extra, noBrand) {
-  return '<header class="top">' + (noBrand ? '<span></span>' : '<span class="brand">Lamia&#39;s House Hunt</span>') + '<span class="topbtns" id="topbtns">' + (extra || "") +
-    '<button type="button" class="quiet" data-act="all">See everything</button></span></header>';
-}
+function top() { return '<header class="top"><span class="brand">Lamia&#39;s House Hunt</span><span class="topbtns" id="topbtns"></span></header>'; }
+function backTop(act, label) { return '<header class="top"><button type="button" class="quiet" data-act="' + act + '"><span aria-hidden="true">&#8249;</span> ' + label + '</button><span class="topbtns" id="topbtns"></span></header>'; }
 function sheetTop(right) { return '<header class="top"><button type="button" class="quiet" data-act="back"><span aria-hidden="true">&#8249;</span> Back</button>' + (right || '<span></span>') + '</header>'; }
 function heart(b, big) {
   var on = isSaved(b.id);
@@ -615,96 +590,62 @@ function heart(b, big) {
 function tagList(h) { var t = (h && Array.isArray(h.tags) ? h.tags : []).filter(function (x) { return typeof x === "string" && x.trim(); }).slice(0, 2); return t.length ? '<ul class="tags" aria-label="In a word">' + t.map(function (x) { return '<li>' + esc(cap(x.trim())) + '</li>'; }).join("") + '</ul>' : ''; }
 function hoodNameOf(b) { var h = HBY[b.neighborhood_id]; return (typeof b.neighborhood_name === "string" && b.neighborhood_name) || (h && h.name) || ""; }
 /* a group's heading: its name, or "X and nearby" when the buildings listed under it come from joined neighborhoods */
-function areaName(id, ids) {
+function areaName(id, ids, noState) {
   var h = HBY[id], g = GROUPS.filter(function (x) { return x.id === id; })[0];
-  var name = (g && g.name) || (h && h.name) || id, st = h && h.state ? ", " + h.state : "";
+  var name = (g && g.name) || (h && h.name) || id, st = h && h.state && !noState ? ", " + h.state : "";
   var joined = (ids || []).some(function (bid) { return BY[bid] && BY[bid].neighborhood_id !== id; });
   return joined ? name + " and nearby" + st : name + st;
 }
-function inHood(b) { if (b.neighborhood_id === b.area_id) return ''; var h = HBY[b.neighborhood_id], n = hoodNameOf(b); return n ? '<p class="inhood">In ' + esc(n) + (h && h.state ? ", " + esc(h.state) : "") + '</p>' : ''; }
-
-var SHORT = { family: "Near " + ANCHOR, money: "Lower cost", room: "Space", going_out: "Going out", green: "A park for the dog", parking: "Parking" };
 function medianOf(xs) { xs = xs.filter(isNum).sort(function (a, b) { return a - b; }); if (!xs.length) return null; var h = Math.floor(xs.length / 2); return xs.length % 2 ? xs[h] : (xs[h - 1] + xs[h]) / 2; }
-/* the figures of a neighborhood, over the buildings shown (as the recommender's own figures) */
+/* the figures of a neighborhood, over the three buildings shown */
 function areaFigs(ids) {
   var rs = ids.map(function (id) { return BY[id].features_raw || {}; }), L = ids.map(function (id) { return raw(BY[id]); });
   var places = rs.filter(function (r) { return isNum(r.restaurants_10min) || isNum(r.bars_10min); }).map(function (r) { return (r.restaurants_10min || 0) + (r.bars_10min || 0); });
   var sq = L.map(function (x) { return x.sqft; }).filter(isNum), tot = L.map(function (x) { return x.total; }).filter(isNum), walk = L.map(function (x) { return x.park; }).filter(isNum);
-  var pk = ids.map(function (id) { return (BY[id].features || {}).parking; }).filter(isNum).sort(function (a, b) { return a - b; });
+  var rent = ids.map(function (id) { return (BY[id].facts || {}).rent_from; }).filter(isNum);
   var d = medianOf(L.map(function (x) { return x.drive; })), p = medianOf(places);
-  return { drive: isNum(d) ? Math.round(d) : null, total: tot.length ? Math.min.apply(null, tot) : null, sqft: sq.length ? Math.max.apply(null, sq) : null,
-    bedroom: L.some(function (x) { return x.bedroom; }), places: isNum(p) ? Math.round(p) : null, walk: walk.length ? Math.max(1, Math.round(Math.min.apply(null, walk))) : null,
-    parking: pk.length ? pk[Math.floor((pk.length - 1) / 2)] : null };
+  var big = null; L.forEach(function (x) { if (isNum(x.sqft) && (!big || x.sqft > big.sqft)) big = x; });
+  return { drive: isNum(d) ? Math.round(d) : null, total: tot.length ? Math.min.apply(null, tot) : null, rent: rent.length ? Math.min.apply(null, rent) : null,
+    sqft: big ? big.sqft : null, bedroom: big ? !!big.bedroom : L.some(function (x) { return x.bedroom; }), places: isNum(p) ? Math.round(p) : null, walk: walk.length ? Math.max(1, Math.round(Math.min.apply(null, walk))) : null };
 }
-var PARK_SHORT = { "1": "garage", "0.7": "off-street", "0.4": "not stated", "0.2": "street only" };
-function goodBit(k, f) {
-  if (k === "family") return isNum(f.drive) ? f.drive + " min to " + ANCHOR : "close to " + ANCHOR;
-  if (k === "money") return isNum(f.total) ? "totals from " + money(f.total) : "lower totals";
-  if (k === "room") return (f.bedroom ? "1 bedroom" : "studios") + (isNum(f.sqft) ? ", up to " + Math.round(f.sqft).toLocaleString("en-US") + " sq ft" : "");
-  if (k === "going_out") return isNum(f.places) ? f.places + (f.places === 1 ? " place" : " places") + " to eat nearby" : "places to eat nearby";
-  if (k === "green") return isNum(f.walk) ? "a park " + f.walk + " min away" : "a park nearby";
-  return (PARK_SHORT[String(f.parking)] || "parking") + " parking";
+var STATE_NAME = { NY: "New York", NJ: "New Jersey", CT: "Connecticut", PA: "Pennsylvania" };
+function hoodChips(A) {
+  var h = HBY[A] || {}, nb = CAN ? DEF.neighborhoods.filter(function (x) { return x.neighborhood_id === A; })[0] : null;
+  var tags = (nb && Array.isArray(nb.tags) && nb.tags.length ? nb.tags : h.tags || []).filter(function (x) { return typeof x === "string" && x.trim(); }).slice(0, 2);
+  var out = tags.map(function (x) { return '<li class="y">' + esc(cap(x.trim())) + '</li>'; });
+  return out.length ? '<ul class="chips" aria-label="In a word">' + out.join("") + '</ul>' : '';
 }
-function badBit(k, f, unknown) {
-  if (unknown) return { family: "drive not known yet", money: "total not known yet", room: "size not published yet", going_out: "places nearby not mapped yet", green: "park not mapped yet", parking: "parking not stated yet" }[k] || "not known yet";
-  if (k === "family") return "farther: " + f.drive + " min to " + ANCHOR;
-  if (k === "money") return "costs more: from " + money(f.total);
-  if (k === "room") return "smaller: up to " + Math.round(f.sqft).toLocaleString("en-US") + " sq ft";
-  if (k === "going_out") return "quieter: " + f.places + " places to eat nearby";
-  if (k === "green") return "park farther: " + f.walk + " min";
-  return "parking less certain";
-}
-/* the one fact on a place row: her top priority after cost (the row already shows the total) */
-function rowFact(b, order) {
-  var k = order.filter(function (x) { return x !== "money"; })[0] || "family", x = raw(b);
-  if (k === "family") return isNum(x.drive) ? Math.round(x.drive) + " min" : null;
-  if (k === "room") return isNum(x.sqft) ? Math.round(x.sqft).toLocaleString("en-US") + " sq ft" : (x.bedroom ? "1 bedroom" : null);
-  if (k === "going_out") return isNum(x.rest) ? x.rest + " places" : null;
-  if (k === "green") return isNum(x.park) ? "park " + Math.max(1, Math.round(x.park)) + " min" : null;
-  if (k === "parking") return PK[x.pk] ? PK[x.pk].replace(" parking", "").toLowerCase() : null;
-  return null;
-}
-var FACT_SR = { family: "drive to " + ANCHOR, room: "space", going_out: "places to eat nearby", green: "walk to a park", parking: "parking" };
-function placeRow(id, order) {
-  var b = BY[id], f = b.facts || {}, c = bldChecked(b), fx = rowFact(b, order), k = order.filter(function (x) { return x !== "money"; })[0] || "family";
-  return '<li><button type="button" class="prow" data-act="open" data-id="' + esc(id) + '">' +
-    '<span class="pr1"><b>' + esc(nm(b)) + '</b>' + (c ? '<span class="ck ' + c.kind + '" title="' + esc(c.text) + '"><span aria-hidden="true">' + (c.kind === "ok" ? "&#10003;" : "&#9719;") + '</span><span class="sr">' + esc(c.text) + '</span></span>' : '') + '<span class="go" aria-hidden="true">&#8250;</span></span>' +
-    '<span class="pr2">Rent <b' + (isNum(f.rent_from) ? ' data-rent="' + f.rent_from + '"' : '') + '>' + (fromMoney(f.rent_from, f.rent_to) || "?") + '</b> &middot; Total <b>' + (fromMoney(f.total_from, f.total_to) || "?") + '</b>' +
-      (fx ? ' &middot; <b>' + esc(fx) + '</b><span class="sr"> ' + esc(FACT_SR[k] || "") + '</span>' : '') + '</span>' +
-    (b.neighborhood_id !== b.area_id ? '<span class="pin">' + esc(hoodNameOf(b)) + '</span>' : '') + '</button></li>';
-}
-/* the at-a-glance table: one row per neighborhood, four short columns, the best in each marked */
-var GLANCE = [
-  { k: "money", label: "Total from", v: function (f) { return f.total; }, t: function (f) { return isNum(f.total) ? money(f.total) : "?"; }, best: "low" },
-  { k: "family", label: "Drive to " + ANCHOR, v: function (f) { return f.drive; }, t: function (f) { return isNum(f.drive) ? f.drive + " min" : "?"; }, best: "low" },
-  { k: "room", label: "Space, sq ft", v: function (f) { return isNum(f.sqft) ? f.sqft + (f.bedroom ? 10000 : 0) : null; }, t: function (f) { return (isNum(f.sqft) ? Math.round(f.sqft).toLocaleString("en-US") : "?") + '<small>' + (f.bedroom ? "1 bed" : "studio") + '</small>'; }, best: "high" },
-  { k: "going_out", label: "Places to eat", v: function (f) { return f.places; }, t: function (f) { return isNum(f.places) ? String(f.places) : "?"; }, best: "high" }
-];
-function glance(r, figs) {
-  var best = GLANCE.map(function (col) {
-    var vs = figs.map(col.v).filter(isNum); if (vs.length < 2) return null;
-    var t = col.best === "low" ? Math.min.apply(null, vs) : Math.max.apply(null, vs);
-    return vs.filter(function (x) { return x === t; }).length === vs.length ? null : t;
+/* one plain line on what life there is like, from the data: the neighborhood's good line, else the first sentence of its about */
+function hoodLine(A) { var h = HBY[A] || {}; return h.good || (h.about ? firstSentence(h.about) : "") || ""; }
+
+/* ---------- the drawings: the long page's experience scenes, inlined by the build ---------- */
+var ILL = window.CONCIERGE_ILLUS || {};
+/* a neighborhood gets the scene of its own experience; when one of the three already has that scene, the next gets the
+   scene that fits what it is best for (meta.leanings, then its why), so the three cards never look alike */
+var SCENE_FOR = { green: "space", room: "space", going_out: "pre_car", family: "settled", money: "new_water", parking: "enclave" };
+var SCENES = (function () {
+  var used = {}, out = [];
+  (CAN ? DEF.neighborhoods : []).forEach(function (nb) {
+    var A = nb.neighborhood_id, h = HBY[A] || {}, ex = h.experience_id || ((BY[(nb.buildings[0] || {}).id] || {}).experience_id);
+    var keys = [ex].concat(LEAN.filter(function (x) { return x.neighborhood_id === A; }).map(function (x) { return SCENE_FOR[x.priority_key]; }),
+      (nb.why_features || []).map(function (k) { return SCENE_FOR[k]; }), Object.keys(ILL));
+    var k = keys.filter(function (x) { return x && ILL[x] && !used[x]; })[0] || null;
+    if (k) used[k] = 1; out.push(k);
   });
-  return '<section class="glance" aria-labelledby="gl-h"><h2 id="gl-h" class="gl-h">At a glance</h2><table><thead><tr><th scope="col"><span class="sr">Neighborhood</span></th>' +
-    GLANCE.map(function (c) { return '<th scope="col">' + esc(c.label) + '</th>'; }).join("") + '</tr></thead><tbody>' +
-    r.neighborhoods.map(function (nb, i) {
-      var f = figs[i], ids = nb.buildings.map(function (x) { return x.id; });
-      return '<tr data-area="' + esc(nb.neighborhood_id) + '"><th scope="row" colspan="5"><button type="button" class="gl-name" data-act="goto" data-v="' + i + '"><span class="num" aria-hidden="true">' + (i + 1) + '</span><span class="gn">' + esc(areaName(nb.neighborhood_id, ids)) + '</span><span class="go" aria-hidden="true">&#8250;</span></button></th></tr>' +
-        '<tr class="gl-vals" data-act="goto" data-v="' + i + '"><td><span class="sr">' + esc(areaName(nb.neighborhood_id, ids)) + '</span></td>' + GLANCE.map(function (c, j) {
-          var isBest = best[j] !== null && c.v(f) === best[j];
-          return '<td class="' + (isBest ? "best" : "") + '">' + (isBest ? '<span class="bm" aria-hidden="true">&#10003;</span><span class="sr">Best: </span>' : '') + c.t(f) + '</td>';
-        }).join("") + '</tr>';
-    }).join("") + '</tbody></table></section>';
+  return out;
+})();
+var HOUSE_SVG = '<svg viewBox="0 0 360 130" preserveAspectRatio="xMidYMid slice"><rect width="360" height="130" fill="#FFE7EF"/><rect y="104" width="360" height="26" fill="#BFE7D2"/><path d="M130 104V62l50-34 50 34v42z" fill="#FFFFFF" stroke="#3A1630" stroke-width="4" stroke-linejoin="round"/><path d="M120 66l60-42 60 42" fill="none" stroke="#3A1630" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect x="168" y="76" width="24" height="28" fill="#E0457B" stroke="#3A1630" stroke-width="3"/><path d="M180 52c-3-6-12-4-11 3 1 4 6 7 11 11 5-4 10-7 11-11 1-7-8-9-11-3z" fill="#E0457B"/></svg>';
+function illus(i, kind) {
+  var k = SCENES[i], s = k && ILL[k] && (ILL[k][kind] || ILL[k].banner);
+  return '<div class="illus" aria-hidden="true">' + (typeof s === "string" ? s : HOUSE_SVG) + '</div>';
 }
 
-/* ---------- the first screen: the short list ---------- */
+/* ---------- home: the logo, one line, three neighborhood cards ---------- */
 function fmtN(n) { return isNum(n) ? Math.round(n).toLocaleString("en-US") : null; }
 /* how the list was narrowed, in two plain sentences, from meta.funnel (its own sentences when it has them) */
 function funnelText() {
   var f = FUNNEL || {};
   if (Array.isArray(f.sentences) && f.sentences.length) return f.sentences.slice(0, 2);
-  /* sources and passed counts come as numbers or as objects ({listing_sites, building_or_manager_sites}, {at_or_under_2000}) */
   var src = isNum(f.sources) ? f.sources : f.sources && typeof f.sources === "object" ? (f.sources.listing_sites || 0) + (f.sources.building_or_manager_sites || 0) : null;
   var area = String(f.area_text || "within a 2-hour drive of " + ANCHOR + "'s").split(", across")[0];
   var a = [], one = "I read " + (fmtN(f.listings_read) ? fmtN(f.listings_read) + " listings" : "the listings") +
@@ -714,54 +655,67 @@ function funnelText() {
   a.push((isNum(n) ? fmtN(n) + " apartments" : "The apartments here") + " passed every rule, and these three neighborhoods came out best for almost any mix of what matters.");
   return a;
 }
-function rulesBlock() {
+function howPicked() {
   var r = (FUNNEL && Array.isArray(FUNNEL.rules)) ? FUNNEL.rules.filter(function (x) { return typeof x === "string" && x; }) : [];
-  return r.length ? '<details class="src rules" id="rules"><summary>The rules</summary><ul class="rlist">' + r.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></details>' : '';
+  return '<details class="how" id="how"><summary>How these were picked</summary><div class="howbox"><p class="fun">' + funnelText().map(esc).join(" ") + '</p>' +
+    (r.length ? '<ul id="rules" aria-label="The rules">' + r.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>' : '') + '</div></details>';
+}
+function logo(tag) {
+  return '<h1 class="logo" tabindex="-1" id="home-h" aria-label="Lamia&#39;s House Hunt, the short version"><svg viewBox="0 0 360 70" aria-hidden="true"><path d="M30 66 180 8 330 66" fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><rect x="262" y="16" width="20" height="34" rx="3" fill="currentColor"/><path d="M180 30c-5-9-19-6-17 4 1 6 9 11 17 17 8-6 16-11 17-17 2-10-12-13-17-4z" fill="#E0457B"/></svg>' +
+    '<span class="name" aria-hidden="true">Lamia&#39;s<br>House Hunt</span><span class="tagbox" aria-hidden="true">' + (tag || "the short version") + '</span></h1>';
+}
+/* the winner of each fact among the three: the lowest total and drive, the most space and places to eat */
+var FACTS4 = [{ k: "total", best: "low" }, { k: "drive", best: "low" }, { k: "sqft", best: "high" }, { k: "places", best: "high" }];
+function bestOf(figs) {
+  var o = {};
+  FACTS4.forEach(function (c) {
+    var vs = figs.map(function (f) { return f[c.k]; }).filter(isNum); if (vs.length < 2) return;
+    var t = c.best === "low" ? Math.min.apply(null, vs) : Math.max.apply(null, vs);
+    if (vs.filter(function (x) { return x === t; }).length < vs.length) o[c.k] = t;
+  });
+  return o;
+}
+var STICKER = '<span class="sticker" aria-hidden="true">Best of 3</span>';
+function tile(iconName, valueHtml, label, isBest, key) {
+  return '<li class="tile' + (isBest ? ' best' : '') + '" data-fact="' + key + '"' + (isBest ? ' data-best="1"' : '') + '>' + (isBest ? STICKER : '') + '<span class="v"><span class="ic" aria-hidden="true">' + icon(iconName) + '</span><b>' + valueHtml + '</b></span><span class="l">' + label + '</span>' + (isBest ? '<span class="sr"> (best of the three)</span>' : '') + '</li>';
+}
+function ncard(nb, i, f, best) {
+  var A = nb.neighborhood_id, ids = nb.buildings.map(function (x) { return x.id; }), tb = isNum(f.total) && best.total === f.total;
+  var nm3 = ids.length === 3 ? "3" : String(ids.length);
+  return '<li class="ncard" data-area="' + esc(A) + '" id="area-' + i + '">' + illus(i, "banner") + '<div class="nb">' +
+    '<h2 id="nh-' + i + '"><span class="num" aria-hidden="true">' + (i + 1) + '</span>' + '<span>' + esc(areaName(A, ids, true)) + ((HBY[A] || {}).state ? '<small>' + esc(STATE_NAME[HBY[A].state] || HBY[A].state) + '</small>' : '') + '</span></h2>' + hoodChips(A) +
+    '<div class="money' + (tb ? ' best' : '') + '" data-fact="total"' + (tb ? ' data-best="1"' : '') + '>' + (tb ? STICKER : '') +
+      '<div><span>Rent from</span><b' + (isNum(f.rent) ? ' data-rent="' + f.rent + '"' : '') + '>' + (money(f.rent) || "?") + '</b></div>' +
+      '<div><span>Total from<small>with utilities and fees</small></span><b class="tv">' + (money(f.total) || "?") + '</b>' + (tb ? '<span class="sr"> (best of the three)</span>' : '') + '</div></div>' +
+    '<ul class="tiles">' +
+      tile("car", isNum(f.drive) ? String(f.drive) : "?", "min to " + esc(ANCHOR), isNum(f.drive) && best.drive === f.drive, "drive") +
+      tile("ruler", isNum(f.sqft) ? Math.round(f.sqft).toLocaleString("en-US") : "?", "sq ft<br>" + (f.bedroom ? "1 bedroom" : "studio"), isNum(f.sqft) && best.sqft === f.sqft, "space") +
+      tile("fork", isNum(f.places) ? String(f.places) : "?", "places to eat nearby", isNum(f.places) && best.places === f.places, "eat") + '</ul>' +
+    '<button type="button" class="btn soft" data-act="hood" data-v="' + i + '" aria-describedby="nh-' + i + '">See the ' + nm3 + ' apartments <span class="go" aria-hidden="true">&#8250;</span></button></div></li>';
 }
 function leaningsBlock() {
-  /* only the leanings whose winner is not already one of the three (in_default_three); none, no section */
+  /* only the leanings whose winner is not already one of the three (in_default_three); none, no card */
   var three = topIds().map(function (t) { return t[0]; });
   var L2 = LEAN.filter(function (x) { return x && x.neighborhood_id && (x.line || x.neighborhood_name) && (x.in_default_three === false || (x.in_default_three === undefined && three.indexOf(x.neighborhood_id) < 0)); });
   if (!L2.length) return '';
-  return '<details class="more lean" id="leanings"><summary>If one thing matters most to you</summary><div class="in"><ul class="llist">' + L2.map(function (x) {
-    var label = x.priority_label ? cap(x.priority_label) : "";
-    return '<li><button type="button" class="lrow" data-act="lean" data-id="' + esc(x.neighborhood_id) + '"><span class="ll">' + esc(label) + '</span><b>' + esc(x.neighborhood_name || x.neighborhood_id) + '</b><span class="go" aria-hidden="true">&#8250;</span></button></li>';
-  }).join("") + '</ul><p class="small muted">Each opens that neighborhood in Browse everything.</p></div></details>';
+  return '<section class="lean" id="leanings" aria-labelledby="lean-h"><h2 id="lean-h">If one thing matters most to you</h2><ul class="llist">' + L2.map(function (x) {
+    return '<li><button type="button" class="lrow" data-act="lean" data-id="' + esc(x.neighborhood_id) + '"><span class="ll">' + esc(x.priority_label ? cap(x.priority_label) : "") + '</span><b>' + esc(x.neighborhood_name || x.neighborhood_id) + '</b><span class="go" aria-hidden="true">&#8250;</span></button></li>';
+  }).join("") + '</ul></section>';
 }
 function home() {
-  if (!CAN) return top("", true) + '<section class="hello"><h1 tabindex="-1"><span class="name">Lamia&#39;s<br>House Hunt</span></h1><p class="lead">Every place, nearest to ' + esc(ANCHOR) + ' first. Save the ones you like.</p><button type="button" class="btn main" data-act="all">See every place</button></section>';
-  var r = DEF;
-  if (VIEW.areaOpen === undefined) VIEW.areaOpen = { 0: true };
-  var figs = r.neighborhoods.map(function (nb) { return areaFigs(nb.buildings.map(function (x) { return x.id; })); });
-  var ft = funnelText();
-  var html = top() + '<section class="stack intro" style="gap:6px"><h1 class="h-say" tabindex="-1" id="res-h">Your three neighborhoods</h1>' +
-    '<p class="fun">' + ft.map(esc).join(" ") + '</p>' + rulesBlock() + '</section>' + glance(r, figs) + '<ol class="hlist">';
-  r.neighborhoods.forEach(function (nb, i) {
-    var A = nb.neighborhood_id, open = !!VIEW.areaOpen[i], ids = nb.buildings.map(function (x) { return x.id; }), f = figs[i];
-    var why = (nb.why_features || []).map(function (k) { return goodBit(k, f); }).join(" · ");
-    var give = nb.gives_up_feature ? badBit(nb.gives_up_feature, f, nb.gives_up_unknown) : null;
-    var tags = Array.isArray(nb.tags) ? { tags: nb.tags } : HBY[A];
-    html += '<li class="hcard' + (open ? ' open' : '') + '" data-area="' + esc(A) + '" id="area-' + i + '">' +
-      '<h2><button type="button" class="hhead" data-act="area" data-v="' + i + '" aria-expanded="' + open + '" aria-controls="hb-' + i + '"><span class="num" aria-hidden="true">' + (i + 1) + '</span>' +
-      '<span class="hn"><span class="hname">' + esc(areaName(A, ids)) + '</span>' + tagSpan(tags) + '</span><span class="tw" aria-hidden="true">&#8250;</span></button></h2>' +
-      '<div class="hbody" id="hb-' + i + '"' + (open ? '' : ' hidden') + '>' +
-      (why ? '<p class="because" data-full="' + esc(nb.why || "") + '"><span class="mk up" aria-hidden="true">&#10003;</span><span><span class="sr">Why: </span>' + esc(cap(why)) + '</span></p>' : '') +
-      (give ? '<p class="gives" data-full="' + esc(nb.gives_up || "") + '"><span class="mk dn" aria-hidden="true">&#8211;</span><span><span class="sr">Gives up: </span>' + esc(cap(give)) + '</span></p>' : '') +
-      '<ol class="plist">' + ids.map(function (id) { return placeRow(id, ORDER); }).join("") + '</ol></div></li>';
-  });
-  html += '</ol>' + leaningsBlock() + '<div class="endblock"><button type="button" class="btn main" data-act="all">Browse everything</button>' +
-    '<div class="links">' + (S.tour.length ? '<button type="button" class="quiet" data-act="plan">My tour plan &middot; ' + S.tour.length + '</button>' : '') +
-    (VIEW.confirmReset ? '' : '<button type="button" class="quiet" data-act="reset-ask">Clear my list</button>') + '</div>' + (VIEW.confirmReset ? resetBlock() : '') + '</div>';
-  return html;
+  var head = '<header class="top" style="min-height:0"><span></span><span class="topbtns" id="topbtns"></span></header>';
+  if (!CAN) return head + '<section class="hello">' + logo() + '<p class="say">Every place, nearest to ' + esc(ANCHOR) + ' first.</p><button type="button" class="btn main" data-act="all">See every place</button></section>';
+  var r = DEF, figs = r.neighborhoods.map(function (nb) { return areaFigs(nb.buildings.map(function (x) { return x.id; })); }), best = bestOf(figs);
+  return head + '<section class="hello">' + logo() + '<p class="say" id="res-h">Three neighborhoods picked for you</p>' + howPicked() + '</section>' +
+    '<ol class="ncards" aria-label="Your three neighborhoods">' + r.neighborhoods.map(function (nb, i) { return ncard(nb, i, figs[i], best); }).join("") + '</ol>' + leaningsBlock();
 }
-function tagSpan(h) { var t = (h && Array.isArray(h.tags) ? h.tags : []).filter(function (x) { return typeof x === "string" && x.trim(); }).slice(0, 2); return t.length ? '<span class="htags">' + t.map(function (x) { return '<span>' + esc(cap(x.trim())) + '</span>'; }).join("") + '</span>' : ''; }
 function resetBlock() {
   return VIEW.confirmReset
     ? '<div class="confirmrow" id="reset-box"><p><b>Clear My list?</b> This clears My list and your tour plan.</p><div class="two"><button type="button" class="btn sm" data-act="reset-no">No, go back</button><button type="button" class="btn sm main" data-act="reset-yes">Yes, clear them</button></div></div>'
     : '<button type="button" class="quiet center" data-act="reset-ask">Clear my list</button>';
 }
 
-/* ---------- a place ---------- */
+/* ---------- a neighborhood: the hero, its three apartments, life here ---------- */
 var MOMENT_ICON = { weekday: "coffee", saturday: "moon", sunday: "car", dog: "dog" };
 var MOMENT_TITLE = { weekday: "A weekday", saturday: "Saturday night", sunday: "Sunday with " + ANCHOR, dog: "The dog's walk" };
 function boldPlaces(text, places) {
@@ -770,41 +724,85 @@ function boldPlaces(text, places) {
     .forEach(function (n) { if (h.indexOf(n) >= 0 && h.indexOf("<b>" + n) < 0) h = h.split(n).join("<b>" + n + "</b>"); });
   return h;
 }
-function lifeHere(b) {
+/* life here as short moments, one line each, a tap opens the rest and its sources */
+function moments(b) {
   var L = (b.life_here || []).filter(function (m) { return m && m.text; });
-  if (!L.length) return "";
   var order = ["weekday", "saturday", "sunday", "dog"];
-  L = L.slice().sort(function (x, y) { var a = order.indexOf(x.moment), z = order.indexOf(y.moment); return (a < 0 ? 9 : a) - (z < 0 ? 9 : z); });
-  return '<section class="life" aria-labelledby="life-h"><h2 id="life-h">Life here</h2>' + L.map(function (m, i) {
+  return L.slice().sort(function (x, y) { var a = order.indexOf(x.moment), z = order.indexOf(y.moment); return (a < 0 ? 9 : a) - (z < 0 ? 9 : z); }).map(function (m) {
     var src = [], seen = {};
     (m.sources || []).forEach(function (s) {
       if (!s || !httpUrl(s.url) || seen[s.url]) return; seen[s.url] = 1;
       var p = (m.places || []).filter(function (x) { return x && x.name && x.source_url === s.url; })[0];
       src.push({ url: s.url, name: p ? p.name + " on " + (s.name || "the map") : (s.name || "Source") });
     });
-    return '<div class="moment" data-moment="' + esc(m.moment || "") + '"><div class="mt"><span class="ic">' + icon(MOMENT_ICON[m.moment] || "dot") + '</span><h3>' + esc(m.title || MOMENT_TITLE[m.moment] || "") + '</h3></div>' +
-      '<p>' + boldPlaces(m.text, m.places) + '</p>' +
-      (src.length ? '<details class="src"><summary>Sources</summary><ul>' + src.map(function (s) { return '<li>' + ext(s.url, s.name || "Source") + '</li>'; }).join("") + '</ul></details>' : '') + '</div>';
-  }).join("") + '</section>';
+    return '<details class="mom" data-moment="' + esc(m.moment || "") + '"><summary><span class="ic" aria-hidden="true">' + icon(MOMENT_ICON[m.moment] || "dot") + '</span><span class="mt"><b>' + esc(m.title || MOMENT_TITLE[m.moment] || "") + '</b><span>' + esc(firstSentence(m.text)) + '</span></span></summary>' +
+      '<div class="mb"><p>' + boldPlaces(m.text, m.places) + '</p>' +
+      (src.length ? '<details class="src"><summary>Sources</summary><ul>' + src.map(function (s) { return '<li>' + ext(s.url, s.name || "Source") + '</li>'; }).join("") + '</ul></details>' : '') + '</div></details>';
+  }).join("");
 }
+function mini(iconName, text, sr) { return '<li><span class="ic" aria-hidden="true">' + icon(iconName) + '</span><span>' + text + (sr ? '<span class="sr"> ' + esc(sr) + '</span>' : '') + '</span></li>'; }
+function starLine(b) {
+  var ap = (b.apartments || []).filter(function (a) { return a && a.star; }); if (!ap.length) return '';
+  var lab = ap[0].confirm_label || ((b.confirm || [])[0] ? "To confirm: " + b.confirm[0].label : "One thing to confirm");
+  return '<p class="star"><span aria-hidden="true">&#9733;</span> ' + esc(lab) + '</p>';
+}
+function aptCard(id, A) {
+  var b = BY[id], x = raw(b), f = b.facts || {};
+  var own = b.neighborhood_id !== A ? hoodNameOf(b) : "";
+  var room = isNum(x.sqft) ? Math.round(x.sqft).toLocaleString("en-US") + "&nbsp;sq&nbsp;ft<br>" + (x.bedroom ? "1&nbsp;bedroom" : "studio") : (x.bedroom ? "1 bedroom" : x.studio ? "Studio" : "Size not known");
+  return '<li class="acard" data-building="' + esc(id) + '"><div class="ahead"><button type="button" class="aname" data-act="open" data-id="' + esc(id) + '"><b>' + esc(nm(b)) + '<span class="go" aria-hidden="true">&#8250;</span></b>' + (own ? '<small>In ' + esc(own) + '</small>' : '') + '</button>' + heart(b) + '</div>' +
+    pairHtml(b) +
+    '<ul class="minis">' + mini("car", isNum(f.drive_min) ? Math.round(f.drive_min) + "&nbsp;min<br>drive" : "Not known", "to " + ANCHOR) + mini("ruler", room, "") +
+      mini("park", isNum(x.park) ? "Park<br>" + Math.max(1, Math.round(x.park)) + "&nbsp;min" : "Park not known", "on foot") + '</ul>' +
+    '<div class="amark">' + chkLine(bldChecked(b)) + starLine(b) + '</div></li>';
+}
+function hoodScreen(i) {
+  var nb = DEF.neighborhoods[i], A = nb.neighborhood_id, ids = nb.buildings.map(function (x) { return x.id; }), line = hoodLine(A);
+  var next = DEF.neighborhoods[i + 1], first = BY[ids[0]];
+  var lifeB = ids.map(function (id) { return BY[id]; }).filter(function (b) { return (b.life_here || []).some(function (m) { return m && m.text; }); })[0];
+  return backTop("home", "My three") +
+    '<section class="hero" data-area="' + esc(A) + '">' + illus(i, "tall") + '<p class="kicker">Neighborhood ' + (i + 1) + ' of 3</p><h1 tabindex="-1" id="hood-h">' + esc(areaName(A, ids, true)) + '</h1>' + hoodChips(A) +
+    (line ? '<p class="line">' + esc(line) + '</p>' : '') + '</section>' +
+    '<section class="stack" aria-labelledby="apts-h"><h2 class="sec-h" id="apts-h">The ' + (ids.length === 3 ? "3" : ids.length) + ' apartments</h2><ol class="acards">' + ids.map(function (id) { return aptCard(id, A); }).join("") + '</ol>' +
+    (ids.some(function (id) { return (BY[id].apartments || []).some(function (a) { return a.star; }); }) ? '<p class="small muted"><span aria-hidden="true">&#9733;</span> A star means one thing to confirm.</p>' : '') + '</section>' +
+    (lifeB ? '<section class="moms" id="life" aria-labelledby="life-h"><h2 class="sec-h" id="life-h">Life here</h2><p class="caption">Around ' + esc(nm(lifeB)) + '. Tap one to read more.</p>' + moments(lifeB) + '</section>' : '') +
+    '<div class="hoodnav">' + (next ? '<button type="button" class="btn main" data-act="hood" data-v="' + (i + 1) + '">Next: ' + esc(areaName(next.neighborhood_id, next.buildings.map(function (x) { return x.id; }), true)) + ' <span class="go" aria-hidden="true">&#8250;</span></button>'
+      : '<button type="button" class="btn main" data-act="home">Back to my three</button>') +
+    (next ? '<button type="button" class="quiet center" data-act="home"><span aria-hidden="true">&#8249;</span> Back to my three</button>' : '') + '</div>';
+}
+
+/* ---------- an apartment (the place sheet): what she needs first, the rest one tap away ---------- */
 function factsList(b) {
   var f = b.facts || {}, park = f.parking || {}, dog = f.dog || {};
   var rent = fromMoney(f.rent_from, f.rent_to), total = fromMoney(f.total_from, f.total_to);
   var toll = !isNum(f.toll_round_trip) ? "tolls not fully known" : f.toll_round_trip === 0 ? "no tolls" : "tolls " + cents(f.toll_round_trip) + " round trip";
-  function row(label, value, sub, marker, attr, inline) {
-    return '<li><div class="frow"><span class="l">' + label + '</span><span class="v"' + (attr || "") + '>' + (value || '<span class="muted">Not known</span>') + (sub ? '<small' + (inline ? ' class="in"' : '') + '>' + sub + '</small>' : '') + '</span></div>' + (marker || "") + '</li>';
+  function row(label, value, sub, attr, inline) {
+    return '<li><div class="frow"><span class="l">' + label + '</span><span class="v"' + (attr || "") + '>' + (value || '<span class="muted">Not known</span>') + (sub ? '<small' + (inline ? ' class="in"' : '') + '>' + sub + '</small>' : '') + '</span></div></li>';
   }
   function textRow(label, text) { return '<li><div class="frow"><span class="l">' + label + '</span></div><p class="ftext">' + (text ? esc(text) : '<span class="muted">Not known yet. Ask on the tour.</span>') + '</p></li>'; }
   return '<ul class="facts">' +
-    row("Rent", rent, rent ? "a month" : "", position("rent_from", f.rent_from, "lower than most", "higher than most"), isNum(f.rent_from) ? ' data-rent="' + f.rent_from + '"' : "", true) +
-    row("Total with utilities and fees", total, total ? "a month" : "", position("total_from", f.total_from, "lower than most", "higher than most"), "", true) +
-    row("Drive to " + esc(ANCHOR), isNum(f.drive_min) ? Math.round(f.drive_min) + " min" : null, toll, position("drive_min", f.drive_min, "shorter than most", "longer than most")) +
+    row("Rent", rent, rent ? "a month" : "", isNum(f.rent_from) ? ' data-rent="' + f.rent_from + '"' : "", true) +
+    row("Total with utilities and fees", total, total ? "a month" : "", "", true) +
+    row("Drive to " + esc(ANCHOR), isNum(f.drive_min) ? Math.round(f.drive_min) + " min" : null, toll) +
     textRow("Parking", park.summary) + textRow("Dog", dog.summary) + '</ul>';
 }
+function confirmBox(b) {
+  var qs = [], seen = {};
+  (b.apartments || []).forEach(function (a) { if (a && a.star && a.confirm_question && !seen[a.confirm_question]) { seen[a.confirm_question] = 1; qs.push({ t: a.confirm_question, star: true }); } });
+  (b.confirm || []).forEach(function (c) { var q = c && (c.question || c.label); if (q && !seen[q]) { seen[q] = 1; qs.push({ t: q, star: true }); } });
+  (b.disclosures || []).forEach(function (t) { t = cap(typeof t === "string" ? t : (t && (t.label || t.question)) || ""); if (t && !seen[t]) { seen[t] = 1; qs.push({ t: t }); } });
+  if (!qs.length) return '';
+  return '<section class="confirmbox" id="confirm" aria-labelledby="conf-h"><h2 id="conf-h">Things to confirm</h2><ul>' + qs.map(function (q) { return '<li>' + (q.star ? '<span aria-hidden="true">&#9733; </span>' : '') + esc(q.t) + '</li>'; }).join("") + '</ul></section>';
+}
+function contactBox(b) {
+  var ct = b.contact || {}, ph = ct.office_phone && !ct.private ? ct.office_phone : null, site = httpUrl(ct.site);
+  if (!ph && !site) return '';
+  return '<section class="contact" id="contact" aria-labelledby="ct-h"><h2 id="ct-h">' + (ct.kind === "leasing office" || !ct.kind ? "Leasing office" : esc(cap(ct.kind))) + '</h2>' +
+    (ph ? '<a class="link tel" href="tel:' + esc(ph.replace(/[^\d+]/g, "")) + '">' + esc(ph) + '</a>' : '') + (site ? ext(site, "Building website") : '') + '</section>';
+}
 function detailsBlocks(b) {
-  var out = "";
-  var ap = b.apartments || [];
-  if (ap.length) out += '<details class="more"><summary>' + (ap.length === 1 ? "The apartment" : "The " + ap.length + " apartments") + '</summary><div class="in"><ul class="apts">' + ap.map(function (a) {
+  var out = "", ap = b.apartments || [];
+  if (ap.length) out += '<details class="more" id="d-apts"><summary>' + (ap.length === 1 ? "The apartment" : "The " + ap.length + " apartments") + '</summary><div class="in"><ul class="apts">' + ap.map(function (a) {
     var bits = [bedsText(a.beds), isNum(a.sqft) ? Math.round(a.sqft) + " sq ft" : null, a.floor_text, a.available_text].filter(Boolean).join(" · ");
     return '<li><p class="a-h">' + esc(aptLabel(a)) + '</p>' + (bits ? '<p class="a-s">' + esc(bits) + '</p>' : '') +
       '<div class="pair"><div><span>Rent</span><b' + (isNum(a.rent) ? ' data-rent="' + a.rent + '"' : '') + '>' + (money(a.rent) || "Not known") + '</b></div><div><span>Total with utilities and fees</span><b>' + (money(a.total) || "Not known") + '</b></div></div>' +
@@ -812,47 +810,44 @@ function detailsBlocks(b) {
       (a.star ? '<p class="star"><span aria-hidden="true">&#9733;</span> ' + esc(a.confirm_label || "One thing to confirm") + '</p>' : '') +
       ext(a.listing_url, "See the listing") + '</li>';
   }).join("") + '</ul>' + (ap.some(function (a) { return a.star; }) ? '<p class="small muted"><span aria-hidden="true">&#9733;</span> A star means one thing to confirm.</p>' : '') + '</div></details>';
-  var conf = (b.confirm || []).filter(function (c) { return c && (c.question || c.label); }), dis = (b.disclosures || []).filter(Boolean);
-  if (conf.length || dis.length) out += '<details class="more"><summary>Things to confirm</summary><div class="in"><ul class="qs">' +
-    conf.map(function (c) { return '<li>' + esc(c.question || c.label) + '</li>'; }).join("") +
-    dis.map(function (t) { return '<li>' + esc(cap(typeof t === "string" ? t : (t.label || t.question || ""))) + '</li>'; }).join("") + '</ul></div></details>';
+  var mm = moments(b);
+  if (mm) out += '<details class="more" id="d-life"><summary>Life here</summary><div class="in"><div class="moms">' + mm + '</div></div></details>';
   var pts = (b.points || []).filter(function (p) { return p && p.text; });
-  if (b.about || pts.length) out += '<details class="more"><summary>About the building</summary><div class="in">' + (b.about ? '<p>' + esc(b.about) + '</p>' : '') +
+  if (b.about || pts.length) out += '<details class="more" id="d-about"><summary>About the building</summary><div class="in">' + (b.about ? '<p>' + esc(b.about) + '</p>' : '') +
     (pts.length ? '<ul class="points">' + pts.map(function (p) { return '<li>' + icon(p.icon) + '<span>' + esc(p.text) + '</span></li>'; }).join("") + '</ul>' : '') + '</div></details>';
-  var day = (b.life_here && b.life_here.length) ? [] : (b.day || []).filter(function (m) { return m && m.title; });
-  if (day.length) out += '<details class="more"><summary>A day here</summary><div class="in"><ul class="day">' + day.map(function (m) {
-    var lv = ["strong", "mixed", "weak"].indexOf(m.level) >= 0 ? m.level : null;
-    return '<li><div class="t"><span>' + esc(m.title) + '</span>' + (lv ? '<span class="chip ' + lv + '">' + lv + '</span>' : '') + '</div>' + (m.text ? '<p>' + esc(m.text) + '</p>' : '') + '</li>';
-  }).join("") + '</ul></div></details>';
+  var ml = moreLikePlace(b);
+  if (ml) out += '<details class="more" id="d-more"><summary>More like this</summary><div class="in">' + ml + '</div></details>';
   return out ? '<div class="moregroup">' + out + '</div>' : "";
 }
-/* "More like this", at the bottom of a place: the data's nearest others (buildings[].similar) */
+/* "More like this": the data's nearest others (buildings[].similar) */
 function moreLikePlace(b) {
   var ids = (Array.isArray(b.similar) ? b.similar : []).filter(function (x) { return BY[x] && x !== b.id; }).slice(0, 3), ks = chipKeys();
   if (!ids.length) return "";
-  return '<section class="stack" style="gap:8px" id="more-like"><h2 class="sec-h">More like this</h2><ul class="thumbs">' + ids.map(function (sid) {
+  return '<ul class="thumbs" id="more-like">' + ids.map(function (sid) {
     var s = BY[sid], f = s.facts || {};
     return '<li><button type="button" class="thumb" data-act="open" data-id="' + esc(sid) + '"><b>' + esc(nm(s)) + '</b><span class="f">' + esc(shortFact(s, ks[0] || "family")) + '</span>' +
       '<span class="m">' + esc(hoodNameOf(s)) + ' &middot; Rent <b' + (isNum(f.rent_from) ? ' data-rent="' + f.rent_from + '"' : '') + '>' + (money(f.rent_from) || "not known") + '</b> &middot; Total with utilities and fees <b>' + (money(f.total_from) || "not known") + '</b></span></button></li>';
-  }).join("") + '</ul></section>';
+  }).join("") + '</ul>';
 }
 function place(b) {
-  var h = HBY[b.neighborhood_id], area = HBY[b.area_id], rank = areaRankOf(b.id);
+  var rank = areaRankOf(b.id), photos = httpUrl(b.photos_url || b.listing_url);
   return sheetTop(heart(b)) +
-    '<article class="stack place" style="gap:16px" data-building="' + esc(b.id) + '">' +
-    '<div class="stack" style="gap:6px">' + (rank ? '<p class="kicker" style="font-size:24px">In your place ' + rank + ' of 3</p>' : '') + '<h1 tabindex="-1" id="sheet-h">' + esc(nm(b)) + '</h1><p class="hood" style="margin-top:0">' + esc(hoodName(b)) + '</p>' +
-    tagList(area || h) + chkLine(bldChecked(b)) + '</div>' +
-    lifeHere(b) +
-    '<section class="stack" style="gap:6px"><h2 class="sec-h">The numbers</h2>' + factsList(b) + '</section>' +
-    ext(b.photos_url || b.listing_url, "See photos") + detailsBlocks(b) + heart(b, true) + moreLikePlace(b) + '</article>';
+    '<article class="stack place" style="gap:14px" data-building="' + esc(b.id) + '">' +
+    '<div class="stack" style="gap:4px">' + (rank ? '<p class="kicker">' + esc(areaName(DEF.neighborhoods[rank - 1].neighborhood_id, DEF.neighborhoods[rank - 1].buildings.map(function (x) { return x.id; }), true)) + '</p>' : '') +
+    '<h1 tabindex="-1" id="sheet-h">' + esc(nm(b)) + '</h1><p class="inhood">' + esc(hoodName(b)) + '</p>' + chkLine(bldChecked(b)) + '</div>' +
+    (photos ? '<a class="photos" id="photos" href="' + esc(photos) + '" target="_blank" rel="noopener noreferrer">See photos <span aria-hidden="true">&#8599;</span><span class="sr"> (opens in a new tab)</span></a>' : '') +
+    factsList(b) + confirmBox(b) + contactBox(b) + detailsBlocks(b) + heart(b, true) + '</article>';
 }
 
-/* ---------- my list ---------- */
+/* ---------- my list: Compare and the tour plan live here ---------- */
 function myList() {
   var L = S.saved.map(function (id) { return BY[id]; }).filter(Boolean);
-  if (!L.length) return sheetTop() + '<section class="stack"><h1 class="h-big" tabindex="-1" id="sheet-h">My list is empty</h1><p class="lead">Tap <span aria-hidden="true">&#9825;</span> Save on a place and it shows up here.</p><button type="button" class="btn main" data-act="back">Back</button></section>';
-  return sheetTop() + '<section class="stack" style="gap:6px"><h1 class="h-big" tabindex="-1" id="sheet-h">My list</h1>' +
-    '<p>' + (L.length === 1 ? 'One saved place. Save one more to compare.' : L.length + ' saved places. Tick two or three to compare.') + '</p></section>' +
+  var planBtn = S.tour.length ? '<button type="button" class="btn" data-act="plan" id="list-plan">My tour plan &middot; ' + S.tour.length + '</button>' : '';
+  if (!L.length) return sheetTop() + '<section class="stack"><p class="kicker">My list</p><h1 class="h-big" tabindex="-1" id="sheet-h">Nothing saved yet</h1><p class="lead">Tap <span aria-hidden="true">&#9825;</span> Save on an apartment and it shows up here.</p>' + planBtn + '<button type="button" class="btn main" data-act="home">See my three neighborhoods</button></section>';
+  var ids = compareIds();
+  return sheetTop() + '<section class="stack" style="gap:6px"><p class="kicker">My list</p><h1 class="h-big" tabindex="-1" id="sheet-h">' + L.length + (L.length === 1 ? ' saved place' : ' saved places') + '</h1>' +
+    '<p>' + (L.length === 1 ? 'Save one more to compare.' : 'Tick two or three, then Compare.') + '</p></section>' +
+    '<div class="listtools"><button type="button" class="btn main" data-act="compare" id="list-compare"' + (ids ? '' : ' disabled') + '>Compare' + (ids ? ' ' + ids.length : '') + '</button>' + planBtn + '</div>' +
     '<ul class="saved">' + L.map(function (b) {
       var t = S.ticked.indexOf(b.id) >= 0;
       return '<li class="srow' + (t ? ' on' : '') + '" data-building="' + esc(b.id) + '">' +
@@ -861,8 +856,7 @@ function myList() {
         '<div class="sact">' + (onTour(b.id) ? '<button type="button" class="btn sm" data-act="untour" data-id="' + esc(b.id) + '" aria-pressed="true"><span aria-hidden="true">&#10003;</span> On your tour plan</button>' : '<button type="button" class="btn sm" data-act="tour" data-id="' + esc(b.id) + '">Add to tour plan</button>') +
         '<button type="button" class="quiet" data-act="unsave" data-id="' + esc(b.id) + '">Remove</button></div>' +
         '<button type="button" class="quiet" data-act="open" data-id="' + esc(b.id) + '">See this place</button></li>';
-    }).join("") + '</ul><p class="tickmsg" id="tickmsg" role="status"></p>' +
-    (S.tour.length ? '<button type="button" class="btn" data-act="plan">See my tour plan (' + S.tour.length + ')</button>' : '');
+    }).join("") + '</ul><p class="tickmsg" id="tickmsg" role="status"></p>' + resetBlock();
 }
 
 /* ---------- compare ---------- */
@@ -878,7 +872,13 @@ function dogShort(b) {
   var w = isNum(d.weight_limit_lb) ? "Up to " + Math.round(d.weight_limit_lb) + " lb" : d.no_weight_limit ? "No weight limit" : (d.summary ? "Weight limit not published" : "Ask on the tour");
   return { text: w + (area ? ". Dog area in the building" : ""), v: (area ? 1000 : 0) + (isNum(d.weight_limit_lb) ? d.weight_limit_lb : d.no_weight_limit ? 999 : 0) };
 }
-function firstSentence(t) { var m = /^(.+?[.!?])(\s|$)/.exec(String(t || "")); return m ? m[1] : String(t || ""); }
+/* the first sentence; a period after an initial or a short abbreviation ("Margaret I. Carman", "St.") does not end it */
+var ABBR = /^(st|ave|blvd|dr|mt|rd|jr|sr|ft|no|mr|mrs|ms|dr|pl|ln|ct)$/i;
+function firstSentence(t) {
+  t = String(t || ""); var re = /[.!?](?=\s|$)/g, m;
+  while ((m = re.exec(t))) { var w = /(\S+)$/.exec(t.slice(0, m.index)); w = w ? w[1] : ""; if (/^[A-Z]$/.test(w) || ABBR.test(w)) continue; return t.slice(0, m.index + 1); }
+  return t;
+}
 function compareRows(L) {
   var rows = [];
   function add(label, cells, better, opts) { rows.push({ label: label, cells: cells, better: better || null, big: opts && opts.big }); }
@@ -946,7 +946,7 @@ function compare(ids) {
 function areaOfBuilding(b) { return HBY[b.area_id] || HBY[b.neighborhood_id] || null; }
 function plan() {
   var kept = S.tour.map(function (id) { return BY[id]; }).filter(Boolean);
-  if (!kept.length) return top() + '<section class="stack"><h1 class="h-big" tabindex="-1">Your tour plan is empty</h1><p class="lead">Add places from My list, or choose one when you compare.</p><button type="button" class="btn main" data-act="' + (CAN ? 'results">See my three places' : 'all">See every place') + '</button></section>';
+  if (!kept.length) return top() + '<section class="stack"><h1 class="h-big" tabindex="-1">Your tour plan is empty</h1><p class="lead">Add places from My list, or choose one when you compare.</p><button type="button" class="btn main" data-act="' + (CAN ? 'results">See my three neighborhoods' : 'all">See every place') + '</button></section>';
   var groups = {}, order = [];
   kept.forEach(function (b) {
     var a = areaOfBuilding(b), k = a ? a.id : "other:" + (b.state || "");
@@ -977,7 +977,7 @@ function plan() {
     });
     html += '</section>';
   });
-  html += '<div class="stack">' + (CAN ? '<button type="button" class="btn" data-act="results">Back to my three places</button>' : '') + resetBlock() + '</div>';
+  html += '<div class="stack">' + (CAN ? '<button type="button" class="btn" data-act="results">Back to my three neighborhoods</button>' : '') + resetBlock() + '</div>';
   return html;
 }
 
@@ -1059,7 +1059,7 @@ function everything() {
   var L = listHtml();
   function seg(v, label) { return '<button type="button" data-act="f-beds" data-v="' + v + '" aria-pressed="' + (f.beds === v) + '">' + label + '</button>'; }
   return '<header class="top"><button type="button" class="quiet" data-act="all-close"><span aria-hidden="true">&#8249;</span> Back</button><span class="topbtns" id="topbtns"></span></header>' +
-    '<section class="stack" style="gap:6px"><h1 class="h-big" tabindex="-1">Everything</h1><p>Every building, nothing left out. Tap one to see it.</p></section>' +
+    '<section class="stack" style="gap:4px"><p class="kicker">Browse</p><h1 class="h-big" tabindex="-1">Everything</h1><p>Every building, nothing left out.</p></section>' +
     '<div class="search"><label for="f-q">Search by name, street, town or ZIP</label><input type="search" id="f-q" autocomplete="off" placeholder="For example: Stamford, or Monroe" value="' + esc(f.q || "") + '">' +
     '<p class="fcount" id="f-count" aria-live="polite">Showing ' + L.shown + ' of ' + B.length + ' buildings</p></div>' +
     '<details class="filter" id="filters"' + (VIEW.fOpen ? ' open' : '') + '><summary><span>Filter</span><span class="fsum" id="f-sum">' + esc(filterSummary()) + '</span></summary><div class="fbody">' +
@@ -1102,13 +1102,14 @@ function drawMap() {
   } catch (e) { slot.textContent = "The map could not be drawn."; }
 }
 
-/* ---------- the bar ---------- */
-function saveBar() {
-  if (!S.saved.length) return "";
-  var ids = compareIds(), v = topView(), inList = v && v.t === "list";
-  return '<nav class="savebar" id="savebar" aria-label="My list"><div class="in">' +
-    '<button type="button" class="btn' + (inList ? ' main' : '') + '" data-act="list" id="bar-list"' + (inList ? ' aria-current="page"' : '') + '><span class="h" aria-hidden="true">&#9829;</span> My list &middot; ' + S.saved.length + '</button>' +
-    '<button type="button" class="btn" data-act="compare" id="bar-compare"' + (ids ? '' : ' disabled') + '>Compare' + (ids ? ' ' + ids.length : '') + '</button></div></nav>';
+/* ---------- the bar: Home, Everything, My list, on every screen ---------- */
+function navBar() {
+  var v = topView(), cur = v && (v.t === "list" || v.t === "compare") ? "list" : v ? "" : VIEW.all ? "all" : S.step === "plan" ? "list" : "home";
+  function tab(key, act, ic, label, extra) { return '<button type="button" class="tab" data-act="' + act + '" id="bar-' + key + '"' + (cur === key ? ' aria-current="page"' : '') + '>' + ic + '<span>' + label + (extra || '') + '</span></button>'; }
+  var n = S.saved.length;
+  return '<nav class="navbar" id="savebar" aria-label="Main"><div class="in">' +
+    tab("home", "home", icon("home"), "Home") + tab("all", "all", icon("search"), "Everything") +
+    tab("list", "list", '<span class="h" aria-hidden="true">' + (n ? "&#9829;" : "&#9825;") + '</span>', "My list", '<span class="n" aria-label="' + n + ' saved">' + n + '</span>') + '</div></nav>';
 }
 
 /* ---------- render ---------- */
@@ -1129,7 +1130,7 @@ function recover(how) {
   var o = document.getElementById("oops"); if (o) o.remove();
   VIEW.stack = []; VIEW.confirmReset = false;
   if (how === "all") { VIEW.all = true; VIEW.tab = "list"; }
-  else { VIEW.all = false; S.step = "home"; VIEW.areaOpen = { 0: true }; }
+  else { VIEW.all = false; S.step = "home"; }
   lastFocusKey = null;
   try { render(); } catch (e) { S = fresh(); VIEW.all = true; try { render(); } catch (e2) { /* nothing more to try */ } }
 }
@@ -1145,10 +1146,10 @@ function renderNow(opts) {
   if (mapApi) { try { mapApi.destroy(); } catch (e) { /* ignore */ } mapApi = null; }
   var v = topView(), sheetScroll = null, old = document.getElementById("sheet");
   if (opts.stay && old) sheetScroll = old.scrollTop;
-  app.innerHTML = VIEW.all ? everything() : S.step === "plan" ? plan() : home();
+  app.innerHTML = VIEW.all ? everything() : S.step === "plan" ? plan() : S.step === "hood" && CAN && DEF.neighborhoods[VIEW.hood] ? hoodScreen(VIEW.hood) : home();
   var inner = !v ? "" : v.t === "place" && BY[v.id] ? place(BY[v.id]) : v.t === "list" ? myList() : v.t === "compare" ? compare(v.ids) : "";
   layer.innerHTML = inner ? '<div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-h" id="sheet"><div class="wrap">' + inner + '</div></div>' : "";
-  barSlot.innerHTML = saveBar();
+  barSlot.innerHTML = navBar();
   var bar = document.getElementById("savebar");
   document.documentElement.style.setProperty("--bar-h", bar ? bar.offsetHeight + "px" : "0px");
   document.body.style.overflow = inner ? "hidden" : "";
@@ -1157,7 +1158,7 @@ function renderNow(opts) {
   save();
   var sh = document.getElementById("sheet");
   if (sh && sheetScroll != null) sh.scrollTop = sheetScroll;
-  var key = v ? v.t + ":" + (v.id || (v.ids || []).join(",")) : VIEW.all ? "all" : S.step;
+  var key = v ? v.t + ":" + (v.id || (v.ids || []).join(",")) : VIEW.all ? "all" : S.step + (S.step === "hood" ? VIEW.hood : "");
   if (!opts.stay && key !== lastFocusKey) {
     lastFocusKey = key;
     var ot = document.getElementById("toast"); if (ot && !opts.keepToast) ot.remove();
@@ -1165,7 +1166,7 @@ function renderNow(opts) {
     if (sh) sh.scrollTop = 0; else window.scrollTo(0, 0);
     /* in an auto-height frame window.scrollTo does nothing: bring the new heading into view so a new screen never
        renders above where she is looking */
-    if (!sh && opts.focus !== false) { try { (h || app).scrollIntoView({ block: "start" }); } catch (e) { /* ignore */ } }
+    if (!sh && opts.focus !== false) { try { app.scrollIntoView({ block: "start" }); } catch (e) { /* ignore */ } }
     if (h && opts.focus !== false) h.focus({ preventScroll: true });
   }
 }
@@ -1187,13 +1188,10 @@ function back() {
 function act(a, el) {
   var id = el.getAttribute("data-id"), v = el.getAttribute("data-v");
   switch (a) {
-    case "results": VIEW.stack = []; VIEW.all = false; S.step = "home"; render(); break;
+    case "results": case "home": VIEW.stack = []; VIEW.all = false; VIEW.confirmReset = false; S.step = "home"; render(); break;
+    case "hood": VIEW.stack = []; VIEW.all = false; S.step = "hood"; VIEW.hood = Number(v) || 0; render(); break;
     case "lean": { VIEW.stack = []; VIEW.all = true; VIEW.tab = "list"; VIEW.f.q = ""; render(); var A = HOOD_AREA[id] || id, g = document.getElementById("grp-" + A);
       if (g) { try { g.scrollIntoView({ block: "start" }); } catch (e) { /* ignore */ } g.focus({ preventScroll: true }); } break; }
-    case "goto": { var gi = Number(v); VIEW.areaOpen = {}; VIEW.areaOpen[gi] = true; render({ stay: true }); var tgt = document.getElementById("area-" + gi);
-      if (tgt) { try { tgt.scrollIntoView({ block: "start", behavior: "smooth" }); } catch (e) { tgt.scrollIntoView(); } var hh = tgt.querySelector(".hhead"); if (hh) hh.focus({ preventScroll: true }); } break; }
-    case "area": { var i = Number(v); VIEW.areaOpen[i] = !VIEW.areaOpen[i]; var hb = document.getElementById("hb-" + i); if (hb) hb.hidden = !VIEW.areaOpen[i];
-      el.setAttribute("aria-expanded", String(!!VIEW.areaOpen[i])); el.closest(".hcard").classList.toggle("open", !!VIEW.areaOpen[i]); break; }
     case "open": push({ t: "place", id: id }); break;
     case "back": back(); break;
     case "save":
@@ -1203,7 +1201,7 @@ function act(a, el) {
       var sb = document.querySelector('[data-act="save"][data-id="' + (window.CSS && CSS.escape ? CSS.escape(id) : id) + '"]'); if (sb) sb.focus({ preventScroll: true });
       break;
     case "unsave": S.saved = without(S.saved, id); S.ticked = without(S.ticked, id); toast("Removed from My list."); render({ stay: true }); break;
-    case "list": if (!(topView() && topView().t === "list")) { if (topView() && topView().t === "compare") VIEW.stack.pop(); push({ t: "list" }); } break;
+    case "list": if (!(topView() && topView().t === "list")) { VIEW.stack = []; push({ t: "list" }); } break;
     case "compare": { var ids = compareIds(); if (!ids) break; if (topView() && topView().t === "compare") VIEW.stack.pop(); push({ t: "compare", ids: ids }); break; }
     case "tour": if (!onTour(id)) S.tour.push(id); toast("Added to your tour plan."); render({ stay: true }); break;
     case "choose-tour": if (!onTour(id)) S.tour.push(id); toast("Added to your tour plan."); render({ stay: true }); break;
@@ -1212,7 +1210,7 @@ function act(a, el) {
     case "reset-ask": VIEW.confirmReset = true; render({ stay: true }); var rb = document.getElementById("reset-box"); if (rb) { rb.scrollIntoView({ block: "center" }); rb.querySelector("button").focus(); } break;
     case "reset-no": VIEW.confirmReset = false; render({ stay: true }); break;
     case "reset-yes": S = fresh(); VIEW.confirmReset = false; VIEW.all = false; VIEW.stack = []; VIEW.open = {}; render(); toast("My list and tour plan cleared."); break;
-    case "all": VIEW.all = true; VIEW.stack = []; VIEW.tab = "list"; VIEW.confirmReset = false; render(); break;
+    case "all": if (VIEW.all && !VIEW.stack.length) break; VIEW.all = true; VIEW.stack = []; VIEW.tab = "list"; VIEW.confirmReset = false; render(); break;
     case "all-close": VIEW.all = false; render(); break;
     case "tab": VIEW.tab = v; render({ stay: true }); var tb = app.querySelector('.tabs [data-v="' + v + '"]'); if (tb) tb.focus(); break;
     case "f-state": VIEW.f.state = v; app.querySelectorAll('[data-act="f-state"]').forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-v") === v)); }); refreshList(); break;
@@ -1246,7 +1244,7 @@ document.addEventListener("input", function (ev) {
   else if (ev.target.id === "f-q") { VIEW.f.q = ev.target.value; soonRefresh(); }
 });
 document.addEventListener("keydown", function (ev) {
-  if (ev.key === "Escape") { if (document.getElementById("ask-sheet")) { if (askApi) askApi.close(); } else if (VIEW.stack.length) back(); else if (VIEW.all) act("all-close", document.body); return; }
+  if (ev.key === "Escape") { if (document.getElementById("ask-sheet")) { if (askApi) askApi.close(); } else if (VIEW.stack.length) back(); else if (VIEW.all) act("all-close", document.body); else if (S.step !== "home") act("home", document.body); return; }
 });
 
 render({ focus: false });
