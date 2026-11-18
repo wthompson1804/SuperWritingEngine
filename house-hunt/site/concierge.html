@@ -143,7 +143,7 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;line-height:1.
 .intro .fun{font-size:16px;line-height:1.4}
 details.rules summary{min-height:40px}
 details.rules{margin-top:-4px}
-.rlist{list-style:disc;padding-left:1.2em;display:grid;gap:4px;font-size:15px;line-height:1.35}
+details.src.rules ul.rlist{list-style:disc;padding-left:1.2em;display:grid;gap:4px;margin-top:0;font-size:15px;line-height:1.35}
 .tapnote{margin-top:-4px}
 details.lean{border-top:2px solid var(--line);border-bottom:2px solid var(--line)}
 .llist{list-style:none;padding:0;display:grid;gap:6px}
@@ -163,6 +163,8 @@ details.lean{border-top:2px solid var(--line);border-bottom:2px solid var(--line
 .glance tbody th{text-align:left;padding:4px 0 0;border-top:2px solid var(--line)}
 .glance tbody tr:first-child th{border-top:2px solid var(--ink)}
 .gl-name{display:flex;align-items:center;gap:8px;width:100%;min-height:44px;background:none;border:0;padding:0;font:inherit;font-family:var(--display);font-weight:800;font-size:18px;line-height:1.15;color:var(--ink);text-align:left}
+.gl-name .gn{flex:1 1 auto;min-width:0}
+.gl-name .go{flex:0 0 auto;font-size:24px;line-height:1;color:var(--berry-deep);padding-right:2px}
 .gl-name .num{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-size:14px}
 .gl-vals{cursor:pointer}
 .gl-vals td{padding:0 4px 8px;font-weight:800;font-size:16px;line-height:1.2;vertical-align:top;white-space:nowrap}
@@ -513,7 +515,8 @@ var KEY = "lamia-concierge";
 var OLD_KEYS = ["lamia-concierge-v4", "lamia-concierge-v3", "lamia-concierge-v2"];
 function fresh() { return { v: 5, step: "home", saved: [], ticked: [], tour: [] }; }
 var S = fresh();
-function keepList(o) { ["saved", "ticked", "tour"].forEach(function (k) { if (Array.isArray(o[k])) S[k] = o[k].filter(function (id, i, a) { return BY[id] && a.indexOf(id) === i; }); }); }
+/* adds a saved list, ticks and tour plan to hers (several old keys may each hold some) */
+function keepList(o) { ["saved", "ticked", "tour"].forEach(function (k) { if (Array.isArray(o[k])) o[k].forEach(function (id) { if (BY[id] && S[k].indexOf(id) < 0) S[k].push(id); }); }); }
 (function load() {
   try {
     OLD_KEYS.forEach(function (k) {
@@ -687,7 +690,7 @@ function glance(r, figs) {
     GLANCE.map(function (c) { return '<th scope="col">' + esc(c.label) + '</th>'; }).join("") + '</tr></thead><tbody>' +
     r.neighborhoods.map(function (nb, i) {
       var f = figs[i], ids = nb.buildings.map(function (x) { return x.id; });
-      return '<tr data-area="' + esc(nb.neighborhood_id) + '"><th scope="row" colspan="5"><button type="button" class="gl-name" data-act="goto" data-v="' + i + '"><span class="num" aria-hidden="true">' + (i + 1) + '</span>' + esc(areaName(nb.neighborhood_id, ids)) + '</button></th></tr>' +
+      return '<tr data-area="' + esc(nb.neighborhood_id) + '"><th scope="row" colspan="5"><button type="button" class="gl-name" data-act="goto" data-v="' + i + '"><span class="num" aria-hidden="true">' + (i + 1) + '</span><span class="gn">' + esc(areaName(nb.neighborhood_id, ids)) + '</span><span class="go" aria-hidden="true">&#8250;</span></button></th></tr>' +
         '<tr class="gl-vals" data-act="goto" data-v="' + i + '"><td><span class="sr">' + esc(areaName(nb.neighborhood_id, ids)) + '</span></td>' + GLANCE.map(function (c, j) {
           var isBest = best[j] !== null && c.v(f) === best[j];
           return '<td class="' + (isBest ? "best" : "") + '">' + (isBest ? '<span class="bm" aria-hidden="true">&#10003;</span><span class="sr">Best: </span>' : '') + c.t(f) + '</td>';
@@ -716,7 +719,9 @@ function rulesBlock() {
   return r.length ? '<details class="src rules" id="rules"><summary>The rules</summary><ul class="rlist">' + r.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></details>' : '';
 }
 function leaningsBlock() {
-  var L2 = LEAN.filter(function (x) { return x && x.neighborhood_id && (x.line || x.neighborhood_name); });
+  /* only the leanings whose winner is not already one of the three (in_default_three); none, no section */
+  var three = topIds().map(function (t) { return t[0]; });
+  var L2 = LEAN.filter(function (x) { return x && x.neighborhood_id && (x.line || x.neighborhood_name) && (x.in_default_three === false || (x.in_default_three === undefined && three.indexOf(x.neighborhood_id) < 0)); });
   if (!L2.length) return '';
   return '<details class="more lean" id="leanings"><summary>If one thing matters most to you</summary><div class="in"><ul class="llist">' + L2.map(function (x) {
     var label = x.priority_label ? cap(x.priority_label) : "";

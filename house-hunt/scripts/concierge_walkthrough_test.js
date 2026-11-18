@@ -1,15 +1,16 @@
-/* Walk through the short page (version 4) the way Lamia would, on a phone:  node scripts/concierge_walkthrough_test.js
+/* Walk through the short page (version 5) the way Lamia would, on a phone:  node scripts/concierge_walkthrough_test.js
    Build first: python3 scripts/build_concierge.py. Opens site/dist/concierge.html from disk, no network (the font
-   stylesheet request is answered with an empty file). Writes site/screens/concierge42-*.png at 2x.
-   At 390 x 844 and 360 x 780: every persona in meta.recommender_examples is played through the screen (eight choices
-   between made-up apartments, tapping what the persona chose) and the page must show exactly the example's tasks, in
-   the example's words, then its priorities and sentence on "Here's what you told me", then its three neighborhoods with
-   their places, why and gives up, number 1 open and 2 and 3 closed. Then, on the first persona: Back undoes a choice;
-   a place row opens the place sheet (Life here, the numbers, Save top and bottom, More like this at the bottom); save
-   three; the bar on every screen; "Not quite" moves a priority and the places follow (the data's nudge example);
-   My list; Compare with two and three; Choose this one; the tour plan; See everything with its filters, Show more and
-   the map. Then: storage blocked, a reload, dark theme, a 320px phone, data with no recommender, and Ask against a
-   stand-in for the viewer's Claude.
+   stylesheet request is answered with an empty file). Writes site/screens/concierge5-*.png at 2x.
+   Version 5 asks nothing: the first screen is the short list. At 390 x 844 and 360 x 780 the first screen must show
+   the title, two sentences with the real counts from meta.funnel, a closed "The rules" listing every rule, the
+   at-a-glance table, and exactly meta.default_recommendation: three neighborhoods with three buildings each (number 1
+   open), each with its why and gives up, each building naming its own neighborhood when it is not the heading's; and
+   "If one thing matters most to you" with only the leanings whose winner is outside the three. Then: an at-a-glance row
+   opens its neighborhood; a leaning opens that neighborhood in Browse everything; a place (Life here, the numbers,
+   Save top and bottom, More like this from buildings[].similar); save three; the bar; My list; Compare with two and
+   three; Choose this one; the tour plan; Browse everything with search, filters, Show more and the map. Then: saved
+   state from earlier versions (answers ignored, list and plan kept), storage blocked, a thrown error, iPhone 13 and
+   Pixel 7 by tap(), dark theme, a 320px phone, data with no short list, and Ask against a stand-in.
    Checks on every screen: no console or page errors, no network, no sideways scroll, no rent above meta.rent_limit,
    none of the banned words, no trace of "Ask the concierge" outside a Claude viewer, every target at least 44px, the
    bar never covering the end of the page, and the toast never under the bar. */
@@ -42,13 +43,13 @@ async function open(browser, extra, init, initArg) {
   return { ctx, page, errs, net };
 }
 let prefix = "";
-async function screen(page, name, full) { await page.waitForTimeout(200); await page.screenshot({ path: path.join(SHOTS, "concierge42-" + prefix + name + ".png"), fullPage: !!full }); }
+async function screen(page, name, full) { await page.waitForTimeout(200); await page.screenshot({ path: path.join(SHOTS, "concierge5-" + prefix + name + ".png"), fullPage: !!full }); }
 async function sheetShot(page, name) {
   const h = await page.evaluate(() => { const s = document.getElementById("sheet"); return s ? s.scrollHeight : 0; });
   const vp = page.viewportSize();
   if (h > vp.height) {
     await page.setViewportSize({ width: vp.width, height: Math.min(h, 7000) }); await page.waitForTimeout(200);
-    await page.screenshot({ path: path.join(SHOTS, "concierge42-" + prefix + name + ".png") });
+    await page.screenshot({ path: path.join(SHOTS, "concierge5-" + prefix + name + ".png") });
     await page.setViewportSize(vp);
   } else await screen(page, name);
 }
@@ -95,21 +96,14 @@ async function barSays(page, n, label) {
   const t = (await page.locator("#savebar #bar-list").innerText()).replace(/\s+/g, " ").trim();
   ok(/My list · (\d+)/.test(t) && Number(/My list · (\d+)/.exec(t)[1]) === n, label + ": the bar says My list · " + n + " (got " + t + ")");
 }
-const taskOnScreen = (page) => page.locator("#app [data-cand]").getAttribute("data-cand").then(Number);
-async function tap(page, choice) {
-  await page.waitForTimeout(380);   /* the page ignores taps in the first 300 ms of a new choice (a double tap) */
-  if (choice === "either") await page.click('#app button[data-act="cj"][data-v="either"]');
-  else await page.click('#app .ct-pick[data-v="' + choice + '"], #app .apt[data-v="' + choice + '"]');
-}
-const shownTopFromState = (page) => page.evaluate(() => { const r = window.__conciergeRec(); return r && r.top[0] ? r.top[0][0] : null; });
-/* what the results show: [[area, [building ids]]] */
+
+/* the first screen: what the page shows, read off the screen */
 const shownTop = (page) => page.evaluate(() => [...document.querySelectorAll("#app .hcard")].map((s) => [s.getAttribute("data-area"), [...s.querySelectorAll(".prow")].map((c) => c.getAttribute("data-id"))]));
-/* save n places from the results: open each row (opening closed neighborhoods as needed) and Save in the sheet */
-async function saveFromResults(page, n) {
+async function saveFromHome(page, n) {
   const ids = (await shownTop(page)).flatMap((t) => t[1]).slice(0, n);
   for (const id of ids) {
     const row = page.locator('#app .prow[data-id="' + id + '"]');
-    if (!(await row.isVisible())) { const card = page.locator('#app .hcard:has(.prow[data-id="' + id + '"]) .hhead'); await card.click(); }
+    if (!(await row.isVisible())) await page.locator('#app .hcard:has(.prow[data-id="' + id + '"]) .hhead').click();
     await row.scrollIntoViewIfNeeded(); await row.click(); await page.waitForSelector("#sheet .place");
     await page.locator('#sheet [data-act="save"]').first().click();
     await page.click('#sheet [data-act="back"]');
@@ -122,155 +116,90 @@ async function saveFromResults(page, n) {
   const built = path.join(ROOT, "site", "dist", "concierge.html");
   assert(fs.existsSync(built), "site/dist/concierge.html is missing: run python3 scripts/build_concierge.py");
   const D = JSON.parse(/window\.CONCIERGE_DATA=(\{[\s\S]*?\});<\/script>/.exec(fs.readFileSync(built, "utf8"))[1]);
-  const LIMIT = D.meta.rent_limit, NB = D.buildings.length, EX = D.meta.recommender_examples || [];
-  ok(EX.length >= 3, "the built data has recommender examples");
+  const LIMIT = D.meta.rent_limit, NB = D.buildings.length, DR = D.meta.default_recommendation, FUN = D.meta.funnel;
+  ok(DR && DR.neighborhoods && DR.neighborhoods.length === 3, "the built data has the short list");
+  const WANT = DR.neighborhoods.map((n) => [n.neighborhood_id, n.buildings.map((b) => b.id)]);
   const byId = Object.fromEntries(D.buildings.map((b) => [b.id, b]));
   const HB = Object.fromEntries(D.neighborhoods.map((h) => [h.id, h]));
+  const fmt = (x) => Number(x).toLocaleString("en-US");
+  const passed = typeof FUN.passed_apartments === "object" ? FUN.passed_apartments.at_or_under_2000 : FUN.passed_apartments;
+  const LEANS = (D.meta.leanings || []).filter((x) => x.in_default_three === false);
   const browser = await chromium.launch();
 
-  /* play one example through the screen; returns the page on the results screen */
-  async function playExample(page, ex, L, shots) {
-    await act(page, "start");
-    const n = ex.answers.length;
-    for (let i = 0; i < n; i++) {
-      await page.waitForSelector("#app [data-cand]");
-      const t = await taskOnScreen(page);
-      ok(t === ex.expected_tasks[i], L + ex.persona + ": task " + (i + 1) + " is " + t + ", the example says " + ex.expected_tasks[i]);
-      ok((await page.locator("#cj-step").innerText()).trim() === (i + 1) + " of " + n, "progress " + (i + 1) + " of " + n);
-      if (ex.expected_tasks_shown) {   /* only the attributes that differ, in the task's order, with the example's words */
-        const rows = await page.evaluate(() => [...document.querySelectorAll("#app .ct-row")].map((r) => { const c = r.querySelectorAll(".ct-c");
-          return { attribute: r.getAttribute("data-label"), a: c[0].getAttribute("data-level"), b: c[1].getAttribute("data-level") }; }));
-        const want = ex.expected_tasks_shown[i], wantRows = Array.isArray(want) ? want : want.rows;
-        ok(JSON.stringify(rows) === JSON.stringify(wantRows), L + "task " + (i + 1) + " shows " + JSON.stringify(rows));
-        if (!Array.isArray(want)) {
-          const hl = await page.locator("#app .ct-pick .ap-hl").allTextContents();
-          ok(JSON.stringify(hl) === JSON.stringify([want.headline_a, want.headline_b]), L + "task " + (i + 1) + " headlines " + hl.join(" / "));
-        }
-        ok((await page.locator("#app .same").count()) === 1, "a quiet Same for both line");
-        const marks = await page.evaluate(() => [...document.querySelectorAll("#app .ct-row")].map((r) => [...r.querySelectorAll(".ct-c")].map((c) => c.classList.contains("up") ? "up" : "dn")));
-        ok(marks.every((m) => m.length === 2 && m[0] !== m[1]), "each row: one side marked better, the other worse");
-        ok(marks.some((m) => m[0] === "up") && marks.some((m) => m[0] === "dn"), "a trade-off: A better on one, worse on another");
-        ok((await page.locator("#app .ct-pick .ap-hl").count()) === 2, "a headline on each side");
-      }
-      if (shots && i === 0) { await everyScreen(page, L + "choice", LIMIT); await screen(page, "02-choice"); }
-      if (shots && i === 3) await screen(page, "02b-choice-4");
-      await tap(page, ex.answers[i].choice);
-    }
-    await page.waitForSelector("#prio");
-    ok((await page.locator("#app [data-cand]").count()) === 0, "no ninth choice");
-    ok((await page.locator("#cf-h").innerText()).trim() === ex.expected_priorities_sentence, L + ex.persona + ": the sentence " + (await page.locator("#cf-h").innerText()));
-    const order = await page.locator("#prio li").evaluateAll((els) => els.map((e) => e.getAttribute("data-feature")));
-    ok(JSON.stringify(order) === JSON.stringify(ex.expected_priorities), L + ex.persona + ": the priorities in order");
-    if (shots) { await everyScreen(page, L + "confirm", LIMIT); await screen(page, "03-confirm"); }
-    await act(page, "confirm-yes");
+  async function firstScreen(page, L) {
     await page.waitForSelector("#app .hlist");
-    const top = await shownTop(page);
-    ok(JSON.stringify(top) === JSON.stringify(ex.expected_top), L + ex.persona + ": the three shown " + JSON.stringify(top));
-    ok((await page.locator("#res-h").textContent()).includes(ex.expected_priorities_sentence), "the results heading carries what she cares about, for screen readers");
-    if (!ex.expected_flat) ok(JSON.stringify(await page.locator("#app .pchips .pc").evaluateAll((els) => els.map((e) => e.getAttribute("data-k")))) === JSON.stringify(ex.expected_priorities.slice(0, 3)), "her top three priorities as numbered chips");
-    ok((await page.locator("#app .glance tbody tr.gl-vals").count()) === 3 && (await page.locator("#app .glance thead th").count()) === 5, "at a glance: three rows, four columns");
-    ok((await page.locator("#app .glance td.best").count()) >= 1, "the best in a column is marked");
+    ok((await page.locator("#res-h").innerText()).trim() === "Your three neighborhoods", "the title");
+    const fun = (await page.locator("#app .fun").innerText()).replace(/\s+/g, " ");
+    ok(fun.includes(fmt(FUN.listings_read) + " listings") && fun.includes(fmt(passed) + " apartments passed every rule"), L + "two sentences with the real counts: " + fun);
+    ok(fun.split(/[.!?](\s|$)/).filter((x) => x && x.trim()).length === 2, "two sentences");
+    ok((await page.locator("#rules li").count()) === FUN.rules.length && !(await page.locator("#rules").evaluate((d) => d.open)), "The rules: closed, every rule listed");
+    ok(JSON.stringify(await shownTop(page)) === JSON.stringify(WANT), L + "exactly the data's three neighborhoods and their three buildings each");
+    ok(WANT.every((t) => t[1].length === 3) && WANT.length === 3, "three by three");
+    ok((await page.locator("#app .glance tbody tr.gl-vals").count()) === 3, "at a glance: three rows");
     const exp = await page.locator("#app .hhead").evaluateAll((els) => els.map((e) => e.getAttribute("aria-expanded")));
-    ok(JSON.stringify(exp) === JSON.stringify(["true", "false", "false"]), "exactly three neighborhoods: number 1 open, 2 and 3 closed");
-    ok(top.length === 3 && top.every((t) => t[1].length === 3), L + ex.persona + ": exactly three buildings in each of the three");
-    for (const [area] of ex.expected_top) {
-      const card = page.locator('#app .hcard[data-area="' + area + '"]');
-      if (ex.expected_why && ex.expected_why[area]) ok((await card.locator(".because").getAttribute("data-full")) === ex.expected_why[area], L + "why for " + area);
-      if (ex.expected_gives_up) ok(ex.expected_gives_up[area] ? (await card.locator(".gives").getAttribute("data-full")) === ex.expected_gives_up[area] : (await card.locator(".gives").count()) === 0, L + "gives up for " + area);
+    ok(JSON.stringify(exp) === '["true","false","false"]', "number 1 open, 2 and 3 one tap away");
+    for (const nb of DR.neighborhoods) {
+      const card = page.locator('#app .hcard[data-area="' + nb.neighborhood_id + '"]');
+      ok((await card.locator(".because").getAttribute("data-full")) === nb.why, "why for " + nb.neighborhood_id);
+      ok(nb.gives_up ? (await card.locator(".gives").getAttribute("data-full")) === nb.gives_up : (await card.locator(".gives").count()) === 0, "gives up for " + nb.neighborhood_id);
+      for (const b of nb.buildings) {   /* each building names its own neighborhood when it is not the heading's */
+        const own = byId[b.id].neighborhood_id !== nb.neighborhood_id;
+        ok((await card.locator('.prow[data-id="' + b.id + '"] .pin').count()) === (own ? 1 : 0), "own neighborhood on " + b.id);
+      }
     }
-    ok(!(await page.locator('#app #whatif, #app [data-act="more"], #app [data-act="remove"], #app .thumb').count()), "no what-would-change, more like this or Not for me on the results");
-    return top;
+    ok((await page.locator("#leanings .lrow").count()) === LEANS.length && (LEANS.length > 0 || (await page.locator("#leanings").count()) === 0), "If one thing matters most: only the winners outside the three (" + LEANS.length + ")");
+    ok((await page.locator('#app [data-cand], #prio, #app [data-act="start"]').count()) === 0, "no choices, no confirmation, no Start");
   }
 
   /* ================= 390 x 844 and 360 x 780 ================= */
   for (const vp of [{ width: 390, height: 844, p: "" }, { width: 360, height: 780, p: "360-" }]) {
     prefix = vp.p;
     const L = "@" + vp.width + " ";
-    for (let e = 1; e < EX.length; e++) {   /* every persona, through the screen */
-      const { ctx, page, errs, net } = await open(browser, { viewport: { width: vp.width, height: vp.height } });
-      await playExample(page, EX[e], L, false);
-      await everyScreen(page, L + EX[e].persona + " results", LIMIT);
-      ok(errs.length === 0 && net.length === 0, L + EX[e].persona + ": errors or network " + errs.concat(net).join(" | "));
-      await ctx.close();
-    }
     const { ctx, page, errs, net } = await open(browser, { viewport: { width: vp.width, height: vp.height } });
-    await everyScreen(page, L + "welcome", LIMIT);
-    ok(await page.locator('#app [data-act="all"]').isVisible(), "See everything on the first screen");
-    const intro = await page.locator(".hello").innerText();
-    ok(/eight quick choices/i.test(intro) && /imaginary apartments/i.test(intro) && /trade-off/i.test(intro) && /teach the page/i.test(intro) &&
-       /three neighborhoods/i.test(intro) && /three best buildings/i.test(intro) && /browse, search and filter/i.test(intro), "the first screen says what will happen and what is promised");
-    ok((await page.locator("#app .btn").count()) === 1 && (await page.locator('#app .btn[data-act="start"]').count()) === 1, "one Start button");
-    await screen(page, "01-welcome");
-    const ex = EX[0];
-    /* Back undoes an answer */
-    await act(page, "start"); await page.waitForSelector("#app [data-cand]");
-    await tap(page, ex.answers[0].choice); await page.waitForSelector("#app [data-cand]");
-    ok((await taskOnScreen(page)) === ex.expected_tasks[1], "the second task");
-    await act(page, "undo");
-    ok((await taskOnScreen(page)) === ex.expected_tasks[0], "Back puts the first task back");
-    ok(((await state(page)).cj || []).length === 0, "and forgets that answer");
-    await act(page, "undo");
-    ok((await page.locator(".hello").count()) === 1, "Back from the first task goes to the welcome");
-    const top = await playExample(page, ex, L, true);
-    await everyScreen(page, L + "results", LIMIT);
-    await screen(page, "04-results"); await screen(page, "04b-results-full", true);
+    await firstScreen(page, L);
+    await everyScreen(page, L + "first screen", LIMIT);
+    await screen(page, "01-first-screen"); await screen(page, "01b-first-screen-full", true);
     const tall = await page.evaluate(() => document.scrollingElement.scrollHeight / window.innerHeight);
-    ok(tall <= 1.75, L + "the results with number 1 open fit in about 1.5 phone screens (" + tall.toFixed(2) + ")");
+    ok(tall <= 2, L + "the first screen with number 1 open is under two phone screens (" + tall.toFixed(2) + ")");
+    await page.click("#rules summary"); await everyScreen(page, L + "rules open", LIMIT); if (!vp.p) await screen(page, "01c-rules");
+    await page.click("#rules summary");
+    /* at a glance: a row opens its neighborhood */
     await page.click('#app tr.gl-vals[data-v="2"]');
     ok((await page.locator('#app .hhead[data-v="2"]').getAttribute("aria-expanded")) === "true", "tapping an at-a-glance row opens that neighborhood");
     await page.click('#app .gl-name[data-v="0"]');
-    /* number 2 opens on tap */
     await page.click('#app .hhead[data-v="1"]');
     ok((await page.locator('#app .hhead[data-v="1"]').getAttribute("aria-expanded")) === "true" && await page.locator("#hb-1").isVisible(), "a tap opens number 2");
-    await everyScreen(page, L + "results, two open", LIMIT); if (!vp.p) await screen(page, "04c-results-two-open", true);
     await page.click('#app .hhead[data-v="1"]');
-    /* a place row, and the place sheet with More like this at the bottom */
-    const firstId = top[0][1][0], fb = byId[firstId];
-    const rowText = await page.locator('#app .prow[data-id="' + firstId + '"]').innerText();
-    ok(/Rent \$[\d,]+ · Total \$[\d,]+/.test(rowText.replace(/\s+/g, " ")), "a place row: Rent $x · Total $y on one line (" + rowText.replace(/\s+/g, " ") + ")");
+    /* if one thing matters most */
+    if (LEANS.length) {
+      await page.click("#leanings summary"); await everyScreen(page, L + "leanings", LIMIT); await page.locator("#leanings").scrollIntoViewIfNeeded(); if (!vp.p) await screen(page, "02-leanings");
+      await page.click('#leanings .lrow[data-id="' + LEANS[0].neighborhood_id + '"]');
+      await page.waitForSelector("#all-list");
+      const g = page.locator('#all-list .grp-h[data-hood="' + LEANS[0].neighborhood_id + '"]');
+      ok((await g.count()) === 1 && await g.evaluate((e) => { const r = e.getBoundingClientRect(); return r.top >= -2 && r.top < window.innerHeight; }), "a leaning opens that neighborhood in Browse everything");
+      await act(page, "all-close"); await page.waitForSelector("#app .hlist");
+    }
+    /* a place row and the place sheet */
+    const firstId = WANT[0][1][0], fb = byId[firstId];
+    const rowText = (await page.locator('#app .prow[data-id="' + firstId + '"]').innerText()).replace(/\s+/g, " ");
+    ok(/Rent \$[\d,]+ · Total \$[\d,]+/.test(rowText), "a place row: Rent $x · Total $y (" + rowText + ")");
     await page.click('#app .prow[data-id="' + firstId + '"]'); await page.waitForSelector("#sheet .place");
     ok((await page.locator("#sheet .life .moment").count()) === (fb.life_here || []).filter((m) => m.text).length, "Life here");
     const labels = await page.locator("#sheet .facts .l").allInnerTexts();
     ok(JSON.stringify(labels) === JSON.stringify(["Rent", "Total with utilities and fees", "Drive to Mom and Dad", "Parking", "Dog"]), "the numbers: " + labels.join(" / "));
     ok((await page.locator('#sheet [data-act="save"]').count()) === 2, "Save at the top and the bottom of a place");
     ok((await page.locator("#sheet img").count()) === 0, "no photos copied");
-    ok(/In your place 1 of 3/.test(await page.locator("#sheet").innerText()), "the place says which of her three it is in");
+    ok(/In your place 1 of 3/.test(await page.locator("#sheet").innerText()), "the place says which of the three it is in");
     const ml = await page.locator("#sheet #more-like .thumb").evaluateAll((els) => els.map((e) => e.getAttribute("data-id")));
-    ok(ml.length === 3 && !ml.includes(firstId), "More like this at the bottom of a place: three others");
+    ok(JSON.stringify(ml) === JSON.stringify((fb.similar || []).filter((x) => byId[x] && x !== firstId).slice(0, 3)), "More like this: the data's nearest three");
     await everyScreen(page, L + "place", LIMIT); await screen(page, "05-place");
     if (!vp.p) { for (const d of await page.locator("#sheet details.more").all()) await d.locator("summary").click(); await sheetShot(page, "05b-place-full"); }
-    await page.locator("#sheet #more-like .thumb").first().click();
-    ok((await page.locator("#sheet .place").getAttribute("data-building")) === ml[0], "a More like this row opens that place");
-    await act(page, "back", null, "#sheet"); await act(page, "back", null, "#sheet");
-    /* save three */
+    await act(page, "back", null, "#sheet");
+    /* save three; My list, Compare, tour plan */
     ok((await page.locator("#savebar").count()) === 0, "no bar before anything is saved");
-    await saveFromResults(page, 3);
-    await toastClear(page); await barSays(page, 3, "results");
-    await everyScreen(page, L + "results with three saved", LIMIT); await screen(page, "06-results-saved");
-    /* Not quite: move one priority up, carry on, the places follow */
-    await act(page, "restart"); await page.waitForSelector("#app [data-cand]"); await barSays(page, 3, "a choice");
-    ok(((await state(page)).cj || []).length === 0, "Change my answers starts the choices again");
-    await everyScreen(page, L + "choice with bar", LIMIT);
-    const clear = await page.evaluate(() => { window.scrollTo(0, document.scrollingElement.scrollHeight); const bar = document.getElementById("savebar");
-      const last = [...document.querySelectorAll('#app [data-act="cj"], #app [data-act="undo"]')].pop(); return !bar || last.getBoundingClientRect().bottom <= bar.getBoundingClientRect().top; });
-    ok(clear, "with the bar showing, the last button scrolls clear of it");
-    for (const a of ex.answers) { await page.waitForSelector("#app [data-cand]"); await tap(page, a.choice); }
-    await page.waitForSelector("#prio");
-    await act(page, "confirm-fix");
-    ok((await page.locator("#prio .mv").count()) === 12, "a move up and down on every priority");
-    if (ex.nudge_example) {
-      const n = ex.nudge_example;
-      await page.click('#app .mv[data-id="' + n.feature + '"][data-v="' + n.direction + '"]');
-      ok((await page.locator("#cf-h").innerText()).trim() === n.priorities_sentence_after, "the sentence follows the move");
-      await everyScreen(page, L + "fixing", LIMIT); await screen(page, "03b-confirm-not-quite");
-      await act(page, "confirm-yes"); await page.waitForSelector("#app .hlist");
-      ok(JSON.stringify(await shownTop(page)) === JSON.stringify(n.expected_top_after), "the three places follow the move");
-      await page.evaluate(() => window.scrollTo(0, 0));
-      await act(page, "restart"); for (const a of ex.answers) { await page.waitForSelector("#app [data-cand]"); await tap(page, a.choice); }
-      await page.waitForSelector("#prio"); await act(page, "confirm-yes"); await page.waitForSelector("#app .hlist");
-      ok(JSON.stringify(await shownTop(page)) === JSON.stringify(ex.expected_top), "answering again without the move gives the first three");
-    } else { await act(page, "confirm-yes"); await page.waitForSelector("#app .hlist"); }
-    /* My list, Compare, tour plan */
+    await saveFromHome(page, 3);
+    await toastClear(page); await barSays(page, 3, "first screen");
+    await everyScreen(page, L + "first screen with three saved", LIMIT); await screen(page, "06-saved");
     await page.click("#bar-list"); await page.waitForSelector("#sheet .saved");
     ok((await page.locator("#sheet .srow").count()) === 3, "three rows in My list");
     await everyScreen(page, L + "my list", LIMIT); await screen(page, "07-my-list");
@@ -293,6 +222,7 @@ async function saveFromResults(page, n) {
     D.buildings.forEach((b) => { const c = b.contact || {}; if (c.private && c.office_phone) ok(!planText.includes(c.office_phone), "a private number is shown"); });
     await screen(page, "10-plan");
     await act(page, "results"); await page.waitForSelector("#app .hlist");
+    ok((await page.locator('#app [data-act="plan"]').count()) === 1, "the tour plan link on the first screen");
     /* See everything */
     await act(page, "all"); await barSays(page, 3, "See everything");
     await everyScreen(page, L + "everything", LIMIT);
@@ -344,136 +274,95 @@ async function saveFromResults(page, n) {
     await page.click('[data-act="f-beds"][data-v="0"]');
     ok((await page.locator("#all-list .row").count()) === D.buildings.filter((b) => b.apartments.some((a) => a.beds === 0)).length, "bedrooms filter");
     await page.click('[data-act="f-beds"][data-v="any"]');
-    ok((await page.locator("#all-list .grp-h").first().getAttribute("data-hood")) === (await shownTopFromState(page)), "her first place leads See everything");
+    ok((await page.locator("#all-list .grp-h").first().getAttribute("data-hood")) === DR.neighborhoods[0].neighborhood_id, "her first neighborhood leads See everything");
     await screen(page, "12-everything");
     await page.click('.tabs [data-v="map"]'); await page.waitForSelector("#map-slot .hhm-svg"); await page.waitForTimeout(300);
     await everyScreen(page, L + "map", LIMIT); await screen(page, "12b-map");
     await page.click('.tabs [data-v="list"]'); await act(page, "all-close");
-    await page.keyboard.press("Escape");
     ok(errs.length === 0, L + "console or page errors: " + errs.join(" || "));
     ok(net.length === 0, L + "network requests: " + net.join(", "));
     await ctx.close();
   }
   prefix = "";
 
+  /* ================= saved state from earlier versions ================= */
+  { const keep = D.buildings[0].id;
+    const { ctx, page: p, errs } = await open(browser, {}, (k) => { if (!sessionStorage.getItem("seeded")) { sessionStorage.setItem("seeded", "1");
+      localStorage.setItem("lamia-concierge-v4", JSON.stringify({ v: 4, step: "results", cj: [0, 1, 2].map((i) => ({ task_index: i, choice: "a" })), moves: [], saved: [k], ticked: [], tour: [k] }));
+      localStorage.setItem("lamia-concierge", JSON.stringify({ v: 42, data_version: "old", step: "choose", cj: [{ task_index: 3, choice: "b" }, { task_index: 3, choice: "b" }], moves: [["room", "up"]], saved: [k], ticked: [], tour: [] })); } }, keep);
+    await firstScreen(p, "old state ");
+    const st = await state(p);
+    ok(st.saved.includes(keep) && st.tour.includes(keep) && !("cj" in st) && !("moves" in st), "old answers ignored; the list and tour plan kept");
+    ok(await p.evaluate(() => localStorage.getItem("lamia-concierge-v4") === null), "the old key is removed");
+    ok(errs.length === 0, "errors (old state): " + errs.join(" || ")); await ctx.close(); }
+
   /* ================= storage blocked ================= */
   { const { ctx, page: p, errs } = await open(browser, {}, () => { Object.defineProperty(window, "localStorage", { get() { throw new Error("blocked"); } }); });
-    await playExample(p, EX[0], "no storage ", false);
-    await saveFromResults(p, 1);
+    await firstScreen(p, "no storage ");
+    await saveFromHome(p, 1);
     await p.click("#bar-list"); await p.waitForSelector("#sheet .saved");
     await p.locator('#sheet [data-act="tour"]').first().click(); await p.click('#sheet [data-act="plan"]');
     ok((await p.locator(".stop").count()) === 1, "works with storage blocked");
     ok(errs.length === 0, "errors (no storage): " + errs.join(" || ")); await ctx.close(); }
 
-  /* ================= her choices survive a reload ================= */
-  { const { ctx, page: p, errs } = await open(browser);
-    const top = await playExample(p, EX[1] || EX[0], "reload ", false);
-    await p.reload(); await p.waitForSelector("#app .hlist");
-    ok(JSON.stringify(await shownTop(p)) === JSON.stringify(top), "the three places come back after a reload");
-    ok(errs.length === 0, "errors (reload): " + errs.join(" || ")); await ctx.close(); }
-
-  /* ================= dark theme, and a 320px phone ================= */
-  { const { ctx, page: p, errs } = await open(browser, { colorScheme: "dark" });
-    await screen(p, "13-dark-welcome");
-    await act(p, "start"); await p.waitForSelector("#app [data-cand]"); await screen(p, "13b-dark-choice");
-    await act(p, "undo");
-    await playExample(p, EX[0], "dark ", false);
-    await saveFromResults(p, 2);
-    await screen(p, "13c-dark-results");
-    await p.locator('#app .prow').first().click(); await p.waitForSelector("#sheet .place"); await screen(p, "13d-dark-place");
-    await act(p, "back", null, "#sheet");
-    await p.click("#bar-compare"); await p.waitForSelector("#cmp"); await screen(p, "13e-dark-compare");
-    await everyScreen(p, "dark", LIMIT);
-    ok(errs.length === 0, "errors (dark): " + errs.join(" || ")); await ctx.close();
-    const small = await open(browser, { viewport: { width: 320, height: 568 } });
-    await everyScreen(small.page, "320 welcome", LIMIT); await act(small.page, "start"); await small.page.waitForSelector("#app [data-cand]");
-    await everyScreen(small.page, "320 choice", LIMIT); await screen(small.page, "14-320-choice");
-    await act(small.page, "undo");
-    await playExample(small.page, EX[0], "320 ", false);
-    await everyScreen(small.page, "320 results", LIMIT);
-    await saveFromResults(small.page, 3);
-    await small.page.click("#bar-compare"); await small.page.waitForSelector("#cmp");
-    await everyScreen(small.page, "320 compare 3", LIMIT); await screen(small.page, "14b-320-compare-3");
-    ok(small.errs.length === 0, "errors (320): " + small.errs.join(" || ")); await small.ctx.close(); }
-
-  /* ================= data with no recommender: the list still works ================= */
-  { const strip = () => { let d; Object.defineProperty(window, "CONCIERGE_DATA", { configurable: true, get() { return d; }, set(v) { if (v) { delete v.recommender_samples; } d = v; } }); };
-    const { ctx, page: p, errs } = await open(browser, {}, strip);
-    ok((await p.locator('#app [data-act="start"]').count()) === 0, "no Start without the recommender");
-    await p.click('#app .btn[data-act="all"]'); await p.waitForSelector("#all-list .row");
-    ok((await p.locator("#all-list .row").count()) === NB, "fallback: every place is listed");
-    await everyScreen(p, "fallback", LIMIT); await screen(p, "15-fallback");
-    ok(errs.length === 0, "errors (fallback): " + errs.join(" || ")); await ctx.close(); }
-
-  /* ================= recovery: stale saved answers, duplicates, a thrown error ================= */
-  { /* answers saved by an older version, under its key, point at other tasks: they are dropped, the list is kept */
-    const keep = D.buildings[0].id;
-    const { ctx, page: p, errs } = await open(browser, {}, (k) => { if (!sessionStorage.getItem("seeded")) { sessionStorage.setItem("seeded", "1");
-      localStorage.setItem("lamia-concierge-v4", JSON.stringify({ v: 4, step: "results", cj: [0, 1, 2, 3, 4, 5, 6, 7].map((i) => ({ task_index: i, choice: "a" })), moves: [], saved: [k], ticked: [], tour: [] })); } }, keep);
-    ok((await p.locator(".hello").count()) === 1 && (await p.locator('#app [data-act="start"]').innerText()).trim() === "Start", "stale answers from an older version are dropped: back to the start");
-    ok((await state(p)).saved.includes(keep), "her list survives");
-    ok(await p.evaluate(() => localStorage.getItem("lamia-concierge-v4") === null), "the old key is removed");
-    await playExample(p, EX[0], "after stale ", false);
-    ok(errs.length === 0, "errors (stale): " + errs.join(" || ")); await ctx.close(); }
-  { /* the same task saved three times, under this data's version */
-    const t0 = EX[0].expected_tasks[0];
-    const probe = await open(browser);
-    const dv = await probe.page.evaluate(() => window.__conciergeDataVersion); await probe.ctx.close();
-    const dup = await open(browser, {}, ([dv, t, a]) => { if (!sessionStorage.getItem("seeded")) { sessionStorage.setItem("seeded", "1");
-      localStorage.setItem("lamia-concierge", JSON.stringify({ v: 42, data_version: dv, step: "choose", cj: [{ task_index: t, choice: a }, { task_index: t, choice: a }, { task_index: t, choice: a }], moves: [], saved: [], ticked: [], tour: [] })); } }, [dv, t0, EX[0].answers[0].choice]);
-    await dup.page.waitForSelector("#app [data-cand]");
-    ok(((await state(dup.page)).cj || []).length === 1, "a task saved three times counts once");
-    ok((await taskOnScreen(dup.page)) === EX[0].expected_tasks[1], "and the next task is the example's second, not a repeat");
-    ok(dup.errs.length === 0, "errors (duplicates): " + dup.errs.join(" || ")); await dup.ctx.close(); }
-  { /* an action that throws: a bar with ways on, not nothing */
-    const { ctx, page: p } = await open(browser);
-    await act(p, "start"); await p.waitForSelector("#app [data-cand]");
-    await p.evaluate(() => { window.__conciergeThrowOn = "cj"; });
-    await tap(p, "a");
-    ok(await p.locator("#oops").isVisible(), "a thrown error shows the Something went wrong bar");
-    ok((await p.locator('#oops [data-oops="results"]').count()) === 0 && (await p.locator('#oops [data-oops="restart"]').count()) === 1 && (await p.locator('#oops [data-oops="all"]').count()) === 1, "before eight answers: Start over and See everything");
-    await screen(p, "16-oops");
-    await p.evaluate(() => { window.__conciergeThrowOn = null; });
-    await p.click('#oops [data-oops="restart"]');
-    ok((await p.locator("#oops").count()) === 0 && (await p.locator(".hello").count()) === 1, "Start over recovers");
-    for (const a of EX[0].answers.slice(0, 0)) await tap(p, a.choice);
-    await playExample(p, EX[0], "after an error ", false);
+  /* ================= an action that throws: a bar with ways on ================= */
+  { const { ctx, page: p } = await open(browser);
     await p.evaluate(() => { window.__conciergeThrowOn = "area"; });
     await p.click('#app .hhead[data-v="1"]');
-    ok(await p.locator('#oops [data-oops="results"]').isVisible(), "with eight answers the bar offers See my results");
+    ok(await p.locator("#oops").isVisible() && (await p.locator('#oops [data-oops="results"]').count()) === 1 && (await p.locator('#oops [data-oops="all"]').count()) === 1, "a thrown error shows the Something went wrong bar");
+    await screen(p, "16-oops");
     await p.evaluate(() => { window.__conciergeThrowOn = null; });
-    await p.click('#oops [data-oops="results"]');
-    ok(JSON.stringify(await shownTop(p)) === JSON.stringify(EX[0].expected_top), "See my results recovers to the same three");
+    await p.click('#oops [data-oops="all"]'); await p.waitForSelector("#all-list");
+    ok((await p.locator("#oops").count()) === 0, "See everything recovers");
+    await act(p, "all-close"); await p.waitForSelector("#app .hlist");
+    ok(JSON.stringify(await shownTop(p)) === JSON.stringify(WANT), "and the first screen is back");
     await ctx.close(); }
 
-  /* ================= real phones: iPhone 13 and Pixel 7, every step by tap() ================= */
+  /* ================= real phones: iPhone 13 and Pixel 7, by tap() ================= */
   for (const name of ["iPhone 13", "Pixel 7"]) {
     const ctx = await browser.newContext(Object.assign({}, devices[name]));
     const page = await ctx.newPage(), errs = [], net = [];
     page.on("pageerror", (e) => errs.push(e.message)); page.on("console", (m) => { if (m.type() === "error") errs.push(m.text()); });
     await page.route(/^https?:/, (route) => { const u = route.request().url(); if (/fonts\.googleapis\.com/.test(u)) return route.fulfill({ status: 200, contentType: "text/css", body: "" }); net.push(u); return route.abort(); });
-    await page.goto(PAGE); await page.waitForSelector("#app h1");
-    const ex = EX[0];
-    await page.tap('#app [data-act="start"]');
-    for (let i = 0; i < ex.answers.length; i++) {
-      await page.waitForSelector("#app [data-cand]");
-      ok((await taskOnScreen(page)) === ex.expected_tasks[i], name + ": task " + (i + 1));
-      await page.waitForTimeout(380);
-      const c = ex.answers[i].choice;
-      await page.tap(c === "either" ? '#app button[data-act="cj"][data-v="either"]' : '#app .ct-pick[data-v="' + c + '"]');
-    }
-    await page.waitForSelector("#prio");
-    const vis = await page.evaluate(() => { const r = document.getElementById("cf-h").getBoundingClientRect(); return r.top >= -1 && r.top < window.innerHeight; });
-    ok(vis, name + ": after the eighth choice the confirmation is in view");
-    await page.tap('#app [data-act="confirm-yes"]'); await page.waitForSelector("#app .hlist");
-    ok(JSON.stringify(await shownTop(page)) === JSON.stringify(ex.expected_top), name + ": the example's three places");
+    await page.goto(PAGE); await page.waitForSelector("#app .hlist");
+    ok(JSON.stringify(await shownTop(page)) === JSON.stringify(WANT), name + ": the three neighborhoods");
+    await page.tap('#app .hhead[data-v="2"]');
+    ok((await page.locator('#app .hhead[data-v="2"]').getAttribute("aria-expanded")) === "true", name + ": a tap opens number 3");
     await page.tap('#app .prow >> nth=0'); await page.waitForSelector("#sheet .place");
-    await page.tap('#sheet [data-act="back"]');
+    await page.tap('#sheet [data-act="save"] >> nth=0'); await page.tap('#sheet [data-act="back"]');
     await page.tap('#app .btn[data-act="all"]'); await page.waitForSelector("#f-q");
+    await page.tap("#f-q"); await page.fill("#f-q", "Stamford"); await page.waitForTimeout(100);
+    ok((await page.locator("#all-list .row").count()) >= 1, name + ": search works");
     ok(errs.length === 0 && net.length === 0, name + ": errors or network " + errs.concat(net).join(" | "));
-    await page.screenshot({ path: path.join(SHOTS, "concierge42-device-" + name.replace(/\W+/g, "-") + ".png") });
+    await page.screenshot({ path: path.join(SHOTS, "concierge5-device-" + name.replace(/\W+/g, "-") + ".png") });
     await ctx.close();
   }
+
+  /* ================= dark theme, and a 320px phone ================= */
+  { const { ctx, page: p, errs } = await open(browser, { colorScheme: "dark" });
+    await firstScreen(p, "dark ");
+    await screen(p, "13-dark-first-screen");
+    await saveFromHome(p, 2);
+    await p.locator('#app .prow').first().click(); await p.waitForSelector("#sheet .place"); await screen(p, "13b-dark-place");
+    await act(p, "back", null, "#sheet");
+    await p.click("#bar-compare"); await p.waitForSelector("#cmp"); await screen(p, "13c-dark-compare");
+    await everyScreen(p, "dark", LIMIT);
+    ok(errs.length === 0, "errors (dark): " + errs.join(" || ")); await ctx.close();
+    const small = await open(browser, { viewport: { width: 320, height: 568 } });
+    await firstScreen(small.page, "320 ");
+    await everyScreen(small.page, "320 first screen", LIMIT); await screen(small.page, "14-320-first-screen");
+    await saveFromHome(small.page, 3);
+    await small.page.click("#bar-compare"); await small.page.waitForSelector("#cmp");
+    await everyScreen(small.page, "320 compare 3", LIMIT); await screen(small.page, "14b-320-compare-3");
+    ok(small.errs.length === 0, "errors (320): " + small.errs.join(" || ")); await small.ctx.close(); }
+
+  /* ================= data with no short list: the list still works ================= */
+  { const strip = () => { let d; Object.defineProperty(window, "CONCIERGE_DATA", { configurable: true, get() { return d; }, set(v) { if (v && v.meta) { delete v.meta.default_recommendation; } d = v; } }); };
+    const { ctx, page: p, errs } = await open(browser, {}, strip);
+    await p.click('#app .btn[data-act="all"]'); await p.waitForSelector("#all-list .row");
+    ok((await p.locator("#all-list .row").count()) === NB, "fallback: every place is listed");
+    await everyScreen(p, "fallback", LIMIT); await screen(p, "15-fallback");
+    ok(errs.length === 0, "errors (fallback): " + errs.join(" || ")); await ctx.close(); }
 
   /* ================= Ask, against a stand-in for the viewer's Claude ================= */
   { const stub = () => {
@@ -489,7 +378,7 @@ async function saveFromResults(page, n) {
       window.claude = { use: async (n) => (n === "sample" ? sample : null) };
     };
     const { ctx, page: p, errs } = await open(browser, {}, stub);
-    await playExample(p, EX[0], "ask ", false);
+    await firstScreen(p, "ask ");
     await p.waitForSelector("#ask-btn");
     await p.click("#ask-btn"); await p.waitForSelector("#ask-sheet");
     ok((await p.evaluate(() => window.__calls.length)) === 0, "nothing is sent until she taps");
@@ -498,11 +387,11 @@ async function saveFromResults(page, n) {
     ok((await p.locator("#ask-a").innerText()) === "<b>3</b> places", "the answer is plain text and the lookup read the page's suggestion");
     ok(JSON.stringify((await p.evaluate(() => window.__calls[0])).tools) === JSON.stringify(["list_buildings", "get_building", "compare", "recommend", "why"]), "five lookups, recommend and why among them");
     const rec = await p.evaluate(() => window.__conciergeLookups.recommend());
-    ok(JSON.stringify(rec.places.map((x) => x.neighborhood)) === JSON.stringify(EX[0].expected_top.map((t) => HB[t[0]].name + (HB[t[0]].state ? ", " + HB[t[0]].state : ""))), "recommend gives her three places");
-    const why = await p.evaluate((id) => window.__conciergeLookups.why({ id }), EX[0].expected_top[0][1][0]);
-    ok(why.recommended && why.its_neighborhood && why.its_neighborhood.place === 1 && why.rank_among_all_buildings >= 1, "why explains a building");
+    ok(rec.places.length === 3 && rec.places.every((x, i) => x.why === DR.neighborhoods[i].why) && /listings/.test(rec.how_the_list_was_narrowed), "recommend gives the three places and how the list was narrowed");
+    const why = await p.evaluate((id) => window.__conciergeLookups.why({ id }), WANT[0][1][0]);
+    ok(why.recommended && why.its_neighborhood && why.its_neighborhood.place === 1, "why explains a building");
     const lst = await p.evaluate(() => window.__conciergeLookups.list_buildings({ recommended_only: true }));
-    ok(lst.count === EX[0].expected_top.flatMap((t) => t[1]).length, "list_buildings can keep to her three places");
+    ok(lst.count === 9, "list_buildings can keep to the nine");
     await p.evaluate(() => { window.__decline = true; });
     await p.fill("#ask-q", "Which is the quietest?"); await p.click("#ask-send");
     await p.waitForFunction(() => !document.querySelector("#ask-btn,#ask-sheet"));
@@ -511,5 +400,5 @@ async function saveFromResults(page, n) {
     await none.page.waitForTimeout(300); ok((await none.page.locator("#ask-btn").count()) === 0, "use() resolving null leaves no trace"); await none.ctx.close(); }
 
   await browser.close();
-  console.log(checks + " checks passed; screenshots in site/screens/concierge42-*.png");
+  console.log(checks + " checks passed; screenshots in site/screens/concierge5-*.png");
 })().catch((e) => { console.error("FAILED: " + (e && e.message || e) + "\n" + ((e && e.stack) || "").split("\n").filter((l) => /walkthrough/.test(l)).slice(0, 3).join("\n")); process.exit(1); });
