@@ -1,88 +1,143 @@
-/* Tests for what the short page (version 5) reads from its data. Plain Node, no packages:  node scripts/test_concierge_pick.js
-   The file keeps its version 1 name so scripts/verify_concierge.py runs it unchanged. Version 5 asks nothing, so the page
-   no longer carries a recommender (the <script id="recommender-logic"> block is gone, and with it its tests); the page
-   shows meta.default_recommendation as the data gives it. This checks the data it shows (site/concierge_data.json when
-   it carries meta.funnel and meta.default_recommendation, else site/_concierge_fixture.json; CONCIERGE_DATA=<file>
-   picks one):
-     - the promise: exactly three neighborhoods, three buildings each, every building in the data and in its
-       neighborhood's group, no building twice;
-     - each neighborhood's why, gives up and tags are there to show;
-     - meta.funnel has the counts the two sentences use, and its rules are plain strings;
-     - meta.leanings point at real groups, one per priority;
-     - buildings[].similar (the place sheet's More like this) names real other buildings.
-   And that the page itself has no recommender left and no version 4 choice screens. */
+/* Tests for what the short page (version 7, "zoom out to neighborhoods") reads from its data. Plain Node, no packages:
+     node scripts/test_concierge_pick.js
+   The file keeps its version 1 name so scripts/verify_concierge.py runs it unchanged. Version 7 shows the ranked
+   neighborhoods of site/neighborhoods_data.json (CONCIERGE_DATA=<file> picks another) as the data gives them, so this
+   checks the data the page shows, and that the template still reads it the way the page promises:
+     - the ranking: ranks 1..N with no gap, each neighborhood with a name, a state, a typical rent at or under the
+       limit and a drive under the limit;
+     - at most three why facts and two know-this facts, each a sentence; at most two tags;
+     - at most three top buildings, none with a rent above the limit, each with a name or an address;
+     - at most two buildings to avoid, each with its reason and the name of its source, none also a top building;
+     - every top and avoid building is in its neighborhood's all_buildings; no building sits in two neighborhoods;
+     - a phone number only ever with a leasing office or a management company;
+     - meta has the measures, weights, coverage and counts the "How this was ranked" box uses;
+     - verified buildings find their fuller sheet in site/concierge_data.json (counted, and at least one must);
+     - the template has its four slots, no older screens, and none of the words the page must not say. */
 "use strict";
 const fs = require("fs"), path = require("path"), assert = require("assert");
 const ROOT = path.resolve(__dirname, "..");
 const html = fs.readFileSync(path.join(ROOT, "site", "concierge.html"), "utf8");
 let n = 0;
 function test(name, fn) { fn(); n++; console.log("ok  " + name); }
+const isNum = (x) => typeof x === "number" && isFinite(x);
+const str = (x) => typeof x === "string" && x.trim().length > 0;
 
-function ready(d) { const m = (d && d.meta) || {}; return !!(m.funnel && m.default_recommendation && (m.default_recommendation.neighborhoods || []).length); }
-function pickData() {
-  if (process.env.CONCIERGE_DATA) return process.env.CONCIERGE_DATA;
-  const real = path.join(ROOT, "site", "concierge_data.json"), fx = path.join(ROOT, "site", "_concierge_fixture.json");
-  try { if (ready(JSON.parse(fs.readFileSync(real, "utf8")))) return real; } catch (e) { /* fall through */ }
-  return fx;
-}
-const file = pickData();
+const file = process.env.CONCIERGE_DATA || path.join(ROOT, "site", "neighborhoods_data.json");
 const D = JSON.parse(fs.readFileSync(file, "utf8"));
-console.log("data: " + path.relative(ROOT, file) + (D.meta.fixture ? "  [TEST FIXTURE]" : ""));
-const M = D.meta, DR = M.default_recommendation, BY = Object.fromEntries(D.buildings.map((b) => [b.id, b]));
-const groups = Object.fromEntries(((M.recommender || {}).groups || []).map((g) => [g.id, g]));
-const HB = Object.fromEntries(D.neighborhoods.map((h) => [h.id, h]));
+console.log("data: " + path.relative(ROOT, file));
+const M = D.meta || {}, H = D.neighborhoods, LIMIT = M.rent_limit;
+const tops = (h) => h.top_buildings || [], avoids = (h) => h.avoid_buildings || [];
 
-test("the page has no recommender and no choice screens left", () => {
-  assert(!/<script id="recommender-logic">/.test(html), "the recommender-logic block is still in the page");
-  assert(!/<script id="match-logic">/.test(html) && !/<script id="pick-logic">/.test(html), "an older logic block is still in the page");
-  assert(!/function chooseScreen|function confirmScreen|data-act="cj"/.test(html), "the version 4 choices are still in the page");
+test("meta carries the limit and the list is there", () => {
+  assert(isNum(LIMIT) && LIMIT === 2000, "meta.rent_limit is " + LIMIT + ", the page promises $2,000");
+  assert(Array.isArray(H) && H.length >= 10, "fewer than ten neighborhoods");
+  assert(isNum(M.max_drive_min) && isNum(M.min_buildings), "meta.max_drive_min and meta.min_buildings");
 });
-test("the promise: exactly three neighborhoods with exactly three buildings each", () => {
-  assert(DR && Array.isArray(DR.neighborhoods), "meta.default_recommendation.neighborhoods");
-  assert.strictEqual(DR.neighborhoods.length, 3);
-  DR.neighborhoods.forEach((nb) => assert.strictEqual(nb.buildings.length, 3, nb.neighborhood_id));
-  assert.strictEqual(new Set(DR.neighborhoods.map((x) => x.neighborhood_id)).size, 3, "a neighborhood twice");
-  const all = DR.neighborhoods.flatMap((x) => x.buildings.map((b) => b.id));
-  assert.strictEqual(new Set(all).size, 9, "a building twice");
+test("ranks run 1..N with no gap and no repeat", () => {
+  const r = H.map((h) => h.rank).sort((a, b) => a - b);
+  r.forEach((v, i) => assert(v === i + 1, "rank " + (i + 1) + " is missing or repeated (found " + v + ")"));
+  assert(new Set(H.map((h) => h.id)).size === H.length, "a neighborhood id is repeated");
+  if (isNum((M.counts || {}).eligible)) assert(M.counts.eligible === H.length, "meta.counts.eligible is not the number of neighborhoods");
 });
-test("every building shown is in the data, in its neighborhood's group", () => {
-  DR.neighborhoods.forEach((nb) => nb.buildings.forEach((b) => {
-    assert(BY[b.id], b.id + " is not in the data");
-    const g = groups[nb.neighborhood_id];
-    if (g) assert(g.building_ids.includes(b.id), b.id + " is not in " + nb.neighborhood_id);
-    else assert.strictEqual(BY[b.id].group_id || BY[b.id].neighborhood_id, nb.neighborhood_id, b.id);
+test("each neighborhood has what its card shows", () => {
+  H.forEach((h) => {
+    const L = h.name + ": ";
+    assert(str(h.id) && str(h.name) && str(h.state), L + "id, name, state");
+    assert(isNum(h.typical_rent) && h.typical_rent <= LIMIT, L + "typical rent " + h.typical_rent);
+    assert(isNum(h.drive_min) && h.drive_min < M.max_drive_min, L + "drive " + h.drive_min);
+    assert(Array.isArray(h.tags) && h.tags.length <= 2 && h.tags.every(str), L + "at most two tags");
+    assert(isNum(h.lat) && isNum(h.lon), L + "a place on the map");
+  });
+});
+test("why facts (up to three) and know-this facts (up to two) are sentences with a measure and an icon", () => {
+  H.forEach((h) => {
+    assert(Array.isArray(h.why) && h.why.length >= 1 && h.why.length <= 3, h.name + ": " + (h.why || []).length + " why facts");
+    assert(Array.isArray(h.know_this) && h.know_this.length <= 2, h.name + ": " + (h.know_this || []).length + " know-this facts");
+    h.why.concat(h.know_this).forEach((w) => assert(str(w.text) && /[.!?]$/.test(w.text.trim()) && str(w.measure) && str(w.icon), h.name + ": a fact without text, measure or icon"));
+    const both = h.why.map((w) => w.measure).filter((m) => h.know_this.some((k) => k.measure === m));
+    assert(both.length === 0, h.name + ": " + both.join(",") + " is both a why and a know-this");
+  });
+});
+test("top buildings: at most three, none above the limit, each with a name or an address", () => {
+  H.forEach((h) => {
+    assert(Array.isArray(h.top_buildings) && tops(h).length <= 3, h.name + ": " + tops(h).length + " top buildings");
+    tops(h).forEach((b) => {
+      const L = h.name + " / " + (b.name || b.address || b.id) + ": ";
+      assert(str(b.id) && (str(b.name) || str(b.address)), L + "id and name");
+      assert(Array.isArray(b.rent_range) && isNum(b.rent_range[0]) && isNum(b.rent_range[1]) && b.rent_range[0] <= b.rent_range[1], L + "rent range");
+      assert(b.rent_range[1] <= LIMIT, L + "rent " + b.rent_range[1] + " is above " + LIMIT);
+      assert(Array.isArray(b.known) && Array.isArray(b.to_ask) && b.known.concat(b.to_ask).every(str), L + "known and to-ask chips");
+      assert(isNum(b.apartments) && b.apartments >= 1, L + "apartments count");
+      if (b.rating) assert(isNum(b.rating.value) && b.rating.value >= 0 && b.rating.value <= 5, L + "rating");
+      const t = b.verified && b.verified.total_with_utilities_and_fees;
+      if (t) assert(isNum(t[0]) && isNum(t[1]) && t[0] >= b.rent_range[0], L + "the total is below the rent");
+    });
+  });
+});
+test("buildings to avoid: at most two, each with its reason and source, none also a top building", () => {
+  H.forEach((h) => {
+    assert(Array.isArray(h.avoid_buildings) && avoids(h).length <= 2, h.name + ": " + avoids(h).length + " to avoid");
+    const topIds = new Set(tops(h).map((b) => b.id));
+    avoids(h).forEach((b) => {
+      const L = h.name + " / " + (b.name || b.id) + ": ";
+      assert(str(b.id) && (str(b.name) || str(b.address)), L + "id and name");
+      assert(str(b.reason) && /[.!?]$/.test(b.reason.trim()), L + "a one-sentence reason");
+      assert(b.source && str(b.source.name), L + "the name of its source");
+      assert(!topIds.has(b.id), L + "also a top building");
+    });
+  });
+});
+test("every top and avoid building is in all_buildings, and no building sits in two neighborhoods", () => {
+  const seen = new Map();
+  H.forEach((h) => {
+    assert(Array.isArray(h.all_buildings), h.name + ": all_buildings");
+    const ids = new Set(h.all_buildings.map((b) => b.id));
+    tops(h).concat(avoids(h)).forEach((b) => assert(ids.has(b.id), h.name + ": " + b.id + " is not in all_buildings"));
+    h.all_buildings.forEach((b) => {
+      assert(str(b.id) && (str(b.name) || str(b.address)), h.name + ": a listed building without id or name");
+      assert(!seen.has(b.id), b.id + " is in " + seen.get(b.id) + " and " + h.name); seen.set(b.id, h.name);
+      if (Array.isArray(b.rent_range) && isNum(b.rent_range[1])) assert(b.rent_range[1] <= LIMIT, h.name + " / " + b.name + ": rent " + b.rent_range[1]);
+    });
+  });
+});
+test("a phone number only with a leasing office or a management company", () => {
+  H.forEach((h) => tops(h).concat(avoids(h)).forEach((b) => {
+    const c = b.contact;
+    if (c && c.phone) assert(/^(leasing office|management company)$/i.test(c.kind || ""), h.name + " / " + b.name + ": a phone with contact kind " + c.kind);
   }));
+  assert(/var PUBLIC_KIND = \/\^\(leasing office\|management company\)\$\/i/.test(html), "the page no longer limits contacts to offices and companies");
 });
-test("each neighborhood has its name, why, and gives up (or none) to show", () => {
-  DR.neighborhoods.forEach((nb) => {
-    assert(nb.name || (HB[nb.neighborhood_id] || {}).name, nb.neighborhood_id + ": no name");
-    assert(typeof nb.why === "string" && nb.why.length > 5, nb.neighborhood_id + ": no why");
-    assert(Array.isArray(nb.why_features) && nb.why_features.length >= 1, nb.neighborhood_id + ": no why_features");
-    assert(nb.gives_up === null || typeof nb.gives_up === "string", nb.neighborhood_id + ": gives_up");
-    assert(!nb.gives_up || nb.gives_up_feature, nb.neighborhood_id + ": gives_up without its feature");
+test("meta has what How this was ranked uses", () => {
+  const ms = M.measures || {}, cov = M.coverage || {}, keys = Object.keys(ms);
+  assert(keys.length >= 5, "meta.measures");
+  keys.forEach((k) => {
+    assert(isNum(ms[k].weight) && ms[k].weight > 0 && str(ms[k].label), "measure " + k + ": weight and label");
+    assert(cov[k] && isNum(cov[k].neighborhoods_with_measure) && isNum(cov[k].of) && cov[k].neighborhoods_with_measure <= cov[k].of, "coverage of " + k);
   });
+  ["listings_used", "listings_at_2000_or_less", "eligible", "no_neighborhood_record", "cut_drive", "cut_by_the_jamaica_rule", "too_little_supply"].forEach((k) => assert(isNum((M.counts || {})[k]), "meta.counts." + k));
 });
-test("meta.funnel: the counts for the two sentences, and the rules as plain strings", () => {
-  const f = M.funnel;
-  assert(Number.isFinite(f.listings_read) && f.listings_read > 0, "listings_read");
-  const passed = typeof f.passed_apartments === "object" && f.passed_apartments ? f.passed_apartments.at_or_under_2000 : f.passed_apartments;
-  assert(Number.isFinite(passed) && passed > 0, "passed apartments");
-  assert(Array.isArray(f.rules) && f.rules.length >= 3 && f.rules.every((r) => typeof r === "string" && r.trim()), "rules");
-  assert(!f.rules.some((r) => /\bcrime/i.test(r)), "no crime wording in the rules");
+test("verified buildings find their fuller sheet", () => {
+  const cpath = path.join(ROOT, "site", "concierge_data.json");
+  if (!fs.existsSync(cpath)) { console.log("    (no site/concierge_data.json: verified buildings get the simple screen)"); return; }
+  const have = new Set(JSON.parse(fs.readFileSync(cpath, "utf8")).buildings.map((b) => b.id));
+  let v = 0, hit = 0;
+  H.forEach((h) => tops(h).forEach((b) => { if (b.verified && b.verified.on_page) { v++; if (have.has(b.id)) hit++; } }));
+  console.log("    " + hit + " of " + v + " verified top buildings have a fuller sheet");
+  assert(v === 0 || hit > 0, "no verified top building has a fuller sheet");
 });
-test("meta.leanings: one line per priority, each pointing at a real neighborhood", () => {
-  const L = M.leanings || [];
-  assert(L.length >= 1);
-  L.forEach((x) => {
-    assert(x.priority_key && x.neighborhood_id, JSON.stringify(x));
-    assert(groups[x.neighborhood_id] || HB[x.neighborhood_id], x.neighborhood_id + " is not a neighborhood");
-    assert(D.buildings.some((b) => (b.group_id || b.neighborhood_id) === x.neighborhood_id || b.neighborhood_id === x.neighborhood_id), x.neighborhood_id + " has no buildings");
-  });
-  assert.strictEqual(new Set(L.map((x) => x.priority_key)).size, L.length, "a priority twice");
+test("the template: four slots, version 7 only, none of the words the page must not say", () => {
+  ["<!--CONCIERGE_DATA_SLOT-->", "<!--CONCIERGE_PLACES_SLOT-->", "<!--CONCIERGE_ILLUS_SLOT-->", "<!--CONCIERGE_MAP_SLOT-->"].forEach((s) => assert(html.split(s).length === 2, s + " must be in the template exactly once"));
+  assert(!/default_recommendation|function compare\(|function plan\(|initAsk|recommender-logic/.test(html), "a version 6 screen is still in the template");
+  assert(/function fresh\(\) \{ return \{ v: 7,/.test(html), "the saved state is not version 7");
+  const shown = html.replace(/<style>[\s\S]*?<\/style>/, "");
+  const bad = /\bcrimes?\b|net-effective|\ball-in\b|\bgates?\b|\bunits?\b/i.exec(shown);
+  assert(!bad, 'the template says "' + (bad && bad[0]) + '"');
+  assert(/Neighborhoods for you/.test(html) && /How this was ranked/.test(html) && /See this neighborhood/.test(html) && /Top buildings/.test(html) && /Checked against its listing/.test(html), "a promised label is missing");
 });
-test("buildings[].similar names real other buildings (the place sheet's More like this)", () => {
-  D.buildings.forEach((b) => { (b.similar || []).forEach((x) => { assert(BY[x], b.id + " -> " + x); assert.notStrictEqual(x, b.id); }); });
-  assert(D.buildings.filter((b) => (b.similar || []).length >= 3).length >= D.buildings.length * 0.9, "most buildings have three similar ones");
+test("the built page, when there, carries no photo addresses and no scoring tables", () => {
+  const built = path.join(ROOT, "site", "dist", "concierge.html");
+  if (!fs.existsSync(built)) { console.log("    (not built yet)"); return; }
+  const t = fs.readFileSync(built, "utf8");
+  assert(!/"photo_url"|"evidence_points"|"sensitivity"/.test(t), "the built page still inlines a field it never shows");
 });
-
-console.log(n + " tests passed");
+console.log("\n" + n + " tests passed");

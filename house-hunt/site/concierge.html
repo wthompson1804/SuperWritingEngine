@@ -9,16 +9,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Yellowtail&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500..800&family=Figtree:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-/* One phone-width column. Questions one per screen, then a vertical list of the places that fit, a place opened
-   as a full sheet, and one bar fixed at the bottom (My list and Compare) on every screen once she saves anything.
-   Same pink daytime-TV set as the long page. */
+/* Version 7. One phone-width column: a ranked list of neighborhood cards, a neighborhood screen (why, know this,
+   top buildings, avoid, all buildings), a building screen, and one bar fixed at the bottom (Home, Everything,
+   My list). Same pink daytime-TV set as version 6. */
 :root{
   --paper:#FFF4F7; --card:#FFFFFF; --ink:#3A1630; --muted:#7A5670;
   --berry:#E0457B; --berry-deep:#C12C62; --on-berry:#FFFFFF;
   --rose:#FFD3E1; --blush:#FFE7EF; --butter:#FFD86B; --on-butter:#3A1630;
-  --mint-ink:#1B6F50; --line:#F3CADA; --track:#EBC3D4;
+  --line:#F3CADA; --track:#EBC3D4;
   --ok-bg:#D9F2E6; --ok-ink:#1B6F50; --mid-bg:#FFF0BF; --mid-ink:#6B4E00; --low-bg:#FFE0DC; --low-ink:#A5342B;
-  --shade:rgba(58,22,48,.55);
+  --avoid-bg:#F2EAEE; --avoid-ink:#6A5563; --avoid-line:#B9A5B1; --water:#FFE7EF; --land:#FFFFFF;
   --script:"Yellowtail","Brush Script MT",cursive;
   --display:"Bricolage Grotesque","Arial Narrow",system-ui,sans-serif;
   --body:"Figtree","Segoe UI",system-ui,sans-serif;
@@ -27,16 +27,18 @@
   --paper:#1E0F1A; --card:#2C1827; --ink:#FCEBF2; --muted:#D6B8CB;
   --berry:#FF8DB3; --berry-deep:#C12C62; --on-berry:#FFFFFF;
   --rose:#4C2542; --blush:#371B30; --butter:#FFD86B; --on-butter:#3A1630;
-  --mint-ink:#8FE0BD; --line:#5B3551; --track:#5B3551;
+  --line:#5B3551; --track:#5B3551;
   --ok-bg:#153F30; --ok-ink:#9BE6C6; --mid-bg:#4A3A0A; --mid-ink:#FFDF85; --low-bg:#4A1F1B; --low-ink:#FFB1A8;
-  --shade:rgba(0,0,0,.6); color-scheme:dark}}
+  --avoid-bg:#2A2027; --avoid-ink:#C9B6C2; --avoid-line:#7A6672; --water:#1E0F1A; --land:#3A2434;
+  color-scheme:dark}}
 :root[data-theme="dark"]{
   --paper:#1E0F1A; --card:#2C1827; --ink:#FCEBF2; --muted:#D6B8CB;
   --berry:#FF8DB3; --berry-deep:#C12C62; --on-berry:#FFFFFF;
   --rose:#4C2542; --blush:#371B30; --butter:#FFD86B; --on-butter:#3A1630;
-  --mint-ink:#8FE0BD; --line:#5B3551; --track:#5B3551;
+  --line:#5B3551; --track:#5B3551;
   --ok-bg:#153F30; --ok-ink:#9BE6C6; --mid-bg:#4A3A0A; --mid-ink:#FFDF85; --low-bg:#4A1F1B; --low-ink:#FFB1A8;
-  --shade:rgba(0,0,0,.6); color-scheme:dark}
+  --avoid-bg:#2A2027; --avoid-ink:#C9B6C2; --avoid-line:#7A6672; --water:#1E0F1A; --land:#3A2434;
+  color-scheme:dark}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.45;-webkit-text-size-adjust:100%;overflow-wrap:break-word}
@@ -49,20 +51,15 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;line-height:1.
 .wrap{max-width:520px;margin:0 auto;padding-block:0;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 #app{display:grid;gap:18px;padding-top:6px;padding-bottom:calc(var(--bar-h,0px) + 28px);min-width:0}
 #app>*{min-width:0}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-/* top line */
+/* top line, buttons, type */
 .top{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px}
-.brand{font-family:var(--script);font-size:25px;line-height:1;color:var(--berry);white-space:nowrap}
 .quiet{background:none;border:0;padding:10px 0;min-height:44px;min-width:44px;justify-content:center;font-weight:800;font-size:16px;text-decoration:underline;text-decoration-color:var(--berry);text-decoration-thickness:2px;text-underline-offset:4px;display:inline-flex;align-items:center;gap:6px}
-.quiet.center{justify-content:center;width:100%}
-.topbtns{display:flex;gap:16px;align-items:center}
-
-/* buttons */
 .btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:56px;font-family:var(--display);font-weight:800;font-size:19px;line-height:1.15;text-align:center;text-decoration:none;border-radius:999px;padding:10px 22px;border:2px solid var(--ink);background:var(--card);color:var(--ink)}
 .btn.main{background:var(--berry-deep);border-color:var(--berry-deep);color:var(--on-berry)}
 .btn.soft{background:var(--rose);border-color:var(--ink);box-shadow:0 3px 0 var(--ink)}
 .btn.sm{min-height:48px;font-size:17px;padding:8px 16px}
-.btn:disabled{opacity:.45;cursor:default}
 .btn:active{transform:translateY(1px)}
 .btn .go{font-size:24px;line-height:1}
 .stack{display:grid;gap:12px}
@@ -72,276 +69,213 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;line-height:1.
 .lead{font-size:20px;line-height:1.4}
 .muted{color:var(--muted)}
 .small{font-size:15px}
+.link{font-weight:800;font-size:17px;text-decoration:underline;text-decoration-color:var(--berry);text-decoration-thickness:2px;text-underline-offset:4px;display:inline-block;padding:10px 0;min-height:44px;line-height:1.4}
 .links{display:flex;flex-wrap:wrap;gap:0 20px}
+.sec-h{font-weight:800;font-stretch:84%;font-size:26px}
+.sec-h small{font-family:var(--body);font-size:15px;font-weight:700;color:var(--muted);margin-left:6px;font-stretch:100%}
+.ic{flex:0 0 auto;border-radius:50%;background:var(--rose);color:var(--berry-deep);display:grid;place-items:center}
 
-/* the logo: the long page's roof and heart, version 1's big pink name and its "the short version" tag */
+/* the logo */
 .hello{text-align:center;display:grid;gap:6px;justify-items:center}
 .logo{margin:0;display:grid;justify-items:center;width:100%}
 .logo svg{display:block;width:min(180px,48%);height:auto;margin:0 auto -14px}
 .logo .name{font-family:var(--script);font-weight:400;font-size:clamp(46px,13.4vw,66px);line-height:.98;color:var(--berry);display:block;transform:rotate(-4deg);text-shadow:2px 2px 0 var(--card),4px 4px 0 var(--ink)}
 .logo .tagbox{display:inline-block;margin-top:12px;font-family:var(--display);font-weight:800;font-stretch:80%;font-size:24px;line-height:1;background:var(--ink);color:var(--paper);padding:6px 16px 9px;border-radius:12px;transform:rotate(1.5deg)}
-.hello .say{font-family:var(--display);font-weight:800;font-stretch:86%;font-size:clamp(21px,5.9vw,25px);line-height:1.2;margin-top:4px}
+.hello .say{font-family:var(--display);font-weight:800;font-stretch:86%;font-size:clamp(24px,6.8vw,30px);line-height:1.15;margin-top:6px}
 details.how{width:100%}
 details.how summary{list-style:none;display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 4px;font-weight:800;font-size:16px;cursor:pointer;text-decoration:underline;text-decoration-color:var(--berry);text-decoration-thickness:2px;text-underline-offset:4px}
 details.how summary::-webkit-details-marker{display:none}
 details.how summary::after{content:"+";font-size:20px;line-height:1;text-decoration:none}
 details.how[open] summary::after{content:"\2212"}
-.howbox{text-align:left;background:var(--card);border:2px solid var(--line);border-radius:20px;padding:14px 16px;display:grid;gap:10px;font-size:17px;line-height:1.45;margin-top:6px}
-.howbox ul{list-style:none;padding:0;display:grid;gap:6px}
-.howbox li{display:grid;grid-template-columns:22px 1fr;gap:8px;font-size:16px;font-weight:600}
-.howbox li::before{content:"\2713";color:var(--ok-ink);font-weight:900}
+.howbox{text-align:left;background:var(--card);border:2px solid var(--line);border-radius:20px;padding:14px 16px;display:grid;gap:12px;font-size:17px;line-height:1.45;margin-top:6px}
+.howbox h3{font-size:19px;font-weight:800}
+.wts{list-style:none;padding:0;display:grid;gap:8px}
+.wts li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:baseline;font-weight:800;font-size:16px}
+.wts li b{font-family:var(--display);font-size:18px;font-variant-numeric:tabular-nums}
+.wts .bar{grid-column:1/-1;height:8px;border-radius:4px;background:var(--track);overflow:hidden}
+.wts .bar i{display:block;height:100%;background:var(--berry-deep);border-radius:4px}
+.wts small{grid-column:1/-1;font-size:14px;font-weight:700;color:var(--muted)}
 
-/* the three neighborhood cards */
+/* neighborhood cards */
 .ncards{list-style:none;padding:0;display:grid;gap:20px}
 .ncard{background:var(--card);border:2px solid var(--ink);border-radius:26px;overflow:hidden;box-shadow:0 5px 0 var(--berry)}
 .illus{display:block;border-bottom:2px solid var(--ink);background:var(--blush);line-height:0}
 .illus svg{display:block;width:100%;height:84px}
-.ncard .nb{display:grid;gap:9px;padding:10px 14px 14px}
-.ncard h2 small{font-family:var(--body);font-size:16px;font-weight:800;color:var(--muted);font-stretch:100%;margin-left:6px;white-space:nowrap}
-.ncard .btn{min-height:50px}
-.ncard h2{font-weight:800;font-stretch:84%;font-size:clamp(26px,7.4vw,31px);line-height:1.05}
-.ncard h2{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px;align-items:start}
-.ncard h2 .num{display:inline-grid;place-items:center;width:30px;height:30px;margin-top:2px;border-radius:50%;background:var(--berry-deep);color:var(--on-berry);font-size:18px;font-stretch:100%}
-.chips{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:6px}
-.chips li{background:var(--blush);border:2px solid var(--line);color:var(--ink);font-weight:800;font-size:14px;line-height:1.2;border-radius:999px;padding:3px 11px}
-.chips li.y{background:var(--butter);border-color:var(--butter);color:var(--on-butter)}
-.money{position:relative;display:grid;gap:0;background:var(--paper);border-radius:16px;padding:6px 12px}
-.money div{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
-.money span{font-size:15px;font-weight:700;line-height:1.25;min-width:0}
-.money span small{display:block;font-size:13px;font-weight:700;color:var(--muted)}
-.money b{flex:0 0 auto;font-family:var(--display);font-weight:800;font-size:24px;line-height:1.15;font-variant-numeric:tabular-nums}
-.tiles{list-style:none;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-.tile{position:relative;display:grid;justify-items:center;align-content:start;text-align:center;gap:2px;background:var(--paper);border-radius:16px;padding:10px 4px 7px}
-.tile .v{display:grid;justify-items:center;gap:2px}
-.tile .ic{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:var(--rose);color:var(--berry-deep);display:grid;place-items:center}
-.tile .ic svg{width:17px;height:17px}
-.tile b{font-family:var(--display);font-weight:800;font-size:24px;line-height:1.05;font-variant-numeric:tabular-nums;white-space:nowrap}
-.tile b small{font-size:15px;font-weight:800}
-.tile span.l{font-size:14px;font-weight:700;line-height:1.2}
-.best{outline:2px solid var(--ok-ink);outline-offset:-2px;background:var(--ok-bg)}
-.sticker{position:absolute;top:-9px;right:-4px;z-index:1;background:var(--butter);color:var(--on-butter);font-weight:900;font-size:12px;line-height:1;letter-spacing:.02em;border-radius:999px;padding:4px 8px 5px;transform:rotate(6deg);box-shadow:0 2px 0 var(--ink);white-space:nowrap}
-.money .sticker{top:-11px;left:12px;right:auto;transform:rotate(-4deg)}
-.money.best{padding-top:12px}
-.lean{background:var(--card);border:2px dashed var(--berry);border-radius:22px;padding:12px 14px;display:grid;gap:8px}
-.lean h2{font-weight:800;font-stretch:84%;font-size:19px}
-.llist{list-style:none;padding:0;display:grid;gap:6px}
-.lrow{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;width:100%;min-height:48px;text-align:left;background:var(--paper);border:2px solid var(--line);border-radius:14px;padding:6px 12px;font:inherit;color:var(--ink)}
-.lrow .ll{font-size:16px;font-weight:700}
-.lrow b{font-family:var(--display);font-weight:800;font-size:18px;text-align:right}
-.lrow .go{font-size:24px;color:var(--berry-deep)}
-.endblock{display:grid;gap:10px;padding-top:6px}
+.ncard .nb{display:grid;gap:10px;padding:10px 14px 14px}
+.ncard h2{font-weight:800;font-stretch:84%;font-size:clamp(26px,7.4vw,31px);line-height:1.05;display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:start}
+.ncard h2 small{display:block;font-family:var(--body);font-size:16px;font-weight:800;color:var(--muted);font-stretch:100%;margin-top:3px}
+.num{display:inline-grid;place-items:center;min-width:36px;height:36px;padding:0 6px;border-radius:999px;background:var(--berry-deep);color:var(--on-berry);font-family:var(--display);font-weight:800;font-size:19px;font-stretch:100%;font-variant-numeric:tabular-nums}
+.tags{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.tags li{background:var(--butter);color:var(--on-butter);font-weight:800;font-size:14px;border-radius:999px;padding:3px 11px}
+.figs{list-style:none;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.figs li{display:grid;gap:1px;background:var(--paper);border-radius:16px;padding:8px 12px 9px}
+.figs b{font-family:var(--display);font-weight:800;font-size:28px;line-height:1.05;font-variant-numeric:tabular-nums;white-space:nowrap}
+.figs b small{font-size:17px;font-weight:800}
+.figs span{font-size:14px;font-weight:700;line-height:1.2}
+.figs .sub{color:var(--muted);font-size:13px}
+.wchips{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.wchips li{display:inline-flex;align-items:center;gap:6px;background:var(--blush);border-radius:999px;padding:3px 12px 3px 3px;font-weight:800;font-size:14px;line-height:1.2}
+.wchips .ic{width:26px;height:26px;background:var(--card)}
+.wchips .ic svg{width:16px;height:16px}
+.conf{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:var(--muted)}
+.conf i{width:10px;height:10px;border-radius:50%;border:2px solid var(--muted);flex:0 0 auto}
+.endblock{display:grid;gap:10px;padding-top:6px;justify-items:center;text-align:center}
 
 /* a neighborhood */
 .hero{display:grid;gap:10px}
 .hero .illus{border:2px solid var(--ink);border-radius:24px;overflow:hidden;box-shadow:0 5px 0 var(--berry)}
 .hero .illus svg{height:auto;aspect-ratio:360/170}
 .hero h1{font-weight:800;font-stretch:82%;font-size:clamp(34px,9.6vw,44px);line-height:1}
-.hero .line{font-size:20px;line-height:1.4;font-weight:600}
-.sec-h{font-weight:800;font-stretch:84%;font-size:26px}
-.sec-h .kick{font-family:var(--script);font-weight:400;color:var(--berry);font-size:30px;margin-right:6px}
-.acards{list-style:none;padding:0;display:grid;gap:16px}
-.acard{background:var(--card);border:2px solid var(--ink);border-radius:22px;padding:14px 14px 12px;display:grid;gap:10px;box-shadow:0 4px 0 var(--berry)}
-.ahead{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:start}
-.aname{display:grid;gap:2px;text-align:left;background:none;border:0;padding:0;font:inherit;color:var(--ink);min-height:44px}
-.aname b{font-family:var(--display);font-weight:800;font-size:22px;line-height:1.12}
-.aname b .go{color:var(--berry-deep);margin-left:4px}
-.aname small{font-size:15px;font-weight:700;color:var(--muted)}
-.heart{min-height:48px;min-width:48px;border:2px solid var(--berry-deep);border-radius:999px;background:var(--card);color:var(--berry-deep);font-weight:800;font-size:16px;padding:6px 14px;display:inline-flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap}
-.heart .h{font-size:20px;line-height:1}
-.heart[aria-pressed="true"]{background:var(--berry-deep);color:var(--on-berry)}
-.minis{list-style:none;padding:0;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.25fr) minmax(0,.95fr);gap:6px}
-.minis li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:6px;align-items:center;font-size:15px;font-weight:700;line-height:1.2}
-.minis .ic{width:26px;height:26px;border-radius:50%;background:var(--blush);color:var(--berry-deep);display:grid;place-items:center}
-.minis .ic svg{width:16px;height:16px}
-.amark{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center}
-.seeit{min-height:48px}
+.hero .where{font-size:17px;font-weight:800;color:var(--muted)}
+.why{list-style:none;padding:0;display:grid;gap:12px}
+.why li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;align-items:start;font-size:18px;font-weight:600;line-height:1.4}
+.why .ic{width:40px;height:40px}
+.why .ic svg{width:22px;height:22px}
+.know{background:var(--mid-bg);color:var(--mid-ink);border-radius:20px;padding:14px 16px;display:grid;gap:10px}
+.know h2{font-size:22px;font-weight:800;font-stretch:84%}
+.know ul{list-style:none;padding:0;display:grid;gap:10px}
+.know li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;align-items:start;font-size:17px;font-weight:600;line-height:1.4}
+.know li svg{width:24px;height:24px;margin-top:1px}
+.note{font-size:15px;font-weight:700;color:var(--muted)}
 .moms{display:grid;gap:10px}
-.caption{font-size:15px;font-weight:700;color:var(--muted);margin-top:-6px}
 details.mom{background:var(--card);border:2px solid var(--line);border-radius:18px}
 details.mom[open]{border-color:var(--ink)}
 details.mom summary{list-style:none;display:grid;grid-template-columns:40px minmax(0,1fr) 20px;gap:10px;align-items:center;min-height:64px;padding:10px 12px;cursor:pointer}
 details.mom summary::-webkit-details-marker{display:none}
 details.mom summary::after{content:"+";font-size:24px;line-height:1;color:var(--berry-deep);font-weight:600}
 details.mom[open] summary::after{content:"\2212"}
-details.mom .ic{width:40px;height:40px;border-radius:50%;background:var(--rose);color:var(--berry-deep);display:grid;place-items:center}
+details.mom .ic{width:40px;height:40px}
 details.mom .ic svg{width:22px;height:22px}
 details.mom .mt{display:grid;gap:1px;min-width:0}
 details.mom .mt b{font-family:var(--display);font-weight:800;font-size:19px;line-height:1.15}
-details.mom .mt span{font-size:15px;font-weight:600;color:var(--muted);line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+details.mom .mt span{font-size:15px;font-weight:600;color:var(--muted);line-height:1.3;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
 details.mom[open] .mt span{display:none}
-details.mom .mb{padding:0 14px 12px;display:grid;gap:4px;font-size:17px;line-height:1.45}
-.hoodnav{display:grid;gap:4px;padding-top:4px}
-.pline{font-size:14px;font-weight:600;color:var(--muted);line-height:1.35}
-.pline b{color:var(--ink);font-variant-numeric:tabular-nums}
-.inhood{font-size:15px;font-weight:700;color:var(--muted)}
-.tags{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:6px}
-.tags li{background:var(--butter);color:var(--on-butter);font-weight:800;font-size:14px;border-radius:999px;padding:3px 11px}
-.thumbs{list-style:none;padding:0;display:grid;gap:6px}
-.thumb{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1px 10px;align-items:baseline;width:100%;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:14px;padding:8px 12px;min-height:44px;font:inherit;color:var(--ink)}
-.thumb b{font-family:var(--display);font-size:17px;line-height:1.15;font-weight:800;min-width:0}
-.thumb .f{font-size:14px;font-weight:700;color:var(--muted);text-align:right;white-space:nowrap}
-.thumb .m{grid-column:1/-1;font-size:14px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
-.thumb .m b{font-family:var(--body);font-size:14px;color:var(--ink)}
-.none-box{background:var(--low-bg);color:var(--low-ink);border-radius:18px;padding:14px 16px;font-weight:700}
+details.mom .mb{padding:0 14px 8px;display:grid;gap:2px;font-size:17px;line-height:1.45}
+details.mom .link{font-size:15px}
 
-/* a place */
-.place h1{font-weight:800;font-stretch:82%;font-size:clamp(30px,8.4vw,38px)}
-.place .kicker{font-size:26px}
-.place .facts{background:var(--card);border:2px solid var(--ink);border-radius:20px;padding:0 16px;box-shadow:0 4px 0 var(--berry)}
-.place .facts li:last-child{border-bottom:0}
-.life{display:grid;gap:12px}
-.life h2,.sec-h{font-weight:800;font-stretch:84%;font-size:26px}
-.moment{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:14px 16px;display:grid;gap:6px}
-.moment .mt{display:flex;align-items:center;gap:10px}
-.moment .mt h3{font-size:19px;font-weight:800}
-.moment .ic{flex:0 0 auto;width:34px;height:34px;border-radius:50%;background:var(--blush);color:var(--berry-deep);display:grid;place-items:center}
-.moment .ic svg{width:20px;height:20px}
-.moment p{font-size:17px;line-height:1.4}
-.moment b{font-weight:800}
-details.src summary{list-style:none;display:inline-flex;align-items:center;gap:6px;min-height:44px;font-size:14px;font-weight:800;color:var(--muted);cursor:pointer}
-details.src summary::-webkit-details-marker{display:none}
-details.src summary::after{content:"+";font-size:18px;line-height:1}
-details.src[open] summary::after{content:"\2212"}
-details.src ul{list-style:none;padding:0;display:grid;gap:0;margin-top:-4px}
-details.src .link{font-size:15px;display:block;padding:10px 0;min-height:44px;line-height:1.35}
-.chk{font-size:14px;font-weight:700;line-height:1.3}
-.chk.ok{color:var(--ok-ink)}
-.chk.old{color:var(--muted)}
-.facts{list-style:none;padding:0;border-top:2px solid var(--line)}
-.facts li{padding:10px 0;border-bottom:2px solid var(--line);display:grid;gap:6px}
-.frow{display:flex;justify-content:space-between;align-items:baseline;gap:14px}
-.frow .l{font-weight:800;font-size:15px;color:var(--muted);flex:1 1 0;min-width:0}
-.frow .v{flex:0 0 auto;max-width:62%;white-space:nowrap;font-family:var(--display);font-weight:800;font-size:22px;text-align:right;font-variant-numeric:tabular-nums;line-height:1.1}
-.frow .v small:not(.in){white-space:normal}
-.frow .v small.in{display:inline;margin:0 0 0 6px}
-.frow .v small{display:block;font-family:var(--body);font-size:14px;font-weight:700;color:var(--muted);margin-top:3px}
-@media (max-width:360px){.brand{font-size:21px}.top .quiet{font-size:14px}.frow .v{font-size:20px}}
-.ftext{font-size:17px;font-weight:600;line-height:1.35}
-.pos{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:700;color:var(--muted)}
-.pos .track{position:relative;flex:1 1 auto;height:6px;border-radius:3px;background:var(--track)}
-.pos .track i{position:absolute;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:var(--berry-deep);border:3px solid var(--card)}
-.pos .word{flex:0 0 auto;min-width:9.2em;text-align:right}
-.link{font-weight:800;font-size:17px;text-decoration:underline;text-decoration-color:var(--berry);text-decoration-thickness:2px;text-underline-offset:4px;display:inline-flex;align-items:center;min-height:44px}
-details.more{border-top:2px solid var(--line)}
-details.more:last-of-type{border-bottom:2px solid var(--line)}
-details.more summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:52px;font-family:var(--display);font-weight:800;font-size:18px;cursor:pointer}
-details.more summary::-webkit-details-marker{display:none}
-details.more summary::after{content:"+";font-size:26px;line-height:1;font-weight:500}
-details.more[open] summary::after{content:"\2212"}
-details.moreqs{margin-top:10px;border-bottom:0!important}
-details.more .in{padding:2px 0 16px;display:grid;gap:12px;font-size:17px}
-.moregroup{display:grid}
-.points{list-style:none;padding:0;display:grid;gap:10px}
-.points li{display:grid;grid-template-columns:26px 1fr;gap:10px;align-items:start}
-.points svg{width:24px;height:24px;margin-top:1px}
-.day{list-style:none;padding:0;display:grid;gap:12px}
-.day li{display:grid;gap:3px}
-.day .t{display:flex;justify-content:space-between;gap:10px;align-items:center;font-weight:800}
-.chip{flex:0 0 auto;font-size:13px;font-weight:800;border-radius:999px;padding:3px 10px}
-.chip.strong{background:var(--ok-bg);color:var(--ok-ink)}
-.chip.mixed{background:var(--mid-bg);color:var(--mid-ink)}
-.chip.weak{background:var(--low-bg);color:var(--low-ink)}
-.apts{list-style:none;padding:0;display:grid;gap:12px}
-.apts li{border:2px solid var(--line);border-radius:16px;padding:12px 14px;display:grid;gap:6px}
-.apts .a-h{font-weight:800}
-.apts .a-s{font-size:15px;color:var(--muted);font-weight:600}
-.pair{display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);gap:10px}
+/* building cards */
+.bcards{list-style:none;padding:0;display:grid;gap:16px}
+.bcard{background:var(--card);border:2px solid var(--ink);border-radius:22px;padding:14px 14px 12px;display:grid;gap:10px;box-shadow:0 4px 0 var(--berry)}
+.bhead{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:start}
+.bname{display:grid;gap:2px;text-align:left;background:none;border:0;padding:0;font:inherit;color:var(--ink);min-height:44px;align-content:center}
+.bname b{font-family:var(--display);font-weight:800;font-size:22px;line-height:1.12}
+.bname b .go{color:var(--berry-deep);margin-left:4px}
+.bname small{font-size:14px;font-weight:800;color:var(--ok-ink)}
+.heart{min-height:48px;min-width:48px;border:2px solid var(--berry-deep);border-radius:999px;background:var(--card);color:var(--berry-deep);font-weight:800;font-size:16px;padding:6px 14px;display:inline-flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap}
+.heart .h{font-size:20px;line-height:1}
+.heart[aria-pressed="true"]{background:var(--berry-deep);color:var(--on-berry)}
+.btn .h{font-size:20px;line-height:1}
+.pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:10px}
+.pair.one{grid-template-columns:minmax(0,1fr)}
 .pair div{display:grid;gap:1px;align-content:start}
 .pair span{font-size:13px;font-weight:800;color:var(--muted);line-height:1.2}
-.pair b{font-family:var(--display);font-size:20px;font-variant-numeric:tabular-nums}
-.star{color:var(--mid-ink);background:var(--mid-bg);border-radius:10px;padding:5px 10px;font-size:15px;font-weight:700;justify-self:start}
-.qs{padding-left:1.15em;display:grid;gap:8px}
+.pair b{font-family:var(--display);font-size:22px;line-height:1.15;font-variant-numeric:tabular-nums}
+.count{font-size:15px;font-weight:800}
+.kq{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.kq li{font-weight:800;font-size:14px;line-height:1.2;border-radius:999px;padding:4px 11px;border:2px solid transparent}
+.kq li.k{background:var(--ok-bg);color:var(--ok-ink)}
+.kq li.q{border-color:var(--avoid-line);color:var(--ink);background:none}
+.kq-l{font-size:13px;font-weight:800;color:var(--muted);margin-bottom:-4px}
+.rating{font-size:15px;font-weight:800}
+.tel{font-family:var(--display);font-weight:800;font-size:20px}
 
-/* my list */
-.saved{list-style:none;padding:0;display:grid;gap:12px}
-.srow{background:var(--card);border:2px solid var(--line);border-radius:20px;padding:12px 14px;display:grid;gap:8px}
-.srow.on{border-color:var(--ink)}
-.tickl{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;min-height:48px;cursor:pointer}
-.tickl input{width:28px;height:28px;margin:0;accent-color:#C12C62}
-.tickl b{font-family:var(--display);font-size:20px;line-height:1.15;display:block}
-.tickl small{display:block;font-size:14px;font-weight:700;color:var(--muted)}
-.sact{display:grid;grid-template-columns:1fr auto;gap:10px}
-.sact .btn{font-size:16px}
-.ontour{color:var(--ok-ink);font-weight:800;font-size:15px}
-.tickmsg{min-height:1.4em;font-weight:800;font-size:16px;color:var(--low-ink)}
+/* avoid: flat, grey, dashed, with a cross */
+.avoids{list-style:none;padding:0;display:grid;gap:12px}
+.avoid{background:var(--avoid-bg);color:var(--avoid-ink);border:2px dashed var(--avoid-line);border-radius:18px;padding:12px 14px;display:grid;grid-template-columns:36px minmax(0,1fr);gap:4px 12px;align-items:start}
+.avoid .x{width:36px;height:36px;border-radius:50%;background:var(--avoid-ink);color:var(--avoid-bg);display:grid;place-items:center;font-weight:900;font-size:20px;line-height:1}
+.avoid h3{font-size:19px;font-weight:800;align-self:center}
+.avoid p{grid-column:2;font-size:16px;font-weight:600;line-height:1.4}
+.avoid .src{font-size:14px;font-weight:700}
+.avoid .src a{display:inline-block;padding:13px 0;font-weight:800;text-underline-offset:3px}
+.avoid .src{margin-top:-8px}
+.sec-avoid{color:var(--avoid-ink)}
 
-/* compare */
-.cmp{display:grid;gap:0;border-top:2px solid var(--ink)}
-.chead,.cells{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:8px}
-.chead{padding:10px 0;border-bottom:2px solid var(--ink)}
-.chead b{font-family:var(--display);font-size:16px;line-height:1.15;font-weight:800;display:block}
-.chead small{display:block;font-size:12px;font-weight:700;color:var(--muted);line-height:1.2;margin-top:2px}
-.crow{padding:8px 0 10px;border-bottom:2px solid var(--line);display:grid;gap:4px}
-.crow .cl{font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-weight:800;color:var(--muted)}
-.cells>div{font-size:14px;font-weight:700;line-height:1.3;min-width:0}
-.cells .big{font-family:var(--display);font-size:18px;font-weight:800;font-variant-numeric:tabular-nums;display:block;line-height:1.15}
-.cells .best{color:var(--ok-ink)}
-.choose .btn{min-height:52px;font-size:15px;padding:6px 8px;line-height:1.15}
-.cmp-n3 .cells>div{font-size:13px}
-.cmp-n3 .cells .big{font-size:16px}
-.cmp-n3 .chead b{font-size:15px}
-
-/* plan */
-.area{display:grid;gap:12px}
-.area-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;border-bottom:2px solid var(--ink);padding-bottom:6px}
-.area-h h2{font-weight:800;font-stretch:85%;font-size:24px}
-.area-h span{font-weight:800;font-size:15px;color:var(--muted);white-space:nowrap}
-.stop{background:var(--card);border:2px solid var(--line);border-radius:20px;padding:16px;display:grid;gap:10px}
-.stop h3{font-weight:800;font-size:22px}
-.stop .lab{color:var(--muted)}
-.stop .phone{font-weight:800;user-select:all;-webkit-user-select:all}
-.confirmrow{background:var(--blush);border-radius:16px;padding:14px;display:grid;gap:10px}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-
-/* everything */
+/* all buildings, everything, my list rows */
+.toggle{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;min-height:56px;background:none;border:0;border-top:2px solid var(--line);border-bottom:2px solid var(--line);padding:8px 0;font-family:var(--display);font-weight:800;font-size:20px;text-align:left}
+.toggle::after{content:"+";font-size:26px;line-height:1;font-weight:500}
+.toggle[aria-expanded="true"]::after{content:"\2212"}
+.rows{list-style:none;padding:0;display:grid;gap:8px}
+.row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:2px 10px;align-items:center;width:100%;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:10px 12px;min-height:60px;box-shadow:0 3px 0 var(--rose);font:inherit;color:var(--ink)}
+.row.b{grid-template-columns:minmax(0,1fr) auto}
+.row .rk{display:inline-grid;place-items:center;min-width:32px;height:32px;padding:0 5px;border-radius:999px;background:var(--ink);color:var(--paper);font-family:var(--display);font-weight:800;font-size:15px;font-variant-numeric:tabular-nums}
+.row .nm{display:grid;gap:0;min-width:0}
+.row .nm b{font-family:var(--display);font-size:18px;line-height:1.15}
+.row .nm small{font-size:14px;font-weight:700;color:var(--muted)}
+.row .fg{display:grid;justify-items:end;gap:0;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row .fg b{font-family:var(--display);font-size:18px;line-height:1.15}
+.row .fg small{font-size:14px;font-weight:700;color:var(--muted)}
+.row .tg{font-size:13px;font-weight:800;color:var(--ok-ink)}
+.row .tg.a{color:var(--avoid-ink)}
+.row.av{background:var(--avoid-bg);border-style:dashed;border-color:var(--avoid-line);box-shadow:none;color:var(--avoid-ink)}
+.hoodnav{display:grid;gap:10px;padding-top:4px}
+.empty{background:var(--card);border:2px dashed var(--line);border-radius:18px;padding:18px;text-align:center;font-weight:700}
 .search{display:grid;gap:6px}
 .search label{font-weight:800;font-size:16px}
-.search .fcount{font-weight:700;font-size:15px;color:var(--muted)}
 .search input{min-height:52px;border:2px solid var(--ink);border-radius:16px;background:var(--card);color:var(--ink);font:inherit;font-size:18px;padding:8px 14px;width:100%}
-.filter{background:var(--butter);color:var(--on-butter);border:2px solid var(--ink);border-radius:22px;padding:16px;display:grid;gap:14px}
-.filter h2{font-weight:800;font-size:22px}
-details.filter{padding:0}
+.fcount{font-weight:800;font-size:16px}
+details.filter{background:var(--butter);color:var(--on-butter);border:2px solid var(--ink);border-radius:22px}
 details.filter summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:56px;padding:8px 16px;cursor:pointer;font-family:var(--display);font-weight:800;font-size:20px}
 details.filter summary::-webkit-details-marker{display:none}
 details.filter summary::after{content:"+";font-size:26px;line-height:1;font-weight:500}
 details.filter[open] summary::after{content:"\2212"}
 details.filter .fsum{flex:1 1 auto;font-family:var(--body);font-size:14px;font-weight:700;text-align:right;min-width:0}
 details.filter .fbody{display:grid;gap:14px;padding:0 16px 16px}
-.filter label,.filter .lab{font-weight:800;font-size:16px;display:block;color:var(--on-butter);letter-spacing:0;text-transform:none}
+.filter label,.filter .lab{font-weight:800;font-size:16px;display:block}
 .filter output{font-family:var(--display);font-size:20px}
 .filter input[type=range]{width:100%;height:44px;margin:0;accent-color:#C12C62}
+.filter :focus-visible{outline-color:#3A1630}
 .seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:6px;margin-top:6px}
 .seg button{min-height:46px;border:2px solid #3A1630;border-radius:999px;background:#FFFFFF;color:#3A1630;font-weight:800;font-size:15px;line-height:1.1;padding:4px 6px}
 .seg button[aria-pressed="true"]{background:#3A1630;color:#FFFFFF}
-.filter :focus-visible{outline-color:#3A1630}
-.check{display:flex!important;align-items:center;gap:12px;min-height:44px}
-.check input{width:26px;height:26px;accent-color:#C12C62;flex:0 0 auto}
-.fcount{font-weight:800;font-size:16px}
 .tabs{display:grid;grid-template-columns:1fr 1fr;border:2px solid var(--ink);border-radius:999px;padding:3px;background:var(--card)}
 .tabs button{min-height:44px;border:0;border-radius:999px;background:none;font-weight:800;font-size:16px}
 .tabs button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
-.grp{display:grid;gap:8px}
-.grp-h{font-weight:800;font-size:19px;display:flex;justify-content:space-between;gap:10px;align-items:baseline;scroll-margin-top:12px}
-.grp-h{flex-direction:column;align-items:flex-start!important;gap:2px!important}
-.grp-h>span{display:flex;align-items:center;gap:8px;min-width:0}
-.grp-h small{white-space:normal!important}
-.grp-h .rk{flex:0 0 auto;display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--ink);color:var(--paper);font-size:15px;margin-right:4px}
-.grp-h small{font-family:var(--body);font-size:14px;font-weight:700;color:var(--muted);white-space:nowrap}
-.nearby{font-size:13px;letter-spacing:.06em;text-transform:uppercase;font-weight:800;color:var(--muted);margin-top:4px}
-.row{display:grid;gap:4px;width:100%;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:12px 14px;min-height:64px;box-shadow:0 3px 0 var(--rose)}
-.row .r1{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
-.row .r1 b{font-family:var(--display);font-size:19px;line-height:1.15}
-.row .r1 span{font-size:14px;font-weight:800;color:var(--muted);white-space:nowrap}
-.row .r2{font-size:15px;font-weight:600;color:var(--muted);display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:baseline}
-.row .r2 b{color:var(--ink);font-size:17px;text-align:right;font-variant-numeric:tabular-nums}
-.row .tag{font-size:13px;font-weight:800}
-.row .tag.k{color:var(--berry-deep)}
-.row .tag.at{color:var(--muted)}
-.empty{background:var(--card);border:2px dashed var(--line);border-radius:18px;padding:18px;text-align:center;font-weight:700}
-.mapwrap .hhm-chips{grid-template-columns:1fr}
-.mapwrap{--ink:#3A1630;--muted:#7A5670;--line:#F3CADA;--paper:#FFF4F7;--white:#FFFFFF;background:#FFF4F7;color:#3A1630;border:2px solid var(--line);border-radius:20px;padding:10px}
+.mapbox{border:2px solid var(--ink);border-radius:20px;overflow:hidden;background:var(--water);line-height:0;touch-action:manipulation;cursor:pointer}
+.mapbox svg{display:block;width:100%;height:auto}
+.srow{background:var(--card);border:2px solid var(--line);border-radius:20px;padding:12px 14px;display:grid;gap:8px}
+.srow h2{font-size:21px;font-weight:800}
+.srow .in{font-size:15px;font-weight:700;color:var(--muted)}
+.sact{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
+.confirmrow{background:var(--blush);border-radius:16px;padding:14px;display:grid;gap:10px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 
-/* the bar, the sheets, the toast */
+/* a building */
+.place h1{font-weight:800;font-stretch:82%;font-size:clamp(30px,8.4vw,38px)}
+.place .kicker{font-size:26px}
+.inhood{font-size:15px;font-weight:700;color:var(--muted)}
+.chk{font-size:15px;font-weight:800;line-height:1.3;color:var(--ok-ink)}
+.photos{display:flex;align-items:center;justify-content:center;gap:8px;min-height:56px;border:2px solid var(--ink);border-radius:999px;background:var(--rose);font-family:var(--display);font-weight:800;font-size:19px;text-decoration:none;color:var(--ink);box-shadow:0 3px 0 var(--ink)}
+.facts{list-style:none;padding:0 16px;background:var(--card);border:2px solid var(--ink);border-radius:20px;box-shadow:0 4px 0 var(--berry)}
+.facts li{padding:10px 0;border-bottom:2px solid var(--line);display:grid;gap:6px}
+.facts li:last-child{border-bottom:0}
+.frow{display:flex;justify-content:space-between;align-items:baseline;gap:14px}
+.frow .l{font-weight:800;font-size:15px;color:var(--muted);flex:1 1 0;min-width:0}
+.frow .v{flex:0 0 auto;max-width:64%;font-family:var(--display);font-weight:800;font-size:22px;text-align:right;font-variant-numeric:tabular-nums;line-height:1.1}
+.frow .v small{display:block;font-family:var(--body);font-size:14px;font-weight:700;color:var(--muted);margin-top:3px}
+.ftext{font-size:17px;font-weight:600;line-height:1.35}
+.box{border-radius:18px;padding:12px 16px;display:grid;gap:8px}
+.box h2{font-size:20px;font-weight:800;font-stretch:84%}
+.box ul{list-style:none;padding:0;display:grid;gap:6px;font-weight:700;font-size:17px;line-height:1.35}
+.box li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px}
+.box.known{background:var(--ok-bg);color:var(--ok-ink)}
+.box.ask{background:none;border:2px solid var(--avoid-line)}
+.box.contact{background:var(--card);border:2px solid var(--line);gap:2px}
+details.more{border-top:2px solid var(--line);border-bottom:2px solid var(--line)}
+details.more+details.more{border-top:0}
+details.more summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:52px;font-family:var(--display);font-weight:800;font-size:18px;cursor:pointer}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::after{content:"+";font-size:26px;line-height:1;font-weight:500}
+details.more[open] summary::after{content:"\2212"}
+details.more .in{padding:2px 0 16px;display:grid;gap:12px;font-size:17px}
+.apts{list-style:none;padding:0;display:grid;gap:12px}
+.apts li{border:2px solid var(--line);border-radius:16px;padding:12px 14px;display:grid;gap:6px}
+.apts .a-h{font-weight:800}
+.apts .a-s{font-size:15px;color:var(--muted);font-weight:600}
+.points{list-style:none;padding:0;display:grid;gap:10px}
+.points li{display:grid;grid-template-columns:26px 1fr;gap:10px;align-items:start}
+.points svg{width:24px;height:24px;margin-top:1px}
+
+/* the bar, the toast, the error bar */
 .navbar{position:fixed;left:0;right:0;bottom:0;z-index:45;background:var(--card);border-top:2px solid var(--ink);box-shadow:0 -3px 0 var(--rose);padding-top:6px;padding-bottom:calc(6px + env(safe-area-inset-bottom,0px));padding-left:max(10px,env(safe-area-inset-left,0px));padding-right:max(10px,env(safe-area-inset-right,0px))}
 .navbar .in{max-width:520px;margin:0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
 .tab{display:grid;justify-items:center;align-content:center;gap:1px;min-height:54px;border:0;border-radius:16px;background:none;font:inherit;font-weight:800;font-size:14px;line-height:1.1;color:var(--ink);padding:4px 2px}
@@ -349,824 +283,473 @@ details.filter .fbody{display:grid;gap:14px;padding:0 16px 16px}
 .tab .h{font-size:22px;line-height:24px;color:var(--berry-deep)}
 .tab[aria-current="page"]{background:var(--rose)}
 .tab .n{display:inline-grid;place-items:center;min-width:20px;height:20px;border-radius:999px;background:var(--berry-deep);color:var(--on-berry);font-size:12px;padding:0 5px;margin-left:3px;vertical-align:1px}
-.photos{display:flex;align-items:center;justify-content:center;gap:8px;min-height:52px;border:2px solid var(--ink);border-radius:999px;background:var(--rose);font-family:var(--display);font-weight:800;font-size:18px;text-decoration:none;color:var(--ink);box-shadow:0 3px 0 var(--ink)}
-.bigpair{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:12px;background:var(--card);border:2px solid var(--ink);border-radius:20px;padding:12px 16px}
-.bigpair div{display:grid;align-content:start}
-.bigpair span{font-size:15px;font-weight:800;color:var(--muted);line-height:1.2}
-.bigpair b{font-family:var(--display);font-weight:800;font-size:30px;line-height:1.1;font-variant-numeric:tabular-nums}
-.confirmbox{background:var(--mid-bg);color:var(--mid-ink);border-radius:18px;padding:12px 16px;display:grid;gap:6px}
-.confirmbox h2{font-size:19px;font-weight:800}
-.confirmbox ul{padding-left:1.1em;display:grid;gap:4px;font-weight:600}
-.contact{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:12px 16px;display:grid;gap:2px}
-.contact h2{font-size:19px;font-weight:800}
-.contact .tel{font-family:var(--display);font-weight:800;font-size:22px}
-.listtools{display:grid;gap:10px}
-.sheet{position:fixed;inset:0;z-index:40;background:var(--paper);overflow-y:auto;-webkit-overflow-scrolling:touch;padding-top:env(safe-area-inset-top,0px)}
-.sheet .wrap{display:grid;gap:16px;padding-top:8px;padding-bottom:calc(var(--bar-h,0px) + 28px)}
-.sheet .wrap>*{min-width:0}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--bar-h,0px) + 14px + env(safe-area-inset-bottom,0px));z-index:60;background:var(--ink);color:var(--paper);font-weight:800;font-size:16px;border-radius:999px;padding:10px 18px;max-width:calc(100% - 32px);text-align:center;pointer-events:none}
-.asksheet{position:fixed;inset:0;z-index:50;background:var(--shade);display:grid;align-items:end}
-.askbox{background:var(--paper);border-radius:24px 24px 0 0;max-height:88%;overflow-y:auto;padding-top:18px;padding-bottom:calc(18px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.askin{max-width:520px;margin:0 auto;display:grid;gap:14px}
-.askin h2{font-weight:800;font-size:26px}
-.sugg{display:grid;gap:8px}
-.sugg button{min-height:48px;text-align:left;border:2px solid var(--line);background:var(--card);border-radius:16px;padding:10px 14px;font-weight:700;font-size:16px}
-.askform{display:grid;grid-template-columns:1fr auto;gap:8px}
-.askform input{min-width:0;min-height:52px;border:2px solid var(--ink);border-radius:16px;background:var(--card);color:var(--ink);font:inherit;padding:8px 14px}
-.askform .btn{width:auto}
-.answer{background:var(--card);border:2px solid var(--ink);border-radius:18px;padding:14px 16px;font-size:18px;white-space:pre-wrap}
 .oops{position:fixed;left:0;right:0;top:0;z-index:70;background:var(--low-bg);color:var(--low-ink);border-bottom:2px solid var(--low-ink);padding-top:calc(10px + env(safe-area-inset-top,0px));padding-bottom:12px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .oops .in{max-width:520px;margin:0 auto;display:grid;gap:8px}
 .oops p{font-size:16px}
 .oops-b{display:flex;flex-wrap:wrap;gap:8px}
 .oops-b .btn{width:auto;flex:1 1 auto}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:360px){.figs b{font-size:25px}.frow .v{font-size:20px}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
 <div class="wrap"><main id="app" tabindex="-1"><p>Loading…</p></main></div>
-<div id="layer"></div>
 <div id="savebar-slot"></div>
 <div id="live" class="sr" aria-live="polite"></div>
 
 <!--CONCIERGE_DATA_SLOT-->
+<!--CONCIERGE_PLACES_SLOT-->
 <!--CONCIERGE_ILLUS_SLOT-->
 <!--CONCIERGE_MAP_SLOT-->
 
 <script>
 (function () {
 "use strict";
-var D = window.CONCIERGE_DATA, MAPBASE = window.HOUSE_HUNT_MAP_BASE || null;
-var app = document.getElementById("app"), layer = document.getElementById("layer"), barSlot = document.getElementById("savebar-slot"), live = document.getElementById("live");
-if (!D || !D.buildings) { app.innerHTML = "<p>This page has not been built yet. Run scripts/build_concierge.py.</p>"; return; }
+var D = window.CONCIERGE_DATA, PLACES = window.CONCIERGE_PLACES || {}, MAPBASE = window.HOUSE_HUNT_MAP_BASE || null;
+var app = document.getElementById("app"), barSlot = document.getElementById("savebar-slot"), live = document.getElementById("live");
+if (!D || !Array.isArray(D.neighborhoods)) { app.innerHTML = "<p>This page has not been built yet. Run scripts/build_concierge.py.</p>"; return; }
 
-/* ---------- data ---------- */
-var META = D.meta || {}, ANCHOR = META.anchor_label || "Mom and Dad";
-var HOODS = D.neighborhoods || [], B = D.buildings || [], BY = {}, HBY = {};
-var CAN = !!(D.meta && D.meta.default_recommendation && Array.isArray(D.meta.default_recommendation.neighborhoods) && D.meta.default_recommendation.neighborhoods.length);
-B.forEach(function (b) { BY[b.id] = b; });
-HOODS.forEach(function (h) { HBY[h.id] = h; });
-B.forEach(function (b) { var h = HBY[b.neighborhood_id]; b.area_id = (typeof b.group_id === "string" && b.group_id) || ((h && h.parked_under && HBY[h.parked_under]) ? h.parked_under : b.neighborhood_id); });
-var WORDS = ["no", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
+/* ---------- data: every field may be absent ---------- */
+var META = D.meta || {}, COUNTS = META.counts || {}, ANCHOR = (PLACES.meta && PLACES.meta.anchor_label) || "Mom and Dad";
+var RICH = PLACES.buildings || {};
+var LIMIT = isNum(META.rent_limit) ? META.rent_limit : 2000;
+function isNum(x) { return typeof x === "number" && isFinite(x); }
+function arr(x) { return Array.isArray(x) ? x : []; }
+function str(x) { return typeof x === "string" && x.trim() ? x.trim() : ""; }
+var N = D.neighborhoods.filter(function (h) { return h && str(h.id) && str(h.name); }).slice().sort(function (a, b) { return (isNum(a.rank) ? a.rank : 1e9) - (isNum(b.rank) ? b.rank : 1e9); });
+var HIX = {}; N.forEach(function (h, i) { HIX[h.id] = i; });
+/* every building by id: the short record from all_buildings, replaced by the fuller top or avoid record */
+var BIX = {};
+N.forEach(function (h) {
+  arr(h.all_buildings).forEach(function (b) { if (b && str(b.id)) BIX[b.id] = { b: b, h: h, role: "listed" }; });
+  arr(h.avoid_buildings).slice(0, 2).forEach(function (b) { if (b && str(b.id)) BIX[b.id] = { b: b, h: h, role: "avoid" }; });
+  arr(h.top_buildings).slice(0, 3).forEach(function (b) { if (b && str(b.id)) BIX[b.id] = { b: b, h: h, role: "top" }; });
+});
 
 /* ---------- small helpers ---------- */
 function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
-function isNum(x) { return typeof x === "number" && isFinite(x); }
 function money(v) { return isNum(v) ? "$" + Math.round(v).toLocaleString("en-US") : null; }
 function cents(v) { return isNum(v) ? "$" + (Math.round(v * 100) % 100 === 0 ? Math.round(v).toString() : v.toFixed(2)) : null; }
+function fmtN(n) { return isNum(n) ? Math.round(n).toLocaleString("en-US") : null; }
 function httpUrl(u) { return typeof u === "string" && /^https?:\/\//i.test(u) ? u : null; }
-function ext(u, label, cls) { u = httpUrl(u); return u ? '<a class="' + (cls || "link") + '" href="' + esc(u) + '" target="_blank" rel="noopener noreferrer">' + esc(label) + ' <span aria-hidden="true">&#8599;</span><span class="sr"> (opens in a new tab)</span></a>' : ""; }
-var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-function niceDate(iso) { var m = /^(\d{4})-(\d\d)-(\d\d)/.exec(iso || ""); return m ? MONTHS[+m[2] - 1] + " " + (+m[3]) : null; }
-function shortDate(iso) { var m = /^(\d{4})-(\d\d)-(\d\d)/.exec(iso || ""); return m ? MONTHS[+m[2] - 1].slice(0, 3) + " " + (+m[3]) : null; }
-function nm(b) { return String((b && (b.name || b.address)) || "This place").replace(/\.\s*$/, ""); }
+function ext(u, label, cls) { u = httpUrl(u); return u ? '<a class="' + (cls || "link") + '" href="' + esc(u) + '" target="_blank" rel="noopener noreferrer">' + esc(label) + ' <span aria-hidden="true">&nbsp;&#8599;</span><span class="sr"> (opens in a new tab)</span></a>' : ""; }
 function cap(s) { s = String(s || ""); return s.charAt(0).toUpperCase() + s.slice(1); }
-function li(q) { return '<li>' + esc(q) + '</li>'; }
+function nm(b) { return str(b && b.name) || str(b && b.address) || "This building"; }
+function plural(n, one, many) { return n + " " + (n === 1 ? one : many); }
 var ICON = {
-  search: "M10 4a6 6 0 1 0 0 12a6 6 0 0 0 0-12zM14.5 14.5L20 20", dog: "M5 11l-2-4 4-1 2 2h5l3-3 2 1-1 4v8h-3v-4H9v4H6v-6z", warning: "M12 4l9 16H3zM12 10v5M12 17.5v.5", train: "M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zM5 11h14M8 20l2-3M16 20l-2-3M9 14h.5M14.5 14h.5",
+  search: "M10 4a6 6 0 1 0 0 12a6 6 0 0 0 0-12zM14.5 14.5L20 20", dog: "M5 11l-2-4 4-1 2 2h5l3-3 2 1-1 4v8h-3v-4H9v4H6v-6z",
   home: "M4 11l8-7 8 7v9h-5v-6H9v6H4z", fork: "M7 3v7a2 2 0 0 0 4 0V3M9 12v9M16 3c-2 2-2 7 0 9v9", park: "M12 3l5 7h-3l4 6H6l4-6H7zM12 16v5",
-  coffee: "M5 9h11v5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5zM16 10h2a2 2 0 0 1 0 5h-2M8 3v3M12 3v3", heart: "M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.500-7 10-7 10z",
-  ruler: "M3 16L16 3l5 5L8 21zM7 14l2 2M10 11l2 2M13 8l2 2", clock: "M12 3a9 9 0 1 0 0 18a9 9 0 0 0 0-18zM12 7v5l3 2", parking: "M5 3h14v18H5zM10 17V8h3a2.500 2.500 0 0 1 0 5h-3",
-  car: "M4 16v-4l2-5h12l2 5v4M4 16h16M6 16v2M18 16v2M7.500 13h.5M16 13h.5", coin: "M12 3a9 9 0 1 0 0 18a9 9 0 0 0 0-18zM14.500 9.500c-.5-1-1.500-1.500-2.500-1.500-1.500 0-2.500.8-2.500 2s1 1.700 2.500 2 2.500.8 2.500 2-1 2-2.500 2c-1 0-2-.5-2.500-1.500M12 6.500V8M12 16v1.500",
-  water: "M3 9c2-2 4-2 6 0s4 2 6 0 4-2 6 0M3 15c2-2 4-2 6 0s4 2 6 0 4-2 6 0", laundry: "M5 3h14v18H5zM12 9a4 4 0 1 0 0 8a4 4 0 0 0 0-8zM8 6h.5", moon: "M19 14A8 8 0 1 1 10 5a6 6 0 0 0 9 9z",
-  key: "M14 4a5 5 0 1 0 0 10a5 5 0 0 0 0-10zM10.500 12.500L4 19v2h3v-2h2v-2h2", dot: "M12 9a3 3 0 1 0 0 6a3 3 0 0 0 0-6z"
+  ruler: "M3 16L16 3l5 5L8 21zM7 14l2 2M10 11l2 2M13 8l2 2", parking: "M5 3h14v18H5zM10 17V8h3a2.500 2.500 0 0 1 0 5h-3",
+  car: "M4 16v-4l2-5h12l2 5v4M4 16h16M6 16v2M18 16v2M7.500 13h.5M16 13h.5", moon: "M19 14A8 8 0 1 1 10 5a6 6 0 0 0 9 9z",
+  key: "M14 4a5 5 0 1 0 0 10a5 5 0 0 0 0-10zM10.500 12.500L4 19v2h3v-2h2v-2h2", tag: "M3 12V4h8l10 10-8 8zM7.500 8h.5",
+  pin: "M12 21s-6-6.500-6-11a6 6 0 0 1 12 0c0 4.500-6 11-6 11zM12 8a2 2 0 1 0 0 4a2 2 0 0 0 0-4z", dot: "M12 9a3 3 0 1 0 0 6a3 3 0 0 0 0-6z"
 };
-ICON.money = ICON.coin;
 function icon(name) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="' + (ICON[name] || ICON.dot) + '"/></svg>'; }
-function offerText(a) { return typeof a.offer_text === "string" && a.offer_text ? a.offer_text : typeof a.offer === "string" && a.offer ? a.offer : null; }
-/* what today's re-read found */
-var STILL_Q = "Is this apartment still offered, and at what rent?";
-function isToday(a) { var s = a && a.checked && a.checked.status; return s === "confirmed_today" || s === "price_changed_today"; }
-function lastSeenText(date) { var d = niceDate(date); return (d ? "Last seen " + d + ". " : "Not re-read today. ") + "Ask if it is still offered."; }
-function aptChecked(a) {
-  var c = a && a.checked; if (!c || !c.status) return null;
-  if (c.status === "confirmed_today") return { kind: "ok", text: "Confirmed on the building's site today" };
-  if (c.status === "price_changed_today") return { kind: "ok", text: "Confirmed today, at a new price" };
-  if (c.status === "last_seen") return { kind: "old", text: lastSeenText(c.date) };
-  return null;
+var STATE_NAME = { NY: "New York", NJ: "New Jersey", CT: "Connecticut", PA: "Pennsylvania" };
+function where(h) { return [str(h.area), str(h.state)].filter(Boolean).join(", "); }
+function rentText(r) { r = arr(r); var a = r[0], z = r[1]; return isNum(a) ? money(a) + (isNum(z) && z !== a ? " to " + money(z) : "") : null; }
+function rentAttr(r) { r = arr(r); var top = isNum(r[1]) ? r[1] : r[0]; return isNum(top) ? ' data-rent="' + top + '"' : ""; }
+function driveText(h) { return isNum(h.drive_min) ? Math.round(h.drive_min) + " min" : null; }
+function tollText(h) { return !isNum(h.toll_round_trip) ? "" : h.toll_round_trip === 0 ? "no tolls" : "tolls " + cents(h.toll_round_trip) + " round trip"; }
+function lowConf(h) { var c = h && h.confidence, l = typeof c === "string" ? c : c && typeof c === "object" ? c.level : ""; return /^low/i.test(String(l || "")); }
+function confLine(h) { return lowConf(h) ? '<p class="conf" data-conf="low"><i aria-hidden="true"></i>Fewer listings to go on</p>' : ""; }
+function isVerified(b) { var v = b && b.verified; return v === true || !!(v && typeof v === "object" && v.on_page); }
+function richOf(b) { return isVerified(b) && RICH[b.id] ? RICH[b.id] : null; }
+/* the total with utilities and fees, only where the data carries it (buildings checked against their listing) */
+function totalRange(b) { var v = b && b.verified, t = v && typeof v === "object" ? arr(v.total_with_utilities_and_fees) : []; return isNum(t[0]) ? t : null; }
+function pairHtml(b) {
+  var r = rentText(b.rent_range), t = totalRange(b);
+  if (!r && !t) return "";
+  return '<div class="pair' + (t ? "" : " one") + '"><div><span>Rent</span><b' + rentAttr(b.rent_range) + '>' + (r || "Not known") + '</b></div>' +
+    (t ? '<div><span>Total with utilities and fees</span><b data-total="1">' + rentText(t) + '</b></div>' : '') + '</div>';
 }
-function bldChecked(b) {
-  var ap = (b.apartments || []).filter(function (a) { return a && a.checked && a.checked.status; });
-  if (!ap.length) return null;
-  var today = ap.filter(isToday).length;
-  if (today === (b.apartments || []).length) return { kind: "ok", text: "Confirmed on the building's site today", today: true };
-  if (today > 0) return { kind: "ok", text: "Some apartments confirmed today", today: true };
-  var dates = ap.map(function (a) { return a.checked.date; }).filter(function (d) { return /^\d{4}-\d\d-\d\d/.test(d || ""); }).sort();
-  return { kind: "old", text: lastSeenText(dates[dates.length - 1]), ask: true, date: dates[dates.length - 1] };
-}
-function chkLine(c) { return c ? '<p class="chk ' + c.kind + '"><span aria-hidden="true">' + (c.kind === "ok" ? "&#10003;" : "&#9719;") + '</span> ' + esc(c.text) + '</p>' : ""; }
-function aptLabel(a) { var l = String((a && a.label) || "").trim(); return !l || /^apartment\s*(null|none|undefined)?$/i.test(l) ? "Apartment" : l; }
-function bedsText(n) { return n === 0 ? "Studio" : n === 1 ? "1 bedroom" : isNum(n) ? n + " bedrooms" : null; }
-function hoodName(b) { var h = HBY[b.neighborhood_id], n = (typeof b.neighborhood_name === "string" && b.neighborhood_name) || (h && h.name); return n ? n + ((h && h.state) || b.state ? ", " + ((h && h.state) || b.state) : "") : [b.city, b.state].filter(Boolean).join(", "); }
-function fromMoney(a, z) { return isNum(a) ? (isNum(z) && z !== a ? "from " : "") + money(a) : null; }
-function pairHtml(b, tag) {
-  var f = b.facts || {}, t = tag || "div";
-  return '<' + t + ' class="pair"><' + t + '><span>Rent</span><b' + (isNum(f.rent_from) ? ' data-rent="' + f.rent_from + '"' : '') + '>' + (fromMoney(f.rent_from, f.rent_to) || "Not known") + '</b></' + t + '>' +
-    '<' + t + '><span>Total with utilities and fees</span><b>' + (fromMoney(f.total_from, f.total_to) || "Not known") + '</b></' + t + '></' + t + '>';
-}
+function aptCount(b) { return isNum(b.apartments) && b.apartments > 0 ? '<p class="count" data-count="' + b.apartments + '">' + plural(b.apartments, "apartment", "apartments") + " at " + money(LIMIT) + " or less</p>" : ""; }
 
-function pairLine(b) {
-  var f = b.facts || {};
-  return '<p class="pline">Rent <b' + (isNum(f.rent_from) ? ' data-rent="' + f.rent_from + '"' : '') + '>' + (fromMoney(f.rent_from, f.rent_to) || "not known") + '</b> &middot; Total with utilities and fees <b>' + (fromMoney(f.total_from, f.total_to) || "not known") + '</b></p>';
-}
-/* where a figure sits among every building on this page */
-var RANGE = {};
-["rent_from", "total_from", "drive_min"].forEach(function (k) { RANGE[k] = B.map(function (b) { return b.facts && b.facts[k]; }).filter(isNum).sort(function (a, b) { return a - b; }); });
-function position(key, v, lowWord, highWord) {
-  var xs = RANGE[key];
-  if (!isNum(v) || !xs || xs.length < 3) return "";
-  var lo = xs[0], hi = xs[xs.length - 1];
-  if (hi === lo) return "";
-  var below = xs.filter(function (x) { return x < v; }).length, same = xs.filter(function (x) { return x === v; }).length;
-  var pct = (below + (same - 1) / 2) / (xs.length - 1);
-  var word = pct <= 0.34 ? lowWord : pct >= 0.66 ? highWord : "about in the middle";
-  var left = Math.max(0, Math.min(100, (v - lo) / (hi - lo) * 100));
-  return '<div class="pos"><span class="track" aria-hidden="true"><i style="left:' + left.toFixed(1) + '%"></i></span><span class="word">' + word + '</span></div>';
-}
-
-/* ---------- her list and tour plan, kept on this phone only ---------- */
-/* Versions 5 and 6 ask nothing: only her list, her ticks for Compare and her tour plan are kept. Answers saved by earlier
-   versions (under this key or older ones) are ignored; their list and plan are kept by building id. */
+/* ---------- her list, kept on this phone only ---------- */
+/* Version 7 keeps only the saved buildings. Lists saved by earlier versions are kept where the building is still here. */
 var KEY = "lamia-concierge";
 var OLD_KEYS = ["lamia-concierge-v4", "lamia-concierge-v3", "lamia-concierge-v2"];
-function fresh() { return { v: 6, step: "home", saved: [], ticked: [], tour: [] }; }
+function fresh() { return { v: 7, saved: [] }; }
 var S = fresh();
-/* adds a saved list, ticks and tour plan to hers (several old keys may each hold some) */
-function keepList(o) { ["saved", "ticked", "tour"].forEach(function (k) { if (Array.isArray(o[k])) o[k].forEach(function (id) { if (BY[id] && S[k].indexOf(id) < 0) S[k].push(id); }); }); }
+function keepList(o) { if (o && Array.isArray(o.saved)) o.saved.forEach(function (id) { if (typeof id === "string" && BIX[id] && BIX[id].role !== "avoid" && S.saved.indexOf(id) < 0) S.saved.push(id); }); }
 (function load() {
   try {
     OLD_KEYS.forEach(function (k) {
       var r = window.localStorage.getItem(k); if (!r) return;
-      try { var o0 = JSON.parse(r); if (o0 && typeof o0 === "object") keepList(o0); } catch (e) { /* ignore */ }
+      try { keepList(JSON.parse(r)); } catch (e) { /* ignore */ }
       window.localStorage.removeItem(k);
     });
     var raw = window.localStorage.getItem(KEY); if (!raw) return;
-    var o = JSON.parse(raw); if (!o || typeof o !== "object") return;
-    keepList(o);
-    if (o.step === "plan") S.step = "plan";
+    keepList(JSON.parse(raw));
   } catch (e) { /* storage is a convenience; the page works without it */ }
-  S.ticked = S.ticked.filter(function (id) { return S.saved.indexOf(id) >= 0; }).slice(0, 3);
 })();
 function save() { try { window.localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* ignore */ } }
-/* the overlays: a place, My list, Compare. The top one is on screen; Back pops it. */
-var VIEW = { hood: 0, all: false, tab: "list", stack: [], confirmReset: false, open: {}, grp: {}, f: { rent: null, beds: "any", garage: false, state: "any", q: "" } };
-var mapApi = null, askApi = null;
 function isSaved(id) { return S.saved.indexOf(id) >= 0; }
-function onTour(id) { return S.tour.indexOf(id) >= 0; }
-function without(list, id) { return list.filter(function (x) { return x !== id; }); }
+
+/* where she is: one of three tabs, with neighborhood and building screens stacked on top */
+var VIEW = { tab: "home", stack: [], shown: 10, mode: "list", sel: null, allOpen: {}, allShown: {}, confirmClear: false, fopen: false, f: { q: "", state: "any", drive: null, rent: null } };
 function topView() { return VIEW.stack[VIEW.stack.length - 1] || null; }
-function push(v) { VIEW.stack.push(v); render(); }
-function compareIds() {
-  var t = S.ticked.filter(isSaved);
-  if (t.length >= 2 && t.length <= 3) return t;
-  if (S.saved.length >= 2 && S.saved.length <= 3 && t.length < 2) return S.saved.slice();
-  return null;
-}
-
-
-
-/* ---------- the short list, as the data gives it (meta.default_recommendation) ---------- */
-var DEF = META.default_recommendation || null, FUNNEL = META.funnel || null, LEAN = Array.isArray(META.leanings) ? META.leanings : [];
-var GROUPS = (META.recommender && META.recommender.groups) || [];
-function areaRankOf(id) { var b = BY[id]; if (!b || !CAN) return null; for (var i = 0; i < DEF.neighborhoods.length; i++) if (DEF.neighborhoods[i].neighborhood_id === b.area_id) return i + 1; return null; }
-function topIds() { return CAN ? DEF.neighborhoods.map(function (n) { return [n.neighborhood_id, n.buildings.map(function (x) { return x.id; })]; }) : []; }
-/* the order of facts on a row: closer to Mom and Dad is better, so the drive comes first */
-var ORDER = ["family", "room", "going_out", "green", "parking", "money"];
-
-
-/* ---------- the facts, in plain words ---------- */
-function raw(b) {
-  var r = b.features_raw || {}, f = b.facts || {}, fit = b.fit || {}, ap = b.apartments || [];
-  function pick(x, y) { return x !== undefined && x !== null ? x : y; }
-  var sq = ap.map(function (a) { return a.sqft; }).filter(isNum);
-  return {
-    drive: pick(r.drive_min, f.drive_min), total: pick(r.total, f.total_from),
-    sqft: pick(r.sqft, pick(fit.sqft_max, sq.length ? Math.max.apply(null, sq) : null)),
-    bedroom: pick(r.bedroom, ap.some(function (a) { return a.beds === 1; })),
-    studio: ap.some(function (a) { return a.beds === 0; }),
-    rest: pick(r.restaurants_10min, fit.restaurants_10min), park: pick(r.park_walk_min, fit.park_walk_min), parkName: pick(r.park_name, fit.park_name),
-    pk: pick(r.parking_kind, (f.parking || {}).kind)
-  };
-}
-var PK = { garage: "Garage parking", covered: "Covered parking", lot: "A parking lot", off_street: "Off-street parking", street: "Street parking" };
-function factText(b, k) {
-  var x = raw(b);
-  if (k === "family") return isNum(x.drive) ? Math.round(x.drive) + " min to " + ANCHOR : "Drive to " + ANCHOR + " not known";
-  if (k === "room") return (x.bedroom ? "1 bedroom" : x.studio ? "Studio" : "Size") + (isNum(x.sqft) ? ", " + Math.round(x.sqft).toLocaleString("en-US") + " sq ft" : x.bedroom || x.studio ? "" : " not known");
-  if (k === "going_out") return isNum(x.rest) ? x.rest + (x.rest === 1 ? " restaurant" : " restaurants") + " in a 10-min walk" : "Restaurants nearby not known";
-  if (k === "green") return isNum(x.park) ? "A park " + Math.max(1, Math.round(x.park)) + " min on foot" : "Nearest park not known";
-  if (k === "parking") return PK[x.pk] || "Parking not known";
-  if (k === "money") return isNum(x.total) ? "Total " + money(x.total) + " a month" : "Total not known";
-  return "";
-}
-/* the same, short enough for a thumbnail */
-function shortFact(b, k) {
-  var x = raw(b);
-  if (k === "family") return isNum(x.drive) ? Math.round(x.drive) + " min drive" : "";
-  if (k === "room") return (x.bedroom ? "1 bedroom" : x.studio ? "Studio" : "") + (isNum(x.sqft) ? (x.bedroom || x.studio ? ", " : "") + Math.round(x.sqft).toLocaleString("en-US") + " sq ft" : "");
-  if (k === "going_out") return isNum(x.rest) ? x.rest + (x.rest === 1 ? " restaurant" : " restaurants") + " near" : "";
-  if (k === "green") return isNum(x.park) ? "Park " + Math.max(1, Math.round(x.park)) + " min walk" : "";
-  if (k === "parking") return PK[x.pk] ? PK[x.pk].replace(" parking", "").replace("A parking lot", "Parking lot") : "";
-  return "";
-}
-var FACT_ORDER = ["family", "room", "going_out", "green", "parking"], FACT_ICON = { family: "car", room: "ruler", going_out: "fork", green: "park", parking: "parking" };
-function lifeLine(b) {
-  var L = b.life_here || [], m = L.filter(function (x) { return x && x.moment === "weekday" && x.text; })[0] || L.filter(function (x) { return x && x.text; })[0];
-  return m ? firstSentence(m.text) : "";
-}
-/* the three facts the place sheet and thumbnails lead with */
-function chipKeys() { return ["family", "room", "going_out"]; }
 
 /* ---------- shared pieces ---------- */
-function top() { return '<header class="top"><span class="brand">Lamia&#39;s House Hunt</span><span class="topbtns" id="topbtns"></span></header>'; }
-function backTop(act, label) { return '<header class="top"><button type="button" class="quiet" data-act="' + act + '"><span aria-hidden="true">&#8249;</span> ' + label + '</button><span class="topbtns" id="topbtns"></span></header>'; }
-function sheetTop(right) { return '<header class="top"><button type="button" class="quiet" data-act="back"><span aria-hidden="true">&#8249;</span> Back</button>' + (right || '<span></span>') + '</header>'; }
+function backTop(right) { return '<header class="top"><button type="button" class="quiet" data-act="back"><span aria-hidden="true">&#8249;</span> Back</button>' + (right || '<span></span>') + '</header>'; }
 function heart(b, big) {
   var on = isSaved(b.id);
-  return '<button type="button" class="' + (big ? "btn sm" : "heart") + '" data-act="save" data-id="' + esc(b.id) + '" aria-pressed="' + on + '" aria-label="' + (on ? "Saved to My list: " : "Save to My list: ") + esc(b.name || b.address || "this place") + '">' +
+  return '<button type="button" class="' + (big ? "btn sm" : "heart") + '" data-act="save" data-id="' + esc(b.id) + '" aria-pressed="' + on + '" aria-label="' + (on ? "Saved to My list: " : "Save to My list: ") + esc(nm(b)) + '">' +
     '<span class="h" aria-hidden="true">' + (on ? "&#9829;" : "&#9825;") + '</span>' + (on ? "Saved" : "Save") + (big ? " to My list" : "") + '</button>';
 }
-function tagList(h) { var t = (h && Array.isArray(h.tags) ? h.tags : []).filter(function (x) { return typeof x === "string" && x.trim(); }).slice(0, 2); return t.length ? '<ul class="tags" aria-label="In a word">' + t.map(function (x) { return '<li>' + esc(cap(x.trim())) + '</li>'; }).join("") + '</ul>' : ''; }
-function hoodNameOf(b) { var h = HBY[b.neighborhood_id]; return (typeof b.neighborhood_name === "string" && b.neighborhood_name) || (h && h.name) || ""; }
-/* a group's heading: its name, or "X and nearby" when the buildings listed under it come from joined neighborhoods */
-function areaName(id, ids, noState) {
-  var h = HBY[id], g = GROUPS.filter(function (x) { return x.id === id; })[0];
-  var name = (g && g.name) || (h && h.name) || id, st = h && h.state && !noState ? ", " + h.state : "";
-  var joined = (ids || []).some(function (bid) { return BY[bid] && BY[bid].neighborhood_id !== id; });
-  return joined ? name + " and nearby" + st : name + st;
-}
-function medianOf(xs) { xs = xs.filter(isNum).sort(function (a, b) { return a - b; }); if (!xs.length) return null; var h = Math.floor(xs.length / 2); return xs.length % 2 ? xs[h] : (xs[h - 1] + xs[h]) / 2; }
-/* the figures of a neighborhood, over the three buildings shown */
-function areaFigs(ids) {
-  var rs = ids.map(function (id) { return BY[id].features_raw || {}; }), L = ids.map(function (id) { return raw(BY[id]); });
-  var places = rs.filter(function (r) { return isNum(r.restaurants_10min) || isNum(r.bars_10min); }).map(function (r) { return (r.restaurants_10min || 0) + (r.bars_10min || 0); });
-  var sq = L.map(function (x) { return x.sqft; }).filter(isNum), tot = L.map(function (x) { return x.total; }).filter(isNum), walk = L.map(function (x) { return x.park; }).filter(isNum);
-  var rent = ids.map(function (id) { return (BY[id].facts || {}).rent_from; }).filter(isNum);
-  var d = medianOf(L.map(function (x) { return x.drive; })), p = medianOf(places);
-  var big = null; L.forEach(function (x) { if (isNum(x.sqft) && (!big || x.sqft > big.sqft)) big = x; });
-  return { drive: isNum(d) ? Math.round(d) : null, total: tot.length ? Math.min.apply(null, tot) : null, rent: rent.length ? Math.min.apply(null, rent) : null,
-    sqft: big ? big.sqft : null, bedroom: big ? !!big.bedroom : L.some(function (x) { return x.bedroom; }), places: isNum(p) ? Math.round(p) : null, walk: walk.length ? Math.max(1, Math.round(Math.min.apply(null, walk))) : null };
-}
-var STATE_NAME = { NY: "New York", NJ: "New Jersey", CT: "Connecticut", PA: "Pennsylvania" };
-function hoodChips(A) {
-  var h = HBY[A] || {}, nb = CAN ? DEF.neighborhoods.filter(function (x) { return x.neighborhood_id === A; })[0] : null;
-  var tags = (nb && Array.isArray(nb.tags) && nb.tags.length ? nb.tags : h.tags || []).filter(function (x) { return typeof x === "string" && x.trim(); }).slice(0, 2);
-  var out = tags.map(function (x) { return '<li class="y">' + esc(cap(x.trim())) + '</li>'; });
-  return out.length ? '<ul class="chips" aria-label="In a word">' + out.join("") + '</ul>' : '';
-}
-/* one plain line on what life there is like, from the data: the neighborhood's good line, else the first sentence of its about */
-function hoodLine(A) { var h = HBY[A] || {}; return h.good || (h.about ? firstSentence(h.about) : "") || ""; }
-
-/* ---------- the drawings: the long page's experience scenes, inlined by the build ---------- */
+function tagList(h) { var t = arr(h.tags).map(str).filter(Boolean).slice(0, 2); return t.length ? '<ul class="tags" aria-label="In a word">' + t.map(function (x) { return '<li>' + esc(cap(x)) + '</li>'; }).join("") + '</ul>' : ''; }
 var ILL = window.CONCIERGE_ILLUS || {};
-/* a neighborhood gets the scene of its own experience; when one of the three already has that scene, the next gets the
-   scene that fits what it is best for (meta.leanings, then its why), so the three cards never look alike */
-var SCENE_FOR = { green: "space", room: "space", going_out: "pre_car", family: "settled", money: "new_water", parking: "enclave" };
-var SCENES = (function () {
-  var used = {}, out = [];
-  (CAN ? DEF.neighborhoods : []).forEach(function (nb) {
-    var A = nb.neighborhood_id, h = HBY[A] || {}, ex = h.experience_id || ((BY[(nb.buildings[0] || {}).id] || {}).experience_id);
-    var keys = [ex].concat(LEAN.filter(function (x) { return x.neighborhood_id === A; }).map(function (x) { return SCENE_FOR[x.priority_key]; }),
-      (nb.why_features || []).map(function (k) { return SCENE_FOR[k]; }), Object.keys(ILL));
-    var k = keys.filter(function (x) { return x && ILL[x] && !used[x]; })[0] || null;
-    if (k) used[k] = 1; out.push(k);
-  });
-  return out;
-})();
 var HOUSE_SVG = '<svg viewBox="0 0 360 130" preserveAspectRatio="xMidYMid slice"><rect width="360" height="130" fill="#FFE7EF"/><rect y="104" width="360" height="26" fill="#BFE7D2"/><path d="M130 104V62l50-34 50 34v42z" fill="#FFFFFF" stroke="#3A1630" stroke-width="4" stroke-linejoin="round"/><path d="M120 66l60-42 60 42" fill="none" stroke="#3A1630" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect x="168" y="76" width="24" height="28" fill="#E0457B" stroke="#3A1630" stroke-width="3"/><path d="M180 52c-3-6-12-4-11 3 1 4 6 7 11 11 5-4 10-7 11-11 1-7-8-9-11-3z" fill="#E0457B"/></svg>';
-function illus(i, kind) {
-  var k = SCENES[i], s = k && ILL[k] && (ILL[k][kind] || ILL[k].banner);
+function illus(h, kind) {
+  var k = ILL[h.illustration_key], s = k && (k[kind] || k.banner);
   return '<div class="illus" aria-hidden="true">' + (typeof s === "string" ? s : HOUSE_SVG) + '</div>';
 }
-
-/* ---------- home: the logo, one line, three neighborhood cards ---------- */
-function fmtN(n) { return isNum(n) ? Math.round(n).toLocaleString("en-US") : null; }
-/* how the list was narrowed, in two plain sentences, from meta.funnel (its own sentences when it has them) */
-function funnelText() {
-  var f = FUNNEL || {};
-  if (Array.isArray(f.sentences) && f.sentences.length) return f.sentences.slice(0, 2);
-  var src = isNum(f.sources) ? f.sources : f.sources && typeof f.sources === "object" ? (f.sources.listing_sites || 0) + (f.sources.building_or_manager_sites || 0) : null;
-  var area = String(f.area_text || "within a 2-hour drive of " + ANCHOR + "'s").split(", across")[0];
-  var a = [], one = "I read " + (fmtN(f.listings_read) ? fmtN(f.listings_read) + " listings" : "the listings") +
-    (src ? " from " + fmtN(src) + " sites" : "") + (isNum(f.towns) ? " across " + fmtN(f.towns) + " towns" : "") + " " + area + ".";
-  a.push(one);
-  var pa = f.passed_apartments, n = isNum(pa) ? pa : pa && typeof pa === "object" && isNum(pa.at_or_under_2000) ? pa.at_or_under_2000 : (META.counts || {}).apartments;
-  a.push((isNum(n) ? fmtN(n) + " apartments" : "The apartments here") + " passed every rule, and these three neighborhoods came out best for almost any mix of what matters.");
-  return a;
-}
-function howPicked() {
-  var r = (FUNNEL && Array.isArray(FUNNEL.rules)) ? FUNNEL.rules.filter(function (x) { return typeof x === "string" && x; }) : [];
-  return '<details class="how" id="how"><summary>How these were picked</summary><div class="howbox"><p class="fun">' + funnelText().map(esc).join(" ") + '</p>' +
-    (r.length ? '<ul id="rules" aria-label="The rules">' + r.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>' : '') + '</div></details>';
-}
-function logo(tag) {
+function logo() {
   return '<h1 class="logo" tabindex="-1" id="home-h" aria-label="Lamia&#39;s House Hunt, the short version"><svg viewBox="0 0 360 70" aria-hidden="true"><path d="M30 66 180 8 330 66" fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><rect x="262" y="16" width="20" height="34" rx="3" fill="currentColor"/><path d="M180 30c-5-9-19-6-17 4 1 6 9 11 17 17 8-6 16-11 17-17 2-10-12-13-17-4z" fill="#E0457B"/></svg>' +
-    '<span class="name" aria-hidden="true">Lamia&#39;s<br>House Hunt</span><span class="tagbox" aria-hidden="true">' + (tag || "the short version") + '</span></h1>';
+    '<span class="name" aria-hidden="true">Lamia&#39;s<br>House Hunt</span><span class="tagbox" aria-hidden="true">the short version</span></h1>';
 }
-/* the winner of each fact among the three: the lowest total and drive, the most space and places to eat */
-var FACTS4 = [{ k: "total", best: "low" }, { k: "drive", best: "low" }, { k: "sqft", best: "high" }, { k: "places", best: "high" }];
-function bestOf(figs) {
-  var o = {};
-  FACTS4.forEach(function (c) {
-    var vs = figs.map(function (f) { return f[c.k]; }).filter(isNum); if (vs.length < 2) return;
-    var t = c.best === "low" ? Math.min.apply(null, vs) : Math.max.apply(null, vs);
-    if (vs.filter(function (x) { return x === t; }).length < vs.length) o[c.k] = t;
-  });
-  return o;
+
+/* ---------- a why fact, shortened to a chip (the full sentence is on the neighborhood screen) ---------- */
+var SHORT_LABEL = { near: "Near " + ANCHOR, cost: "Lower rents", going_out: "Places to go out", green: "Parks nearby", supply: "Dogs welcome", space: "More room", parking: "Easier parking" };
+function whyChip(w) {
+  var f = (w && w.figures) || {}, m = w && w.measure;
+  if (m === "near") return f.toll_per_month === 0 ? "No tolls on the drive" : isNum(f.hours_per_month) ? f.hours_per_month + " h of driving a month" : SHORT_LABEL.near;
+  if (m === "cost") return isNum(f.apartments_2000) ? fmtN(f.apartments_2000) + " at " + money(LIMIT) + " or less" : isNum(f.median_rent) ? "Half ask " + money(f.median_rent) + " or less" : SHORT_LABEL.cost;
+  if (m === "going_out") return isNum(f.places_10min) ? fmtN(f.places_10min) + " places to eat nearby" : SHORT_LABEL.going_out;
+  if (m === "green") return isNum(f.park_walk_min) ? "Park " + Math.round(f.park_walk_min) + " min on foot" : isNum(f.dog_run_miles) ? "Dog run " + f.dog_run_miles + " miles" : SHORT_LABEL.green;
+  if (m === "supply") return isNum(f.dogs_yes) && isNum(f.listings) ? f.dogs_yes + " of " + f.listings + " say dogs OK" : SHORT_LABEL.supply;
+  if (m === "space") return isNum(f.median_sqft) ? "About " + fmtN(f.median_sqft) + " sq ft" : SHORT_LABEL.space;
+  if (m === "parking") return isNum(f.parking_offstreet_buildings) && isNum(f.parking_stated_buildings) ? f.parking_offstreet_buildings + " of " + f.parking_stated_buildings + " have parking" : SHORT_LABEL.parking;
+  return SHORT_LABEL[m] || "";
 }
-var STICKER = '<span class="sticker" aria-hidden="true">Best of 3</span>';
-function tile(iconName, valueHtml, label, isBest, key) {
-  return '<li class="tile' + (isBest ? ' best' : '') + '" data-fact="' + key + '"' + (isBest ? ' data-best="1"' : '') + '>' + (isBest ? STICKER : '') + '<span class="v"><span class="ic" aria-hidden="true">' + icon(iconName) + '</span><b>' + valueHtml + '</b></span><span class="l">' + label + '</span>' + (isBest ? '<span class="sr"> (best of the three)</span>' : '') + '</li>';
+function whyList(h) { return arr(h.why).filter(function (w) { return w && str(w.text); }).slice(0, 3); }
+function knowList(h) { return arr(h.know_this).filter(function (w) { return w && str(w.text); }).slice(0, 2); }
+
+/* ---------- home ---------- */
+var MEASURE_LABEL = { near: "Near " + ANCHOR, cost: "Rent", going_out: "Going out", green: "Parks and the dog", supply: "Listings that take dogs and skip the stairs", space: "Space", parking: "Parking", records: "Safety" };
+function howRanked() {
+  var c = COUNTS, ms = META.measures || {}, cov = META.coverage || {}, keys = Object.keys(ms).filter(function (k) { return ms[k] && isNum(ms[k].weight); }).sort(function (a, b) { return ms[b].weight - ms[a].weight; });
+  var sum = keys.reduce(function (s, k) { return s + ms[k].weight; }, 0), maxW = keys.reduce(function (s, k) { return Math.max(s, ms[k].weight); }, 0);
+  var p = [];
+  if (isNum(c.listings_used)) p.push('<p>' + fmtN(c.listings_used) + ' apartment listings were read' + (isNum(c.listings_at_2000_or_less) ? ', and ' + fmtN(c.listings_at_2000_or_less) + ' of them ask ' + money(LIMIT) + ' or less in rent' : '') + '.</p>');
+  var drive = isNum(META.max_drive_min) ? (META.max_drive_min % 60 === 0 ? plural(META.max_drive_min / 60, "hour", "hours") : META.max_drive_min + " minutes") : null;
+  if (isNum(c.eligible)) p.push('<p><b>' + fmtN(c.eligible) + ' neighborhoods are ranked.</b> Each one' + (drive ? ' is under ' + drive + ' by car from ' + esc(ANCHOR) + ',' : '') + ' passed the safety rule' +
+    (isNum(META.min_buildings) ? ', and has at least ' + META.min_buildings + ' buildings with a studio or one-bedroom at ' + money(LIMIT) + ' or less' : '') + '.</p>');
+  var out = [];
+  if (isNum(c.no_neighborhood_record)) out.push(fmtN(c.no_neighborhood_record) + " places with too little on file to rank");
+  if (isNum(c.too_little_supply)) out.push(fmtN(c.too_little_supply) + " with too few buildings");
+  if (isNum(c.cut_by_the_jamaica_rule)) out.push(fmtN(c.cut_by_the_jamaica_rule) + " that did not pass the safety rule");
+  if (isNum(c.cut_drive)) out.push(fmtN(c.cut_drive) + " too far away");
+  if (out.length) p.push('<p class="small muted">Left out: ' + out.join(", ") + '.</p>');
+  var rows = keys.map(function (k) {
+    var cv = cov[k] || {}, known = isNum(cv.neighborhoods_with_measure) && isNum(cv.of) ? (cv.neighborhoods_with_measure === cv.of ? "Known for all " + cv.of : "Known for " + cv.neighborhoods_with_measure + " of " + cv.of) : "";
+    return '<li data-measure="' + esc(k) + '"><span>' + esc(MEASURE_LABEL[k] || str(ms[k].label) || k) + '</span><b>' + ms[k].weight + '</b><span class="bar" aria-hidden="true"><i style="width:' + (maxW ? Math.round(ms[k].weight / maxW * 100) : 0) + '%"></i></span>' + (known ? '<small>' + known + '</small>' : '') + '</li>';
+  }).join("");
+  return '<details class="how" id="how"><summary>How this was ranked</summary><div class="howbox">' + p.join("") +
+    (rows ? '<h3>What counts, out of ' + sum + '</h3><ul class="wts" id="weights">' + rows + '</ul><p class="small muted">Where something is not known for a neighborhood, it adds nothing and takes nothing away.</p>' : '') +
+    '<p class="small muted">Rent is the listed rent. Typical rent is the middle listed rent of the studios and one-bedrooms at ' + money(LIMIT) + ' or less. Drive times are estimates without traffic.</p></div></details>';
 }
-function ncard(nb, i, f, best) {
-  var A = nb.neighborhood_id, ids = nb.buildings.map(function (x) { return x.id; }), tb = isNum(f.total) && best.total === f.total;
-  var nm3 = ids.length === 3 ? "3" : String(ids.length);
-  return '<li class="ncard" data-area="' + esc(A) + '" id="area-' + i + '">' + illus(i, "banner") + '<div class="nb">' +
-    '<h2 id="nh-' + i + '"><span class="num" aria-hidden="true">' + (i + 1) + '</span>' + '<span>' + esc(areaName(A, ids, true)) + ((HBY[A] || {}).state ? '<small>' + esc(STATE_NAME[HBY[A].state] || HBY[A].state) + '</small>' : '') + '</span></h2>' + hoodChips(A) +
-    '<div class="money' + (tb ? ' best' : '') + '" data-fact="total"' + (tb ? ' data-best="1"' : '') + '>' + (tb ? STICKER : '') +
-      '<div><span>Rent from</span><b' + (isNum(f.rent) ? ' data-rent="' + f.rent + '"' : '') + '>' + (money(f.rent) || "?") + '</b></div>' +
-      '<div><span>Total from<small>with utilities and fees</small></span><b class="tv">' + (money(f.total) || "?") + '</b>' + (tb ? '<span class="sr"> (best of the three)</span>' : '') + '</div></div>' +
-    '<ul class="tiles">' +
-      tile("car", isNum(f.drive) ? String(f.drive) : "?", "min to " + esc(ANCHOR), isNum(f.drive) && best.drive === f.drive, "drive") +
-      tile("ruler", isNum(f.sqft) ? Math.round(f.sqft).toLocaleString("en-US") : "?", "sq ft<br>" + (f.bedroom ? "1 bedroom" : "studio"), isNum(f.sqft) && best.sqft === f.sqft, "space") +
-      tile("fork", isNum(f.places) ? String(f.places) : "?", "places to eat nearby", isNum(f.places) && best.places === f.places, "eat") + '</ul>' +
-    '<button type="button" class="btn soft" data-act="hood" data-v="' + i + '" aria-describedby="nh-' + i + '">See the ' + nm3 + ' apartments <span class="go" aria-hidden="true">&#8250;</span></button></div></li>';
+function figs(h, note) {
+  var d = driveText(h), toll = tollText(h);
+  return '<ul class="figs"><li><b' + (isNum(h.typical_rent) ? ' data-rent="' + h.typical_rent + '"' : '') + '>' + (money(h.typical_rent) || "Not known") + '</b><span>typical rent</span></li>' +
+    '<li><b>' + (d ? Math.round(h.drive_min) + ' <small>min</small>' : "Not known") + '</b><span>drive to ' + esc(ANCHOR) + '</span>' + (note && toll ? '<span class="sub">' + toll + '</span>' : '') + '</li></ul>';
 }
-function leaningsBlock() {
-  /* only the leanings whose winner is not already one of the three (in_default_three); none, no card */
-  var three = topIds().map(function (t) { return t[0]; });
-  var L2 = LEAN.filter(function (x) { return x && x.neighborhood_id && (x.line || x.neighborhood_name) && (x.in_default_three === false || (x.in_default_three === undefined && three.indexOf(x.neighborhood_id) < 0)); });
-  if (!L2.length) return '';
-  return '<section class="lean" id="leanings" aria-labelledby="lean-h"><h2 id="lean-h">If one thing matters most to you</h2><ul class="llist">' + L2.map(function (x) {
-    return '<li><button type="button" class="lrow" data-act="lean" data-id="' + esc(x.neighborhood_id) + '"><span class="ll">' + esc(x.priority_label ? cap(x.priority_label) : "") + '</span><b>' + esc(x.neighborhood_name || x.neighborhood_id) + '</b><span class="go" aria-hidden="true">&#8250;</span></button></li>';
-  }).join("") + '</ul></section>';
+function ncard(h) {
+  var chips = whyList(h).map(function (w) { var t = whyChip(w); return t ? '<li data-measure="' + esc(w.measure || "") + '"><span class="ic" aria-hidden="true">' + icon(w.icon) + '</span>' + esc(t) + '</li>' : ''; }).join("");
+  return '<li class="ncard" data-hood="' + esc(h.id) + '" data-rank="' + esc(h.rank) + '">' + illus(h, "banner") + '<div class="nb">' +
+    '<h2><span class="num"><span class="sr">Number </span>' + esc(isNum(h.rank) ? h.rank : "") + '</span><span>' + esc(h.name) + (where(h) ? '<small>' + esc(where(h)) + '</small>' : '') + '</span></h2>' +
+    tagList(h) + figs(h) + (chips ? '<ul class="wchips" aria-label="Why it ranks here">' + chips + '</ul>' : '') + confLine(h) +
+    '<button type="button" class="btn soft" data-act="hood" data-id="' + esc(h.id) + '">See this neighborhood<span class="sr">: ' + esc(h.name) + '</span> <span class="go" aria-hidden="true">&#8250;</span></button></div></li>';
 }
 function home() {
-  var head = '<header class="top" style="min-height:0"><span></span><span class="topbtns" id="topbtns"></span></header>';
-  if (!CAN) return head + '<section class="hello">' + logo() + '<p class="say">Every place, nearest to ' + esc(ANCHOR) + ' first.</p><button type="button" class="btn main" data-act="all">See every place</button></section>';
-  var r = DEF, figs = r.neighborhoods.map(function (nb) { return areaFigs(nb.buildings.map(function (x) { return x.id; })); }), best = bestOf(figs);
-  return head + '<section class="hello">' + logo() + '<p class="say" id="res-h">Three neighborhoods picked for you</p>' + howPicked() + '</section>' +
-    '<ol class="ncards" aria-label="Your three neighborhoods">' + r.neighborhoods.map(function (nb, i) { return ncard(nb, i, figs[i], best); }).join("") + '</ol>' + leaningsBlock();
-}
-function resetBlock() {
-  return VIEW.confirmReset
-    ? '<div class="confirmrow" id="reset-box"><p><b>Clear My list?</b> This clears My list and your tour plan.</p><div class="two"><button type="button" class="btn sm" data-act="reset-no">No, go back</button><button type="button" class="btn sm main" data-act="reset-yes">Yes, clear them</button></div></div>'
-    : '<button type="button" class="quiet center" data-act="reset-ask">Clear my list</button>';
+  var shown = Math.min(VIEW.shown, N.length), left = N.length - shown;
+  return '<section class="hello">' + logo() + '<p class="say">Neighborhoods for you</p>' + howRanked() + '</section>' +
+    (N.length ? '<ol class="ncards" id="ncards">' + N.slice(0, shown).map(ncard).join("") + '</ol>' : '<p class="empty">No neighborhoods are in the data yet.</p>') +
+    (left > 0 ? '<div class="endblock"><p class="small muted" id="shown-count">Showing ' + shown + ' of ' + N.length + '</p><button type="button" class="btn" data-act="more" id="show-more">Show ' + Math.min(10, left) + ' more</button></div>' : '');
 }
 
-/* ---------- a neighborhood: the hero, its three apartments, life here ---------- */
-var MOMENT_ICON = { weekday: "coffee", saturday: "moon", sunday: "car", dog: "dog" };
-var MOMENT_TITLE = { weekday: "A weekday", saturday: "Saturday night", sunday: "Sunday with " + ANCHOR, dog: "The dog's walk" };
-function boldPlaces(text, places) {
-  var h = esc(text);
-  (places || []).map(function (p) { return p && p.name ? esc(p.name) : null; }).filter(Boolean).sort(function (a, b) { return b.length - a.length; })
-    .forEach(function (n) { if (h.indexOf(n) >= 0 && h.indexOf("<b>" + n) < 0) h = h.split(n).join("<b>" + n + "</b>"); });
-  return h;
+/* ---------- a neighborhood ---------- */
+var LIFE_ICON = { park: "park", green: "park", trail: "park", dog_run: "dog", restaurant: "fork", market: "fork", bar: "moon", event: "moon", downtown: "home", street: "home", neighborhood: "home", town: "home" };
+function lifeHere(h) {
+  var L = arr(h.life_here).filter(function (m) { return m && str(m.fact); });
+  if (!L.length) return "";
+  return '<section class="stack" id="life" aria-labelledby="life-h"><h2 class="sec-h" id="life-h">Life here</h2><div class="moms">' + L.map(function (m) {
+    return '<details class="mom"><summary><span class="ic" aria-hidden="true">' + icon(LIFE_ICON[m.kind] || "pin") + '</span><span class="mt"><b>' + esc(str(m.place) || "Around here") + '</b><span>' + esc(m.fact) + '</span></span></summary>' +
+      '<div class="mb"><p>' + esc(m.fact) + '</p>' + (str(m.schedule) ? '<p class="small muted">' + esc(m.schedule) + '</p>' : '') + ext(m.source_url, str(m.source_name) || "Source") + '</div></details>';
+  }).join("") + '</div></section>';
 }
-/* life here as short moments, one line each, a tap opens the rest and its sources */
-function moments(b) {
-  var L = (b.life_here || []).filter(function (m) { return m && m.text; });
-  var order = ["weekday", "saturday", "sunday", "dog"];
-  return L.slice().sort(function (x, y) { var a = order.indexOf(x.moment), z = order.indexOf(y.moment); return (a < 0 ? 9 : a) - (z < 0 ? 9 : z); }).map(function (m) {
-    var src = [], seen = {};
-    (m.sources || []).forEach(function (s) {
-      if (!s || !httpUrl(s.url) || seen[s.url]) return; seen[s.url] = 1;
-      var p = (m.places || []).filter(function (x) { return x && x.name && x.source_url === s.url; })[0];
-      src.push({ url: s.url, name: p ? p.name + " on " + (s.name || "the map") : (s.name || "Source") });
-    });
-    return '<details class="mom" data-moment="' + esc(m.moment || "") + '"><summary><span class="ic" aria-hidden="true">' + icon(MOMENT_ICON[m.moment] || "dot") + '</span><span class="mt"><b>' + esc(m.title || MOMENT_TITLE[m.moment] || "") + '</b><span>' + esc(firstSentence(m.text)) + '</span></span></summary>' +
-      '<div class="mb"><p>' + boldPlaces(m.text, m.places) + '</p>' +
-      (src.length ? '<details class="src"><summary>Sources</summary><ul>' + src.map(function (s) { return '<li>' + ext(s.url, s.name || "Source") + '</li>'; }).join("") + '</ul></details>' : '') + '</div></details>';
-  }).join("");
+var ASK_SHORT = {
+  "Is there parking, and what does it cost?": "Parking, and its cost?", "Which floor is it on, and is there an elevator?": "Floor and elevator?", "Is there a weight limit for dogs?": "Dog weight limit?",
+  "When is it available?": "Available when?", "How big is it?": "How big?", "What does parking cost each month?": "Parking cost?", "Are dogs allowed?": "Dogs allowed?",
+  "Are dogs allowed, and up to what weight?": "Dogs, and what weight?", "Which floor is it on? (never the ground floor)": "Which floor?"
+};
+function chipsOf(b) {
+  var k = arr(b.known).map(str).filter(Boolean), q = arr(b.to_ask).map(str).filter(Boolean);
+  if (!k.length && !q.length) return "";
+  return (k.length ? '<p class="kq-l">Known</p><ul class="kq known">' + k.map(function (x) { return '<li class="k"><span aria-hidden="true">&#10003; </span>' + esc(x) + '</li>'; }).join("") + '</ul>' : '') +
+    (q.length ? '<p class="kq-l">To ask</p><ul class="kq toask">' + q.map(function (x) { return '<li class="q" data-q="' + esc(x) + '">' + esc(ASK_SHORT[x] || x) + '</li>'; }).join("") + '</ul>' : '');
 }
-function mini(iconName, text, sr) { return '<li><span class="ic" aria-hidden="true">' + icon(iconName) + '</span><span>' + text + (sr ? '<span class="sr"> ' + esc(sr) + '</span>' : '') + '</span></li>'; }
-function starLine(b) {
-  var ap = (b.apartments || []).filter(function (a) { return a && a.star; }); if (!ap.length) return '';
-  var lab = ap[0].confirm_label || ((b.confirm || [])[0] ? "To confirm: " + b.confirm[0].label : "One thing to confirm");
-  return '<p class="star"><span aria-hidden="true">&#9733;</span> ' + esc(lab) + '</p>';
+function ratingLine(b) {
+  var r = b.rating; if (!r || !isNum(r.value)) return "";
+  var t = r.value + " out of 5" + (isNum(r.count) ? " from " + plural(r.count, "review", "reviews") : "") + (str(r.site) ? " on " + r.site : "");
+  return '<p class="rating" data-rating="' + r.value + '">' + (httpUrl(r.source_url) ? ext(r.source_url, "\u2605 " + t) : esc("\u2605 " + t)) + '</p>';
 }
-function aptCard(id, A) {
-  var b = BY[id], x = raw(b), f = b.facts || {};
-  var own = b.neighborhood_id !== A ? hoodNameOf(b) : "";
-  var room = isNum(x.sqft) ? Math.round(x.sqft).toLocaleString("en-US") + "&nbsp;sq&nbsp;ft<br>" + (x.bedroom ? "1&nbsp;bedroom" : "studio") : (x.bedroom ? "1 bedroom" : x.studio ? "Studio" : "Size not known");
-  return '<li class="acard" data-building="' + esc(id) + '"><div class="ahead"><button type="button" class="aname" data-act="open" data-id="' + esc(id) + '"><b>' + esc(nm(b)) + '<span class="go" aria-hidden="true">&#8250;</span></b>' + (own ? '<small>In ' + esc(own) + '</small>' : '') + '</button>' + heart(b) + '</div>' +
-    pairHtml(b) +
-    '<ul class="minis">' + mini("car", isNum(f.drive_min) ? Math.round(f.drive_min) + "&nbsp;min<br>drive" : "Not known", "to " + ANCHOR) + mini("ruler", room, "") +
-      mini("park", isNum(x.park) ? "Park<br>" + Math.max(1, Math.round(x.park)) + "&nbsp;min" : "Park not known", "on foot") + '</ul>' +
-    '<div class="amark">' + chkLine(bldChecked(b)) + starLine(b) + '</div></li>';
+/* only a leasing office or a management company; a private person's number is never shown */
+var PUBLIC_KIND = /^(leasing office|management company)$/i;
+function contactOf(b) {
+  var c = b.contact; if (!c || typeof c !== "object" || c.private || !PUBLIC_KIND.test(String(c.kind || ""))) return null;
+  var ph = str(c.phone || c.office_phone), site = httpUrl(c.site);
+  if (site && site === httpUrl(b.listing_url)) site = null;
+  return ph || site ? { kind: cap(String(c.kind)), phone: ph, site: site } : null;
+}
+function contactLinks(b) {
+  var c = contactOf(b); if (!c) return "";
+  return (c.phone ? '<a class="link" data-phone="1" href="tel:' + esc(c.phone.replace(/[^\d+]/g, "")) + '">' + esc(c.kind) + ": " + esc(c.phone) + '</a>' : '') + (c.site ? ext(c.site, c.kind + " site") : '');
+}
+function bcard(b) {
+  var v = isVerified(b), links = ext(b.listing_url, "Listing and photos") + contactLinks(b);
+  return '<li class="bcard" data-building="' + esc(b.id) + '"><div class="bhead"><button type="button" class="bname" data-act="open" data-id="' + esc(b.id) + '"><b>' + esc(nm(b)) + '<span class="go" aria-hidden="true">&#8250;</span></b>' +
+    (v ? '<small><span aria-hidden="true">&#10003; </span>Checked against its listing</small>' : '') + '</button>' + heart(b) + '</div>' +
+    pairHtml(b) + aptCount(b) + chipsOf(b) + ratingLine(b) + (links ? '<div class="links">' + links + '</div>' : '') + '</li>';
+}
+function avoidCard(b) {
+  var s = b.source || {}, name = str(s.name);
+  return '<li class="avoid" data-building="' + esc(b.id) + '"><span class="x" aria-hidden="true">&#10005;</span><h3><span class="sr">Avoid: </span>' + esc(nm(b)) + '</h3>' +
+    (str(b.reason) ? '<p class="reason">' + esc(b.reason) + '</p>' : '') +
+    (name ? '<p class="src">Source: ' + (httpUrl(s.url) ? ext(s.url, name, "srcl") : '<span>' + esc(name) + '</span>') + '</p>' : '') + '</li>';
+}
+function bRow(b, h) {
+  var r = rentText(b.rent_range), role = BIX[b.id] ? BIX[b.id].role : "listed";
+  return '<li><button type="button" class="row b' + (role === "avoid" ? " av" : "") + '" data-act="open" data-id="' + esc(b.id) + '"><span class="nm"><b>' + esc(nm(b)) + '</b>' +
+    (role === "top" ? '<span class="tg">Top building</span>' : role === "avoid" ? '<span class="tg a"><span aria-hidden="true">&#10005; </span>Avoid</span>' : isNum(b.apartments) ? '<small>' + plural(b.apartments, "apartment", "apartments") + '</small>' : '') + '</span>' +
+    '<span class="fg">' + (r ? '<b' + rentAttr(b.rent_range) + '>' + r + '</b><small>rent</small>' : '') + '</span></button></li>';
+}
+function allBuildings(h) {
+  var L = arr(h.all_buildings).filter(function (b) { return b && str(b.id); });
+  if (!L.length) return "";
+  var open = !!VIEW.allOpen[h.id], shown = Math.min(VIEW.allShown[h.id] || 20, L.length);
+  return '<section class="stack" id="allb"><h2 style="font:inherit;margin:0"><button type="button" class="toggle" data-act="allb" data-id="' + esc(h.id) + '" aria-expanded="' + open + '" id="allb-t">All ' + L.length + (L.length === 1 ? " building" : " buildings") + ' here</button></h2>' +
+    (open ? '<ul class="rows" id="allb-list">' + L.slice(0, shown).map(function (b) { return bRow(b, h); }).join("") + '</ul>' +
+      (shown < L.length ? '<button type="button" class="btn sm" data-act="allb-more" data-id="' + esc(h.id) + '" id="allb-more">Show ' + Math.min(20, L.length - shown) + ' more</button>' : '') : '') + '</section>';
 }
 function hoodScreen(i) {
-  var nb = DEF.neighborhoods[i], A = nb.neighborhood_id, ids = nb.buildings.map(function (x) { return x.id; }), line = hoodLine(A);
-  var next = DEF.neighborhoods[i + 1], first = BY[ids[0]];
-  var lifeB = ids.map(function (id) { return BY[id]; }).filter(function (b) { return (b.life_here || []).some(function (m) { return m && m.text; }); })[0];
-  return backTop("home", "My three") +
-    '<section class="hero" data-area="' + esc(A) + '">' + illus(i, "tall") + '<p class="kicker">Neighborhood ' + (i + 1) + ' of 3</p><h1 tabindex="-1" id="hood-h">' + esc(areaName(A, ids, true)) + '</h1>' + hoodChips(A) +
-    (line ? '<p class="line">' + esc(line) + '</p>' : '') + '</section>' +
-    '<section class="stack" aria-labelledby="apts-h"><h2 class="sec-h" id="apts-h">The ' + (ids.length === 3 ? "3" : ids.length) + ' apartments</h2><ol class="acards">' + ids.map(function (id) { return aptCard(id, A); }).join("") + '</ol>' +
-    (ids.some(function (id) { return (BY[id].apartments || []).some(function (a) { return a.star; }); }) ? '<p class="small muted"><span aria-hidden="true">&#9733;</span> A star means one thing to confirm.</p>' : '') + '</section>' +
-    (lifeB ? '<section class="moms" id="life" aria-labelledby="life-h"><h2 class="sec-h" id="life-h">Life here</h2><p class="caption">Around ' + esc(nm(lifeB)) + '. Tap one to read more.</p>' + moments(lifeB) + '</section>' : '') +
-    '<div class="hoodnav">' + (next ? '<button type="button" class="btn main" data-act="hood" data-v="' + (i + 1) + '">Next: ' + esc(areaName(next.neighborhood_id, next.buildings.map(function (x) { return x.id; }), true)) + ' <span class="go" aria-hidden="true">&#8250;</span></button>'
-      : '<button type="button" class="btn main" data-act="home">Back to my three</button>') +
-    (next ? '<button type="button" class="quiet center" data-act="home"><span aria-hidden="true">&#8249;</span> Back to my three</button>' : '') + '</div>';
+  var h = N[i], why = whyList(h), know = knowList(h), tops = arr(h.top_buildings).filter(Boolean).slice(0, 3), avs = arr(h.avoid_buildings).filter(Boolean).slice(0, 2);
+  var prev = N[i - 1], next = N[i + 1], st = STATE_NAME[h.state] || str(h.state);
+  return backTop() + '<article class="stack" style="gap:18px" data-hood="' + esc(h.id) + '">' +
+    '<section class="hero">' + illus(h, "tall") + '<p class="kicker">' + (isNum(h.rank) ? "Number " + h.rank + " of " + N.length : "Neighborhood") + '</p>' +
+    '<h1 tabindex="-1" id="screen-h">' + esc(h.name) + '</h1>' + ([str(h.area), st].filter(Boolean).length ? '<p class="where">' + esc([str(h.area), st].filter(Boolean).join(", ")) + '</p>' : '') + tagList(h) + figs(h, true) + '</section>' +
+    (why.length ? '<section class="stack" id="why" aria-labelledby="why-h"><h2 class="sec-h" id="why-h">Why it ranks ' + (isNum(h.rank) ? "#" + h.rank : "here") + '</h2><ul class="why">' +
+      why.map(function (w) { return '<li data-measure="' + esc(w.measure || "") + '"><span class="ic" aria-hidden="true">' + icon(w.icon) + '</span><span class="t">' + esc(w.text) + '</span></li>'; }).join("") + '</ul>' + confLine(h) + '</section>' : '') +
+    (know.length ? '<section class="know" id="know" aria-labelledby="know-h"><h2 id="know-h">Know this</h2><ul>' + know.map(function (w) { return '<li data-measure="' + esc(w.measure || "") + '">' + icon(w.icon) + '<span class="t">' + esc(w.text) + '</span></li>'; }).join("") + '</ul></section>' : '') +
+    lifeHere(h) +
+    '<section class="stack" id="tops" aria-labelledby="tops-h"><h2 class="sec-h" id="tops-h">Top buildings</h2>' + (str(h.supply_note) ? '<p class="note" id="supply-note">' + esc(h.supply_note) + '</p>' : '') +
+    (tops.length ? '<ul class="bcards">' + tops.map(bcard).join("") + '</ul>' : '<p class="empty">No building stands out here yet.</p>') + '</section>' +
+    (avs.length ? '<section class="stack" id="avoid" aria-labelledby="avoid-h"><h2 class="sec-h sec-avoid" id="avoid-h">Avoid</h2><ul class="avoids">' + avs.map(avoidCard).join("") + '</ul></section>' : '') +
+    allBuildings(h) +
+    '<nav class="hoodnav" aria-label="Other neighborhoods">' +
+    (next ? '<button type="button" class="btn soft" data-act="nav-hood" data-id="' + esc(next.id) + '" id="next-hood">Next: ' + esc(next.name) + ' <span class="go" aria-hidden="true">&#8250;</span></button>' : '') +
+    (prev ? '<button type="button" class="quiet" data-act="nav-hood" data-id="' + esc(prev.id) + '" id="prev-hood"><span aria-hidden="true">&#8249;</span> Previous: ' + esc(prev.name) + '</button>' : '') + '</nav></article>';
 }
 
-/* ---------- an apartment (the place sheet): what she needs first, the rest one tap away ---------- */
-function factsList(b) {
-  var f = b.facts || {}, park = f.parking || {}, dog = f.dog || {};
-  var rent = fromMoney(f.rent_from, f.rent_to), total = fromMoney(f.total_from, f.total_to);
-  var toll = !isNum(f.toll_round_trip) ? "tolls not fully known" : f.toll_round_trip === 0 ? "no tolls" : "tolls " + cents(f.toll_round_trip) + " round trip";
-  function row(label, value, sub, attr, inline) {
-    return '<li><div class="frow"><span class="l">' + label + '</span><span class="v"' + (attr || "") + '>' + (value || '<span class="muted">Not known</span>') + (sub ? '<small' + (inline ? ' class="in"' : '') + '>' + sub + '</small>' : '') + '</span></div></li>';
-  }
-  function textRow(label, text) { return '<li><div class="frow"><span class="l">' + label + '</span></div><p class="ftext">' + (text ? esc(text) : '<span class="muted">Not known yet. Ask on the tour.</span>') + '</p></li>'; }
-  return '<ul class="facts">' +
-    row("Rent", rent, rent ? "a month" : "", isNum(f.rent_from) ? ' data-rent="' + f.rent_from + '"' : "", true) +
-    row("Total with utilities and fees", total, total ? "a month" : "", "", true) +
-    row("Drive to " + esc(ANCHOR), isNum(f.drive_min) ? Math.round(f.drive_min) + " min" : null, toll) +
-    textRow("Parking", park.summary) + textRow("Dog", dog.summary) + '</ul>';
+/* ---------- a building ---------- */
+function listOf(cls, id, title, items, mark) {
+  return items.length ? '<section class="box ' + cls + '" id="' + id + '" aria-labelledby="' + id + '-h"><h2 id="' + id + '-h">' + title + '</h2><ul>' + items.map(function (x) { return '<li><span aria-hidden="true">' + mark + '</span><span class="t">' + esc(x) + '</span></li>'; }).join("") + '</ul></section>' : '';
 }
-function confirmBox(b) {
-  var qs = [], seen = {};
-  (b.apartments || []).forEach(function (a) { if (a && a.star && a.confirm_question && !seen[a.confirm_question]) { seen[a.confirm_question] = 1; qs.push({ t: a.confirm_question, star: true }); } });
-  (b.confirm || []).forEach(function (c) { var q = c && (c.question || c.label); if (q && !seen[q]) { seen[q] = 1; qs.push({ t: q, star: true }); } });
-  (b.disclosures || []).forEach(function (t) { t = cap(typeof t === "string" ? t : (t && (t.label || t.question)) || ""); if (t && !seen[t]) { seen[t] = 1; qs.push({ t: t }); } });
-  if (!qs.length) return '';
-  return '<section class="confirmbox" id="confirm" aria-labelledby="conf-h"><h2 id="conf-h">Things to confirm</h2><ul>' + qs.map(function (q) { return '<li>' + (q.star ? '<span aria-hidden="true">&#9733; </span>' : '') + esc(q.t) + '</li>'; }).join("") + '</ul></section>';
-}
-function contactBox(b) {
-  var ct = b.contact || {}, ph = ct.office_phone && !ct.private ? ct.office_phone : null, site = httpUrl(ct.site);
-  if (!ph && !site) return '';
-  return '<section class="contact" id="contact" aria-labelledby="ct-h"><h2 id="ct-h">' + (ct.kind === "leasing office" || !ct.kind ? "Leasing office" : esc(cap(ct.kind))) + '</h2>' +
-    (ph ? '<a class="link tel" href="tel:' + esc(ph.replace(/[^\d+]/g, "")) + '">' + esc(ph) + '</a>' : '') + (site ? ext(site, "Building website") : '') + '</section>';
-}
-function detailsBlocks(b) {
-  var out = "", ap = b.apartments || [];
-  if (ap.length) out += '<details class="more" id="d-apts"><summary>' + (ap.length === 1 ? "The apartment" : "The " + ap.length + " apartments") + '</summary><div class="in"><ul class="apts">' + ap.map(function (a) {
-    var bits = [bedsText(a.beds), isNum(a.sqft) ? Math.round(a.sqft) + " sq ft" : null, a.floor_text, a.available_text].filter(Boolean).join(" · ");
-    return '<li><p class="a-h">' + esc(aptLabel(a)) + '</p>' + (bits ? '<p class="a-s">' + esc(bits) + '</p>' : '') +
-      '<div class="pair"><div><span>Rent</span><b' + (isNum(a.rent) ? ' data-rent="' + a.rent + '"' : '') + '>' + (money(a.rent) || "Not known") + '</b></div><div><span>Total with utilities and fees</span><b>' + (money(a.total) || "Not known") + '</b></div></div>' +
-      (offerText(a) ? '<p class="a-s">' + esc(offerText(a)) + '</p>' : '') + chkLine(aptChecked(a)) +
-      (a.star ? '<p class="star"><span aria-hidden="true">&#9733;</span> ' + esc(a.confirm_label || "One thing to confirm") + '</p>' : '') +
-      ext(a.listing_url, "See the listing") + '</li>';
-  }).join("") + '</ul>' + (ap.some(function (a) { return a.star; }) ? '<p class="small muted"><span aria-hidden="true">&#9733;</span> A star means one thing to confirm.</p>' : '') + '</div></details>';
-  var mm = moments(b);
-  if (mm) out += '<details class="more" id="d-life"><summary>Life here</summary><div class="in"><div class="moms">' + mm + '</div></div></details>';
-  var pts = (b.points || []).filter(function (p) { return p && p.text; });
-  if (b.about || pts.length) out += '<details class="more" id="d-about"><summary>About the building</summary><div class="in">' + (b.about ? '<p>' + esc(b.about) + '</p>' : '') +
-    (pts.length ? '<ul class="points">' + pts.map(function (p) { return '<li>' + icon(p.icon) + '<span>' + esc(p.text) + '</span></li>'; }).join("") + '</ul>' : '') + '</div></details>';
-  var ml = moreLikePlace(b);
-  if (ml) out += '<details class="more" id="d-more"><summary>More like this</summary><div class="in">' + ml + '</div></details>';
-  return out ? '<div class="moregroup">' + out + '</div>' : "";
-}
-/* "More like this": the data's nearest others (buildings[].similar) */
-function moreLikePlace(b) {
-  var ids = (Array.isArray(b.similar) ? b.similar : []).filter(function (x) { return BY[x] && x !== b.id; }).slice(0, 3), ks = chipKeys();
-  if (!ids.length) return "";
-  return '<ul class="thumbs" id="more-like">' + ids.map(function (sid) {
-    var s = BY[sid], f = s.facts || {};
-    return '<li><button type="button" class="thumb" data-act="open" data-id="' + esc(sid) + '"><b>' + esc(nm(s)) + '</b><span class="f">' + esc(shortFact(s, ks[0] || "family")) + '</span>' +
-      '<span class="m">' + esc(hoodNameOf(s)) + ' &middot; Rent <b' + (isNum(f.rent_from) ? ' data-rent="' + f.rent_from + '"' : '') + '>' + (money(f.rent_from) || "not known") + '</b> &middot; Total with utilities and fees <b>' + (money(f.total_from) || "not known") + '</b></span></button></li>';
-  }).join("") + '</ul>';
-}
-function place(b) {
-  var rank = areaRankOf(b.id), photos = httpUrl(b.photos_url || b.listing_url);
-  return sheetTop(heart(b)) +
-    '<article class="stack place" style="gap:14px" data-building="' + esc(b.id) + '">' +
-    '<div class="stack" style="gap:4px">' + (rank ? '<p class="kicker">' + esc(areaName(DEF.neighborhoods[rank - 1].neighborhood_id, DEF.neighborhoods[rank - 1].buildings.map(function (x) { return x.id; }), true)) + '</p>' : '') +
-    '<h1 tabindex="-1" id="sheet-h">' + esc(nm(b)) + '</h1><p class="inhood">' + esc(hoodName(b)) + '</p>' + chkLine(bldChecked(b)) + '</div>' +
-    (photos ? '<a class="photos" id="photos" href="' + esc(photos) + '" target="_blank" rel="noopener noreferrer">See photos <span aria-hidden="true">&#8599;</span><span class="sr"> (opens in a new tab)</span></a>' : '') +
-    factsList(b) + confirmBox(b) + contactBox(b) + detailsBlocks(b) + heart(b, true) + '</article>';
-}
-
-/* ---------- my list: Compare and the tour plan live here ---------- */
-function myList() {
-  var L = S.saved.map(function (id) { return BY[id]; }).filter(Boolean);
-  var planBtn = S.tour.length ? '<button type="button" class="btn" data-act="plan" id="list-plan">My tour plan &middot; ' + S.tour.length + '</button>' : '';
-  if (!L.length) return sheetTop() + '<section class="stack"><p class="kicker">My list</p><h1 class="h-big" tabindex="-1" id="sheet-h">Nothing saved yet</h1><p class="lead">Tap <span aria-hidden="true">&#9825;</span> Save on an apartment and it shows up here.</p>' + planBtn + '<button type="button" class="btn main" data-act="home">See my three neighborhoods</button></section>';
-  var ids = compareIds();
-  return sheetTop() + '<section class="stack" style="gap:6px"><p class="kicker">My list</p><h1 class="h-big" tabindex="-1" id="sheet-h">' + L.length + (L.length === 1 ? ' saved place' : ' saved places') + '</h1>' +
-    '<p>' + (L.length === 1 ? 'Save one more to compare.' : 'Tick two or three, then Compare.') + '</p></section>' +
-    '<div class="listtools"><button type="button" class="btn main" data-act="compare" id="list-compare"' + (ids ? '' : ' disabled') + '>Compare' + (ids ? ' ' + ids.length : '') + '</button>' + planBtn + '</div>' +
-    '<ul class="saved">' + L.map(function (b) {
-      var t = S.ticked.indexOf(b.id) >= 0;
-      return '<li class="srow' + (t ? ' on' : '') + '" data-building="' + esc(b.id) + '">' +
-        '<label class="tickl" for="tick-' + esc(b.id) + '"><input type="checkbox" id="tick-' + esc(b.id) + '" data-tick="' + esc(b.id) + '"' + (t ? ' checked' : '') + '><span><b>' + esc(nm(b)) + '</b><small>' + esc(hoodName(b)) + '</small></span></label>' +
-        pairHtml(b) + chkLine(bldChecked(b)) +
-        '<div class="sact">' + (onTour(b.id) ? '<button type="button" class="btn sm" data-act="untour" data-id="' + esc(b.id) + '" aria-pressed="true"><span aria-hidden="true">&#10003;</span> On your tour plan</button>' : '<button type="button" class="btn sm" data-act="tour" data-id="' + esc(b.id) + '">Add to tour plan</button>') +
-        '<button type="button" class="quiet" data-act="unsave" data-id="' + esc(b.id) + '">Remove</button></div>' +
-        '<button type="button" class="quiet" data-act="open" data-id="' + esc(b.id) + '">See this place</button></li>';
-    }).join("") + '</ul><p class="tickmsg" id="tickmsg" role="status"></p>' + resetBlock();
-}
-
-/* ---------- compare ---------- */
-function hm(min) { min = Math.round(min / 5) * 5; var h = Math.floor(min / 60), m = min % 60; return h ? h + " h" + (m ? " " + (m < 10 ? "0" : "") + m : "") : min + " min"; }
-function biggest(b, beds) { var xs = (b.apartments || []).filter(function (a) { return beds == null || a.beds === beds; }).map(function (a) { return a.sqft; }).filter(isNum); return xs.length ? Math.max.apply(null, xs) : null; }
-function parkShort(b) {
-  var p = (b.facts || {}).parking || {};
-  var w = { garage: "Garage", covered: "Covered", lot: "Lot", off_street: "Off-street", street: "Street only" }[p.kind] || null;
-  return w ? w + (isNum(p.fee) && p.fee > 0 ? ", " + money(p.fee) + "/mo" : p.fee === 0 ? ", included" : "") : "Ask on the tour";
-}
-function dogShort(b) {
-  var d = (b.facts || {}).dog || {}, area = b.fit && b.fit.dog_area_in_building === true;
-  var w = isNum(d.weight_limit_lb) ? "Up to " + Math.round(d.weight_limit_lb) + " lb" : d.no_weight_limit ? "No weight limit" : (d.summary ? "Weight limit not published" : "Ask on the tour");
-  return { text: w + (area ? ". Dog area in the building" : ""), v: (area ? 1000 : 0) + (isNum(d.weight_limit_lb) ? d.weight_limit_lb : d.no_weight_limit ? 999 : 0) };
-}
-/* the first sentence; a period after an initial or a short abbreviation ("Margaret I. Carman", "St.") does not end it */
-var ABBR = /^(st|ave|blvd|dr|mt|rd|jr|sr|ft|no|mr|mrs|ms|dr|pl|ln|ct)$/i;
-function firstSentence(t) {
-  t = String(t || ""); var re = /[.!?](?=\s|$)/g, m;
-  while ((m = re.exec(t))) { var w = /(\S+)$/.exec(t.slice(0, m.index)); w = w ? w[1] : ""; if (/^[A-Z]$/.test(w) || ABBR.test(w)) continue; return t.slice(0, m.index + 1); }
-  return t;
-}
-function compareRows(L) {
-  var rows = [];
-  function add(label, cells, better, opts) { rows.push({ label: label, cells: cells, better: better || null, big: opts && opts.big }); }
-  function val(fn) { return L.map(fn); }
-  add("Rent", val(function (b) { var f = b.facts || {}; return { html: '<span class="big"' + (isNum(f.rent_from) ? ' data-rent="' + f.rent_from + '"' : '') + '>' + (fromMoney(f.rent_from, f.rent_to) || "Not known") + '</span>', text: String(f.rent_from), v: f.rent_from }; }), "low");
-  add("Total with utilities and fees", val(function (b) { var f = b.facts || {}; return { html: '<span class="big">' + (fromMoney(f.total_from, f.total_to) || "Not known") + '</span>', text: String(f.total_from), v: f.total_from }; }), "low");
-  add("Drive to " + ANCHOR + " and tolls", val(function (b) {
-    var f = b.facts || {}, t = !isNum(f.toll_round_trip) ? "tolls not known" : f.toll_round_trip === 0 ? "no tolls" : cents(f.toll_round_trip) + " tolls";
-    return { html: '<span class="big">' + (isNum(f.drive_min) ? Math.round(f.drive_min) + " min" : "Not known") + '</span>' + esc(t), text: f.drive_min + t, v: f.drive_min };
-  }), "low");
-  add("Each visit, there and back", val(function (b) {
-    var f = b.facts || {}; if (!isNum(f.drive_min)) return { html: "Not known", text: "?", v: null };
-    return { html: '<span class="big">' + hm(f.drive_min * 2) + '</span>' + (!isNum(f.toll_round_trip) ? "tolls not known" : f.toll_round_trip === 0 ? "no tolls" : cents(f.toll_round_trip) + " tolls"), text: hm(f.drive_min * 2) + f.toll_round_trip, v: f.drive_min };
-  }), "low");
-  add("Parking", val(function (b) { var t = parkShort(b); return { html: esc(t), text: t, v: (b.scores || {}).parking }; }), "high");
-  add("Dog", val(function (b) { var d = dogShort(b); return { html: esc(d.text), text: d.text, v: d.v }; }), "high");
-  add("Room", val(function (b) { return { html: esc(factText(b, "room")), text: factText(b, "room"), v: null }; }), null);
-  add("Going out", val(function (b) { var r = b.fit && b.fit.restaurants_10min; return isNum(r) ? { html: '<span class="big">' + r + '</span>restaurants in a 10-minute walk', text: String(r), v: r } : { html: "Not known", text: "?", v: null }; }), "high");
-  add("A park", val(function (b) { var p = b.fit && b.fit.park_walk_min; return isNum(p) ? { html: '<span class="big">' + Math.max(1, Math.round(p)) + ' min</span>on foot' + (b.fit.park_name ? ", " + esc(b.fit.park_name) : ""), text: String(Math.round(p)) + b.fit.park_name, v: p } : { html: "Not known", text: "?", v: null }; }), "low");
-  add("Checked", val(function (b) { var c = bldChecked(b); return c ? { html: c.today ? "Confirmed today" : "Last seen " + (shortDate(c.date) || "earlier"), text: c.text, v: c.today ? 1 : 0 } : { html: "Not known", text: "?", v: null }; }), "high");
-  add("Life here", val(function (b) {
-    var L2 = b.life_here || [], m = L2.filter(function (x) { return x.moment === "weekday"; })[0] || L2[0];
-    var t = m ? firstSentence(m.text) : "";
-    return { html: m ? boldPlaces(t, m.places) : esc(t), text: t, v: null };
-  }), null);
-  rows.forEach(function (r) {
-    var texts = r.cells.map(function (c) { return c.text; });
-    r.same = texts.every(function (t) { return t === texts[0]; });
-    r.best = [];
-    if (!r.same && r.better) {
-      var vs = r.cells.map(function (c) { return c.v; }).filter(isNum);
-      if (vs.length >= 2) {
-        var target = r.better === "low" ? Math.min.apply(null, vs) : Math.max.apply(null, vs);
-        var hits = r.cells.map(function (c, i) { return isNum(c.v) && c.v === target ? i : -1; }).filter(function (i) { return i >= 0; });
-        if (hits.length < r.cells.length) r.best = hits;
-      }
-    }
-  });
+function bedsText(n) { return n === 0 ? "Studio" : n === 1 ? "1 bedroom" : isNum(n) ? n + " bedrooms" : null; }
+/* the fuller sheet of a building that was checked against its listing: its drive, parking, dog and each apartment */
+function richFacts(R, h) {
+  var f = R.facts || {}, park = f.parking || {}, dog = f.dog || {}, rows = "";
+  var toll = !isNum(f.toll_round_trip) ? "" : f.toll_round_trip === 0 ? "no tolls" : "tolls " + cents(f.toll_round_trip) + " round trip";
+  if (isNum(f.drive_min)) rows += '<li><div class="frow"><span class="l">Drive to ' + esc(ANCHOR) + '</span><span class="v">' + Math.round(f.drive_min) + ' min' + (toll ? '<small>' + toll + '</small>' : '') + '</span></div></li>';
+  if (str(park.summary)) rows += '<li><div class="frow"><span class="l">Parking</span></div><p class="ftext">' + esc(park.summary) + '</p></li>';
+  if (str(dog.summary)) rows += '<li><div class="frow"><span class="l">Dog</span></div><p class="ftext">' + esc(dog.summary) + '</p></li>';
   return rows;
 }
-function compare(ids) {
-  var L = (ids || []).map(function (id) { return BY[id]; }).filter(Boolean).slice(0, 3), n = L.length;
-  if (n < 2) return sheetTop() + '<section class="stack"><h1 class="h-big" tabindex="-1" id="sheet-h">Pick two or three</h1><p class="lead">Tick two or three places in My list, then tap Compare.</p><button type="button" class="btn main" data-act="list">Open My list</button></section>';
-  var rows = compareRows(L), diff = rows.filter(function (r) { return !r.same; }), same = rows.filter(function (r) { return r.same; });
-  function rowHtml(r) {
-    return '<div class="crow"><p class="cl">' + esc(r.label) + '</p><div class="cells">' + r.cells.map(function (c, i) {
-      var good = r.best.indexOf(i) >= 0, h = c.html, tick = '<span aria-hidden="true">&#10003;&nbsp;</span>';
-      if (good) h = /^<span class="big"[^>]*>/.test(h) ? h.replace(/^(<span class="big"[^>]*>)/, "$1" + tick) : tick + h;
-      return '<div class="' + (good ? "best" : "") + '"><span class="sr">' + esc(L[i].name || "") + ': </span>' + h + (good ? '<span class="sr"> (better)</span>' : '') + '</div>';
-    }).join("") + '</div></div>';
-  }
-  return sheetTop() + '<section class="stack" style="gap:6px"><h1 class="h-big" tabindex="-1" id="sheet-h">Side by side</h1><p class="small muted"><span aria-hidden="true">&#10003;</span> marks the better one in each row.</p></section>' +
-    '<div class="cmp cmp-n' + n + '" style="--n:' + n + '" id="cmp" data-cols="' + n + '">' +
-    '<div class="chead">' + L.map(function (b) { return '<div><b>' + esc(nm(b)) + '</b><small>' + esc(hoodName(b)) + '</small></div>'; }).join("") + '</div>' +
-    diff.map(rowHtml).join("") +
-    (same.length ? '<details class="more" id="same"><summary>Same for all (' + same.length + ')</summary><div class="in" style="gap:0">' + same.map(rowHtml).join("") + '</div></details>' : '') +
-    '<div class="cells choose">' + L.map(function (b) {
-      return onTour(b.id) ? '<button type="button" class="btn" data-act="untour" data-id="' + esc(b.id) + '" aria-pressed="true"><span aria-hidden="true">&#10003;</span>&nbsp;On your tour</button>'
-        : '<button type="button" class="btn main" data-act="choose-tour" data-id="' + esc(b.id) + '" aria-label="Choose ' + esc(b.name || "this one") + ' for the tour plan">Choose this one</button>';
-    }).join("") + '</div></div>' +
-    (S.tour.length ? '<button type="button" class="btn" data-act="plan">See my tour plan (' + S.tour.length + ')</button>' : '');
+function richMore(R) {
+  var out = "", ap = arr(R.apartments).filter(function (a) { return a && (!isNum(a.rent) || a.rent <= LIMIT); });
+  if (ap.length) out += '<details class="more" id="d-apts"><summary>' + (ap.length === 1 ? "The apartment" : "The " + ap.length + " apartments") + '</summary><div class="in"><ul class="apts">' + ap.map(function (a) {
+    var label = str(a.label), bits = [bedsText(a.beds), isNum(a.sqft) ? Math.round(a.sqft) + " sq ft" : null, str(a.floor_text), str(a.available_text)].filter(Boolean).join(" · ");
+    return '<li><p class="a-h">' + esc(!label || /^apartment\s*(null|none|undefined)?$/i.test(label) ? "Apartment" : label) + '</p>' + (bits ? '<p class="a-s">' + esc(bits) + '</p>' : '') +
+      '<div class="pair"><div><span>Rent</span><b' + (isNum(a.rent) ? ' data-rent="' + a.rent + '"' : '') + '>' + (money(a.rent) || "Not known") + '</b></div><div><span>Total with utilities and fees</span><b>' + (money(a.total) || "Not known") + '</b></div></div>' +
+      (str(a.offer_text) ? '<p class="a-s">' + esc(a.offer_text) + '</p>' : '') + (a.star && str(a.confirm_question) ? '<p class="a-s"><span aria-hidden="true">&#9733; </span>' + esc(a.confirm_question) + '</p>' : '') +
+      ext(a.listing_url, "See the listing") + '</li>';
+  }).join("") + '</ul></div></details>';
+  var pts = arr(R.points).filter(function (p) { return p && str(p.text); });
+  if (str(R.about) || pts.length) out += '<details class="more" id="d-about"><summary>About the building</summary><div class="in">' + (str(R.about) ? '<p>' + esc(R.about) + '</p>' : '') +
+    (pts.length ? '<ul class="points">' + pts.map(function (p) { return '<li>' + icon(p.icon) + '<span>' + esc(p.text) + '</span></li>'; }).join("") + '</ul>' : '') + '</div></details>';
+  return out ? '<div>' + out + '</div>' : "";
+}
+function bldScreen(id) {
+  var e = BIX[id], b = e.b, h = e.h, R = richOf(b), avoid = e.role === "avoid";
+  var addr = [str(b.address) && str(b.address) !== nm(b) ? str(b.address) : "", [str(b.city), [str(b.state), str(b.zip)].filter(Boolean).join(" ")].filter(Boolean).join(", ")].filter(Boolean).join(" · ");
+  var r = rentText(b.rent_range), t = totalRange(b), c = contactOf(b), s = b.source || {};
+  var asks = arr(b.to_ask).map(str).filter(Boolean);
+  if (R) arr(R.confirm).concat(arr(R.disclosures)).forEach(function (x) { var q = cap(str(typeof x === "string" ? x : x && (x.question || x.label))); var k3 = q.toLowerCase().split(/\s+/).slice(0, 2).join(" "); if (q && !asks.some(function (y) { return y.toLowerCase().split(/\s+/).slice(0, 2).join(" ") === k3; })) asks.push(q); });
+  var money2 = (r ? '<li><div class="frow"><span class="l">Rent</span><span class="v"' + rentAttr(b.rent_range) + '>' + r + '<small>a month</small></span></div></li>' : '') +
+    (t ? '<li><div class="frow"><span class="l">Total with utilities and fees</span><span class="v">' + rentText(t) + '<small>a month</small></span></div></li>' : '') +
+    (isNum(b.apartments) && b.apartments > 0 ? '<li><div class="frow"><span class="l">Apartments at ' + money(LIMIT) + ' or less</span><span class="v">' + b.apartments + '</span></div></li>' : '') + (R ? richFacts(R, h) : '');
+  return backTop(avoid ? '' : heart(b)) + '<article class="stack place" style="gap:14px" data-building="' + esc(id) + '" data-role="' + e.role + '">' +
+    '<div class="stack" style="gap:4px"><p class="kicker">' + esc(h.name) + '</p><h1 tabindex="-1" id="screen-h">' + esc(nm(b)) + '</h1>' + (addr ? '<p class="inhood">' + esc(addr) + '</p>' : '') +
+    (isVerified(b) ? '<p class="chk" id="checked"><span aria-hidden="true">&#10003; </span>Checked against its listing</p>' : '') + '</div>' +
+    (avoid ? '<ul class="avoids" style="list-style:none">' + avoidCard(b) + '</ul>' : '') +
+    (httpUrl(b.listing_url) ? '<a class="photos" id="photos" href="' + esc(b.listing_url) + '" target="_blank" rel="noopener noreferrer">See the listing and photos <span aria-hidden="true">&#8599;</span><span class="sr"> (opens in a new tab)</span></a>' : '') +
+    (money2 ? '<ul class="facts" id="facts">' + money2 + '</ul>' : '') +
+    listOf("known", "known", "What is known", arr(b.known).map(str).filter(Boolean), "&#10003;") +
+    listOf("ask", "toask", "What to ask", asks, "?") + ratingLine(b) +
+    (c ? '<section class="box contact" id="contact" aria-labelledby="ct-h"><h2 id="ct-h">' + esc(c.kind) + '</h2>' + (c.phone ? '<a class="link tel" data-phone="1" href="tel:' + esc(c.phone.replace(/[^\d+]/g, "")) + '">' + esc(c.phone) + '</a>' : '') + (c.site ? ext(c.site, "Website") : '') + '</section>' : '') +
+    (R ? richMore(R) : '') + (avoid ? '' : heart(b, true)) +
+    '<button type="button" class="quiet" data-act="see-hood" data-id="' + esc(h.id) + '" id="to-hood">See ' + esc(h.name) + '</button></article>';
 }
 
-/* ---------- tour plan ---------- */
-function areaOfBuilding(b) { return HBY[b.area_id] || HBY[b.neighborhood_id] || null; }
-function plan() {
-  var kept = S.tour.map(function (id) { return BY[id]; }).filter(Boolean);
-  if (!kept.length) return top() + '<section class="stack"><h1 class="h-big" tabindex="-1">Your tour plan is empty</h1><p class="lead">Add places from My list, or choose one when you compare.</p><button type="button" class="btn main" data-act="' + (CAN ? 'results">See my three neighborhoods' : 'all">See every place') + '</button></section>';
-  var groups = {}, order = [];
-  kept.forEach(function (b) {
-    var a = areaOfBuilding(b), k = a ? a.id : "other:" + (b.state || "");
-    if (!groups[k]) { groups[k] = { name: a ? a.name + (a.state ? ", " + a.state : "") : (b.state || "Other places"), drive: a && isNum(a.drive_min) ? a.drive_min : (b.facts || {}).drive_min, list: [] }; order.push(k); }
-    groups[k].list.push(b);
-  });
-  order.sort(function (x, y) { var a = groups[x].drive, b = groups[y].drive; return (isNum(a) ? a : 1e9) - (isNum(b) ? b : 1e9) || (x < y ? -1 : 1); });
-  var ts = niceDate(META.tour_start), mv = niceDate(META.move_in_by);
-  var html = top() + '<section class="stack" style="gap:8px"><p class="kicker">All set</p><h1 class="h-big" tabindex="-1">Your tour plan</h1>' +
-    '<p class="lead">' + kept.length + (kept.length === 1 ? ' place' : ' places') + ', closest to ' + esc(ANCHOR) + ' first.' + (ts ? ' Tours can start ' + ts + '.' : '') + (mv ? ' Move in by ' + mv + '.' : '') + '</p></section>';
-  order.forEach(function (k) {
-    var g = groups[k];
-    html += '<section class="area"><div class="area-h"><h2>' + esc(g.name) + '</h2>' + (isNum(g.drive) ? '<span>' + Math.round(g.drive) + ' min drive</span>' : '') + '</div>';
-    g.list.sort(function (x, y) { return ((x.facts || {}).drive_min || 0) - ((y.facts || {}).drive_min || 0) || (x.id < y.id ? -1 : 1); }).forEach(function (b) {
-      var addr = [b.address, b.city, b.state].filter(Boolean).join(", "), ct = b.contact || {};
-      var own = HBY[b.neighborhood_id], parked = own && own.parked_under;
-      var qs = [], seen = {}, chk = bldChecked(b);
-      if (chk && chk.ask) { seen[STILL_Q] = 1; qs.push(STILL_Q); }
-      (b.confirm || []).forEach(function (c) { var q = c && (c.question || c.label); if (q && !seen[q]) { seen[q] = 1; qs.push(q); } });
-      (b.tour_questions || []).forEach(function (q) { if (q && !seen[q]) { seen[q] = 1; qs.push(q); } });
-      html += '<div class="stop" data-stop="' + esc(b.id) + '"><h3>' + esc(nm(b)) + '</h3>' + (parked ? '<p class="small muted">In ' + esc(own.name) + '</p>' : '') + chkLine(chk) +
-        (addr ? '<p><a class="link" href="https://www.google.com/maps/search/?api=1&amp;query=' + encodeURIComponent(addr) + '" target="_blank" rel="noopener noreferrer">' + esc(addr) + ' <span aria-hidden="true">&#8599;</span><span class="sr"> (opens a map in a new tab)</span></a></p>' : '') +
-        pairHtml(b) +
-        (((ct.office_phone && !ct.private) || httpUrl(ct.site)) ? '<div><p class="lab">Leasing office</p>' + (ct.office_phone && !ct.private ? '<p class="phone">' + esc(ct.office_phone) + '</p>' : '') + ext(ct.site, "Building website") + '</div>' : '') +
-        (qs.length ? '<div><p class="lab">Ask on the tour</p><ol class="qs" style="margin-top:6px">' + qs.slice(0, 3).map(li).join("") + '</ol>' +
-          (qs.length > 3 ? '<details class="more moreqs"><summary>' + (qs.length - 3) + ' more to ask</summary><div class="in"><ol class="qs" start="4">' + qs.slice(3).map(li).join("") + '</ol></div></details>' : '') + '</div>' : '') +
-        '<div class="links"><button type="button" class="quiet" data-act="open" data-id="' + esc(b.id) + '">See this place again</button><button type="button" class="quiet" data-act="untour" data-id="' + esc(b.id) + '">Take it off the plan</button></div></div>';
-    });
-    html += '</section>';
-  });
-  html += '<div class="stack">' + (CAN ? '<button type="button" class="btn" data-act="results">Back to my three neighborhoods</button>' : '') + resetBlock() + '</div>';
-  return html;
+/* ---------- my list ---------- */
+function myList() {
+  var L = S.saved.map(function (id) { return BIX[id]; }).filter(Boolean);
+  if (!L.length) return '<section class="stack" style="padding-top:12px"><p class="kicker">My list</p><h1 class="h-big" tabindex="-1" id="screen-h">Nothing saved yet</h1><p class="lead">Tap <span aria-hidden="true">&#9825;</span> Save on a building and it shows up here.</p><button type="button" class="btn main" data-act="home">See the neighborhoods</button></section>';
+  return '<section class="stack" style="gap:6px;padding-top:12px"><p class="kicker">My list</p><h1 class="h-big" tabindex="-1" id="screen-h">' + plural(L.length, "saved building", "saved buildings") + '</h1></section>' +
+    '<ul class="rows" id="saved" style="gap:12px">' + L.map(function (e) {
+      var b = e.b, n = arr(b.to_ask).length;
+      return '<li class="srow" data-building="' + esc(b.id) + '"><h2>' + esc(nm(b)) + '</h2><p class="in">' + esc(e.h.name) + (isNum(e.h.rank) ? ", number " + e.h.rank : "") + (isNum(e.h.drive_min) ? " · " + Math.round(e.h.drive_min) + " min to " + esc(ANCHOR) : "") + '</p>' +
+        pairHtml(b) + (n ? '<p class="small muted">' + plural(n, "thing", "things") + ' to ask</p>' : '') +
+        '<div class="sact"><button type="button" class="btn sm" data-act="open" data-id="' + esc(b.id) + '">See this building</button><button type="button" class="quiet" data-act="unsave" data-id="' + esc(b.id) + '">Remove</button></div></li>';
+    }).join("") + '</ul>' +
+    (VIEW.confirmClear ? '<div class="confirmrow" id="clear-confirm"><p><b>Clear your whole list?</b></p><div class="two"><button type="button" class="btn sm main" data-act="clear-yes">Yes, clear it</button><button type="button" class="btn sm" data-act="clear-no">Keep it</button></div></div>'
+      : '<button type="button" class="quiet" data-act="clear" id="clear">Clear my list</button>');
 }
 
-/* ---------- see everything ---------- */
-function rentBounds() {
-  var rents = []; B.forEach(function (b) { (b.apartments || []).forEach(function (a) { if (isNum(a.rent)) rents.push(a.rent); }); if (isNum((b.facts || {}).rent_from)) rents.push(b.facts.rent_from); });
-  var hi = isNum(META.rent_limit) ? META.rent_limit : (rents.length ? Math.ceil(Math.max.apply(null, rents) / 50) * 50 : 2000);
-  var lo = rents.length ? Math.floor(Math.min.apply(null, rents) / 50) * 50 : 0;
-  if (lo >= hi) lo = Math.max(0, hi - 50);
-  return [lo, hi];
-}
-/* search: every word must appear in the name, street, town, state, ZIP or neighborhood */
-function norm(t) { return String(t || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, " ").trim(); }
+/* ---------- everything: every ranked neighborhood, searchable ---------- */
+function norm(t) { return String(t || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, " ").trim(); }
 var HAY = {};
-function matchesQuery(b, q) {
-  var h = HAY[b.id] || (HAY[b.id] = " " + norm([b.name, b.address, b.city, b.state, b.zip, b.postal_code, b.borough, hoodNameOf(b), (HBY[b.area_id] || {}).name].join(" ")) + " ");
-  return norm(q).split(" ").filter(Boolean).every(function (w) { return h.indexOf(" " + w) >= 0; });
-}
-function stateOf(b) { var h = HBY[b.neighborhood_id]; return b.state || (h && h.state) || ""; }
-var STATES = B.map(stateOf).filter(function (x, i, a) { return x && a.indexOf(x) === i; }).sort();
-/* every area (the recommender's group, else the neighborhood) with its buildings */
-var AREAS = (function () { var o = {}, order = []; B.forEach(function (b) { if (!o[b.area_id]) { o[b.area_id] = []; order.push(b.area_id); } o[b.area_id].push(b); }); return { by: o, ids: order }; })();
-var HOOD_AREA = {}; B.forEach(function (b) { if (!HOOD_AREA[b.neighborhood_id]) HOOD_AREA[b.neighborhood_id] = b.area_id; });
-function matchApts(b) {
-  var f = VIEW.f, ap = b.apartments || [];
-  if (f.garage && ((b.facts || {}).parking || {}).kind !== "garage") return null;
-  if (f.state !== "any" && stateOf(b) !== f.state) return null;
-  if (f.q && !matchesQuery(b, f.q)) return null;
-  if (!ap.length) { var r = (b.facts || {}).rent_from; return (f.beds === "any" && (f.rent == null || !isNum(r) || r <= f.rent)) ? [] : null; }
-  var m = ap.filter(function (a) { return (f.rent == null || !isNum(a.rent) || a.rent <= f.rent) && (f.beds === "any" || String(a.beds) === f.beds); });
-  return m.length ? m : null;
-}
-function listHtml() {
-  var shown = 0, html = "";
-  function rowFor(b, tagName) {
-    var m = matchApts(b); if (!m) return "";
-    shown++;
-    var f = b.facts || {}, rs = m.map(function (a) { return a.rent; }).filter(isNum), ts = m.map(function (a) { return a.total; }).filter(isNum);
-    var r = rs.length ? Math.min.apply(null, rs) : f.rent_from, t = ts.length ? Math.min.apply(null, ts) : f.total_from, many = rs.length > 1 && Math.max.apply(null, rs) !== r;
-    return '<button type="button" class="row" data-act="open" data-id="' + esc(b.id) + '"><span class="r1"><b>' + esc(nm(b)) + '</b><span>' + (isNum(f.drive_min) ? Math.round(f.drive_min) + ' min' : '') + '</span></span>' +
-      '<span class="r2"><span>Rent ' + (many ? 'from ' : '') + '</span><b' + (isNum(r) ? ' data-rent="' + r + '"' : '') + '>' + (money(r) || 'not known') + '</b><span>Total with utilities and fees ' + (many ? 'from ' : '') + '</span><b>' + (money(t) || 'not known') + '</b></span>' +
-      (tagName ? '<span class="tag at">In ' + esc(tagName) + '</span>' : '') +
-      (isSaved(b.id) ? '<span class="tag k">&#9829; On My list</span>' : '') + '</button>';
-  }
-  /* her three neighborhoods first, then the rest nearest to Mom and Dad first; within one, the short list's order, then rank */
-  var score = {}, rank = {}, pos = {};
-  topIds().forEach(function (t, i) { rank[t[0]] = i + 1; t[1].forEach(function (id, j) { pos[id] = 3 - j; }); });
-  B.forEach(function (b) { score[b.id] = (pos[b.id] || 0) * 1000 + (b.rank_score || 0); });
-  var areas = AREAS.ids.slice().sort(function (x, y) {
-    var a = rank[x] || 9, z = rank[y] || 9; if (a !== z) return a - z;
-    var dx = (HBY[x] || {}).drive_min, dy = (HBY[y] || {}).drive_min;
-    return (isNum(dx) ? dx : 1e9) - (isNum(dy) ? dy : 1e9) || (x < y ? -1 : 1); });
-  var firstRest = true, SHOW = 3;
-  areas.forEach(function (A) {
-    var h = HBY[A] || { id: A, name: A };
-    var rows = AREAS.by[A].slice().sort(function (x, y) { return (score[y.id] - score[x.id]) || (x.id < y.id ? -1 : 1); })
-      .map(function (b) { return rowFor(b, b.neighborhood_id !== A ? hoodNameOf(b) : null); }).filter(Boolean);
-    if (!rows.length) return;
-    if (!rank[A] && firstRest && Object.keys(rank).length) { html += '<p class="nearby" style="margin-top:10px">Every other place</p>'; firstRest = false; }
-    var open = !!VIEW.grp[A], rest = rows.slice(SHOW), gid = "grp-more-" + A.replace(/[^\w-]/g, "_");
-    html += '<div class="grp"><h3 class="grp-h" tabindex="-1" id="grp-' + esc(A) + '" data-hood="' + esc(A) + '"><span>' + (rank[A] ? '<span class="rk">' + rank[A] + '</span> ' : '') + esc(areaName(A, AREAS.by[A].map(function (b) { return b.id; }))) + '</span>' + (isNum(h.drive_min) ? '<small>' + Math.round(h.drive_min) + ' min to ' + esc(ANCHOR) + '</small>' : '') + '</h3>' + tagList(h) +
-      rows.slice(0, SHOW).join("") +
-      (rest.length ? '<div class="grp-rest stack" id="' + gid + '"' + (open ? '' : ' hidden') + ' style="gap:8px">' + rest.join("") + '</div>' +
-        '<button type="button" class="quiet" data-act="grp-more" data-id="' + esc(A) + '" aria-expanded="' + open + '" aria-controls="' + gid + '">' + (open ? 'Show fewer' : 'Show ' + rest.length + ' more in ' + esc(h.name)) + '</button>' : '') + '</div>';
+N.forEach(function (h) { HAY[h.id] = " " + norm([h.name, h.area, h.state, STATE_NAME[h.state], arr(h.tags_true || h.tags).join(" ")].join(" ")) + " "; });
+var STATES = N.map(function (h) { return str(h.state); }).filter(function (x, i, a) { return x && a.indexOf(x) === i; }).sort();
+function bounds(key, step) { var xs = N.map(function (h) { return h[key]; }).filter(isNum); if (!xs.length) return null; return { min: Math.floor(Math.min.apply(null, xs) / step) * step, max: Math.ceil(Math.max.apply(null, xs) / step) * step, step: step }; }
+var DRIVE_B = bounds("drive_min", 5), RENT_B = bounds("typical_rent", 25);
+function matches() {
+  var f = VIEW.f, words = norm(f.q).split(" ").filter(Boolean);
+  return N.filter(function (h) {
+    if (f.state !== "any" && h.state !== f.state) return false;
+    if (isNum(f.drive) && DRIVE_B && f.drive < DRIVE_B.max && !(isNum(h.drive_min) && h.drive_min <= f.drive)) return false;
+    if (isNum(f.rent) && RENT_B && f.rent < RENT_B.max && !(isNum(h.typical_rent) && h.typical_rent <= f.rent)) return false;
+    return words.every(function (w) { return HAY[h.id].indexOf(" " + w) >= 0; });
   });
-  if (!shown) html = '<p class="empty">' + (VIEW.f.q ? 'Nothing matches &ldquo;' + esc(VIEW.f.q) + '&rdquo; with these filters. Check the spelling, or clear the search.' : 'Nothing fits that filter. Raise the rent or clear a choice.') + '</p>';
-  return { html: html, shown: shown };
+}
+function hRow(h) {
+  return '<li><button type="button" class="row" data-act="hood" data-id="' + esc(h.id) + '" data-rank="' + esc(h.rank) + '"><span class="rk"><span class="sr">Number </span>' + esc(isNum(h.rank) ? h.rank : "") + '</span>' +
+    '<span class="nm"><b>' + esc(h.name) + '</b><small>' + esc(where(h)) + '</small></span>' +
+    '<span class="fg"><b' + (isNum(h.typical_rent) ? ' data-rent="' + h.typical_rent + '"' : '') + '>' + (money(h.typical_rent) || "") + '</b><small>' + (driveText(h) ? driveText(h) + " drive" : "") + '</small></span></button></li>';
 }
 function filterSummary() {
-  var f = VIEW.f, rb = rentBounds(), bits = [];
-  if (f.rent != null && f.rent < rb[1]) bits.push("rent up to " + money(f.rent));
-  if (f.beds !== "any") bits.push(f.beds === "0" ? "studios" : "1 bedroom");
-  if (f.state !== "any") bits.push(f.state);
-  if (f.garage) bits.push("garage");
-  return bits.length ? bits.join(", ") : "rent, bedrooms, state, parking";
+  var f = VIEW.f, a = [];
+  if (f.state !== "any") a.push(STATE_NAME[f.state] || f.state);
+  if (isNum(f.drive) && DRIVE_B && f.drive < DRIVE_B.max) a.push("up to " + f.drive + " min");
+  if (isNum(f.rent) && RENT_B && f.rent < RENT_B.max) a.push("up to " + money(f.rent));
+  return a.join(" · ");
+}
+function proj(lat, lon) { var p = MAPBASE.proj; return [(lon - p.west) * p.kx * p.scale, (p.north - lat) * p.scale]; }
+var MAP_OK = !!(MAPBASE && MAPBASE.proj && isNum(MAPBASE.proj.kx) && isNum(MAPBASE.proj.scale) && N.some(function (h) { return isNum(h.lat) && isNum(h.lon); }));
+var FRAME = null;
+function frame() {
+  if (FRAME) return FRAME;
+  var pts = N.filter(function (h) { return isNum(h.lat) && isNum(h.lon); }).map(function (h) { return proj(h.lat, h.lon); });
+  var a = PLACES.meta && PLACES.meta.anchor; if (a && isNum(a.lat) && isNum(a.lon)) pts.push(proj(a.lat, a.lon));
+  var xs = pts.map(function (p) { return p[0]; }), ys = pts.map(function (p) { return p[1]; }), pad = 160;
+  FRAME = { x: Math.min.apply(null, xs) - pad, y: Math.min.apply(null, ys) - pad, w: Math.max.apply(null, xs) - Math.min.apply(null, xs) + 2 * pad, h: Math.max.apply(null, ys) - Math.min.apply(null, ys) + 2 * pad };
+  return FRAME;
+}
+function mapHtml(L) {
+  var F = frame(), u = F.w / 358, a = PLACES.meta && PLACES.meta.anchor, sel = VIEW.sel && HIX[VIEW.sel] != null ? N[HIX[VIEW.sel]] : null;
+  if (sel && L.indexOf(sel) < 0) sel = null;
+  var dots = L.filter(function (h) { return isNum(h.lat) && isNum(h.lon); }).slice().reverse().map(function (h) {
+    var p = proj(h.lat, h.lon), top = isNum(h.rank) && h.rank <= 10;
+    return '<circle cx="' + p[0].toFixed(0) + '" cy="' + p[1].toFixed(0) + '" r="' + ((top ? 7 : 5) * u).toFixed(0) + '" fill="' + (top ? "var(--berry-deep)" : "var(--berry)") + '" fill-opacity="' + (top ? 1 : .55) + '" stroke="var(--ink)" stroke-width="' + (1.5 * u).toFixed(0) + '"/>';
+  }).join("");
+  var anchor = "";
+  if (a && isNum(a.lat) && isNum(a.lon)) { var q = proj(a.lat, a.lon), s = u * 1.1; anchor = '<path transform="translate(' + q[0].toFixed(0) + ' ' + q[1].toFixed(0) + ') scale(' + s.toFixed(2) + ')" d="M0 9c-9-6-13-11-13-16a7 7 0 0 1 13-4a7 7 0 0 1 13 4c0 5-4 10-13 16z" fill="var(--butter)" stroke="var(--ink)" stroke-width="2.500"/>'; }
+  var selDot = "";
+  if (sel) { var sp = proj(sel.lat, sel.lon); selDot = '<circle cx="' + sp[0].toFixed(0) + '" cy="' + sp[1].toFixed(0) + '" r="' + (12 * u).toFixed(0) + '" fill="none" stroke="var(--ink)" stroke-width="' + (3 * u).toFixed(0) + '"/>'; }
+  return '<div class="mapbox" id="map" role="img" aria-label="A map of ' + L.length + ' neighborhoods. The list shows the same places."><svg viewBox="' + [F.x, F.y, F.w, F.h].map(function (v) { return v.toFixed(0); }).join(" ") + '" style="aspect-ratio:' + (F.w / F.h).toFixed(3) + '">' +
+    (str(MAPBASE.land) ? '<path d="' + MAPBASE.land + '" fill="var(--land)" stroke="var(--line)" stroke-width="' + (1.5 * u).toFixed(0) + '"/>' : '') +
+    arr(MAPBASE.state_lines).map(function (d) { return '<path d="' + d + '" fill="none" stroke="var(--muted)" stroke-width="' + (1.2 * u).toFixed(0) + '" stroke-dasharray="' + (5 * u).toFixed(0) + ' ' + (4 * u).toFixed(0) + '"/>'; }).join("") +
+    dots + anchor + selDot + '</svg></div>' +
+    '<p class="small muted" id="map-key"><span aria-hidden="true">&#9829;</span> ' + esc(ANCHOR) + ' · darker dots are the top 10 · tap a dot</p>' +
+    (sel ? '<ul class="rows" id="map-card">' + hRow(sel) + '</ul>' : '');
+}
+function allBody() {
+  var L = matches();
+  var head = '<p class="fcount" id="all-count" role="status">' + (L.length === N.length ? "All " + N.length + " neighborhoods" : L.length + " of " + N.length + " neighborhoods") + '</p>';
+  if (!L.length) return head + '<div class="empty" id="all-empty"><p>Nothing matches.</p><button type="button" class="quiet" data-act="f-reset">Clear search and filters</button></div>';
+  if (VIEW.mode === "map" && MAP_OK) return head + mapHtml(L);
+  return head + '<ol class="rows" id="all-list">' + L.map(hRow).join("") + '</ol>';
 }
 function everything() {
-  var rb = rentBounds(), f = VIEW.f; if (f.rent == null) f.rent = rb[1];
-  var L = listHtml();
-  function seg(v, label) { return '<button type="button" data-act="f-beds" data-v="' + v + '" aria-pressed="' + (f.beds === v) + '">' + label + '</button>'; }
-  return '<header class="top"><button type="button" class="quiet" data-act="all-close"><span aria-hidden="true">&#8249;</span> Back</button><span class="topbtns" id="topbtns"></span></header>' +
-    '<section class="stack" style="gap:4px"><p class="kicker">Browse</p><h1 class="h-big" tabindex="-1">Everything</h1><p>Every building, nothing left out.</p></section>' +
-    '<div class="search"><label for="f-q">Search by name, street, town or ZIP</label><input type="search" id="f-q" autocomplete="off" placeholder="For example: Stamford, or Monroe" value="' + esc(f.q || "") + '">' +
-    '<p class="fcount" id="f-count" aria-live="polite">Showing ' + L.shown + ' of ' + B.length + ' buildings</p></div>' +
-    '<details class="filter" id="filters"' + (VIEW.fOpen ? ' open' : '') + '><summary><span>Filter</span><span class="fsum" id="f-sum">' + esc(filterSummary()) + '</span></summary><div class="fbody">' +
-    '<div><label for="f-rent">Rent up to <output id="f-rent-out" for="f-rent">' + money(f.rent) + '</output></label><input type="range" id="f-rent" min="' + rb[0] + '" max="' + rb[1] + '" step="50" value="' + f.rent + '"></div>' +
-    '<div><span class="lab" id="f-beds-l">Bedrooms</span><div class="seg" role="group" aria-labelledby="f-beds-l">' + seg("any", "Any") + seg("0", "Studio") + seg("1", "1 bedroom") + '</div></div>' +
-    (STATES.length > 1 ? '<div><span class="lab" id="f-state-l">State</span><div class="seg" role="group" aria-labelledby="f-state-l">' + ['any'].concat(STATES).map(function (st) { return '<button type="button" data-act="f-state" data-v="' + esc(st) + '" aria-pressed="' + (f.state === st) + '">' + (st === "any" ? "Any" : esc(st)) + '</button>'; }).join("") + '</div></div>' : '') +
-    '<label class="check" for="f-garage"><input type="checkbox" id="f-garage"' + (f.garage ? " checked" : "") + '> Garage parking only</label></div></details>' +
-    (MAPBASE && typeof window.initHouseHuntMap === "function" ? '<div class="tabs" role="group" aria-label="Show as"><button type="button" data-act="tab" data-v="list" aria-pressed="' + (VIEW.tab === "list") + '">List</button><button type="button" data-act="tab" data-v="map" aria-pressed="' + (VIEW.tab === "map") + '">Map</button></div>' : '') +
-    '<div id="all-list" class="stack"' + (VIEW.tab === "map" ? " hidden" : "") + '>' + L.html + '</div>' +
-    '<div id="all-map" class="mapwrap"' + (VIEW.tab === "map" ? "" : " hidden") + '><div id="map-slot"></div></div>';
+  var f = VIEW.f;
+  function seg(v, label) { return '<button type="button" data-act="f-state" data-v="' + esc(v) + '" aria-pressed="' + (f.state === v) + '">' + esc(label) + '</button>'; }
+  var dv = DRIVE_B ? (isNum(f.drive) ? f.drive : DRIVE_B.max) : null, rv = RENT_B ? (isNum(f.rent) ? f.rent : RENT_B.max) : null, sum = filterSummary();
+  return '<section class="stack" style="gap:6px;padding-top:12px"><p class="kicker">Everything</p><h1 class="h-big" tabindex="-1" id="screen-h">Every neighborhood</h1></section>' +
+    '<div class="search"><label for="f-q">Search by name</label><input type="search" id="f-q" value="' + esc(f.q) + '" placeholder="Queens, Newark, quiet…" autocomplete="off" enterkeyhint="search"></div>' +
+    '<details class="filter" id="filter"' + (VIEW.fopen ? " open" : "") + '><summary>Filters<span class="fsum" id="fsum">' + esc(sum) + '</span></summary><div class="fbody">' +
+    (STATES.length > 1 ? '<div><span class="lab" id="st-l">State</span><div class="seg" role="group" aria-labelledby="st-l">' + seg("any", "Any") + STATES.map(function (s) { return seg(s, s); }).join("") + '</div></div>' : '') +
+    (DRIVE_B ? '<div><label for="f-drive">Longest drive to ' + esc(ANCHOR) + ': <output id="f-drive-out">' + dv + ' min</output></label><input type="range" id="f-drive" min="' + DRIVE_B.min + '" max="' + DRIVE_B.max + '" step="' + DRIVE_B.step + '" value="' + dv + '"></div>' : '') +
+    (RENT_B ? '<div><label for="f-rent">Highest typical rent: <output id="f-rent-out">' + money(rv) + '</output></label><input type="range" id="f-rent" min="' + RENT_B.min + '" max="' + RENT_B.max + '" step="' + RENT_B.step + '" value="' + rv + '"></div>' : '') +
+    '</div></details>' +
+    (MAP_OK ? '<div class="tabs" role="group" aria-label="Show as"><button type="button" data-act="mode" data-v="list" aria-pressed="' + (VIEW.mode !== "map") + '" id="mode-list">List</button><button type="button" data-act="mode" data-v="map" aria-pressed="' + (VIEW.mode === "map") + '" id="mode-map">Map</button></div>' : '') +
+    '<div class="stack" id="all-body">' + allBody() + '</div>';
 }
-/* the rent slider fires many times a second; with a long list, redraw once per frame */
 var refreshPending = false;
-function soonRefresh() { if (refreshPending) return; refreshPending = true; (window.requestAnimationFrame || setTimeout)(function () { refreshPending = false; refreshList(); }); }
-function refreshList() {
-  var L = listHtml(), box = document.getElementById("all-list"), cnt = document.getElementById("f-count");
-  if (box) box.innerHTML = L.html;
-  if (cnt) cnt.textContent = "Showing " + L.shown + " of " + B.length + " buildings";
-  var fs = document.getElementById("f-sum"); if (fs) fs.textContent = filterSummary();
-  if (VIEW.tab === "map") drawMap();
+function refreshAll() {
+  var el = document.getElementById("all-body"); if (el) el.innerHTML = allBody();
+  var fs = document.getElementById("fsum"); if (fs) fs.textContent = filterSummary();
 }
-function drawMap() {
-  var slot = document.getElementById("map-slot");
-  if (!slot || !MAPBASE || typeof window.initHouseHuntMap !== "function") return;
-  if (mapApi) { try { mapApi.destroy(); } catch (e) { /* ignore */ } mapApi = null; }
-  var counts = {}; B.forEach(function (b) { if (matchApts(b)) counts[b.neighborhood_id] = (counts[b.neighborhood_id] || 0) + 1; });
-  var rank = {}; topIds().forEach(function (t) { rank[t[0]] = 1; });
-  var any = Object.keys(rank).length;
-  var years = any ? [{ id: "top", label: "Your three places" }, { id: "rest", label: "Every other place" }] : [{ id: "rest", label: "Every place" }];
-  var style = { top: { color: "#C12C62", shape: "diamond" }, rest: { color: "#324BAE", shape: "circle" } };
-  var data = { meta: META.anchor ? { anchor: META.anchor } : {}, years: years,
-    neighborhoods: HOODS.filter(function (h) { return isNum(h.lat) && isNum(h.lon); }).map(function (h) {
-      var host = HOOD_AREA[h.id] || h.id;
-      return { id: h.id, name: h.name, state: h.state, year: rank[host] ? "top" : "rest", lat: h.lat, lon: h.lon, counts: { shown: counts[h.id] || 0 }, drive_min: h.drive_min, toll_round_trip: h.toll_round_trip }; }) };
-  try {
-    mapApi = window.initHouseHuntMap(slot, data, MAPBASE, { anchorLabel: ANCHOR, yearStyle: style, groupWord: "group", onSelectHood: function (id) {
-      var host = HOOD_AREA[id] || id;
-      VIEW.tab = "list"; render(); var t = document.getElementById("grp-" + host); if (t) { t.scrollIntoView({ block: "start" }); t.focus({ preventScroll: true }); }
-    } });
-  } catch (e) { slot.textContent = "The map could not be drawn."; }
-}
+function soonRefresh() { if (refreshPending) return; refreshPending = true; (window.requestAnimationFrame || setTimeout)(function () { refreshPending = false; try { refreshAll(); } catch (e) { oops(e); } }); }
 
-/* ---------- the bar: Home, Everything, My list, on every screen ---------- */
+/* ---------- the bar ---------- */
 function navBar() {
-  var v = topView(), cur = v && (v.t === "list" || v.t === "compare") ? "list" : v ? "" : VIEW.all ? "all" : S.step === "plan" ? "list" : "home";
-  function tab(key, act, ic, label, extra) { return '<button type="button" class="tab" data-act="' + act + '" id="bar-' + key + '"' + (cur === key ? ' aria-current="page"' : '') + '>' + ic + '<span>' + label + (extra || '') + '</span></button>'; }
-  var n = S.saved.length;
-  return '<nav class="navbar" id="savebar" aria-label="Main"><div class="in">' +
-    tab("home", "home", icon("home"), "Home") + tab("all", "all", icon("search"), "Everything") +
-    tab("list", "list", '<span class="h" aria-hidden="true">' + (n ? "&#9829;" : "&#9825;") + '</span>', "My list", '<span class="n" aria-label="' + n + ' saved">' + n + '</span>') + '</div></nav>';
+  var cur = VIEW.tab, n = S.saved.length;
+  function tab(key, ic, label, extra) { return '<button type="button" class="tab" data-act="' + key + '" id="bar-' + key + '"' + (cur === key ? ' aria-current="page"' : '') + '>' + ic + '<span>' + label + (extra || '') + '</span></button>'; }
+  return '<nav class="navbar" id="savebar" aria-label="Main"><div class="in">' + tab("home", icon("home"), "Home") + tab("all", icon("search"), "Everything") +
+    tab("list", '<span class="h" aria-hidden="true">' + (n ? "&#9829;" : "&#9825;") + '</span>', "My list", '<span class="n" aria-label="' + n + ' saved">' + n + '</span>') + '</div></nav>';
 }
 
 /* ---------- render ---------- */
-var lastFocusKey = null;
-/* if anything throws while drawing a screen or doing what she tapped, say so and offer three ways on, never nothing */
+var lastKey = null;
+/* if anything throws while drawing a screen or doing what she tapped, say so and offer two ways on, never nothing */
 function oops(err) {
   try { if (window.console) console.warn("concierge:", err && err.message || err); } catch (e) { /* ignore */ }
   var o = document.getElementById("oops"); if (o) o.remove();
   o = document.createElement("div"); o.id = "oops"; o.className = "oops"; o.setAttribute("role", "alert");
-  var done = CAN;
-  o.innerHTML = '<div class="in"><p><b>Something went wrong.</b> Try one of these:</p><div class="oops-b">' +
-    (done ? '<button type="button" class="btn sm main" data-oops="results">See my three neighborhoods</button>' : '') +
-    '<button type="button" class="btn sm" data-oops="all">See everything</button></div></div>';
+  o.innerHTML = '<div class="in"><p><b>Something went wrong.</b> Try one of these:</p><div class="oops-b"><button type="button" class="btn sm main" data-oops="home">Back to Home</button><button type="button" class="btn sm" data-oops="all">See everything</button></div></div>';
   document.body.appendChild(o);
   var f = o.querySelector("button"); if (f) f.focus();
 }
 function recover(how) {
   var o = document.getElementById("oops"); if (o) o.remove();
-  VIEW.stack = []; VIEW.confirmReset = false;
-  if (how === "all") { VIEW.all = true; VIEW.tab = "list"; }
-  else { VIEW.all = false; S.step = "home"; }
-  lastFocusKey = null;
-  try { render(); } catch (e) { S = fresh(); VIEW.all = true; try { render(); } catch (e2) { /* nothing more to try */ } }
+  VIEW.stack = []; VIEW.confirmClear = false; VIEW.tab = how === "all" ? "all" : "home"; VIEW.mode = "list"; lastKey = null;
+  try { renderNow(); } catch (e) { VIEW.tab = how === "all" ? "home" : "all"; try { renderNow(); } catch (e2) { /* nothing more to try */ } }
 }
 document.addEventListener("click", function (ev) {
   var b = ev.target.closest ? ev.target.closest("[data-oops]") : null;
   if (b) { ev.stopPropagation(); recover(b.getAttribute("data-oops")); }
 }, true);
-function render(opts) {
-  try { renderNow(opts); } catch (err) { oops(err); }
-}
+function render(opts) { try { renderNow(opts); } catch (err) { oops(err); } }
 function renderNow(opts) {
   opts = opts || {};
-  if (mapApi) { try { mapApi.destroy(); } catch (e) { /* ignore */ } mapApi = null; }
-  var v = topView(), sheetScroll = null, old = document.getElementById("sheet");
-  if (opts.stay && old) sheetScroll = old.scrollTop;
-  app.innerHTML = VIEW.all ? everything() : S.step === "plan" ? plan() : S.step === "hood" && CAN && DEF.neighborhoods[VIEW.hood] ? hoodScreen(VIEW.hood) : home();
-  var inner = !v ? "" : v.t === "place" && BY[v.id] ? place(BY[v.id]) : v.t === "list" ? myList() : v.t === "compare" ? compare(v.ids) : "";
-  layer.innerHTML = inner ? '<div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-h" id="sheet"><div class="wrap">' + inner + '</div></div>' : "";
+  var v = topView();
+  app.innerHTML = v && v.t === "hood" && N[HIX[v.id]] ? hoodScreen(HIX[v.id]) : v && v.t === "bld" && BIX[v.id] ? bldScreen(v.id) : VIEW.tab === "all" ? everything() : VIEW.tab === "list" ? myList() : home();
   barSlot.innerHTML = navBar();
   var bar = document.getElementById("savebar");
   document.documentElement.style.setProperty("--bar-h", bar ? bar.offsetHeight + "px" : "0px");
-  document.body.style.overflow = inner ? "hidden" : "";
-  if (VIEW.all && VIEW.tab === "map" && !inner) drawMap();
-  if (askApi) askApi.mount();
   save();
-  var sh = document.getElementById("sheet");
-  if (sh && sheetScroll != null) sh.scrollTop = sheetScroll;
-  var key = v ? v.t + ":" + (v.id || (v.ids || []).join(",")) : VIEW.all ? "all" : S.step + (S.step === "hood" ? VIEW.hood : "");
-  if (!opts.stay && key !== lastFocusKey) {
-    lastFocusKey = key;
-    var ot = document.getElementById("toast"); if (ot && !opts.keepToast) ot.remove();
-    var h = (inner ? layer : app).querySelector("h1[tabindex],h2[tabindex]");
-    if (sh) sh.scrollTop = 0; else window.scrollTo(0, 0);
-    /* in an auto-height frame window.scrollTo does nothing: bring the new heading into view so a new screen never
-       renders above where she is looking */
-    if (!sh && opts.focus !== false) { try { app.scrollIntoView({ block: "start" }); } catch (e) { /* ignore */ } }
+  var key = v ? v.t + ":" + v.id : VIEW.tab;
+  if (!opts.stay && key !== lastKey) {
+    lastKey = key;
+    var ot = document.getElementById("toast"); if (ot) ot.remove();
+    if (isNum(opts.scroll)) window.scrollTo(0, opts.scroll);
+    else {
+      window.scrollTo(0, 0);
+      /* in an auto-height frame window.scrollTo does nothing: bring the new screen into view */
+      if (opts.focus !== false) { try { app.scrollIntoView({ block: "start" }); } catch (e) { /* ignore */ } }
+    }
+    var h = app.querySelector("h1[tabindex]");
     if (h && opts.focus !== false) h.focus({ preventScroll: true });
   }
 }
@@ -1179,234 +762,73 @@ function toast(msg) {
 }
 
 /* ---------- actions ---------- */
+function push(v) { var t = topView(); if (t) t.y = window.scrollY; else VIEW.y = window.scrollY; VIEW.stack.push(v); render(); }
 function back() {
-  var was = VIEW.stack.pop(); render({ stay: true }); lastFocusKey = null;
-  var under = topView();
-  if (was && was.id && !under) { var el = app.querySelector('[data-act="open"][data-id="' + (window.CSS && CSS.escape ? CSS.escape(was.id) : was.id) + '"]'); if (el) el.focus(); }
-  else { var h = (under ? layer : app).querySelector("h1[tabindex],h2[tabindex]"); if (h) h.focus({ preventScroll: true }); }
+  if (!VIEW.stack.length) { VIEW.tab = "home"; render(); return; }
+  var was = VIEW.stack.pop(), under = topView();
+  render({ scroll: under ? under.y || 0 : VIEW.y || 0 });
+  var el = was && was.id ? app.querySelector('[data-act="' + (was.t === "hood" ? "hood" : "open") + '"][data-id="' + (window.CSS && CSS.escape ? CSS.escape(was.id) : was.id) + '"]') : null;
+  if (el) el.focus({ preventScroll: true });
 }
+function goTab(t) { VIEW.stack = []; VIEW.tab = t; VIEW.confirmClear = false; VIEW.y = 0; lastKey = null; render(); }
 function act(a, el) {
   var id = el.getAttribute("data-id"), v = el.getAttribute("data-v");
   switch (a) {
-    case "results": case "home": VIEW.stack = []; VIEW.all = false; VIEW.confirmReset = false; S.step = "home"; render(); break;
-    case "hood": VIEW.stack = []; VIEW.all = false; S.step = "hood"; VIEW.hood = Number(v) || 0; render(); break;
-    case "lean": { VIEW.stack = []; VIEW.all = true; VIEW.tab = "list"; VIEW.f.q = ""; render(); var A = HOOD_AREA[id] || id, g = document.getElementById("grp-" + A);
-      if (g) { try { g.scrollIntoView({ block: "start" }); } catch (e) { /* ignore */ } g.focus({ preventScroll: true }); } break; }
-    case "open": push({ t: "place", id: id }); break;
+    case "home": case "all": case "list": goTab(a); break;
+    case "hood": if (HIX[id] != null) push({ t: "hood", id: id }); break;
+    case "see-hood": if (HIX[id] != null) { VIEW.stack = VIEW.stack.filter(function (x) { return x.t !== "bld"; }); var tv = topView(); if (tv && tv.t === "hood" && tv.id === id) { lastKey = null; render(); } else { if (tv && tv.t === "hood") VIEW.stack.pop(); VIEW.stack.push({ t: "hood", id: id }); render(); } } break;
+    case "nav-hood": if (HIX[id] != null) { VIEW.stack[VIEW.stack.length - 1] = { t: "hood", id: id }; render(); } break;
+    case "open": if (BIX[id]) push({ t: "bld", id: id }); break;
     case "back": back(); break;
+    case "more": { var before = VIEW.shown; VIEW.shown += 10; render({ stay: true }); var c = document.querySelectorAll("#ncards .ncard")[before]; if (c) { var hb = c.querySelector("button"); if (hb) hb.focus({ preventScroll: true }); } break; }
     case "save":
-      if (isSaved(id)) { S.saved = without(S.saved, id); S.ticked = without(S.ticked, id); toast("Taken off My list."); }
+      if (!BIX[id]) break;
+      if (isSaved(id)) { S.saved = S.saved.filter(function (x) { return x !== id; }); toast("Taken off My list."); }
       else { S.saved.push(id); toast("Saved to My list."); }
-      render({ stay: true });
-      var sb = document.querySelector('[data-act="save"][data-id="' + (window.CSS && CSS.escape ? CSS.escape(id) : id) + '"]'); if (sb) sb.focus({ preventScroll: true });
-      break;
-    case "unsave": S.saved = without(S.saved, id); S.ticked = without(S.ticked, id); toast("Removed from My list."); render({ stay: true }); break;
-    case "list": if (!(topView() && topView().t === "list")) { VIEW.stack = []; push({ t: "list" }); } break;
-    case "compare": { var ids = compareIds(); if (!ids) break; if (topView() && topView().t === "compare") VIEW.stack.pop(); push({ t: "compare", ids: ids }); break; }
-    case "tour": if (!onTour(id)) S.tour.push(id); toast("Added to your tour plan."); render({ stay: true }); break;
-    case "choose-tour": if (!onTour(id)) S.tour.push(id); toast("Added to your tour plan."); render({ stay: true }); break;
-    case "untour": S.tour = without(S.tour, id); toast("Taken off your tour plan."); render({ stay: true }); break;
-    case "plan": VIEW.stack = []; VIEW.all = false; S.step = "plan"; render(); break;
-    case "reset-ask": VIEW.confirmReset = true; render({ stay: true }); var rb = document.getElementById("reset-box"); if (rb) { rb.scrollIntoView({ block: "center" }); rb.querySelector("button").focus(); } break;
-    case "reset-no": VIEW.confirmReset = false; render({ stay: true }); break;
-    case "reset-yes": S = fresh(); VIEW.confirmReset = false; VIEW.all = false; VIEW.stack = []; VIEW.open = {}; render(); toast("My list and tour plan cleared."); break;
-    case "all": if (VIEW.all && !VIEW.stack.length) break; VIEW.all = true; VIEW.stack = []; VIEW.tab = "list"; VIEW.confirmReset = false; render(); break;
-    case "all-close": VIEW.all = false; render(); break;
-    case "tab": VIEW.tab = v; render({ stay: true }); var tb = app.querySelector('.tabs [data-v="' + v + '"]'); if (tb) tb.focus(); break;
-    case "f-state": VIEW.f.state = v; app.querySelectorAll('[data-act="f-state"]').forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-v") === v)); }); refreshList(); break;
-    case "grp-more": { VIEW.grp[id] = !VIEW.grp[id]; var box = document.getElementById(el.getAttribute("aria-controls")); if (box) box.hidden = !VIEW.grp[id];
-      el.setAttribute("aria-expanded", String(!!VIEW.grp[id])); el.textContent = VIEW.grp[id] ? "Show fewer" : "Show " + box.children.length + " more in " + ((HBY[id] || {}).name || "this place"); break; }
-    case "f-beds": VIEW.f.beds = v; app.querySelectorAll('[data-act="f-beds"]').forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-v") === v)); }); refreshList(); break;
+      render({ stay: true }); refocus('[data-act="save"][data-id="' + id + '"]'); break;
+    case "unsave": S.saved = S.saved.filter(function (x) { return x !== id; }); toast("Taken off My list."); render({ stay: true }); refocus("#screen-h"); break;
+    case "clear": VIEW.confirmClear = true; render({ stay: true }); refocus('[data-act="clear-yes"]'); break;
+    case "clear-no": VIEW.confirmClear = false; render({ stay: true }); refocus("#clear"); break;
+    case "clear-yes": S.saved = []; VIEW.confirmClear = false; toast("Your list is empty."); render({ stay: true }); refocus("#screen-h"); break;
+    case "allb": VIEW.allOpen[id] = !VIEW.allOpen[id]; render({ stay: true }); refocus("#allb-t"); break;
+    case "allb-more": { var hh = N[HIX[id]], was = VIEW.allShown[id] || 20; VIEW.allShown[id] = was + 20; render({ stay: true }); var rows = document.querySelectorAll("#allb-list .row"); if (rows[was]) rows[was].focus({ preventScroll: true }); void hh; break; }
+    case "f-state": VIEW.f.state = v; VIEW.fopen = true; render({ stay: true }); refocus('[data-act="f-state"][data-v="' + v + '"]'); break;
+    case "f-reset": VIEW.f = { q: "", state: "any", drive: null, rent: null }; render({ stay: true }); refocus("#f-q"); break;
+    case "mode": VIEW.mode = v === "map" ? "map" : "list"; VIEW.sel = null; render({ stay: true }); refocus("#mode-" + VIEW.mode); break;
   }
 }
+function refocus(sel) { var el = document.querySelector(sel); if (el) el.focus({ preventScroll: true }); }
 document.addEventListener("click", function (ev) {
-  var el = ev.target.closest ? ev.target.closest("[data-act]") : null;
-  if (!el || el.disabled) return;
+  var t = ev.target;
+  if (!t || !t.closest) return;
+  var map = t.closest("#map");
+  if (map) {
+    try {
+      var svg = map.querySelector("svg"), box = svg.getBoundingClientRect(), F = frame(), k = F.w / box.width;
+      var x = F.x + (ev.clientX - box.left) * k, y = F.y + (ev.clientY - box.top) * k, best = null, bd = Math.pow(26 * k, 2);
+      matches().forEach(function (h) { if (!isNum(h.lat) || !isNum(h.lon)) return; var p = proj(h.lat, h.lon), d = Math.pow(p[0] - x, 2) + Math.pow(p[1] - y, 2); if (d < bd) { bd = d; best = h; } });
+      VIEW.sel = best ? best.id : null; refreshAll();
+      if (best) live.textContent = best.name;
+    } catch (e) { oops(e); }
+    return;
+  }
+  var el = t.closest("[data-act]");
+  if (!el) return;
   try {
     if (window.__conciergeThrowOn === el.getAttribute("data-act")) throw new Error("a test of the error fallback");
     act(el.getAttribute("data-act"), el);
   } catch (err) { oops(err); }
 });
-document.addEventListener("toggle", function (ev) { if (ev.target && ev.target.id === "filters") VIEW.fOpen = ev.target.open; }, true);
-document.addEventListener("change", function (ev) {
-  var t = ev.target, id = t && t.getAttribute && t.getAttribute("data-tick");
-  if (!id) return;
-  if (t.checked) {
-    if (S.ticked.length >= 3) { t.checked = false; var m = document.getElementById("tickmsg"); if (m) m.textContent = "Compare up to three. Untick one first."; toast("Compare up to three."); return; }
-    if (S.ticked.indexOf(id) < 0) S.ticked.push(id);
-  } else S.ticked = without(S.ticked, id);
-  render({ stay: true });
-  var again = document.getElementById("tick-" + id); if (again) again.focus({ preventScroll: true });
-});
 document.addEventListener("input", function (ev) {
-  if (ev.target.id === "f-rent") { VIEW.f.rent = Number(ev.target.value); var o = document.getElementById("f-rent-out"); if (o) o.textContent = money(VIEW.f.rent); soonRefresh(); }
-  else if (ev.target.id === "f-garage") { VIEW.f.garage = !!ev.target.checked; refreshList(); }
-  else if (ev.target.id === "f-q") { VIEW.f.q = ev.target.value; soonRefresh(); }
+  var t = ev.target, o;
+  if (t.id === "f-q") { VIEW.f.q = t.value; soonRefresh(); }
+  else if (t.id === "f-drive") { VIEW.f.drive = Number(t.value); o = document.getElementById("f-drive-out"); if (o) o.textContent = VIEW.f.drive + " min"; soonRefresh(); }
+  else if (t.id === "f-rent") { VIEW.f.rent = Number(t.value); o = document.getElementById("f-rent-out"); if (o) o.textContent = money(VIEW.f.rent); soonRefresh(); }
 });
-document.addEventListener("keydown", function (ev) {
-  if (ev.key === "Escape") { if (document.getElementById("ask-sheet")) { if (askApi) askApi.close(); } else if (VIEW.stack.length) back(); else if (VIEW.all) act("all-close", document.body); else if (S.step !== "home") act("home", document.body); return; }
-});
+document.addEventListener("toggle", function (ev) { if (ev.target && ev.target.id === "filter") VIEW.fopen = ev.target.open; }, true);
+document.addEventListener("keydown", function (ev) { if (ev.key === "Escape" && VIEW.stack.length) back(); });
 
 render({ focus: false });
-
-/* ===================================================================================================================
-   ASK THE CONCIERGE (optional). Nothing of it exists on the page unless the viewer's Claude can be reached.
-   Answers come only from the lookups below, which read this page's own data (now including fit and life_here).
-   =================================================================================================================== */
-function placesNow() {
-  var o = {}; if (!CAN) return o;
-  topIds().forEach(function (t, i) { t[1].forEach(function (id, j) { o[id] = { place: i + 1, area: areaName(t[0]), order_in_place: j + 1 }; }); });
-  return o;
-}
-function areaWords(i) {
-  var nb = CAN ? DEF.neighborhoods[i] : null; if (!nb) return null;
-  return { place: i + 1, neighborhood: areaName(nb.neighborhood_id), tags: ((HBY[nb.neighborhood_id] || {}).tags || []).slice(0, 2), why: nb.why, gives_up: nb.gives_up,
-    buildings: nb.buildings.map(function (x) { return BY[x.id] ? BY[x.id].name : x.id; }), what_would_change: nb.what_would_change ? nb.what_would_change.text : null };
-}
-function brief(b, P) {
-  var f = b.facts || {}, h = HBY[b.neighborhood_id], px = (P || placesNow())[b.id] || null;
-  return { id: b.id, name: b.name, neighborhood: h ? h.name : null, state: b.state || (h && h.state) || null, tags: (HBY[b.area_id] || {}).tags || [],
-    rent_from: f.rent_from, total_with_utilities_and_fees_from: f.total_from, drive_min_to_mom_and_dad: isNum(f.drive_min) ? Math.round(f.drive_min) : null,
-    checked: (bldChecked(b) || {}).text || null, tolls_round_trip: f.toll_round_trip, parking: (f.parking || {}).summary || null, parking_kind: (f.parking || {}).kind || null, dog: (f.dog || {}).summary || null,
-    room: factText(b, "room"), restaurants_10min_walk: raw(b).rest, park_walk_min: raw(b).park,
-    recommended: px ? "place " + px.place + " (" + px.area + "), building " + px.order_in_place : null,
-    on_my_list: isSaved(b.id), on_tour_plan: onTour(b.id) };
-}
-function findBuilding(x) {
-  x = String(x == null ? "" : x).trim(); if (BY[x]) return BY[x];
-  var low = x.toLowerCase(); return B.filter(function (b) { return (b.name || "").toLowerCase() === low; })[0] || B.filter(function (b) { return low && (b.name || "").toLowerCase().indexOf(low) >= 0; })[0] || null;
-}
-var LOOKUPS = {
-  list_buildings: function (q) {
-    q = q || {}; var F = placesNow();
-    var rows = B.filter(function (b) {
-      var f = b.facts || {}, h = HBY[b.neighborhood_id] || {};
-      if (q.max_rent != null && isNum(Number(q.max_rent)) && isNum(f.rent_from) && f.rent_from > Number(q.max_rent)) return false;
-      if (q.bedrooms != null && q.bedrooms !== "" && !(b.apartments || []).some(function (a) { return Number(a.beds) === Number(q.bedrooms); })) return false;
-      if (q.garage === true && (f.parking || {}).kind !== "garage") return false;
-      if (q.saved_only === true && !isSaved(b.id)) return false;
-      if (q.recommended_only === true && !F[b.id]) return false;
-      if (q.neighborhood && (h.name || "").toLowerCase().indexOf(String(q.neighborhood).toLowerCase()) < 0) return false;
-      return true;
-    }).map(function (b) { return brief(b, F); });
-    return { count: rows.length, buildings: rows };
-  },
-  get_building: function (q) {
-    var b = findBuilding(q && q.id); if (!b) throw new Error("No building with that id or name.");
-    var o = brief(b);
-    o.address = [b.address, b.city, b.state].filter(Boolean).join(", "); o.why = b.why || null; o.give_up = b.give_up || null; o.about = b.about || null;
-    o.fit = b.fit || null; o.features_raw = b.features_raw || null;
-    o.life_here = (b.life_here || []).map(function (m) { return { moment: m.title || m.moment, text: m.text, places: (m.places || []).map(function (p) { return p.name; }), sources: (m.sources || []).map(function (s) { return s.name; }) }; });
-    o.points = (b.points || []).map(function (p) { return p.text; }); o.a_day_here = (b.day || []).map(function (m) { return { moment: m.title, text: m.text, level: m.level }; });
-    o.to_confirm = (b.confirm || []).map(function (c) { return c.question || c.label; }); o.tour_questions = b.tour_questions || [];
-    o.apartments = (b.apartments || []).map(function (a) { return { label: aptLabel(a), bedrooms: a.beds, sqft: a.sqft, floor: a.floor_text, rent: a.rent, total_with_utilities_and_fees: a.total, available: a.available_text, offer: offerText(a), one_thing_to_confirm: a.star ? (a.confirm_label || true) : null, checked: (aptChecked(a) || {}).text || null }; });
-    return o;
-  },
-  compare: function (q) {
-    var ids = (q && Array.isArray(q.ids)) ? q.ids : [], F = placesNow();
-    return { buildings: ids.map(findBuilding).filter(Boolean).slice(0, 6).map(function (b) { return brief(b, F); }) };
-  },
-  recommend: function () {
-    if (!CAN) return { places: [], note: "No suggestion on this page." };
-    return { how_the_list_was_narrowed: funnelText().join(" "), rules: (FUNNEL && FUNNEL.rules) || [], places: DEF.neighborhoods.map(function (t, i) { return areaWords(i); }),
-      if_one_thing_matters_most: LEAN.map(function (x) { return x.line || (x.priority_label + ": " + x.neighborhood_name); }) };
-  },
-  why: function (q) {
-    var b = findBuilding(q && q.id); if (!b) throw new Error("No building with that id or name.");
-    var P = placesNow(), px = P[b.id], o = { name: b.name, recommended: !!px };
-    if (CAN) {
-      var i = -1; topIds().forEach(function (t, k) { if (t[0] === b.area_id) i = k; });
-      o.its_neighborhood = i >= 0 ? areaWords(i) : { neighborhood: areaName(b.area_id), in_her_three_places: false };
-    }
-    o.facts = FACT_ORDER.map(function (k) { return factText(b, k); });
-    return o;
-  }
-};
-function initAsk(sample, canTools) {
-  var hidden = false, busy = null;
-  var RULES = "You are answering a question from Lamia, who is choosing an apartment building to tour. " +
-    "Answer ONLY from the building data given to you here" + (canTools ? " through the tools (call them to look things up)" : "") + ". " +
-    "Answer in two or three plain sentences. Name buildings by their name, never by an id. Give rent and the total with utilities and fees together when you mention a price. " +
-    "If the data does not say, reply exactly: That isn't in what I have. Do not guess, and do not use outside knowledge.";
-  var TOOLS = [
-    { name: "list_buildings", description: "Lists the buildings on this page with rent, total with utilities and fees, drive minutes to Mom and Dad, tolls, room, parking, dog policy, restaurants and park nearby, and whether each is in her three suggested places. Every filter is optional.",
-      inputSchema: { type: "object", properties: { max_rent: { type: "number" }, bedrooms: { type: "number", description: "0 for a studio, 1 for one bedroom" }, garage: { type: "boolean" }, saved_only: { type: "boolean", description: "only the places on My list" }, recommended_only: { type: "boolean", description: "only the buildings in her three suggested places" }, neighborhood: { type: "string" } } },
-      execute: function (i) { return LOOKUPS.list_buildings(i); } },
-    { name: "get_building", description: "Returns everything known about one building: address, what life there is like (with named places and sources), how it fits her answers, its apartments and what to confirm. Takes the building id or its name.",
-      inputSchema: { type: "object", properties: { id: { type: "string" } }, required: ["id"] }, execute: function (i) { return LOOKUPS.get_building(i); } },
-    { name: "compare", description: "Returns the same key facts side by side for up to six buildings, by id or name.",
-      inputSchema: { type: "object", properties: { ids: { type: "array", items: { type: "string" } } }, required: ["ids"] }, execute: function (i) { return LOOKUPS.compare(i); } },
-    { name: "recommend", description: "Returns her three suggested places right now, each with why, what it gives up compared with the other two, and its best buildings.",
-      inputSchema: { type: "object", properties: {} }, execute: function () { return LOOKUPS.recommend(); } },
-    { name: "why", description: "Says why one building is or is not suggested: its neighborhood's place in her three, the reasons, and its facts. Takes the building id or its name.",
-      inputSchema: { type: "object", properties: { id: { type: "string" } }, required: ["id"] }, execute: function (i) { return LOOKUPS.why(i); } }
-  ];
-  function table() {
-    var F = placesNow();
-    return "name | neighborhood | rent from | total with utilities and fees from | drive min | tolls round trip | room | parking | dog | in her three places | on My list\n" +
-      B.map(function (b) { return brief(b, F); }).map(function (r) { return [r.name, r.neighborhood, r.rent_from, r.total_with_utilities_and_fees_from, r.drive_min_to_mom_and_dad, r.tolls_round_trip, r.room, r.parking, r.dog, r.recommended || "no", r.on_my_list ? "yes" : "no"].map(function (x) { return x == null ? "not known" : String(x).replace(/\|/g, "/"); }).join(" | "); }).join("\n");
-  }
-  function remove() { hidden = true; close(); var b = document.getElementById("ask-btn"); if (b) b.remove(); }
-  function mount() {
-    if (hidden || document.getElementById("ask-btn")) return;
-    var slot = document.getElementById("topbtns"); if (!slot) return;
-    var b = document.createElement("button"); b.type = "button"; b.id = "ask-btn"; b.className = "quiet"; b.textContent = "Ask";
-    b.setAttribute("aria-label", "Ask the concierge"); b.addEventListener("click", open); slot.insertBefore(b, slot.firstChild);
-  }
-  function close() { if (busy) { busy.abort(); busy = null; } var s = document.getElementById("ask-sheet"); if (s) s.remove(); var b = document.getElementById("ask-btn"); if (b) b.focus(); }
-  function open() {
-    if (document.getElementById("ask-sheet")) return;
-    var sugg = ["Why these three places?", "Which is closest to " + ANCHOR + "?", "Which has the lowest total each month?", "Which ones have a garage?"];
-    if (S.saved.length >= 2) sugg.unshift("Compare the places on My list.");
-    var w = document.createElement("div"); w.id = "ask-sheet"; w.className = "asksheet"; w.setAttribute("role", "dialog"); w.setAttribute("aria-modal", "true"); w.setAttribute("aria-labelledby", "ask-h");
-    w.innerHTML = '<div class="askbox"><div class="askin"><div class="top"><h2 id="ask-h" tabindex="-1">Ask the concierge</h2><button type="button" class="quiet" id="ask-close">Close</button></div>' +
-      '<p class="small muted">Answers come only from the buildings on this page.</p><div class="sugg" id="ask-sugg"></div>' +
-      '<form class="askform" id="ask-form"><label class="sr" for="ask-q">Your question</label><input id="ask-q" type="text" autocomplete="off" maxlength="300" placeholder="Type a question"><button type="submit" class="btn sm main" id="ask-send">Ask</button></form>' +
-      '<p class="answer" id="ask-a" hidden></p><p class="small muted" id="ask-note" role="status"></p><button type="button" class="btn sm" id="ask-stop" hidden>Stop</button></div></div>';
-    document.body.appendChild(w);
-    var box = w.querySelector("#ask-sugg");
-    sugg.slice(0, 5).forEach(function (q) { var b = document.createElement("button"); b.type = "button"; b.textContent = q; b.addEventListener("click", function () { ask(q); }); box.appendChild(b); });
-    w.querySelector("#ask-close").addEventListener("click", close);
-    w.querySelector("#ask-stop").addEventListener("click", function () { if (busy) busy.abort(); });
-    w.addEventListener("click", function (e) { if (e.target === w) close(); });
-    w.querySelector("#ask-form").addEventListener("submit", function (e) { e.preventDefault(); var q = w.querySelector("#ask-q").value.trim(); if (q) ask(q); });
-    w.querySelector("#ask-h").focus();
-  }
-  function ask(q) {
-    var out = document.getElementById("ask-a"), note = document.getElementById("ask-note"), stop = document.getElementById("ask-stop"), send = document.getElementById("ask-send");
-    if (!out || busy) return;
-    var ctl = new AbortController(); busy = ctl;
-    out.hidden = false; out.textContent = "Thinking…"; note.textContent = ""; stop.hidden = false; send.disabled = true;
-    var input = RULES + (canTools ? "" : "\n\nThe buildings on this page:\n" + table()) + "\n\nLamia's question: " + q;
-    var options = { signal: ctl.signal, modelTier: "quick", onText: function (u) { if (busy === ctl) out.textContent = u.text; } };
-    if (canTools) options.tools = TOOLS; else options.cache = false;
-    sample(input, options).then(function (r) {
-      if (busy !== ctl) return;
-      out.textContent = r.text; if (r.truncated) note.textContent = "That answer was cut short. Try a narrower question.";
-    }, function (e) {
-      if (busy !== ctl) return;
-      var code = e && e.code;
-      if (["not_granted", "sampling_disabled", "not_declared", "capability_disabled", "capability_removed"].indexOf(code) >= 0) { busy = null; remove(); return; }
-      if (code === "tools_unavailable") { canTools = false; }
-      out.textContent = code === "refused" ? "" : (e && e.text) || ""; out.hidden = !out.textContent;
-      note.textContent = code === "cancelled" ? "Stopped." : code === "rate_limited" ? "Too many questions for now. Try again in a little while." : code === "session_expired" ? "Sign in to Claude again, then ask once more."
-        : code === "refused" ? "That question could not be answered. Try asking it another way." : "That did not go through. Tap a question to try again.";
-    }).then(function () { if (busy === ctl) busy = null; var s = document.getElementById("ask-stop"), b = document.getElementById("ask-send"); if (s) s.hidden = true; if (b) b.disabled = false; });
-  }
-  askApi = { mount: mount, close: close };
-  mount();
-}
-(function () {
-  if (!window.claude || typeof window.claude.use !== "function") return;
-  var p; try { p = window.claude.use("sample"); } catch (e) { return; }
-  Promise.resolve(p).then(function (sample) {
-    if (typeof sample !== "function") return;
-    var lim; try { lim = typeof sample.limits === "function" ? sample.limits() : null; } catch (e) { lim = null; }
-    Promise.resolve(lim).catch(function () { return null; }).then(function (l) { initAsk(sample, !!(l && l.tools)); });
-  }, function () { /* no Claude here: the feature stays absent */ });
-})();
-window.__conciergeLookups = LOOKUPS;
-window.__conciergeRec = function () { return CAN ? { top: topIds() } : null; };
 })();
 </script>
 </body>

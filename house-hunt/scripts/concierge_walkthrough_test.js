@@ -1,30 +1,45 @@
-/* Walk through the short page (version 6) the way Lamia would, on a phone:  node scripts/concierge_walkthrough_test.js
+/* Walk through the short page (version 7, "zoom out to neighborhoods") the way Lamia would, on a phone:
+     node scripts/concierge_walkthrough_test.js
    Build first: python3 scripts/build_concierge.py. Opens site/dist/concierge.html from disk, no network (the font
-   stylesheet request is answered with an empty file). Writes site/screens/concierge6-*.png at 2x.
-   Version 6 is version 5's content, simplified: Home (the logo, one line, a closed "How these were picked" with the
-   funnel sentences and every rule, exactly three neighborhood cards from meta.default_recommendation, each with a
-   drawing, its rent and total as a labelled pair, three icon facts, a "Best of 3" sticker on the winner of each fact
-   and one "See the 3 apartments" button; then "If one thing matters most to you" with only the leanings outside the
-   three); a neighborhood screen (the drawing, its name, one line from the data, exactly its three apartments, each
-   with rent and total, three icon facts, the checked mark and Save; Life here as one-line moments that open on a tap;
-   Next or Back); the apartment screen (See photos as a link, the five facts, things to confirm, the contact, the rest
-   closed); a bar on every screen (Home, Everything, My list with its count); My list with Compare and the tour plan;
-   Everything with search, filters, Show more and the map. Then: saved state from earlier versions, storage blocked,
-   a thrown error, iPhone 13 and Pixel 7 by tap(), dark theme, a 320px phone, data with no short list, and Ask
-   against a stand-in.
+   stylesheet request is answered with an empty file). Writes site/screens/concierge7-*.png at 2x.
+   What is compared with site/neighborhoods_data.json, field by field:
+     - Home: the logo, "Neighborhoods for you", a closed "How this was ranked" (its counts and weights from meta),
+       the first ten neighborhood cards in rank order (rank, name, state, up to two tags, typical rent, drive, one
+       chip per why fact, the low-confidence mark only where the data says low, one button), then Show more by ten;
+     - every neighborhood screen (all of them, by Next): the why and know-this sentences word for word, its top
+       buildings (at most three, none with a rent above the limit: name, rent, total only where the data has one,
+       apartments count, known and to-ask chips, rating only where present, a phone only for an office or a company)
+       and its buildings to avoid (at most two: name, reason, source name, nothing else), and "All N buildings here";
+     - building screens: what is known, what to ask, rent, the listing link, "Checked against its listing" and the
+       fuller sheet only for verified buildings, Save;
+     - Everything: every neighborhood in rank order, search, the state, drive and typical-rent filters, the map;
+     - My list: saved buildings, Remove, Clear, kept across a reload and from version 6's saved state.
+   Then: a 360x780 phone, iPhone 13 by tap(), dark theme, storage blocked, a thrown error.
    Checks on every screen: no console or page errors, no network, no sideways scroll, no rent above meta.rent_limit,
-   none of the banned words, no trace of "Ask the concierge" outside a Claude viewer, every target at least 44px, the
-   bar on screen and never covering the end of the page, and the toast never under the bar. */
+   none of the banned words, every target at least 44px, the bar on screen and never covering the end of the page. */
 "use strict";
 const { chromium, devices } = require("playwright");
 const path = require("path"), fs = require("fs"), assert = require("assert");
 const ROOT = path.resolve(__dirname, "..");
 const PAGE = "file://" + path.join(ROOT, "site", "dist", "concierge.html");
 const SHOTS = path.join(ROOT, "site", "screens");
-const BANNED = /\ball-in\b|\bcap\b|\bunits?\b|\bgate\b|\bwe\b|net-effective|everything included|\bcrimes?\b|\bexperiences?\b/i;
+const DATA = JSON.parse(fs.readFileSync(path.join(ROOT, "site", "neighborhoods_data.json"), "utf8"));
+const META = DATA.meta, LIMIT = META.rent_limit;
+const N = DATA.neighborhoods.slice().sort((a, b) => a.rank - b.rank);
+const BANNED = /\ball-in\b|\bcap\b|\bunits?\b|\bgates?\b|\bwe\b|net-effective|everything included|\bcrimes?\b/i;
+/* street and building names are proper names ("Vails Gate Heights Dr"): they are taken out before the word check */
+const NAMES = [...new Set(N.flatMap((h) => h.all_buildings.concat(h.top_buildings, h.avoid_buildings).flatMap((b) => [b.name, b.address])).filter((s) => typeof s === "string" && BANNED.test(s)))];
 const KEY = "lamia-concierge";
+const PUBLIC = /^(leasing office|management company)$/i;
 let checks = 0;
 const ok = (cond, msg) => { assert(cond, msg); checks++; };
+const same = (a, b, msg) => ok(JSON.stringify(a) === JSON.stringify(b), msg + "\n  page: " + JSON.stringify(a) + "\n  data: " + JSON.stringify(b));
+const money = (v) => "$" + Math.round(v).toLocaleString("en-US");
+const rentText = (r) => money(r[0]) + (r[1] !== r[0] ? " to " + money(r[1]) : "");
+const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+const nm = (b) => (b.name || b.address || "").trim();
+const isLow = (h) => /^low/i.test(String(typeof h.confidence === "string" ? h.confidence : (h.confidence || {}).level || ""));
+const publicPhone = (b) => !!(b.contact && !b.contact.private && PUBLIC.test(b.contact.kind || "") && (b.contact.phone || b.contact.office_phone));
 
 async function open(browser, extra, init, initArg) {
   const ctx = await browser.newContext(Object.assign({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, hasTouch: true, isMobile: true }, extra || {}));
@@ -43,441 +58,380 @@ async function open(browser, extra, init, initArg) {
   return { ctx, page, errs, net };
 }
 let prefix = "";
-const shotPath = (name) => path.join(SHOTS, "concierge6-" + prefix + name + ".png");
-async function screen(page, name, full) { await page.waitForTimeout(200); await page.screenshot({ path: shotPath(name), fullPage: !!full }); }
-async function sheetShot(page, name) {
-  const h = await page.evaluate(() => { const s = document.getElementById("sheet"); return s ? s.scrollHeight : 0; });
-  const vp = page.viewportSize();
-  if (h > vp.height) {
-    await page.setViewportSize({ width: vp.width, height: Math.min(h, 7000) }); await page.waitForTimeout(200);
-    await page.screenshot({ path: shotPath(name) });
-    await page.setViewportSize(vp);
-  } else await screen(page, name);
+const shotPath = (name) => path.join(SHOTS, "concierge7-" + prefix + name + ".png");
+async function screen(page, name) { await page.waitForTimeout(150); await page.screenshot({ path: shotPath(name) }); }
+async function fullShot(page, name) {
+  const vp = page.viewportSize(), h = await page.evaluate(() => document.documentElement.scrollHeight);
+  await page.evaluate(() => window.scrollTo(0, 0));
+  if (h > vp.height) { await page.setViewportSize({ width: vp.width, height: Math.min(h, 6000) }); await page.waitForTimeout(150); await page.screenshot({ path: shotPath(name) }); await page.setViewportSize(vp); }
+  else await screen(page, name);
 }
-async function everyScreen(page, label, limit) {
+async function everyScreen(page, label) {
   const r = await page.evaluate(() => {
-    const sheet = document.getElementById("sheet"), bar = document.getElementById("savebar");
+    const bar = document.getElementById("savebar"), scope = document.getElementById("app");
     const vis = (e) => { const b = e.getBoundingClientRect(); const st = getComputedStyle(e); return b.width > 0 && b.height > 0 && st.visibility !== "hidden" && (!e.checkVisibility || e.checkVisibility()); };
-    const scope = sheet ? sheet.querySelector(".wrap") : document.getElementById("app");
     return {
-      sw: Math.max(document.documentElement.scrollWidth, sheet ? sheet.scrollWidth : 0), iw: window.innerWidth,
+      sw: document.documentElement.scrollWidth, iw: window.innerWidth,
       text: document.body.innerText,
       rents: [...document.querySelectorAll("[data-rent]")].map((e) => Number(e.getAttribute("data-rent"))),
-      ask: !!document.querySelector("#ask-btn,#ask-sheet,[id^=ask-]"),
-      bar: !!bar && vis(bar) && bar.querySelectorAll(".tab").length === 3,
-      small: [...(sheet ? sheet : document).querySelectorAll("button,a[href],summary,input")].concat(bar ? [...bar.querySelectorAll("button")] : [])
-        .filter((e) => vis(e) && !e.closest(".hhm") && !e.closest("label.check") && !e.closest("label.tickl"))
+      bar: !!bar && vis(bar) && bar.querySelectorAll(".tab").length === 3 && ["Home", "Everything", "My list"].every((t, i) => bar.querySelectorAll(".tab")[i].textContent.indexOf(t) >= 0),
+      small: [...document.querySelectorAll("button,a[href],summary,input")].filter(vis)
         .filter((e) => { const b = e.getBoundingClientRect(); return b.height < 43.5 || b.width < 43.5; })
         .map((e) => (e.textContent || e.id).trim().slice(0, 30) + " " + Math.round(e.getBoundingClientRect().width) + "x" + Math.round(e.getBoundingClientRect().height)),
       padOk: (() => {
         if (!bar) return true;
         const kids = [...scope.querySelectorAll("*")].filter(vis); if (!kids.length) return true;
-        const scroller = sheet || document.scrollingElement;
-        const maxScroll = scroller.scrollHeight - scroller.clientHeight;
-        const lastBottom = Math.max(...kids.map((e) => e.getBoundingClientRect().bottom)) + (sheet ? sheet.scrollTop : window.scrollY);
-        return lastBottom <= maxScroll + (sheet ? sheet.clientHeight : window.innerHeight) - bar.offsetHeight + 1;
+        const sc = document.scrollingElement, maxScroll = sc.scrollHeight - sc.clientHeight;
+        const lastBottom = Math.max(...kids.map((e) => e.getBoundingClientRect().bottom)) + window.scrollY;
+        return lastBottom <= maxScroll + window.innerHeight - bar.offsetHeight + 1;
       })(),
     };
   });
   ok(r.sw <= r.iw, label + ": the page scrolls sideways (" + r.sw + " > " + r.iw + ")");
-  const bad = BANNED.exec(r.text);
-  ok(!bad, label + ': banned word "' + (bad && bad[0]) + '" near "' + (bad ? r.text.slice(Math.max(0, bad.index - 40), bad.index + 40).replace(/\n/g, " ") : "") + '"');
-  r.rents.forEach((v) => ok(v <= limit, label + ": a rent of " + v + " is above " + limit));
-  ok(!r.ask && !/ask the concierge/i.test(r.text), label + ": a trace of the Ask feature");
+  let text = r.text; NAMES.forEach((s) => { text = text.split(s).join(" "); });
+  const bad = BANNED.exec(text);
+  ok(!bad, label + ': banned word "' + (bad && bad[0]) + '" near "' + (bad ? text.slice(Math.max(0, bad.index - 40), bad.index + 40).replace(/\n/g, " ") : "") + '"');
+  r.rents.forEach((v) => ok(v <= LIMIT, label + ": a rent of " + v + " is above " + LIMIT));
   ok(r.small.length === 0, label + ": targets under 44px: " + r.small.join(" | "));
   ok(r.bar, label + ": the bar (Home, Everything, My list) is on screen");
   ok(r.padOk, label + ": the bar covers the end of the page");
   return r;
 }
 const state = (page) => page.evaluate((k) => JSON.parse(localStorage.getItem(k) || "null"), KEY);
-async function toastClear(page) {
-  const r = await page.evaluate(() => { const t = document.getElementById("toast"), b = document.getElementById("savebar"); if (!t || !b) return true; return t.getBoundingClientRect().bottom <= b.getBoundingClientRect().top + 0.5; });
-  ok(r, "the toast sits above the bar");
+async function barSays(page, n, label) { ok((await page.locator("#savebar #bar-list .n").innerText()).trim() === String(n), label + ": the bar says My list " + n); }
+const cardsDom = (page) => page.evaluate(() => [...document.querySelectorAll("#ncards .ncard")].map((c) => ({
+  id: c.getAttribute("data-hood"), rank: c.querySelector(".num").textContent.replace(/\D/g, ""), title: c.querySelector("h2").innerText.replace(/\s+/g, " "),
+  tags: [...c.querySelectorAll(".tags li")].map((e) => e.textContent), figs: c.querySelector(".figs").innerText.replace(/\s+/g, " "),
+  chips: [...c.querySelectorAll(".wchips li")].map((e) => e.getAttribute("data-measure")), chipText: [...c.querySelectorAll(".wchips li")].map((e) => e.textContent.trim()),
+  low: !!c.querySelector('[data-conf="low"]'), buttons: [...c.querySelectorAll("button,a")].map((e) => e.textContent.replace(/\s+/g, " ").trim()),
+  drawing: !!c.querySelector(".illus svg"),
+})));
+const hoodDom = (page) => page.evaluate(() => {
+  const T = (e) => (e ? e.textContent.replace(/\s+/g, " ").trim() : null), q = (s, r) => (r || document).querySelector(s), qa = (s, r) => [...(r || document).querySelectorAll(s)];
+  return {
+    id: q("#app article").getAttribute("data-hood"), h1: T(q("#app h1")), kicker: T(q(".hero .kicker")), whyH: T(q("#why-h")),
+    why: qa("#why li .t").map(T), know: qa("#know li .t").map(T), low: !!q('#why [data-conf="low"]'), note: T(q("#supply-note")),
+    life: qa("#life details.mom .mt b").map(T),
+    tops: qa("#tops .bcard").map((c) => ({
+      id: c.getAttribute("data-building"), name: T(q(".bname b", c)).replace(/\s*›$/, ""), checked: /Checked against its listing/.test(T(q(".bname", c))),
+      rent: T(q(".pair [data-rent]", c)), rentTop: Number(q(".pair [data-rent]", c).getAttribute("data-rent")), total: T(q(".pair [data-total]", c)), pairLabels: qa(".pair span", c).map(T),
+      count: q("[data-count]", c) ? Number(q("[data-count]", c).getAttribute("data-count")) : null,
+      known: qa(".kq li.k", c).map((e) => T(e).replace(/^✓\s*/, "")), ask: qa(".kq li.q", c).map((e) => e.getAttribute("data-q")),
+      rating: q("[data-rating]", c) ? Number(q("[data-rating]", c).getAttribute("data-rating")) : null, tel: qa('a[href^="tel:"]', c).length,
+      listing: (q(".links a.link", c) || {}).href || null, save: qa('[data-act="save"]', c).length,
+    })),
+    avoid: qa("#avoid .avoid").map((c) => ({ id: c.getAttribute("data-building"), name: T(q("h3", c)).replace(/^Avoid:\s*/, ""), reason: T(q(".reason", c)), src: T(q(".src", c)), kids: c.children.length, rent: !!q("[data-rent]", c), tel: qa('a[href^="tel:"]', c).length, x: T(q(".x", c)) })),
+    avoidStyle: q("#avoid .avoid") ? getComputedStyle(q("#avoid .avoid")).borderTopStyle : null, topStyle: q("#tops .bcard") ? getComputedStyle(q("#tops .bcard")).borderTopStyle : null,
+    allLabel: T(q("#allb-t")), next: T(q("#next-hood")), prev: T(q("#prev-hood")),
+  };
+});
+function checkHood(d, h, i, L) {
+  ok(d.id === h.id && d.h1 === h.name, L + "is the screen of " + h.name + " (got " + d.h1 + ")");
+  ok(d.kicker === "Number " + h.rank + " of " + N.length && d.whyH === "Why it ranks #" + h.rank, L + "says its rank");
+  same(d.why, h.why.slice(0, 3).map((w) => w.text.replace(/\s+/g, " ").trim()), L + "why sentences");
+  same(d.know, h.know_this.slice(0, 2).map((w) => w.text.replace(/\s+/g, " ").trim()), L + "know-this sentences");
+  ok(d.low === isLow(h), L + "the low-confidence mark is " + (isLow(h) ? "missing" : "shown without cause"));
+  ok(d.note === (typeof h.supply_note === "string" && h.supply_note.trim() ? h.supply_note.trim() : null), L + "supply note");
+  same(d.life, (h.life_here || []).filter((m) => m && m.fact).map((m) => (m.place || "Around here").replace(/\s+/g, " ").trim()), L + "Life here moments");
+  const tops = h.top_buildings.slice(0, 3), avs = h.avoid_buildings.slice(0, 2);
+  ok(d.tops.length <= 3 && d.avoid.length <= 2, L + "at most three top buildings and two to avoid");
+  same(d.tops.map((b) => b.id), tops.map((b) => b.id), L + "top buildings");
+  d.tops.forEach((c, k) => {
+    const b = tops[k], B = L + nm(b) + ": ", v = b.verified && b.verified.on_page, t = v && b.verified.total_with_utilities_and_fees;
+    ok(c.name === nm(b).replace(/\s+/g, " "), B + "name (got " + c.name + ")");
+    ok(c.rent === rentText(b.rent_range) && c.rentTop === b.rent_range[1] && c.rentTop <= LIMIT, B + "rent " + c.rent);
+    ok(c.total === (t ? rentText(t) : null), B + "total with utilities and fees " + c.total);
+    same(c.pairLabels, t ? ["Rent", "Total with utilities and fees"] : ["Rent"], B + "the rent labels");
+    ok(c.count === b.apartments, B + "apartments at the limit or less");
+    same(c.known, b.known, B + "known chips"); same(c.ask, b.to_ask, B + "to-ask chips");
+    ok(c.rating === (b.rating && typeof b.rating.value === "number" ? b.rating.value : null), B + "rating only where the data has one");
+    ok(c.checked === !!v, B + "Checked against its listing");
+    ok(c.tel === (publicPhone(b) ? 1 : 0), B + "a phone only for an office or a company");
+    ok(c.listing === (b.listing_url ? new URL(b.listing_url).href : null), B + "listing link"); ok(c.save === 1, B + "one Save");
+  });
+  same(d.avoid.map((b) => b.id), avs.map((b) => b.id), L + "buildings to avoid");
+  d.avoid.forEach((c, k) => {
+    const b = avs[k], B = L + "avoid " + nm(b) + ": ";
+    ok(c.name === nm(b).replace(/\s+/g, " ") && c.reason === b.reason.replace(/\s+/g, " ").trim(), B + "name and reason");
+    ok(c.src.indexOf("Source: " + b.source.name) === 0, B + "source name (got " + c.src + ")");
+    ok(c.kids === 4 && !c.rent && c.tel === 0 && c.x === "✕", B + "shows only the cross, the name, the reason and the source");
+  });
+  if (d.avoid.length && d.tops.length) ok(d.avoidStyle === "dashed" && d.topStyle === "solid", L + "avoid cards look different from top buildings");
+  ok(d.allLabel === "All " + h.all_buildings.length + (h.all_buildings.length === 1 ? " building" : " buildings") + " here", L + "All N buildings here (got " + d.allLabel + ")");
+  ok(d.next === (N[i + 1] ? "Next: " + N[i + 1].name + " ›" : null) && d.prev === (N[i - 1] ? "‹ Previous: " + N[i - 1].name : null), L + "next and previous");
 }
-async function barSays(page, n, label) {
-  const t = (await page.locator("#savebar #bar-list").innerText()).replace(/\s+/g, " ").trim(), c = (await page.locator("#savebar #bar-list .n").innerText()).trim();
-  ok(/My list/.test(t) && c === String(n), label + ": the bar says My list " + n + " (got " + t + ")");
+const bldDom = (page) => page.evaluate(() => {
+  const T = (e) => (e ? e.textContent.replace(/\s+/g, " ").trim() : null), q = (s) => document.querySelector(s), qa = (s) => [...document.querySelectorAll(s)];
+  return { id: q("#app article").getAttribute("data-building"), h1: T(q("#app h1")), kicker: T(q(".place .kicker")), checked: !!q("#checked"), photos: (q("#photos") || {}).href || null,
+    facts: qa("#facts .frow").map((r) => [T(r.querySelector(".l")), T(r.querySelector(".v"))]), known: qa("#known li .t").map(T), ask: qa("#toask li .t").map(T), tel: qa('a[href^="tel:"]').map(T), rich: !!q("#d-apts"), saves: qa('[data-act="save"]').length, rating: !!q("[data-rating]") };
+});
+function checkBld(d, b, h, L) {
+  const v = !!(b.verified && b.verified.on_page);
+  ok(d.id === b.id && d.h1 === nm(b).replace(/\s+/g, " ") && d.kicker === h.name, L + "is the screen of " + nm(b));
+  ok(d.checked === v, L + "Checked against its listing only when verified");
+  ok(!d.rich || v, L + "the fuller sheet only for a verified building");
+  ok(d.photos === (b.listing_url ? new URL(b.listing_url).href : null), L + "the listing link");
+  ok(d.facts[0][0] === "Rent" && d.facts[0][1] === rentText(b.rent_range) + "a month", L + "rent first (got " + d.facts[0].join(" ") + ")");
+  const t = v && b.verified.total_with_utilities_and_fees, tot = d.facts.find((f) => f[0] === "Total with utilities and fees");
+  ok(!!tot === !!t && (!t || tot[1] === rentText(t) + "a month"), L + "the total, labelled, only where the data has one");
+  const cnt = d.facts.find((f) => f[0] === "Apartments at " + money(LIMIT) + " or less");
+  ok(cnt && cnt[1] === String(b.apartments), L + "apartments at the limit or less");
+  same(d.known, b.known, L + "what is known");
+  same(d.ask.slice(0, b.to_ask.length), b.to_ask, L + "what to ask");
+  ok(d.tel.length === (publicPhone(b) ? 1 : 0), L + "a phone only for an office or a company (got " + d.tel.join(",") + ")");
+  ok(d.rating === !!(b.rating && typeof b.rating.value === "number"), L + "rating only where present");
+  ok(d.saves === 2, L + "Save at the top and the bottom");
 }
-const cards = (page) => page.evaluate(() => [...document.querySelectorAll("#app .ncard")].map((c) => c.getAttribute("data-area")));
-const aptIds = (page) => page.evaluate(() => [...document.querySelectorAll("#app .acard")].map((c) => c.getAttribute("data-building")));
-const num = (t) => Number(String(t).replace(/[^\d.]/g, ""));
-async function goHome(page, how) { await page[how || "click"]("#bar-home"); await page.waitForSelector("#app .ncards"); }
-async function saveFromHoods(page, n) {
-  const saved = [];
-  for (let i = 0; saved.length < n && i < 3; i++) {
-    await page.click('#app [data-act="hood"][data-v="' + i + '"]'); await page.waitForSelector("#app .acards");
-    for (const id of await aptIds(page)) {
-      if (saved.length >= n) break;
-      await page.click('#app .acard[data-building="' + id + '"] [data-act="save"]'); saved.push(id);
-    }
-    await goHome(page);
-  }
-  return saved;
-}
+const rowsDom = (page, sel) => page.evaluate((s) => [...document.querySelectorAll(s + " .row")].map((r) => r.getAttribute("data-id")), sel || "#all-list");
+async function setRange(page, id, v) { await page.evaluate(([i, val]) => { const e = document.getElementById(i); e.value = String(val); e.dispatchEvent(new Event("input", { bubbles: true })); }, [id, v]); await page.waitForTimeout(80); }
+async function toHood(page, id, how) { await page[how || "click"]("#bar-all"); await page.waitForSelector("#all-list"); await page[how || "click"]('#all-list .row[data-id="' + id + '"]'); await page.waitForSelector('#app article[data-hood="' + id + '"]'); }
 
 (async () => {
   fs.mkdirSync(SHOTS, { recursive: true });
-  const built = path.join(ROOT, "site", "dist", "concierge.html");
-  assert(fs.existsSync(built), "site/dist/concierge.html is missing: run python3 scripts/build_concierge.py");
-  const D = JSON.parse(/window\.CONCIERGE_DATA=(\{[\s\S]*?\});<\/script>/.exec(fs.readFileSync(built, "utf8"))[1]);
-  const LIMIT = D.meta.rent_limit, NB = D.buildings.length, DR = D.meta.default_recommendation, FUN = D.meta.funnel;
-  ok(DR && DR.neighborhoods && DR.neighborhoods.length === 3, "the built data has the short list");
-  const WANT = DR.neighborhoods.map((n) => [n.neighborhood_id, n.buildings.map((b) => b.id)]);
-  const byId = Object.fromEntries(D.buildings.map((b) => [b.id, b]));
-  const HB = Object.fromEntries(D.neighborhoods.map((h) => [h.id, h]));
-  const fmt = (x) => Number(x).toLocaleString("en-US");
-  const passed = typeof FUN.passed_apartments === "object" ? FUN.passed_apartments.at_or_under_2000 : FUN.passed_apartments;
-  const LEANS = (D.meta.leanings || []).filter((x) => x.in_default_three === false);
-  const money = (v) => "$" + Math.round(v).toLocaleString("en-US");
   const browser = await chromium.launch();
+  const firstVerified = N.map((h) => [h, h.top_buildings.find((b) => b.verified && b.verified.on_page)]).find((x) => x[1]);
+  const firstPlain = N.map((h) => [h, h.top_buildings.find((b) => !(b.verified && b.verified.on_page))]).find((x) => x[1]);
 
-  async function home(page, L) {
-    await page.waitForSelector("#app .ncards");
-    ok(/Three neighborhoods picked for you/.test(await page.locator("#res-h").innerText()), L + "the one warm line");
-    ok((await page.locator("#app h1.logo").count()) === 1, L + "the logo is the heading");
-    ok(JSON.stringify(await cards(page)) === JSON.stringify(WANT.map((t) => t[0])), L + "exactly the data's three neighborhood cards, in order");
-    ok(!(await page.locator("#how").evaluate((d) => d.open)), L + "How these were picked is closed");
-    ok((await page.locator("#rules li").count()) === FUN.rules.length, L + "every rule is behind the tap");
-    for (let i = 0; i < 3; i++) {
-      const c = page.locator("#app .ncard").nth(i);
-      ok((await c.locator('[data-act="hood"]').count()) === 1 && /^See the 3 apartments/.test((await c.locator('[data-act="hood"]').innerText()).trim()), L + "one button: See the 3 apartments");
-      ok((await c.locator(".illus svg").count()) === 1, L + "a drawing on card " + (i + 1));
-      ok((await c.locator("[data-fact]").count()) === 4, L + "four facts on card " + (i + 1));
-      const mt = (await c.locator(".money").innerText()).replace(/\s+/g, " ");
-      const ids = WANT[i][1], rent = Math.min(...ids.map((id) => byId[id].facts.rent_from)), total = Math.min(...ids.map((id) => (byId[id].features_raw || {}).total ?? byId[id].facts.total_from));
-      ok(mt.includes("Rent from " + money(rent)) && /Total from with utilities and fees/.test(mt) && mt.includes(money(total)), L + "rent and total as a labelled pair, from the data: " + mt);
-      const tags = (DR.neighborhoods[i].tags || []).slice(0, 2);
-      ok((await c.locator(".chips li").allInnerTexts()).join("|") === tags.map((t) => t.charAt(0).toUpperCase() + t.slice(1)).join("|"), L + "the tags as chips");
-    }
-    /* the sticker: on the winner of each fact among the three */
-    for (const [fact, dir] of [["total", "low"], ["drive", "low"], ["space", "high"], ["eat", "high"]]) {
-      const vals = await page.locator('#app .ncard [data-fact="' + fact + '"]').evaluateAll((els) => els.map((e) => ({ t: (e.querySelector(".tv") || e.querySelector("b")).textContent, best: e.hasAttribute("data-best"), sticker: !!e.querySelector(".sticker") })));
-      const ns = vals.map((v) => num(v.t)), t = dir === "low" ? Math.min(...ns) : Math.max(...ns), allSame = ns.every((x) => x === ns[0]);
-      vals.forEach((v, j) => ok(v.best === (!allSame && ns[j] === t) && v.sticker === v.best, L + "the Best of 3 sticker on " + fact + " (" + ns.join(", ") + ")"));
-    }
-    ok((await page.locator("#leanings .lrow").count()) === LEANS.length && (LEANS.length > 0 || (await page.locator("#leanings").count()) === 0), L + "If one thing matters most: only the winners outside the three (" + LEANS.length + ")");
-  }
-  async function hoodScreen(page, i, L) {
-    await page.waitForSelector("#app .acards");
-    const A = WANT[i][0], h = HB[A] || {};
-    ok(JSON.stringify(await aptIds(page)) === JSON.stringify(WANT[i][1]), L + "neighborhood " + (i + 1) + ": exactly its three apartments, in order");
-    ok((await page.locator("#app .hero .illus svg").count()) === 1, L + "the drawing on the neighborhood screen");
-    const line = h.good || null;
-    if (line) ok((await page.locator("#app .hero .line").innerText()).trim() === line, L + "the one line comes from the data");
-    for (const id of WANT[i][1]) {
-      const c = page.locator('#app .acard[data-building="' + id + '"]'), b = byId[id];
-      const pair = (await c.locator(".pair").innerText()).replace(/\s+/g, " ");
-      ok(pair.includes("Rent") && pair.includes("Total with utilities and fees") && pair.includes(money(b.facts.rent_from)) && pair.includes(money(b.facts.total_from)), L + "rent and total on " + id + ": " + pair);
-      ok((await c.locator(".minis li").count()) === 3, L + "three icon facts on " + id);
-      ok((await c.locator('[data-act="save"]').count()) === 1, L + "Save on " + id);
-      const today = (b.apartments || []).every((a) => a.checked && /today/.test(a.checked.status || ""));
-      if (today) ok(/Confirmed/.test(await c.locator(".chk").innerText()), L + "the confirmed-today mark on " + id);
-      ok((await c.locator(".star").count()) === ((b.apartments || []).some((a) => a.star) ? 1 : 0), L + "a star only where one thing is to confirm (" + id + ")");
-      const own = b.neighborhood_id !== A;
-      ok((await c.locator(".aname small").count()) === (own ? 1 : 0), L + "its own neighborhood named when not the heading's (" + id + ")");
-    }
-    const lifeB = WANT[i][1].map((id) => byId[id]).find((b) => (b.life_here || []).some((m) => m.text));
-    if (lifeB) {
-      const n = lifeB.life_here.filter((m) => m.text).length;
-      ok((await page.locator("#life details.mom").count()) === n, L + "Life here: one moment per line (" + n + ")");
-      ok((await page.locator("#life details.mom[open]").count()) === 0, L + "the moments start closed");
-    }
-  }
+  for (const size of [{ width: 390, height: 844, p: "" }, { width: 360, height: 780, p: "360-" }]) {
+    prefix = size.p; const W = size.width + ": ";
+    const { ctx, page, errs, net } = await open(browser, { viewport: { width: size.width, height: size.height } });
 
-  /* ================= 390 x 844 and 360 x 780 ================= */
-  for (const vp of [{ width: 390, height: 844, p: "" }, { width: 360, height: 780, p: "360-" }]) {
-    prefix = vp.p;
-    const L = "@" + vp.width + " ";
-    const { ctx, page, errs, net } = await open(browser, { viewport: { width: vp.width, height: vp.height } });
-    await home(page, L);
-    await everyScreen(page, L + "home", LIMIT);
-    await screen(page, "01-home"); await screen(page, "01b-home-full", true);
-    const tall = await page.evaluate(() => (document.scrollingElement.scrollHeight - document.getElementById("savebar").offsetHeight) / window.innerHeight);
-    ok(tall <= 2.6, L + "Home fits on about two phone screens (" + tall.toFixed(2) + ")");
-    console.log("  " + L + "home is " + tall.toFixed(2) + " phone screens");
-    await page.click("#how summary"); await page.waitForTimeout(100);
-    const how = (await page.locator("#how .howbox").innerText()).replace(/\s+/g, " ");
-    ok(how.includes(fmt(FUN.listings_read) + " listings") && how.includes(fmt(passed) + " apartments passed every rule"), L + "How these were picked: the real counts (" + how.slice(0, 120) + ")");
-    await everyScreen(page, L + "how open", LIMIT); if (!vp.p) { await page.locator("#how").scrollIntoViewIfNeeded(); await screen(page, "01c-how-picked"); }
+    /* ================= home ================= */
+    ok((await page.locator("#app h1.logo").getAttribute("aria-label")) === "Lamia's House Hunt, the short version", W + "the logo");
+    ok((await page.locator(".hello .say").innerText()).trim() === "Neighborhoods for you", W + "Neighborhoods for you");
+    ok(!(await page.locator("#how").evaluate((e) => e.open)) && (await page.locator("#how summary").innerText()).trim().indexOf("How this was ranked") === 0, W + "How this was ranked is one closed tap");
+    let cards = await cardsDom(page);
+    same(cards.map((c) => c.id), N.slice(0, 10).map((h) => h.id), W + "home shows the first ten in rank order");
+    cards.forEach((c, i) => {
+      const h = N[i], L = W + "card " + h.name + ": ";
+      ok(c.rank === String(h.rank) && c.title.indexOf(h.name) >= 0 && c.title.indexOf(h.state) >= 0, L + "rank, name and state (got " + c.title + ")");
+      same(c.tags, h.tags.slice(0, 2).map(cap), L + "tags");
+      ok(c.figs.indexOf(money(h.typical_rent) + " typical rent") === 0 && c.figs.indexOf(Math.round(h.drive_min) + " min drive to Mom and Dad") > 0, L + "typical rent and drive (got " + c.figs + ")");
+      same(c.chips, h.why.slice(0, 3).map((w) => w.measure), L + "one chip per why fact");
+      ok(c.chipText.every((t) => t.length > 3 && t.length <= 30), L + "chips are short: " + c.chipText.join(" | "));
+      ok(c.low === isLow(h), L + "low-confidence mark"); ok(c.drawing, L + "a drawing");
+      ok(c.buttons.length === 1 && /^See this neighborhood/.test(c.buttons[0]), L + "one button");
+    });
+    ok((await page.locator("#show-more").innerText()).trim() === "Show " + Math.min(10, N.length - 10) + " more" && (await page.locator("#shown-count").innerText()).trim() === "Showing 10 of " + N.length, W + "Show more");
+    await everyScreen(page, W + "home");
+    await screen(page, "01-home"); await fullShot(page, "01b-home-full");
     await page.click("#how summary");
-    /* a leaning opens that neighborhood in Everything */
-    if (LEANS.length) {
-      await page.locator("#leanings").scrollIntoViewIfNeeded(); if (!vp.p) await screen(page, "02-leanings");
-      await page.click('#leanings .lrow[data-id="' + LEANS[0].neighborhood_id + '"]');
-      await page.waitForSelector("#all-list");
-      const g = page.locator('#all-list .grp-h[data-hood="' + LEANS[0].neighborhood_id + '"]');
-      ok((await g.count()) === 1 && await g.evaluate((e) => { const r = e.getBoundingClientRect(); return r.top >= -2 && r.top < window.innerHeight; }), L + "a leaning opens that neighborhood in Everything");
-      await goHome(page);
+    const how = await page.locator(".howbox").innerText();
+    ok(how.indexOf(META.counts.listings_used.toLocaleString("en-US") + " apartment listings") >= 0 && how.indexOf(META.counts.eligible + " neighborhoods are ranked") >= 0, W + "how: the counts from meta");
+    const wts = await page.evaluate(() => [...document.querySelectorAll("#weights li")].map((l) => [l.getAttribute("data-measure"), Number(l.querySelector("b").textContent), (l.querySelector("small") || {}).textContent || ""]));
+    same(wts.map((w) => [w[0], w[1]]), Object.keys(META.measures).sort((a, b) => META.measures[b].weight - META.measures[a].weight).map((k) => [k, META.measures[k].weight]), W + "how: measures and weights");
+    wts.forEach((w) => { const c = META.coverage[w[0]]; ok(w[2] === (c.neighborhoods_with_measure === c.of ? "Known for all " + c.of : "Known for " + c.neighborhoods_with_measure + " of " + c.of), W + "how: coverage of " + w[0]); });
+    await everyScreen(page, W + "how this was ranked"); await screen(page, "02-how");
+    await page.click("#how summary");
+    await page.click("#show-more");
+    cards = await cardsDom(page);
+    same(cards.map((c) => c.id), N.slice(0, 20).map((h) => h.id), W + "Show more adds the next ten in rank order");
+    await everyScreen(page, W + "home, twenty shown");
+
+    /* ================= every neighborhood screen, by Next ================= */
+    await page.click('#ncards .ncard[data-hood="' + N[0].id + '"] [data-act="hood"]');
+    const sweep = size.p ? 12 : N.length;
+    for (let i = 0; i < sweep; i++) {
+      const h = N[i], L = W + "#" + h.rank + " " + h.name + ": ";
+      await page.waitForSelector('#app article[data-hood="' + h.id + '"]');
+      checkHood(await hoodDom(page), h, i, L);
+      await everyScreen(page, L.slice(0, -2));
+      if (i < 3) { await page.click("#allb-t"); await page.waitForSelector("#allb-list");
+        same(await rowsDom(page, "#allb-list"), h.all_buildings.slice(0, 20).map((b) => b.id), L + "all buildings, the first twenty");
+        await everyScreen(page, L + "all buildings open"); await fullShot(page, "03-hood-" + (i + 1)); await page.click("#allb-t"); }
+      if (i + 1 < sweep) await page.click("#next-hood");
     }
-    /* the three neighborhood screens, one after the other with Next */
-    await page.click('#app [data-act="hood"][data-v="0"]');
-    for (let i = 0; i < 3; i++) {
-      await hoodScreen(page, i, L);
-      await everyScreen(page, L + "neighborhood " + (i + 1), LIMIT);
-      await screen(page, "03-hood-" + (i + 1)); if (!vp.p) await screen(page, "03b-hood-" + (i + 1) + "-full", true);
-      if (i === 0) {
-        await page.click("#life details.mom >> nth=0 >> summary");
-        ok(await page.locator("#life details.mom").first().evaluate((d) => d.open), L + "a tap opens a moment");
-        await everyScreen(page, L + "moment open", LIMIT);
-        if (!vp.p) { await page.locator("#life").scrollIntoViewIfNeeded(); await screen(page, "03c-life-here-open"); }
+    if (!size.p) { await page.click("#prev-hood"); await page.waitForSelector('#app article[data-hood="' + N[N.length - 2].id + '"]'); ok(true, "Previous goes back one"); }
+    /* a neighborhood with the most to show, for the eye */
+    const rich = N.slice().sort((a, b) => (b.avoid_buildings.length + b.life_here.length + b.know_this.length) - (a.avoid_buildings.length + a.life_here.length + a.know_this.length))[0];
+    await toHood(page, rich.id); await page.click("#life details.mom summary").catch(() => {}); await fullShot(page, "04-hood-full");
+
+    /* ================= building screens ================= */
+    for (const [h, b, name] of [[firstPlain[0], firstPlain[1], "05-building"], [firstVerified[0], firstVerified[1], "05b-building-checked"]]) {
+      await toHood(page, h.id);
+      await page.click('.bcard[data-building="' + b.id + '"] .bname'); await page.waitForSelector('#app article[data-building="' + b.id + '"]');
+      checkBld(await bldDom(page), b, h, W + "building " + nm(b) + ": ");
+      await everyScreen(page, W + "building " + nm(b)); await screen(page, name); await fullShot(page, name + "-full");
+      if (b === firstVerified[1]) { ok((await bldDom(page)).rich, W + "a verified building opens the fuller sheet"); await page.click("#d-apts summary"); await everyScreen(page, W + "building, apartments open"); }
+      await page.click('[data-act="back"]'); await page.waitForSelector('#app article[data-hood="' + h.id + '"]');
+      ok(true, "Back returns to the neighborhood");
+    }
+    if (!size.p) {
+      /* every top building with a contact, and every top building of the first eight neighborhoods */
+      const want = [];
+      N.forEach((h, i) => h.top_buildings.slice(0, 3).forEach((b) => { if (i < 8 || b.contact) want.push([h, b]); }));
+      let lastHood = null;
+      for (const [h, b] of want) {
+        if (lastHood !== h.id) { await toHood(page, h.id); lastHood = h.id; }
+        await page.click('.bcard[data-building="' + b.id + '"] .bname'); await page.waitForSelector('#app article[data-building="' + b.id + '"]');
+        checkBld(await bldDom(page), b, h, "building " + h.name + " / " + nm(b) + ": ");
+        await everyScreen(page, "building " + nm(b));
+        await page.click('[data-act="back"]'); await page.waitForSelector('#app article[data-hood="' + h.id + '"]');
       }
-      const next = page.locator('#app .hoodnav .btn.main');
-      ok((await page.locator("#app .btn.main").count()) === 1, L + "one primary action on neighborhood " + (i + 1));
-      if (i < 2) { ok(/^Next: /.test((await next.innerText()).trim()), L + "Next to the following neighborhood"); await next.click(); }
-      else { ok(/Back to my three/.test(await next.innerText()), L + "the last one goes back to my three"); }
+      /* a building to avoid, opened from the full list: its reason, and no Save */
+      const av = N.find((h) => h.avoid_buildings.length && h.all_buildings.slice(0, 20).some((b) => b.id === h.avoid_buildings[0].id));
+      if (av) {
+        await toHood(page, av.id); await page.click("#allb-t"); await page.click('#allb-list .row[data-id="' + av.avoid_buildings[0].id + '"]'); await page.waitForSelector('#app article[data-role="avoid"]');
+        ok((await page.locator(".place .avoid .reason").innerText()).trim() === av.avoid_buildings[0].reason.trim() && (await page.locator('[data-act="save"]').count()) === 0, "an avoid building's screen gives its reason and has no Save");
+        await everyScreen(page, "avoid building screen"); await screen(page, "06-avoid-building");
+      }
     }
-    await goHome(page);
-    /* the apartment screen */
-    await page.click('#app [data-act="hood"][data-v="0"]'); await page.waitForSelector("#app .acards");
-    const firstId = WANT[0][1][0], fb = byId[firstId];
-    await page.click('#app .acard[data-building="' + firstId + '"] .aname'); await page.waitForSelector("#sheet .place");
-    const labels = await page.locator("#sheet .facts .l").allInnerTexts();
-    ok(JSON.stringify(labels) === JSON.stringify(["Rent", "Total with utilities and fees", "Drive to Mom and Dad", "Parking", "Dog"]), L + "the five facts: " + labels.join(" / "));
-    const ph = page.locator("#sheet #photos");
-    if (fb.photos_url || fb.listing_url) ok((await ph.getAttribute("href")) === (fb.photos_url || fb.listing_url) && (await ph.getAttribute("target")) === "_blank", L + "See photos is a link out");
-    ok((await page.locator("#sheet img").count()) === 0, L + "no photos copied");
-    ok((await page.locator('#sheet [data-act="save"]').count()) === 2, L + "Save at the top and the bottom");
-    ok((await page.locator("#sheet details.more[open]").count()) === 0 && (await page.locator("#sheet details.more").count()) >= 3, L + "the rest is closed");
-    if ((fb.confirm || []).length || (fb.disclosures || []).length) ok((await page.locator("#sheet #confirm li").count()) >= 1, L + "things to confirm");
-    const ct = fb.contact || {};
-    if ((ct.office_phone && !ct.private) || ct.site) ok((await page.locator("#sheet #contact").count()) === 1, L + "the contact");
-    ok(/^Bloomfield|\w/.test(await page.locator("#sheet .kicker").innerText()), L + "the apartment names its neighborhood");
-    await everyScreen(page, L + "apartment", LIMIT); await screen(page, "05-apartment");
-    if (!vp.p) {
-      for (const d of await page.locator("#sheet details.more").all()) await d.locator("summary").first().click();
-      const ml = await page.locator("#sheet #more-like .thumb").evaluateAll((els) => els.map((e) => e.getAttribute("data-id")));
-      ok(JSON.stringify(ml) === JSON.stringify((fb.similar || []).filter((x) => byId[x] && x !== firstId).slice(0, 3)), "More like this: the data's nearest three");
-      await everyScreen(page, L + "apartment all open", LIMIT); await sheetShot(page, "05b-apartment-all-open");
-    }
-    await page.click('#sheet [data-act="back"]'); await page.waitForSelector("#app .acards");
-    await goHome(page);
-    /* save three; My list, Compare, tour plan */
-    await barSays(page, 0, "before saving");
-    const saved = await saveFromHoods(page, 3);
-    await toastClear(page); await barSays(page, 3, "home");
-    await everyScreen(page, L + "home with three saved", LIMIT); await screen(page, "06-saved");
-    await page.click("#bar-list"); await page.waitForSelector("#sheet .saved");
-    ok((await page.locator("#sheet .srow").count()) === 3, "three rows in My list");
-    ok(!(await page.locator("#sheet #list-compare").isDisabled()) && /Compare 3/.test(await page.locator("#sheet #list-compare").innerText()), "Compare sits in My list, ready for the three saved");
-    await everyScreen(page, L + "my list", LIMIT); await screen(page, "07-my-list");
-    await page.locator("#sheet .srow input[type=checkbox]").nth(0).click();
-    await page.locator("#sheet .srow input[type=checkbox]").nth(1).click();
-    await page.click("#sheet #list-compare"); await page.waitForSelector("#cmp");
-    ok((await page.locator("#cmp").getAttribute("data-cols")) === "2", "two columns");
-    await everyScreen(page, L + "compare 2", LIMIT); await screen(page, "08-compare-2");
-    await page.click('#sheet [data-act="back"]'); await page.waitForSelector("#sheet .saved");
-    await page.locator("#sheet .srow input[type=checkbox]").nth(2).click();
-    await page.click("#sheet #list-compare"); await page.waitForSelector("#cmp");
-    ok((await page.locator("#cmp").getAttribute("data-cols")) === "3", "three columns");
-    await everyScreen(page, L + "compare 3", LIMIT); await sheetShot(page, "09-compare-3");
-    const pickId = (await state(page)).ticked[1];
-    await page.click('#sheet [data-act="choose-tour"][data-id="' + pickId + '"]');
-    await toastClear(page);
-    await page.click('#sheet [data-act="plan"]'); await page.waitForSelector(".stop");
-    ok((await page.locator('.stop[data-stop="' + pickId + '"]').count()) === 1, "the tour plan has the chosen place");
-    const planText = (await everyScreen(page, L + "plan", LIMIT)).text;
-    D.buildings.forEach((b) => { const c = b.contact || {}; if (c.private && c.office_phone) ok(!planText.includes(c.office_phone), "a private number is shown"); });
-    await screen(page, "10-plan");
-    await page.click("#bar-list"); await page.waitForSelector("#sheet .saved");
-    ok((await page.locator("#sheet #list-plan").count()) === 1, "the tour plan is reachable from My list");
-    await page.click('#sheet [data-act="back"]');
-    ok(JSON.stringify((await state(page)).saved) === JSON.stringify(saved), "My list is kept");
-    /* Everything */
-    await page.click("#bar-all"); await page.waitForSelector("#all-list"); await barSays(page, 3, "Everything");
-    await everyScreen(page, L + "everything", LIMIT);
-    ok((await page.locator("#all-list .row").count()) === NB, "every building is listed");
-    ok(await page.locator("#f-q").isVisible(), "a visible search box");
-    const probe = D.buildings.find((b) => b.city) || D.buildings[0];
-    const norm = (t) => String(t || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
-    for (const q of [probe.city, probe.address, probe.name]) {
-      await page.fill("#f-q", q); await page.waitForTimeout(80);
-      const ids = await page.locator("#all-list .row").evaluateAll((els) => els.map((e) => e.getAttribute("data-id")));
-      const want = D.buildings.filter((b) => { const h = " " + norm([b.name, b.address, b.city, b.state, b.zip, b.postal_code, b.borough, b.neighborhood_name, (HB[b.neighborhood_id] || {}).name, (HB[b.group_id] || {}).name].join(" ")) + " "; return norm(q).split(" ").every((w) => h.includes(" " + w)); }).length;
-      ok(ids.includes(probe.id) && ids.length === want, "search '" + q + "' finds it (" + ids.length + " of " + want + ")");
-      ok((await page.locator("#f-count").innerText()) === "Showing " + ids.length + " of " + NB + " buildings", "the count follows the search");
-    }
-    await page.fill("#f-q", probe.city); await page.waitForTimeout(80); await everyScreen(page, L + "search", LIMIT); await screen(page, "12c-everything-search");
-    await page.fill("#f-q", "zzzz qqqq"); await page.waitForTimeout(80);
-    ok(/Nothing matches/.test(await page.locator("#all-list").innerText()), "no match says so");
-    await page.fill("#f-q", ""); await page.waitForTimeout(80);
-    ok((await page.locator("#all-list .row").count()) === NB, "clearing the search brings every building back");
-    if (!(await page.locator("#filters").evaluate((d) => d.open))) await page.click("#filters summary");
-    const slider = page.locator("#f-rent"), min = Number(await slider.getAttribute("min")), max = Number(await slider.getAttribute("max"));
-    await slider.evaluate((el, v) => { el.value = v; el.dispatchEvent(new Event("input", { bubbles: true })); }, String(Math.round((min + (max - min) * 0.45) / 50) * 50));
-    await page.waitForTimeout(80);
-    const fewer = await page.locator("#all-list .row").count(); ok(fewer < NB && fewer > 0, "the rent filter changes the list");
-    await slider.evaluate((el, v) => { el.value = v; el.dispatchEvent(new Event("input", { bubbles: true })); }, String(max));
-    await page.waitForTimeout(80);
-    ok((await page.locator("#all-list .row").count()) === NB, "back to every building");
-    const over = await page.evaluate(() => [...document.querySelectorAll("#all-list .grp")].filter((g) => [...g.querySelectorAll(".row")].filter((r) => r.checkVisibility()).length > 3).length);
-    ok(over === 0, "no place shows more than three rows before Show more");
-    const moreBtn = page.locator('#all-list [data-act="grp-more"]').first();
-    if (await moreBtn.count()) {
-      const ctl = await moreBtn.getAttribute("aria-controls"), hidden = await page.locator("#" + ctl.replace(/:/g, "\\:") + " .row").count();
-      ok(/^Show \d+ more in /.test(await moreBtn.innerText()) && Number(/\d+/.exec(await moreBtn.innerText())[0]) === hidden, "Show N more says how many");
-      await moreBtn.click();
-      ok((await moreBtn.getAttribute("aria-expanded")) === "true", "Show more opens the rest");
-      await everyScreen(page, L + "show more", LIMIT); await moreBtn.click();
-    }
-    const states = [...new Set(D.buildings.map((b) => b.state || (HB[b.neighborhood_id] || {}).state).filter(Boolean))].sort();
-    if (states.length > 1) {
-      await page.click('[data-act="f-state"][data-v="' + states[0] + '"]');
-      ok((await page.locator("#all-list .row").count()) === D.buildings.filter((b) => (b.state || (HB[b.neighborhood_id] || {}).state) === states[0]).length, "state filter");
-      await page.click('[data-act="f-state"][data-v="any"]');
-    }
-    await page.click('[data-act="f-beds"][data-v="0"]');
-    ok((await page.locator("#all-list .row").count()) === D.buildings.filter((b) => b.apartments.some((a) => a.beds === 0)).length, "bedrooms filter");
-    await page.click('[data-act="f-beds"][data-v="any"]');
-    ok((await page.locator("#all-list .grp-h").first().getAttribute("data-hood")) === DR.neighborhoods[0].neighborhood_id, "her first neighborhood leads Everything");
-    await page.evaluate(() => window.scrollTo(0, 0)); await screen(page, "12-everything");
-    await page.click('.tabs [data-v="map"]'); await page.waitForSelector("#map-slot .hhm-svg"); await page.waitForTimeout(300);
-    await everyScreen(page, L + "map", LIMIT); await screen(page, "12b-map");
-    await page.click('.tabs [data-v="list"]');
-    await goHome(page);
-    ok(errs.length === 0, L + "console or page errors: " + errs.join(" || "));
-    ok(net.length === 0, L + "network requests: " + net.join(", "));
+
+    /* ================= Save and My list ================= */
+    await page.click("#bar-list"); await page.waitForSelector("#app h1");
+    ok((await page.locator("#app h1").innerText()).trim() === "Nothing saved yet", W + "My list starts empty"); await everyScreen(page, W + "My list, empty"); await barSays(page, 0, W + "start");
+    await page.click('#app [data-act="home"]'); await page.waitForSelector("#ncards");
+    const [sh, sb] = firstPlain, [vh, vb] = firstVerified;
+    await toHood(page, sh.id);
+    await page.click('.bcard[data-building="' + sb.id + '"] [data-act="save"]');
+    ok((await page.locator('.bcard[data-building="' + sb.id + '"] [data-act="save"]').getAttribute("aria-pressed")) === "true" && (await page.locator("#toast").innerText()) === "Saved to My list.", W + "Save on a card");
+    ok(await page.evaluate(() => document.getElementById("toast").getBoundingClientRect().bottom <= document.getElementById("savebar").getBoundingClientRect().top + 0.5), W + "the toast sits above the bar");
+    await barSays(page, 1, W + "after one save"); await screen(page, "07-saved");
+    await toHood(page, vh.id); await page.click('.bcard[data-building="' + vb.id + '"] .bname'); await page.waitForSelector(".place");
+    await page.click('.place .btn[data-act="save"]'); await barSays(page, 2, W + "after two saves");
+    same(await state(page), { v: 7, saved: [sb.id, vb.id] }, W + "what is kept on the phone");
+    await page.click("#bar-list"); await page.waitForSelector("#saved");
+    const rows = await page.evaluate(() => [...document.querySelectorAll("#saved .srow")].map((r) => [r.getAttribute("data-building"), r.querySelector("h2").textContent, r.querySelector(".in").textContent, r.querySelector("[data-rent]").textContent]));
+    same(rows.map((r) => [r[0], r[1], r[3]]), [[sb.id, nm(sb), rentText(sb.rent_range)], [vb.id, nm(vb), rentText(vb.rent_range)]], W + "My list rows");
+    ok(rows[0][2].indexOf(sh.name + ", number " + sh.rank) === 0, W + "a saved building names its neighborhood");
+    ok((await page.locator("#app h1").innerText()).trim() === "2 saved buildings", W + "My list heading");
+    await everyScreen(page, W + "My list"); await screen(page, "08-my-list");
+    await page.reload(); await page.waitForSelector("#app h1"); await barSays(page, 2, W + "after a reload");
+    await page.click("#bar-list"); await page.waitForSelector("#saved");
+    await page.click('#saved .srow[data-building="' + vb.id + '"] [data-act="open"]'); await page.waitForSelector('#app article[data-building="' + vb.id + '"]');
+    ok((await page.locator('.top [data-act="save"]').getAttribute("aria-pressed")) === "true", W + "the saved building opens from My list, marked saved");
+    await page.click('[data-act="back"]'); await page.waitForSelector("#saved");
+    await page.click('#saved .srow[data-building="' + sb.id + '"] [data-act="unsave"]'); await barSays(page, 1, W + "after Remove");
+    await page.click("#clear"); await page.waitForSelector("#clear-confirm"); await everyScreen(page, W + "My list, clear?"); await page.click('[data-act="clear-no"]'); await barSays(page, 1, W + "Keep it");
+    await page.click("#clear"); await page.click('[data-act="clear-yes"]'); await barSays(page, 0, W + "after Clear");
+    same(await state(page), { v: 7, saved: [] }, W + "the phone's copy is empty");
+
+    /* ================= Everything ================= */
+    await page.click("#bar-all"); await page.waitForSelector("#all-list");
+    ok((await page.locator("#bar-all").getAttribute("aria-current")) === "page", W + "the bar marks Everything");
+    same(await rowsDom(page), N.map((h) => h.id), W + "Everything lists every neighborhood in rank order");
+    const r0 = await page.locator("#all-list .row").first().innerText();
+    ok([String(N[0].rank), N[0].name, N[0].state, money(N[0].typical_rent), Math.round(N[0].drive_min) + " min drive"].every((s) => r0.indexOf(s) >= 0), W + "a row has rank, name, state, typical rent and drive (got " + r0.replace(/\n/g, " ") + ")");
+    ok((await page.locator("#all-count").innerText()).trim() === "All " + N.length + " neighborhoods", W + "the count");
+    await everyScreen(page, W + "Everything"); await screen(page, "12-everything");
+    const target = N[Math.min(17, N.length - 1)], word = target.name.split(/[^A-Za-z]+/).filter((w) => w.length > 3)[0] || target.name;
+    await page.fill("#f-q", word); await page.waitForTimeout(120);
+    const found = await rowsDom(page);
+    const norm = (t) => " " + String(t || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, " ").trim() + " ";
+    const NAME = { NY: "New York", NJ: "New Jersey", CT: "Connecticut", PA: "Pennsylvania" };
+    same(found, N.filter((h) => norm([h.name, h.area, h.state, NAME[h.state], (h.tags_true || h.tags).join(" ")].join(" ")).indexOf(" " + norm(word).trim()) >= 0).map((h) => h.id), W + 'search "' + word + '"');
+    ok(found.indexOf(target.id) >= 0 && found.length < N.length, W + "search finds " + target.name);
+    await everyScreen(page, W + "Everything, searched"); await screen(page, "12c-everything-search");
+    await page.fill("#f-q", "zzzz"); await page.waitForSelector("#all-empty"); await everyScreen(page, W + "Everything, nothing matches");
+    await page.click('[data-act="f-reset"]'); await page.waitForSelector("#all-list"); same(await rowsDom(page), N.map((h) => h.id), W + "Clear search and filters");
+    await page.click("#filter summary");
+    const st = N.map((h) => h.state).sort((a, b) => N.filter((h) => h.state === b).length - N.filter((h) => h.state === a).length)[0];
+    await page.click('[data-act="f-state"][data-v="' + st + '"]');
+    same(await rowsDom(page), N.filter((h) => h.state === st).map((h) => h.id), W + "state filter " + st);
+    const drives = N.map((h) => h.drive_min).sort((a, b) => a - b), dCut = Math.ceil(drives[Math.floor(drives.length / 3)] / 5) * 5;
+    await setRange(page, "f-drive", dCut);
+    same(await rowsDom(page), N.filter((h) => h.state === st && h.drive_min <= dCut).map((h) => h.id), W + "state and longest drive " + dCut);
+    ok((await page.locator("#f-drive-out").innerText()).trim() === dCut + " min", W + "the drive filter says its value");
+    await page.click('[data-act="f-state"][data-v="any"]');
+    const rents = N.map((h) => h.typical_rent).sort((a, b) => a - b), rCut = Math.ceil(rents[Math.floor(rents.length / 2)] / 25) * 25;
+    await setRange(page, "f-rent", rCut);
+    const expect = N.filter((h) => h.drive_min <= dCut && h.typical_rent <= rCut).map((h) => h.id);
+    same(await rowsDom(page), expect, W + "longest drive and highest typical rent " + rCut);
+    ok((await page.locator("#all-count").innerText()).trim() === expect.length + " of " + N.length + " neighborhoods" && (await page.locator("#fsum").innerText()).indexOf("up to " + money(rCut)) >= 0, W + "the count and the filter summary follow");
+    await everyScreen(page, W + "Everything, filtered"); await screen(page, "12d-everything-filtered");
+    /* the map */
+    await page.click("#mode-map"); await page.waitForSelector("#map svg");
+    ok((await page.locator("#map svg circle").count()) === expect.length, W + "the map shows the filtered neighborhoods as dots");
+    await page.click('[data-act="f-state"][data-v="any"]'); await setRange(page, "f-drive", 9999); await setRange(page, "f-rent", 99999);
+    ok((await page.locator("#map svg circle").count()) === N.length, W + "the map shows every neighborhood");
+    await page.click("#filter summary");
+    const dot = await page.locator("#map svg circle").last().boundingBox();   /* drawn last: rank 1 */
+    await page.mouse.click(dot.x + dot.width / 2, dot.y + dot.height / 2); await page.waitForSelector("#map-card .row");
+    const picked = await page.locator("#map-card .row").getAttribute("data-id");
+    const p1 = N[0], near = N.filter((h) => Math.abs(h.lat - p1.lat) < 0.05 && Math.abs(h.lon - p1.lon) < 0.05).map((h) => h.id);
+    ok(near.indexOf(picked) >= 0, W + "tapping a dot shows that neighborhood (got " + picked + ")");
+    await everyScreen(page, W + "Everything, map"); await fullShot(page, "12b-map");
+    await page.click("#map-card .row"); await page.waitForSelector('#app article[data-hood="' + picked + '"]'); ok(true, "the map's card opens the neighborhood");
+    await page.click('[data-act="back"]'); await page.waitForSelector("#map svg"); ok(true, "Back returns to the map");
+    await page.click("#bar-home"); await page.waitForSelector("#ncards");
+    ok((await page.locator("#bar-home").getAttribute("aria-current")) === "page", W + "the bar marks Home");
+    await page.keyboard.press("Tab"); ok(true, "keyboard reaches the page");
+
+    ok(errs.length === 0, W + "console errors: " + errs.join(" | "));
+    ok(net.length === 0, W + "network requests: " + net.join(", "));
     await ctx.close();
   }
   prefix = "";
 
-  /* ================= keyboard: Tab reaches a card's button, Enter opens it, Escape comes back ================= */
-  { const { ctx, page: p, errs } = await open(browser, { hasTouch: false, isMobile: false });
-    await p.focus('#app [data-act="hood"][data-v="1"]'); await p.keyboard.press("Enter");
-    await p.waitForSelector("#app .acards"); ok(JSON.stringify(await aptIds(p)) === JSON.stringify(WANT[1][1]), "keyboard: Enter opens a neighborhood");
-    ok(await p.evaluate(() => document.activeElement && document.activeElement.id === "hood-h"), "keyboard: focus moves to its heading");
-    await p.keyboard.press("Escape"); await p.waitForSelector("#app .ncards"); ok(true, "keyboard: Escape goes back home");
-    ok(errs.length === 0, "errors (keyboard): " + errs.join(" || ")); await ctx.close(); }
+  /* ================= iPhone 13, by tap ================= */
+  { const dev = devices["iPhone 13"]; const { ctx, page: p, errs, net } = await open(browser, Object.assign({}, dev));
+    const h = N[0], b = h.top_buildings[0];
+    await everyScreen(p, "iPhone 13 home");
+    await p.tap('#ncards .ncard[data-hood="' + h.id + '"] [data-act="hood"]'); await p.waitForSelector('#app article[data-hood="' + h.id + '"]');
+    checkHood(await hoodDom(p), h, 0, "iPhone 13 " + h.name + ": "); await everyScreen(p, "iPhone 13 neighborhood");
+    await p.screenshot({ path: shotPath("device-iPhone-13") });
+    if (b) {
+      await p.tap('.bcard[data-building="' + b.id + '"] .bname'); await p.waitForSelector('#app article[data-building="' + b.id + '"]');
+      checkBld(await bldDom(p), b, h, "iPhone 13 building: "); await everyScreen(p, "iPhone 13 building");
+      await p.tap('.top [data-act="save"]'); await barSays(p, 1, "iPhone 13 save");
+      await p.tap('[data-act="back"]'); await p.waitForSelector("#tops");
+    }
+    await p.tap("#next-hood"); await p.waitForSelector('#app article[data-hood="' + N[1].id + '"]');
+    await p.tap("#bar-list"); await p.waitForSelector(b ? "#saved" : "#app h1"); await everyScreen(p, "iPhone 13 My list");
+    await p.tap("#bar-all"); await p.waitForSelector("#all-list"); await p.tap("#mode-map"); await p.waitForSelector("#map svg"); await everyScreen(p, "iPhone 13 map");
+    await p.tap("#bar-home"); await p.waitForSelector("#ncards"); await p.tap("#show-more");
+    ok((await p.locator("#ncards .ncard").count()) === Math.min(20, N.length), "iPhone 13: Show more by tap");
+    ok(errs.length === 0 && net.length === 0, "iPhone 13: errors or network: " + errs.concat(net).join(" | "));
+    await ctx.close(); }
 
-  /* ================= saved state from earlier versions ================= */
-  { const keep = D.buildings[0].id;
-    const { ctx, page: p, errs } = await open(browser, {}, (k) => { if (!sessionStorage.getItem("seeded")) { sessionStorage.setItem("seeded", "1");
-      localStorage.setItem("lamia-concierge-v4", JSON.stringify({ v: 4, step: "results", cj: [0, 1, 2].map((i) => ({ task_index: i, choice: "a" })), moves: [], saved: [k], ticked: [], tour: [k] }));
-      localStorage.setItem("lamia-concierge", JSON.stringify({ v: 5, step: "home", saved: [k], ticked: [], tour: [] })); } }, keep);
-    await home(p, "old state ");
-    const st = await state(p);
-    ok(st.v === 6 && st.saved.includes(keep) && st.tour.includes(keep) && !("cj" in st), "old answers ignored; the list and tour plan kept");
-    ok(await p.evaluate(() => localStorage.getItem("lamia-concierge-v4") === null), "the old key is removed");
-    ok(errs.length === 0, "errors (old state): " + errs.join(" || ")); await ctx.close(); }
+  /* ================= dark ================= */
+  { prefix = "dark-"; const { ctx, page: p, errs } = await open(browser, { colorScheme: "dark" });
+    const lum = await p.evaluate(() => { const m = getComputedStyle(document.body).backgroundColor.match(/\d+/g).map(Number); return (m[0] + m[1] + m[2]) / 3; });
+    ok(lum < 60, "dark: the page is dark (" + lum + ")");
+    const contrast = await p.evaluate(() => { const c = document.querySelector(".ncard"), a = getComputedStyle(c).backgroundColor.match(/\d+/g).map(Number), b = getComputedStyle(c.querySelector("h2")).color.match(/\d+/g).map(Number); return Math.abs((a[0] + a[1] + a[2]) - (b[0] + b[1] + b[2])) / 3; });
+    ok(contrast > 120, "dark: card text stands out from the card");
+    await everyScreen(p, "dark home"); await screen(p, "01-home");
+    const h = N.find((x) => x.avoid_buildings.length && x.know_this.length) || N[0];
+    await toHood(p, h.id); checkHood(await hoodDom(p), h, N.indexOf(h), "dark " + h.name + ": "); await everyScreen(p, "dark neighborhood"); await fullShot(p, "03-hood");
+    if (h.top_buildings[0]) { await p.click(".bcard .bname"); await p.waitForSelector(".place"); await everyScreen(p, "dark building"); await fullShot(p, "05-building"); }
+    await p.click("#bar-all"); await p.waitForSelector("#all-list"); await p.click("#mode-map"); await p.waitForSelector("#map svg"); await screen(p, "12b-map");
+    ok(errs.length === 0, "dark: console errors: " + errs.join(" | ")); await ctx.close(); prefix = ""; }
 
-  /* ================= storage blocked ================= */
+  /* ================= storage blocked: everything still works, in memory ================= */
   { const { ctx, page: p, errs } = await open(browser, {}, () => { Object.defineProperty(window, "localStorage", { get() { throw new Error("blocked"); } }); });
-    await home(p, "no storage ");
-    await saveFromHoods(p, 1);
-    await p.click("#bar-list"); await p.waitForSelector("#sheet .saved");
-    await p.locator('#sheet [data-act="tour"]').first().click(); await p.click('#sheet [data-act="plan"]');
-    ok((await p.locator(".stop").count()) === 1, "works with storage blocked");
-    ok(errs.length === 0, "errors (no storage): " + errs.join(" || ")); await ctx.close(); }
+    ok((await p.locator("#ncards .ncard").count()) === 10, "storage blocked: home still shows ten");
+    await p.click("#ncards .ncard [data-act=hood]"); await p.waitForSelector("#tops");
+    if (N[0].top_buildings.length) { await p.click('.bcard [data-act="save"]'); await barSays(p, 1, "storage blocked: save");
+      await p.click("#bar-list"); await p.waitForSelector("#saved"); ok((await p.locator("#saved .srow").count()) === 1, "storage blocked: My list works in memory"); }
+    await everyScreen(p, "storage blocked");
+    ok(errs.length === 0, "storage blocked: console errors: " + errs.join(" | ")); await ctx.close(); }
 
-  /* ================= an action that throws: a bar with ways on ================= */
-  { const { ctx, page: p } = await open(browser);
+  /* ================= version 6's saved state: its list is kept where the building is still here ================= */
+  { const keep = firstVerified[1].id;
+    const { ctx, page: p, errs } = await open(browser, {}, ([k, id]) => { if (!sessionStorage.getItem("seeded")) { sessionStorage.setItem("seeded", "1");
+      localStorage.setItem(k, JSON.stringify({ v: 6, step: "plan", saved: [id, "b_gone", 7], ticked: [id], tour: [id] })); localStorage.setItem("lamia-concierge-v4", JSON.stringify({ saved: ["b_gone_too"] })); } }, [KEY, keep]);
+    await barSays(p, 1, "old state"); same(await state(p), { v: 7, saved: [keep] }, "old state becomes version 7 with the buildings still here");
+    ok((await p.evaluate(() => localStorage.getItem("lamia-concierge-v4"))) === null, "the older key is cleared");
+    ok((await p.locator("#ncards .ncard").count()) === 10, "old state: opens on Home");
+    ok(errs.length === 0, "old state: console errors: " + errs.join(" | ")); await ctx.close(); }
+  { const { ctx, page: p, errs } = await open(browser, {}, (k) => { localStorage.setItem(k, "{not json"); }, KEY);
+    ok((await p.locator("#ncards .ncard").count()) === 10, "broken saved state: the page still opens"); ok(errs.length === 0, "broken saved state: errors"); await ctx.close(); }
+
+  /* ================= an action that throws: a bar with two ways on ================= */
+  { const { ctx, page: p, errs } = await open(browser);
     await p.evaluate(() => { window.__conciergeThrowOn = "hood"; });
-    await p.click('#app [data-act="hood"][data-v="1"]');
-    ok(await p.locator("#oops").isVisible() && (await p.locator('#oops [data-oops="results"]').count()) === 1 && (await p.locator('#oops [data-oops="all"]').count()) === 1, "a thrown error shows the Something went wrong bar");
+    await p.click("#ncards .ncard [data-act=hood]"); await p.waitForSelector("#oops");
+    ok(await p.locator("#oops").isVisible() && (await p.locator('#oops [data-oops="home"]').count()) === 1 && (await p.locator('#oops [data-oops="all"]').count()) === 1, "a thrown error shows the Something went wrong bar");
+    ok(await p.evaluate(() => [...document.querySelectorAll("#oops button")].every((b) => b.getBoundingClientRect().height >= 44)), "its buttons are 44px");
     await screen(p, "16-oops");
     await p.evaluate(() => { window.__conciergeThrowOn = null; });
     await p.click('#oops [data-oops="all"]'); await p.waitForSelector("#all-list");
-    ok((await p.locator("#oops").count()) === 0, "Everything recovers");
-    await goHome(p);
-    ok(JSON.stringify(await cards(p)) === JSON.stringify(WANT.map((t) => t[0])), "and Home is back");
-    await ctx.close(); }
-
-  /* ================= real phones: iPhone 13 and Pixel 7, by tap() ================= */
-  for (const name of ["iPhone 13", "Pixel 7"]) {
-    const ctx = await browser.newContext(Object.assign({}, devices[name]));
-    const page = await ctx.newPage(), errs = [], net = [];
-    page.on("pageerror", (e) => errs.push(e.message)); page.on("console", (m) => { if (m.type() === "error") errs.push(m.text()); });
-    await page.route(/^https?:/, (route) => { const u = route.request().url(); if (/fonts\.googleapis\.com/.test(u)) return route.fulfill({ status: 200, contentType: "text/css", body: "" }); net.push(u); return route.abort(); });
-    await page.goto(PAGE); await page.waitForSelector("#app .ncards");
-    ok(JSON.stringify(await cards(page)) === JSON.stringify(WANT.map((t) => t[0])), name + ": three neighborhood cards");
-    for (let i = 0; i < 3; i++) {
-      await page.tap('#app [data-act="hood"][data-v="' + i + '"]'); await page.waitForSelector("#app .acards");
-      ok(JSON.stringify(await aptIds(page)) === JSON.stringify(WANT[i][1]), name + ": neighborhood " + (i + 1) + " opens to its three apartments");
-      await page.tap("#bar-home"); await page.waitForSelector("#app .ncards");
-    }
-    await page.tap('#app [data-act="hood"][data-v="0"]'); await page.waitForSelector("#app .acards");
-    await page.tap("#app .acard .aname >> nth=0"); await page.waitForSelector("#sheet .place");
-    await page.tap('#sheet [data-act="save"] >> nth=0'); await page.tap('#sheet [data-act="back"]');
-    await page.tap("#app .acard:nth-child(2) [data-act=\"save\"]");
-    await page.tap("#bar-list"); await page.waitForSelector("#sheet .saved");
-    await page.tap("#sheet .srow:nth-child(1) .tickl"); await page.tap("#sheet .srow:nth-child(2) .tickl");
-    await page.tap("#sheet #list-compare"); await page.waitForSelector("#cmp");
-    ok((await page.locator("#cmp").getAttribute("data-cols")) === "2", name + ": Compare by tap");
-    await page.tap('#sheet [data-act="choose-tour"] >> nth=0'); await page.tap('#sheet [data-act="plan"]'); await page.waitForSelector(".stop");
-    await page.tap("#bar-all"); await page.waitForSelector("#f-q");
-    await page.tap("#f-q"); await page.fill("#f-q", "Stamford"); await page.waitForTimeout(100);
-    ok((await page.locator("#all-list .row").count()) >= 1, name + ": search works");
-    ok(errs.length === 0 && net.length === 0, name + ": errors or network " + errs.concat(net).join(" | "));
-    await page.tap("#bar-home"); await page.waitForSelector("#app .ncards");
-    await page.screenshot({ path: path.join(SHOTS, "concierge6-device-" + name.replace(/\W+/g, "-") + ".png") });
-    await ctx.close();
-  }
-
-  /* ================= dark theme, and a 320px phone ================= */
-  { const { ctx, page: p, errs } = await open(browser, { colorScheme: "dark" });
-    await home(p, "dark ");
-    await screen(p, "13-dark-home"); await screen(p, "13a-dark-home-full", true);
-    await everyScreen(p, "dark home", LIMIT);
-    await saveFromHoods(p, 2);
-    await p.click('#app [data-act="hood"][data-v="0"]'); await p.waitForSelector("#app .acards"); await screen(p, "13b-dark-hood");
-    await p.click("#app .acard .aname >> nth=0"); await p.waitForSelector("#sheet .place"); await screen(p, "13c-dark-apartment");
-    await everyScreen(p, "dark apartment", LIMIT);
-    await p.click("#bar-list"); await p.waitForSelector("#sheet .saved"); await screen(p, "13d-dark-my-list");
-    ok(errs.length === 0, "errors (dark): " + errs.join(" || ")); await ctx.close();
-    const small = await open(browser, { viewport: { width: 320, height: 568 } });
-    await home(small.page, "320 ");
-    await everyScreen(small.page, "320 home", LIMIT); await screen(small.page, "14-320-home");
-    await small.page.click('#app [data-act="hood"][data-v="2"]'); await small.page.waitForSelector("#app .acards");
-    await everyScreen(small.page, "320 neighborhood", LIMIT); await screen(small.page, "14b-320-hood");
-    await goHome(small.page);
-    await saveFromHoods(small.page, 3);
-    await small.page.click("#bar-list"); await small.page.waitForSelector("#sheet .saved");
-    for (let i = 0; i < 3; i++) await small.page.locator("#sheet .srow input[type=checkbox]").nth(i).click();
-    await small.page.click("#sheet #list-compare"); await small.page.waitForSelector("#cmp");
-    await everyScreen(small.page, "320 compare 3", LIMIT); await screen(small.page, "14c-320-compare-3");
-    ok(small.errs.length === 0, "errors (320): " + small.errs.join(" || ")); await small.ctx.close(); }
-
-  /* ================= data with no short list: the list still works ================= */
-  { const strip = () => { let d; Object.defineProperty(window, "CONCIERGE_DATA", { configurable: true, get() { return d; }, set(v) { if (v && v.meta) { delete v.meta.default_recommendation; } d = v; } }); };
-    const { ctx, page: p, errs } = await open(browser, {}, strip);
-    await p.click('#app .btn[data-act="all"]'); await p.waitForSelector("#all-list .row");
-    ok((await p.locator("#all-list .row").count()) === NB, "fallback: every place is listed");
-    await everyScreen(p, "fallback", LIMIT); await screen(p, "15-fallback");
-    ok(errs.length === 0, "errors (fallback): " + errs.join(" || ")); await ctx.close(); }
-
-  /* ================= Ask, against a stand-in for the viewer's Claude ================= */
-  { const stub = () => {
-      window.__calls = [];
-      const sample = async (input, options) => {
-        window.__calls.push({ input, tools: (options.tools || []).map((t) => t.name) });
-        if (window.__decline) throw { code: "not_granted", message: "declined" };
-        const r = options.tools ? await options.tools.find((t) => t.name === "recommend").execute({}, {}) : null;
-        const text = "<b>" + (r ? r.places.length : "table") + "</b> places";
-        options.onText({ text, delta: text }); return { text, truncated: false, modelTierApplied: "quick" };
-      };
-      sample.limits = async () => ({ maxPromptBytes: 262144, tools: { maxCount: 8 } });
-      window.claude = { use: async (n) => (n === "sample" ? sample : null) };
-    };
-    const { ctx, page: p, errs } = await open(browser, {}, stub);
-    await home(p, "ask ");
-    await p.waitForSelector("#ask-btn");
-    await p.click("#ask-btn"); await p.waitForSelector("#ask-sheet");
-    ok((await p.evaluate(() => window.__calls.length)) === 0, "nothing is sent until she taps");
-    await p.locator("#ask-sugg button").first().click();
-    await p.waitForFunction(() => /places/.test(document.getElementById("ask-a").textContent));
-    ok((await p.locator("#ask-a").innerText()) === "<b>3</b> places", "the answer is plain text and the lookup read the page's suggestion");
-    ok(JSON.stringify((await p.evaluate(() => window.__calls[0])).tools) === JSON.stringify(["list_buildings", "get_building", "compare", "recommend", "why"]), "five lookups");
-    const rec = await p.evaluate(() => window.__conciergeLookups.recommend());
-    ok(rec.places.length === 3 && rec.places.every((x, i) => x.why === DR.neighborhoods[i].why) && /listings/.test(rec.how_the_list_was_narrowed), "recommend gives the three places and how the list was narrowed");
-    const why = await p.evaluate((id) => window.__conciergeLookups.why({ id }), WANT[0][1][0]);
-    ok(why.recommended && why.its_neighborhood && why.its_neighborhood.place === 1, "why explains a building");
-    ok((await p.evaluate(() => window.__conciergeLookups.list_buildings({ recommended_only: true }))).count === 9, "list_buildings can keep to the nine");
-    await p.evaluate(() => { window.__decline = true; });
-    await p.fill("#ask-q", "Which is the quietest?"); await p.click("#ask-send");
-    await p.waitForFunction(() => !document.querySelector("#ask-btn,#ask-sheet"));
-    ok(errs.length === 0, "errors (ask): " + errs.join(" || ")); await ctx.close();
-    const none = await open(browser, {}, () => { window.claude = { use: async () => null }; });
-    await none.page.waitForTimeout(300); ok((await none.page.locator("#ask-btn").count()) === 0, "use() resolving null leaves no trace"); await none.ctx.close(); }
+    ok((await p.locator("#oops").count()) === 0, "See everything recovers");
+    await p.evaluate(() => { window.__conciergeThrowOn = "home"; }); await p.click("#bar-home"); await p.waitForSelector("#oops");
+    await p.evaluate(() => { window.__conciergeThrowOn = null; }); await p.click('#oops [data-oops="home"]'); await p.waitForSelector("#ncards");
+    ok((await p.locator("#oops").count()) === 0, "Back to Home recovers");
+    ok(errs.length === 0, "thrown error: console errors: " + errs.join(" | ")); await ctx.close(); }
 
   await browser.close();
-  console.log(checks + " checks passed; screenshots in site/screens/concierge6-*.png");
-})().catch((e) => { console.error("FAILED: " + (e && e.message || e) + "\n" + ((e && e.stack) || "").split("\n").filter((l) => /walkthrough/.test(l)).slice(0, 3).join("\n")); process.exit(1); });
+  console.log("concierge walk-through (version 7): " + checks + " checks passed; screenshots in site/screens/concierge7-*.png");
+})().catch((e) => { console.error("FAIL: " + (e && e.message || e)); process.exit(1); });

@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """One command that says whether the concierge page (the short version) is publishable.
 
-Runs, in order: the data build, its tests, the published-text check on the concierge data, the pick-logic tests, the
-page build and (with --with-browser) the phone walk-through. Prints one line per step and a final verdict. It does not
-touch the first page; `verify_all.py` remains that page's check.
+Runs, in order: the neighborhood ranking build (scripts/neighborhood_rank.py, which rewrites
+site/neighborhoods_data.json), its tests, the tests of the data the page shows, the page build and (with
+--with-browser) the phone walk-through. Prints one line per step and a final verdict. It does not touch the first
+page; `verify_all.py` remains that page's check. (Version 7: the page reads the ranked neighborhoods; the steps of
+the earlier versions, the concierge data build, its tests and the published-text check, no longer apply here.)
 """
 from __future__ import annotations
 import argparse, subprocess, sys, time
@@ -13,10 +15,9 @@ ROOT = Path(__file__).resolve().parent.parent
 
 def steps(with_browser: bool):
     s = [
-        ("concierge data build", ["python3", "scripts/concierge_data.py"]),
-        ("concierge data tests", ["python3", "scripts/test_concierge_data.py"]),
-        ("published text on concierge data", ["python3", "scripts/check_published_text.py", "--data", "site/_concierge_base.json", "--out-suffix", "_u2000"]),
-        ("short list data tests (what the page shows)", ["node", "scripts/test_concierge_pick.js"]),
+        ("neighborhood ranking build", ["python3", "scripts/neighborhood_rank.py"]),
+        ("neighborhood ranking tests", ["python3", "scripts/test_neighborhood_rank.py"]),
+        ("page data tests (what the page shows)", ["node", "scripts/test_concierge_pick.js"]),
         ("page build", ["python3", "scripts/build_concierge.py"]),
     ]
     if with_browser:
