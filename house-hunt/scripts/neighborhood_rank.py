@@ -402,9 +402,16 @@ def total_score(s, weights):
     return round(100 * sum(v * w for v, w in got) / sum(w for _, w in got), 6) if got else 0.0
 
 
-def rank_ids(S, weights):
+TOP_N, MIN_TOP_ELIGIBLE = 10, 3             # the first 10 places need at least 3 buildings that could be a top building
+
+
+def rank_ids(S, weights, thin=()):
+    """Rank by score; a neighborhood in `thin` (fewer than MIN_TOP_ELIGIBLE qualifying buildings) cannot hold one of the
+    first TOP_N places: those go to the best-scoring others, and the rest follow in score order."""
     sc = {h: total_score(S[h], weights) for h in S}
     order = sorted(S, key=lambda h: (-sc[h], h))
+    head = [h for h in order if h not in thin][:TOP_N]
+    order = head + [h for h in order if h not in head]
     return {h: i + 1 for i, h in enumerate(order)}, sc
 
 
@@ -468,8 +475,13 @@ def sentence(meas, m):
         s = (f"Half of the studios and one-bedrooms listed here ask {t['median_rent']} or less in rent, and "
              f"{t['apartments_2000']} {'is' if f['apartments_2000'] == 1 else 'are'} listed at $2,000 or less.")
     elif meas == "supply":
-        s = (f"Of {t['listings']} listings here, {t['dogs_yes']} say dogs are allowed, {t['pets_general']} more {'says' if f['pets_general'] == 1 else 'say'} pets are allowed "
-             f"without naming dogs, and {t['elevator_or_floor2']} state an elevator or a second-floor apartment.")
+        bits = [f"{t['dogs_yes']} {'says' if f['dogs_yes'] == 1 else 'say'} dogs are allowed"]
+        if f["pets_general"]:
+            bits.append(f"{t['pets_general']} more {'says' if f['pets_general'] == 1 else 'say'} pets are allowed without naming dogs")
+        if f["elevator_or_floor2"]:
+            bits.append(f"{t['elevator_or_floor2']} {'states' if f['elevator_or_floor2'] == 1 else 'state'} an elevator or a second-floor apartment")
+        f = {k: v for k, v in f.items() if v or k in ("listings", "dogs_yes")}
+        s = f"Of {t['listings']} listings here, " + (", ".join(bits[:-1]) + (", and " if len(bits) > 2 else " and ") + bits[-1] if len(bits) > 1 else bits[0]) + "."
     elif meas == "going_out":
         s = (f"About {t['places_10min']} restaurants, bars and cafés are within a 10-minute walk of a typical building here."
              if f["places_10min"] else "There are 0 restaurants, bars or cafés within a 10-minute walk of a typical building here.")
@@ -532,8 +544,31 @@ def drawback(meas, m, med):
     return None
 
 
+def strength(meas, m, med):
+    """(sentence, figures) when the neighborhood's own figure is better than the middle of the ranked list, else None."""
+    def better(key, higher_better):
+        v, c = m.get(key), med.get(key)
+        return v is not None and c is not None and (v > c if higher_better else v < c)
+    if meas in DRAWBACK:
+        return sentence(meas, m) if better(*DRAWBACK[meas]) else None
+    if meas == "cost":
+        cheap, choice = better("median_rent", False), better("apartments_2000", True)
+        f = display_figures("cost", m)
+        if cheap and choice:
+            return sentence("cost", m)
+        if cheap:
+            return f"Half of the studios and one-bedrooms listed here ask {money(f['median_rent'])} or less in rent.", {"median_rent": f["median_rent"]}
+        if choice:
+            return f"There is a lot to choose from: {f['apartments_2000']} apartments are listed at $2,000 or less.", {"apartments_2000": f["apartments_2000"]}
+        return None
+    if meas == "parking":
+        return sentence("parking", m) if not m.get("overnight_rule") and (m.get("offstreet_share") or 0) > 0.5 else None
+    return None
+
+
 def why_and_know(h, S, M, eligible, med):
-    """Three best measures and one or two worst, by the neighborhood's standing on each among the eligible list."""
+    """Up to three real strengths and up to two real drawbacks, by the neighborhood's standing on each measure among the
+    ranked list. A strength must stand in the upper half and beat the list's median figure; fewer than three is fewer."""
     pct = {}
     for meas in WEIGHTS:
         if meas == "records" or S[h].get(meas) is None:
@@ -541,13 +576,14 @@ def why_and_know(h, S, M, eligible, med):
         others = [S[o][meas] for o in eligible if S[o].get(meas) is not None]
         pct[meas] = sum(1 for v in others if v < S[h][meas]) / max(1, len(others) - 1) if len(others) > 1 else 0.5
     order = sorted(pct, key=lambda k: (-pct[k], -WEIGHTS[k], k))
-    made = {}
-    for meas in order:
-        s, f = sentence(meas, M[h])
-        if s and text_ok(s):
-            made[meas] = {"measure": meas, "icon": ICONS[meas], "text": s, "figures": f, "standing": round(pct[meas], 3)}
-    usable = [k for k in order if k in made]
-    why = [made[k] for k in usable[:3]]
+    why = []
+    for k in order:
+        if pct[k] < 0.5 or len(why) == 3:
+            continue
+        d = strength(k, M[h], med)
+        if d and d[0] and text_ok(d[0]):
+            why.append({"measure": k, "icon": ICONS[k], "text": d[0], "figures": d[1], "standing": round(pct[k], 3)})
+    usable = [w["measure"] for w in why]
     know = []
     for k in reversed(order):                    # worst standing first; only real drawbacks, and none when nothing is clearly low
         if k in usable[:3] or pct[k] >= 0.4 or len(know) == 2:
@@ -558,7 +594,24 @@ def why_and_know(h, S, M, eligible, med):
     return why, know, pct
 
 
-def tags_for(m, pct):
+CHARACTERS = {"lively": ("lively street", "going_out"), "waterfront": ("waterfront", None), "green": ("green", "green"),
+              "near_family": ("near family", "near"), "roomy": ("roomy", "space"), "value": ("value", "cost")}
+
+
+def character_for(m, pct, water_m, water_standing):
+    """The neighborhood's own strongest character, for the illustration: the best-standing one whose plain floor holds."""
+    holds = {"lively": m["places_10min"] is not None and m["places_10min"] >= 20,
+             "waterfront": water_m is not None and water_m <= 400,
+             "green": m["park_walk_min"] is not None and m["park_walk_min"] <= 5,
+             "near_family": m["drive_min"] <= 30,
+             "roomy": m["median_sqft"] is not None and m["median_sqft"] >= 650,
+             "value": m["median_rent"] is not None and m["median_rent"] <= 1700}
+    stand = {k: (water_standing if k == "waterfront" else pct.get(CHARACTERS[k][1], 0.0)) for k in CHARACTERS}
+    pool = [k for k in CHARACTERS if holds[k]] or list(CHARACTERS)
+    return sorted(pool, key=lambda k: (-stand[k], k))[0]
+
+
+def tags_for(m, pct, know_measures=()):
     holds = {"near family": m["drive_min"] <= 30,
              "lively": m["places_10min"] is not None and m["places_10min"] >= 20,
              "quiet": m["places_10min"] is not None and m["places_10min"] <= 5,
@@ -569,9 +622,11 @@ def tags_for(m, pct):
              "dog friendly": m["dogs_yes_share"] is not None and m["dogs_yes_share"] >= 0.5,
              "lots of choice": m["apartments_2000"] >= 40}
     true = [t for t, ok in holds.items() if ok]
+    shown = [t for t in true if TAG_MEASURE[t] not in know_measures]        # a tag never contradicts a "know this" line
     true.sort(key=lambda t: (-(1 - pct.get("going_out", 0.5) if t == "quiet" else pct.get(TAG_MEASURE[t], 0.5)), t))
     out, seen = [], set()
-    for t in true:                               # two tags about two different things
+    shown.sort(key=lambda t: (-(1 - pct.get("going_out", 0.5) if t == "quiet" else pct.get(TAG_MEASURE[t], 0.5)), t))
+    for t in shown:                              # two tags about two different things
         if TAG_MEASURE[t] not in seen:
             out.append(t)
             seen.add(TAG_MEASURE[t])
@@ -636,36 +691,37 @@ RECORD_TOPICS = {"class_c_violations": "serious violations", "heat_hot_water_com
                  "mold_complaints": "mold complaints", "pest_complaints": "pest complaints"}
 
 
-def avoid_reason_from_list(reasons):
+def avoid_reason_from_list(reasons, address="this address", n_elev=None):
     """One plain sentence from data/avoid_buildings.csv `reasons`, or None when nothing can be said in plain words."""
     out = []
     for part in [p.strip() for p in str(reasons).split(";") if p.strip()]:
         m = re.match(r"elevator: (\d+)\+ complaints to the city in (\d+) months", part)
         if m:
-            out.append(f"City records show {m.group(1)} or more elevator complaints here in {m.group(2)} months, more than at 9 in 10 similar buildings.")
+            n = f"{int(n_elev)}" if n_elev and n_elev >= int(m.group(1)) else f"{m.group(1)} or more"
+            out.append((f"City records show {n} elevator complaints at {address} in {m.group(2)} months, more than at 9 in 10 similar buildings.", "City elevator complaint records", "elevator_city"))
             continue
         m = re.match(r"elevator: (\d+) tenant reports of outages in (\d+) months", part)
         if m:
-            out.append(f"{m.group(1)} tenants reported elevator outages here in the last {m.group(2)} months.")
+            out.append((f"{m.group(1)} tenants reported elevator outages at {address} in the last {m.group(2)} months.", "Tenant reviews", "elevator"))
             continue
         m = re.match(r"management: city records in the last (\d+) months above the 90th percentile on (.+)", part)
         if m:
             topics = [RECORD_TOPICS.get(t.strip(), t.strip().replace("_", " ")) for t in m.group(2).split(",")]
-            out.append(f"City records for the last {m.group(1)} months show more {', '.join(topics)} here than at 9 in 10 similar buildings.")
+            out.append((f"City records for the last {m.group(1)} months show more {', '.join(topics)} at {address} than at 9 in 10 similar buildings.", "City housing records", "records_city"))
             continue
         m = re.match(r"management: (\d+) (?:separate dated )?tenant reports of (?:serious )?problems in the last (\d+) months", part)
         if m:
-            out.append(f"{m.group(1)} tenants reported serious problems with the management here in the last {m.group(2)} months.")
+            out.append((f"{m.group(1)} tenants reported serious problems with the management of {address} in the last {m.group(2)} months.", "Tenant reviews", "management"))
             continue
         m = re.match(r"reviews: (\d+) negative reviews in the last (\d+) months \(([^)]*)\)", part)
         if m:
             tg = [AVOID_TAGS[t] for t in m.group(3).split(";") if t in AVOID_TAGS]
-            out.append(f"{m.group(1)} reviews in the last {m.group(2)} months report serious problems" + (f" ({', '.join(tg)})." if tg else "."))
-    out = [s for s in out if text_ok(s)]
+            out.append((f"{m.group(1)} reviews of {address} in the last {m.group(2)} months report serious problems" + (f" ({', '.join(tg)})." if tg else "."), "Tenant reviews", "reviews"))
+    out = [s for s in out if text_ok(s[0])]
     return out[0] if out else None
 
 
-def build_buildings(U, src, hood_median):
+def build_buildings(U, src, hood_median, place=None):
     """{hood_id: [building dict]} for every building with a studio or one-bedroom listed at $2,000 or less."""
     tpl_unknown = U[(U.template != "") & U.listed_rent.isna() & (U.advertised_rent <= RENT_SHOW) & U.hood_id.notna() & U.has_street]
     P = pd.concat([U[(U.listed_rent <= RENT_SHOW) & U.hood_id.notna() & U.has_street], tpl_unknown])
@@ -693,6 +749,11 @@ def build_buildings(U, src, hood_median):
         b = {"id": bk, "name": name, "address": address, "city": str(first.city), "state": str(first.state),
              "zip": str(first.zip5).split(".")[0], "rent_range": [int(shown.listed_rent.min()), int(shown.listed_rent.max())],
              "apartments": int(len(shown)), "apartments_listed": int(len(g)), "usable": bool(len(use))}
+        hn, boro = (place or {}).get(h, (None, None))
+        if boro:                                 # inside New York City the city line is the borough, never "New York"
+            b["city_listed"], b["city"] = b["city"], boro
+        b["neighborhood"] = hn
+        b["place_text"] = f"{hn}, {boro}" if boro else f"{b['city']}, {b['state']}"
         b["rent_text"] = (f"Rent {money(b['rent_range'][0])}" if b["rent_range"][0] == b["rent_range"][1]
                           else f"Rent {money(b['rent_range'][0])} to {money(b['rent_range'][1])}")
         known, ask = [], []
@@ -810,16 +871,18 @@ def build_buildings(U, src, hood_median):
         listed = [src["avoid"][k] for k in keys if k in src["avoid"]]
         held_back = False
         if listed:
-            s = avoid_reason_from_list(listed[0].reasons)
+            s = avoid_reason_from_list(listed[0].reasons, address, num(getattr(listed[0], "n_elevator24", None)))
             ev = []
             try:
-                ev = [e.get("url") for e in json.loads(listed[0].evidence_json) if e.get("url")]
+                ev = [e for e in json.loads(listed[0].evidence_json) if e.get("url")]
             except (TypeError, ValueError):
                 pass
             if s:
-                av = {"kind": "avoid_list", "priority": 1, "reason": s,
-                      "source": {"name": "The search's avoid list (city records and tenant reports)", "file": "data/avoid_buildings.csv",
-                                 "url": ev[0] if ev else None, "key": listed[0].addr_key}}
+                # a link only when it leads to the matching evidence: a tenant report of the same kind. City records have
+                # no page a reader can open (only a raw data query), so they carry no link.
+                link = None if s[2].endswith("_city") else next((e["url"] for e in ev if e.get("category") == s[2]), None)
+                av = {"kind": "avoid_list", "priority": 1, "reason": s[0],
+                      "source": {"name": s[1], "file": "data/avoid_buildings.csv", "url": link, "key": listed[0].addr_key}}
             else:
                 held_back = True                 # on the avoid list for a reason this page does not put in words
         if av is None:
@@ -827,33 +890,33 @@ def build_buildings(U, src, hood_median):
                 r = src["rstd"].get(k)
                 if r is not None and r.rating_verdict == "avoid" and isinstance(r.rating_verdict_why, str):
                     m = re.match(r"(\d+) negative reviews in the last (\d+) months", r.rating_verdict_why)
-                    s = (f"{m.group(1)} tenant reviews in the last {m.group(2)} months report serious problems here." if m
-                         else "Tenant reviews of this building are poor, with enough reviews to count.")
+                    s = (f"{m.group(1)} tenant reviews of {address} in the last {m.group(2)} months report serious problems." if m
+                         else f"Tenant reviews of {address} are poor, with enough reviews to count.")
                     av = {"kind": "low_rating", "priority": 2, "reason": s,
-                          "source": {"name": "Review screen of this search", "file": "data/evidence/rating_standard.csv",
+                          "source": {"name": "Tenant reviews", "file": "data/evidence/rating_standard.csv",
                                      "url": r.source_url if isinstance(r.source_url, str) else None, "key": k}}
                     break
         if av is None and not vids and set(g.listing_id) & src["unverified"] and set(g.listing_id) <= src["unverified"]:
             av = {"kind": "unverified_listing", "priority": 4,
-                  "reason": "A reviewer who read this listing could not confirm it is a real apartment that is available.",
-                  "source": {"name": "Listing review of this search", "file": "data/evidence/review_verdicts.csv",
+                  "reason": f"A reviewer who read the listing for {address} could not confirm it is a real apartment that is available.",
+                  "source": {"name": "A check of this listing", "file": "data/evidence/review_verdicts.csv",
                              "url": b["listing_url"], "key": sorted(set(g.listing_id) & src["unverified"])[0]}}
         if av is None and not vids and not has_template:
             med = hood_median.get((h, int(first.beds)))
             if med and med[1] >= 10 and b["rent_range"][1] < 0.55 * med[0]:
                 kind = "studios" if int(first.beds) == 0 else "one-bedrooms"
                 av = {"kind": "price_far_below", "priority": 5,
-                      "reason": (f"The rent asked ({money(b['rent_range'][1])}) is far below what {kind} here usually list for "
+                      "reason": (f"The rent asked at {address} ({money(b['rent_range'][1])}) is far below what {kind} here usually list for "
                                  f"({money(med[0])}), which often means a listing is not what it seems."),
-                      "source": {"name": "Listing compared with the neighborhood's listings", "file": "data/listings.csv",
+                      "source": {"name": "Its listing, against the others here", "file": "data/listings.csv",
                                  "url": b["listing_url"], "key": str(first.listing_id)}}
         if av is None and dn:
-            av = {"kind": "no_dogs", "priority": 6, "reason": "The listing says dogs are not allowed.",
-                  "source": {"name": "The listing page", "file": "data/listings.csv", "url": b["listing_url"], "key": str(g.listing_id.iloc[0])}}
+            av = {"kind": "no_dogs", "priority": 6, "reason": f"The listing for {address} says no dogs.",
+                  "source": {"name": "Its listing", "file": "data/listings.csv", "url": b["listing_url"], "key": str(g.listing_id.iloc[0])}}
         if av is None and ground_only:
             av = {"kind": "ground_floor_only", "priority": 7,
-                  "reason": "Every apartment listed here at $2,000 or less is on the ground floor.",
-                  "source": {"name": "The listing page", "file": "data/listings.csv", "url": b["listing_url"], "key": str(g.listing_id.iloc[0])}}
+                  "reason": f"Every apartment listed at {address} at $2,000 or less is on the ground floor.",
+                  "source": {"name": "Its listing", "file": "data/listings.csv", "url": b["listing_url"], "key": str(g.listing_id.iloc[0])}}
         b["avoid"], b["held_back"] = av, held_back
         # building-level evidence score for the top three
         rec_known = any(k in src["rec_held"] for k in keys)
@@ -870,15 +933,28 @@ def build_buildings(U, src, hood_median):
     return out
 
 
+STRONG_AVOID = {"avoid_list", "low_rating", "unverified_listing", "price_far_below"}
+
+
 def pick_buildings(bs):
+    """(top three, up to two to avoid, number of buildings that qualify as a top building). The avoid cards never repeat a
+    sentence: the second card has a different kind of reason where one exists; two of the same kind only for the stronger
+    kinds of evidence, each sentence naming its own building."""
     cand = [b for b in bs if b["usable"] and b["avoid"] is None and not b["held_back"] and not b["has_template_listing"]]
     top = sorted(cand, key=lambda b: (-b["evidence_score"], b["rent_range"][0], b["id"]))[:3]
-    bad = sorted([b for b in bs if b["avoid"] and not b["rent_is_template"]], key=lambda b: (b["avoid"]["priority"], -b["apartments_listed"], b["id"]))[:2]
-    return top, bad
+    pool = sorted([b for b in bs if b["avoid"] and not b["rent_is_template"]], key=lambda b: (b["avoid"]["priority"], -b["apartments_listed"], b["id"]))
+    bad = pool[:1]
+    if bad:
+        k0, r0 = bad[0]["avoid"]["kind"], bad[0]["avoid"]["reason"]
+        other = [b for b in pool[1:] if b["avoid"]["kind"] != k0]
+        same = [b for b in pool[1:] if b["avoid"]["kind"] == k0 and b["avoid"]["reason"] != r0 and k0 in STRONG_AVOID]
+        nxt = sorted(other + same, key=lambda b: (b["avoid"]["priority"], -b["apartments_listed"], b["id"]))
+        bad += nxt[:1]
+    return top, bad, len(cand)
 
 
 def card(b, role):
-    keep = ["id", "name", "address", "city", "state", "zip", "rent_range", "rent_text", "apartments", "known", "to_ask", "rating",
+    keep = ["id", "name", "address", "city", "neighborhood", "place_text", "state", "zip", "rent_range", "rent_text", "apartments", "known", "to_ask", "rating",
             "contact", "listing_url", "photo_url", "verified", "evidence_score", "evidence_points"]
     d = {k: b[k] for k in keep}
     if role == "avoid":
@@ -973,14 +1049,20 @@ def build():
     eligible = sorted(h for h, s in status.items() if s == "ranked")
     S = measure_scores(M, eligible)
     sc_all = scenarios()
-    ranks = {name: rank_ids(S, w)[0] for name, w in sc_all.items()}
-    base_rank, base_score = rank_ids(S, WEIGHTS)
 
     med = {}
     P22 = U[U.listed_rent <= RENT_POOL]
     for (h, beds), g in P22[P22.hood_id.isin(eligible)].groupby(["hood_id", "beds"]):
         med[(h, int(beds))] = (float(g.listed_rent.median()), int(len(g)))
-    B = build_buildings(U[U.hood_id.isin(eligible)], src, med)
+    nyc = {"Queens", "Brooklyn", "Bronx", "Manhattan", "Staten Island"}
+    place = {h: (clean_name(Hx.hood[h]), Hx.area[h] if Hx.area[h] in nyc else None) for h in eligible}
+    B = build_buildings(U[U.hood_id.isin(eligible)], src, med, place)
+    picks = {h: pick_buildings(B.get(h, [])) for h in eligible}
+    thin = {h for h in eligible if picks[h][2] < MIN_TOP_ELIGIBLE}
+    ranks = {name: rank_ids(S, w, thin)[0] for name, w in sc_all.items()}
+    base_rank, base_score = rank_ids(S, WEIGHTS, thin)
+    score_rank = rank_ids(S, WEIGHTS)[0]
+    water = {h: num(Hx.water_m[h]) for h in eligible}
     life = life_here()
     Gx = groups.set_index("hood_id")
     parent = {}
@@ -995,8 +1077,11 @@ def build():
     for h in sorted(eligible, key=lambda x: base_rank[x]):
         m = M[h]
         why, know, pct = why_and_know(h, S, M, eligible, med_fig)
-        tags, tags_true = tags_for(m, pct)
-        top, bad = pick_buildings(B.get(h, []))
+        tags, tags_true = tags_for(m, pct, {w["measure"] for w in know})
+        ws = [v for v in water.values() if v is not None]
+        w_stand = sum(1 for v in ws if v > water[h]) / max(1, len(ws) - 1) if water[h] is not None else 0.0
+        ch = character_for(m, pct, water[h], w_stand)
+        top, bad, n_cand = picks[h]
         role = {b["id"]: "top" for b in top}
         role.update({b["id"]: "avoid" for b in bad})
         rr = [ranks[n][h] for n in sc_all]
@@ -1038,9 +1123,14 @@ def build():
             "all_buildings": [{"id": b["id"], "name": b["name"], "rent_range": b["rent_range"], "apartments": b["apartments_listed"],
                                "known": b["known"], "to_ask": b["to_ask"], "role": role.get(b["id"], "listed"),
                                "rent_text": b["rent_text"], "rent_is_template": b["rent_is_template"],
+                               "address": b["address"], "city": b["city"], "place_text": b["place_text"],
                                "verified": b["verified"]["on_page"], "listing_url": b["listing_url"]}
                               for b in sorted(B.get(h, []), key=lambda b: (-b["evidence_score"], b["rent_range"][0], b["id"]))],
             "sensitivity": {n: ranks[n][h] for n in sc_all},
+            "why_heading": "Why it ranks here" if len(why) == 3 else "What it has going for it",
+            "rank_by_score": score_rank[h], "top_eligible_buildings": n_cand,
+            "held_below_top_10": bool(h in thin and score_rank[h] <= TOP_N),
+            "illustration_character": ch, "illustration_character_label": CHARACTERS[ch][0],
             "supply_note": (None if len(top) >= 3 else
                             f"Only {len(top)} {'building here has' if len(top) == 1 else 'buildings here have'} an apartment at $2,000 or less "
                             "with nothing stated against it." if top else "No building here has an apartment at $2,000 or less with nothing stated against it."),
@@ -1055,7 +1145,7 @@ def build():
                           "parts": {k: sum(1 for h in eligible if M[h].get(k) is not None) for k, _, _, _ in subs}}
     cut_j = [h for h, s in status.items() if s == "jamaica_rule"]
     meta = {
-        "built_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "built_at": str(U.last_seen.max())[:19].replace("+00:00", "") + "Z",      # from the data, so a re-run writes the same file
         "data_as_of": str(U.last_seen.max())[:10],
         "rent_limit": RENT_SHOW, "rent_pool": RENT_POOL, "max_drive_min": MAX_DRIVE_MIN, "min_buildings": MIN_BUILDINGS,
         "visits_per_month": VISITS_PER_MONTH, "move_in_by": MOVE_IN_BY,
@@ -1091,6 +1181,9 @@ def build():
                         "note": "rank under each weight x1.5 and x0.5 and under equal weights; rank_range is the lowest and highest of these"},
         "tag_floors": TAG_FLOORS,
         "list_medians": med_fig,
+        "top_10_rule": f"a neighborhood needs at least {MIN_TOP_ELIGIBLE} buildings that qualify as a top building to hold one of the first {TOP_N} places",
+        "why_rule": "a measure in the upper half of the ranked list whose own figure beats the list's median; fewer than three when fewer qualify",
+        "characters": {k: v[0] for k, v in CHARACTERS.items()},
         "know_this_rule": "a measure in the bottom 40% of the ranked list whose own figure is worse than the list's median; none when nothing qualifies",
         "confidence_rule": "high: rank range 12 or narrower and 30+ listings; low: range wider than 40 or under 15 listings; otherwise medium",
         "min_reviews_for_rating": MIN_REVIEWS_SHOWN,

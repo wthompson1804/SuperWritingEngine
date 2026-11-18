@@ -42,7 +42,8 @@ def test_figures_in_sentences():
     n = 0
     for h in HOODS:
         m = flat(h)
-        assert len(h["why"]) == 3, (h["id"], len(h["why"]))
+        assert len(h["why"]) <= 3, (h["id"], len(h["why"]))
+        assert h["why_heading"] == ("Why it ranks here" if len(h["why"]) == 3 else "What it has going for it"), h["id"]
         assert len(h["know_this"]) <= 2, h["id"]
         assert not {w["measure"] for w in h["why"]} & {w["measure"] for w in h["know_this"]}, h["id"]
         for w in h["why"] + h["know_this"]:
@@ -50,8 +51,7 @@ def test_figures_in_sentences():
             full = nr.display_figures(w["measure"], m)
             expect = {k: full[k] for k in w["figures"]}
             assert w["figures"] == expect, (h["id"], w["measure"], w["figures"], full)
-            if w in h["why"]:
-                assert expect == full, (h["id"], w["measure"])
+            assert not re.search(r"\b0 (more|say|state)|\b1 (say|state|more say|are)\b", w["text"]), w["text"]
             want = {nr.figure_text(k, v).lstrip("$") for k, v in expect.items()}
             found = set(re.findall(r"\d[\d,]*(?:\.\d+)?", w["text"]))
             assert want <= found | {"0"}, (h["id"], w["text"], want)
@@ -94,6 +94,9 @@ def test_eligibility():
     H = nr.read(nr.DATA / "neighborhoods.csv").set_index("hood_id")
     jam = S.loc["ny:jamaica"]
     assert [h["rank"] for h in HOODS] == list(range(1, len(HOODS) + 1))
+    assert sorted(h["rank_by_score"] for h in HOODS) == list(range(1, len(HOODS) + 1))
+    late = [h for h in HOODS if h["rank"] > nr.TOP_N]
+    assert [h["score"] for h in late] == sorted((h["score"] for h in late), reverse=True)
     assert len(HOODS) == META["counts"]["eligible"] == sum(1 for r in ROWS if r["status"] == "ranked")
     for h in HOODS:
         i = h["id"]
@@ -120,6 +123,17 @@ def test_know_this_is_a_drawback():
     med = META["list_medians"]
     for h in HOODS:
         m = flat(h)
+        assert not {nr.TAG_MEASURE[t] for t in h["tags"]} & {w["measure"] for w in h["know_this"]}, h["id"]
+        for w in h["why"]:
+            assert w["standing"] >= 0.5, (h["id"], w["measure"])
+            k = w["measure"]
+            if k in nr.DRAWBACK:
+                key, hb = nr.DRAWBACK[k]
+                assert (m[key] > med[key]) if hb else (m[key] < med[key]), (h["id"], k, m[key], med[key])
+            elif k == "cost":
+                assert m["median_rent"] < med["median_rent"] or m["apartments_2000"] > med["apartments_2000"], h["id"]
+            else:
+                assert k == "parking" and not m["overnight_rule"] and m["offstreet_share"] > 0.5, h["id"]
         for w in h["know_this"]:
             assert w["standing"] < 0.4, (h["id"], w["measure"])
             k = w["measure"]
@@ -147,6 +161,14 @@ def test_buildings():
         top, bad = h["top_buildings"], h["avoid_buildings"]
         assert len(top) <= 3 and len(bad) <= 2, h["id"]
         assert not {b["id"] for b in top} & {b["id"] for b in bad}, h["id"]
+        assert len({b["reason"] for b in bad}) == len(bad), h["id"]
+        if len(bad) == 2 and bad[0]["avoid_kind"] == bad[1]["avoid_kind"]:
+            assert bad[0]["avoid_kind"] in nr.STRONG_AVOID, h["id"]
+        assert h["illustration_character"] in META["characters"], h["id"]
+        if h["rank"] <= nr.TOP_N:
+            assert h["top_eligible_buildings"] >= nr.MIN_TOP_ELIGIBLE and len(top) == 3, h["id"]
+        for b in top + bad + h["all_buildings"]:
+            assert b["city"] != "New York" and b["place_text"], b["id"]
         roles = {b["id"]: b["role"] for b in h["all_buildings"]}
         for b in top + bad:
             assert b["name"] and b["address"] and re.match(r"\s*\d", b["address"]), (h["id"], b["id"])
@@ -240,7 +262,7 @@ def test_sensitivity():
     assert sum(META["weights"].values()) == 100
     S = {h["id"]: {m: d["score"] for m, d in h["measures"].items()} for h in HOODS}
     for name, w in sc.items():
-        ranks, scores = nr.rank_ids(S, w)
+        ranks, scores = nr.rank_ids(S, w, {h["id"] for h in HOODS if h["top_eligible_buildings"] < nr.MIN_TOP_ELIGIBLE})
         assert sorted(ranks.values()) == list(range(1, len(HOODS) + 1))
         for h in HOODS:
             assert h["sensitivity"][name] == ranks[h["id"]], (name, h["id"])

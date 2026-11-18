@@ -123,3 +123,25 @@ this script only. `scripts/gates.py` is untouched.
 - **`supply_note`** where fewer than three top buildings exist (3 neighborhoods).
 - **`confidence`**: high when the rank range is 12 or narrower with 30+ listings; low when wider than 40 or under 15
   listings; otherwise medium (4 high, 57 medium, 55 low).
+
+## Revision 2, after the page review
+
+- **Why** facts are only real strengths: a measure in the upper half of the list whose own figure beats the list's
+  median. Fewer than three is fewer (3 facts: 66 neighborhoods; 2: 35; 1: 12; none: 3). `why_heading` reads "Why it
+  ranks here" with three and "What it has going for it" otherwise.
+- **Top-10 rule**: a neighborhood needs at least 3 buildings that qualify as a top building to hold one of the first
+  10 places; otherwise it follows in score order from place 11 with its `supply_note`. It moves one place: Jackson
+  Heights (best score, 66.4, but 2 qualifying buildings and 9 apartments) goes from 1 to 11. `rank_by_score`,
+  `top_eligible_buildings` and `held_below_top_10` are in the JSON; the same rule is applied in every sensitivity run.
+- **Avoid cards** never repeat a sentence: each names its own building; the second card has a different kind of reason
+  unless both are strong evidence (avoid list, reviews, a reviewer's check, rent far below). Two "no dogs" or two
+  "ground floor" cards are never shown together. Sources have short names ("City elevator complaint records", "Its
+  listing", "A check of this listing", "Tenant reviews"). City-record cards carry no link (the only address is a raw
+  data query); a tenant-report card links only to a report of the same kind.
+- **Tags** never repeat a measure that is in "know this".
+- **Sentences**: zero clauses are dropped, verbs agree with a count of one. Inside New York City a building's `city`
+  is its borough (`city_listed` keeps what the listing wrote), with `neighborhood` and `place_text`.
+- **Illustration**: `illustration_character` (lively / waterfront / green / near_family / roomy / value) is the
+  neighborhood's best-standing character whose plain floor holds (waterfront: open water within 400 m).
+  `illustration_key` (the lifestyle group) is unchanged so the page keeps working.
+- **Deterministic**: `built_at` is the latest listing read time, so a re-run writes the same bytes.
