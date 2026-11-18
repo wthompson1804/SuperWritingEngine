@@ -273,3 +273,51 @@ passed_apartments, shown_apartments, buildings, neighborhoods, eligible_neighbor
 (same shape as a recommendation: neighborhoods with why, gives_up, tags and three buildings each), computed with the
 prior mean weights; `meta.leanings` [{priority_key, priority_label, neighborhood_id, neighborhood_name, line}].
 The conjoint data may stay in the file but the page no longer uses it.
+
+---
+
+## Version 7 (Will, 2026-11-18): zoom out to the neighborhood
+
+The audit (`docs/AUDIT_2026-11-18.md`) showed the unit-level picture is full of holes (floor, dogs, parking, size
+unknown for most listings) and that the "best three" was an artifact. Will: stop obsessing over single apartments;
+use what is solid without paid APIs, the neighborhood and aggregate level. Deliverable: **a ranked list of
+neighborhoods, each with its top three buildings and up to two buildings to avoid, presented attractively.**
+
+### Neighborhood ranking (scripts/neighborhood_rank.py → data/neighborhood_rank.csv)
+Unit = neighborhood (the existing `hood_id`; Jersey City split, small NYC areas as they are). Evidence = ALL individual
+apartment listings collected (16,927 rows, any gate status except stated failures of type), not only verified ones.
+- Eligible: drive to Mom and Dad under 2 hours; passes the owner's Jamaica rule (kept as is); at least 5 distinct
+  buildings with a studio/one-bedroom listed at $2,000 or less in the last collection (enough real supply).
+- Measures, each from data we hold for most neighborhoods (coverage reported per measure; a neighborhood missing a
+  measure gets no credit and no penalty for it, the weight is spread over what is known):
+  - Near Mom and Dad: drive minutes and round-trip toll (hours and dollars per month at two visits a month).
+  - Cost: median listed rent of studios and one-bedrooms at $2,200 or less, and how many are at $2,000 or less.
+  - Supply she can use: share of listings that say dogs or pets are allowed; share with a stated elevator or floor 2.
+  - Going out: restaurants, bars, cafés within a 10-minute walk (median over listed buildings).
+  - Green and the dog: park walk minutes, park area nearby, dog run distance.
+  - Space: median square feet where stated (and how many state it).
+  - Driving life: share of buildings with off-street/garage parking where stated; overnight street parking rules.
+  - Records: lower is better within the cut (never shown as open text).
+- Weights from her profile (stated, in the file): near Mom and Dad 22, cost 18, going out 16, green/dog 14,
+  usable supply 12, space 8, parking 6, records 4. A sensitivity table: rank under each weight ±50% and under equal
+  weights; a neighborhood's "stable rank range" is published with it. No per-listing "confirmed today" multiplier.
+- Output per neighborhood: rank, score, the measures with coverage, three plain "why" facts (its best measures
+  against the list), one or two "know this" facts (its worst), stable rank range.
+
+### Buildings in each neighborhood
+- **Top three**: buildings with a studio/one-bedroom at $2,000 or less, ranked by building-level evidence only:
+  verified on the page (has a shown apartment) first; dogs or pets stated allowed; elevator or floor-2 stated;
+  review-site rating and count where the ratings census has it; management/complaint record where held; number of
+  qualifying apartments listed; own-site contact. Each carries "known" and "to ask" chips instead of being hidden
+  for unknowns. Fewer than three is shown as fewer.
+- **Up to two to avoid**: only on evidence: the existing avoid rules (`data/avoid_buildings.csv`), low ratings with
+  enough reviews (`data/rating_standard.csv`), official violation/complaint records, listings that look fake
+  (template text, price far below the neighborhood, reviewer "unverified" verdicts), stated no dogs, basement or
+  ground floor only. Each with its reason and source. None is invented: zero or one is fine.
+
+### Page (replaces the short version's content, same link)
+The pink look of version 6. Home: "Neighborhoods for you", a ranked list of cards (top 10 open to view, the rest
+under "Show more"), each: rank, illustration, name, two true tags, three why facts as icon chips, typical rent, drive
+to Mom and Dad. A neighborhood screen: why it ranks here, know-this, Life here, **Top 3 buildings**, **Avoid** (one
+or two, clearly different styling), then "All N buildings here". Building screen as in v6 with known / to-ask chips.
+Bottom bar: Home · Everything · My list. "How this was ranked" behind one tap (measures, weights, coverage).

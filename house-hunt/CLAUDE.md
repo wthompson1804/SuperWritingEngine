@@ -280,3 +280,9 @@ Decisions by Will that changed or replaced an earlier one. Dates are UTC days of
   almost anyone at this price, so the page says how the list was narrowed (real counts), then shows the three
   neighborhoods and their three best buildings at a glance, with browse, search, filter, My list, Compare and the tour
   plan kept. Spec: "Version 5" in `docs/CONCIERGE_DESIGN.md`.
+
+- **Zoom out to neighborhoods (Will, 2026-11-18):** after the audit (`docs/AUDIT_2026-11-18.md`), the short version
+  ranks neighborhoods on aggregate data from all listings collected (no per-listing "confirmed today" multiplier),
+  and shows for each its top three buildings and up to two to avoid, with unknowns shown as "to ask" instead of
+  hiding the building. The Jamaica rule and the $2,000 rent limit stay. Spec: "Version 7" in
+  `docs/CONCIERGE_DESIGN.md`.
