@@ -51,7 +51,7 @@ test("each neighborhood has what its card shows", () => {
 });
 test("why facts (up to three) and know-this facts (up to two) are sentences with a measure and an icon", () => {
   H.forEach((h) => {
-    assert(Array.isArray(h.why) && h.why.length >= 1 && h.why.length <= 3, h.name + ": " + (h.why || []).length + " why facts");
+    assert(Array.isArray(h.why) && h.why.length <= 3, h.name + ": " + (h.why || []).length + " why facts");
     assert(Array.isArray(h.know_this) && h.know_this.length <= 2, h.name + ": " + (h.know_this || []).length + " know-this facts");
     h.why.concat(h.know_this).forEach((w) => assert(str(w.text) && /[.!?]$/.test(w.text.trim()) && str(w.measure) && str(w.icon), h.name + ": a fact without text, measure or icon"));
     const both = h.why.map((w) => w.measure).filter((m) => h.know_this.some((k) => k.measure === m));
@@ -127,7 +127,7 @@ test("verified buildings find their fuller sheet", () => {
 });
 test("the template: four slots, version 7 only, none of the words the page must not say", () => {
   ["<!--CONCIERGE_DATA_SLOT-->", "<!--CONCIERGE_PLACES_SLOT-->", "<!--CONCIERGE_ILLUS_SLOT-->", "<!--CONCIERGE_MAP_SLOT-->"].forEach((s) => assert(html.split(s).length === 2, s + " must be in the template exactly once"));
-  assert(!/default_recommendation|function compare\(|function plan\(|initAsk|recommender-logic/.test(html), "a version 6 screen is still in the template");
+  assert(!/default_recommendation|function plan\(|initAsk|recommender-logic/.test(html), "a version 6 screen is still in the template");
   assert(/function fresh\(\) \{ return \{ v: 7,/.test(html), "the saved state is not version 7");
   const shown = html.replace(/<style>[\s\S]*?<\/style>/, "");
   const bad = /\bcrimes?\b|net-effective|\ball-in\b|\bgates?\b|\bunits?\b/i.exec(shown);

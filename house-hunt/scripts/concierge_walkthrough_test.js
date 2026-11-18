@@ -13,7 +13,7 @@
      - building screens: what is known, what to ask, rent, the listing link, "Checked against its listing" and the
        fuller sheet only for verified buildings, Save;
      - Everything: every neighborhood in rank order, search, the state, drive and typical-rent filters, the map;
-     - My list: saved buildings, Remove, Clear, kept across a reload and from version 6's saved state.
+     - My list: saved buildings, Compare (two or three side by side), Remove, Clear, kept across a reload and from version 6's saved state.
    Then: a 360x780 phone, iPhone 13 by tap(), dark theme, storage blocked, a thrown error.
    Checks on every screen: no console or page errors, no network, no sideways scroll, no rent above meta.rent_limit,
    none of the banned words, every target at least 44px, the bar on screen and never covering the end of the page. */
@@ -39,6 +39,9 @@ const rentText = (r) => money(r[0]) + (r[1] !== r[0] ? " to " + money(r[1]) : ""
 const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 const nm = (b) => (b.name || b.address || "").trim();
 const isLow = (h) => /^low/i.test(String(typeof h.confidence === "string" ? h.confidence : (h.confidence || {}).level || ""));
+const cardNote = (h) => { const n = h.top_eligible_buildings, only = typeof n === "number" ? "only " + n + (n === 1 ? " building qualifies" : " buildings qualify") : "";
+  if (!h.supply_note && !h.held_below_top_10) return null;
+  return h.held_below_top_10 && only ? (h.rank_by_score === 1 ? "Scores highest, but " + only : "Scores number " + h.rank_by_score + ", but " + only) : only ? cap(only) : h.supply_note; };
 const publicPhone = (b) => !!(b.contact && !b.contact.private && PUBLIC.test(b.contact.kind || "") && (b.contact.phone || b.contact.office_phone));
 
 async function open(browser, extra, init, initArg) {
@@ -103,14 +106,14 @@ const cardsDom = (page) => page.evaluate(() => [...document.querySelectorAll("#n
   id: c.getAttribute("data-hood"), rank: c.querySelector(".num").textContent.replace(/\D/g, ""), title: c.querySelector("h2").innerText.replace(/\s+/g, " "),
   tags: [...c.querySelectorAll(".tags li")].map((e) => e.textContent), figs: c.querySelector(".figs").innerText.replace(/\s+/g, " "),
   chips: [...c.querySelectorAll(".wchips li")].map((e) => e.getAttribute("data-measure")), chipText: [...c.querySelectorAll(".wchips li")].map((e) => e.textContent.trim()),
-  low: !!c.querySelector('[data-conf="low"]'), buttons: [...c.querySelectorAll("button,a")].map((e) => e.textContent.replace(/\s+/g, " ").trim()),
+  low: !!c.querySelector('[data-conf="low"]'), note: (c.querySelector("[data-note]") || {}).textContent || null, buttons: [...c.querySelectorAll("button,a")].map((e) => e.textContent.replace(/\s+/g, " ").trim()),
   drawing: !!c.querySelector(".illus svg"),
 })));
 const hoodDom = (page) => page.evaluate(() => {
   const T = (e) => (e ? e.textContent.replace(/\s+/g, " ").trim() : null), q = (s, r) => (r || document).querySelector(s), qa = (s, r) => [...(r || document).querySelectorAll(s)];
   return {
     id: q("#app article").getAttribute("data-hood"), h1: T(q("#app h1")), kicker: T(q(".hero .kicker")), whyH: T(q("#why-h")),
-    why: qa("#why li .t").map(T), know: qa("#know li .t").map(T), low: !!q('#why [data-conf="low"]'), note: T(q("#supply-note")),
+    why: qa("#why li .t").map(T), know: qa("#know li .t").map(T), low: !!q('#app article [data-conf="low"]'), note: T(q("#supply-note")),
     life: qa("#life details.mom .mt b").map(T),
     tops: qa("#tops .bcard").map((c) => ({
       id: c.getAttribute("data-building"), name: T(q(".bname b", c)).replace(/\s*›$/, ""), checked: /Checked against its listing/.test(T(q(".bname", c))),
@@ -127,7 +130,7 @@ const hoodDom = (page) => page.evaluate(() => {
 });
 function checkHood(d, h, i, L) {
   ok(d.id === h.id && d.h1 === h.name, L + "is the screen of " + h.name + " (got " + d.h1 + ")");
-  ok(d.kicker === "Number " + h.rank + " of " + N.length && d.whyH === "Why it ranks #" + h.rank, L + "says its rank");
+  ok(d.kicker === "Number " + h.rank + " of " + N.length && d.whyH === (h.why.length ? h.why_heading || "Why it ranks #" + h.rank : null), L + "says its rank, and the why heading the data gives (got " + d.whyH + ")");
   same(d.why, h.why.slice(0, 3).map((w) => w.text.replace(/\s+/g, " ").trim()), L + "why sentences");
   same(d.know, h.know_this.slice(0, 2).map((w) => w.text.replace(/\s+/g, " ").trim()), L + "know-this sentences");
   ok(d.low === isLow(h), L + "the low-confidence mark is " + (isLow(h) ? "missing" : "shown without cause"));
@@ -163,12 +166,13 @@ function checkHood(d, h, i, L) {
 const bldDom = (page) => page.evaluate(() => {
   const T = (e) => (e ? e.textContent.replace(/\s+/g, " ").trim() : null), q = (s) => document.querySelector(s), qa = (s) => [...document.querySelectorAll(s)];
   return { id: q("#app article").getAttribute("data-building"), h1: T(q("#app h1")), kicker: T(q(".place .kicker")), checked: !!q("#checked"), photos: (q("#photos") || {}).href || null,
-    facts: qa("#facts .frow").map((r) => [T(r.querySelector(".l")), T(r.querySelector(".v"))]), known: qa("#known li .t").map(T), ask: qa("#toask li .t").map(T), tel: qa('a[href^="tel:"]').map(T), rich: !!q("#d-apts"), saves: qa('[data-act="save"]').length, rating: !!q("[data-rating]") };
+    place: T(q(".place .inhood")), facts: qa("#facts .frow").map((r) => [T(r.querySelector(".l")), T(r.querySelector(".v"))]), known: qa("#known li .t").map(T), ask: qa("#toask li .t").map(T), tel: qa('a[href^="tel:"]').map(T), rich: !!q("#d-apts"), saves: qa('[data-act="save"]').length, rating: !!q("[data-rating]") };
 });
 function checkBld(d, b, h, L) {
   const v = !!(b.verified && b.verified.on_page);
   ok(d.id === b.id && d.h1 === nm(b).replace(/\s+/g, " ") && d.kicker === h.name, L + "is the screen of " + nm(b));
   ok(d.checked === v, L + "Checked against its listing only when verified");
+  if (b.place_text) ok(d.place && d.place.endsWith(b.place_text.replace(/\s+/g, " ").trim()), L + "the place line uses place_text (got " + d.place + ")");
   ok(!d.rich || v, L + "the fuller sheet only for a verified building");
   ok(d.photos === (b.listing_url ? new URL(b.listing_url).href : null), L + "the listing link");
   ok(d.facts[0][0] === "Rent" && d.facts[0][1] === rentText(b.rent_range) + "a month", L + "rent first (got " + d.facts[0].join(" ") + ")");
@@ -209,7 +213,7 @@ async function toHood(page, id, how) { await page[how || "click"]("#bar-all"); a
       ok(c.figs.indexOf(money(h.typical_rent) + " typical rent") === 0 && c.figs.indexOf(Math.round(h.drive_min) + " min drive to Mom and Dad") > 0, L + "typical rent and drive (got " + c.figs + ")");
       same(c.chips, h.why.slice(0, 3).map((w) => w.measure), L + "one chip per why fact");
       ok(c.chipText.every((t) => t.length > 3 && t.length <= 30), L + "chips are short: " + c.chipText.join(" | "));
-      ok(c.low === isLow(h), L + "low-confidence mark"); ok(c.drawing, L + "a drawing");
+      ok(c.low === isLow(h), L + "low-confidence mark"); ok(c.drawing, L + "a drawing"); ok(c.note === cardNote(h), L + "the supply note on the card (got " + c.note + ")");
       ok(c.buttons.length === 1 && /^See this neighborhood/.test(c.buttons[0]), L + "one button");
     });
     ok((await page.locator("#show-more").innerText()).trim() === "Show " + Math.min(10, N.length - 10) + " more" && (await page.locator("#shown-count").innerText()).trim() === "Showing 10 of " + N.length, W + "Show more");
@@ -226,6 +230,12 @@ async function toHood(page, id, how) { await page[how || "click"]("#bar-all"); a
     await page.click("#show-more");
     cards = await cardsDom(page);
     same(cards.map((c) => c.id), N.slice(0, 20).map((h) => h.id), W + "Show more adds the next ten in rank order");
+    cards.forEach((c, i) => { ok(c.note === cardNote(N[i]), W + N[i].name + ": the supply note on the card (got " + c.note + ")"); same(c.chips, N[i].why.slice(0, 3).map((w) => w.measure), W + N[i].name + ": chips"); });
+    const held = N.findIndex((h) => h.held_below_top_10);
+    if (held >= 0 && held < 20) { ok(held >= 10 && /only \d+ buildings? qualif/.test(cards[held].note), W + "a neighborhood held below the top ten says why on its card: " + cards[held].note);
+      await page.locator('#ncards .ncard[data-hood="' + N[held].id + '"]').scrollIntoViewIfNeeded(); await screen(page, "01c-home-held-card"); }
+    const scenes = await page.evaluate(() => [...document.querySelectorAll("#ncards .ncard .illus")].map((e) => e.innerHTML.length + ":" + e.innerHTML.slice(0, 400)));
+    N.slice(0, 20).forEach((h, i) => { if (i && h.illustration_character && N[i - 1].illustration_character) ok((scenes[i] === scenes[i - 1]) === (h.illustration_character === N[i - 1].illustration_character), W + h.name + ": its drawing differs from the card above exactly when its character does"); });
     await everyScreen(page, W + "home, twenty shown");
 
     /* ================= every neighborhood screen, by Next ================= */
@@ -296,6 +306,38 @@ async function toHood(page, id, how) { await page[how || "click"]("#bar-all"); a
     ok(rows[0][2].indexOf(sh.name + ", number " + sh.rank) === 0, W + "a saved building names its neighborhood");
     ok((await page.locator("#app h1").innerText()).trim() === "2 saved buildings", W + "My list heading");
     await everyScreen(page, W + "My list"); await screen(page, "08-my-list");
+    /* Compare: two side by side, then four saved, pick three */
+    await page.click("#list-compare"); await page.waitForSelector("#cmp");
+    const cmpDom = () => page.evaluate(() => { const T = (e) => e.textContent.replace(/\s+/g, " ").trim(); const o = { ids: [...document.querySelectorAll("#cmp .chead [data-building]")].map((e) => e.getAttribute("data-building")) };
+      document.querySelectorAll("#cmp .crow").forEach((r) => { o[r.getAttribute("data-row")] = [...r.querySelectorAll(".cells > div")].map(T); o[r.getAttribute("data-row") + "L"] = T(r.querySelector(".cl")); }); return o; });
+    const checkCmp = (c, list, L) => {
+      same(c.ids, list.map((x) => x[1].id), L + "the buildings");
+      ok(c.rentL === "Rent" && c.totalL === "Total with utilities and fees" && c.driveL === "Drive to Mom and Dad" && c.knownL === "Known" && c.askL === "To ask", L + "the five rows, labelled");
+      list.forEach(([h, b], i) => { const t = b.verified && b.verified.total_with_utilities_and_fees;
+        ok(c.rent[i].indexOf(rentText(b.rent_range)) === 0, L + nm(b) + " rent (got " + c.rent[i] + ")");
+        ok(t ? c.total[i].indexOf(rentText(t)) === 0 : c.total[i] === "Not known yet", L + nm(b) + " total where known (got " + c.total[i] + ")");
+        ok(c.drive[i].indexOf(Math.round(h.drive_min) + " min") === 0, L + nm(b) + " drive");
+        b.known.forEach((k) => ok(c.known[i].indexOf(k) >= 0, L + nm(b) + " known: " + k));
+        ok(c.ask[i].indexOf(String(b.to_ask.length)) === 0, L + nm(b) + " to-ask count (got " + c.ask[i] + ")"); });
+    };
+    checkCmp(await cmpDom(), [[sh, sb], [vh, vb]], W + "compare two: ");
+    await everyScreen(page, W + "compare two"); await fullShot(page, "09-compare-2");
+    await page.click('[data-act="back"]'); await page.waitForSelector("#saved");
+    const extra = N.flatMap((h) => h.top_buildings.slice(0, 3).map((b) => [h, b])).filter((x) => x[1].id !== sb.id && x[1].id !== vb.id).slice(0, 2);
+    for (const [h, b] of extra) { await toHood(page, h.id); await page.click('.bcard[data-building="' + b.id + '"] [data-act="save"]'); }
+    await page.click("#bar-list"); await page.waitForSelector("#saved"); await barSays(page, 4, W + "four saved");
+    await page.click("#list-compare"); ok((await page.locator("#tickmsg").innerText()).trim() === "Pick two or three to compare." && (await page.locator("#cmp").count()) === 0, W + "with four saved, Compare asks her to pick");
+    const three = [[sh, sb], extra[0], extra[1]];
+    for (const [, b] of three) await page.click('#saved [data-act="tick"][data-id="' + b.id + '"]');
+    await page.click('#saved [data-act="tick"][data-id="' + vb.id + '"]');
+    ok((await page.locator("#tickmsg").innerText()).trim() === "Three at most. Take one off first." && (await page.locator('#saved [data-act="tick"][aria-pressed="true"]').count()) === 3, W + "three at most");
+    await everyScreen(page, W + "My list, picking"); await fullShot(page, "08b-my-list-pick");
+    await page.click("#list-compare"); await page.waitForSelector("#cmp");
+    checkCmp(await cmpDom(), three, W + "compare three: "); await everyScreen(page, W + "compare three"); await fullShot(page, "10-compare-3");
+    await page.click('#cmp + .choose [data-act="open"]'); await page.waitForSelector('#app article[data-building="' + sb.id + '"]'); await page.click('[data-act="back"]'); await page.waitForSelector("#cmp");
+    await page.click('[data-act="back"]'); await page.waitForSelector("#saved");
+    for (const [, b] of extra) await page.click('#saved .srow[data-building="' + b.id + '"] [data-act="unsave"]');
+    await barSays(page, 2, W + "back to two");
     await page.reload(); await page.waitForSelector("#app h1"); await barSays(page, 2, W + "after a reload");
     await page.click("#bar-list"); await page.waitForSelector("#saved");
     await page.click('#saved .srow[data-building="' + vb.id + '"] [data-act="open"]'); await page.waitForSelector('#app article[data-building="' + vb.id + '"]');
